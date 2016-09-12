@@ -38,6 +38,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update_attributes user_params
+      sign_in(@user, bypass: true) if current_user? @user
       flash[:success] = flash_message "updated"
       redirect_to admin_users_path
     else

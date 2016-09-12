@@ -13,8 +13,6 @@ class UsersController < ApplicationController
 
     @note = Note.new
     @notes = Note.load_notes @user, current_user
-
-    render "admin/users/show"
   end
 
   def edit
