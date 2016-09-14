@@ -1,6 +1,7 @@
 class Admin::SubjectsController < ApplicationController
   load_and_authorize_resource
   load_and_authorize_resource :course
+  skip_load_resource :course, only: :show
 
   def index
     @subject = Subject.new
@@ -13,8 +14,8 @@ class Admin::SubjectsController < ApplicationController
   end
 
   def show
-    @course = Course.includes(course_subjects: [:tasks,
-      user_subjects: [user_tasks: [:user, :task]]]).find params[:course_id]
+    @course = Course.includes(course_subjects: [user_subjects: :user])
+      .find params[:course_id]
     @course_subject = @course.course_subjects.find do |course_subject|
       course_subject.subject_id == @subject.id
     end

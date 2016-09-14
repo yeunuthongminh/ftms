@@ -1,6 +1,6 @@
 class Admin::AssignTraineesController < ApplicationController
-  load_and_authorize_resource :course
-  authorize_resource class: false
+  authorize_resource :course, class: false
+  before_action :find_course
 
   def edit
     @trainees = User.trainees.available_of_course @course.id,
@@ -23,5 +23,13 @@ class Admin::AssignTraineesController < ApplicationController
   private
   def course_params
     params.require(:course).permit Course::USER_COURSE_ATTRIBUTES_PARAMS
+  end
+
+  def find_course
+    @course = Course.includes(:user_courses).find_by_id params[:course_id]
+    if @course.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to admin_courses_path
+    end
   end
 end

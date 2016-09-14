@@ -94,6 +94,9 @@ GEM
       sass (~> 3.2)
     breadcrumbs_on_rails (2.3.1)
     builder (3.2.2)
+    bullet (5.4.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     cancancan (1.15.0)
     carrierwave (0.11.2)
       activemodel (>= 3.2.0)
@@ -303,6 +306,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.10.0)
     unread (0.8.1)
       activerecord (>= 3)
     warden (1.2.6)
@@ -328,6 +332,7 @@ DEPENDENCIES
   bootstrap-kaminari-views
   bootstrap-sass (= 3.2.0.0)
   breadcrumbs_on_rails
+  bullet
   cancancan
   carrierwave
   ckeditor
