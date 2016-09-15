@@ -37,6 +37,7 @@ gem "ajax-datatables-rails", "0.1.2"
 gem "jquery-datatables-rails", github: "rweng/jquery-datatables-rails"
 gem "breadcrumbs_on_rails"
 gem "unread"
+gem "exception_notification"
 
 group :development, :test do
   gem "fabrication"

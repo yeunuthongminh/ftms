@@ -137,6 +137,9 @@ GEM
       thread
       thread_safe
     erubis (2.7.0)
+    exception_notification (4.2.1)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     execjs (2.7.0)
     fabrication (2.15.2)
     faker (1.4.2)
@@ -335,6 +338,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   draper!
+  exception_notification
   fabrication
   faker (= 1.4.2)
   highcharts-rails
@@ -369,4 +373,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.12.5
+   1.13.0

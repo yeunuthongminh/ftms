@@ -35,5 +35,24 @@ module Ftms
     config.action_view.embed_authenticity_token_in_remote_forms = true
     config.middleware.use I18n::JS::Middleware
     config.action_controller.permit_all_parameters = true
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      port: "587",
+      domain: "localhost",
+      user_name: ENV["GMAIL_USERNAME"],
+      password: ENV["GMAIL_PASSWORD"],
+      authentication: :plain,
+      enable_starttls_auto: true
+    }
+    config.action_mailer.perform_deliveries = true
+    Rails.application.config.middleware.use ExceptionNotification::Rack,
+      email: {
+        verbose_subject: false,
+        normalize_subject: true,
+        email_prefix: "[FTMS]_System-ERROR ",
+        sender_address: ENV["GMAIL_USERNAME"],
+        exception_recipients: %w{ENV["GMAIL_USERNAME"]}
+      }
   end
 end
