@@ -87,6 +87,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :profile
 
+  after_commit :send_welcome_mail, on: :create
+
   def total_done_tasks user, course
     done_tasks = UserSubject.load_user_subject(user.id, course.id).map(&:user_tasks).flatten.count
   end
@@ -133,5 +135,9 @@ class User < ApplicationRecord
       self.password = Settings.default_password
       self.password_confirmation = Settings.default_password
     end
+  end
+
+  def send_welcome_mail
+    WelcomeNewTraineeJob.perform_now self, Settings.default_password
   end
 end

@@ -1,4 +1,5 @@
 defaults: &defaults
+  default_email: "framgia.tms@gmail.com"
   update_supervisor_params:
     - supervisor
     - leader
