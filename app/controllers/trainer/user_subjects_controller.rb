@@ -5,6 +5,8 @@ class Trainer::UserSubjectsController < ApplicationController
     if params[:user_subject].present?
       if @user_subject.update_attributes user_subject_params
         flash.now[:success] = flash_message "updated"
+        update_end_date_when_update_start_date if params[:user_subject][:start_date]
+          .present?
       else
         flash.now[:danger] = flash_message "not_updated"
       end
@@ -30,5 +32,10 @@ class Trainer::UserSubjectsController < ApplicationController
     @subject = @course_subject.subject
     @user_subjects = @course_subject.user_subjects
     @user_subjects_not_finishs = @user_subjects.not_finish @user_subjects.finish
+  end
+
+  def update_end_date_when_update_start_date
+    @user_subject.update_attributes end_date:
+      @user_subject.during_time.business_days.after(@user_subject.start_date) 
   end
 end

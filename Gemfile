@@ -38,6 +38,7 @@ gem "jquery-datatables-rails", github: "rweng/jquery-datatables-rails"
 gem "breadcrumbs_on_rails"
 gem "unread"
 gem "exception_notification"
+gem "business_time"
 
 group :development, :test do
   gem "fabrication"
