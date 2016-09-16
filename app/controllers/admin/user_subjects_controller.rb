@@ -9,7 +9,7 @@ class Admin::UserSubjectsController < ApplicationController
         flash.now[:danger] = flash_message "not_updated"
       end
     else
-      @user_subject.update_status current_user
+      @user_subject.update_status current_user, params["status"]
     end
     load_data
     respond_to do |format|

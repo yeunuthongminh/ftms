@@ -65,12 +65,23 @@
     <% if @course.progress? %>
       <% if user_subject.init? %>
         <%= link_to t("admin.actions.show_subject.start"),
-          [:trainer, @course_subject, user_subject],
-          method: :patch, remote: true, class: "btn btn-primary btn-status" %>
+          [:trainer, @course_subject, user_subject], data: {method: :patch,
+          remote: true, confirm: t("messages.delete.confirm")},
+          class: "btn btn-primary btn-status" %>
       <% elsif user_subject.progress? %>
         <%= link_to t("admin.actions.show_subject.finish"),
-          [:trainer, @course_subject, user_subject],
-          method: :patch, remote: true, class: "btn btn-success btn-status" %>
+          [:trainer, @course_subject, user_subject], data: {method: :patch,
+          remote: true, confirm: t("messages.delete.confirm")},
+          class: "btn btn-success btn-finish btn-status" %>
+      <% elsif user_subject.pending? %>
+        <%= link_to t("admin.actions.show_subject.finish"),
+          [:trainer, @course_subject, user_subject], data: {method: :patch,
+          remote: true, confirm: t("messages.delete.confirm")},
+          class: "btn btn-warning btn-finish btn-status" %>
+        <%= link_to t("admin.actions.show_subject.reject"),
+          [:trainer, @course_subject, user_subject], data: {method: :patch,
+          remote: true, confirm: t("messages.delete.confirm")},
+          class: "btn btn-danger btn-reject btn-status" %>
       <% end %>
     <% end %>
   </td>

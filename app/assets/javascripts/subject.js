@@ -40,4 +40,12 @@ $(document).on('turbolinks:load ajaxComplete', function() {
         data: $('#user-subjects-charts').data('total-number-tasks')
       }]
   });
+
+  $('.btn-reject').click(function () {
+    this.href = this.href + '?status=reject';
+  });
+
+  $('.btn-finish').click(function () {
+    this.href = this.href + '?status=finish';
+  });
 });
