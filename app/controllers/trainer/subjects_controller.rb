@@ -1,6 +1,10 @@
 class Trainer::SubjectsController < ApplicationController
   load_and_authorize_resource
   load_and_authorize_resource :course
+  skip_load_resource :course, only: :show
+  skip_load_resource only: [:edit, :update]
+  before_action :find_subject_in_edit, only: :edit
+  before_action :find_course_in_show, only: :show
 
   def index
     @subject = Subject.new
@@ -13,8 +17,6 @@ class Trainer::SubjectsController < ApplicationController
   end
 
   def show
-    @course = Course.includes(course_subjects: [:tasks,
-      user_subjects: [user_tasks: [:user, :task]]]).find params[:course_id]
     @course_subject = @course.course_subjects.find do |course_subject|
       course_subject.subject_id == @subject.id
     end
@@ -75,5 +77,16 @@ class Trainer::SubjectsController < ApplicationController
   private
   def subject_params
     params.require(:subject).permit Subject::SUBJECT_ATTRIBUTES_PARAMS
+  end
+
+  def find_subject_in_edit
+    @subject = Subject.includes(:documents, :task_masters).find_by_id params[:id]
+    redirect_if_object_nil @subject
+  end
+
+  def find_course_in_show
+    @course = Course.includes(course_subjects: [user_subjects: :user])
+      .find_by_id params[:course_id]
+    redirect_if_object_nil @course
   end
 end

@@ -2,6 +2,8 @@ class Admin::CoursesController < ApplicationController
   load_and_authorize_resource
   skip_load_resource only: [:show, :edit]
   before_action :load_data, except: [:index, :show, :destroy]
+  before_action :find_course_in_show, only: :show
+  before_action :find_course_in_edit, only: :edit
 
   def index
     respond_to do |format|
@@ -19,7 +21,6 @@ class Admin::CoursesController < ApplicationController
   end
 
   def edit
-    @course = Course.includes(:documents).find_by_id params[:id]
     add_breadcrumb_path "courses"
     add_breadcrumb @course.name, :admin_course_path
     add_breadcrumb_edit "courses"
@@ -46,7 +47,6 @@ class Admin::CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.includes(:programming_language).find_by_id params[:id]
     @course_subjects = @course.course_subjects.includes(:subject).order_position
     @users = @course.users
     @trainers = @course.users.trainers
@@ -73,5 +73,15 @@ class Admin::CoursesController < ApplicationController
   def load_data
     @subjects = Subject.all
     @programming_languages = ProgrammingLanguage.all
+  end
+
+  def find_course_in_show
+    @course = Course.includes(:programming_language).find_by_id params[:id]
+    redirect_if_object_nil @course, Course
+  end
+
+  def find_course_in_edit
+    @course = Course.includes(:documents).find_by_id params[:id]
+    redirect_if_object_nil @course, Course
   end
 end

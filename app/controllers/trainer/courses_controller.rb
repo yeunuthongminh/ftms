@@ -1,6 +1,9 @@
 class Trainer::CoursesController < ApplicationController
   load_and_authorize_resource
+  skip_load_resource only: [:show, :edit]
   before_action :load_data, except: [:index, :show, :destroy]
+  before_action :find_course_in_show, only: :show
+  before_action :find_course_in_edit, only: :edit
 
   def index
     respond_to do |format|
@@ -70,5 +73,15 @@ class Trainer::CoursesController < ApplicationController
   def load_data
     @subjects = Subject.all
     @programming_languages = ProgrammingLanguage.all
+  end
+
+  def find_course_in_show
+    @course = Course.includes(:programming_language).find_by_id params[:id]
+    redirect_if_object_nil @course
+  end
+
+  def find_course_in_edit
+    @course = Course.includes(:documents).find_by_id params[:id]
+    redirect_if_object_nil @course
   end
 end
