@@ -138,6 +138,6 @@ class User < ApplicationRecord
   end
 
   def send_welcome_mail
-    WelcomeNewTraineeJob.perform_now self, Settings.default_password
+    WelcomeNewTraineeJob.perform_now(self, Settings.default_password) if Rails.env.production?
   end
 end
