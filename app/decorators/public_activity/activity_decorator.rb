@@ -22,6 +22,8 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
       I18n.t "activity.request_subject"
     when "user_subject.reject_finish_subject"
       I18n.t "activity.reject_subject"
+    when "user_subject.reopen_subject"
+      I18n.t "activity.reopen_subject"
     when "user_subject.start_all_subject"
       I18n.t "activity.start_all_subject"
     when "user_subject.finish_all_subject"

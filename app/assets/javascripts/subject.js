@@ -48,4 +48,8 @@ $(document).on('turbolinks:load ajaxComplete', function() {
   $('.btn-finish').click(function () {
     this.href = this.href + '?status=finish';
   });
+
+  $('.btn-reopen').click(function () {
+    this.href = this.href + '?status=reopen';
+  });
 });

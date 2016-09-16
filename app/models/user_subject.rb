@@ -78,6 +78,10 @@ class UserSubject < ApplicationRecord
         update_attributes status: :finish, user_end_date: Time.now
         key = "user_subject.finish_subject"
         notification_key = Notification.keys[:finish]
+      elsif status == Settings.subject_status.reopen
+        update_attributes status: :progress, user_end_date: nil
+        key = "user_subject.reopen_subject"
+        notification_key = Notification.keys[:reopen]
       end
     end
     create_activity key: key, owner: current_user, recipient: user
