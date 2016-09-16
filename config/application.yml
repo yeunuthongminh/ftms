@@ -90,6 +90,7 @@ defaults: &defaults
     progress: "progress"
     reject: "reject"
     finish: "finish"
+    reopen: "reopen"
 development:
   <<: *defaults
   neat_setting: 800

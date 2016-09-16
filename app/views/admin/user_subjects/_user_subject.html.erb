@@ -84,6 +84,11 @@
           [:admin, @course_subject, user_subject], data: {method: :patch,
           remote: true, confirm: t("messages.delete.confirm")},
           class: "btn btn-danger btn-reject btn-status" %>
+      <% elsif user_subject.finish? %>
+        <%= link_to t("admin.actions.show_subject.reopen"),
+          [:admin, @course_subject, user_subject], data: {method: :patch,
+          remote: true, confirm: t("messages.delete.confirm")},
+          class: "btn btn-success btn-reopen btn-status" %>
       <% end %>
     <% end %>
   </td>

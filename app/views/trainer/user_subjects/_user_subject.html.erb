@@ -72,16 +72,21 @@
         <%= link_to t("admin.actions.show_subject.finish"),
           [:trainer, @course_subject, user_subject], data: {method: :patch,
           remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-success btn-finish btn-status" %>
+          class: "btn btn-danger btn-finish btn-status" %>
       <% elsif user_subject.pending? %>
         <%= link_to t("admin.actions.show_subject.finish"),
           [:trainer, @course_subject, user_subject], data: {method: :patch,
           remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-warning btn-finish btn-status" %>
+          class: "btn btn-danger btn-finish btn-status" %>
         <%= link_to t("admin.actions.show_subject.reject"),
           [:trainer, @course_subject, user_subject], data: {method: :patch,
           remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-danger btn-reject btn-status" %>
+          class: "btn btn-warning btn-reject btn-status" %>
+      <% elsif user_subject.finish? %>
+        <%= link_to t("admin.actions.show_subject.reopen"),
+          [:trainer, @course_subject, user_subject], data: {method: :patch,
+          remote: true, confirm: t("messages.delete.confirm")},
+          class: "btn btn-success btn-reopen btn-status" %>
       <% end %>
     <% end %>
   </td>

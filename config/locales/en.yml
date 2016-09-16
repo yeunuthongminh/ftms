@@ -88,6 +88,7 @@ en:
     finish_subject: "has finished subject"
     request_subject: "has been requested to finish subject"
     reject_subject: "has been rejected request to finish subject"
+    reopen_subject: "has been reopened"
   courses:
     course: "Course"
     name: "Name:"
