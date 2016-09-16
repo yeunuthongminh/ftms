@@ -4,6 +4,7 @@ en:
       show_subject:
         start: "Start"
         finish: "Finish"
+        reject: "Reject"
         start_all: "Start all"
         finish_all: "Finish all"
     confirms:

@@ -5,5 +5,5 @@ class Notification < ApplicationRecord
 
   has_many :user_notifications, dependent: :destroy
 
-  enum key: [:start, :finish, :reopen]
+  enum key: [:start, :finish, :reopen, :request, :reject]
 end

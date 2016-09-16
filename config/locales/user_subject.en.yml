@@ -4,6 +4,7 @@ en:
       init: "New"
       progress: "Progress"
       finish: "Finish"
+      pending: "Pending finish"
     labels:
       days: "days"
     chart:

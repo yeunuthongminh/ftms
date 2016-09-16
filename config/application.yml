@@ -85,6 +85,11 @@ defaults: &defaults
     mysql: 2
     tutorial_book: 10
     javascript: 4
+  subject_status:
+    init: "init"
+    progress: "progress"
+    reject: "reject"
+    finish: "finish"
 development:
   <<: *defaults
   neat_setting: 800

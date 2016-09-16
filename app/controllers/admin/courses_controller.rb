@@ -77,11 +77,11 @@ class Admin::CoursesController < ApplicationController
 
   def find_course_in_show
     @course = Course.includes(:programming_language).find_by_id params[:id]
-    redirect_if_object_nil @course, Course
+    redirect_if_object_nil @course
   end
 
   def find_course_in_edit
     @course = Course.includes(:documents).find_by_id params[:id]
-    redirect_if_object_nil @course, Course
+    redirect_if_object_nil @course
   end
 end

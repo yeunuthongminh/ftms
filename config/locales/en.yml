@@ -86,6 +86,8 @@ en:
     start_course: "has started course "
     start_subject: "has started subject"
     finish_subject: "has finished subject"
+    request_subject: "has been requested to finish subject"
+    reject_subject: "has been rejected request to finish subject"
   courses:
     course: "Course"
     name: "Name:"

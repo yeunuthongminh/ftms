@@ -4,3 +4,5 @@ en:
       start: "%{data} has started"
       finish: "%{data} has finished"
       reopen: "%{data} has reopened"
+      request: "%{data} has been requested to finish"
+      reject: "%{data}: request to finish has been rejected"

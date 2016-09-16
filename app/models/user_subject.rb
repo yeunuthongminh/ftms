@@ -28,7 +28,7 @@ class UserSubject < ApplicationRecord
       UserSubject.statuses[:progress], trainer_id).includes :user
   end
 
-  enum status: [:init, :progress, :finish]
+  enum status: [:init, :progress, :finish, :pending]
 
   delegate :name, to: :user, prefix: true, allow_nil: true
   delegate :name, :description, to: :subject, prefix: true, allow_nil: true
@@ -61,16 +61,26 @@ class UserSubject < ApplicationRecord
     end
   end
 
-  def update_status current_user
+  def update_status current_user, status
     if init?
       update_attributes(status: :progress, start_date: Time.now,
         end_date: Time.now + during_time.days)
       key = "user_subject.start_subject"
       notification_key = Notification.keys[:start]
     else
-      update_attributes status: :finish, user_end_date: Time.now
-      key = "user_subject.finish_subject"
-      notification_key = Notification.keys[:finish]
+      if is_of_user? current_user
+        update_attributes status: :pending
+        key = "user_subject.request_subject"
+        notification_key = Notification.keys[:request]
+      elsif status == Settings.subject_status.reject
+        update_attributes status: :progress
+        key = "user_subject.reject_finish_subject"
+        notification_key = Notification.keys[:reject]
+      elsif status == Settings.subject_status.finish
+        update_attributes status: :finish, user_end_date: Time.now
+        key = "user_subject.finish_subject"
+        notification_key = Notification.keys[:finish]
+      end
     end
     create_activity key: key, owner: current_user, recipient: user
     if is_of_user? current_user
@@ -110,10 +120,10 @@ class UserSubject < ApplicationRecord
     if start_date.present?
       current_date = user_end_date
       current_date ||= Time.zone.today
-      
-      real_duration_time = end_date - start_date 
+
+      real_duration_time = end_date - start_date
       return 100 if real_duration_time <= 0
-      
+
       user_current_time = (current_date - start_date).to_f
       percent = user_current_time * 100 / real_duration_time.to_f
       [percent, 100].min
