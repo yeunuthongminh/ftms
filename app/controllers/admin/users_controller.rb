@@ -1,5 +1,7 @@
 class Admin::UsersController < ApplicationController
   load_and_authorize_resource
+  skip_load_resource only: :edit
+  before_action :load_user, only: :edit
   before_action :load_data, except: [:index, :show, :destroy]
   before_action :load_breadcrumb_edit, only: [:edit, :update]
   before_action :load_breadcrumb_new, only: [:new, :create]
@@ -58,13 +60,15 @@ class Admin::UsersController < ApplicationController
   def show
     add_breadcrumb_path "users"
 
-    @activities = PublicActivity::Activity.user_activities(@user.id).recent.limit(20).decorate
+    @activities = PublicActivity::Activity.includes(:owner, :trackable)
+      .user_activities(@user.id).recent.limit(20).decorate
     @user_courses = @user.user_courses
     @finished_courses = @user_courses.course_finished
     @inprogress_course = @user_courses.course_progress.last
 
     if @inprogress_course
-      @user_subjects = @inprogress_course.user_subjects.order_by_course_subject
+      @user_subjects = @inprogress_course.user_subjects
+        .includes(course_subject: :subject).order_by_course_subject
     end
 
     @note = Note.new
@@ -83,7 +87,7 @@ class Admin::UsersController < ApplicationController
     datas.each do |data|
       instance_variable_set "@#{data.table_name}", data.all
     end
-    @trainers = User.trainers
+    @trainers = User.trainers.includes(:profile)
   end
 
   def load_breadcrumb_edit
@@ -106,5 +110,13 @@ class Admin::UsersController < ApplicationController
     @user_type = UserType.new
     @university = University.new
     @managers = User.not_trainees
+  end
+
+  def load_user
+    @user = User.includes(:profile).find_by_id params[:id]
+    if @user.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to admin_users_path
+    end
   end
 end

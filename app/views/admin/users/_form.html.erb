@@ -23,8 +23,9 @@
         <br>
         <div class="profile-form">
           <%= f.label :trainer_id %>
-          <%= f.select :trainer_id, options_for_select(@trainers.collect{|trainer| [trainer.name,
-            trainer.id, {"data-location-id": trainer.profile_location_id}]},
+          <%= f.select :trainer_id, options_for_select(@trainers
+            .collect{|trainer| [trainer.name, trainer.id,
+            {"data-location-id": trainer.profile_location_id}]},
             f.object.trainer_id), {include_blank: true}, class: "form-control" %>
         </div>
       </div>

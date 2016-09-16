@@ -72,6 +72,7 @@ en:
       reopen_course: "Course was reopened successfully"
       course_not_upate: "Course couldn't updated successfully"
       unknow_errors: "Transaction fails"
+      not_find: "%{model_name} couldn't find"
   tasks:
     update: "Update"
   subjects:

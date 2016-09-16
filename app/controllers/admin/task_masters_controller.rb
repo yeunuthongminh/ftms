@@ -1,6 +1,8 @@
 class Admin::TaskMastersController < ApplicationController
-  load_resource :subject
+
   def index
+    @subject = Subject.includes(:documents, :task_masters)
+      .find_by id: params[:subject_id]
     @task_masters = @subject.task_masters
 
     add_breadcrumb_path "subjects"
