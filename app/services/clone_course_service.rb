@@ -4,17 +4,17 @@ class CloneCourseService
   end
 
   def clone_course
-    @clone_course = ActiveRecord::Base.transaction do
+    @clone_course = nil
+    ActiveRecord::Base.transaction do
       begin
         new_course = @course.dup
         new_course.status = Settings.course.init
         new_course.image = File.open @course.image.path if @course.image.path
         new_course.save!
         clone_course_subject @course, new_course
-      true
+        @clone_course = new_course
       rescue
         raise ActiveRecord::Rollback
-        false
       end
     end
     @clone_course
