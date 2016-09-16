@@ -34,8 +34,6 @@ class UserSubject < ApplicationRecord
   delegate :name, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
 
-  validate :check_end_date
-
   def load_trainers
     course.users.trainers
   end
@@ -63,8 +61,8 @@ class UserSubject < ApplicationRecord
 
   def update_status current_user, status
     if init?
-      update_attributes(status: :progress, start_date: Time.now,
-        end_date: Time.now + during_time.days)
+      update_attributes status: :progress, start_date: Time.now,
+        end_date: during_time.business_days.from_now
       key = "user_subject.start_subject"
       notification_key = Notification.keys[:start]
     else
@@ -118,6 +116,7 @@ class UserSubject < ApplicationRecord
 
   def percent_progress
     if start_date.present?
+      return 0 if start_date > Time.zone.today
       current_date = user_end_date
       current_date ||= Time.zone.today
 
@@ -136,10 +135,5 @@ class UserSubject < ApplicationRecord
       UserTask.find_or_create_by(user_subject_id: id,
         user_id: user_course.user_id, task_id: task.id)
     end
-  end
-
-  def check_end_date
-    errors.add :end_date, I18n.t("error.wrong_end_date") if
-      start_date.present? && (start_date > Date.today || start_date > end_date)
   end
 end
