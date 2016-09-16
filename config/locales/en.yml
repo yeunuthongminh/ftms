@@ -73,6 +73,7 @@ en:
       course_not_upate: "Course couldn't updated successfully"
       unknow_errors: "Transaction fails"
       not_find: "%{model_name} couldn't find"
+      record_not_found: "Sorry, no record was found!"
   tasks:
     update: "Update"
   subjects:

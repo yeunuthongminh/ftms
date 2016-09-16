@@ -47,6 +47,10 @@ class Trainer::CourseSubjectsController < ApplicationController
   end
 
   def load_course
-    @course = Course.find params[:course_id]
+    @course = Course.find_by_id params[:course_id]
+    if @course.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to trainer_courses_path
+    end
   end
 end

@@ -28,6 +28,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  rescue_from ActiveRecord::RecordNotFound do
+    flash[:alert] = flash_message "record_not_found"
+    redirect_to root_url
+  end
+
   def get_root_path
     if current_user.nil?
       root_path
@@ -77,5 +82,12 @@ class ApplicationController < ActionController::Base
 
   def get_namespace
     @namespace = self.class.parent.to_s.downcase
+  end
+
+  def redirect_if_object_nil object
+    if object.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to root_path
+    end
   end
 end
