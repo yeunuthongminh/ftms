@@ -274,3 +274,9 @@ en:
     university: "Enter university name..."
     usertype: "Enter type name..."
     location: "Enter location name..."
+  mail:
+    by_day:
+      title: "Trainee finish task by day: %{time}"
+      user_finish_task: "%{user_name} has been finished task %{task_name},
+        subject: %{subject_name}"
+      course: "Course: %{name}"

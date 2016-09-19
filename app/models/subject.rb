@@ -14,6 +14,8 @@ class Subject < ApplicationRecord
 
   scope :recent, ->{order created_at: :desc}
 
+  delegate :name, to: :user_subject, prefix: true, allow_nil: true
+
   accepts_nested_attributes_for :task_masters, allow_destroy: true,
     reject_if: proc {|attributes| attributes[:name].blank?}
 

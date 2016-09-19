@@ -14,4 +14,6 @@ class Task < ApplicationRecord
   scope :has_task_master, ->{where.not task_master_id: nil}
 
   accepts_nested_attributes_for :user_tasks, allow_destroy: true
+
+  delegate :name, to: :user_task, prefix: true, allow_nil: true
 end

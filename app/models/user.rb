@@ -82,6 +82,7 @@ class User < ApplicationRecord
 
   delegate :total_point, :current_rank, to: :evaluation, prefix: true, allow_nil: true
   delegate :location_id, to: :profile, prefix: true, allow_nil: true
+  delegate :name, to: :user_task, prefix: true, allow_nil: true
 
   before_validation :set_password
 

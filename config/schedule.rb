@@ -19,6 +19,10 @@ env :PATH, ENV["PATH"]
 # end
 
 # Learn more: http://github.com/javan/whenever
-every :day, at: "1:00 am" do
-  command "backup perform --trigger db_backup"
+every :day, at: "11:05 pm" do
+  command "backup perform --trigger fts_backup", output: "log/back_up.log"
+end
+
+every :day, at: "6:00 pm" do
+  rake "delayjob:mailday"
 end
