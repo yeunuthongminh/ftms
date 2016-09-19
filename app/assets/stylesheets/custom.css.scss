@@ -529,3 +529,14 @@ select {
 .text-blue {
   color: blue;
 }
+
+input.datepicker {
+  height: 27px;
+  width: 70%;
+}
+
+.datepicker .btn {
+  margin: 5px 15px;
+  width: 70px;
+  padding: 3px 12px;
+}

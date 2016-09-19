@@ -55,7 +55,6 @@
 //= require admin/location
 //= require admin/user
 //= require admin/dashboard_chart
-//= require admin/user_subject
 //= require admin/user_profile
 
 $(document).on("turbolinks:load ajaxComplete", function() {

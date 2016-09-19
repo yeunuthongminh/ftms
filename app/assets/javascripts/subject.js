@@ -52,4 +52,10 @@ $(document).on('turbolinks:load ajaxComplete', function() {
   $('.btn-reopen').click(function () {
     this.href = this.href + '?status=reopen';
   });
+
+  if($('#user-subject').length > 0 ) {
+    $('.fa-edit').unbind('click').on('click', function() {
+      $(this).parent().find('.datepicker').click();
+    });
+  }
 });
