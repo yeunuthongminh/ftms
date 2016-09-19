@@ -2,12 +2,14 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def show
-    @activities = PublicActivity::Activity.user_activities(@user.id).recent.limit(20).decorate
+    @activities = PublicActivity::Activity.includes(:owner, :trackable)
+      .user_activities(@user.id).recent.limit(20).decorate
     @user_courses = @user.user_courses
     @inprogress_course = @user_courses.course_progress.last
     @finished_courses = @user_courses.course_finished
 
-    @user_subjects = @inprogress_course.user_subjects.order_by_course_subject if @inprogress_course
+    @user_subjects = @inprogress_course.user_subjects.includes(:course_subject)
+      .order_by_course_subject if @inprogress_course
 
     add_breadcrumb @user.name
 

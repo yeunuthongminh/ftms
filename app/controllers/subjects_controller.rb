@@ -1,16 +1,16 @@
 class SubjectsController < ApplicationController
   load_and_authorize_resource :user
-  load_and_authorize_resource :user_course, only: [:show]
   load_and_authorize_resource :subject, only: :show
 
   before_action :load_course, only: :update
+  before_action :load_user_course, only: :show
   before_action :check_status, only: :update
   before_action :check_status_subject, only: :update
 
   def show
     @task_masters = @subject.task_masters
-    @course_subject = CourseSubject.includes(:tasks,
-      user_subjects: [course: [:users], user_tasks: :task])
+    @course_subject = CourseSubject.includes(
+      user_subjects: [:course, user_tasks: [:task, :user, :user_subject]])
       .find_by course_id: @user_course.course_id, subject_id: @subject.id
 
     @user_subjects = @course_subject.user_subjects
@@ -48,6 +48,10 @@ class SubjectsController < ApplicationController
 
   def check_status_subject
     redirect_to :back unless @user_subject.progress?
+  end
+
+  def load_user_course
+    @user_course = UserCourse.includes(:user).find_by_id params[:user_course_id]
   end
 
   def load_chart_data
