@@ -143,6 +143,9 @@ en:
     users: "Users"
     locations: "Locations"
     organization_chart: "Orgazination Chart"
+    universities: "Universities"
+    statuses: "Statuses"
+    user_types: "User_types"
     footer:
       street: "13F Keangnam Landmark 72 Tower, Plot E6, Pham Hung Road, Nam Tu Liem, Ha Noi, Viet Nam"
       phone: "84-4-3795-5417"
@@ -276,7 +279,8 @@ en:
     location: "Enter location name..."
   mail:
     by_day:
-      title: "Trainee finish task by day: %{time}"
+      title: "Report by day: %{time}"
       user_finish_task: "%{user_name} has been finished task %{task_name},
         subject: %{subject_name}"
       course: "Course: %{name}"
+      no_task_finish: "In day no have task finished"
