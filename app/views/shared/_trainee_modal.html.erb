@@ -6,12 +6,9 @@
         <h3 class="label-modal"><%= t "subjects.modal.member_details" %></h3>
       </div>
       <div class="modal-body info-panel">
-        <div class="member-title"><%= t "subjects.modal.trainers" %></div>
-        <ul class="user-list clearfix">
-          <%= render partial: "shared/member", collection: @trainers, as: :user %></ul>
         <div class="member-title"><%= t "subjects.modal.trainees" %></div>
         <ul class="user-list clearfix">
-          <%= render partial: "shared/member", collection: @trainees, as: :user %></ul>
+          <%= render partial: "shared/trainee", collection: @trainees, as: :user %></ul>
       </div>
     </div>
   </div>
