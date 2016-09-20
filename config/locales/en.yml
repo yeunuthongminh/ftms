@@ -18,6 +18,8 @@ en:
     logout: "Logout"
     login: "Sign in"
     home: "Home"
+    trainer: "Trainer"
+    admin: "Admin"
     content:
       title: "learn more. faster."
       lead_in: "FREE classes for experienced engineers"
