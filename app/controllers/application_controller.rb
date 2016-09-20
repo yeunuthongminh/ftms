@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!, :set_locale, except: :home
   before_action :new_feed_back
+  before_action :set_current_role
   before_action :get_namespace
   before_action :set_root_path
 
@@ -31,6 +32,10 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound do
     flash[:alert] = flash_message "record_not_found"
     redirect_to root_url
+  end
+
+  def set_current_role
+    current_user.current_role = current_user.roles.pluck(:role_type) if current_user
   end
 
   def get_root_path

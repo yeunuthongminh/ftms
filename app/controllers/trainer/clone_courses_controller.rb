@@ -10,7 +10,7 @@ class Trainer::CloneCoursesController < ApplicationController
       redirect_to @clone_course
     else
       flash[:failed] = t "courses.confirms.not_clone"
-      redirect_to admin_courses_path
+      redirect_to trainer_courses_path
     end
   end
 end

@@ -90,6 +90,8 @@ class User < ApplicationRecord
 
   after_commit :send_welcome_mail, on: :create
 
+  attr_accessor :current_role
+
   def total_done_tasks user, course
     done_tasks = UserSubject.load_user_subject(user.id, course.id).map(&:user_tasks).flatten.count
   end
@@ -103,15 +105,15 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-    check_role Role.role_types[:admin]
+    current_role.include? Settings.namespace_roles.admin
   end
 
   def is_trainee?
-    check_role Role.role_types[:trainee]
+    current_role.include? Settings.namespace_roles.trainee
   end
 
   def is_trainer?
-    check_role Role.role_types[:trainer]
+    current_role.include? Settings.namespace_roles.trainer
   end
 
   def in_course? course
@@ -119,10 +121,6 @@ class User < ApplicationRecord
   end
 
   private
-  def check_role role_type
-    roles.exists? role_type: role_type
-  end
-
   def password_required?
     new_record? ? super : false
   end

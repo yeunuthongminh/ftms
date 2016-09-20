@@ -1,58 +1,28 @@
 <tr id="user-subject-<%= user_subject.id %>">
   <td><%= link_to user_subject.user.name, [:admin, user_subject.user] %></td>
   <td>
-    <div class="date-content">
-      <%= user_subject.start_date %>
-      <% if user_subject.progress? %>
-        <%= link_to "javascript:void(0)" do %>
-          <i class="fa fa-edit"></i>
+    <% if user_subject.progress? %>
+      <div class="form-edit">
+        <%= form_for [:admin, @course_subject, user_subject], remote: true do |f| %>
+          <%= f.text_field :start_date, class: "date-edit datepicker", readonly: true %>
+          <i class="fa fa-edit fa-2x"></i>
+          <%= f.button :submit, class: "btn-save", hidden: true %>
         <% end %>
-      <% end %>
-    </div>
-
-    <div class="form-edit row" hidden>
-      <%= form_for [:admin, @course_subject, user_subject], remote: true do |f| %>
-        <div class="col-md-8">
-          <%= f.text_field :start_date, class: "form-control datepicker" %>
-        </div>
-        <div class="col-md-4">
-          <%= f.button :submit, class: "button-save" do %>
-            <i class="fa fa-save"></i>
-          <% end %>
-          <%= link_to "javascript:void(0)" do %>
-            <i class="fa fa-remove"
-              type="button"></i>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </td>
   <td>
-    <div class="date-content">
-      <%= user_subject.finish? ? user_subject.user_end_date : user_subject.end_date %>
-      <% if user_subject.progress? %>
-        <%= link_to "javascript:void(0)" do %>
-          <i class="fa fa-edit"></i>
+    <% if user_subject.finish? %>
+      <input type="text" value="<%= user_subject.user_end_date %>"></input>
+    <% elsif user_subject.progress? %>
+      <div class="form-edit">
+        <%= form_for [:admin, @course_subject, user_subject], remote: true do |f| %>
+          <%= f.text_field :end_date, class: "date-edit datepicker", readonly: true %>
+          <i class="fa fa-edit fa-2x"></i>
+          <%= f.button :submit, class: "btn-save", hidden: true %>
         <% end %>
-      <% end %>
-    </div>
-
-    <div class="form-edit row" hidden>
-      <%= form_for [:admin, @course_subject, user_subject], remote: true do |f| %>
-        <div class="col-md-8">
-          <%= f.text_field :end_date, class: "form-control datepicker" %>
-        </div>
-        <div class="col-md-4">
-          <%= f.button :submit, class: "button-save" do %>
-            <i class="fa fa-save"></i>
-          <% end %>
-          <%= link_to "javascript:void(0)" do %>
-            <i class="fa fa-remove"
-              type="button"></i>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </td>
   <td>
     <span class="label-status <%= set_background_color_status user_subject.status %>">
