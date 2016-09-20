@@ -47,10 +47,11 @@ class Admin::CoursesController < ApplicationController
   end
 
   def show
-    @course_subjects = @course.course_subjects.includes(:subject).order_position
+    @course_subjects = @course.course_subjects
+      .includes(:subject, user_subjects: :user).order_position
     @users = @course.users
-    @trainers = @course.users.trainers
-    @trainees = @course.users.trainees
+    @trainers = @users.trainers
+    @trainees = @users.trainees
 
     add_breadcrumb_path "courses"
     add_breadcrumb @course.name, :admin_course_path

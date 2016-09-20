@@ -178,4 +178,8 @@ module ApplicationHelper
       "text-muted"
     end
   end
+
+  def the_rest_member trainee
+    trainee.progress.size - Settings.number_member_show
+  end
 end
