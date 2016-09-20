@@ -5,7 +5,7 @@
       <div class="form-edit">
         <%= form_for [:admin, @course_subject, user_subject], remote: true do |f| %>
           <%= f.text_field :start_date, class: "date-edit datepicker", readonly: true %>
-          <i class="fa fa-edit fa-2x"></i>
+          <i class="fa fa-edit fa-2x text-blue"></i>
           <%= f.button :submit, class: "btn-save", hidden: true %>
         <% end %>
       </div>
@@ -18,7 +18,7 @@
       <div class="form-edit">
         <%= form_for [:admin, @course_subject, user_subject], remote: true do |f| %>
           <%= f.text_field :end_date, class: "date-edit datepicker", readonly: true %>
-          <i class="fa fa-edit fa-2x"></i>
+          <i class="fa fa-edit fa-2x text-blue"></i>
           <%= f.button :submit, class: "btn-save", hidden: true %>
         <% end %>
       </div>

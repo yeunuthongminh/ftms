@@ -284,3 +284,7 @@ en:
         subject: %{subject_name}"
       course: "Course: %{name}"
       no_task_finish: "In day no have task finished"
+  user_subjects:
+    init: "Init"
+    in_progress: "In progress"
+    finished: "Finished"

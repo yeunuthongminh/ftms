@@ -18,6 +18,11 @@
                   </span>&nbsp;
                   <span><i><%= course_subject.subject.during_time %>
                     <%= t "user_subjects.labels.days" %></i>
+                  </span>&nbsp;&nbsp;
+                  <span class="label-status
+                    <%= set_background_color_status_subject course_subject
+                      .user_subjects %>">
+                    <%= status_subject course_subject.user_subjects  %>
                   </span>
                 </div>
                 <div><%= truncate course_subject.subject_description,
@@ -27,7 +32,8 @@
             <div class="col-xs-2 info-panel">
               <% course_subject.user_subjects.each.with_index 1 do
                 |user_subject, index| %>
-                <% if user_subject.progress? && index <= Settings.number_member_show %>
+                <% if (user_subject.progress? || user_subject.pending?) &&
+                  index <= Settings.number_member_show %>
                   <div class="col-xs-6">
                     <%= link_to [:admin, user_subject.user] do %>
                       <%= avatar_user_tag user_subject.user,
