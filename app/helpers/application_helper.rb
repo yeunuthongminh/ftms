@@ -182,4 +182,17 @@ module ApplicationHelper
   def the_rest_member trainee
     trainee.progress.size - Settings.number_member_show
   end
+
+  ["set_background_color_", ""].each do |prefix|
+    define_method "#{prefix}status_subject" do |user_subjects|
+      if user_subjects.progress.any? || user_subjects.pending.any?
+        prefix.blank? ? t("user_subjects.in_progress") :
+          "in_progress-background-color"
+      elsif user_subjects.finish.size == user_subjects.size
+        prefix.blank? ? t("user_subjects.finished") : "finished-background-color"
+      else
+        prefix.blank? ? t("user_subjects.init") : "init-background-color"
+      end
+    end
+  end
 end
