@@ -12,4 +12,5 @@ class Profile < ApplicationRecord
   delegate :name, to: :user_type, prefix: true, allow_nil: true
   delegate :name, to: :status, prefix: true, allow_nil: true
   delegate :name, to: :programming_language, prefix: true, allow_nil: true
+  delegate :name, to: :location, prefix: true, allow_nil: true
 end
