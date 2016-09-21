@@ -58,7 +58,7 @@ class SubjectsController < ApplicationController
     unless @user_subject.init?
       @user_tasks_chart_data = {}
 
-      @user_subjects.each do |user_subject|
+      @user_subjects.includes(:user, :user_course).each do |user_subject|
         @user_tasks_chart_data[user_subject.user.name] = user_subject.user_tasks.finished.size
       end
     end
