@@ -16,9 +16,9 @@ class UserTask < ApplicationRecord
     -> {joins(:user_subject).where "user_subjects.status = ?",
       UserSubject.statuses[:progress]}
   scope :user_finished_task_in_day, ->course_id{joins(user_subject: :course).includes(:task, :user, :user_subject)
-    .where "user_tasks.status = #{statuses[:finished]} AND
+    .where("user_tasks.status = #{statuses[:finished]} AND
     date(user_tasks.updated_at) = '#{Date.today}' AND course_id = ? ",
-    course_id}
+    course_id).order :user_id}
 
   enum status: [:in_progress, :finished]
 

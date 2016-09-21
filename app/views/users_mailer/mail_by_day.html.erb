@@ -1,14 +1,3 @@
 <% @courses.each do |course| %>
-  <%= t "mail.by_day.course", name: course.name %><br>
-  <% user_tasks = load_user_tasks(course.id) %>
-  <% unless user_tasks.blank? %>
-    <% user_tasks.each do |user_task| %>
-      <p><%= t "mail.by_day.user_finish_task",
-        user_name: user_task.user_name,
-        task_name: user_task.task_name,
-        subject_name: user_task.user_subject.subject.name %></p>
-    <% end %>
-  <% else %>
-    <%= t "mail.by_day.no_task_finish" %>
-  <% end %>
+  <%= course.decorate.show_user_action %>
 <% end %>
