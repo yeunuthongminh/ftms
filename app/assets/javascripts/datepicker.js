@@ -18,25 +18,27 @@ $(document).on('turbolinks:load ajaxComplete', function() {
   $('input.datepicker').click(function() {
     var current_date = $(this).val();
     select_date = $(this).datepicker(datetime_options).datepicker('show');
-    $('.btn-datepk').remove();
-    $('.datepicker-dropdown').append(btn_group);
+    if($('.user-task-info').length > 0){
+      $('.btn-datepk').remove();
+      $('.datepicker-dropdown').append(btn_group);
 
-    $('.btn-save').click(function() {
-      select_date.parents('form').submit();
-      select_date.datepicker('hide');
-    });
+      $('.btn-save').click(function() {
+        select_date.parents('form').submit();
+        select_date.datepicker('hide');
+      });
 
-    $('.btn-cancel').click(function() {
-      select_date.datepicker('hide');
-      cleardate(select_date);
-    });
+      $('.btn-cancel').click(function() {
+        select_date.datepicker('hide');
+        cleardate(select_date);
+      });
 
-    select_date.datepicker().on('hide', function(e) {
-      cleardate(this);
-    });
+      select_date.datepicker().on('hide', function(e) {
+        cleardate(this);
+      });
 
-    function cleardate(e) {
-      $(e).val(current_date);
+      function cleardate(e) {
+        $(e).val(current_date);
+      }
     }
   });
 });

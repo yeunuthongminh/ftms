@@ -28,6 +28,7 @@ class CourseDecorator < Draper::Decorator
       user_tasks.each do |user_task|
         unless user_task.user.id == user.id
           user = user_task.user
+          subject = user_task.user_subject.subject
           show_html += "</tr><tr></td>
             <td style='border: 1px solid #cecece;'>#{I18n.t 'mail.by_day.user_name', user_name: user.name}</td>
             <td style='border: 1px solid #cecece;'>#{I18n.t 'mail.by_day.subject_name',
@@ -37,7 +38,7 @@ class CourseDecorator < Draper::Decorator
         end
         unless user_task.user_subject.subject.id == subject.id
           subject = user_task.user_subject.subject
-          show_html += "<tr><td style='border: 1px solid #cecece;'></td>
+          show_html += "<tr><td></td>
             <td style='border: 1px solid #cecece;'>
             #{I18n.t 'mail.by_day.subject_name',
             subject_name: subject.name,
