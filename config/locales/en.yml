@@ -281,12 +281,15 @@ en:
     location: "Enter location name..."
   mail:
     by_day:
-      user_name: "%{user_name}: "
-      subject_name: "%{subject_name} has been finished task: "
+      user_name: "%{user_name}"
+      subject_name: "%{subject_name}, %{progress}% done"
       title: "Report by day: %{time}"
-      finish_task: "%{task_name},"
+      finish_task: "%{task_name}"
       course: "Course: %{name}"
       no_task_finish: "In day no have task finished"
+      name: "Trainee"
+      subject: "Subject"
+      task_finish: "Finisk Task"
   user_subjects:
     init: "Init"
     in_progress: "In progress"
