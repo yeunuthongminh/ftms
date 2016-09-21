@@ -46,6 +46,7 @@
 //= require user
 //= require evaluation_template
 //= require rank
+//= require training_managements
 //= require university
 //= require admin/assign_user
 //= require jquery.quicksearch

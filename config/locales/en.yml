@@ -148,6 +148,8 @@ en:
     universities: "Universities"
     statuses: "Statuses"
     user_types: "User_types"
+    training_schedule: "Training schedule"
+    training_management: "Training management"
     footer:
       street: "13F Keangnam Landmark 72 Tower, Plot E6, Pham Hung Road, Nam Tu Liem, Ha Noi, Viet Nam"
       phone: "84-4-3795-5417"
@@ -243,6 +245,8 @@ en:
       all: "Dashboard"
     organization_charts:
       all: "Organization Chart"
+    training_managements:
+      all: "Training Management"
   datatables:
     search_name: "Search name"
     search_name_email: "Search name or email"

@@ -44,7 +44,8 @@ Rails.application.routes.draw do
     resources :notes, except: :index
     resources :locations
     resources :feed_backs, only: :index
-    get "organization_charts" => "organization_charts#index"
+    resources :organization_charts, only: :index
+    resources :training_managements, only: :index
   end
 
   namespace :trainer do
