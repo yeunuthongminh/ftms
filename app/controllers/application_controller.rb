@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_role
-    current_user.current_role = current_user.roles.pluck(:role_type) if current_user
+    current_user.current_role ||= current_user.roles.pluck(:role_type) if current_user
   end
 
   def get_root_path

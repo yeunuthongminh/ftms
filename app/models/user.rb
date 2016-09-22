@@ -104,16 +104,14 @@ class User < ApplicationRecord
     return course.user_courses.find_by(leader_id: self.id) ? true :false
   end
 
-  def is_admin?
-    current_role.include? Settings.namespace_roles.admin
-  end
-
-  def is_trainee?
-    current_role.include? Settings.namespace_roles.trainee
-  end
-
-  def is_trainer?
-    current_role.include? Settings.namespace_roles.trainer
+  %w(admin trainee trainer).each do |user_type|
+    define_method "is_#{user_type}?" do
+      if current_role.present?
+        current_role.include? eval("Settings.namespace_roles.#{user_type}")
+      else
+        check_role eval("Role.role_types[:#{user_type}]")
+      end
+    end
   end
 
   def in_course? course
@@ -121,6 +119,10 @@ class User < ApplicationRecord
   end
 
   private
+  def check_role role_type
+    roles.exists? role_type: role_type
+  end
+
   def password_required?
     new_record? ? super : false
   end

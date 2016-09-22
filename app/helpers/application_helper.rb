@@ -188,7 +188,7 @@ module ApplicationHelper
       if user_subjects.progress.any? || user_subjects.pending.any?
         prefix.blank? ? t("user_subjects.in_progress") :
           "in_progress-background-color"
-      elsif user_subjects.finish.size == user_subjects.size
+      elsif user_subjects.size > 0 && user_subjects.size == user_subjects.finish.size
         prefix.blank? ? t("user_subjects.finished") : "finished-background-color"
       else
         prefix.blank? ? t("user_subjects.init") : "init-background-color"
