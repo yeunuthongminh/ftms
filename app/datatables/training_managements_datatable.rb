@@ -31,12 +31,13 @@ class TrainingManagementsDatatable
         user.profile.start_training_date,
         user.profile.leave_date,
         user.profile.finish_training_date,
-        user.profile.ready_for_project,
+        user.profile.ready_for_project? ? I18n.t("profiles.columns.ready_for_project.ready") :
+          I18n.t("profiles.columns.ready_for_project.not_ready"),
         user.profile.contract_date,
         "",
         user.trainer ? user.trainer.name : "",
-        "",
-        ""
+        (subject = user.user_subjects.find{|s| s.current_progress}) ? subject.name : "",
+        user.notes.any? ? user.notes.last.name : ""
       ]
     end
   end
@@ -46,7 +47,7 @@ class TrainingManagementsDatatable
   end
 
   def fetch_users
-    @users = User.trainees.includes :trainer,
+    @users = User.trainees.includes :trainer, :notes, user_subjects: [:course_subject],
       profile: [:status, :user_type, :location, :university, :programming_language]
     users = @users.order("#{sort_column} #{sort_direction}")
       .where("users.name like :search", search: "%#{params[:sSearch]}%")
