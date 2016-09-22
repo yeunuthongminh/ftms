@@ -38,6 +38,7 @@ class Admin::CoursesController < ApplicationController
 
   def update
     if @course.update_attributes course_params
+      ExpectedTrainingDateService.new(@course).expected_training_end_date
       flash[:success] = flash_message "updated"
       redirect_to admin_course_path(@course)
     else

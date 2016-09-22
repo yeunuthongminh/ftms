@@ -22,6 +22,7 @@ class Admin::UsersController < ApplicationController
 
   def create
     if @user.save
+      UserSendMailService.new(@user).send_welcome_mail
       flash[:success] = flash_message "created"
 
       if params[:commit].present?
