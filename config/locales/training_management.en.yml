@@ -11,7 +11,7 @@ en:
       start_training_date: "Start training date"
       leave_date: "Leave date"
       finish_training_date: "Finish training date"
-      ready_for_real_project: "Start for real project"
+      ready_for_real_project: "Ready for real project"
       contract_date: "Contract date"
       working_days: "Working days/week"
       trainer: "Trainer"
