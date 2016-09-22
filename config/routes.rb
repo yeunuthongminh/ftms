@@ -85,6 +85,8 @@ Rails.application.routes.draw do
     resources :statuses, except: :show
     resources :user_types, except: :show
     resources :locations
+    resources :organization_charts, only: :index
+    resources :training_managements, only: :index
   end
 
   root "static_pages#home"
