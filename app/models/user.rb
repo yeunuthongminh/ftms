@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :course_subjects, through: :user_subjects
   has_many :tasks, through: :user_tasks
   has_one :profile, dependent: :destroy
-  has_one :evaluation
+  has_one :evaluation, dependent: :destroy
   has_many :trainees, class_name: User.name, foreign_key: :trainer_id
   has_many :notes, dependent: :destroy
   has_many :notifications
@@ -88,8 +88,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :profile
 
-  after_commit :send_welcome_mail, on: :create
-
   attr_accessor :current_role
 
   def total_done_tasks user, course
@@ -136,9 +134,5 @@ class User < ApplicationRecord
       self.password = Settings.default_password
       self.password_confirmation = Settings.default_password
     end
-  end
-
-  def send_welcome_mail
-    WelcomeNewTraineeJob.perform_now(self, Settings.default_password) if Rails.env.production?
   end
 end

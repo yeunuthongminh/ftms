@@ -62,7 +62,7 @@ class UserSubject < ApplicationRecord
   def update_status current_user, status
     if init?
       update_attributes status: :progress, start_date: Time.now,
-        end_date: during_time.business_days.from_now
+        end_date: during_time.business_days.from_now, current_progress: in_progress
       key = "user_subject.start_subject"
       notification_key = Notification.keys[:start]
     else
@@ -71,7 +71,7 @@ class UserSubject < ApplicationRecord
         key = "user_subject.request_subject"
         notification_key = Notification.keys[:request]
       elsif status == Settings.subject_status.reject
-        update_attributes status: :progress
+        update_attributes status: :progress, current_progress: in_progress
         key = "user_subject.reject_finish_subject"
         notification_key = Notification.keys[:reject]
       elsif status == Settings.subject_status.finish
@@ -79,7 +79,7 @@ class UserSubject < ApplicationRecord
         key = "user_subject.finish_subject"
         notification_key = Notification.keys[:finish]
       elsif status == Settings.subject_status.reopen
-        update_attributes status: :progress, user_end_date: nil
+        update_attributes status: :progress, user_end_date: nil, current_progress: in_progress
         key = "user_subject.reopen_subject"
         notification_key = Notification.keys[:reopen]
       end
@@ -139,5 +139,11 @@ class UserSubject < ApplicationRecord
       UserTask.find_or_create_by(user_subject_id: id,
         user_id: user_course.user_id, task_id: task.id)
     end
+  end
+
+  def in_progress
+    user_subjects = self.course_subject.user_subjects
+    return true if user_subjects.size == user_subjects.where(current_progress: false)
+    false
   end
 end
