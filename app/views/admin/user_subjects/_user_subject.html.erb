@@ -62,4 +62,16 @@
       <% end %>
     <% end %>
   </td>
+  <td>
+    <%= button_tag t("button.show"),
+      class: "btn btn-primary btn-status btn-show",
+      data: {id: user_subject.id} %>
+  </td>
 </tr>
+<% user_subject.user_tasks.includes(:task).each do |user_task| %>
+  <tr class="user-subject-<%= user_subject.id %>" hidden>
+    <td><%= user_task.task_name %></td>
+    <td class=<%= task_color user_task.status %>>
+      <%= t "user_tasks.statuses.#{user_task.status}" %></td>
+  </tr>
+<% end %>

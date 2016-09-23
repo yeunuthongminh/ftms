@@ -181,6 +181,7 @@ en:
     send: "Send"
     cancel: "Cancel"
     close: "Close"
+    show: "Show"
   buttons:
     edit: Edit
   evaluations:

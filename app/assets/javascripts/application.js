@@ -57,6 +57,7 @@
 //= require admin/user
 //= require admin/dashboard_chart
 //= require admin/user_profile
+//= require admin/user_subject
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();
