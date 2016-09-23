@@ -26,6 +26,7 @@ class Admin::SubjectsController < ApplicationController
     add_breadcrumb_path "courses"
     add_breadcrumb @course.name, admin_course_path(@course)
     add_breadcrumb @course_subject.subject_name
+    load_chart_data
   end
 
   def new
@@ -80,7 +81,8 @@ class Admin::SubjectsController < ApplicationController
   end
 
   def find_subject_in_edit
-    @subject = Subject.includes(:documents, :task_masters).find_by_id params[:id]
+    @subject = Subject.includes(:documents, :task_masters)
+      .find_by_id params[:id]
     redirect_if_object_nil @subject
   end
 
@@ -88,5 +90,15 @@ class Admin::SubjectsController < ApplicationController
     @course = Course.includes(course_subjects: [user_subjects: :user])
       .find_by_id params[:course_id]
     redirect_if_object_nil @course
+  end
+
+  def load_chart_data
+    if @user_subjects.any?
+      @user_tasks_chart_data = {}
+
+      @user_subjects.each do |user_subject|
+        @user_tasks_chart_data[user_subject.user.name] = user_subject.user_tasks.finished.size
+      end
+    end
   end
 end
