@@ -71,7 +71,7 @@
     </div>
   </div>
 </div>
-<% if @user_subjects.any? %>
+<% unless @user_tasks_chart_data.blank? %>
   <div id="user-subjects-charts"
     data-user-name="<%= @user_tasks_chart_data.keys %>"
     data-total-number-tasks="<%= @user_tasks_chart_data.values %>">

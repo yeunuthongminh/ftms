@@ -121,14 +121,6 @@ class User < ApplicationRecord
     roles.exists? role_type: role_type
   end
 
-  def password_required?
-    new_record? ? super : false
-  end
-
-  def create_user_profile
-    create_profile user_id: id
-  end
-
   def set_password
     if new_record?
       self.password = Settings.default_password

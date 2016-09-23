@@ -2,6 +2,6 @@
   $("#user-subject-<%= @user_subject.id %>").
     replaceWith("<%= j render @user_subject %>");
 <% else %>
-  $(".user-lists").html("<%= j render "admin/subjects/user_lists" %>");
+  $(".user-task-info").replaceWith("<%= j render "admin/subjects/user_lists" %>");
 <% end %>
 $(".flash").html("<%= j render "shared/flash_banner" %>");
