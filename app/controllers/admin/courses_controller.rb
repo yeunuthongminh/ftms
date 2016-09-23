@@ -48,8 +48,7 @@ class Admin::CoursesController < ApplicationController
   end
 
   def show
-    @course_subjects = @course.course_subjects
-      .includes(:subject, user_subjects: :user).order_position
+    @course_subjects = @course.course_subjects.includes(:subject).order_position
     @users = @course.users
     @trainers = @users.trainers
     @trainees = @users.trainees

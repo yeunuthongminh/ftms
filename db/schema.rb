@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922075046) do
+ActiveRecord::Schema.define(version: 20160923085523) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -185,9 +185,10 @@ ActiveRecord::Schema.define(version: 20160922075046) do
     t.integer  "programming_language_id"
     t.integer  "user_progress_id"
     t.integer  "status_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.integer  "location_id"
+    t.decimal  "working_day",             precision: 2, scale: 1
     t.index ["location_id"], name: "index_profiles_on_location_id", using: :btree
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end

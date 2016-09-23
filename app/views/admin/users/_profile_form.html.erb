@@ -21,7 +21,8 @@
             <%= ff.label :start_training_date %>
           </div>
           <div class="col-md-7">
-            <%= ff.text_field :start_training_date, class: "form-control datepicker" %>
+            <%= ff.text_field :start_training_date,
+              class: "form-control datepicker profile" %>
           </div>
         </div>
         <div class="row form-group">
@@ -29,7 +30,7 @@
             <%= ff.label :leave_date %>
           </div>
           <div class="col-md-7">
-            <%= ff.text_field :leave_date, class: "form-control datepicker" %>
+            <%= ff.text_field :leave_date, class: "form-control datepicker profile" %>
           </div>
         </div>
         <div class="row form-group">
@@ -37,7 +38,8 @@
             <%= ff.label :finish_training_date %>
           </div>
           <div class="col-md-7">
-            <%= ff.text_field :finish_training_date, class: "form-control datepicker" %>
+            <%= ff.text_field :finish_training_date,
+              class: "form-control datepicker profile" %>
           </div>
         </div>
         <div class="row form-group">
@@ -45,10 +47,27 @@
             <%= ff.label :contract_date %>
           </div>
           <div class="col-md-7">
-            <%= ff.text_field :contract_date, class: "form-control datepicker" %>
+            <%= ff.text_field :contract_date, class: "form-control datepicker profile" %>
           </div>
         </div>
-
+        <div class="row form-group">
+          <div class="col-md-4">
+            <%= ff.label :graduation %>
+          </div>
+          <div class="col-md-7">
+            <%= ff.text_field :graduation, class: "form-control datepicker profile" %>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-4">
+            <%= ff.label :working_day %>
+          </div>
+          <div class="col-md-7">
+            <%= ff.number_field :working_day, step: Settings.working_day.step,
+              min: Settings.working_day.min, max: Settings.working_day.max,
+              class: "form-control profile"%>
+          </div>
+        </div>
       </div>
 
       <div class="col-md-6 profile-form">
