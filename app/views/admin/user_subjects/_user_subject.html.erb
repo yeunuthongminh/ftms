@@ -5,7 +5,6 @@
       <div class="form-edit">
         <%= form_for [:admin, @course_subject, user_subject], remote: true do |f| %>
           <%= f.text_field :start_date, class: "date-edit datepicker", readonly: true %>
-          <i class="fa fa-edit fa-2x text-blue"></i>
           <%= f.button :submit, class: "btn-save", hidden: true %>
         <% end %>
       </div>
@@ -13,12 +12,11 @@
   </td>
   <td>
     <% if user_subject.finish? %>
-      <input type="text" value="<%= user_subject.user_end_date %>"></input>
+      <input type="text" value="<%= user_subject.user_end_date %>" disabled></input>
     <% elsif user_subject.progress? %>
       <div class="form-edit">
         <%= form_for [:admin, @course_subject, user_subject], remote: true do |f| %>
           <%= f.text_field :end_date, class: "date-edit datepicker", readonly: true %>
-          <i class="fa fa-edit fa-2x text-blue"></i>
           <%= f.button :submit, class: "btn-save", hidden: true %>
         <% end %>
       </div>
@@ -58,7 +56,7 @@
         <%= link_to t("admin.actions.show_subject.reopen"),
           [:admin, @course_subject, user_subject], data: {method: :patch,
           remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-success btn-reopen btn-status" %>
+          class: "btn btn-danger btn-reopen btn-status" %>
       <% end %>
     <% end %>
   </td>

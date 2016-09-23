@@ -42,7 +42,7 @@ class User < ApplicationRecord
     :id, :start_training_date, :leave_date, :finish_training_date,
     :ready_for_project, :contract_date, :naitei_company,
     :user_type_id, :university_id, :programming_language_id, :user_progress_id,
-    :status_id, :location_id
+    :status_id, :location_id, :graduation, :working_day
   ]
 
   ATTRIBUTES_PARAMS = [:name, :email, :password,
@@ -50,8 +50,6 @@ class User < ApplicationRecord
     profile_attributes: ATTRIBUTES_PROFILE_PARAMS]
 
   devise :database_authenticatable, :rememberable, :trackable, :validatable
-
-  delegate :id, :name, to: :role, prefix: true, allow_nil: true
 
   scope :available_of_course, ->course_id, programming_language_id{
     joins(:profile).where(QUERY, course_id: course_id,
@@ -80,9 +78,12 @@ class User < ApplicationRecord
       .pluck(:id))
   end
 
+  delegate :id, :name, to: :role, prefix: true, allow_nil: true
   delegate :total_point, :current_rank, to: :evaluation, prefix: true, allow_nil: true
   delegate :location_id, to: :profile, prefix: true, allow_nil: true
   delegate :name, to: :user_task, prefix: true, allow_nil: true
+  delegate :working_day, to: :profile, prefix: true, allow_nil: true
+  delegate :graduation, to: :profile, prefix: true, allow_nil: true
 
   before_validation :set_password
 
