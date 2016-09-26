@@ -24,3 +24,17 @@ $(document).on("turbolinks:load", function() {
     }
   });
 });
+
+var datepicker_options = {
+  autoclose: true,
+  enableOnReadonly: true,
+  format: "mm-yyyy",
+  viewMode: "months",
+  minViewMode: "months"
+};
+
+$(document).on('turbolinks:load ajaxComplete', function() {
+  $('input.graduation').click(function() {
+    $(this).datepicker(datepicker_options).datepicker('show');
+  });
+});

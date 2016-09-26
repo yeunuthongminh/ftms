@@ -12,7 +12,7 @@
   </td>
   <td>
     <% if user_subject.finish? %>
-      <input type="text" value="<%= user_subject.user_end_date %>" disabled></input>
+      <%= user_subject.user_end_date %>
     <% elsif user_subject.progress? %>
       <div class="form-edit">
         <%= form_for [:admin, @course_subject, user_subject], remote: true do |f| %>

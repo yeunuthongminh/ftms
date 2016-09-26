@@ -21,7 +21,7 @@
           <% end %>
         <% end %>
         <br>
-        <div class="profile-form">
+        <div>
           <%= f.label :trainer_id %>
           <%= f.select :trainer_id, options_for_select(@trainers
             .collect{|trainer| [trainer.name, trainer.id,
