@@ -43,11 +43,11 @@ class CoursesDatatable
     current_user = @view.current_user
     @courses = @namespace == Settings.namespace_roles.admin ? Course.all : current_user.courses
     courses = @courses.order("#{sort_column} #{sort_direction}")
-      .where("name like :search", search: "%#{params[:sSearch]}%")
+      .where("courses.name like :search", search: "%#{params[:sSearch]}%")
       .per_page_kaminari(page).per per_page
 
     if params[:sSearch_3].present?
-      courses = courses.where "status = :search", search: "#{params[:sSearch_3]}"
+      courses = courses.where "courses.status = :search", search: "#{params[:sSearch_3]}"
     end
     courses
   end
@@ -61,7 +61,7 @@ class CoursesDatatable
   end
 
   def sort_column
-    columns = %w[id name]
+    columns = %w[id name trainer programming_language_id location_id]
     columns[params[:iSortCol_0].to_i]
   end
 

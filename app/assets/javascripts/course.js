@@ -4,10 +4,12 @@ $(document).on("turbolinks:load", function() {
     + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7 pull-right'p>>";
 
   if(tbl_course.length > 0) {
-    set_datatable(tbl_course, [2, 3], dom);
+    set_datatable(tbl_course, [2, 5], dom);
 
     tbl_course.dataTable().columnFilter({
       aoColumns: [
+        null,
+        null,
         null,
         null,
         null,
