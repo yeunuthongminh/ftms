@@ -30,10 +30,9 @@
               </div>
             <% end %>
             <div class="col-xs-2 info-panel">
-              <% course_subject.user_subjects.includes(:user).order(:status)
+              <% course_subject.user_subjects.progress.includes(:user)
                 .each.with_index 1 do |user_subject, index| %>
-                <% if (user_subject.progress? || user_subject.pending?) &&
-                  index <= Settings.number_member_show %>
+                <% if index <= Settings.number_member_show %>
                   <div class="col-xs-6">
                     <%= link_to [:trainer, user_subject.user],
                       title: user_subject.user.name do %>

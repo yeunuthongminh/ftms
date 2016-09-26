@@ -179,8 +179,8 @@ module ApplicationHelper
     end
   end
 
-  def the_rest_member trainee
-    trainee.progress.size - Settings.number_member_show
+  def the_rest_member user_subjects
+    user_subjects.progress.size - Settings.number_member_show
   end
 
   ["set_background_color_", ""].each do |prefix|
@@ -205,5 +205,9 @@ module ApplicationHelper
       link_to t("staticpages.admin"), admin_root_path,
         class: "btn btn-default btn-flat"
     end
+  end
+
+  def data_finish_task data
+    data.blank? || data.values.sum == 0 ? false : true
   end
 end

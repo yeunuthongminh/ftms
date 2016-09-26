@@ -97,8 +97,8 @@ class Admin::SubjectsController < ApplicationController
       @user_tasks_chart_data = {}
 
       @user_subjects.each do |user_subject|
-        finished_task = user_subject.user_tasks.finished.size
-        @user_tasks_chart_data[user_subject.user.name] = finished_task if finished_task > 0
+        @user_tasks_chart_data[user_subject.user.name] = user_subject
+          .user_tasks.finished.size
       end
     end
   end
