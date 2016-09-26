@@ -55,10 +55,13 @@ class User < ApplicationRecord
     joins(:profile).where(QUERY, course_id: course_id,
     programming_language_id: programming_language_id)
   }
+  scope :trainee_roles, ->{joins(user_roles: :role)
+    .where("roles.role_type = ?", Role.role_types[:trainee])}
   scope :trainers, ->{joins(user_roles: :role)
     .where("roles.role_type = ?", Role.role_types[:trainer])}
-  scope :trainees, ->{joins(user_roles: :role)
-    .where("roles.role_type = ?", Role.role_types[:trainee])}
+  scope :admin_roles, ->{joins(user_roles: :role)
+    .where("roles.role_type = ?", Role.role_types[:admin])}
+  scope :trainees, ->{trainee_roles.where.not(id: admin_roles.map(&:id))}
   scope :find_course, ->course{joins(:user_courses)
     .where("user_courses.course_id in (?)", course).distinct}
   scope :show_members, ->{limit Settings.number_member_show}
