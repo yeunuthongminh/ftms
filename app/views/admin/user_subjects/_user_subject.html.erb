@@ -61,9 +61,10 @@
     <% end %>
   </td>
   <td>
-    <%= button_tag t("button.show"),
-      class: "btn btn-primary btn-status btn-show",
-      data: {id: user_subject.id} %>
+    <%= link_to "javascript:void(0)",
+      class: "btn-show", data: {id: user_subject.id} do %>
+      <i class="glyphicon glyphicon-chevron-down"></i>
+    <% end %>
   </td>
 </tr>
 <% user_subject.user_tasks.includes(:task).each do |user_task| %>

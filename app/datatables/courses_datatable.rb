@@ -24,7 +24,7 @@ class CoursesDatatable
         course.id,
         link_to(course.name, eval("@view.#{@namespace}_course_path(course)")),
         course.load_trainers.map do |trainer|
-          link_to(@view.avatar_user_tag(trainer, "profile-user",
+          link_to(@view.avatar_user_tag(trainer, "profile-user img-circle",
           Settings.image_size_20), eval("@view.#{@namespace}_user_path(trainer)"),
           title: trainer.name)
         end,

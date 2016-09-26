@@ -25,7 +25,7 @@ class LocationsDatatable
         index,
         link_to(location.name, eval("@view.#{@namespace}_location_path(location)")),
         if location.manager.present?
-          link_to(@view.avatar_user_tag(manager, "profile-user",
+          link_to(@view.avatar_user_tag(manager, "profile-user img-circle",
             Settings.image_size_20), eval("@view.#{@namespace}_user_path(manager)"),
             title: manager.name)
         end,

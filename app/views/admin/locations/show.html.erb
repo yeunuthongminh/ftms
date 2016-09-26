@@ -2,7 +2,8 @@
   <div class="manager-info">
     <div class="manager">
       <%= link_to avatar_user_tag(@manager, "img-circle",
-          Settings.image_size_30), @manager, class: "manager-image" %>
+        Settings.image_size_30), @manager, title: @manager.name,
+        class: "manager-image" %>
       <%= link_to @manager.name ,@manager %>
     </div>
   </div>
