@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th class="trainee-image"><%= link_to avatar_user_tag(trainer, "img-circle",
-        Settings.image_size_30), trainer %></th>
+        Settings.image_size_30), trainer, title: trainer.name %></th>
       <th><%= link_to trainer.name, trainer %></th>
     </tr>
   </thead>

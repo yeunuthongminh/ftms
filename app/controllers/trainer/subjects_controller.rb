@@ -26,6 +26,7 @@ class Trainer::SubjectsController < ApplicationController
     add_breadcrumb_path "courses"
     add_breadcrumb @course.name, trainer_course_path(@course)
     add_breadcrumb @course_subject.subject_name
+    load_chart_data
   end
 
   def new
@@ -88,5 +89,16 @@ class Trainer::SubjectsController < ApplicationController
     @course = Course.includes(course_subjects: [user_subjects: :user])
       .find_by_id params[:course_id]
     redirect_if_object_nil @course
+  end
+
+  def load_chart_data
+    if @user_subjects.any?
+      @user_tasks_chart_data = {}
+
+      @user_subjects.each do |user_subject|
+        finished_task = user_subject.user_tasks.finished.size
+        @user_tasks_chart_data[user_subject.user.name] = finished_task if finished_task > 0
+      end
+    end
   end
 end
