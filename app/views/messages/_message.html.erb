@@ -2,8 +2,8 @@
   data-user-id="<%= message.user_id %>">
   <div class="media">
     <div class="media-left pull-left">
-      <%= link_to avatar_user_tag(message.user, "img-circle", Settings.image_size_30),
-        message.user %>
+      <%= link_to avatar_user_tag(message.user, "img-circle", Settings
+      .image_size_30), message.user, title: message.user.name %>
     </div>
     <div class="media-body">
       <div class="media-heading">

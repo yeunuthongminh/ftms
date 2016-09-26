@@ -35,7 +35,8 @@
                 <% if (user_subject.progress? || user_subject.pending?) &&
                   index <= Settings.number_member_show %>
                   <div class="col-xs-6">
-                    <%= link_to [:trainer, user_subject.user] do %>
+                    <%= link_to [:trainer, user_subject.user],
+                      title: user_subject.user.name do %>
                       <%= avatar_user_tag user_subject.user,
                         "profile-user img-circle", Settings.image_size_30 %>
                     <% end %>
