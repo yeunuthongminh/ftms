@@ -2,6 +2,7 @@ class Location < ApplicationRecord
   belongs_to :manager, class_name: User.name, foreign_key: :user_id
 
   has_many :profiles
+  has_many :courses
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates :manager, presence: true, uniqueness: {case_sensitive: false}

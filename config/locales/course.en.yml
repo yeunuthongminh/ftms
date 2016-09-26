@@ -27,11 +27,14 @@ en:
       id: "ID"
       name: "Name"
       trainers: "Trainers"
+      language: "Language"
+      location: "Location"
       status: "Status"
       all_status: "All status"
     labels:
       trainer: "Trainers "
       trainee: "Trainees "
+      location: "Location: "
       status:
         init: "New"
         progress: "Progress"
@@ -50,4 +53,4 @@ en:
     time: "Course's Time is from %{start_date} to %{end_date}"
     assign_trainers: "Assign trainers"
     assign_trainees: "Assign trainees"
-
+    location: "Location"

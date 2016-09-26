@@ -22,6 +22,7 @@ class Course < ApplicationRecord
   has_many :messages, as: :chat_room, dependent: :destroy
 
   belongs_to :programming_language
+  belongs_to :location
 
   enum status: [:init, :progress, :finish]
 
@@ -41,11 +42,12 @@ class Course < ApplicationRecord
 
   USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy]]
   COURSE_ATTRIBUTES_PARAMS = [:name, :image, :description,
-    :programming_language_id,
+    :programming_language_id, :location_id,
     :start_date, :end_date, documents_attributes:
     [:id, :name, :content, :description, :_destroy], subject_ids: []]
 
   delegate :name, to: :programming_language, prefix: true, allow_nil: true
+  delegate :name, to: :location, prefix: true, allow_nil: true
 
   def active_user_courses_when_start_course
     user_courses.update_all active: true
