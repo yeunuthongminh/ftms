@@ -19,7 +19,7 @@ class CoursesDatatable
 
   private
   def data
-    courses.map.each do |course|
+    courses.includes(:programming_language, :location).map.each do |course|
       [
         course.id,
         link_to(course.name, eval("@view.#{@namespace}_course_path(course)")),
@@ -28,6 +28,8 @@ class CoursesDatatable
           Settings.image_size_20), eval("@view.#{@namespace}_user_path(trainer)"),
           title: trainer.name)
         end,
+        course.programming_language_name,
+        course.location_name,
         course.decorate.set_status
       ]
     end

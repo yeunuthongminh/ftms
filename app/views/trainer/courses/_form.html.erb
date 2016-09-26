@@ -60,6 +60,14 @@
         {prompt: ""}, {selected: f.object.programming_language_id, required: true,
         class: "form-control"} %>
     </div>
+    <div class="col-md-3 text-right">
+      <span><%= t "courses.location" %></span>
+    </div>
+    <div class="col-md-3">
+      <%= f.select :location_id, @locations.collect{|u| [u.name, u.id]},
+        {prompt: ""}, {selected: f.object.location_id, required: true,
+        class: "form-control"} %>
+    </div>
   </div><br>
   <div class="row">
     <div class="col-md-2 text-right">

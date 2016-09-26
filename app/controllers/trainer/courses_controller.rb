@@ -74,6 +74,7 @@ class Trainer::CoursesController < ApplicationController
   def load_data
     @subjects = Subject.all
     @programming_languages = ProgrammingLanguage.all
+    @locations = Location.all
   end
 
   def find_course_in_show
