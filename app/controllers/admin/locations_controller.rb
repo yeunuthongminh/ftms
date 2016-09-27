@@ -1,5 +1,7 @@
 class Admin::LocationsController < ApplicationController
   load_and_authorize_resource
+  skip_load_resource only: :show
+  before_action :find_location, only: :show
   before_action :load_managers, except: :destroy
   before_action :set_breadcrumb_new, only: [:new, :create]
   before_action :set_breadcrumb_edit, only: [:edit, :update]
@@ -15,7 +17,7 @@ class Admin::LocationsController < ApplicationController
 
   def show
     @manager = @location.manager
-    @trainers = User.trainers.by_location @location.id
+    @trainers = User.trainers.includes(:trainees).by_location @location.id
 
     add_breadcrumb_path "locations"
     add_breadcrumb @location.name
@@ -77,5 +79,13 @@ class Admin::LocationsController < ApplicationController
     add_breadcrumb_path "locations"
     add_breadcrumb @location.name
     add_breadcrumb_edit "locations"
+  end
+
+  def find_location
+    @location = Location.includes(:manager).find_by_id params[:id]
+    unless @location
+      redirect_to admin_locations_path
+      flash[:alert] = flash_message "not_find"
+    end
   end
 end

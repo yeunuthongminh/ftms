@@ -2,6 +2,7 @@
   $("#user-subject-<%= @user_subject.id %>").
     replaceWith("<%= j render @user_subject %>");
 <% else %>
-  $(".user-lists").html("<%= j render 'trainer/subjects/user_lists' %>");
+  $(".action").html("<%= j render "shared/action_user_subjects" %>");
+  $(".user-lists").html("<%= j render "trainer/subjects/user_lists" %>");
 <% end %>
-$(".flash").html("<%= j render 'shared/flash_banner' %>");
+$(".flash").html("<%= j render "shared/flash_banner" %>");

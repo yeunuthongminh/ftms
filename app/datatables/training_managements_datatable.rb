@@ -23,11 +23,11 @@ class TrainingManagementsDatatable
       [
         link_to(user.name, eval("@view.#{@namespace}_user_path(user)")),
         user.profile.user_type_name,
-        user.profile.location_name,
+        user.profile.location_name ? link_to(user.profile.location_name,
+          eval("@view.#{@namespace}_location_path(user.profile.location)")) : "",
         user.profile.status_name,
         user.profile.university_name,
         user.profile_graduation,
-        user.profile_working_day,
         user.profile.programming_language_name,
         user.profile.start_training_date,
         user.profile.leave_date,
@@ -35,8 +35,10 @@ class TrainingManagementsDatatable
         user.profile.ready_for_project? ? I18n.t("profiles.columns.ready_for_project.ready") :
           I18n.t("profiles.columns.ready_for_project.not_ready"),
         user.profile.contract_date,
-        "",
-        user.trainer ? user.trainer.name : "",
+        user.profile_working_day,
+        user.trainer ? link_to(@view.avatar_user_tag(user.trainer, "profile-user img-circle",
+          Settings.image_size_20), eval("@view.#{@namespace}_user_path(user.trainer)"),
+          title: user.trainer.name) : "",
         (subject = user.user_subjects.find{|s| s.current_progress}) ? subject.name : "",
         user.notes.any? ? user.notes.last.name : ""
       ]
@@ -50,13 +52,8 @@ class TrainingManagementsDatatable
   def fetch_users
     @users = User.trainees.includes :trainer, :notes, user_subjects: [:course_subject],
       profile: [:status, :user_type, :location, :university, :programming_language]
-    users = @users.order("#{sort_column} #{sort_direction}")
-      .where("users.name like :search", search: "%#{params[:sSearch]}%")
+    users = @users.where("users.name like :search", search: "%#{params[:sSearch]}%")
       .per_page_kaminari(page).per per_page
-
-    # if params[:sSearch].present?
-    #   users = users.where "users.name like :search", search: "%#{params[:sSearch]}%"
-    # end
     users
   end
 
@@ -66,14 +63,5 @@ class TrainingManagementsDatatable
 
   def per_page
     params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : @users.size
-  end
-
-  def sort_column
-    columns = %w[id name]
-    columns[params[:iSortCol_0].to_i]
-  end
-
-  def sort_direction
-    params[:sSortDir_0] == "desc" ? "desc" : "asc"
   end
 end
