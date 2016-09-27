@@ -81,9 +81,9 @@
       </section>
     </div>
 
-    <div class="col-md-3 user-infor right-side-course">
+    <div class="col-md-3 user-info right-side-course">
       <h2 class="label"><%= t "courses.labels.location" %></h2>
-      <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= @course.location_name %></h5>
+      <ul><%= link_to @course.location_name, [:admin, @course.location] %></ul>
       <h2 class="label"><%= t "courses.labels.trainer" %>
         (<%= @trainers.size %>)&nbsp;
         <%= link_to edit_admin_course_assign_trainers_path(@course) do %>

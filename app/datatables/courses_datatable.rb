@@ -29,7 +29,8 @@ class CoursesDatatable
           title: trainer.name)
         end,
         course.programming_language_name,
-        course.location_name,
+        course.location ? link_to(course.location_name,
+          eval("@view.#{@namespace}_location_path(course.location)")) : "",
         course.decorate.set_status
       ]
     end
@@ -46,8 +47,8 @@ class CoursesDatatable
       .where("courses.name like :search", search: "%#{params[:sSearch]}%")
       .per_page_kaminari(page).per per_page
 
-    if params[:sSearch_3].present?
-      courses = courses.where "courses.status = :search", search: "#{params[:sSearch_3]}"
+    if params[:sSearch_5].present?
+      courses = courses.where "courses.status = :search", search: "#{params[:sSearch_5]}"
     end
     courses
   end
