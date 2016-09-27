@@ -9,16 +9,17 @@ namespace :db do
     Course.all.each do |course|
       location_id = course.load_trainers.first.try :profile_location_id
       course.update_attributes location_id: location_id
+      puts "Update location #{course} success"
     end
   end
 
   task rake_trainee_progress: :environment do
     CourseSubject.all.each do |course_subject|
       user_subjects = course_subject.user_subjects
-      user_subjects.each do |user_subject|
-        if user_subjects.size == user_subjects.where(current_progress: false)
-          user_subject.update_attributes current_progress: true
-        end
+      if user_subjects.progress.size > 0 && user_subjects.finish.size > 0
+        user_subjects.finish.order("updated_at DESC").first
+          .update_attributes current_progress: true
+        puts "Update current progress #{course_subject} success"
       end
     end
   end
