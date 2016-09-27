@@ -1,5 +1,17 @@
 <tr id="user-subject-<%= user_subject.id %>">
-  <td><%= link_to user_subject.user.name, [:trainer, user_subject.user] %></td>
+  <td class="user-name">
+    <%= link_to user_subject.user_name,
+      [:trainer, user_subject.user] %>
+    <% if user_subject.finish? %>
+      <%= link_to [:trainer, @course_subject, user_subject],
+        data: {method: :patch, remote: true,
+        confirm: t("messages.delete.confirm")},
+        class: "btn-reopen pull-right",
+        title: t("admin.actions.show_subject.reopen") do %>
+        <i><%= image_tag "reopen.png", class: "reopen-img img-circle" %></i>
+      <% end %>
+    <% end %>
+  </td>
   <td>
     <% if user_subject.progress? %>
       <div class="form-edit">

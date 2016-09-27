@@ -34,6 +34,23 @@
   #user-subjects-charts {
     margin-top: 20px;
   }
+
+  .user-lists {
+    .user-name {
+      .btn-reopen {
+        display: none;
+      }
+      .reopen-img {
+        width: 17px;
+        height: 17px;
+      }
+    }
+    .user-name:hover {
+      .btn-reopen {
+        display: inline !important;
+      }
+    }
+  }
 }
 .user-task-info {
   .show-task {

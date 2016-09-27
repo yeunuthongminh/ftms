@@ -185,13 +185,15 @@ module ApplicationHelper
 
   ["set_background_color_", ""].each do |prefix|
     define_method "#{prefix}status_subject" do |user_subjects|
-      if user_subjects.progress.any? || user_subjects.pending.any?
+      if user_subjects.size == user_subjects.init.size
+        prefix.blank? ? t("user_subjects.init") : "init-background-color"
+      elsif user_subjects.size > 0 && user_subjects.size == user_subjects
+        .finish.size
+        prefix.blank? ? t("user_subjects.finished") :
+          "finished-background-color"
+      else
         prefix.blank? ? t("user_subjects.in_progress") :
           "in_progress-background-color"
-      elsif user_subjects.size > 0 && user_subjects.size == user_subjects.finish.size
-        prefix.blank? ? t("user_subjects.finished") : "finished-background-color"
-      else
-        prefix.blank? ? t("user_subjects.init") : "init-background-color"
       end
     end
   end
