@@ -24,8 +24,9 @@ en:
       inprogress_courses: "In progress courses"
     notes: "Notes"
     titles:
-      none_finished_course: "You have not finished any course"
-      not_learn_any_course: "You have not learned any course now!"
+      none_finished_course: "%{user_name} have not finished any course"
+      not_learn_any_course: "%{user_name} have not learned any course now!"
+      me: "You"
     type:
       trainee: "Trainee"
   signins:
