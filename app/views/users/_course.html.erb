@@ -1,7 +1,8 @@
 <li class="list-group-item finished_course">
   <dl class="dl-horizontal">
     <dt><strong><%= t "courses.name" %></strong></dt>
-    <dd><%= link_to user_course.course_name,
+    <dd><%= link_to user_course.course_name, @namespace == Settings.namespace_roles.trainee ?
+      user_course_path(user_course) :
       eval("#{@namespace}_course_path(user_course.course)") %></dd>
     <dt><strong><%= t "courses.description" %></strong></dt>
     <dd><%= user_course.course_description %></dd>

@@ -14,6 +14,17 @@
               <li class="user-header">
                 <%= avatar_user_tag current_user, "img-circle", Settings.image_size_50 %>
                 <p><%= current_user.name %></p>
+                <div class="col-xs-4 col-xs-offset-4">
+                  <div class="switch-role">
+                    <button class="btn btn-warning">
+                      <%= @namespace.capitalize %>
+                      <span class="caret"></span>
+                    </button>
+                    <ul hidden class="drop">
+                      <%= current_user.decorate.set_link_role %>
+                    </ul>
+                  </div>
+                </div>
               </li>
               <li class="user-footer">
                 <div class="pull-left">
