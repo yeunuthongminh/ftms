@@ -1,5 +1,4 @@
-class UsersMailer < ActionMailer::Base
-  default from: ENV["GMAIL_USERNAME"]
+class UsersMailer < ApplicationMailer
 
   def mail_by_day user_id
     @user = User.includes(:courses).find_by id: user_id
