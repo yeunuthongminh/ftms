@@ -27,7 +27,7 @@ class TrainingManagementsDatatable
           eval("@view.#{@namespace}_location_path(user.profile.location)")) : "",
         user.profile.status_name,
         user.profile.university_name,
-        user.profile_graduation ? I18n.l(user.profile_graduation, format: :default) : "",
+        user.profile_graduation ? I18n.l(user.profile_graduation, format: :year_month) : "",
         user.profile.programming_language_name,
         user.profile.start_training_date ?
           I18n.l(user.profile.start_training_date, format: :default) : "",
