@@ -1,5 +1,4 @@
 namespace :db do
-  require "business_time"
   desc "rake update data"
   task update_data: :environment do
     Rake::Task["db:rake_course_location"].invoke
@@ -35,10 +34,10 @@ namespace :db do
       working_day = trainee.profile.working_day
       if start_date
         if working_day && working_day > 0
-          finish_date = start_date + (40*5/working_day).to_i.business_days.after start_date
+          finish_date = start_date + (40*7/working_day - 1).to_i.days
           profile.update_attributes finish_training_date: finish_date
         else
-          finish_date = start_date + 40.business_days.after start_date
+          finish_date = start_date + (40*7/5 - 1).to_i.days
           profile.update_attributes finish_training_date: finish_date
         end
       end
