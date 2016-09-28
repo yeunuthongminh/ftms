@@ -3,6 +3,7 @@ namespace :db do
   task update_data: :environment do
     Rake::Task["db:rake_course_location"].invoke
     Rake::Task["db:rake_trainee_progress"].invoke
+    Rake::Task["db:rake_training_end_date"].invoke
   end
 
   task rake_course_location: :environment do
@@ -25,5 +26,17 @@ namespace :db do
       end
     end
     puts "Update current progress success"
+  end
+
+  task rake_training_end_date: :environment do
+    User.trainees.each do |trainee|
+      start_date = trainee.profile.start_training_date
+      working_day = trainee.profile.working_day
+      if start_date && working_day > 0
+        finish_date = start_date + (7*40/working_day).days
+        profile.update_attributes finish_training_date: finish_date
+      end
+    end
+    puts "Update finish training date complete"
   end
 end
