@@ -37,14 +37,18 @@
           <span><%= t "courses.start_date" %></span>
         </div>
         <div class="col-md-3">
-          <%= f.text_field :start_date, class: "form-control datepicker", required: true,
+          <%= f.text_field :start_date, value: @course.start_date ?
+            l(@course.start_date, format: :default) : "",
+            class: "form-control datepicker", required: true,
             placeholder: I18n.t("courses.form.input_course_start_date") %>
         </div>
         <div class="col-md-3 text-right">
           <span><%= t "courses.end_date" %></span>
         </div>
         <div class="col-md-3">
-          <%= f.text_field :end_date, class: "form-control datepicker", required: true,
+          <%= f.text_field :end_date, value: @course.end_date ?
+            l(@course.end_date, format: :default) : "",
+            class: "form-control datepicker", required: true,
             placeholder: I18n.t("courses.form.input_course_end_date") %>
         </div>
       </div>
