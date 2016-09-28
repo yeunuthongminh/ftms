@@ -18,7 +18,8 @@
             <%= ff.label :start_training_date %>
           </div>
           <div class="col-md-7">
-            <%= ff.text_field :start_training_date,
+            <%= ff.text_field :start_training_date, value: @user.profile.start_training_date ?
+              l(@user.profile.start_training_date, format: :default) : "",
               class: "form-control datepicker profile" %>
           </div>
         </div>
@@ -27,7 +28,9 @@
             <%= ff.label :leave_date %>
           </div>
           <div class="col-md-7">
-            <%= ff.text_field :leave_date, class: "form-control datepicker profile" %>
+            <%= ff.text_field :leave_date, value: @user.profile.leave_date ?
+              l(@user.profile.leave_date, format: :default) : "",
+              class: "form-control datepicker profile" %>
           </div>
         </div>
         <div class="row form-group">
@@ -35,7 +38,8 @@
             <%= ff.label :finish_training_date %>
           </div>
           <div class="col-md-7">
-            <%= ff.text_field :finish_training_date,
+            <%= ff.text_field :finish_training_date, value: @user.profile.finish_training_date ?
+              l(@user.profile.finish_training_date, format: :default) : "",
               class: "form-control datepicker profile" %>
           </div>
         </div>
@@ -44,7 +48,9 @@
             <%= ff.label :contract_date %>
           </div>
           <div class="col-md-7">
-            <%= ff.text_field :contract_date, class: "form-control datepicker profile" %>
+            <%= ff.text_field :contract_date, value: @user.profile.contract_date ?
+              l(@user.profile.contract_date, format: :default) : "",
+            class: "form-control datepicker profile" %>
           </div>
         </div>
         <div class="row form-group">
@@ -52,7 +58,9 @@
             <%= ff.label :graduation %>
           </div>
           <div class="col-md-7">
-            <%= ff.text_field :graduation, class: "form-control graduation profile" %>
+            <%= ff.text_field :graduation,
+              value: @user.profile_graduation ? l(@user.profile_graduation, format: :year_month) :
+              "", class: "form-control graduation profile" %>
           </div>
         </div>
         <div class="row form-group">

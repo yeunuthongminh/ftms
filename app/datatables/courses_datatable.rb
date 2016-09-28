@@ -19,9 +19,9 @@ class CoursesDatatable
 
   private
   def data
-    courses.includes(:programming_language, :location).map.each do |course|
+    courses.includes(:programming_language, :location).map.each.with_index 1 do |course, index|
       [
-        course.id,
+        index,
         link_to(course.name, eval("@view.#{@namespace}_course_path(course)")),
         course.load_trainers.map do |trainer|
           link_to(@view.avatar_user_tag(trainer, "profile-user img-circle",
