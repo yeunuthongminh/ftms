@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
+  skip_authorize_resource :edit
+  before_action :load_data, :load_user, only: :edit
 
   def show
     @activities = PublicActivity::Activity.includes(:owner, :trackable)
@@ -18,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user.build_profile unless @user.profile
   end
 
   def update
@@ -25,6 +28,7 @@ class UsersController < ApplicationController
       sign_in @user, bypass: true
       redirect_to @user, notice: flash_message("updated")
     else
+      load_data
       flash[:alert] = flash_message "not_updated"
       render :edit
     end
@@ -33,5 +37,17 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit User::ATTRIBUTES_PARAMS
+  end
+
+  def load_user
+    @user = User.includes(:profile).find_by_id params[:id]
+    if @user.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to root_path
+    end
+  end
+
+  def load_data
+    @universities = University.all
   end
 end

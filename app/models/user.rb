@@ -131,4 +131,8 @@ class User < ApplicationRecord
       self.password_confirmation = Settings.default_password
     end
   end
+
+  def password_required?
+    new_record? ? super : false
+  end
 end

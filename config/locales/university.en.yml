@@ -6,3 +6,5 @@ en:
   table:
     thead:
       name: "Name"
+  university:
+    other: "Other University"
