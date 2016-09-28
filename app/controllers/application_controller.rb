@@ -87,6 +87,7 @@ class ApplicationController < ActionController::Base
 
   def get_namespace
     @namespace = self.class.parent.to_s.downcase
+    @namespace = Settings.namespace_roles.trainee if @namespace == "object"
   end
 
   def redirect_if_object_nil object

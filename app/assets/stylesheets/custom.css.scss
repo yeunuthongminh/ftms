@@ -267,12 +267,12 @@ html {
     }
 
     .dropdown-menu {
-      width: 80% !important;
       color: #3c8dbc !important;
       margin: 5px 2px 2px 2px;
-      left: -123%;
       border-top: 1px solid #eee !important;
-
+      li.user-header {
+        background-color: #3c8dbc;
+      }
       li a {
         color: #3c8dbc !important;
 
@@ -548,5 +548,25 @@ input.profile {
   }
   .user-task-info tr:hover {
     background: #DDEBD7;
+  }
+}
+
+.switch-role {
+  position: relative;
+  .btn-warning {
+    margin-left: -5px;
+    padding: 4px 13px;
+  }
+}
+
+.switch-role:hover {
+  .btn-warning {
+    display: none;
+  }
+  .drop {
+    position: absolute;
+    list-style: none;
+    left: -40px;
+    display: inline !important;
   }
 }

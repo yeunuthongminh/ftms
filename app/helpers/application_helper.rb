@@ -198,17 +198,6 @@ module ApplicationHelper
     end
   end
 
-  def link_to_role
-    if current_user.is_trainer? && @namespace == Settings.namespace_roles.admin
-      link_to t("staticpages.trainer"), trainer_root_path,
-        class: "btn btn-default btn-flat"
-    elsif current_user.is_admin? && @namespace == Settings.namespace_roles
-      .trainer
-      link_to t("staticpages.admin"), admin_root_path,
-        class: "btn btn-default btn-flat"
-    end
-  end
-
   def data_finish_task data
     data.blank? || data.values.sum == 0 ? false : true
   end
