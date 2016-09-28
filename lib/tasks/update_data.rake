@@ -33,13 +33,8 @@ namespace :db do
       start_date = trainee.profile.start_training_date
       working_day = trainee.profile.working_day
       if start_date
-        if working_day && working_day > 0
-          finish_date = start_date + (40*7/working_day - 1).to_i.days
-          profile.update_attributes finish_training_date: finish_date
-        else
-          finish_date = start_date + (40*7/5 - 1).to_i.days
-          profile.update_attributes finish_training_date: finish_date
-        end
+        finish_date = start_date + (40*7/((working_day && working_day > 0) ? working_day : 5) - 1).to_i.days
+        trainee.profile.update_attributes finish_training_date: finish_date
       end
     end
     puts "Update finish training date complete"
