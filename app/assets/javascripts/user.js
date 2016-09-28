@@ -23,12 +23,20 @@ $(document).on("turbolinks:load", function() {
       location_select.val('');
     }
   });
+   $('.btn-submit').click(function() {
+    var graduation = $('input.graduation');
+    var graduation_date = graduation.val();
+    if (graduation_date) {
+      graduation.val(graduation_date + '/01');
+    }
+    $('.edit_user').submit();
+   });
 });
 
 var datepicker_options = {
   autoclose: true,
   enableOnReadonly: true,
-  format: "mm-yyyy",
+  format: I18n.t("datepicker.time.short"),
   viewMode: "months",
   minViewMode: "months"
 };

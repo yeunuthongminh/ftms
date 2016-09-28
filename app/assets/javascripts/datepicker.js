@@ -1,5 +1,5 @@
 var datetime_options = {
-  format: I18n.t("datepicker.time.format"),
+  format: I18n.t("datepicker.time.default"),
   enableOnReadonly: true,
   orientation: "auto",
   forceParse: false,

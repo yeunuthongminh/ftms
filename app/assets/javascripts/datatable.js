@@ -16,7 +16,7 @@ function set_datatable(selector, not_order_column, dom) {
     ],
     order: [1],
     "columnDefs": [{"orderable": false, "targets": not_order_column}],
-    "pageLength": 10,
+    "pageLength": 50,
     sAjaxSource: selector.data("source"),
     language: {
       search: "_INPUT_",
