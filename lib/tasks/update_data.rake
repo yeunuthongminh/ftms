@@ -32,7 +32,7 @@ namespace :db do
     User.trainees.each do |trainee|
       start_date = trainee.profile.start_training_date
       working_day = trainee.profile.working_day
-      if start_date && working_day > 0
+      if start_date && working_day && working_day > 0
         finish_date = start_date + (7*40/working_day).days
         profile.update_attributes finish_training_date: finish_date
       end
