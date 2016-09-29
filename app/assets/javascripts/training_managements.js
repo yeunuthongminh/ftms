@@ -17,7 +17,7 @@ $(document).on("turbolinks:load", function() {
       ],
       order: [1],
       "columnDefs": [{"orderable": false, "targets": []}],
-      "pageLength": 10,
+      "pageLength": 50,
       sAjaxSource: tbl_training_managements.data("source"),
       language: {
         search: "_INPUT_",
