@@ -29,6 +29,8 @@ en:
       me: "You"
     type:
       trainee: "Trainee"
+      admin: "Admin"
+      trainer: "Trainer"
   signins:
     banner: "Please Login"
     remember: "Remember me"
