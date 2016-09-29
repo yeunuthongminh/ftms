@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160929092651) do
+ActiveRecord::Schema.define(version: 20160930072715) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 20160929092651) do
     t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
     t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
     t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
+  end
+
+  create_table "answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text     "content",     limit: 65535
+    t.boolean  "is_correct"
+    t.integer  "question_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["deleted_at"], name: "index_answers_on_deleted_at", using: :btree
+    t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
   end
 
   create_table "ckeditor_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -232,6 +243,17 @@ ActiveRecord::Schema.define(version: 20160929092651) do
     t.index ["deleted_at"], name: "index_programming_languages_on_deleted_at", using: :btree
   end
 
+  create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text     "content",    limit: 65535
+    t.integer  "level"
+    t.integer  "subject_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["deleted_at"], name: "index_questions_on_deleted_at", using: :btree
+    t.index ["subject_id"], name: "index_questions_on_subject_id", using: :btree
+  end
+
   create_table "ranks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "begin_point"
     t.integer  "end_point"
@@ -251,6 +273,19 @@ ActiveRecord::Schema.define(version: 20160929092651) do
     t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", using: :btree
   end
 
+  create_table "results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "test_id"
+    t.integer  "question_id"
+    t.integer  "answer_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["answer_id"], name: "index_results_on_answer_id", using: :btree
+    t.index ["deleted_at"], name: "index_results_on_deleted_at", using: :btree
+    t.index ["question_id"], name: "index_results_on_question_id", using: :btree
+    t.index ["test_id"], name: "index_results_on_test_id", using: :btree
+  end
+
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -266,6 +301,18 @@ ActiveRecord::Schema.define(version: 20160929092651) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_statuses_on_deleted_at", using: :btree
+  end
+
+  create_table "subject_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "number_of_test"
+    t.integer  "time_of_test"
+    t.integer  "min_score_to_pass"
+    t.integer  "subject_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["deleted_at"], name: "index_subject_details_on_deleted_at", using: :btree
+    t.index ["subject_id"], name: "index_subject_details_on_subject_id", using: :btree
   end
 
   create_table "subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -302,6 +349,15 @@ ActiveRecord::Schema.define(version: 20160929092651) do
     t.datetime "deleted_at"
     t.index ["course_subject_id"], name: "index_tasks_on_course_subject_id", using: :btree
     t.index ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree
+  end
+
+  create_table "tests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_subject_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["deleted_at"], name: "index_tests_on_deleted_at", using: :btree
+    t.index ["user_subject_id"], name: "index_tests_on_user_subject_id", using: :btree
   end
 
   create_table "universities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

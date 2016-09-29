@@ -7,6 +7,7 @@ class Subject < ApplicationRecord
     documents_attributes: [:id, :name, :content, :_destroy],
     task_masters_attributes: [:id, :name, :description, :_destroy]]
 
+  has_one :subject_detail, dependent: :destroy
   has_many :task_masters, dependent: :destroy
   has_many :course_subjects, dependent: :destroy
   has_many :courses, through: :course_subjects
