@@ -1,4 +1,6 @@
 class TaskMaster < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :subject
 
   validates :name, presence: true

@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  acts_as_paranoid
+  acts_as_reader
+  mount_uploader :avatar, ImageUploader
 
   QUERY = "users.id NOT IN (SELECT user_id
     FROM user_courses, courses WHERE user_courses.course_id = courses.id
@@ -6,7 +9,19 @@ class User < ApplicationRecord
     AND courses.id <> :course_id) AND profiles.programming_language_id =
     :programming_language_id"
 
-  mount_uploader :avatar, ImageUploader
+
+  ATTRIBUTES_PROFILE_PARAMS = [
+    :id, :start_training_date, :leave_date, :finish_training_date,
+    :ready_for_project, :contract_date, :naitei_company,
+    :user_type_id, :university_id, :programming_language_id, :user_progress_id,
+    :status_id, :location_id, :graduation, :working_day
+  ]
+
+  ATTRIBUTES_PARAMS = [:name, :email, :password,
+    :password_confirmation, :avatar, :trainer_id, role_ids: [],
+    profile_attributes: ATTRIBUTES_PROFILE_PARAMS]
+
+  attr_accessor :current_role
 
   belongs_to :trainer, class_name: User.name, foreign_key: :trainer_id
   belongs_to :role
@@ -36,21 +51,6 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password
 
-  acts_as_reader
-
-  ATTRIBUTES_PROFILE_PARAMS = [
-    :id, :start_training_date, :leave_date, :finish_training_date,
-    :ready_for_project, :contract_date, :naitei_company,
-    :user_type_id, :university_id, :programming_language_id, :user_progress_id,
-    :status_id, :location_id, :graduation, :working_day
-  ]
-
-  ATTRIBUTES_PARAMS = [:name, :email, :password,
-    :password_confirmation, :avatar, :trainer_id, role_ids: [],
-    profile_attributes: ATTRIBUTES_PROFILE_PARAMS]
-
-  devise :database_authenticatable, :rememberable, :trackable, :validatable
-
   scope :available_of_course, ->course_id, programming_language_id{
     joins(:profile).where(QUERY, course_id: course_id,
     programming_language_id: programming_language_id)
@@ -73,13 +73,16 @@ class User < ApplicationRecord
   }
   scope :created_between, ->start_date, end_date{where("DATE(created_at) >=
     ? AND DATE(created_at) <= ?", start_date, end_date)}
-
   scope :by_trainer, ->trainer_id{where trainer_id: trainer_id}
   scope :free_trainees, -> do
     where.not(id: joins(:user_subjects)
       .where("user_subjects.status = ?", UserSubject.statuses[:progress])
       .pluck(:id))
   end
+
+  before_validation :set_password
+
+  accepts_nested_attributes_for :profile
 
   delegate :id, :name, to: :role, prefix: true, allow_nil: true
   delegate :total_point, :current_rank, to: :evaluation, prefix: true, allow_nil: true
@@ -88,11 +91,7 @@ class User < ApplicationRecord
   delegate :working_day, to: :profile, prefix: true, allow_nil: true
   delegate :graduation, to: :profile, prefix: true, allow_nil: true
 
-  before_validation :set_password
-
-  accepts_nested_attributes_for :profile
-
-  attr_accessor :current_role
+  devise :database_authenticatable, :rememberable, :trackable, :validatable
 
   def total_done_tasks user, course
     done_tasks = UserSubject.load_user_subject(user.id, course.id).map(&:user_tasks).flatten.count

@@ -10,6 +10,14 @@ GIT
       request_store (~> 1.0)
 
 GIT
+  remote: git://github.com/rubysherpas/paranoia.git
+  revision: 70f6e37b7b32cf4f70c5b852a38597699f476c62
+  branch: rails5
+  specs:
+    paranoia (2.2.0.pre)
+      activerecord (>= 4.0, < 5.1)
+
+GIT
   remote: git://github.com/rweng/jquery-datatables-rails.git
   revision: b8e6b6fa51e0074ea44b4771a68b1817a14023fc
   specs:
@@ -361,6 +369,7 @@ DEPENDENCIES
   letter_opener
   mini_magick
   mysql2 (~> 0.3.20)
+  paranoia!
   pry
   public_activity
   puma (~> 3.0)

@@ -1,4 +1,6 @@
 class Profile < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :user
   belongs_to :user_type
   belongs_to :university

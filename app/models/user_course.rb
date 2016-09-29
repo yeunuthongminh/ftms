@@ -1,6 +1,7 @@
 class UserCourse < ApplicationRecord
   include PublicActivity::Model
   include InitUserSubject
+  acts_as_paranoid
 
   after_create :create_user_subjects_when_assign_new_user
 

@@ -1,5 +1,11 @@
 class Evaluation < ApplicationRecord
-  before_save :cal_total_point, :cal_rank_value
+  acts_as_paranoid
+
+  ATTRIBUTES_PARAMS = [:assessment, :total_point, :current_rank,
+    :rank_id, :user_id, evaluation_details_attributes:
+      [:id, :name, :point, :evaluation_id, :evaluation_template_id],
+      notes_attributes: [:id, :name, :evaluation_id, :_destroy]
+  ]
 
   belongs_to :user
 
@@ -7,16 +13,11 @@ class Evaluation < ApplicationRecord
   has_many :evaluation_details, dependent: :destroy
   has_many :notes, dependent: :destroy
 
-  accepts_nested_attributes_for :evaluation_details, allow_destroy: true
+  before_save :cal_total_point, :cal_rank_value
 
+  accepts_nested_attributes_for :evaluation_details, allow_destroy: true
   accepts_nested_attributes_for :notes, allow_destroy: true,
     reject_if: proc {|attributes| attributes[:name].blank?}
-
-  ATTRIBUTES_PARAMS = [:assessment, :total_point, :current_rank,
-    :rank_id, :user_id, evaluation_details_attributes:
-      [:id, :name, :point, :evaluation_id, :evaluation_template_id],
-      notes_attributes: [:id, :name, :evaluation_id, :_destroy]
-  ]
 
   private
   def cal_total_point

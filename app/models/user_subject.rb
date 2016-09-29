@@ -1,7 +1,8 @@
 class UserSubject < ApplicationRecord
   include PublicActivity::Model
+  acts_as_paranoid
 
-  has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
+  ATTRIBUTES_PARAMS = [:start_date, :end_date]
 
   belongs_to :user
   belongs_to :course
@@ -9,12 +10,9 @@ class UserSubject < ApplicationRecord
   belongs_to :course_subject
   has_many :user_tasks, dependent: :destroy
   has_many :notifications, as: :trackable, dependent: :destroy
-
-  accepts_nested_attributes_for :user_tasks
+  has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
 
   after_create :create_user_tasks
-
-  ATTRIBUTES_PARAMS = [:start_date, :end_date]
 
   scope :load_user_subject, ->(user_id, course_id){where "user_id = ? AND course_id = ?", user_id, course_id}
   scope :load_users, ->status {where status: status}
@@ -28,11 +26,13 @@ class UserSubject < ApplicationRecord
       UserSubject.statuses[:progress], trainer_id).includes :user
   end
 
-  enum status: [:init, :progress, :finish, :pending]
+  accepts_nested_attributes_for :user_tasks
 
   delegate :name, to: :user, prefix: true, allow_nil: true
   delegate :name, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
+
+  enum status: [:init, :progress, :finish, :pending]
 
   def load_trainers
     course.users.trainers
