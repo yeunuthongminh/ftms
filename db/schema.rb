@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926034839) do
+ActiveRecord::Schema.define(version: 20160929092651) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_activities_on_deleted_at", using: :btree
     t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
     t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
     t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
@@ -48,6 +50,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "receiver_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_conversations_on_deleted_at", using: :btree
   end
 
   create_table "course_subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -60,7 +64,9 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "course_id"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.datetime "deleted_at"
     t.index ["course_id"], name: "index_course_subjects_on_course_id", using: :btree
+    t.index ["deleted_at"], name: "index_course_subjects_on_deleted_at", using: :btree
     t.index ["subject_id"], name: "index_course_subjects_on_subject_id", using: :btree
   end
 
@@ -75,6 +81,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
     t.integer  "location_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_courses_on_deleted_at", using: :btree
   end
 
   create_table "documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -85,6 +93,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.text     "description",       limit: 65535
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_documents_on_deleted_at", using: :btree
   end
 
   create_table "evaluation_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -94,6 +104,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "evaluation_template_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluation_details_on_deleted_at", using: :btree
     t.index ["evaluation_id"], name: "index_evaluation_details_on_evaluation_id", using: :btree
     t.index ["evaluation_template_id"], name: "index_evaluation_details_on_evaluation_template_id", using: :btree
   end
@@ -104,6 +116,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "max_point"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluation_templates_on_deleted_at", using: :btree
   end
 
   create_table "evaluations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -113,6 +127,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "user_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluations_on_deleted_at", using: :btree
     t.index ["user_id"], name: "index_evaluations_on_user_id", using: :btree
   end
 
@@ -121,6 +137,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "user_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_feed_backs_on_deleted_at", using: :btree
     t.index ["user_id"], name: "index_feed_backs_on_user_id", using: :btree
   end
 
@@ -129,6 +147,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_locations_on_deleted_at", using: :btree
     t.index ["user_id"], name: "index_locations_on_user_id", using: :btree
   end
 
@@ -139,6 +159,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_messages_on_deleted_at", using: :btree
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
@@ -149,6 +171,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "author_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_notes_on_deleted_at", using: :btree
     t.index ["evaluation_id"], name: "index_notes_on_evaluation_id", using: :btree
     t.index ["user_id"], name: "index_notes_on_user_id", using: :btree
   end
@@ -160,6 +184,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_notifications_on_deleted_at", using: :btree
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 
@@ -169,6 +195,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "role_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_permissions_on_deleted_at", using: :btree
     t.index ["role_id"], name: "index_permissions_on_role_id", using: :btree
   end
 
@@ -190,6 +218,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.datetime "updated_at",                                      null: false
     t.integer  "location_id"
     t.decimal  "working_day",             precision: 2, scale: 1
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_profiles_on_deleted_at", using: :btree
     t.index ["location_id"], name: "index_profiles_on_location_id", using: :btree
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end
@@ -198,6 +228,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_programming_languages_on_deleted_at", using: :btree
   end
 
   create_table "ranks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -206,6 +238,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.float    "rank_value",  limit: 24
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_ranks_on_deleted_at", using: :btree
   end
 
   create_table "read_marks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -222,12 +256,16 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "role_type"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_roles_on_deleted_at", using: :btree
   end
 
   create_table "statuses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_statuses_on_deleted_at", using: :btree
   end
 
   create_table "subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -238,6 +276,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "during_time"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_subjects_on_deleted_at", using: :btree
   end
 
   create_table "task_masters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -246,6 +286,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "subject_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_task_masters_on_deleted_at", using: :btree
     t.index ["subject_id"], name: "index_task_masters_on_subject_id", using: :btree
   end
 
@@ -257,13 +299,17 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "course_subject_id"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.datetime "deleted_at"
     t.index ["course_subject_id"], name: "index_tasks_on_course_subject_id", using: :btree
+    t.index ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree
   end
 
   create_table "universities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_universities_on_deleted_at", using: :btree
   end
 
   create_table "user_courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -272,6 +318,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "course_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_user_courses_on_deleted_at", using: :btree
     t.index ["user_id", "course_id"], name: "index_user_courses_on_user_id_and_course_id", unique: true, using: :btree
   end
 
@@ -281,6 +329,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.datetime "updated_at",                      null: false
     t.integer  "user_id"
     t.integer  "notification_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_user_notifications_on_deleted_at", using: :btree
     t.index ["notification_id"], name: "index_user_notifications_on_notification_id", using: :btree
     t.index ["user_id"], name: "index_user_notifications_on_user_id", using: :btree
   end
@@ -290,6 +340,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_user_roles_on_deleted_at", using: :btree
     t.index ["role_id"], name: "index_user_roles_on_role_id", using: :btree
     t.index ["user_id"], name: "index_user_roles_on_user_id", using: :btree
   end
@@ -308,8 +360,10 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.datetime "updated_at",                        null: false
     t.date     "user_end_date"
     t.boolean  "current_progress",  default: false
+    t.datetime "deleted_at"
     t.index ["course_id"], name: "index_user_subjects_on_course_id", using: :btree
     t.index ["course_subject_id"], name: "index_user_subjects_on_course_subject_id", using: :btree
+    t.index ["deleted_at"], name: "index_user_subjects_on_deleted_at", using: :btree
     t.index ["user_course_id"], name: "index_user_subjects_on_user_course_id", using: :btree
     t.index ["user_id"], name: "index_user_subjects_on_user_id", using: :btree
   end
@@ -322,6 +376,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.integer  "status",          default: 0
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_user_tasks_on_deleted_at", using: :btree
     t.index ["task_id"], name: "index_user_tasks_on_task_id", using: :btree
     t.index ["user_id"], name: "index_user_tasks_on_user_id", using: :btree
     t.index ["user_subject_id"], name: "index_user_tasks_on_user_subject_id", using: :btree
@@ -331,6 +387,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_user_types_on_deleted_at", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -349,6 +407,8 @@ ActiveRecord::Schema.define(version: 20160926034839) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

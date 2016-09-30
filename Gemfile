@@ -39,6 +39,7 @@ gem "breadcrumbs_on_rails"
 gem "unread"
 gem "exception_notification"
 gem "business_time"
+gem "paranoia", github: "rubysherpas/paranoia", branch: "rails5"
 
 group :development, :test do
   gem "fabrication"

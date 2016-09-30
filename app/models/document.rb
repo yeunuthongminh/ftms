@@ -1,4 +1,6 @@
 class Document < ApplicationRecord
+  acts_as_paranoid
+
   mount_uploader :content, DocumentUploader
 
   belongs_to :documentable, polymorphic: true

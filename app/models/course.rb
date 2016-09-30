@@ -1,12 +1,22 @@
 class Course < ApplicationRecord
+  acts_as_paranoid
+
   include PublicActivity::Model
   include InitUserSubject
   mount_uploader :image, ImageUploader
 
+  USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy]]
+  COURSE_ATTRIBUTES_PARAMS = [:name, :image, :description,
+    :programming_language_id, :location_id,
+    :start_date, :end_date, documents_attributes:
+    [:id, :name, :content, :description, :_destroy], subject_ids: []]
+
+  belongs_to :programming_language
+  belongs_to :location
+
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
 
   validate :check_end_date, on: [:create, :update]
-
   validates :name, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
@@ -21,15 +31,8 @@ class Course < ApplicationRecord
   has_many :notifications, as: :trackable, dependent: :destroy
   has_many :messages, as: :chat_room, dependent: :destroy
 
-  belongs_to :programming_language
-  belongs_to :location
-
-  enum status: [:init, :progress, :finish]
-
   scope :recent, ->{order created_at: :desc}
-
   scope :active_course, ->{where status: "progress"}
-
   scope :created_between, ->start_date, end_date{where("DATE(created_at) >=
     ? AND DATE(created_at) <= ?", start_date, end_date)}
   scope :finished_between, ->start_date, end_date{where("DATE(updated_at) >=
@@ -40,11 +43,7 @@ class Course < ApplicationRecord
     reject_if: proc {|attributes| attributes["content"].blank? && attributes["id"].blank?},
     allow_destroy: true
 
-  USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy]]
-  COURSE_ATTRIBUTES_PARAMS = [:name, :image, :description,
-    :programming_language_id, :location_id,
-    :start_date, :end_date, documents_attributes:
-    [:id, :name, :content, :description, :_destroy], subject_ids: []]
+  enum status: [:init, :progress, :finish]
 
   delegate :name, to: :programming_language, prefix: true, allow_nil: true
   delegate :name, to: :location, prefix: true, allow_nil: true

@@ -1,4 +1,6 @@
 class Location < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :manager, class_name: User.name, foreign_key: :user_id
 
   has_many :profiles
@@ -7,9 +9,9 @@ class Location < ApplicationRecord
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates :manager, presence: true, uniqueness: {case_sensitive: false}
 
-  delegate :name, to: :manager, prefix: true, allow_nil: true
-
   after_save :update_user_location
+
+  delegate :name, to: :manager, prefix: true, allow_nil: true
 
   private
   def update_user_location

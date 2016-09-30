@@ -1,6 +1,9 @@
 class Rank < ApplicationRecord
-  belongs_to :evaluation
+  acts_as_paranoid
+
   ATTRIBUTES_PARAMS = [:begin_point, :end_point, :rank_value]
+
+  belongs_to :evaluation
 
   validates :begin_point, presence: true
   validates :end_point, presence: true

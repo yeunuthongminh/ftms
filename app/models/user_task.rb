@@ -1,4 +1,5 @@
 class UserTask < ApplicationRecord
+  acts_as_paranoid
   include PublicActivity::Model
 
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity",
