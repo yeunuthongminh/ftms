@@ -13,7 +13,9 @@
     <% end %>
   </td>
   <td>
-    <% if user_subject.progress? %>
+    <% if user_subject.finish? %>
+      <%= l user_subject.start_date, format: :default %>
+    <% elsif user_subject.progress? || user_subject.waiting? %>
       <div class="form-edit">
         <%= form_for [:trainer, @course_subject, user_subject],
           remote: true do |f| %>
@@ -27,8 +29,8 @@
   </td>
   <td>
     <% if user_subject.finish? %>
-      <%= user_subject.user_end_date %>
-    <% elsif user_subject.progress? %>
+      <%= l user_subject.end_date, format: :default %>
+    <% elsif user_subject.progress? || user_subject.waiting? %>
       <div class="form-edit">
         <%= form_for [:trainer, @course_subject, user_subject],
           remote: true do |f| %>
@@ -39,6 +41,9 @@
         <% end %>
       </div>
     <% end %>
+  </td>
+  <td>
+    <%= l(user_subject.user_end_date, format: :default) if user_subject.finish? %>
   </td>
   <td>
     <span class="label-status <%= set_background_color_status user_subject.status %>">
