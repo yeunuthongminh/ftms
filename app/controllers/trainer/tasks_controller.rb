@@ -64,7 +64,13 @@ class Trainer::TasksController < ApplicationController
   end
 
   def add_task_info
-    @task.create_by_trainee = current_user.is_trainee?
+    if current_user.is_trainer? || current_user.is_admin?
+      @course_subject.user_subjects.each do |user_subject|
+        user_subject.create_user_task_if_create_task @task
+      end
+    else
+      @task.create_by_trainee = current_user.is_trainee?
+    end
     @task.course_subject = @course_subject
   end
 end
