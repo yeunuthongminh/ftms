@@ -32,7 +32,7 @@ class UserSubject < ApplicationRecord
   delegate :name, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
 
-  enum status: [:init, :progress, :finish, :pending]
+  enum status: [:init, :progress, :finish, :waiting]
 
   def load_trainers
     course.users.trainers
@@ -62,24 +62,24 @@ class UserSubject < ApplicationRecord
   def update_status current_user, status
     if init?
       update_attributes status: :progress, start_date: Time.now,
-        end_date: during_time.business_days.from_now, current_progress: in_progress
+        end_date: during_time.business_days.from_now, current_progress: in_progress?
       key = "user_subject.start_subject"
       notification_key = Notification.keys[:start]
     else
       if is_of_user? current_user
-        update_attributes status: :pending
+        update_attributes status: :waiting
         key = "user_subject.request_subject"
         notification_key = Notification.keys[:request]
       elsif status == Settings.subject_status.reject
-        update_attributes status: :progress, current_progress: in_progress
+        update_attributes status: :progress, current_progress: in_progress?
         key = "user_subject.reject_finish_subject"
         notification_key = Notification.keys[:reject]
       elsif status == Settings.subject_status.finish
-        update_attributes status: :finish, user_end_date: Time.now
+        update_attributes status: :finish, user_end_date: Time.now, current_progress: in_progress?
         key = "user_subject.finish_subject"
         notification_key = Notification.keys[:finish]
       elsif status == Settings.subject_status.reopen
-        update_attributes status: :progress, user_end_date: nil, current_progress: in_progress
+        update_attributes status: :progress, user_end_date: nil, current_progress: in_progress?
         key = "user_subject.reopen_subject"
         notification_key = Notification.keys[:reopen]
       end
@@ -141,9 +141,15 @@ class UserSubject < ApplicationRecord
     end
   end
 
-  def in_progress
-    user_subjects = self.course_subject.user_subjects
-    return true if user_subjects.size == user_subjects.where(current_progress: false)
-    false
+  def in_progress?
+    user_subjects = self.user.user_subjects.where current_progress: true
+    if user_subjects.size > 0
+      if user_subjects.first.finish?
+        user_subjects.first.update_attributes! current_progress: false
+      else
+        return false
+      end
+    end
+    true
   end
 end
