@@ -15,8 +15,11 @@
   <td>
     <% if user_subject.progress? %>
       <div class="form-edit">
-        <%= form_for [:trainer, @course_subject, user_subject], remote: true do |f| %>
-          <%= f.text_field :start_date, class: "date-edit datepicker", readonly: true %>
+        <%= form_for [:trainer, @course_subject, user_subject],
+          remote: true do |f| %>
+          <%= f.text_field :start_date, value: user_subject.start_date ?
+            l(user_subject.start_date, format: :default) : "",
+            class: "date-edit datepicker", readonly: true %>
           <%= f.button :submit, class: "btn-save", hidden: true %>
         <% end %>
       </div>
@@ -27,8 +30,11 @@
       <%= user_subject.user_end_date %>
     <% elsif user_subject.progress? %>
       <div class="form-edit">
-        <%= form_for [:trainer, @course_subject, user_subject], remote: true do |f| %>
-          <%= f.text_field :end_date, class: "date-edit datepicker", readonly: true %>
+        <%= form_for [:trainer, @course_subject, user_subject],
+          remote: true do |f| %>
+          <%= f.text_field :end_date, value: user_subject.end_date ?
+            l(user_subject.end_date, format: :default) : "",
+            class: "date-edit datepicker", readonly: true %>
           <%= f.button :submit, class: "btn-save", hidden: true %>
         <% end %>
       </div>

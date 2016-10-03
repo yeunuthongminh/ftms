@@ -133,6 +133,10 @@ class UserSubject < ApplicationRecord
     end
   end
 
+  def create_user_task_if_create_task task
+    UserTask.create task: task, user: self.user, user_subject: self
+  end
+
   private
   def create_user_tasks
     course_subject.tasks.each do |task|
