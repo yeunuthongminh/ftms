@@ -79,7 +79,7 @@ class UserSubject < ApplicationRecord
         key = "user_subject.reject_finish_subject"
         notification_key = Notification.keys[:reject]
       elsif status == Settings.subject_status.finish
-        update_attributes status: :finish, user_end_date: Time.now, current_progress: in_progress?
+        update_attributes status: :finish, user_end_date: Time.now
         key = "user_subject.finish_subject"
         notification_key = Notification.keys[:finish]
       elsif status == Settings.subject_status.reopen
@@ -142,22 +142,7 @@ class UserSubject < ApplicationRecord
   end
 
   def in_progress?
-    user_subjects = self.user.user_subjects.where(current_progress: true)
-      .order "updated_at DESC"
-    if user_subjects.size == 1
-      if user_subjects.first == self
-        progress_subjects = self.user.user_subjects
-          .where(status: [:progress, :waiting]).order "updated_at DESC"
-        if progress_subjects.size > 0
-          progress_subjects.first.update_attributes current_progress: true
-          return false
-        end
-      elsif user_subjects.first.finish?
-        user_subjects.first.update_attributes! current_progress: false
-      else
-        return false
-      end
-    end
+    user.user_subjects.update_all current_progress: false
     true
   end
 
