@@ -26,6 +26,7 @@ en:
       days: "(days)"
       start_date: "Start date"
       end_date: "End date"
+      user_end_date: "User end date"
       progress: "Progress"
       action: "Action"
       status: "Status"

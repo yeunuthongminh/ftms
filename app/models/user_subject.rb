@@ -44,14 +44,18 @@ class UserSubject < ApplicationRecord
 
   class << self
     def update_all_status status, current_user, course_subject
-      load_users(statuses[:init]).update_all status: statuses[:progress],
-        start_date: Time.now,
-        end_date: Time.now + course_subject.subject_during_time.days
+      load_users(statuses[:init]).each do |user_subject|
+        user_subject.update_attributes status: statuses[:progress],
+          start_date: Time.now, current_progress: user_subject.in_progress?,
+          end_date: Time.now + course_subject.subject_during_time.days
+      end
       if status == "start"
         key = "user_subject.start_all_subject"
       else
-        load_users(statuses[:progress]).update_all status: statuses[:finish],
-          user_end_date: Time.now
+        load_users(statuses[:waiting, :progress]).each do |user_subject|
+          user_subject.update_attributes  status: statuses[:finish],
+          user_end_date: Time.now, current_progress: user_subject.in_progress?
+        end
         key = "user_subject.finish_all_subject"
       end
       course_subject.create_activity key: key,
@@ -71,7 +75,7 @@ class UserSubject < ApplicationRecord
         key = "user_subject.request_subject"
         notification_key = Notification.keys[:request]
       elsif status == Settings.subject_status.reject
-        update_attributes status: :progress, current_progress: in_progress?
+        update_attributes status: :progress
         key = "user_subject.reject_finish_subject"
         notification_key = Notification.keys[:reject]
       elsif status == Settings.subject_status.finish
@@ -137,23 +141,31 @@ class UserSubject < ApplicationRecord
     UserTask.create task: task, user: self.user, user_subject: self
   end
 
-  private
-  def create_user_tasks
-    course_subject.tasks.each do |task|
-      UserTask.find_or_create_by(user_subject_id: id,
-        user_id: user_course.user_id, task_id: task.id)
-    end
-  end
-
   def in_progress?
-    user_subjects = self.user.user_subjects.where current_progress: true
-    if user_subjects.size > 0
-      if user_subjects.first.finish?
+    user_subjects = self.user.user_subjects.where(current_progress: true)
+      .order "updated_at DESC"
+    if user_subjects.size == 1
+      if user_subjects.first == self
+        progress_subjects = self.user.user_subjects
+          .where(status: [:progress, :waiting]).order "updated_at DESC"
+        if progress_subjects.size > 0
+          progress_subjects.first.update_attributes current_progress: true
+          return false
+        end
+      elsif user_subjects.first.finish?
         user_subjects.first.update_attributes! current_progress: false
       else
         return false
       end
     end
     true
+  end
+
+  private
+  def create_user_tasks
+    course_subject.tasks.each do |task|
+      UserTask.find_or_create_by(user_subject_id: id,
+        user_id: user_course.user_id, task_id: task.id)
+    end
   end
 end
