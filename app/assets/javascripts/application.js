@@ -28,6 +28,7 @@
 //= require highcharts/highcharts-more
 //= require admin/dark-unica
 //= require jquery.slimscroll
+//= require table_config
 //= require notify
 //= require admin/role_permission
 //= require admin/evaluation

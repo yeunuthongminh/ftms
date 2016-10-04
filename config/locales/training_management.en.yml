@@ -1,5 +1,7 @@
 en:
   training_managements:
+    titles:
+      all_trainee: "All trainees"
     headers:
       trainee_name: "Name"
       trainee_type: "Type"

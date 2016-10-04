@@ -1,0 +1,147 @@
+@import "variables";
+@import "mixin";
+
+#training_managements {
+  @include customize-scrollbar;
+
+  .fixedTable-body {
+    height: auto;
+  }
+
+  .tcell {
+    &.stt {
+      min-width: 35px;
+      max-width: 35px;
+    }
+
+    &.trainee_type {
+      text-align: left;
+      text-transform: capitalize;
+      border-left: 0;
+      @include ellipsis(120px);
+      position: relative;
+    }
+
+    &.leave_date, &.contract_date {
+      min-width: 100px;
+      max-width: 100px;
+    }
+
+    &.empty {
+      min-width: 2700px;
+      max-width: 2700px;
+      border:0;
+      height:0px;
+    }
+
+    &.location {
+      min-width: 80px;
+      max-width: 80px;
+    }
+
+    &.action {
+      min-width: 60px;
+      max-width: 60px;
+    }
+
+    &.status {
+      min-width: 85px;
+      max-width: 85px;
+      &.title, &.list-title{
+        white-space: normal;
+      }
+    }
+
+    &.university {
+      min-width: 370px;
+      max-width: 370px;
+      position: relative;
+    }
+
+    &.graduation {
+      min-width: 130px;
+      max-width: 130px;
+      position: relative;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    &.current_progress, &.note {
+      min-width: 300px;
+      max-width: 300px;
+      position: relative;
+    }
+
+    &.programming_language {
+      min-width: 120px;
+      max-width: 120px;
+      position: relative;
+    }
+
+    &.start_training_date, &.finish_training_date, &.trainer {
+      min-width: 200px;
+      max-width: 200px;
+      position: relative;
+    }
+
+    &.ready_for_project {
+      min-width: 250px;
+      max-width: 250px;
+    }
+
+    &.working_day {
+      min-width: 220px;
+      max-width: 220px;
+    }
+
+    &.name {
+      min-width: 210px;
+      max-width: 210px;
+    }
+
+    &.none {
+      display: table-cell;
+      border-right: none;
+      border-top: 2px solid #ccc;
+    }
+  }
+}
+
+#statistic-division-modal {
+  .modal-dialog {
+    min-width: 70%
+  }
+
+  .modal-body {
+    height: 500px;
+    .tab-content{
+      margin-top: 10px;
+    }
+
+    .tbl {
+      width: 100%;
+      .tcell {
+        width: 50%;
+      }
+    }
+  }
+}
+
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+
+#resigned-date {
+  overflow: hidden;
+}
+
+#min_value, #max_value{
+  text-align: left;
+  border-radius: 3px;
+}
+
+.pane-body > .tbl .tbl-row .tcell{
+  padding-right: 10px;
+}
