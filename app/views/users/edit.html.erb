@@ -27,11 +27,10 @@
 
       <%= f.fields_for :profile do |ff| %>
         <div class="form-group">
-          <%= ff.label :start_training_date %>
-          <%= ff.text_field :start_training_date,
-            value: @user.profile.start_training_date ?
-            l(@user.profile.start_training_date, format: :default) : "",
-            class: "form-control datepicker profile" %>
+          <%= ff.label :working_day %>
+          <%= ff.number_field :working_day, step: Settings.working_day.step,
+            min: Settings.working_day.min, max: Settings.working_day.max,
+            class: "form-control profile"%>
         </div>
 
         <div class="form-group">
