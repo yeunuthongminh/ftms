@@ -201,4 +201,8 @@ module ApplicationHelper
   def data_finish_task data
     data.blank? || data.values.sum == 0 ? false : true
   end
+
+  def i18n_pluralize number, word
+    I18n.locale == :en ? pluralize(number, t("#{word}")) : "#{number} #{I18n.t word}"
+  end
 end

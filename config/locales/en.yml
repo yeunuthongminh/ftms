@@ -306,3 +306,4 @@ en:
     init: "Init"
     in_progress: "In progress"
     finished: "Finished"
+  record: "record"
