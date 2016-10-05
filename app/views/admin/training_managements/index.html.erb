@@ -3,14 +3,15 @@
     <div id="<%= controller_name %>">
       <h3 class="title">
         <%= t "training_managements.titles.all_trainee" %>
-
+        <button id="btn-filter-on-off" title="<%= filter_title %>"
+          class="btn-filter-onoff-project btn btn-default">
+          &nbsp;
+        </button>
         <span id="filter-loading" class="filter-loading-offset-top"></span>
       </h3>
 
       <div class="table">
         <%= render "training_management_header" %>
-        <%#= render "evaluation_sidebar" %>
-        <%#= render "evaluation_body" %>
         <%= @training_management_presenters.html_safe %>
       </div>
 

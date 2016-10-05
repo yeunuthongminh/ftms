@@ -187,6 +187,7 @@ en:
     cancel: "Cancel"
     close: "Close"
     show: "Show"
+    ok: "OK"
   buttons:
     edit: Edit
   evaluations:
@@ -307,3 +308,15 @@ en:
     in_progress: "In progress"
     finished: "Finished"
   record: "record"
+  filters:
+    btn_on: "Turn on filter"
+    btn_off: "Turn off filter"
+    loading: "Loading..."
+    select_all: "Select All"
+    sort_asc: "Sort: A &rarr;Z"
+    sort_desc: "Sort: Z &rarr;A"
+    clear: "Clear"
+    index:
+      quick_search: "Quick Search"
+    show:
+      blank: "Blank"

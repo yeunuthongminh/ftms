@@ -28,7 +28,11 @@
 //= require highcharts/highcharts-more
 //= require admin/dark-unica
 //= require jquery.slimscroll
+//= require filter-data
+//= require filter-box
+//= require blank_option_filter
 //= require table_config
+//= require hight_light_table
 //= require notify
 //= require admin/role_permission
 //= require admin/evaluation
@@ -102,3 +106,10 @@ $(document).on("turbolinks:load", function() {
   $("#slimscroll_admin").slimScroll();
 });
 
+function isDatepicker(element) {
+  var arr_element = ["prev", "next", "datepicker-switch", "old day", "new day",
+    "active day", "year old", "year new", "dow", "day", "month", "today", "clear",
+    "datepicker datepicker-dropdown dropdown-menu datepicker-orient-left datepicker-orient-top",
+    "year active", "year", "month active"];
+  return arr_element.indexOf(element.attr("class")) !== -1
+}

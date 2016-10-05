@@ -25,6 +25,7 @@
     &.leave_date, &.contract_date {
       min-width: 100px;
       max-width: 100px;
+      position: relative;
     }
 
     &.empty {
@@ -37,19 +38,19 @@
     &.location {
       min-width: 80px;
       max-width: 80px;
+      position: relative;
     }
 
     &.action {
       min-width: 60px;
       max-width: 60px;
+      position: relative;
     }
 
-    &.status {
-      min-width: 85px;
-      max-width: 85px;
-      &.title, &.list-title{
-        white-space: normal;
-      }
+    &.trainee-status {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
     }
 
     &.university {
@@ -88,16 +89,19 @@
     &.ready_for_project {
       min-width: 250px;
       max-width: 250px;
+      position: relative;
     }
 
     &.working_day {
       min-width: 220px;
       max-width: 220px;
+      position: relative;
     }
 
     &.name {
       min-width: 210px;
       max-width: 210px;
+      position: relative;
     }
 
     &.none {

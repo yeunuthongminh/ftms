@@ -30,7 +30,7 @@ class TrainingManagementPresenter < ActionView::Base
   def sidebar_item user, index
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{user.id}\">
       <div class=\"tcell stt\">#</div>
-      <div class=\"tcell name employee_name\" title=\"#{user.name}\">
+      <div class=\"tcell name trainee_name\" title=\"#{user.name}\">
       #{link_to user.name, admin_user_path(id: user.id)}
       </div>
     </div>
@@ -45,7 +45,7 @@ class TrainingManagementPresenter < ActionView::Base
       <div class=\"tcell location division\" data-toogle=\"tooltip\" title=#{user.profile.location_name}>
         #{user.profile.location_name}
       </div>
-      <div class=\"tcell status text-center\" data-toogle=\"tooltip\" title=#{user.profile.status_name}>
+      <div class=\"tcell trainee-status text-center\" data-toogle=\"tooltip\" title=#{user.profile.status_name}>
         #{user.profile.status_name}
       </div>
       <div class=\"tcell university\" data-toogle=\"tooltip\" title=#{user.profile.university_name}>
