@@ -13,6 +13,7 @@ class Subject < ApplicationRecord
   has_many :courses, through: :course_subjects
   has_many :documents, as: :documentable
   has_many :notifications, as: :trackable, dependent: :destroy
+  has_many :questions, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :during_time, presence: true, numericality: {greater_than: 0}

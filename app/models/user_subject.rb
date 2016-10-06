@@ -11,6 +11,7 @@ class UserSubject < ApplicationRecord
   has_many :user_tasks, dependent: :destroy
   has_many :notifications, as: :trackable, dependent: :destroy
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
+  has_many :exams, dependent: :destroy
 
   after_create :create_user_tasks
 
