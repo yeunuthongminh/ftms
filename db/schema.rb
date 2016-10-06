@@ -162,6 +162,18 @@ ActiveRecord::Schema.define(version: 20161005085327) do
     t.index ["user_id"], name: "index_feed_backs_on_user_id", using: :btree
   end
 
+  create_table "filters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "filter_type"
+    t.text     "content",       limit: 65535
+    t.integer  "target_id"
+    t.boolean  "is_turn_on"
+    t.string   "target_params"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["user_id"], name: "index_filters_on_user_id", using: :btree
+  end
+
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -475,6 +487,7 @@ ActiveRecord::Schema.define(version: 20161005085327) do
   add_foreign_key "evaluation_details", "evaluations"
   add_foreign_key "evaluations", "users"
   add_foreign_key "feed_backs", "users"
+  add_foreign_key "filters", "users"
   add_foreign_key "locations", "users"
   add_foreign_key "messages", "users"
   add_foreign_key "notes", "evaluations"
