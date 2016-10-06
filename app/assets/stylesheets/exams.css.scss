@@ -1,0 +1,92 @@
+#exams {
+  .show-exam {
+    margin-top: 30px;
+    .question-title {
+      height: 30px;
+      font-size: 18px;
+      margin: 5px 0 20px 0;
+      font-weight: bold;
+    }
+
+    .question-content {
+      position: relative;
+      span {
+        margin-left: 20px;
+        font-weight: normal;
+        font-size: 16px;
+      }
+
+      .list-group-item-success {
+        color: red;
+        background: transparent;
+      }
+    }
+
+    .question-content:hover {
+      background-color: #DDEBD7;
+    }
+
+    input[type='radio']:after {
+      width: 15px;
+      height: 15px;
+      border-radius: 15px;
+      top: 0px;
+      left: -1px;
+      position: relative;
+      background-color: #d1d3d1;
+      content: "";
+      display: inline-block;
+      visibility: visible;
+      border: 2px solid white;
+    }
+
+    input[type='radio']:checked:after {
+      width: 15px;
+      height: 15px;
+      border-radius: 15px;
+      top: 0px;
+      left: -1px;
+      position: relative;
+      background-color: red;
+      content: "";
+      display: inline-block;
+      visibility: visible;
+      border: 2px solid white;
+    }
+
+    label {
+      cursor: pointer;
+      padding: 0 20px;
+    }
+
+    #clock {
+      font-size: 16px;
+      font-weight: bold;
+      border: none !important;
+      background-color: inherit !important;
+    }
+
+    .timer {
+      border: 1px solid #E6E6E6;
+      background-color: #CECECE;
+      float: right;
+      position: fixed;
+      right: 70px;
+      top: 70px;
+      width: 200px;
+    }
+    .do-exam {
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 30px;
+    }
+    .button-exam {
+      background-color: #fff;
+      border: none;
+      margin: 0 20px;
+      .btn {
+        width: 90px;
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<div id="exams">
+  <% provide :title, t("exams.do_exam",
+    name: @exam.user_subject.subject.name) %>
+  <div class="show-exam">
+    <%= render "do_exam" %>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+en:
+  exams:
+    created_at: "Created Date"
+    subject: "Subject"
+    status: "status"
+    spent_time: Spent Time"
+    score: "Score"
+    title: "Exams"
+    created: "Exam created"
+    create_fail: "Exam create fail"
+    updated: "Exam updated"
+    update_fail: "Exam update fail"
+    uncheck: "View"
+    init: "Start"
+    testing: "Continue"
+    checked: "View"
+    do_exam: Do exam %{name}
+    save: "Save"
+    finish: "Finish"
+    finish_warning: "You wan't to finish?"
+    result: "Score of exam: %{score}"
+    finished: "Exam finished"
+    updated: "Exam updated"
+    update_fail: Exam update fail
+    score_form: "%{score}/%{total}"
+    all: "All examsexam"
+    remaining_time: "Remaining Time"
+    subject_name: "Subject: %{name}"
+    time:
+      default: "HMS"

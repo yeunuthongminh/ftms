@@ -1,0 +1,20 @@
+<div class="col-sm-8 col-sm-offset-1 do-exam">
+  <h1><%= t "exams.subject_name", name: @exam.user_subject.subject.name %></h1>
+  <div class="timer">
+    <h4><%= t "exams.remaining_time" %></h4>
+    <div id="clock"></div>
+  </div>
+  <%= form_for @exam do |exam| %>
+    <ol>
+      <%= exam.fields_for :results do |result| %>
+        <%= render "results/result_field", result: result %>
+      <% end %>
+    </ol>
+    <div class="button-exam text-center">
+      <%= exam.submit t("exams.save"),
+        class: "btn btn-primary submit-time-out" %>
+      <%= exam.submit t("exams.finish"), class: "btn btn-danger",
+        name: "finish", data: {confirm: t("exams.finish_warning")} %>
+    </div>
+  <% end %>
+</div>

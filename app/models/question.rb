@@ -5,5 +5,7 @@ class Question < ApplicationRecord
 
   has_many :answers, dependent: :destroy
   has_many :results, dependent: :destroy
-  has_many :tests, through: :results
+  has_many :exams, through: :results
+
+  accepts_nested_attributes_for :answers, allow_destroy: true
 end

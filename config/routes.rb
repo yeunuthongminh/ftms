@@ -114,4 +114,5 @@ Rails.application.routes.draw do
   resources :notifications, only: :index
   patch "update_notifications" => "notifications#update"
   resources :feed_backs, only: :create
+  resources :exams, only: :show
 end

@@ -1,0 +1,10 @@
+<li>
+  <div class="question-title"><%= result.object.question.content %></div>
+  <% result.object.question.answers.each do |answer| %>
+    <label class="question-content">
+      <%= result.radio_button :answer_id, answer.id,
+        checked: answer == result.object.answer %>
+      <span><%= answer.content %></span><br>
+    </label><br>
+  <% end %>
+</li>
