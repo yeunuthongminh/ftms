@@ -55,7 +55,7 @@
           [:admin, @course_subject, user_subject], data: {method: :patch,
           remote: true, confirm: t("messages.delete.confirm")},
           class: "btn btn-success btn-finish btn-status" %>
-      <% elsif user_subject.pending? %>
+      <% elsif user_subject.waiting? %>
         <%= link_to t("admin.actions.show_subject.finish"),
           [:admin, @course_subject, user_subject], data: {method: :patch,
           remote: true, confirm: t("messages.delete.confirm")},

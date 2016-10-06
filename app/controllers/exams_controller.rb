@@ -1,6 +1,5 @@
 class ExamsController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource only: :show
+  authorize_resource only: :show
   before_action :find_exam, only: :show
 
   def show

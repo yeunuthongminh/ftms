@@ -28,3 +28,4 @@ en:
     subject_name: "Subject: %{name}"
     time:
       default: "HMS"
+    not_ready: "This subject not ready to create exam"

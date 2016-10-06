@@ -33,7 +33,7 @@ class UserSubject < ApplicationRecord
   delegate :name, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
 
-  enum status: [:init, :progress, :finish, :pending]
+  enum status: [:init, :progress, :finish, :waiting]
 
   def load_trainers
     course.users.trainers
@@ -68,7 +68,7 @@ class UserSubject < ApplicationRecord
       notification_key = Notification.keys[:start]
     else
       if is_of_user? current_user
-        update_attributes status: :pending
+        update_attributes status: :waiting
         key = "user_subject.request_subject"
         notification_key = Notification.keys[:request]
       elsif status == Settings.subject_status.reject
