@@ -35,13 +35,5 @@ module Ftms
     config.action_view.embed_authenticity_token_in_remote_forms = true
     config.middleware.use I18n::JS::Middleware
     config.action_controller.permit_all_parameters = true
-    Rails.application.config.middleware.use ExceptionNotification::Rack,
-      email: {
-        verbose_subject: false,
-        normalize_subject: true,
-        email_prefix: "[FTMS]_System-ERROR ",
-        sender_address: ENV["GMAIL_USERNAME"],
-        exception_recipients: %w{ENV["GMAIL_USERNAME"]}
-      }
   end
 end
