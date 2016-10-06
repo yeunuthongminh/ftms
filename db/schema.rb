@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005085327) do
+ActiveRecord::Schema.define(version: 20161006095016) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -325,13 +325,13 @@ ActiveRecord::Schema.define(version: 20161005085327) do
   end
 
   create_table "subject_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "number_of_test"
-    t.integer  "time_of_test"
+    t.integer  "number_of_question"
+    t.integer  "time_of_exam"
     t.integer  "min_score_to_pass"
     t.integer  "subject_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.index ["deleted_at"], name: "index_subject_details_on_deleted_at", using: :btree
     t.index ["subject_id"], name: "index_subject_details_on_subject_id", using: :btree
   end

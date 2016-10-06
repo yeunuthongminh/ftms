@@ -27,4 +27,5 @@ class Subject < ApplicationRecord
   accepts_nested_attributes_for :documents, allow_destroy: true
 
   delegate :name, to: :user_subject, prefix: true, allow_nil: true
+  delegate :number_of_question, to: :subject_detail, prefix: true, allow_nil: true
 end
