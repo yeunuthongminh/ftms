@@ -3,7 +3,7 @@ class UserSubjectsController < ApplicationController
 
   def update
     @user_subject.update_status current_user, params["status"]
-    exam = ResultService.new(@user_subject).new_exam
+    exam = ExamService.new(@user_subject).new_exam
     if exam
       redirect_to exam
     else

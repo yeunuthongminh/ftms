@@ -100,7 +100,9 @@ defaults: &defaults
     "difference": 2
     "working_day": 1
   exams:
-    percent_question: [40, 40, 20]
+    percent_question: [50, 30, 20]
+    duration: 20
+    unit: 1
 development:
   <<: *defaults
   neat_setting: 800
