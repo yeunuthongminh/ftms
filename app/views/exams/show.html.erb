@@ -1,7 +1,14 @@
 <div id="exams">
-  <% provide :title, t("exams.do_exam",
-    name: @exam.user_subject.subject.name) %>
-  <div class="show-exam">
-    <%= render "do_exam" %>
-  </div>
+  <% if @exam.finish? %>
+    <% provide :title, @exam.user_subject.subject.name %>
+    <div id="show-exam">
+      <%= render "show_exam" %>
+    </div>
+  <% else %>
+    <% provide :title, t("exams.do_exam",
+      name: @exam.user_subject.subject.name) %>
+    <div id="do-exam">
+      <%= render "do_exam" %>
+    </div>
+  <% end %>
 </div>

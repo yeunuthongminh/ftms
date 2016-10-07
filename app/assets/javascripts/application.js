@@ -63,6 +63,8 @@
 //= require admin/dashboard_chart
 //= require admin/user_profile
 //= require admin/user_subject
+//= require jquery.countdown
+//= require exam
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();

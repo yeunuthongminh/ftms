@@ -1,0 +1,10 @@
+<div class="col-sm-8 col-sm-offset-1 show-exam">
+  <h1><%= t "exams.subject_name", name: @exam.user_subject.subject.name %></h1>
+  <%= form_for @exam do |exam| %>
+    <ol>
+      <%= exam.fields_for :results do |result| %>
+        <%= render "results/result_field", result: result, disabled: true %>
+      <% end %>
+    </ol>
+  <% end %>
+</div>
