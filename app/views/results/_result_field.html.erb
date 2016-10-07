@@ -3,7 +3,7 @@
   <% result.object.question.answers.each do |answer| %>
     <label class="question-content">
       <%= result.radio_button :answer_id, answer.id,
-        checked: answer == result.object.answer %>
+        checked: answer == result.object.answer, disabled: disabled %>
       <span><%= answer.content %></span><br>
     </label><br>
   <% end %>

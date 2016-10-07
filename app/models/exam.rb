@@ -9,4 +9,10 @@ class Exam < ApplicationRecord
   has_many :questions, through: :results
 
   accepts_nested_attributes_for :results, allow_destroy: true
+
+  enum status: [:init, :testing, :finish]
+
+  def remaining_time
+    init? || testing? ? duration.minutes - (Time.zone.now - started_at).to_i : 0
+  end
 end

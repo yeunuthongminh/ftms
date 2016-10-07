@@ -1,20 +1,30 @@
-<div class="col-sm-8 col-sm-offset-1 do-exam">
-  <h1><%= t "exams.subject_name", name: @exam.user_subject.subject.name %></h1>
-  <div class="timer">
-    <h4><%= t "exams.remaining_time" %></h4>
-    <div id="clock"></div>
-  </div>
-  <%= form_for @exam do |exam| %>
-    <ol>
-      <%= exam.fields_for :results do |result| %>
-        <%= render "results/result_field", result: result %>
-      <% end %>
-    </ol>
-    <div class="button-exam text-center">
-      <%= exam.submit t("exams.save"),
-        class: "btn btn-primary submit-time-out" %>
-      <%= exam.submit t("exams.finish"), class: "btn btn-danger",
-        name: "finish", data: {confirm: t("exams.finish_warning")} %>
+<%= form_for @exam do |f| %>
+  <div class="col-sm-8 col-sm-offset-1">
+    <div class="do-exam">
+      <h1><%= t "exams.subject_name",
+        name: @exam.user_subject.subject.name %></h1>
+      <ol>
+        <%= f.fields_for :results do |result| %>
+          <%= render "results/result_field", result: result, disabled: false %>
+        <% end %>
+      </ol>
     </div>
-  <% end %>
-</div>
+  </div>
+  <div class="col-md-3">
+    <div class="right-side-do-exams">
+      <div class="timer">
+        <%= hidden_field_tag :remaining_time, value: @remaining_time %>
+        <h4 class="text-center"><%= t "exams.remaining_time" %></h4>
+        <div id="clock"></div>
+      </div>
+      <h3 class="subject-title"><%= t "exams.subject_name",
+        name: @exam.user_subject.subject.name %></h3>
+      <div class="button-exam text-center">
+        <%= f.submit t("exams.save"),
+          class: "btn btn-primary submit-time-out" %>
+        <%= f.submit t("exams.finish"), class: "btn btn-danger",
+          name: "finish", data: {confirm: t("exams.finish_warning")} %>
+      </div>
+    </div>
+  </div>
+<% end %>
