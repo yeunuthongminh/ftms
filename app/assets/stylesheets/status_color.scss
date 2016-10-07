@@ -3,6 +3,8 @@ $progress_color: BLUE;
 $finish_color: #ccc;
 $waiting_color: #DF8B14;
 $testing_color: #5bc0de;
+$pass_color: GREEN;
+$fail_color: RED;
 
 .init-color {
   color: $init_color;
@@ -30,6 +32,14 @@ $testing_color: #5bc0de;
 
 .progress-background-color, .in_progress-background-color {
   background-color: $progress_color !important;
+}
+
+.pass-background-color {
+  background-color: $pass_color;
+}
+
+.fail-background-color {
+  background-color: $fail_color;
 }
 
 .progress-border-color {

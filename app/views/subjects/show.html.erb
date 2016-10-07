@@ -25,11 +25,16 @@
         <span class="label-status <%= set_background_color_status @user_subject.status %>">
           <%= t "courses.labels.status.#{@user_subject.status}" %>
         </span>
-        <%= link_to t("subjects.task.finish"), user_subject_path(@user_subject),
-          method: :put, data: {confirm: t("subjects.buttons.admin.delete_confirm")},
-          class: "btn-finish pull-right" if current_user.is_trainee? &&
-            @user_subject.progress? %>
-
+        <% if current_user.is_trainee? && (@user_subject.progress? || @user_subject.waiting?) %>
+          <%= link_to t("button.finish"), "#", class: "btn btn-danger pull-right",
+         id: "finish-subject" %>
+         <div id="dialog-finish" title="<%= t "user_subjects.finish.confirm-title" %>"
+          class="dialog">
+          <p><%= t "user_subjects.finish.confirm" %></p>
+          <%= link_to "", user_subject_path(@user_subject),
+            method: :put, class: "hidden", id: "finish-subject-enter" %>
+         </div>
+        <% end %>
         <div class="description"><%= @user_subject.description %></div>
         <div class="subject-content box-divider">
           <div class="label-title"><%= t "subjects.content" %></div>

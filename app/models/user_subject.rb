@@ -69,8 +69,7 @@ class UserSubject < ApplicationRecord
     else
       if is_of_user? current_user
         update_attributes status: :waiting
-        key = "user_subject.request_subject"
-        notification_key = Notification.keys[:request]
+        key = "user_subject.do_exam_subject"
       elsif status == Settings.subject_status.reject
         update_attributes status: :progress, current_progress: in_progress
         key = "user_subject.reject_finish_subject"
@@ -86,10 +85,10 @@ class UserSubject < ApplicationRecord
       end
     end
     create_activity key: key, owner: current_user, recipient: user
-    if is_of_user? current_user
+    if self.progress? && is_of_user?(current_user)
       CourseNotificationBroadCastJob.perform_now course,
         notification_key, current_user.id, self
-    else
+    elsif !self.waiting?
       UserSubjectNotificationBroadCastJob.perform_now self,
         notification_key, current_user.id
     end
