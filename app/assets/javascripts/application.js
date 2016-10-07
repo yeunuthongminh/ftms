@@ -115,3 +115,33 @@ function isDatepicker(element) {
     "year active", "year", "month active"];
   return arr_element.indexOf(element.attr("class")) !== -1
 }
+
+$(document).on('turbolinks:load', '.open-select', function(e, xhr, opts) {
+  var $filterDom = $('.' + $(this).attr('data-name'));
+
+  if($filterDom.length > 0) {
+    xhr.abort();
+    console.log('cancel ajax');
+  }
+});
+
+function resetOrder() {
+  var stt = 0;
+  var list_record = $('#list-records').find('.trow .stt:visible').not('.header').not('.sum');
+  $.each(list_record, function(){
+    stt++;
+    $(this).html(stt);
+  });
+}
+
+$(document).on('ready, turbolinks:load', function() {
+  $(document).ajaxStart(function() {
+    $('#loading').show();
+  });
+  $(document).ajaxStop(function() {
+    $('#loading').hide();
+  });
+  $(document).ajaxError(function() {
+    $('#loading').hide();
+  });
+});

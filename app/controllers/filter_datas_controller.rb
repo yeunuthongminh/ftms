@@ -1,7 +1,6 @@
-class Admin::FilterDatasController < ApplicationController
+class FilterDatasController < ApplicationController
   before_action :load_filter, only: [:index]
   before_action :load_dates
-  # before_action :load_worksheet, only: [:index]
 
   def index
     @filter_type = params[:filter_type]
@@ -31,12 +30,12 @@ class Admin::FilterDatasController < ApplicationController
         @value_field = :location_name
         @resources = Location.order(:name).pluck :name
       when "graduation"
-        @key_field = :id
-        @value_field = :name
-        @resources = []
+        @key_field = :graduation
+        @value_field = :graduation
+        @resources = Profile.order(:graduation).pluck(:graduation).uniq.compact
       when "trainee_status"
         @key_field = :id
-        @value_field = :status_name
+        @value_field = :status
         @resources = Status.order(:name).pluck :name
       when "university"
         @key_field = :id
@@ -106,7 +105,7 @@ class Admin::FilterDatasController < ApplicationController
   end
 
   def filter_params
-    params.require(:filter).permit :user_id, :content, :target_id, :is_turn_on, :target_params
+    params.require(:filter).permit :user_id, :content, :target_id, :is_turn_on, :target_params, :filter_type
   end
 
   def load_filter
@@ -129,30 +128,6 @@ class Admin::FilterDatasController < ApplicationController
     end
   end
 
-  def load_price_history_resources field, includes = nil
-    @price_histories = @project.price_histories.includes(includes)
-      .reject{|price_history| price_history.is_reject?}
-    @resources = filter_data field
-  end
-
-  def load_statistic_resources field
-    statistic_decorator = StatisticDecorator.new @month.to_date, current_user
-    statistic_data = statistic_decorator.statistic
-    @resources = statistic_data[:divisions].map do |division|
-      division[:projects].map {|project| project[field]}
-    end.flatten.compact.uniq.sort
-  end
-
-  def load_assignee_resources field, is_number = false
-    @resources = CachingService.new([@month.to_date], current_user).assignees.map do |assignee|
-      if is_number
-        eval(assignee[@month][field.to_s]) rescue nil
-      else
-        assignee[@month][field.to_s]
-      end
-    end.compact.uniq.sort
-  end
-
   def load_dates
     @dates = []
     @range_select = params[:range_time_values] ||
@@ -165,9 +140,5 @@ class Admin::FilterDatasController < ApplicationController
     rescue
     end
     @dates << Date.today.beginning_of_month if @dates.blank?
-  end
-
-  def load_worksheet
-    @worksheet = Worksheet.new(@dates, current_user).array
   end
 end

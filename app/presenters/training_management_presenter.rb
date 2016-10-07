@@ -39,22 +39,22 @@ class TrainingManagementPresenter < ActionView::Base
 
   def body_item user, index
     html = "<div class=\"trow #{"list_#{index}" }\" id=\"body-row-#{user.id}\">
-      <div class=\"tcell trainee_type\" data-toogle=\"tooltip\" title=#{user.profile.user_type_name}>
+      <div class=\"tcell trainee_type\" title=\"#{user.profile.user_type_name}\">
         #{user.profile.user_type_name}
       </div>
-      <div class=\"tcell location division\" data-toogle=\"tooltip\" title=#{user.profile.location_name}>
+      <div class=\"tcell location division\" title=\"#{user.profile.location_name}\">
         #{user.profile.location_name}
       </div>
-      <div class=\"tcell trainee-status text-center\" data-toogle=\"tooltip\" title=#{user.profile.status_name}>
+      <div class=\"tcell trainee_status\" title=\"#{user.profile.status_name}\">
         #{user.profile.status_name}
       </div>
-      <div class=\"tcell university\" data-toogle=\"tooltip\" title=#{user.profile.university_name}>
+      <div class=\"tcell university\" title=\"#{user.profile.university_name}\">
         #{user.profile.university_name}
       </div>
       <div class=\"tcell graduation skill_name\">
       #{l user.profile_graduation, format: :year_month if user.profile_graduation}
       </div>
-      <div class=\"tcell programming_language evaluation_rank_value \" data-toogle=\"tooltip\" title=#{user.profile.programming_language_name}>
+      <div class=\"tcell programming_language evaluation_rank_value \" title=\"#{user.profile.programming_language_name}\">
         #{user.profile.programming_language_name}
       </div>
       <div class=\"tcell start_training_date text-right\">
@@ -73,15 +73,14 @@ class TrainingManagementPresenter < ActionView::Base
       <div class=\"tcell contract_date text-right\">
         #{l user.profile.contract_date, format: :default if user.profile.contract_date}
       </div>
-      <div class=\"tcell working_day text-right\">
+      <div class=\"tcell working_day text-right\" title=\"#{user.profile_working_day}\">
         #{user.profile_working_day}
       </div>
-      <div class=\"tcell trainer\">
-        #{link_to(user.trainer.name, admin_user_path(user.trainer),
-          title: user.trainer.name) if user.trainer}
+      <div class=\"tcell trainer\" title=\"#{user.trainer.name if user.trainer}\">
+        #{link_to(user.trainer.name, admin_user_path(user.trainer)) if user.trainer}
       </div>
-      <div class=\"tcell current_progress\">
-        #{(subject = user.user_subjects.find{|s| s.current_progress}) ? subject.name : ""}
+      <div class=\"tcell current_progress\" title=\"#{user.current_progress.name if user.current_progress}\">
+        #{user.current_progress.name if user.current_progress}
       </div>
       <div class=\"tcell note\">
         #{user.notes.any? ? user.notes.last.name : ""}

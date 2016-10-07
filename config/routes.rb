@@ -46,7 +46,6 @@ Rails.application.routes.draw do
     resources :feed_backs, only: :index
     resources :organization_charts, only: :index
     resources :training_managements, only: :index
-    resources :filter_datas, only: [:index, :create]
   end
 
   namespace :trainer do
@@ -115,4 +114,5 @@ Rails.application.routes.draw do
   patch "update_notifications" => "notifications#update"
   resources :feed_backs, only: :create
   resources :exams, only: [:show, :update]
+  resources :filter_datas, only: [:index, :create]
 end

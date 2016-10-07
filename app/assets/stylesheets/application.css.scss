@@ -44,6 +44,7 @@
  *= require user_courses
  *= require footer
  *= require subject
+ #= require table_config
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require chat_layout
  *= require admin/organization_charts
@@ -186,6 +187,56 @@
     left: auto;
     right: 10px;
   }
+}
+
+.filters {
+  input {
+    padding-right: 6px;
+  }
+
+  input[id*=date] {
+    border-radius: 3px;
+  }
+}
+
+#filter-loading {
+  float: right;
+  font-size: 15px;
+  margin-right: 5px;
+  color: #EB3D3D;
+}
+
+.btn-filter-off, .btn-filter-off:focus {
+  background: no-repeat url("/assets/filter_sprite.png") -19px -2289px;
+  border-radius: 2px !important;
+}
+
+.btn-filter-on, .btn-filter-on:focus {
+  color: #333;
+  background: #e6e6e6 url("/assets/filter_sprite.png") 2px -63px;
+  border-color: #adadad;
+  box-shadow: inset 0px 0px 0.1px rgba(0, 0, 0, 0.5), inset 0px 0px 6px rgba(157, 157, 157, 0.5);
+  border-radius: 2px !important;
+}
+
+.ic-filter-off {
+  pointer-events: none;
+  background: no-repeat url("/assets/filter.png") -247px -124px !important;
+}
+
+#btn-filter-on-off {
+  float: right;
+  cursor: pointer;
+  width: 15px;
+  height: 28px;
+}
+
+.filter-loading-offset-top, {
+  margin-top: 8px;
+}
+
+.chart-link-offset-top {
+  margin-top: 10px;
 }
 
 .open-select {
