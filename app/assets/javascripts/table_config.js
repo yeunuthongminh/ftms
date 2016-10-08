@@ -35,14 +35,10 @@ $(window).on('resize', function(){
 
 function setTableMaxHeight(tblElement) {
   var windowHeight = $(window).height();
-  var topHeight = $('#top-menu').outerHeight();
-  var headerHeight = $('#header').outerHeight();
+  var breadcrumbHeight = $('.breadcrumb').outerHeight();
+  var headerHeight = $('#admin-header').outerHeight();
   var titleHeight = $('h3.title').outerHeight();
-  var pTitle = $('p.title-assignees-history');
-  var pTitleHeight = 0;
-  if (pTitle.length != 0 ) pTitleHeight = $('p.title-assignees-history').outerHeight() + 8;
   var headerTableHeight = $('.fixedTitle').outerHeight();
-  var projectHeaderHeight = $('.pheader').outerHeight();
   var fixedBottomHeight = $('#fixed-bottom-body').outerHeight();
   var numberRecordHeight = $('#number-records').outerHeight();
   var fixedTableBody = $('.fixedTable-body');
@@ -53,7 +49,7 @@ function setTableMaxHeight(tblElement) {
 
   var _scrollbar = $('.scrollbar');
   var _scrollbarH = $('.scrollbarH');
-  var height = windowHeight - topHeight - headerHeight - titleHeight - headerTableHeight - projectHeaderHeight - numberRecordHeight - fixedBottomHeight - pTitleHeight - 55;
+  var height = windowHeight - breadcrumbHeight - headerHeight - titleHeight - headerTableHeight - numberRecordHeight - fixedBottomHeight - 110;
 
   if (fixedHeader.hasHorizontalScrollBar(fixedHeader.width()) && $('#salaries').length == 0) {
     _scrollbarH.css('max-width', fixedHeader.width());

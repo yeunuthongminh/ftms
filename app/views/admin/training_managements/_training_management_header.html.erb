@@ -4,7 +4,7 @@
       <div class="tcell stt">#</div>
       <div class="tcell name display_name title">
         <%= t "training_managements.headers.trainee_name" %>
-        <%= link_to admin_filter_datas_path(type: :trainee_name, filter_type: :training_managements),
+        <%= link_to filter_datas_path(type: :trainee_name, filter_type: :training_managements),
           remote: true,
           class: "open-select",
           data: {name: "f-trainee_name"} do %>
@@ -25,7 +25,7 @@
       <div class="trow header">
         <div class="tcell trainee_type trainee_type title">
           <%= t "training_managements.headers.trainee_type" %>
-          <%= link_to admin_filter_datas_path(type: :trainee_type, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :trainee_type, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-trainee_type"} do %>
@@ -34,16 +34,16 @@
         </div>
         <div class="tcell location title">
           <%= t "training_managements.headers.location" %>
-          <%= link_to admin_filter_datas_path(type: :location, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :location, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-location"} do %>
             <i class="fa ic ic-filter toggle-button-division location"></i>
           <% end %>
         </div>
-        <div class="tcell trainee-status title">
+        <div class="tcell trainee_status title">
           <%= t "training_managements.headers.status" %>
-          <%= link_to admin_filter_datas_path(type: :trainee_status, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :trainee_status, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-trainee_status"} do %>
@@ -52,7 +52,7 @@
         </div>
         <div class="tcell university title">
           <%= t "training_managements.headers.university" %>
-          <%= link_to admin_filter_datas_path(type: :university, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :university, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-university"} do %>
@@ -61,7 +61,7 @@
         </div>
         <div class="tcell graduation title">
           <%= t "training_managements.headers.graduation" %>
-          <%= link_to admin_filter_datas_path(type: :graduation, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :graduation, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-graduation"} do %>
@@ -70,7 +70,7 @@
         </div>
         <div class="tcell programming_language title">
           <%= t "training_managements.headers.language" %>
-          <%= link_to admin_filter_datas_path(type: :programming_language, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :programming_language, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-programming_language"} do %>
@@ -79,7 +79,7 @@
         </div>
         <div class="tcell start_training_date title">
           <%= t "training_managements.headers.start_training_date" %>
-          <%= link_to admin_filter_datas_path(type: :start_training_date, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :start_training_date, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-start_training_date"} do %>
@@ -88,7 +88,7 @@
         </div>
         <div class="tcell leave_date title">
           <%= t "training_managements.headers.leave_date" %>
-          <%= link_to admin_filter_datas_path(type: :leave_date, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :leave_date, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-leave_date"} do %>
@@ -97,7 +97,7 @@
         </div>
         <div class="tcell finish_training_date title">
           <%= t "training_managements.headers.finish_training_date" %>
-          <%= link_to admin_filter_datas_path(type: :finish_training_date, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :finish_training_date, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-finish_training_date"} do %>
@@ -106,7 +106,7 @@
         </div>
         <div class="tcell ready_for_project title">
           <%= t "training_managements.headers.ready_for_real_project" %>
-          <%= link_to admin_filter_datas_path(type: :ready_for_project, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :ready_for_project, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-ready_for_project"} do %>
@@ -115,7 +115,7 @@
         </div>
         <div class="tcell contract_date title">
           <%= t "training_managements.headers.contract_date" %>
-          <%= link_to admin_filter_datas_path(type: :contract_date, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :contract_date, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-contract_date"} do %>
@@ -124,7 +124,7 @@
         </div>
         <div class="tcell working_day title">
           <%= t "training_managements.headers.working_days" %>
-          <%= link_to admin_filter_datas_path(type: :working_day, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :working_day, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-working_day"} do %>
@@ -133,7 +133,7 @@
         </div>
         <div class="tcell trainer title">
           <%= t "training_managements.headers.trainer" %>
-          <%= link_to admin_filter_datas_path(type: :trainer, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :trainer, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-trainer"} do %>
@@ -142,7 +142,7 @@
         </div>
         <div class="tcell current_progress title">
           <%= t "training_managements.headers.progress" %>
-          <%= link_to admin_filter_datas_path(type: :current_progress, filter_type: :training_managements),
+          <%= link_to filter_datas_path(type: :current_progress, filter_type: :training_managements),
             remote: true,
             class: "open-select",
             data: {name: "f-current_progress"} do %>

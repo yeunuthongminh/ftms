@@ -1,13 +1,13 @@
 var open_select_event_target;
 
-$(document).on("page:change", function () {
+$(document).on("turbolinks:load", function () {
   validateFilterRank();
   intSearcher();
   resetOrder();
   show_blank_option();
 });
 
-$(document).on("page:load", function(){
+$(document).on("turbolinks:load", function(){
   resetOrder();
   show_blank_option();
 });

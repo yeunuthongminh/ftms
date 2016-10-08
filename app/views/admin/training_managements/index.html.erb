@@ -1,8 +1,10 @@
 <div id="main" class="clearfix">
   <div id="content">
     <div id="<%= controller_name %>">
+      <%= image_tag "loading.svg", id: "loading" %>
       <h3 class="title">
         <%= t "training_managements.titles.all_trainee" %>
+
         <button id="btn-filter-on-off" title="<%= filter_title %>"
           class="btn-filter-onoff-project btn btn-default">
           &nbsp;
@@ -17,6 +19,11 @@
 
       <div class="pull-right" id="number-records">
         <%= i18n_pluralize @users.size, Settings.record %>
+      </div>
+
+      <div id="filter" data-filter-data="<%= @filter_data_user %>"
+        data-type="<%= :training_managements %>" data-id="<%= current_user.id %>"
+        data-is-turn-on="<%= @filter_service.is_on? %>">
       </div>
 
       <div class="list-filters">
