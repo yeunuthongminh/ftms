@@ -121,6 +121,10 @@ class User < ApplicationRecord
     user_courses.exists? course_id: course
   end
 
+  def current_progress
+    user_subjects.find {|user_subject| user_subject.current_progress?}
+  end
+
   private
   def check_role role_type
     roles.exists? role_type: role_type
