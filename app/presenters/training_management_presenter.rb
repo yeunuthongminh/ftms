@@ -43,7 +43,7 @@ class TrainingManagementPresenter < ActionView::Base
       <div class=\"tcell trainee_type\" title=\"#{user.profile.user_type_name}\">
         #{user.profile.user_type_name}
       </div>
-      <div class=\"tcell location division\" title=\"#{user.profile.location_name}\">
+      <div class=\"tcell location\" title=\"#{user.profile.location_name}\">
         #{user.profile.location_name}
       </div>
       <div class=\"tcell trainee_status\" title=\"#{user.profile.status_name}\">
@@ -52,10 +52,10 @@ class TrainingManagementPresenter < ActionView::Base
       <div class=\"tcell university\" title=\"#{user.profile.university_name}\">
         #{user.profile.university_name}
       </div>
-      <div class=\"tcell graduation skill_name\">
+      <div class=\"tcell graduation\">
       #{l user.profile_graduation, format: :year_month if user.profile_graduation}
       </div>
-      <div class=\"tcell programming_language evaluation_rank_value \" title=\"#{user.profile.programming_language_name}\">
+      <div class=\"tcell programming_language\" title=\"#{user.profile.programming_language_name}\">
         #{user.profile.programming_language_name}
       </div>
       <div class=\"tcell start_training_date text-right\">
@@ -67,7 +67,7 @@ class TrainingManagementPresenter < ActionView::Base
       <div class=\"tcell finish_training_date text-right\">
         #{l user.profile.finish_training_date, format: :default if user.profile.finish_training_date}
       </div>
-      <div class=\"tcell ready_for_project text-center\">
+      <div class=\"tcell ready_for_project\">
         #{user.profile.ready_for_project? ? t("profiles.columns.ready_for_project.ready") :
           t("profiles.columns.ready_for_project.not_ready")}
       </div>
@@ -87,7 +87,7 @@ class TrainingManagementPresenter < ActionView::Base
         #{user.notes.any? ? user.notes.last.name : ""}
       </div>"
     html += "<div class=\"tcell action\">
-      #{link_to t("button.edit"), edit_admin_user_path(user)}
+      #{link_to t("button.edit"), eval("edit_#{@namespace}_user_path(user)")}
       </div></div>"
   end
 end

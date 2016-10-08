@@ -30,6 +30,8 @@ en:
       language: "Language"
       location: "Location"
       status: "Status"
+      start_date: "Start date"
+      end_date: "End date"
       all_status: "All status"
     labels:
       trainer: "Trainers "
@@ -54,3 +56,7 @@ en:
     assign_trainers: "Assign trainers"
     assign_trainees: "Assign trainees"
     location: "Location"
+    statuses:
+      init: "Init"
+      progress: "Progress"
+      finish: "Finish"

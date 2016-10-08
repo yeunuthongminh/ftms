@@ -1,17 +1,18 @@
 class Trainer::CoursesController < ApplicationController
+  include FilterData
+
   load_and_authorize_resource
-  skip_load_resource only: [:show, :edit]
+  skip_load_resource only: [:index, :show, :edit]
   before_action :load_data, except: [:index, :show, :destroy]
   before_action :find_course_in_show, only: :show
   before_action :find_course_in_edit, only: :edit
+  before_action :load_filter, only: :index
 
   def index
-    respond_to do |format|
-      format.html {add_breadcrumb_index "courses"}
-      format.json {
-        render json: CoursesDatatable.new(view_context, @namespace)
-      }
-    end
+    add_breadcrumb_index "courses"
+    @courses = Course.includes :programming_language, :location
+    @filter_data_user = @filter_service.user_filter_data
+    @course_presenters = CoursePresenter.new(@courses, @namespace).render
   end
 
   def new
