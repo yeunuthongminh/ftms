@@ -1,0 +1,42 @@
+<div class="table-responsive" id="exam-index">
+  <h2 align="center"><%= t "exams.label.index" %></h2>
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
+      <tr>
+        <th><%= t "exams.label.created_at" %></th>
+        <th><%= t "exams.label.subject" %></th>
+        <th><%= t "exams.label.status" %></th>
+        <th><%= t "exams.label.duration" %></th>
+        <th><%= t "exams.label.question_number" %></th>
+        <th><%= t "exams.label.spent_time" %></th>
+        <th><%= t "exams.label.score" %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @exams.includes(:user_subject).each do |exam| %>
+        <tr>
+          <td><%= l exam.created_at, format: :datetime %></td>
+          <td>
+            <%= link_to exam.user_subject.subject_name,
+              [exam.user_subject.user_course, exam.user_subject.subject] %>
+          </td>
+          <td>
+            <span class="label-status <%= set_background_color_status exam.status %>">
+              <%= t "status.#{exam.status}" %></span>
+          </td>
+          <td><%= t "exams.duration", duration: exam.duration %></td>
+          <td><%= exam.results.size %></td>
+          <td><%= l Time.at(exam.spent_time).utc, format: :times %></td>
+          <td>
+            <%= "#{exam.score}/#{exam.user_subject.subject.subject_detail_min_score_to_pass}" %>
+            &nbsp;&nbsp;
+            <span class="label-status <%= color_result exam %>">
+              <%= t "status.#{status_result exam}" %></span>
+          </td>
+          <td><%= link_to t("button.show"), exam, class: "btn btn-primary" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

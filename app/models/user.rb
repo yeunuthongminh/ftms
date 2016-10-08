@@ -48,8 +48,7 @@ class User < ApplicationRecord
   has_many :roles, through: :user_roles
   has_many :feed_backs, dependent: :destroy
   has_many :filters, dependent: :destroy
-  has_many :group_users, dependent: :destroy
-  has_many :groups, through: :group_users
+  has_many :exams, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password
@@ -120,10 +119,6 @@ class User < ApplicationRecord
 
   def in_course? course
     user_courses.exists? course_id: course
-  end
-
-  def current_progress
-    user_subjects.find{|user_subject| user_subject.current_progress?}
   end
 
   private

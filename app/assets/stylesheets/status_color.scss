@@ -2,6 +2,7 @@ $init_color: GREEN;
 $progress_color: BLUE;
 $finish_color: #ccc;
 $waiting_color: #DF8B14;
+$testing_color: #5bc0de;
 
 .init-color {
   color: $init_color;
@@ -21,6 +22,10 @@ $waiting_color: #DF8B14;
 
 .waiting-background-color {
   background-color: $waiting_color !important;
+}
+
+.testing-background-color {
+  background-color: $testing_color !important;
 }
 
 .progress-background-color, .in_progress-background-color {

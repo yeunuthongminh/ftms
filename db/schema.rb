@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 20161008052106) do
     t.datetime "started_at"
     t.integer  "score",           default: 0
     t.integer  "duration"
+    t.integer  "user_id"
     t.index ["deleted_at"], name: "index_exams_on_deleted_at", using: :btree
     t.index ["user_subject_id"], name: "index_exams_on_user_subject_id", using: :btree
   end

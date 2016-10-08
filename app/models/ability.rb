@@ -20,11 +20,13 @@ class Ability
       model_class = permission.first.constantize
       action = permission.second.to_sym
       can action, model_class do |model|
-        if model_class == "Course"
+        if model_class == Course
           @user.in_course? model.id
-        elsif model_class == "User"
+        elsif model_class == User
           courses = @user.user_courses.pluck :course_id
           model.in_course? courses
+        elsif model_class == Exam
+          model.user == @user
         else
           true
         end

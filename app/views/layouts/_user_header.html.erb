@@ -17,6 +17,12 @@
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
             <li>
+              <%= link_to exams_path do %>
+                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                <%= t "user-header.exams" %>
+              <% end %>
+            </li>
+            <li>
               <%= link_to courses_path do %>
                 <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                 <%= t "user-header.courses" %>

@@ -2,6 +2,7 @@ en:
   name_system: "Framgia TMS"
   user-header:
     courses: "Courses"
+    exams: "Exams"
   document:
     name: "Documents"
     description: "Document description"
@@ -116,6 +117,8 @@ en:
     start: "start"
     progress: "progress"
     finished: "finished"
+    testing: "testing"
+    init: "init"
   datetime: &datetime
     formats:
       default: "%Y/%m/%d"
@@ -123,7 +126,8 @@ en:
       year: "%d/%m/%Y"
       month_year: "%m/%Y"
       year_month: "%Y/%m"
-      datetime: "%d-%m-%Y %H:%M"
+      datetime: "%Y-%m-%d %I:%M %p"
+      times: "%H:%M:%S"
   date:
     <<: *datetime
   time:

@@ -1,6 +1,10 @@
 class ExamsController < ApplicationController
-  authorize_resource only: :show
   before_action :find_exam, only: [:show, :update]
+  authorize_resource only: [:show, :update]
+  before_action :load_exams, only: :index
+
+  def index
+  end
 
   def show
     check_status
@@ -9,12 +13,19 @@ class ExamsController < ApplicationController
 
   def update
     if @exam.update_attributes exam_params
-      flash[:success] = t "exams.updated"
-      @exam.finish!
+      if params["finish"].nil?
+        flash[:notice] = t "exams.saved"
+        @exam.testing!
+        redirect_to [@exam.user_subject.user_course, @exam.user_subject.subject]
+      else
+        flash[:success] = t "exams.finished"
+        @exam.finish!
+        redirect_to exams_path
+      end
     else
       flash[:danger] = t "exams.update_fail"
+      redirect_to [@exam.user_subject.user_course, @exam.user_subject.subject]
     end
-    redirect_to [@exam.user_subject.user_course, @exam.user_subject.subject]
   end
 
   private
@@ -35,5 +46,9 @@ class ExamsController < ApplicationController
       flash[:alert] = flash_message "not_find"
       redirect_to root_path
     end
+  end
+
+  def load_exams
+    @exams = current_user.exams
   end
 end

@@ -1,7 +1,7 @@
 <%= form_for @exam do |f| %>
   <div class="col-sm-8 col-sm-offset-1">
     <div class="do-exam">
-      <h1><%= t "exams.subject_name",
+      <h1 align="center"><%= t "exams.subject_name",
         name: @exam.user_subject.subject.name %></h1>
       <ol>
         <%= f.fields_for :results do |result| %>
