@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161008071357) do
+ActiveRecord::Schema.define(version: 20161008083749) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -302,6 +302,7 @@ ActiveRecord::Schema.define(version: 20161008071357) do
     t.string   "name"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "priority"
     t.index ["project_id"], name: "index_project_requirements_on_project_id", using: :btree
     t.index ["project_stage_id"], name: "index_project_requirements_on_project_stage_id", using: :btree
   end
