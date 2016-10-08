@@ -79,6 +79,22 @@ class FilterDatasController < ApplicationController
         @blank = @type == "working_day"
         @key_field = :working_day
         @value_field = :working_day
+      when "course_name"
+        @resources = Course.order(:name).pluck :name
+      when "course_status"
+        @resources = i18n_enum(:course, :status)
+      when "course_trainers"
+        @key_field = :trainer
+        @value_field = :trainer
+        @resources = User.trainers.order(:name).pluck :name
+      when "course_start_date"
+        @key_field = :start_date
+        @value_field = :start_date
+        @resources = Course.order(:start_date).pluck(:start_date).uniq.compact
+      when "course_end_date"
+        @key_field = :end_date
+        @value_field = :end_date
+        @resources = Course.order(:end_date).pluck(:end_date).uniq.compact
       end
     end
 

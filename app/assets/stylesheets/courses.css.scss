@@ -1,3 +1,6 @@
+@import "variables";
+@import "mixin";
+
 #trainee-course {
   .status {
     font-size: 60%;
@@ -86,5 +89,90 @@
 
   .course-name {
     font-size: 20px;
+  }
+}
+
+#courses {
+  @include customize-scrollbar;
+
+  .fixedTable-body {
+    height: auto;
+  }
+
+  .table {
+    // width: 1518px;
+  }
+
+  .fixedTitle, .fixedTable-sidebar, #parent, #child {
+    width: 700px;
+  }
+
+  .scrollbarH {
+    margin-left: 700px;
+  }
+
+  .scrollbar {
+    top: 30px;
+  }
+
+  .fixedTitle, .fixedTable-header {
+    max-height: 31px;
+    min-height: 31px;
+    height: 31px;
+  }
+
+  .tcell {
+    &.stt {
+      min-width: 35px;
+      max-width: 35px;
+    }
+
+    &.location {
+      min-width: 120px;
+      max-width: 120px;
+      position: relative;
+    }
+
+    &.action {
+      min-width: 60px;
+      max-width: 60px;
+      position: relative;
+    }
+
+    &.course_status {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
+    }
+
+    &.programming_language {
+      min-width: 120px;
+      max-width: 120px;
+      position: relative;
+    }
+
+    &.course_trainers {
+      min-width: 500px;
+      max-width: 500px;
+      position: relative;
+    }
+
+    &.name {
+      min-width: 664px;
+      max-width: 664px;
+      position: relative;
+    }
+
+    &.course_start_date, &.course_end_date {
+      min-width: 210px;
+      max-width: 210px;
+      position: relative;
+    }
+
+    &.none {
+      display: table-cell;
+      border-right: none;
+      border-top: 2px solid #ccc;
+    }
   }
 }

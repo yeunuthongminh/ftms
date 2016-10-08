@@ -45,13 +45,11 @@
 //= require jquery.dataTables.columnFilter
 //= require datatable
 //= require subject
-//= require course
 //= require evaluation
 //= require role
 //= require user
 //= require evaluation_template
 //= require rank
-//= require training_managements
 //= require university
 //= require admin/assign_user
 //= require jquery.quicksearch

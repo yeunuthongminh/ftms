@@ -1,37 +1,35 @@
-<div id="courses">
-  <div id="admin-courses">
-    <div class="row">
-      <div class="col-md-12 title">
-        <span>
-          <%= link_to t("courses.buttons.admin.new"),
-            new_admin_course_path, class: "btn btn-success pull-right" %>
-        </span>
+<div id="main" class="clearfix">
+  <div id="content">
+    <div id="<%= controller_name %>">
+      <%= link_to t("courses.buttons.admin.new"),
+        new_admin_course_path, class: "btn btn-success pull-right" %>
+      <%= image_tag "loading.svg", id: "loading" %>
+      <h3 class="title">
+        <button id="btn-filter-on-off" title="<%= filter_title %>"
+          class="btn-filter-onoff-project btn btn-default">
+          &nbsp;
+        </button>
+        <span id="filter-loading" class="filter-loading-offset-top"></span>
+      </h3>
+
+      <div class="table">
+        <%= render "shared/datatables/course_header" %>
+        <%= @course_presenters.html_safe %>
+      </div>
+
+      <div class="pull-right" id="number-records">
+        <%= i18n_pluralize @courses.size, Settings.record %>
+      </div>
+
+      <div id="filter" data-filter-data="<%= @filter_data_user %>"
+        data-type="<%= :courses %>" data-id="<%= current_user.id %>"
+        data-is-turn-on="<%= @filter_service.is_on? %>">
+      </div>
+
+      <div class="list-filters">
+        <div class="filter-form">
+        </div>
       </div>
     </div>
-    <table id="course-tbl" class="table table-bordered display"
-      data-source="<%= admin_courses_url format: "json" %>" >
-      <thead>
-        <tr class="active">
-          <th></th>
-          <th><%= t "courses.table.name" %></th>
-          <th><%= t "courses.table.trainers" %></th>
-          <th><%= t "courses.table.language" %></th>
-          <th><%= t "courses.table.location" %></th>
-          <th><%= t "courses.table.status" %></th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-      <tfoot hidden>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><%= t "courses.table.all_status" %></td>
-        </tr>
-      </tfoot>
-    </table>
   </div>
 </div>
