@@ -1,8 +1,9 @@
 class TrainingManagementPresenter < ActionView::Base
   include Rails.application.routes.url_helpers
 
-  def initialize users
+  def initialize users, namespace
     @users = users
+    @namespace = namespace
   end
 
   def render
@@ -31,7 +32,7 @@ class TrainingManagementPresenter < ActionView::Base
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{user.id}\">
       <div class=\"tcell stt\">#</div>
       <div class=\"tcell name trainee_name\" title=\"#{user.name}\">
-      #{link_to user.name, admin_user_path(id: user.id)}
+      #{link_to user.name, eval("#{@namespace}_user_path(user)")}
       </div>
     </div>
     "
@@ -77,7 +78,7 @@ class TrainingManagementPresenter < ActionView::Base
         #{user.profile_working_day}
       </div>
       <div class=\"tcell trainer\" title=\"#{user.trainer.name if user.trainer}\">
-        #{link_to(user.trainer.name, admin_user_path(user.trainer)) if user.trainer}
+        #{link_to user.trainer.name, eval("#{@namespace}_user_path(user.trainer)") if user.trainer}
       </div>
       <div class=\"tcell current_progress\" title=\"#{user.current_progress.name if user.current_progress}\">
         #{user.current_progress.name if user.current_progress}
