@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :feed_backs, only: :index
     resources :organization_charts, only: :index
     resources :training_managements, only: :index
+    resources :projects
   end
 
   namespace :trainer do

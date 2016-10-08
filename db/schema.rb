@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161008052106) do
+ActiveRecord::Schema.define(version: 20161008071357) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -179,6 +179,17 @@ ActiveRecord::Schema.define(version: 20161008052106) do
     t.index ["user_id"], name: "index_filters_on_user_id", using: :btree
   end
 
+  create_table "group_projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "group_id"
+    t.integer  "project_id"
+    t.string   "link_github"
+    t.string   "link_redmine"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["group_id"], name: "index_group_projects_on_group_id", using: :btree
+    t.index ["project_id"], name: "index_group_projects_on_project_id", using: :btree
+  end
+
   create_table "group_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "group_id"
     t.integer  "user_id"
@@ -286,20 +297,18 @@ ActiveRecord::Schema.define(version: 20161008052106) do
 
   create_table "project_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "project_id"
-    t.integer  "project_user_id"
+    t.integer  "project_stage_id"
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["project_id"], name: "index_project_requirements_on_project_id", using: :btree
-    t.index ["project_user_id"], name: "index_project_requirements_on_project_user_id", using: :btree
+    t.index ["project_stage_id"], name: "index_project_requirements_on_project_stage_id", using: :btree
   end
 
-  create_table "project_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "project_id"
+  create_table "project_stages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_project_users_on_project_id", using: :btree
   end
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -532,6 +541,8 @@ ActiveRecord::Schema.define(version: 20161008052106) do
   add_foreign_key "evaluations", "users"
   add_foreign_key "feed_backs", "users"
   add_foreign_key "filters", "users"
+  add_foreign_key "group_projects", "groups"
+  add_foreign_key "group_projects", "projects"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
   add_foreign_key "locations", "users"
@@ -542,9 +553,8 @@ ActiveRecord::Schema.define(version: 20161008052106) do
   add_foreign_key "permissions", "roles"
   add_foreign_key "profiles", "locations"
   add_foreign_key "profiles", "users"
-  add_foreign_key "project_requirements", "project_users"
+  add_foreign_key "project_requirements", "project_stages"
   add_foreign_key "project_requirements", "projects"
-  add_foreign_key "project_users", "projects"
   add_foreign_key "task_masters", "subjects"
   add_foreign_key "tasks", "course_subjects", on_delete: :cascade
   add_foreign_key "user_notifications", "notifications"
