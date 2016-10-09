@@ -1,0 +1,12 @@
+<fieldset class="field">
+  <%= f.label :answer %>
+  <%= f.text_field :content, class: "form-control" %>
+  <div class="correct-choose">
+    <%= f.label :is_correct %>
+    <%= f.check_box :is_correct, class: "check" %>
+  </div>
+  <div class="remove-choose">
+    <%= f.hidden_field :_destroy %>
+    <%= link_to_remove_fields t("subjects.document_remove"), f %>
+  </div>
+</fieldset>
