@@ -187,6 +187,8 @@ ActiveRecord::Schema.define(version: 20161010090510) do
     t.string   "link_redmine"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_group_projects_on_deleted_at", using: :btree
     t.index ["group_id"], name: "index_group_projects_on_group_id", using: :btree
     t.index ["project_id"], name: "index_group_projects_on_project_id", using: :btree
   end
@@ -196,6 +198,8 @@ ActiveRecord::Schema.define(version: 20161010090510) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_group_users_on_deleted_at", using: :btree
     t.index ["group_id"], name: "index_group_users_on_group_id", using: :btree
     t.index ["user_id"], name: "index_group_users_on_user_id", using: :btree
   end
@@ -204,6 +208,8 @@ ActiveRecord::Schema.define(version: 20161010090510) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_groups_on_deleted_at", using: :btree
   end
 
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -303,6 +309,8 @@ ActiveRecord::Schema.define(version: 20161010090510) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "priority"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_project_requirements_on_deleted_at", using: :btree
     t.index ["project_id"], name: "index_project_requirements_on_project_id", using: :btree
     t.index ["project_stage_id"], name: "index_project_requirements_on_project_stage_id", using: :btree
   end
@@ -311,12 +319,16 @@ ActiveRecord::Schema.define(version: 20161010090510) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_project_stages_on_deleted_at", using: :btree
   end
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_projects_on_deleted_at", using: :btree
   end
 
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -470,19 +482,19 @@ ActiveRecord::Schema.define(version: 20161010090510) do
   end
 
   create_table "user_subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "status",            default: 0
+    t.integer  "status",               default: 0
     t.integer  "user_id"
     t.integer  "course_id"
     t.integer  "user_course_id"
     t.integer  "course_subject_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.integer  "during_time",       default: 0
-    t.integer  "progress",          default: 0
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.integer  "during_time",          default: 0
+    t.integer  "progress",             default: 0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.date     "user_end_date"
-    t.boolean  "current_progress",  default: false
+    t.boolean  "current_progress",     default: false
     t.datetime "deleted_at"
     t.boolean  "lock_for_create_exam", default: false
     t.index ["course_id"], name: "index_user_subjects_on_course_id", using: :btree

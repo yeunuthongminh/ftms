@@ -5,10 +5,12 @@
         <th class="assign-checkbox"></th>
         <th><%= t "courses.users.name" %></th>
         <th><%= t "courses.users.email" %></th>
+        <th><%= t "layouts.subjects" %>
+        <th><%= t "layouts.courses" %>
       </thead>
       <tbody>
-        <%= render partial: "shared/assign_user_row", collection: users,
-          as: :user, locals: {f: f, course_users: course_users} %>
+        <%= render partial: "shared/assign_user_group_row", collection: users,
+          as: :user, locals: {f: f, group_users: group_users} %>
       </tbody>
     </table>
   </div>
@@ -16,6 +18,6 @@
 <br>
 <div class="row">
   <div class="col-md-1 col-md-offset-11">
-  <%= f.submit :save, class: "btn btn-primary pull-right" %>
+    <%= f.submit t("groups.button.#{params[:action]}"), class: "btn btn-primary pull-right" %>
   </div>
 </div>
