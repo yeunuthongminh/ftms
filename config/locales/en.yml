@@ -192,9 +192,9 @@ en:
     cancel: "Cancel"
     close: "Close"
     show: "Show"
-    ok: "OK"
   buttons:
     edit: Edit
+    ok: "OK"
   evaluations:
     evaluate: "Evaluate"
     create: "Create"

@@ -97,17 +97,6 @@ var filter_function = function(){
       filter_columns_data.push(column_filter);
     }
 
-    // for(var column_name in list_filter_date) {
-    //   var data = list_filter_date[column_name];
-    //   var column_filter = {"columnName": column_name, "params": {"select": data}};
-    //   filter_columns_data.push(column_filter);
-    // }
-
-    //filter_columns_data.push({"columnName": "join_date", "params": {"blank": true} });
-    // var filter_columns_data = [{"columnName": "u", "params": {"select": ["A", "B"]}},
-    //   {"columnName": "category", "params": ""},
-    //   {"columnName": "evaluation_rank_value", "params": {"range": {start: 3, end: 6}} }
-    // ];
     console.log("Fillter on columns");
     console.log(filter_columns_data);
 
@@ -131,7 +120,11 @@ var filter_function = function(){
 
         if (column.params.hasOwnProperty('select')) {
           var list = column.params.select;
-          hide_condition = (list.indexOf(cell_value) == -1);
+          if (column.columnName == "course_trainers") {
+            hide_condition = ($(list).filter(cell_value.split(", ")).length == 0);
+          } else {
+            hide_condition = (list.indexOf(cell_value) == -1);
+          }
           if (hide_condition) {break;};
         }
 
