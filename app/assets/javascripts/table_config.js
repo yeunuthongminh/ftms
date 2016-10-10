@@ -125,7 +125,7 @@ $(document).click(function(e){
 });
 
 $(document).ready(function() {
-  var _table = $('.table');
+  var _table = $('div.table');
   var fixedTableBody = $('.fixedTable-body');
   var realWidth;
 
