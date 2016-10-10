@@ -47,6 +47,8 @@ Rails.application.routes.draw do
     resources :organization_charts, only: :index
     resources :training_managements, only: :index
     resources :projects
+    resources :filter_datas, only: [:index, :create]
+    resources :questions, except: [:index, :show]
   end
 
   namespace :trainer do

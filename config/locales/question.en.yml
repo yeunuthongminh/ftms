@@ -1,0 +1,10 @@
+en:
+  questions:
+    add_answer: "Add Answer"
+  breadcrumbs:
+    questions:
+      all: "All Questions"
+      new: "New"
+      edit: "Edit"
+  error:
+    wrong_answer: "is single choise -> must 1 answers correct"

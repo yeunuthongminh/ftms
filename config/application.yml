@@ -103,6 +103,7 @@ defaults: &defaults
     percent_question: [50, 30, 20]
     duration: 20
     unit: 1
+  default_number_of_answers: 2
 development:
   <<: *defaults
   neat_setting: 800
