@@ -31,12 +31,15 @@
           <td>
             <%= "#{exam.score}/#{exam.user_subject.subject.subject_detail_min_score_to_pass}" %>
             &nbsp;&nbsp;
-            <span class="label-status <%= color_result exam %>">
-              <%= t "status.#{status_result exam}" %></span>
+            <% if exam.finish? %>
+              <span class="label-status <%= color_result exam %>">
+                <%= t "status.#{status_result exam}" %></span>
+            <% end %>
           </td>
           <td><%= link_to t("button.show"), exam, class: "btn btn-primary" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <%= paginate @exams %>
 </div>

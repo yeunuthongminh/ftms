@@ -1,7 +1,8 @@
 class Exam < ApplicationRecord
   acts_as_paranoid
 
-  EXAM_ATTRIBUTES_PARAMS = [:user_subject_id, results_attributes: [:id, :questions_id, :answer_id]]
+  EXAM_ATTRIBUTES_PARAMS = [:user_subject_id, :status, :spent_time,
+    results_attributes: [:id, :questions_id, :answer_id]]
 
   belongs_to :user
   belongs_to :user_subject

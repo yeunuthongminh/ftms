@@ -37,8 +37,7 @@
 //= require admin/role_permission
 //= require admin/evaluation
 //= require admin/note
-//= require jquery-ui/sortable
-//= require jquery-ui/effect-highlight
+//= require jquery-ui
 //= require admin/update_order_course_subject
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap

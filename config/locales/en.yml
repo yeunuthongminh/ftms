@@ -119,6 +119,8 @@ en:
     finished: "finished"
     testing: "testing"
     init: "init"
+    pass: "Pass"
+    fail: "Fail"
   datetime: &datetime
     formats:
       default: "%Y/%m/%d"

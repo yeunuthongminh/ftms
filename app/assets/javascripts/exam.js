@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function() {
       format: I18n.t('exams.time.default'),
       onExpiry: function() {
         $('.submit-time-out').trigger('click');
-        $('.submit-time-out').hidden();
+        $('.submit-time-out').closest('div').hide();
       }
     });
   }

@@ -30,6 +30,8 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
       I18n.t "activity.finish_all_subject"
     when "user_task.change_status"
       I18n.t "activity.change_status"
+    when "user_subject.do_exam_subject"
+      I18n.t "activity.do_exam_subject"
     else
       key
     end

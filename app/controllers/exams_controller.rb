@@ -8,18 +8,22 @@ class ExamsController < ApplicationController
 
   def show
     check_status
-    @remaining_time = @exam.remaining_time
   end
 
   def update
     if @exam.update_attributes exam_params
+      user_subject = @exam.user_subject
       if params["finish"].nil?
         flash[:notice] = t "exams.saved"
-        @exam.testing!
-        redirect_to [@exam.user_subject.user_course, @exam.user_subject.subject]
+        @exam.update_attributes status: :testing, spent_time: spent_time
+        redirect_to [user_subject.user_course, user_subject.subject]
       else
         flash[:success] = t "exams.finished"
-        @exam.finish!
+        @exam.update_attributes status: :finish, spent_time: spent_time
+        point = ExamService.new(user_subject).calculate_point @exam
+        unless point < user_subject.subject.subject_detail_min_score_to_pass
+          user_subject.finish!
+        end
         redirect_to exams_path
       end
     else
@@ -36,6 +40,7 @@ class ExamsController < ApplicationController
   def check_status
     if @exam.init?
       @exam.update_attributes started_at: Time.zone.now, status: :testing
+      ExamFinishJob.set(wait: @exam.duration.minutes).perform_later @exam
     end
   end
 
@@ -49,6 +54,11 @@ class ExamsController < ApplicationController
   end
 
   def load_exams
-    @exams = current_user.exams
+    @exams = current_user.exams.per_page_kaminari(params[:page]).per Settings.per_page
+  end
+
+  def spent_time
+    spent_time = (Time.zone.now - @exam.started_at).to_i
+    spent_time > @exam.duration.minutes.to_i ? @exam.duration.minutes.to_i : spent_time
   end
 end

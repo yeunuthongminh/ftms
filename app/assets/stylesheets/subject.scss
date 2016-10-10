@@ -97,3 +97,12 @@
   color: #575a5b;
   font-weight: 700;
 }
+
+.ui-widget-overlay {
+  background: rgba(0, 0, 0, 0.8) !important;
+  opacity: .8;
+}
+
+.dialog {
+  display: none;
+}

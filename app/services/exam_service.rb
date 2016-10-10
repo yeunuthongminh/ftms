@@ -25,7 +25,9 @@ class ExamService
     results = exam.results.pluck(:question_id, :answer_id).to_h
     unit = Settings.exams.unit
     exam_point = 0
-    question_points = Question.where(id: results.keys).pluck(:level).map{|v| v*unit}
+    question_points = Question.where(id: results.keys).map do |question|
+      question.level_before_type_cast*unit
+    end
     results.values.each_with_index do |answer_id, index|
       if Answer.find_by id: answer_id, is_correct: true
         exam_point += unit*question_points[index]

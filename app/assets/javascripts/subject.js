@@ -52,4 +52,32 @@ $(document).on('turbolinks:load ajaxComplete', function() {
   $('.btn-reopen').click(function () {
     this.href = this.href + '?status=reopen';
   });
+
+  $('#finish-subject').click(function(e) {
+    event.preventDefault();
+    var exec_finish = document.getElementById('finish-subject-enter');
+    $("#dialog-finish").dialog({
+      modal: true,
+      width: 550,
+      buttons: [
+        {
+          text: I18n.t("user_subjects.finish.with_exam"),
+          click: function() {
+            exec_finish.href = exec_finish.href + '?action=exam_now';
+            $(exec_finish).trigger('click');
+          }
+        },
+        {
+          text: I18n.t("user_subjects.finish.without_exam"),
+          click: function() {
+            $(exec_finish).trigger('click');
+          }
+        },
+        {
+          text: I18n.t("buttons.cancel"),
+          click: function() {$(this).dialog('close');}
+        }
+      ]
+    });
+  });
 });

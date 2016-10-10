@@ -218,4 +218,28 @@ module ApplicationHelper
   def filter_title
     @filter_service.is_on? ? t("filters.btn_off") : t("filters.btn_on")
   end
+
+  def color_result exam
+    if exam.score < exam.user_subject.subject.subject_detail_min_score_to_pass
+      set_background_color_status "fail"
+    else
+      set_background_color_status "pass"
+    end
+  end
+
+  def status_result exam
+    if exam.score < exam.user_subject.subject.subject_detail_min_score_to_pass
+      t "status.fail"
+    else
+      t "status.pass"
+    end
+  end
+
+  def remaining_time exam
+    if exam.init? || exam.testing?
+      time_remaining = (exam.duration.minutes - (Time.zone.now - exam.started_at)).to_i
+      return time_remaining if time_remaining > 0
+    end
+    0
+  end
 end

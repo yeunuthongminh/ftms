@@ -48,6 +48,8 @@ class User < ApplicationRecord
   has_many :roles, through: :user_roles
   has_many :feed_backs, dependent: :destroy
   has_many :filters, dependent: :destroy
+  has_many :group_users, dependent: :destroy
+  has_many :groups, through: :group_users
   has_many :exams, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true

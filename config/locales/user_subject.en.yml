@@ -13,3 +13,8 @@ en:
       y_axis: "Number tasks"
     notifications:
       user: " by %{user}"
+    finish:
+      with_exam: "Finish and doing exam now"
+      without_exam: "Finish and do exam later"
+      confirm: "You need pass an exam to finish this subject, are you sure?"
+      confirm-title: "Finish confirm?"
