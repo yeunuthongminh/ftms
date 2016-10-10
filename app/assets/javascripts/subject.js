@@ -53,31 +53,51 @@ $(document).on('turbolinks:load ajaxComplete', function() {
     this.href = this.href + '?status=reopen';
   });
 
-  $('#finish-subject').click(function(e) {
-    event.preventDefault();
-    var exec_finish = document.getElementById('finish-subject-enter');
-    $("#dialog-finish").dialog({
-      modal: true,
-      width: 550,
-      buttons: [
-        {
-          text: I18n.t("user_subjects.finish.with_exam"),
-          click: function() {
-            exec_finish.href = exec_finish.href + '?action=exam_now';
-            $(exec_finish).trigger('click');
+  $('.finish-subject').click(function(e) {
+    e.preventDefault();
+    var exec_finish = document.getElementById('finish-subject-exam');
+    if (exec_finish) {
+      $("#dialog-finish").dialog({
+        modal: true,
+        width: 550,
+        buttons: [
+          {
+            text: I18n.t("user_subjects.finish.with_exam"),
+            click: function() {
+              exec_finish.href = exec_finish.href + '?exam=now';
+              $(exec_finish).trigger('click');
+            }
+          },
+          {
+            text: I18n.t("user_subjects.finish.without_exam"),
+            click: function() {
+              $(exec_finish).trigger('click');
+            }
+          },
+          {
+            text: I18n.t("buttons.cancel"),
+            click: function() {$(this).dialog('close');}
           }
-        },
-        {
-          text: I18n.t("user_subjects.finish.without_exam"),
-          click: function() {
-            $(exec_finish).trigger('click');
+        ]
+      });
+    } else {
+      exec_finish = document.getElementById('finish-subject-project');
+      $("#dialog-finish").dialog({
+        modal: true,
+        width: 300,
+        buttons: [
+          {
+            text: I18n.t("user_subjects.finish.with_present"),
+            click: function() {
+              $(exec_finish).trigger('click');
+            }
+          },
+          {
+            text: I18n.t("buttons.cancel"),
+            click: function() {$(this).dialog('close');}
           }
-        },
-        {
-          text: I18n.t("buttons.cancel"),
-          click: function() {$(this).dialog('close');}
-        }
-      ]
-    });
+        ]
+      });
+    }
   });
 });

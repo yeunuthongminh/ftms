@@ -37,6 +37,25 @@ class ExamService
     exam_point
   end
 
+  def locked?
+    return true if @user_subject.exams.not_finished.size > 0 ||
+      @user_subject.lock_for_create_exam?
+
+    recent_exams = @user_subject.exams.finished.order("created_at DESC")
+      .limit(Settings.exams.max_recent_exams).pluck(:created_at).reverse
+    return false if recent_exams.size < Settings.exams.max_recent_exams
+
+    duration = @user_subject.subject.subject_detail_time_of_exam.minutes.to_i
+    current_time = (Time.zone.now - recent_exams.first).to_i
+    if current_time < duration*4
+      @user_subject.update_attributes lock_for_create_exam: true
+      ResetPermissionExamJob.set(wait: Settings.exams.time_for_lock.hours)
+        .perform_later @user_subject
+      return true
+    end
+    false
+  end
+
   private
   def random_question subject, number_of_question, levels, level_for_exam
     n = number_of_question
