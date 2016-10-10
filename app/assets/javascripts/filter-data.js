@@ -290,8 +290,8 @@ var filter_function = function(){
     });
   });
 
-  $(".filter-form").off("click", ".button-filters-assignees");
-  $(".filter-form").on("click", ".button-filters-assignees", function(event) {
+  $(".filter-form").off("click", ".button-filters");
+  $(".filter-form").on("click", ".button-filters", function(event) {
     event.preventDefault();
     filterClickListener(event);
     reset_position_list();

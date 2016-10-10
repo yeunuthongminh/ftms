@@ -124,7 +124,7 @@ $(document).click(function(e){
   }
 });
 
-$(document).ready(function() {
+$(document).on("turbolinks:load", function(){
   var _table = $('div.table');
   var fixedTableBody = $('.fixedTable-body');
   var realWidth;

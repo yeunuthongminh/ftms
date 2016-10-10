@@ -32,7 +32,15 @@ class FilterDatasController < ApplicationController
       when "graduation"
         @key_field = :graduation
         @value_field = :graduation
-        @resources = Profile.order(:graduation).pluck(:graduation).uniq.compact
+        @resources = []
+        Profile.order(:graduation).each do |profile|
+          @resources << if profile.graduation
+            l profile.graduation, format: :year_month
+          else
+            profile.graduation
+          end
+        end
+        @resources = @resources.uniq.compact
       when "trainee_status"
         @key_field = :id
         @value_field = :status
