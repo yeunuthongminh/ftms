@@ -62,6 +62,7 @@
 //= require admin/user_subject
 //= require jquery.countdown
 //= require exam
+//= require question
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();

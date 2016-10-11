@@ -1,0 +1,24 @@
+<div id="questions" class="profile-active">
+  <div class="title">
+    <span>
+      <%= link_to t("button.new"), new_admin_question_path,
+        class: "btn btn-success pull-right" %>
+    </span>
+  </div>
+
+  <table id="tbl-question" class="table table-bordered display"
+    data-source="<%= admin_questions_url format: "json" %>">
+    <thead>
+      <tr class="active">
+        <th></th>
+        <th><%= t "questions.table.content" %></th>
+        <th><%= t "questions.table.level" %></th>
+        <th><%= t "questions.table.subject" %></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
