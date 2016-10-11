@@ -48,8 +48,8 @@ Rails.application.routes.draw do
     resources :training_managements, only: :index
     resources :projects
     resources :filter_datas, only: [:index, :create]
-    resources :questions, except: [:index, :show]
-    resources :groups, exams: [:index, :show]
+    resources :questions, except: :show
+    resources :groups, except: [:index, :show]
   end
 
   namespace :trainer do

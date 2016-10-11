@@ -2,6 +2,15 @@ class Admin::QuestionsController < ApplicationController
   load_and_authorize_resource
   before_action :load_data, only: [:new, :edit]
 
+  def index
+    respond_to do |format|
+      format.html {add_breadcrumb_index "questions"}
+      format.json {
+        render json: QuestionsDatatable.new(view_context, @namespace)
+      }
+    end
+  end
+
   def new
     Settings.default_number_of_answers.times {@question.answers.build}
     add_breadcrumb_path "courses"

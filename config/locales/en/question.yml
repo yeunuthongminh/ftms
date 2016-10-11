@@ -1,6 +1,14 @@
 en:
   questions:
     add_answer: "Add Answer"
+    table:
+      content: "Content"
+      subject: "Subject"
+      level: "Level"
+    level:
+      easy: "Easy"
+      normal: "Normal"
+      hard: "Hard"
   breadcrumbs:
     questions:
       all: "All Questions"
