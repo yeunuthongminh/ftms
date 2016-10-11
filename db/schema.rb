@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161008083749) do
+ActiveRecord::Schema.define(version: 20161010090510) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -484,6 +484,7 @@ ActiveRecord::Schema.define(version: 20161008083749) do
     t.date     "user_end_date"
     t.boolean  "current_progress",  default: false
     t.datetime "deleted_at"
+    t.boolean  "lock_for_create_exam", default: false
     t.index ["course_id"], name: "index_user_subjects_on_course_id", using: :btree
     t.index ["course_subject_id"], name: "index_user_subjects_on_course_subject_id", using: :btree
     t.index ["deleted_at"], name: "index_user_subjects_on_deleted_at", using: :btree

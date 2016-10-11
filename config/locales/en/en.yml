@@ -194,6 +194,7 @@ en:
     cancel: "Cancel"
     close: "Close"
     show: "Show"
+    do_exam: "Do exam"
   buttons:
     edit: Edit
     ok: "OK"

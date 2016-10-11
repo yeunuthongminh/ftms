@@ -25,15 +25,26 @@
         <span class="label-status <%= set_background_color_status @user_subject.status %>">
           <%= t "courses.labels.status.#{@user_subject.status}" %>
         </span>
-        <% if current_user.is_trainee? && (@user_subject.progress? || @user_subject.waiting?) %>
-          <%= link_to t("button.finish"), "#", class: "btn btn-danger pull-right",
-         id: "finish-subject" %>
-         <div id="dialog-finish" title="<%= t "user_subjects.finish.confirm-title" %>"
-          class="dialog">
-          <p><%= t "user_subjects.finish.confirm" %></p>
-          <%= link_to "", user_subject_path(@user_subject),
-            method: :put, class: "hidden", id: "finish-subject-enter" %>
-         </div>
+        <% unless @user_subject.finish? %>
+          <div id="dialog-finish" title="<%= t "user_subjects.finish.confirm-title" %>"
+            class="dialog">
+            <% if @user_subject.subject.subject_detail %>
+              <p><%= t "user_subjects.finish.confirm_exam" %></p>
+              <%= link_to "", user_subject_path(@user_subject),
+                method: :put, class: "hidden", id: "finish-subject-exam" %>
+            <% else %>
+              <p><%= t "user_subjects.finish.confirm_project" %></p>
+              <%= link_to "", user_subject_path(@user_subject),
+                method: :put, class: "hidden", id: "finish-subject-project" %>
+            <% end %>
+          </div>
+          <% if current_user.is_trainee? && @user_subject.progress? %>
+            <%= link_to t("button.finish"), "#",
+              class: "btn btn-danger pull-right finish-subject" %>
+          <% elsif @user_subject.subject.subject_detail && @user_subject.waiting? %>
+            <%= link_to t("button.do_exam"), "#",
+              class: "btn btn-info pull-right finish-subject" %>
+          <% end %>
         <% end %>
         <div class="description"><%= @user_subject.description %></div>
         <div class="subject-content box-divider">
