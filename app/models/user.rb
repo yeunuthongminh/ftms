@@ -83,6 +83,9 @@ class User < ApplicationRecord
       .where("user_subjects.status = ?", UserSubject.statuses[:progress])
       .pluck(:id))
   end
+  scope :free_group, ->{where.not id: GroupUser.select(:user_id)}
+  scope :free_and_in_group, ->group_id{where.not id: GroupUser
+    .where.not(group_id: group_id).select(:user_id)}
 
   before_validation :set_password
 

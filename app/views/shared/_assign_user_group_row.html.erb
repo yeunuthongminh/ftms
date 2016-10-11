@@ -1,0 +1,18 @@
+<tr>
+  <td class="assign-checkbox">
+    <%= f.fields_for :group_users, @group.group_users.build do |group_user_builder| %>
+      <% if group_users.include? user %>
+        <%= group_user_builder.check_box :_destroy, {checked: true}, false, true %>
+        <%= group_user_builder.hidden_field :user_id, value: user.id %>
+        <%= group_user_builder.hidden_field :id, value:
+          @group.group_users.find_by(user_id: user.id).id %>
+      <% else %>
+        <%= group_user_builder.check_box :user_id, {checked: false}, user.id, nil %>
+      <% end %>
+    <% end %>
+  </td>
+  <td><%= user.name %></td>
+  <td><%= user.email %></td>
+  <td><%= user.current_progress.subject_name if user.current_progress.present? %></td>
+  <td><%= user.current_progress.course_name if user.current_progress.present? %></td>
+</tr>

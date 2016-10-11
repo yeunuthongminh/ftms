@@ -1,0 +1,8 @@
+en:
+  groups:
+    title: "Groups"
+    button:
+      edit: "Save"
+      create: "Create"
+      new: "Create"
+      update: "Save"
