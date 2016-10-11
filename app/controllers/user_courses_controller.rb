@@ -1,7 +1,6 @@
 class UserCoursesController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource only: :show
   before_action :find_user_course, only: :show
+  authorize_resource only: :show
 
   def show
     @course = @user_course.course

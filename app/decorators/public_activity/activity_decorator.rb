@@ -28,6 +28,8 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
       I18n.t "activity.start_all_subject"
     when "user_subject.finish_all_subject"
       I18n.t "activity.finish_all_subject"
+    when "user_subject.finish_exam"
+      I18n.t "activity.finish_exam"
     when "user_task.change_status"
       I18n.t "activity.change_status"
     when "user_subject.do_exam_subject"
@@ -78,7 +80,7 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
     case key
     when "course.finish_course", "course.start_course", "course.reopen_course"
       trackable.name
-    when "user_subject.start_subject", "user_subject.finish_subject"
+    when "user_subject.start_subject", "user_subject.finish_subject", "user_subject.finish_exam"
       "#{trackable.subject_name}"
     when "user_task.change_status"
       trackable.task_name

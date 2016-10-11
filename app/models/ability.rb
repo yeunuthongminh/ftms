@@ -25,6 +25,8 @@ class Ability
         elsif model_class == User
           courses = @user.user_courses.pluck :course_id
           model.in_course? courses
+        elsif model_class == UserCourse
+          model.user == @user
         elsif model_class == Exam
           model.user == @user
         else
