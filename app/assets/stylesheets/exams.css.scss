@@ -1,4 +1,8 @@
+@import "variables";
+@import "mixin";
+
 #exams {
+  @include customize-scrollbar;
   #show-exam, #do-exam {
     margin-top: 30px;
     .question-title {
@@ -107,6 +111,87 @@
     border: none;
     .btn {
       width: 98px;
+    }
+  }
+
+  .fixedTable-body {
+    height: auto;
+  }
+
+  .table {
+    width: 1518px;
+  }
+
+  .fixedTitle, .fixedTable-sidebar, #parent, #child {
+    width: 235px;
+  }
+
+  .scrollbarH {
+    margin-left: 235px;
+  }
+
+  .scrollbar {
+    top: 30px;
+  }
+
+  .fixedTitle, .fixedTable-header {
+    max-height: 31px;
+    min-height: 31px;
+    height: 31px;
+  }
+
+  .tcell {
+    &.stt {
+      min-width: 35px;
+      max-width: 35px;
+    }
+
+    &.subject_name {
+      min-width: 200px;
+      max-width: 200px;
+      position: relative;
+    }
+
+    &.course {
+      min-width: 300px;
+      max-width: 300px;
+      position: relative;
+    }
+
+    &.created_at {
+      min-width: 150px;
+      max-width: 150px;
+      position: relative;
+    }
+
+    &.spent_time {
+      min-width: 130px;
+      max-width: 130px;
+      position: relative;
+    }
+
+    &.score {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
+    }
+
+    &.name {
+      min-width: 200px;
+      max-width: 200px;
+      position: relative;
+    }
+
+    &.course_start_date, &.course_end_date {
+      min-width: 210px;
+      max-width: 210px;
+      position: relative;
+    }
+
+    &.none {
+      display: table-cell;
+      border-right: none;
+      border-top: 2px solid #ccc;
     }
   }
 }

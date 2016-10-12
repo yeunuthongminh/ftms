@@ -1,0 +1,66 @@
+<div class="fixedTitle">
+  <div class="tbody">
+    <div class="trow header">
+      <div class="tcell stt">#</div>
+      <div class="tcell name display_name title">
+        <%= t "exams.label.trainee_name" %>
+        <%= link_to filter_datas_path(type: :trainee_name, filter_type: :exams),
+          remote: true, class: "open-select", data: {name: "f-trainee_name"} do %>
+          <i class="fa ic ic-filter trainee_name"></i>
+        <% end %>
+      </div>
+      <div class="clear-both">
+        <div class="side-bar">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="fixedTable-header">
+  <div id="table-header" class="scroll-table">
+    <div class="tbody">
+      <div class="trow header">
+        <div class="tcell subject_name title">
+          <%= t "exams.label.subject" %>
+          <%= link_to filter_datas_path(type: :subject_name,
+            filter_type: :exams), remote: true, class: "open-select",
+            data: {name: "f-subject_name"} do %>
+            <i class="fa ic ic-filter subject_name"></i>
+          <% end %>
+        </div>
+        <div class="tcell course title">
+          <%= t "exams.label.course_name" %>
+          <%= link_to filter_datas_path(type: :course_name,
+            filter_type: :exams), remote: true, class: "open-select",
+            data: {name: "f-course_name"} do %>
+            <i class="fa ic ic-filter course_name"></i>
+          <% end %>
+        </div>
+        <div class="tcell created_at title">
+          <%= t "exams.label.created_at" %>
+          <%= link_to filter_datas_path(type: :exam_created_at,
+            filter_type: :exams), remote: true, class: "open-select",
+            data: {name: "f-created_at"} do %>
+            <i class="fa ic ic-filter created_at"></i>
+          <% end %>
+        </div>
+        <div class="tcell spent_time title">
+          <%= t "exams.label.spent_time" %>
+          <%= link_to filter_datas_path(type: :exam_spent_time,
+            filter_type: :exams), remote: true, class: "open-select",
+            data: {name: "f-spent_time"} do %>
+            <i class="fa ic ic-filter spent_time"></i>
+          <% end %>
+        </div>
+        <div class="tcell score title">
+          <%= t "exams.label.score" %>
+          <%= link_to filter_datas_path(type: :exam_score, filter_type: :exams),
+            remote: true, class: "open-select", data: {name: "f-score"} do %>
+            <i class="fa ic ic-filter score"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
