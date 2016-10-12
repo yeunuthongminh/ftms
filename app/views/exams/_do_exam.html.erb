@@ -19,8 +19,7 @@
       <h3 class="subject-title"><%= t "exams.subject_name",
         name: @exam.user_subject.subject.name %></h3>
       <div class="button-exam text-center">
-        <%= f.submit t("exams.save"),
-          class: "btn btn-primary" %>
+        <%= f.submit t("exams.save"), class: "btn btn-primary" %>
         <%= f.submit t("exams.finish"), class: "btn btn-danger submit-time-out",
           name: "finish", data: {confirm: t("exams.finish_warning")} %>
       </div>

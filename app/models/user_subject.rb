@@ -33,7 +33,7 @@ class UserSubject < ApplicationRecord
   delegate :name, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
 
-  enum status: [:init, :progress, :finish, :waiting]
+  enum status: [:init, :progress, :finish, :waiting, :request]
 
   def load_trainers
     course.users.trainers
@@ -68,10 +68,16 @@ class UserSubject < ApplicationRecord
       notification_key = Notification.keys[:start]
     else
       if is_of_user? current_user
-        update_attributes status: :waiting
-        key = "user_subject.do_exam_subject"
+        if waiting? && status == Settings.subject_status.finish
+          update_attributes status: :finish, user_end_date: Time.now
+          key = "user_subject.finish_exam"
+          notification_key = Notification.keys[:finish]
+        elsif progress?
+          update_attributes status: :waiting
+          key = "user_subject.do_exam_subject"
+        end
       elsif status == Settings.subject_status.reject
-        update_attributes status: :progress, current_progress: in_progress
+        update_attributes status: :waiting
         key = "user_subject.reject_finish_subject"
         notification_key = Notification.keys[:reject]
       elsif status == Settings.subject_status.finish
@@ -84,8 +90,8 @@ class UserSubject < ApplicationRecord
         notification_key = Notification.keys[:reopen]
       end
     end
-    create_activity key: key, owner: current_user, recipient: user
-    if self.progress? && is_of_user?(current_user)
+    create_activity(key: key, owner: current_user, recipient: user) if key
+    if is_of_user?(current_user) && (self.progress? || self.finish?)
       CourseNotificationBroadCastJob.perform_now course,
         notification_key, current_user.id, self
     elsif !self.waiting?
