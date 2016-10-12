@@ -103,6 +103,22 @@ class FilterDatasController < ApplicationController
         @key_field = :end_date
         @value_field = :end_date
         @resources = Course.order(:end_date).pluck(:end_date).uniq.compact
+      when "subject_name"
+        @key_field = :subject_name
+        @value_field = :subject_name
+        @resources = Subject.order(:name).pluck :name
+      when "exam_created_at"
+        @key_field = :created_at
+        @value_field = :created_at
+        @resources = Exam.order(:created_at).pluck(:created_at).uniq.compact
+      when "exam_spent_time"
+        @key_field = :spent_time
+        @value_field = :spent_time
+        @resources = Exam.order(:spent_time).pluck(:spent_time).uniq.compact
+      when "exam_score"
+        @key_field = :score
+        @value_field = :score
+        @resources = Exam.order(:score).pluck(:score).uniq.compact
       end
     end
 
