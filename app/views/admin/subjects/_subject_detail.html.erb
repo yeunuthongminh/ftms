@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= t "subject_details.label.title" %>
+  </div>
+  <div class="panel-footer">
+    <div id="edit-subject-detail">
+      <div class="row">
+        <div class="col-md-4 col-xs-4">
+          <b><%= t "subject_details.label.number_of_question" %></b>
+          <%= f.number_field :number_of_question, step: 1, min: 0, class: "subject-detail" %>
+        </div>
+        <div class="col-md-4 col-xs-4">
+          <b><%= t "subject_details.label.time_of_exam" %></b>
+          <%= f.number_field :time_of_exam, min: 0, step: 1, class: "subject-detail" %>
+        </div>
+        <div class="col-md-4 col-xs-4">
+          <b><%= t "subject_details.label.min_score_to_pass" %></b>
+          <%= f.number_field :min_score_to_pass, min: 0, step: 1, class: "subject-detail" %>
+        </div>
+      </div>
+      <div class="row">
+        <br>
+        <div class="col-md-2">
+          <b><%= t "subject_details.label.percent_of_questions" %></b>
+        </div>
+        <div class="col-md-9 group-select">
+          <div id="per-questions">
+            <div class="col-md-4 col-xs-4">
+              <label>
+                <%= t "subject_details.label.level.easy" %>
+              </label>
+              <input type="number" name="easy" id="per-easy" min="0" max="100"
+                  step="1" class="subject-detail">
+            </div>
+            <div class="col-md-4 col-xs-4">
+              <label>
+                <%= t "subject_details.label.level.normal" %>
+              </label>
+              <input type="number" name="normal" id="per-normal" min="0" max="100"
+                  step="1" class="subject-detail">
+            </div>
+            <div class="col-md-4 col-xs-4">
+              <label>
+                <%= t "subject_details.label.level.hard" %>
+              </label>
+              <input type="number" name="hard" id="per-hard" min="0" max="100"
+                  step="1" class="subject-detail">
+            </div>
+          </div>
+          <div id="slider-percent-question"></div>
+        </div>
+        <%= f.hidden_field :percent_of_questions,
+          value: percent_of_question(f.object.percent_of_questions), id: "percent_of_questions" %>
+      </div>
+    </div>
+  </div>
+</div>
+

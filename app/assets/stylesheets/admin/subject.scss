@@ -76,3 +76,20 @@
   padding-left: 17%;
   font-weight: bold;
 }
+
+#edit-subject-detail {
+  input.subject-detail {
+    width: 70px;
+    margin: 0 15px;
+  }
+  #per-questions {
+    margin-bottom: 30px;
+    min-height: 15px;
+  }
+
+  .group-select {
+    padding: 10px 5px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+  }
+}

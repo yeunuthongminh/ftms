@@ -397,8 +397,9 @@ ActiveRecord::Schema.define(version: 20161011064807) do
     t.integer  "min_score_to_pass"
     t.integer  "subject_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "percent_of_questions"
     t.index ["deleted_at"], name: "index_subject_details_on_deleted_at", using: :btree
     t.index ["subject_id"], name: "index_subject_details_on_subject_id", unique: true, using: :btree
   end
