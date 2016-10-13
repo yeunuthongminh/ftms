@@ -40,6 +40,7 @@
 //= require jquery-ui/dialog
 //= require jquery-ui/sortable
 //= require jquery-ui/effect-highlight
+//= require jquery-ui/slider
 //= require admin/update_order_course_subject
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
@@ -63,6 +64,7 @@
 //= require admin/user_profile
 //= require admin/user_subject
 //= require jquery.countdown
+//= require admin/subject
 //= require exam
 //= require question
 

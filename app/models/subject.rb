@@ -5,7 +5,9 @@ class Subject < ApplicationRecord
 
   SUBJECT_ATTRIBUTES_PARAMS = [:name, :description, :content, :image, :during_time,
     documents_attributes: [:id, :name, :content, :_destroy],
-    task_masters_attributes: [:id, :name, :description, :_destroy]]
+    task_masters_attributes: [:id, :name, :description, :_destroy],
+    subject_detail_attributes: [:id, :number_of_question, :time_of_exam,
+    :min_score_to_pass, :percent_of_questions, :_destroy]]
 
   has_one :subject_detail, dependent: :destroy
   has_many :task_masters, dependent: :destroy
@@ -25,6 +27,7 @@ class Subject < ApplicationRecord
   accepts_nested_attributes_for :task_masters, allow_destroy: true,
     reject_if: proc {|attributes| attributes[:name].blank?}
   accepts_nested_attributes_for :documents, allow_destroy: true
+  accepts_nested_attributes_for :subject_detail, allow_destroy: true
 
   delegate :name, to: :user_subject, prefix: true, allow_nil: true
   delegate :number_of_question, :min_score_to_pass, :time_of_exam,

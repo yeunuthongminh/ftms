@@ -242,4 +242,12 @@ module ApplicationHelper
     end
     0
   end
+
+  def percent_of_question percent_of_questions
+    if percent_of_questions.blank?
+      Settings.exams.percent_question.to_s
+    else
+      percent_of_questions
+    end
+  end
 end

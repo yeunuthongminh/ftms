@@ -32,7 +32,7 @@ class Admin::SubjectsController < ApplicationController
   def new
     @subject.documents.build
     @subject.task_masters.build
-
+    @subject.build_subject_detail percent_of_questions: Settings.exams.percent_question.to_s
     add_breadcrumb_path "subjects"
     add_breadcrumb_new "subjects"
   end

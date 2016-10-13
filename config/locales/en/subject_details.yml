@@ -1,0 +1,12 @@
+en:
+  subject_details:
+    label:
+      title: "Subject Details"
+      number_of_question: "Number of questions:"
+      time_of_exam: "Time of exam:"
+      min_score_to_pass: "Min score to pass:"
+      percent_of_questions: "Percent of questions:"
+      level:
+        easy: "Percent Easy:"
+        normal: "Percent Normal:"
+        hard: "Percent Hard:"
