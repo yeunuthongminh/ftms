@@ -1,6 +1,6 @@
 <ul class="user-list clearfix">
   <%= render partial: "shared/member", collection: @members, as: :user %>
-  <%= link_to "#", data: {toggle: "modal", target: "#member-modal"},
+  <%= link_to "#", data: {toggle: "modal", target: "#trainee-modal"},
     title: t("subjects.modal.member_details") do %>
     <li class="plus-node">
       <% if @count_member > 0 %>
