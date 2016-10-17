@@ -6,8 +6,8 @@ class User < ApplicationRecord
   QUERY = "users.id NOT IN (SELECT user_id
     FROM user_courses, courses WHERE user_courses.course_id = courses.id
     AND (courses.status = 0 OR courses.status = 1)
-    AND courses.id <> :course_id) AND profiles.programming_language_id =
-    :programming_language_id"
+    AND user_courses.deleted_at IS NULL
+    AND courses.id <> :course_id)"
 
 
   ATTRIBUTES_PROFILE_PARAMS = [
@@ -47,13 +47,13 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
   has_many :feed_backs, dependent: :destroy
+  has_many :track_logs, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password
 
-  scope :available_of_course, ->course_id, programming_language_id{
-    joins(:profile).where(QUERY, course_id: course_id,
-    programming_language_id: programming_language_id)
+  scope :available_of_course, ->course_id{
+    joins(:profile).where QUERY, course_id: course_id
   }
   scope :trainee_roles, ->{joins(user_roles: :role)
     .where("roles.role_type = ?", Role.role_types[:trainee])}
@@ -79,6 +79,8 @@ class User < ApplicationRecord
       .where("user_subjects.status = ?", UserSubject.statuses[:progress])
       .pluck(:id))
   end
+  scope :users_in_course, ->{joins(:user_courses)
+    .where("user_courses.deleted_at": nil).distinct}
 
   before_validation :set_password
 
@@ -91,7 +93,8 @@ class User < ApplicationRecord
   delegate :working_day, to: :profile, prefix: true, allow_nil: true
   delegate :graduation, to: :profile, prefix: true, allow_nil: true
 
-  devise :database_authenticatable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :rememberable, :trackable, :validatable,
+    :recoverable
 
   def total_done_tasks user, course
     done_tasks = UserSubject.load_user_subject(user.id, course.id).map(&:user_tasks).flatten.count

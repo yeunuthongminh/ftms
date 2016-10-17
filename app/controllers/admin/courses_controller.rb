@@ -29,7 +29,7 @@ class Admin::CoursesController < ApplicationController
   def create
     if @course.save
       flash[:success] = flash_message "created"
-      redirect_to admin_courses_path
+      redirect_to admin_course_path @course
     else
       flash[:failed] = flash_message "not_created"
       render :new
@@ -48,10 +48,7 @@ class Admin::CoursesController < ApplicationController
   end
 
   def show
-    @course_subjects = @course.course_subjects.includes(:subject).order_position
-    @users = @course.users
-    @trainers = @users.trainers
-    @trainees = @users.trainees
+    @supports = Supports::Course.new @course
 
     add_breadcrumb_path "courses"
     add_breadcrumb @course.name, :admin_course_path
