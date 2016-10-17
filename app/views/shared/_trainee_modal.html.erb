@@ -8,7 +8,8 @@
       <div class="modal-body info-panel">
         <div class="member-title"><%= t "subjects.modal.trainees" %></div>
         <ul class="user-list clearfix">
-          <%= render partial: "shared/trainee", collection: @trainees, as: :user %></ul>
+          <%= render partial: "shared/trainee",
+            collection: @supports.trainees, as: :user %></ul>
       </div>
     </div>
   </div>
