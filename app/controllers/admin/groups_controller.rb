@@ -5,6 +5,8 @@ class Admin::GroupsController < ApplicationController
   before_action :load_data_edit, only: :edit
 
   def new
+    add_breadcrumb_path "groups"
+    add_breadcrumb_new "groups"
   end
 
   def create
@@ -19,6 +21,8 @@ class Admin::GroupsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb_path "groups"
+    add_breadcrumb_edit "groups"
   end
 
   def update

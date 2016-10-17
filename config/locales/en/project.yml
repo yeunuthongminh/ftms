@@ -1,13 +1,14 @@
 en:
-  groups:
-    title: "Groups"
+  projects:
+    title: "Projects"
+    add_requirement: "Add Requirement"
     button:
       edit: "Save"
       create: "Create"
       new: "Create"
       update: "Save"
   breadcrumbs:
-    groups:
-      all: "All Groups"
+    projects:
+      all: "All Projects"
       new: "New"
       edit: "Edit"
