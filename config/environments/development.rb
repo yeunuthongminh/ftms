@@ -58,4 +58,14 @@ Rails.application.configure do
     Bullet.rails_logger = true
     Bullet.add_footer = true
   end
+
+  arr = []
+  config.middleware.use ExceptionNotification::Rack,
+    email: {
+      verbose_subject: false,
+      normalize_subject: true,
+      email_prefix: "[FTMS]_System-ERROR ",
+      sender_address: ENV["GMAIL_USERNAME"],
+      exception_recipients: arr << ENV["GMAIL_USERNAME"]
+    }
 end

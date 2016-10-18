@@ -89,4 +89,14 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   Rails.application.config.action_cable.disable_request_forgery_protection = true
+
+  arr = []
+  config.middleware.use ExceptionNotification::Rack,
+    email: {
+      verbose_subject: false,
+      normalize_subject: true,
+      email_prefix: "[FTMS]_System-ERROR ",
+      sender_address: ENV["MAILGUN_SMTP_USERNAME"],
+      exception_recipients: arr << ENV["GMAIL_USERNAME"]
+    }
 end
