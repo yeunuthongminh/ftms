@@ -78,7 +78,7 @@ module ApplicationHelper
       avatar_user_tag chat_room, "img-circle",
         Settings.image_size_40
     elsif chat_room.class.name == "Course"
-      image_course_tag chat_room, "img-circle",
+      image_course_tag chat_room, chat_room.programming_language_name,
         Settings.image_size_40
     end
   end
