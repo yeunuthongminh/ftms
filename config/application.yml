@@ -106,6 +106,7 @@ defaults: &defaults
     max_recent_exams: 3
     time_for_lock: 6
   default_number_of_answers: 2
+  default_number_of_requirement: 4
 development:
   <<: *defaults
   neat_setting: 800

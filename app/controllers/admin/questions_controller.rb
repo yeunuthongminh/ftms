@@ -13,7 +13,7 @@ class Admin::QuestionsController < ApplicationController
 
   def new
     Settings.default_number_of_answers.times {@question.answers.build}
-    add_breadcrumb_path "courses"
+    add_breadcrumb_path "questions"
     add_breadcrumb_new "questions"
   end
 
@@ -32,7 +32,7 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def edit
-    add_breadcrumb_path "courses"
+    add_breadcrumb_path "questions"
     add_breadcrumb_edit "questions"
   end
 
