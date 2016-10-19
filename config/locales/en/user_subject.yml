@@ -13,3 +13,6 @@ en:
       y_axis: "Number tasks"
     notifications:
       user: " by %{user}"
+    init: "Init"
+    in_progress: "In progress"
+    finished: "Finished"
