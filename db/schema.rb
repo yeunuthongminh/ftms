@@ -438,8 +438,8 @@ ActiveRecord::Schema.define(version: 20161014084210) do
     t.integer  "status",       default: 0
     t.datetime "deleted_at"
     t.integer  "user_task_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["deleted_at"], name: "index_user_task_histories_on_deleted_at", using: :btree
     t.index ["user_task_id"], name: "index_user_task_histories_on_user_task_id", using: :btree
   end
