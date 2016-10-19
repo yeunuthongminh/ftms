@@ -72,7 +72,7 @@ class CourseDecorator < Draper::Decorator
             </td>
             <td style='border: 1px solid #cecece;'>
               #{I18n.t 'mail.by_day.progress_done',
-              progress: user_task_history.user_subject.percent_progress.to_i}
+              progress: user_task_history.user_task.user_subject.percent_progress.to_i}
             </td>
             <td style='border: 1px solid #cecece;'>"
         end
@@ -103,7 +103,8 @@ class CourseDecorator < Draper::Decorator
       end
     end
 
-    show_html += "</td><td style='border: 1px solid #cecece;'></td><td style='border: 1px solid #cecece;'>" if current_status == "continue"
+    show_html += "</td><td style='border: 1px solid #cecece;'></td>
+      <td style='border: 1px solid #cecece;'>" if current_status == "continue"
 
     unless users.blank?
       show_html += "</tr>"
