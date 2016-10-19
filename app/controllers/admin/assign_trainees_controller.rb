@@ -11,7 +11,7 @@ class Admin::AssignTraineesController < ApplicationController
 
   def update
     if params[:course] && @course.update_attributes(course_params)
-      ExpectedTrainingDateService.new(@course).expected_training_end_date
+      ExpectedTrainingDateService.new(course: @course).perform
       flash[:success] = flash_message "updated"
     else
       flash[:danger] = flash_message "not_updated"

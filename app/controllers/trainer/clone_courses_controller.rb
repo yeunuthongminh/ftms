@@ -1,10 +1,10 @@
 class Trainer::CloneCoursesController < ApplicationController
   load_and_authorize_resource :course
-  authorize_resource class: false
 
   def create
-    clone_course_service = CloneCourseService.new @course
-    @clone_course = clone_course_service.clone_course
+    clone_course_service = CloneCourseService.new(course: @course)
+    @clone_course = clone_course_service.perform
+
     if @clone_course
       flash[:success] = t "courses.confirms.clone_success"
       redirect_to [:trainer, @clone_course]
