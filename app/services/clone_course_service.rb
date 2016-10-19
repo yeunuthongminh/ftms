@@ -1,9 +1,11 @@
 class CloneCourseService
-  def initialize course
-    @course = course
+  attr_reader :args
+
+  def initialize args
+    @course = args[:course]
   end
 
-  def clone_course
+  def perform
     @clone_course = nil
     ActiveRecord::Base.transaction do
       begin

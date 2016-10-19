@@ -1,5 +1,6 @@
-class UserTaskService
-  attr_reader :args, :flash
+class MailerServices::UserTaskService
+  attr_reader :args
+
   def initialize args
     @user_task = args[:user_task]
     @status = args[:status]
