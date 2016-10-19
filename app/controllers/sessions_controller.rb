@@ -9,6 +9,7 @@ class SessionsController < Devise::SessionsController
 
   def log_sign_out
     log = current_user.track_logs.order_by_time.first
-    log.update_attributes(signout_time: Time.zone.now) if log.signout_time.nil?
+    log.update_attributes(signout_time: Time.zone.now) if log &&
+      log.signout_time.nil?
   end
 end
