@@ -59,22 +59,8 @@ class Admin::UsersController < ApplicationController
 
   def show
     add_breadcrumb_path "users"
-
-    @activities = PublicActivity::Activity.includes(:owner, :trackable)
-      .user_activities(@user.id).recent.limit(20).decorate
-    @user_courses = @user.user_courses
-    @finished_courses = @user_courses.course_finished
-    @inprogress_course = @user_courses.course_progress.last
-
-    if @inprogress_course
-      @user_subjects = @inprogress_course.user_subjects
-        .includes(course_subject: :subject).order_by_course_subject
-    end
-
-    @note = Note.new
-    @notes = Note.load_notes @user, current_user
-
     add_breadcrumb @user.name
+    @supports = Supports::User.new @user
   end
 
   private
