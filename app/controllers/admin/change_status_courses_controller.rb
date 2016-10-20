@@ -1,24 +1,21 @@
 class Admin::ChangeStatusCoursesController < ApplicationController
   load_and_authorize_resource :course
-  authorize_resource class: false
 
   def update
-    if @course.init?
-      @course.start_course current_user
-      key = Notification.keys[:start]
-      flash[:success] = flash_message "start_course"
-    elsif @course.progress?
-      key = Notification.keys[:finish]
-      @course.finish_course current_user
-      flash[:success] = flash_message "finish_course"
-    elsif @course.finish?
-      key = Notification.keys[:reopen]
-      @course.reopen_course current_user
-      flash[:success] = flash_message "reopen_course"
-    else
-      flash[:failed] = flash_message "course_not_upate"
+    key = case @course.status
+    when "init"
+      "start"
+    when "progress"
+      "finish"
+    when "finish"
+      "reopen"
     end
-    CourseNotificationBroadCastJob.perform_now @course, key, current_user.id
-    redirect_to admin_course_path @course
+
+    @course.send "#{key}_course", current_user
+    flash[:success] = flash_message "#{key}_course"
+
+    CourseNotificationBroadCastJob.perform_now course: @course,
+      key: Notification.keys[key], user_id: current_user.id
+    redirect_to [:admin, @course]
   end
 end
