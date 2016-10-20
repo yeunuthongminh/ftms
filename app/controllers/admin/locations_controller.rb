@@ -1,8 +1,9 @@
 class Admin::LocationsController < ApplicationController
   load_and_authorize_resource
   skip_load_resource only: :show
+
   before_action :find_location, only: :show
-  before_action :load_managers, except: :destroy
+  before_action :load_managers, except: [:destroy, :show, :index]
   before_action :set_breadcrumb_new, only: [:new, :create]
   before_action :set_breadcrumb_edit, only: [:edit, :update]
 
@@ -16,8 +17,7 @@ class Admin::LocationsController < ApplicationController
   end
 
   def show
-    @manager = @location.manager
-    @trainers = User.trainers.includes(:trainees).by_location @location.id
+    @location_support = Supports::Location.new location: @location
 
     add_breadcrumb_path "locations"
     add_breadcrumb @location.name
@@ -63,7 +63,7 @@ class Admin::LocationsController < ApplicationController
 
   private
   def location_params
-    params.require(:location).permit :name, :user_id
+    params.require(:location).permit Location::ATTRIBUTE_PARAMS
   end
 
   def load_managers
