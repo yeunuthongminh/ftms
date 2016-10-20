@@ -13,50 +13,6 @@ en:
     wrong_end_date: "Must be greater than start date"
     not_authorize: "You are not authorized to access this page."
     wrong_format: "must have format dd/mm/yyyy"
-  staticpages:
-    framgia: "Framgia Trainning Management System"
-    profile: "Profile"
-    logout: "Logout"
-    login: "Sign in"
-    home: "Home"
-    trainer: "Trainer"
-    admin: "Admin"
-    content:
-      title: "learn more. faster."
-      lead_in: "FREE classes for experienced engineers"
-      box1: "Basic"
-      box2: "Advance"
-    portfolio:
-      title: "upcoming core courses"
-      content: "Demanding, 8-week course that meets twice a week from 7-9 PM and ends with a final group project."
-      text_1: "Learn how to build web apps using Rails 5."
-      text_2: "Learn how to build web apps using Lavarel."
-      text_3: "Learn how to build apps Android."
-      btn: "Subscribe to Mailing List"
-      box_name_1: "Ruby"
-      box_name_2: "Php"
-      box_name_3: "Android"
-    div3:
-      name: "New program"
-      content1: "Looking for a great software engineering job?"
-      content2: "Get funding and mentorship for your team?"
-      link1: "SELECT"
-      link2: "PUSH"
-    principles:
-      title: "Our Training Principles"
-      content: "We want to work with the most dedicated startup engineers and designers.We want to help you become the best you can be, alongside talented peers."
-      header1: "Real Tutorials"
-      content1: "We'll learn how apps like Facebook, Instagram, and Twitter are built."
-      header2: "Project 1"
-      content2: "You'll be learning and working with the best."
-      header3: "Project 2"
-      content3: "You'll build real apps you'll be proud to show to customers and employers."
-    counters:
-      title: "Developing Developers"
-      content: "Master new skills in programming, design and product building."
-      learning: "Learning"
-      completed: "Completed"
-      manage: "Manage"
   messages:
     delete:
       confirm: "Are you sure?"
@@ -81,40 +37,8 @@ en:
       record_not_found: "Sorry, no record was found!"
   tasks:
     update: "Update"
-  subjects:
-    start_date: "Start date:"
-    start_date: "Start date: %{start_date}"
   signins:
     banner: "Login"
-  activity:
-    finish_course: "has finished course "
-    start_course: "has started course "
-    start_subject: "has started subject"
-    finish_subject: "has finished subject"
-    request_subject: "has been requested to finish subject"
-    reject_subject: "has been rejected request to finish subject"
-    reopen_subject: "has been reopened"
-  courses:
-    course: "Course"
-    name: "Name:"
-    description: "Description:"
-    list_subjects: "List subjects:"
-    image: "Image:"
-    status: "Status:"
-    start_date: "Start date:"
-    end_date: "End date:"
-    language: "Language"
-    trainees: "Trainees"
-    trainers: "Trainers"
-    buttons:
-      admin:
-        start:
-          finished: "Finished"
-      trainer:
-        edit: "Edit"
-    tab:
-      trainees: "Trainees"
-      trainers: "Trainers"
   status:
     start: "start"
     progress: "progress"
@@ -189,74 +113,11 @@ en:
     send: "Send"
     cancel: "Cancel"
     close: "Close"
-    show: "Show"
     continue: "Continue"
-  buttons:
-    edit: Edit
   evaluations:
     evaluate: "Evaluate"
     create: "Create"
     update: "Update"
-  breadcrumbs:
-    paths: "Paths"
-    courses:
-      all: "All Courses"
-      new: "New"
-      edit: "Edit"
-    subjects:
-      all: "All Subjects"
-      new: "New"
-      edit: "Edit"
-      new_task: "New Task"
-      task_masters: "Task Masters"
-    roles:
-      all: "All roles"
-      new: "New"
-      edit: "Edit"
-      allocate_permissions: "Allocate Permissions"
-    evaluation_templates:
-      all: "All Evaluation Templates"
-      new: "New"
-      edit: "Edit"
-    evaluations:
-      all: "All Evaluations"
-      new: "New"
-      edit: "Edit"
-    ranks:
-      all: "All Ranks"
-      new: "New"
-      edit: "Edit"
-    profiles:
-      all: "User Profiles"
-      edit: "Edit"
-    universities:
-      all: "All Universities"
-      new: "New"
-      edit: "Edit"
-    statuses:
-      all: "All Statuses"
-      new: "New"
-      edit: "Edit"
-    user_types:
-      all: "All Types"
-      new: "New"
-      edit: "Edit"
-    users:
-      all: "All User"
-      new: "New"
-      edit: "Edit"
-    locations:
-      all: "All Locations"
-      new: "New"
-      edit: "Edit"
-    feed_backs:
-      all: "All Feed Back"
-    dashboard:
-      all: "Dashboard"
-    organization_charts:
-      all: "Organization Chart"
-    training_managements:
-      all: "Training Management"
   datatables:
     search_name: "Search name"
     search_name_email: "Search name or email"
@@ -283,12 +144,12 @@ en:
       number_course_show: "Number finished course : <b>{point.y:.1f} course</b>"
   table:
     thead:
-      max_point: Max Point
-      min_point: Min Point
+      max_point: "Max Point"
+      min_point: "Min Point"
     thread:
-      action: Action
+      action: "Action"
   user_tasks:
-    description: Description
+    description: "Description"
   quick_form:
     university: "Enter university name..."
     usertype: "Enter type name..."
@@ -299,7 +160,7 @@ en:
       subject_name: "%{subject_name}"
       progress_done: "%{progress}%"
       title: "[Report][Daily] Framgia Education - [%{time}]"
-      finish_task: "- %{task_name}"
+      task_name: "- %{task_name}"
       course: "Course: %{name}"
       no_task_finish: "None"
       name: "Trainee"
@@ -307,10 +168,4 @@ en:
       task_finish: "Finish Task"
       progress: "Progress"
       task_continue: "Continue Task"
-      continue_task: "- %{task_name}"
       task_init: "Init Task"
-      init_task: "- %{task_name}"
-  user_subjects:
-    init: "Init"
-    in_progress: "In progress"
-    finished: "Finished"

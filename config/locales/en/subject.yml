@@ -66,6 +66,8 @@ en:
     tasks:
       in_progress_tasks: "Inprogress tasks:"
       finished_tasks: "Finished tasks:"
+    start_date: "Start date:"
+    start_date: "Start date: %{start_date}"
   subject:
     fields:
       content: "Content"

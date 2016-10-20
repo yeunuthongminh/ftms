@@ -10,3 +10,6 @@ en:
     change_status: "has updated"
     for_subject: "for"
     in_subject: "in subject"
+    request_subject: "has been requested to finish subject"
+    reject_subject: "has been rejected request to finish subject"
+    reopen_subject: "has been reopened"
