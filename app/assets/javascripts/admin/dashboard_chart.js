@@ -1,8 +1,8 @@
 $(document).on('turbolinks:load', function() {
-  if ($('#finished-course-chart').data('chart') != undefined &&
-    $('#finished-course-chart').data('chart').length > 0) {
-    var data_finish_course_chart = $('#finished-course-chart').data('chart');
-    $('#finished-course-chart').highcharts({
+  if ($('#finished_courses-chart').data('chart') != undefined &&
+    $('#finished_courses-chart').data('chart').length > 0) {
+    var data_finish_course_chart = $('#finished_courses-chart').data('chart');
+    $('#finished_courses-chart').highcharts({
       chart: {
         type: 'column'
       },
@@ -45,10 +45,10 @@ $(document).on('turbolinks:load', function() {
       }]
     });
   };
-  if ($('#new-course-chart').data('chart') != undefined &&
-    $('#new-course-chart').data('chart').length > 0) {
-    var data_new_course_chart = $('#new-course-chart').data('chart');
-    $('#new-course-chart').highcharts({
+  if ($('#new_courses-chart').data('chart') != undefined &&
+    $('#new_courses-chart').data('chart').length > 0) {
+    var data_new_course_chart = $('#new_courses-chart').data('chart');
+    $('#new_courses-chart').highcharts({
       chart: {
         type: 'column'
       },
@@ -89,10 +89,10 @@ $(document).on('turbolinks:load', function() {
       }]
     });
   };
-  if ($('#user-sign-up-chart').data('chart') != undefined &&
-    $('#user-sign-up-chart').data('chart').length > 0) {
-    var data_user_sign_up_chart = $('#user-sign-up-chart').data('chart');
-    $('#user-sign-up-chart').highcharts({
+  if ($('#new_users-chart').data('chart') != undefined &&
+    $('#new_users-chart').data('chart').length > 0) {
+    var data_user_sign_up_chart = $('#new_users-chart').data('chart');
+    $('#new_users-chart').highcharts({
       chart: {
         type: 'column'
       },
