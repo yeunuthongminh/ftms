@@ -3,16 +3,14 @@ class Admin::CoursesController < ApplicationController
 
   load_and_authorize_resource
   skip_load_resource only: [:index, :show, :edit]
-  before_action :load_data, except: [:index, :show, :destroy]
   before_action :find_course_in_show, only: :show
   before_action :find_course_in_edit, only: :edit
-  before_action :load_filter, only: :index
+  before_action :load_data, only: [:new, :edit, :show]
 
   def index
     add_breadcrumb_index "courses"
-    @courses = Course.includes :programming_language, :location
-    @filter_data_user = @filter_service.user_filter_data
-    @course_presenters = CoursePresenter.new(@courses, @namespace).render
+    @supports ||= Supports::Course.new course: @course, namespace: @namespace,
+      filter_service: load_filter
   end
 
   def new
@@ -33,8 +31,14 @@ class Admin::CoursesController < ApplicationController
       redirect_to admin_course_path @course
     else
       flash[:failed] = flash_message "not_created"
+      load_data
       render :new
     end
+  end
+
+  def show
+    add_breadcrumb_path "courses"
+    add_breadcrumb @course.name, :admin_course_path
   end
 
   def update
@@ -44,15 +48,9 @@ class Admin::CoursesController < ApplicationController
       redirect_to admin_course_path(@course)
     else
       flash[:failed] = flash_message "not_updated"
+      load_data
       render :edit
     end
-  end
-
-  def show
-    @supports = Supports::Course.new @course
-
-    add_breadcrumb_path "courses"
-    add_breadcrumb @course.name, :admin_course_path
   end
 
   def destroy
@@ -70,9 +68,7 @@ class Admin::CoursesController < ApplicationController
   end
 
   def load_data
-    @subjects = Subject.all
-    @programming_languages = ProgrammingLanguage.all
-    @locations = Location.all
+    @supports ||= Supports::Course.new course: @course
   end
 
   def find_course_in_show

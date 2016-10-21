@@ -1,8 +1,10 @@
 class Supports::Course
   attr_reader :course
 
-  def initialize course
-    @course = course
+  def initialize args
+    @course = args[:course]
+    @namespace = args[:namespace]
+    @filter_service = args[:filter_service]
   end
 
   def course_subjects
@@ -43,5 +45,29 @@ class Supports::Course
 
   def groups
     @groups ||= Group.group_of_user_in_course @course.id
+  end
+
+  def subjects
+    @subjects ||= Subject.all
+  end
+
+  %w(programming_languages locations).each do |objects|
+    define_method objects do
+      instance_variable_set "@#{objects}",
+        objects.classify.constantize.all.collect {|object| [object.name,
+        object.id]}
+    end
+  end
+
+  def courses
+    @courses = Course.includes :programming_language, :location
+  end
+
+  def filter_data_user
+    @filter_data_user ||= @filter_service.user_filter_data
+  end
+
+  def course_presenters
+    @course_presenters ||= CoursePresenter.new(courses, @namespace).render
   end
 end
