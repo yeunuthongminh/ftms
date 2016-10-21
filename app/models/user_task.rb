@@ -35,4 +35,9 @@ class UserTask < ApplicationRecord
   def subject_in_progress?
     user_subject.progress?
   end
+
+  def all_user_task_history
+    self.user_task_histories.select{|user_task_history|
+      user_task_history.created_at.to_date == Date.today.to_date}
+  end
 end

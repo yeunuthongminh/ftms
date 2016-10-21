@@ -176,6 +176,16 @@ class UserSubject < ApplicationRecord
     false
   end
 
+  def do_none_task?
+    none_task = true
+    self.user_tasks.each do |user_task|
+      if user_task.all_user_task_history.any?
+        return none_task = false
+      end
+    end
+    none_task
+  end
+
   private
   def create_user_tasks
     course_subject.tasks.each do |task|

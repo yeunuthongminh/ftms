@@ -36,6 +36,14 @@ class CourseSubject < ApplicationRecord
 
   ranks :row_order, with_same: :course_id
 
+  def finished?
+    status = true
+    self.user_subjects.each do |user_subject|
+      return status = false
+    end
+    status
+  end
+
   private
   def update_subject_course
     self.update_attributes subject_name: subject.name,
