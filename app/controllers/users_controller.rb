@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def load_user
-    @user = User.includes(:profile).find_by_id params[:id]
+    @user = User.includes(:profile).find_by id: params[:id]
     if @user.nil?
       flash[:alert] = flash_message "not_find"
       redirect_to root_path

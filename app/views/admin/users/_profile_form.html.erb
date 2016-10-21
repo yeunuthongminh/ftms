@@ -5,7 +5,7 @@
       <div class="col-md-9 form-group">
         <div class="col-md-8">
           <%= ff.label :location_id %>
-          <%= select_profile_field "location", @locations, ff %>
+          <%= select_profile_field "location", @supports.locations, ff %>
         </div>
         <%= link_to "#", data: {toggle: "modal",
           target: "#location-modal"} do %>
@@ -81,7 +81,7 @@
             <%= ff.label :user_type %>
           </div>
           <div class="col-md-7">
-            <%= select_profile_field "user_type", @user_types, ff %>
+            <%= select_profile_field "user_type", @supports.user_types, ff %>
           </div>
           <%= link_to "#", data: {toggle: "modal", target: "#usertype-modal"} do %>
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -92,7 +92,7 @@
             <%= ff.label :university %>
           </div>
           <div class="col-md-7">
-            <%= select_profile_field "university", @universities, ff %>
+            <%= select_profile_field "university", @supports.universities, ff %>
           </div>
           <%= link_to "#", data: {toggle: "modal", target: "#university-modal"} do %>
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -103,7 +103,7 @@
             <%= ff.label :programming_language %>
           </div>
           <div class="col-md-7">
-            <%= select_profile_field "programming_language", @programming_languages, ff %>
+            <%= select_profile_field "programming_language", @supports.programming_languages, ff %>
           </div>
         </div>
         <div class="row form-group">
@@ -111,7 +111,7 @@
             <%= ff.label :status %>
           </div>
           <div class="col-md-7">
-            <%= select_profile_field "status", @statuses, ff %>
+            <%= select_profile_field "status", @supports.statuses, ff %>
           </div>
         </div>
         <div class="row form-group">
