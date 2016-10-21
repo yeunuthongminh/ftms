@@ -1,13 +1,3 @@
 en:
   groups:
     title: "Groups"
-    button:
-      edit: "Save"
-      create: "Create"
-      new: "Create"
-      update: "Save"
-  breadcrumbs:
-    groups:
-      all: "All Groups"
-      new: "New"
-      edit: "Edit"

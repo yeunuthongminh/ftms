@@ -27,8 +27,8 @@ class UsersDatatable
         link_to(user.name, eval("@view.#{@namespace}_user_path(user)")),
         user.email,
         user.roles.map(&:name).join(", "),
-        link_to(@view.t("button.edit"), eval("@view.edit_#{@namespace}_user_path(user)"), class: "pull-right"),
-        link_to(@view.t("button.delete"), eval("@view.#{@namespace}_user_path(user)"),
+        link_to(@view.t("buttons.edit"), eval("@view.edit_#{@namespace}_user_path(user)"), class: "pull-right"),
+        link_to(@view.t("buttons.delete"), eval("@view.#{@namespace}_user_path(user)"),
           method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
           class: "text-danger pull-right")
       ]

@@ -42,6 +42,3 @@ en:
       trainee_name: "Trainee"
     duration: "%{duration} minutes"
     lock_for_create: "Sorry, you have been locked to create new exam for this subject"
-  breadcrumbs:
-    exams:
-      all: "All Exam"

@@ -1,0 +1,75 @@
+en:
+  breadcrumbs:
+    paths: "Paths"
+    courses:
+      all: "All Courses"
+      new: "New"
+      edit: "Edit"
+    subjects:
+      all: "All Subjects"
+      new: "New"
+      edit: "Edit"
+      new_task: "New Task"
+      task_masters: "Task Masters"
+    roles:
+      all: "All roles"
+      new: "New"
+      edit: "Edit"
+      allocate_permissions: "Allocate Permissions"
+    evaluation_templates:
+      all: "All Evaluation Templates"
+      new: "New"
+      edit: "Edit"
+    evaluations:
+      all: "All Evaluations"
+      new: "New"
+      edit: "Edit"
+    ranks:
+      all: "All Ranks"
+      new: "New"
+      edit: "Edit"
+    profiles:
+      all: "User Profiles"
+      edit: "Edit"
+    universities:
+      all: "All Universities"
+      new: "New"
+      edit: "Edit"
+    statuses:
+      all: "All Statuses"
+      new: "New"
+      edit: "Edit"
+    user_types:
+      all: "All Types"
+      new: "New"
+      edit: "Edit"
+    users:
+      all: "All User"
+      new: "New"
+      edit: "Edit"
+    locations:
+      all: "All Locations"
+      new: "New"
+      edit: "Edit"
+    feed_backs:
+      all: "All Feed Back"
+    dashboard:
+      all: "Dashboard"
+    organization_charts:
+      all: "Organization Chart"
+    training_managements:
+      all: "Training Management"
+    exams:
+      all: "All Exam"
+    groups:
+      all: "All Groups"
+      new: "New"
+      edit: "Edit"
+    projects:
+      all: "All Projects"
+      new: "New"
+      edit: "Edit"
+    questions:
+      all: "All Questions"
+      new: "New"
+      edit: "Edit"

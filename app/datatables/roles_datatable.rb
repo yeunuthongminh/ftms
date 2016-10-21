@@ -23,9 +23,9 @@ class RolesDatatable
       [
         index,
         link_to(role.name, eval("@view.edit_admin_role_allocate_permissions_path(role)")),
-        link_to(@view.t("button.edit"), eval("@view.edit_#{@namespace}_role_path(role)"),
+        link_to(@view.t("buttons.edit"), eval("@view.edit_#{@namespace}_role_path(role)"),
           class: "text-primary pull-right"),
-        link_to(@view.t("button.delete"), eval("@view.#{@namespace}_role_path(role)"),
+        link_to(@view.t("buttons.delete"), eval("@view.#{@namespace}_role_path(role)"),
           method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
           class: "text-danger pull-right")
       ]

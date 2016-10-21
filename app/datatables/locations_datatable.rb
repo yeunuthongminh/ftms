@@ -29,10 +29,10 @@ class LocationsDatatable
             Settings.image_size_20), eval("@view.#{@namespace}_user_path(manager)"),
             title: manager.name)
         end,
-        link_to(@view.t("button.edit"),
+        link_to(@view.t("buttons.edit"),
           eval("@view.edit_#{@namespace}_location_path(location)"),
           class: "text-primary pull-right"),
-        link_to(@view.t("button.delete"),
+        link_to(@view.t("buttons.delete"),
           eval("@view.#{@namespace}_location_path(location)"),
           method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
           class: "text-danger pull-right")

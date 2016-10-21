@@ -39,10 +39,10 @@
             <% end %>
           </div>
           <% if current_user.is_trainee? && @user_subject.progress? %>
-            <%= link_to t("button.finish"), "#",
+            <%= link_to t("buttons.finish"), "#",
               class: "btn btn-danger pull-right finish-subject" %>
           <% elsif @user_subject.subject.subject_detail && @user_subject.waiting? %>
-            <%= link_to t("button.do_exam"), "#",
+            <%= link_to t("buttons.do_exam"), "#",
               class: "btn btn-info pull-right finish-subject" %>
           <% end %>
         <% end %>

@@ -9,14 +9,14 @@
         <span class="name"><%= course.name %></span>
         <span class="pull-right">
           <% if course.init? %>
-            <%= link_to t("courses.buttons.admin.start"), admin_course_change_status_courses_path(course),
+            <%= link_to t("buttons.start"), admin_course_change_status_courses_path(course),
               method: :patch, class: "btn btn-info" %>
           <% elsif course.progress? %>
-            <%= link_to t("courses.buttons.admin.finish"),admin_course_change_status_courses_path(course),
+            <%= link_to t("buttons.finish"),admin_course_change_status_courses_path(course),
               method: :patch, class: "btn btn-success" %>
           <% elsif course.finish? %>
             <label class="btn btn-xs btn-danger">
-              <%= t "courses.buttons.admin.start.finished" %>
+              <%= t "buttons.finished" %>
             </label>
           <% end %>
         </span>

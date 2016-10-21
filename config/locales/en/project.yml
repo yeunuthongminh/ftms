@@ -2,13 +2,3 @@ en:
   projects:
     title: "Projects"
     add_requirement: "Add Requirement"
-    button:
-      edit: "Save"
-      create: "Create"
-      new: "Create"
-      update: "Save"
-  breadcrumbs:
-    projects:
-      all: "All Projects"
-      new: "New"
-      edit: "Edit"

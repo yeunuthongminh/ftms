@@ -20,3 +20,6 @@ en:
       confirm-title: "Finish confirm?"
       confirm_project: "Are you sure?"
       with_present: "Finish subject now"
+    init: "Init"
+    in_progress: "In progress"
+    finished: "Finished"
