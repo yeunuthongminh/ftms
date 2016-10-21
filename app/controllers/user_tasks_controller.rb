@@ -4,7 +4,7 @@ class UserTasksController < ApplicationController
   def update
     new_status = params[:status]
     @old_status = @user_task.status
-    user_task_service = UserTaskService.new user_task: @user_task,
+    user_task_service = MailerServices::UserTaskService.new user_task: @user_task,
       status: new_status
     if new_status == Settings.status.finished
       @user_task_history = user_task_service.perform
