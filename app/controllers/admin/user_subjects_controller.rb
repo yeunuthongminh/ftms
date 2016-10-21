@@ -25,13 +25,9 @@ class Admin::UserSubjectsController < ApplicationController
   end
 
   def load_data
-    @course_subject = CourseSubject.includes(:subject, :course, :tasks,
-      user_subjects: [:user, :course_subject, user_tasks: [:user, :task]])
-      .find params[:course_subject_id]
-    @course = @course_subject.course
-    @subject = @course_subject.subject
-    @user_subjects = @course_subject.user_subjects
-    @user_subjects_not_finishs = @user_subjects.not_finish @user_subjects.finish
+    @supports = Supports::UserSubject.new user_subject: @user_subject,
+      course_subject_id: params[:course_subject_id]
+    redirect_if_object_nil @supports.course_subject
   end
 
   def update_end_date_when_update_start_date
