@@ -6,7 +6,7 @@ class Trainer::AssignTraineesController < ApplicationController
     @supports = Supports::Course.new @course
 
     add_breadcrumb_path "courses"
-    add_breadcrumb @course.name, trainer_course_path @course
+    add_breadcrumb @course.name, trainer_course_path(@course)
     add_breadcrumb t "courses.assign_trainees"
   end
 
