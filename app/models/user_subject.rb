@@ -30,7 +30,7 @@ class UserSubject < ApplicationRecord
   accepts_nested_attributes_for :user_tasks
 
   delegate :name, to: :user, prefix: true, allow_nil: true
-  delegate :name, :description, to: :subject, prefix: true, allow_nil: true
+  delegate :name, :id, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
 
   enum status: [:init, :progress, :finish, :waiting, :request]
@@ -45,14 +45,18 @@ class UserSubject < ApplicationRecord
 
   class << self
     def update_all_status status, current_user, course_subject
-      load_users(statuses[:init]).update_all status: statuses[:progress],
-        start_date: Time.now,
-        end_date: Time.now + course_subject.subject_during_time.days
+      load_users(statuses[:init]).each do |user_subject|
+        user_subject.update_attributes status: statuses[:progress],
+          start_date: Time.now, current_progress: user_subject.in_progress?,
+          end_date: Time.now + course_subject.subject_during_time.days
+      end
       if status == "start"
         key = "user_subject.start_all_subject"
       else
-        load_users(statuses[:progress]).update_all status: statuses[:finish],
-          user_end_date: Time.now
+        load_users(statuses[:waiting, :progress]).each do |user_subject|
+          user_subject.update_attributes  status: statuses[:finish],
+          user_end_date: Time.now, current_progress: user_subject.in_progress?
+        end
         key = "user_subject.finish_all_subject"
       end
       course_subject.create_activity key: key,
@@ -63,7 +67,7 @@ class UserSubject < ApplicationRecord
   def update_status current_user, status
     if init?
       update_attributes status: :progress, start_date: Time.now,
-        end_date: during_time.business_days.from_now, current_progress: in_progress
+        end_date: during_time.business_days.from_now, current_progress: in_progress?
       key = "user_subject.start_subject"
       notification_key = Notification.keys[:start]
     else
@@ -85,7 +89,7 @@ class UserSubject < ApplicationRecord
         key = "user_subject.finish_subject"
         notification_key = Notification.keys[:finish]
       elsif status == Settings.subject_status.reopen
-        update_attributes status: :progress, user_end_date: nil, current_progress: in_progress
+        update_attributes status: :progress, user_end_date: nil, current_progress: in_progress?
         key = "user_subject.reopen_subject"
         notification_key = Notification.keys[:reopen]
       end
@@ -139,17 +143,20 @@ class UserSubject < ApplicationRecord
     end
   end
 
+  def create_user_task_if_create_task task
+    UserTask.create task: task, user: self.user, user_subject: self
+  end
+
+  def in_progress?
+    user.user_subjects.update_all current_progress: false
+    true
+  end
+
   private
   def create_user_tasks
     course_subject.tasks.each do |task|
       UserTask.find_or_create_by(user_subject_id: id,
         user_id: user_course.user_id, task_id: task.id)
     end
-  end
-
-  def in_progress
-    user_subjects = self.course_subject.user_subjects
-    return true if user_subjects.size == user_subjects.where(current_progress: false)
-    false
   end
 end

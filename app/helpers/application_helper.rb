@@ -78,7 +78,7 @@ module ApplicationHelper
       avatar_user_tag chat_room, "img-circle",
         Settings.image_size_40
     elsif chat_room.class.name == "Course"
-      image_course_tag chat_room, "img-circle",
+      image_course_tag chat_room, chat_room.programming_language_name,
         Settings.image_size_40
     end
   end
@@ -155,7 +155,7 @@ module ApplicationHelper
   end
 
   def class_body name
-    name == "static_pages" || name == "sessions" ?
+    name == "static_pages" || name == "sessions" || name == "passwords" ?
       "body_home" : "container body-wrapper-content"
   end
 
@@ -249,5 +249,13 @@ module ApplicationHelper
     else
       percent_of_questions
     end
+  end
+
+  def footer_not_show controller_name
+    controller_name == "sessions" || controller_name == "passwords"
+  end
+
+  def load_user_roles user
+    Role.joins(:users).where users: {id: user.id}
   end
 end

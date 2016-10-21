@@ -13,10 +13,15 @@
     <% end %>
   </td>
   <td>
-    <% if user_subject.progress? %>
+    <% if user_subject.finish? %>
+      <%= l user_subject.start_date, format: :default %>
+    <% elsif user_subject.progress? || user_subject.waiting? %>
       <div class="form-edit">
-        <%= form_for [:admin, @course_subject, user_subject], remote: true do |f| %>
-          <%= f.text_field :start_date, class: "date-edit datepicker", readonly: true %>
+        <%= form_for [:admin, @course_subject, user_subject],
+          remote: true do |f| %>
+          <%= f.text_field :start_date, value: user_subject.start_date ?
+            l(user_subject.start_date, format: :default) : "",
+            class: "date-edit datepicker", readonly: true %>
           <%= f.button :submit, class: "btn-save", hidden: true %>
         <% end %>
       </div>
@@ -24,15 +29,21 @@
   </td>
   <td>
     <% if user_subject.finish? %>
-      <%= user_subject.user_end_date %>
-    <% elsif user_subject.progress? %>
+      <%= l user_subject.end_date, format: :default %>
+    <% elsif user_subject.progress? || user_subject.waiting? %>
       <div class="form-edit">
-        <%= form_for [:admin, @course_subject, user_subject], remote: true do |f| %>
-          <%= f.text_field :end_date, class: "date-edit datepicker", readonly: true %>
+        <%= form_for [:admin, @course_subject, user_subject],
+          remote: true do |f| %>
+          <%= f.text_field :end_date, value: user_subject.end_date ?
+            l(user_subject.end_date, format: :default) : "",
+            class: "date-edit datepicker", readonly: true %>
           <%= f.button :submit, class: "btn-save", hidden: true %>
         <% end %>
       </div>
     <% end %>
+  </td>
+  <td>
+    <%= l(user_subject.user_end_date, format: :default) if user_subject.finish? %>
   </td>
   <td>
     <span class="label-status <%= set_background_color_status user_subject.status %>">

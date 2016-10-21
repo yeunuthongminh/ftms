@@ -19,7 +19,8 @@
           </a>
         <% end %>
 
-        <% unless @user_subjects.size == @user_subjects.finish.size %>
+        <% unless @user_subjects.size == @user_subjects.finish.size ||
+          @user_subjects.init.any? %>
           <a href="<%= admin_status_subject_path @course_subject, "finish" %>",
             data-method="patch",
             data-remote="true",

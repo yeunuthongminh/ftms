@@ -36,6 +36,6 @@ class Trainer::UserSubjectsController < ApplicationController
 
   def update_end_date_when_update_start_date
     @user_subject.update_attributes end_date:
-      @user_subject.during_time.business_days.after(@user_subject.start_date) 
+      (@user_subject.during_time - 1).business_days.after(@user_subject.start_date)
   end
 end
