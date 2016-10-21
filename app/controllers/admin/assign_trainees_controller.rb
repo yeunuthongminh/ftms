@@ -25,7 +25,7 @@ class Admin::AssignTraineesController < ApplicationController
   end
 
   def find_course
-    @course = Course.includes(user_courses: :user).find_by_id params[:course_id]
+    @course = Course.includes(user_courses: :user).find_by id: params[:course_id]
     if @course.nil?
       flash[:alert] = flash_message "not_find"
       redirect_to admin_courses_path

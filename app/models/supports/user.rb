@@ -32,7 +32,24 @@ class Supports::User
     @note ||= Note.new
   end
 
-  def notes
-    @notes ||= Note.load_notes @user, current_user
+  def managers
+    @managers ||= User.not_trainees
+  end
+
+  def trainers
+    @trainers ||= User.trainers.includes :profile
+  end
+
+  %w(roles universities programming_languages statuses user_types locations)
+    .each do |objects|
+    define_method objects do
+      instance_variable_set "@#{objects}", objects.classify.constantize.all
+    end
+  end
+
+  %w(location university user_type).each do |object|
+    define_method object do
+      instance_variable_set "@#{object}", object.classify.constantize.new
+    end
   end
 end
