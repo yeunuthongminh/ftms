@@ -13,6 +13,8 @@ class Location < ApplicationRecord
 
   delegate :name, to: :manager, prefix: true, allow_nil: true
 
+  ATTRIBUTE_PARAMS = [:name, :user_id]
+
   private
   def update_user_location
     manager_profile = Profile.find_or_initialize_by user_id: manager.id
