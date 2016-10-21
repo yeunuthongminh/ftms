@@ -5,6 +5,7 @@ class Admin::SubjectsController < ApplicationController
   skip_load_resource only: [:edit, :update]
   before_action :find_subject_in_edit, only: [:edit, :update]
   before_action :load_data, only: :show
+  before_action :load_subject_detail, only: [:new, :edit]
 
   def index
     @subject = Subject.new
@@ -25,7 +26,6 @@ class Admin::SubjectsController < ApplicationController
   def new
     @subject.documents.build
     @subject.task_masters.build
-    @subject.build_subject_detail percent_of_questions: Settings.exams.percent_question.to_s
     add_breadcrumb_path "subjects"
     add_breadcrumb_new "subjects"
   end
@@ -83,5 +83,11 @@ class Admin::SubjectsController < ApplicationController
     @supports = Supports::Subject.new subject: @subject,
       course_id: params[:course_id]
     redirect_if_object_nil @supports.course
+  end
+
+  def load_subject_detail
+    if @subject.subject_detail.nil?
+      @subject.build_subject_detail percent_of_questions: Settings.exams.percent_question.to_s
+    end
   end
 end

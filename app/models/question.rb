@@ -11,7 +11,6 @@ class Question < ApplicationRecord
   has_many :exams, through: :results
 
   validates :content, presence: true
-  validate :check_answers
 
   scope :random, ->count, level{where(level: level).order("RAND()").limit(count)}
 
