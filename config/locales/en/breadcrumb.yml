@@ -73,3 +73,5 @@ en:
       all: "All Questions"
       new: "New"
       edit: "Edit"
+    statistics:
+      all: "Statistics"

@@ -1,0 +1,4 @@
+<% if params[:type] == "trainee_types" %>
+  $('#trainee-types-statistic').attr("data-trainee-types", "<%= @statistics.trainee_types %>");
+  load_trainee_types_statistic_chart();
+<% end %>

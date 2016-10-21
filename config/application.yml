@@ -112,6 +112,11 @@ defaults: &defaults
     init: "init"
     finished: "finished"
     continue: "continue"
+  statistics:
+    - locations
+    - trainee_types
+    - universities
+    - programming_languages
 development:
   <<: *defaults
   neat_setting: 800

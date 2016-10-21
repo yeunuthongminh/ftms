@@ -1,0 +1,22 @@
+en:
+  statistics:
+    titles:
+      locations: "Locations"
+      trainee_types: "Trainees type"
+      universities: "Universities"
+      programming_languages: "Programming languages"
+    user_types:
+      title: "Total trainees by type"
+      serie_name: "Trainees"
+    universities:
+      title: "Total trainees by universities"
+      serie_name: "Trainees"
+    programming_languages:
+      title: "Total trainees by languages"
+      serie_name: "Trainees"
+    locations:
+      title: "Total trainees by locations"
+      serie_name: "Total trainees"
+      y_asis: "Trainees (persons)"
+      surfix: "persons"
+

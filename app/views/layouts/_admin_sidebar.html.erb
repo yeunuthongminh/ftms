@@ -124,6 +124,23 @@
             </li>
           </ul>
         </li>
+        <li id="statistics-header" class="treeview">
+          <a href="javascript:void(0)">
+            <i class="fa fa-sitemap" aria-hidden="true"></i>
+            <span><%= t "layouts.statistics" %></span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <% Settings.statistics.each do |type| %>
+              <li>
+                <%= link_to admin_statistics_path(type: type) do %>
+                  <i class="fa fa-circle-o" aria-hidden="true"></i>
+                  <span><%= t "statistics.titles.#{type}" %></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
         <li id="exams-header" class="treeview">
           <a href="javascript:void(0)">
             <i class="fa fa-book"></i><span><%= t "layouts.exams" %></span>
