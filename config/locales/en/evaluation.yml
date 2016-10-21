@@ -9,11 +9,6 @@ en:
         current_rank: "Current Rank"
         name: "Name"
         total_point: Total Point
-  evaluation_template:
-    buttons:
-      new: "New"
-      create: "Create"
-      update: "Update"
   layouts:
     evaluation_template: "Evaluation Templates"
     paths: "Paths"

@@ -87,7 +87,7 @@ class TrainingManagementPresenter < ActionView::Base
         #{user.notes.any? ? user.notes.last.name : ""}
       </div>"
     html += "<div class=\"tcell action\">
-      #{link_to t("button.edit"), eval("edit_#{@namespace}_user_path(user)")}
+      #{link_to t("buttons.edit"), eval("edit_#{@namespace}_user_path(user)")}
       </div></div>"
   end
 end

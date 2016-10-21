@@ -1,10 +1,5 @@
 en:
   locations:
-    buttons:
-      admin:
-        new: "New"
-      trainer:
-        new: "New"
     form:
       input_location_name: "Enter location name..."
     name: "Name"

@@ -9,9 +9,9 @@ var datetime_options = {
 };
 
 var btn_group = '<div class="btn-datepk" style="display: inline;">'
-  + '<button class="btn btn-success btn-save">' + I18n.t("button.save")
+  + '<button class="btn btn-success btn-save">' + I18n.t("buttons.save")
   + '</button>' + '<button class="btn btn-danger btn-cancel" style="float: right;">'
-  + I18n.t("button.cancel") + '</button></div>';
+  + I18n.t("buttons.cancel") + '</button></div>';
 
 $(document).on('turbolinks:load ajaxComplete', function() {
   var select_date;

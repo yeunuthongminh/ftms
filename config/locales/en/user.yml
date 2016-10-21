@@ -1,7 +1,5 @@
 en:
   user:
-    buttons:
-      new: New
     role: Role
     login: "Log in"
     edit_profile: "Edit profile"
@@ -40,9 +38,3 @@ en:
     banner: "Please Login"
     remember: "Remember me"
   member: "Member"
-  buttons:
-    submit: "Update profile"
-    save: "Save"
-    new: "New"
-    cancel: "Cancel"
-    create_and_continue: "Create and continue"

@@ -23,9 +23,9 @@ class UniversitiesDatatable
       [
         index,
         university.name,
-        link_to(@view.t("button.edit"), eval("@view.edit_#{@namespace}_university_path(university)"),
+        link_to(@view.t("buttons.edit"), eval("@view.edit_#{@namespace}_university_path(university)"),
           class: "text-primary pull-right"),
-        link_to(@view.t("button.delete"), eval("@view.#{@namespace}_university_path(university)"),
+        link_to(@view.t("buttons.delete"), eval("@view.#{@namespace}_university_path(university)"),
           method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
           class: "text-danger pull-right")
       ]

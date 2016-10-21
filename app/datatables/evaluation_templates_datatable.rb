@@ -25,10 +25,10 @@ class EvaluationTemplatesDatatable
         evaluation_template.name,
         evaluation_template.min_point,
         evaluation_template.max_point,
-        link_to(@view.t("button.edit"),
+        link_to(@view.t("buttons.edit"),
           eval("@view.edit_#{@namespace}_evaluation_template_path(evaluation_template)"),
           class: "text-primary pull-right"),
-        link_to(@view.t("button.delete"),
+        link_to(@view.t("buttons.delete"),
           eval("@view.#{@namespace}_evaluation_template_path(evaluation_template)"),
           method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
           class: "text-danger pull-right")

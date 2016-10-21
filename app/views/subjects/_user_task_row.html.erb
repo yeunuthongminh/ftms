@@ -15,13 +15,13 @@
     <div class="action text-center" hidden>
       <% if user_task.in_progress? %>
         <div class="action-status">
-          <%= link_to t("button.continue"), user_task_path(user_task,
+          <%= link_to t("buttons.continue"), user_task_path(user_task,
             status: "continue"),
             method: :patch, remote: true,
             data: {confirm: t("messages.continue.confirm")},
             class: "btn btn-finished btn-continue-task" %>
 
-          <%= link_to t("button.finish"), user_task_path(user_task,
+          <%= link_to t("buttons.finish"), user_task_path(user_task,
             status: "finished"),
             method: :patch,
             remote: true, data: {confirm: t("messages.delete.confirm")},
@@ -29,11 +29,11 @@
         </div>
       <% end %>
       <% if user_task.nil_master? %>
-        <%= link_to t("button.edit"), "#", data: {toggle: "modal",
+        <%= link_to t("buttons.edit"), "#", data: {toggle: "modal",
           target: "#user-task-#{user_task.id}"},
           title: t("subjects.task.update") %> |
 
-        <%= link_to t("button.delete"), user_task.task, method: :delete,
+        <%= link_to t("buttons.delete"), user_task.task, method: :delete,
           data: {confirm: t("messages.delete.confirm")} %>
       <% end %>
     </div>

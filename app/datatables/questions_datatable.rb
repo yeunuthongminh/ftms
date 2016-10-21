@@ -27,10 +27,10 @@ class QuestionsDatatable
         I18n.t("questions.level.#{question.level}"),
         link_to(question.subject_name,
           eval("@view.#{@namespace}_subject_task_masters_path(question.subject)")),
-        link_to(@view.t("button.edit"),
+        link_to(@view.t("buttons.edit"),
           eval("@view.edit_#{@namespace}_question_path(question)"),
           class: "pull-right"),
-        link_to(@view.t("button.delete"),
+        link_to(@view.t("buttons.delete"),
           eval("@view.#{@namespace}_question_path(question)"),
           method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
           class: "text-danger pull-right")

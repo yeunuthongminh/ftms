@@ -1,6 +1,6 @@
 <div id="statuses" class="profile-active">
   <p class="pull-right">
-    <%= link_to t("button.new"), new_trainer_status_path, class: "btn btn-success" %>
+    <%= link_to t("buttons.new"), new_trainer_status_path, class: "btn btn-success" %>
   </p>
 
   <table class="table table-striped tbl-status">
@@ -16,11 +16,11 @@
             <td><%= index %></td>
             <td><%= status.name %></td>
             <td class="action">
-              <%= link_to t("button.edit"), edit_trainer_status_path(status),
+              <%= link_to t("buttons.edit"), edit_trainer_status_path(status),
                 class: "text-primary" %> &nbsp;
             </td>
             <td>
-              <%= link_to t("button.delete"), trainer_status_path(status),
+              <%= link_to t("buttons.delete"), trainer_status_path(status),
                 method: :delete, data: {confirm: t("messages.delete.confirm")},
                 class: "text-danger" %>
             </td>

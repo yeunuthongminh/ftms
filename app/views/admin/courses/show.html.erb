@@ -38,14 +38,14 @@
                     data-method="patch",
                     data-confirm="<%= t "courses.confirms.confirm_finish" %>">
                     <i class="fa fa-minus-square-o" aria-hidden="true"></i>
-                    <%= t "courses.buttons.admin.finish" %>
+                    <%= t "buttons.finish" %>
                   </a>
                 <% elsif @course.finish? %>
                   <a href="<%= admin_course_change_status_courses_path @course %>",
                     data-method="patch",
                     data-confirm="<%= t "courses.confirms.confirm_reopen" %>">
                     <i class="fa fa-retweet" aria-hidden="true"></i>
-                    <%= t "courses.buttons.admin.reopen" %>
+                    <%= t "buttons.reopen" %>
                   </a>
                 <% end %>
               </li>
@@ -54,13 +54,13 @@
                   data-method="post",
                   data-confirm="<%= t "courses.confirms.confirm_clone" %>">
                   <i class="fa fa-clone" aria-hidden="true"></i>
-                  <%= t "button.clone" %>
+                  <%= t "buttons.clone" %>
                 </a>
               </li>
               <li>
                 <a  href="<%= edit_admin_course_path %>">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
-                  <%= t "courses.buttons.admin.edit" %>
+                  <%= t "buttons.edit" %>
                 </a>
               </li>
               <li>
@@ -68,7 +68,7 @@
                   data-method="delete",
                   data-confirm="<%= t "messages.delete.confirm" %>">
                   <i class="fa fa-trash" aria-hidden="true"></i>
-                  <%= t "button.delete" %>
+                  <%= t "buttons.delete" %>
                 </a>
               </li>
             </ul>
@@ -129,7 +129,7 @@
             </div>
             <div class="col-xs-6">
               <%= link_to edit_admin_group_path(group),
-                title: t("button.edit") do %>
+                title: t("buttons.edit") do %>
                 <i class="fa fa-edit"></i>
               <% end %>
             </div>
