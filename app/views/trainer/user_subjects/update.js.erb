@@ -3,6 +3,6 @@
     replaceWith("<%= j render @user_subject %>");
 <% else %>
   $(".action").html("<%= j render "shared/action_user_subjects" %>");
-  $(".user-lists").html("<%= j render "trainer/subjects/user_lists" %>");
+  $(".user-lists").replaceWith("<%= j render "trainer/subjects/user_lists" %>");
 <% end %>
 $(".flash").html("<%= j render "shared/flash_banner" %>");

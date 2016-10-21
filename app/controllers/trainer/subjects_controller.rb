@@ -4,7 +4,7 @@ class Trainer::SubjectsController < ApplicationController
   skip_load_resource :course, only: :show
   skip_load_resource only: [:edit, :update]
   before_action :find_subject_in_edit, only: :edit
-  before_action :find_course_in_show, only: :show
+  before_action :load_data, only: :show
 
   def index
     @subject = Subject.new
@@ -17,16 +17,9 @@ class Trainer::SubjectsController < ApplicationController
   end
 
   def show
-    @course_subject = @course.course_subjects.find do |course_subject|
-      course_subject.subject_id == @subject.id
-    end
-    @user_subjects = @course_subject.user_subjects
-    @user_subjects_not_finishs = @user_subjects.not_finish @user_subjects.finish
-
     add_breadcrumb_path "courses"
-    add_breadcrumb @course.name, trainer_course_path(@course)
-    add_breadcrumb @course_subject.subject_name
-    load_chart_data
+    add_breadcrumb @supports.course.name, trainer_course_path(@supports.course)
+    add_breadcrumb @supports.course_subject.subject_name
   end
 
   def new
@@ -85,20 +78,9 @@ class Trainer::SubjectsController < ApplicationController
     redirect_if_object_nil @subject
   end
 
-  def find_course_in_show
-    @course = Course.includes(course_subjects: [user_subjects: :user])
-      .find_by_id params[:course_id]
-    redirect_if_object_nil @course
-  end
-
-  def load_chart_data
-    if @user_subjects.any?
-      @user_tasks_chart_data = {}
-
-      @user_subjects.each do |user_subject|
-        @user_tasks_chart_data[user_subject.user.name] = user_subject
-          .user_tasks.finished.size
-      end
-    end
+  def load_data
+    @supports = Supports::Subject.new subject: @subject,
+      course_id: params[:course_id]
+    redirect_if_object_nil @supports.course
   end
 end

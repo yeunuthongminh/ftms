@@ -3,11 +3,11 @@
     <%= link_to user_subject.user_name,
       [:trainer, user_subject.user] %>
     <% if user_subject.finish? %>
-      <%= link_to [:trainer, @course_subject, user_subject],
+      <%= link_to [:trainer, @supports.course_subject, user_subject],
         data: {method: :patch, remote: true,
         confirm: t("messages.delete.confirm")},
         class: "btn-reopen pull-right",
-        title: t("admin.actions.show_subject.reopen") do %>
+        title: t("buttons.reopen") do %>
         <i><%= image_tag "reopen.png", class: "reopen-img img-circle" %></i>
       <% end %>
     <% end %>
@@ -17,7 +17,7 @@
       <%= l user_subject.start_date, format: :default %>
     <% elsif user_subject.progress? || user_subject.waiting? %>
       <div class="form-edit">
-        <%= form_for [:trainer, @course_subject, user_subject],
+        <%= form_for [:trainer, @supports.course_subject, user_subject],
           remote: true do |f| %>
           <%= f.text_field :start_date, value: user_subject.start_date ?
             l(user_subject.start_date, format: :default) : "",
@@ -32,7 +32,7 @@
       <%= l user_subject.end_date, format: :default %>
     <% elsif user_subject.progress? || user_subject.waiting? %>
       <div class="form-edit">
-        <%= form_for [:trainer, @course_subject, user_subject],
+        <%= form_for [:trainer, @supports.course_subject, user_subject],
           remote: true do |f| %>
           <%= f.text_field :end_date, value: user_subject.end_date ?
             l(user_subject.end_date, format: :default) : "",
@@ -46,7 +46,8 @@
     <%= l(user_subject.user_end_date, format: :default) if user_subject.finish? %>
   </td>
   <td>
-    <span class="label-status <%= set_background_color_status user_subject.status %>">
+    <span class="label-status
+      <%= set_background_color_status user_subject.status %>">
       <%= t "courses.labels.status.#{user_subject.status}" %>
     </span>
   </td>
@@ -55,31 +56,30 @@
         status: user_subject.status %>
   </td>
   <td class="action">
-    <% if @course.progress? %>
+    <% if @supports.course.progress? %>
       <% if user_subject.init? %>
-        <%= link_to t("admin.actions.show_subject.start"),
-          [:trainer, @course_subject, user_subject], data: {method: :patch,
+        <%= link_to t("trainer.actions.show_subject.start"),
+          [:trainer, @supports.course_subject, user_subject],
+          data: {method: :patch,
           remote: true, confirm: t("messages.delete.confirm")},
           class: "btn btn-primary btn-status" %>
       <% elsif user_subject.progress? %>
-        <%= link_to t("admin.actions.show_subject.finish"),
-          [:trainer, @course_subject, user_subject], data: {method: :patch,
+        <%= link_to t("trainer.actions.show_subject.finish"),
+          [:trainer, @supports.course_subject, user_subject],
+          data: {method: :patch,
           remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-danger btn-finish btn-status" %>
+          class: "btn btn-success btn-finish btn-status" %>
       <% elsif user_subject.waiting? %>
-        <%= link_to t("admin.actions.show_subject.finish"),
-          [:trainer, @course_subject, user_subject], data: {method: :patch,
+        <%= link_to t("trainer.actions.show_subject.finish"),
+          [:trainer, @supports.course_subject, user_subject],
+          data: {method: :patch,
           remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-danger btn-finish btn-status" %>
-        <%= link_to t("admin.actions.show_subject.reject"),
-          [:trainer, @course_subject, user_subject], data: {method: :patch,
+          class: "btn btn-warning btn-finish btn-status" %>
+        <%= link_to t("trainer.actions.show_subject.reject"),
+          [:trainer, @supports.course_subject, user_subject],
+          data: {method: :patch,
           remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-warning btn-reject btn-status" %>
-      <% elsif user_subject.finish? %>
-        <%= link_to t("admin.actions.show_subject.reopen"),
-          [:trainer, @course_subject, user_subject], data: {method: :patch,
-          remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-success btn-reopen btn-status" %>
+          class: "btn btn-danger btn-reject btn-status" %>
       <% end %>
     <% end %>
   </td>
