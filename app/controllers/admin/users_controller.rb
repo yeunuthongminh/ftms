@@ -11,7 +11,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       format.html {add_breadcrumb_index "users"}
       format.json {
-        render json: UsersDatatable.new(view_context, @namespace)
+        render json: UsersDatatable.new view_context, @namespace
       }
     end
   end
@@ -21,10 +21,9 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
-    if @user.save
-      UserSendMailService.new(@user).send_welcome_mail
+    user_send_mail_service = MailerServices::UserSendMailService.new user: @user
+    if @user.save && user_send_mail_service.perform?
       flash[:success] = flash_message "created"
-
       if params[:commit].present?
         redirect_to admin_users_path
       else
@@ -93,7 +92,7 @@ class Admin::UsersController < ApplicationController
 
   def load_breadcrumb_edit
     add_breadcrumb_path "users"
-    add_breadcrumb @user.name, admin_user_path(@user)
+    add_breadcrumb @user.name, admin_user_path @user
     add_breadcrumb_edit "users"
   end
 

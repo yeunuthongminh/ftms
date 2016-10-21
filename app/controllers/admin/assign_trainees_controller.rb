@@ -5,13 +5,13 @@ class Admin::AssignTraineesController < ApplicationController
   def edit
     @supports = Supports::Course.new @course
     add_breadcrumb_path "courses"
-    add_breadcrumb @course.name, admin_course_path(@course)
+    add_breadcrumb @course.name, admin_course_path @course
     add_breadcrumb t "courses.assign_trainees"
   end
 
   def update
-    if params[:course] && @course.update_attributes(course_params)
-      ExpectedTrainingDateService.new(@course).expected_training_end_date
+    if params[:course] && @course.update_attributes course_params
+      ExpectedTrainingDateService.new(course: @course).perform
       flash[:success] = flash_message "updated"
     else
       flash[:danger] = flash_message "not_updated"

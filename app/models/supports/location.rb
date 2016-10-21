@@ -6,10 +6,10 @@ class Supports::Location
   end
 
   def manager
-    @manager = @location.manager
+    @manager ||= @location.manager
   end
 
   def trainers
-    @trainers = User.trainers.includes(:trainees).by_location @location.id
+    @trainers ||= User.trainers.includes(:trainees).by_location @location.id
   end
 end

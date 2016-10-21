@@ -7,15 +7,15 @@ class Supports::Dashboard
   end
 
   def new_users_in_day
-    @new_users = load_data User.created_between(@start_date, @end_date)
+    @new_users ||= load_data User.created_between(@start_date, @end_date)
   end
 
   def new_courses_in_day
-    @new_courses = load_data Course.created_between(@start_date, @end_date)
+    @new_courses ||= load_data Course.created_between(@start_date, @end_date)
   end
 
   def finished_courses_in_day
-    @finished_courses = load_data Course.finished_between(@start_date, @end_date)
+    @finished_courses ||= load_data Course.finished_between(@start_date, @end_date)
   end
 
   private
