@@ -258,4 +258,10 @@ module ApplicationHelper
   def load_user_roles user
     Role.joins(:users).where users: {id: user.id}
   end
+
+  def set_background_answer answer, result
+    if answer == result.answer && !answer.is_correct?
+      "style=background-color:red;"
+    end
+  end
 end

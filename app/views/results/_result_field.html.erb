@@ -1,7 +1,7 @@
 <li>
   <div class="question-title"><%= result.object.question.content %></div>
   <% result.object.question.answers.each do |answer| %>
-    <label class="question-content">
+    <label class="question-content" <%= set_background_answer answer, result.object %>>
       <%= result.radio_button :answer_id, answer.id,
         checked: answer == result.object.answer, disabled: disabled %>
       <span><%= answer.content %></span><br>

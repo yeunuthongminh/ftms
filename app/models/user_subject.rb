@@ -95,15 +95,18 @@ class UserSubject < ApplicationRecord
       end
     end
 
-    create_activity key: key, owner: current_user, recipient: user if key
-
-    if is_of_user? current_user && (self.progress? || self.finish?)
-      CourseNotificationBroadCastJob.perform_now course: course,
-        key: notification_key, user_id: current_user.id,
-        user_subject: self
-    else
-      UserSubjectNotificationBroadCastJob.perform_now user_subject: self,
-        key: notification_key, user_id: current_user.id
+    if changed?
+      create_activity key: key, owner: current_user, recipient: user if key
+      if notification_key
+        if is_of_user? current_user && (self.progress? || self.finish?)
+          CourseNotificationBroadCastJob.perform_now course: course,
+            key: notification_key, user_id: current_user.id,
+            user_subject: self
+        else
+          UserSubjectNotificationBroadCastJob.perform_now user_subject: self,
+            key: notification_key, user_id: current_user.id
+        end
+      end
     end
   end
 
@@ -153,6 +156,24 @@ class UserSubject < ApplicationRecord
   def in_progress?
     user.user_subjects.update_all current_progress: false
     true
+  end
+
+  def locked?
+    return true if exams.not_finished.size > 0 || lock_for_create_exam?
+
+    recent_exams = exams.finished.order("created_at DESC")
+      .limit(Settings.exams.max_recent_exams).pluck(:created_at).reverse
+    return false if recent_exams.size < Settings.exams.max_recent_exams
+
+    duration = subject.subject_detail_time_of_exam.minutes.to_i
+    current_time = (Time.zone.now - recent_exams.first).to_i
+    if current_time < duration*4
+      update_attributes lock_for_create_exam: true
+      ResetPermissionExamJob.set(wait: Settings.exams.time_for_lock.hours)
+        .perform_later self
+      return true
+    end
+    false
   end
 
   private
