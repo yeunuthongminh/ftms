@@ -89,6 +89,7 @@ en:
     training_schedule: "Training schedule"
     training_management: "Training management"
     project_trainings: "Project trainings"
+    statistics: "Statistic"
     exams: "Exams"
     questions: "Questions"
     footer:
