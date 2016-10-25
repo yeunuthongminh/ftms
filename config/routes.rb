@@ -50,7 +50,6 @@ Rails.application.routes.draw do
     resources :projects
     resources :filter_datas, only: [:index, :create]
     resources :questions, except: :show
-    resources :groups, except: [:index, :show]
     resources :exams, only: :index
     resources :statistics, only: [:index, :create]
   end

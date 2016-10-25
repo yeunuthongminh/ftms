@@ -180,38 +180,6 @@ ActiveRecord::Schema.define(version: 20161014084210) do
     t.index ["user_id"], name: "index_filters_on_user_id", using: :btree
   end
 
-  create_table "group_projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "group_id"
-    t.integer  "project_id"
-    t.string   "link_github"
-    t.string   "link_redmine"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_group_projects_on_deleted_at", using: :btree
-    t.index ["group_id"], name: "index_group_projects_on_group_id", using: :btree
-    t.index ["project_id"], name: "index_group_projects_on_project_id", using: :btree
-  end
-
-  create_table "group_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_group_users_on_deleted_at", using: :btree
-    t.index ["group_id"], name: "index_group_users_on_group_id", using: :btree
-    t.index ["user_id"], name: "index_group_users_on_user_id", using: :btree
-  end
-
-  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_groups_on_deleted_at", using: :btree
-  end
-
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -577,10 +545,6 @@ ActiveRecord::Schema.define(version: 20161014084210) do
   add_foreign_key "evaluations", "users"
   add_foreign_key "feed_backs", "users"
   add_foreign_key "filters", "users"
-  add_foreign_key "group_projects", "groups"
-  add_foreign_key "group_projects", "projects"
-  add_foreign_key "group_users", "groups"
-  add_foreign_key "group_users", "users"
   add_foreign_key "locations", "users"
   add_foreign_key "messages", "users"
   add_foreign_key "notes", "evaluations"

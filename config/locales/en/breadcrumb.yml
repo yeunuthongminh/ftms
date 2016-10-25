@@ -61,10 +61,6 @@ en:
       all: "Training Management"
     exams:
       all: "All Exam"
-    groups:
-      all: "All Groups"
-      new: "New"
-      edit: "Edit"
     projects:
       all: "All Projects"
       new: "New"

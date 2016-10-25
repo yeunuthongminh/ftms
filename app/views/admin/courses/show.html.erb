@@ -114,28 +114,6 @@
           <% end %>
         <% end %>
       </ul>
-      <h2 class="label"><%= t "groups.title" %>
-        <%= link_to new_admin_group_path do %>&nbsp;
-          <i class="fa fa-plus"></i>
-        <% end %>
-      </h2>
-      <ul>
-        <% @supports.groups.each do |group| %>
-          <li class="label-user">
-            <div class="col-xs-6">
-              <%= link_to [:admin, group], title: group.name do %>
-                <%= group.name %>
-              <% end %>
-            </div>
-            <div class="col-xs-6">
-              <%= link_to edit_admin_group_path(group),
-                title: t("buttons.edit") do %>
-                <i class="fa fa-edit"></i>
-              <% end %>
-            </div>
-          </li>
-        <% end %>
-      </ul>
     </div>
   </div>
 </div>
