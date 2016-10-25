@@ -40,14 +40,6 @@ en:
     update: "Update"
   signins:
     banner: "Login"
-  status:
-    start: "start"
-    progress: "progress"
-    finished: "finished"
-    testing: "testing"
-    init: "init"
-    pass: "Pass"
-    fail: "Fail"
   datetime: &datetime
     formats:
       default: "%Y/%m/%d"
@@ -178,3 +170,7 @@ en:
       quick_search: "Quick Search"
     show:
       blank: "Blank"
+  notices:
+    attention: "Attention!!!"
+    change_status:
+      user_subject: "Are you sure want to switch status to "

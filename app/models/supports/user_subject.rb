@@ -25,4 +25,8 @@ class Supports::UserSubject
   def user_subjects_not_finishs
     @user_subjects_not_finishs = user_subjects.not_finish user_subjects.finish
   end
+
+  def statuses
+    @statuses ||= UserSubject.statuses
+  end
 end

@@ -15,7 +15,9 @@ class UserSubject < ApplicationRecord
 
   after_create :create_user_tasks
 
-  scope :load_user_subject, ->(user_id, course_id){where "user_id = ? AND course_id = ?", user_id, course_id}
+  scope :load_user_subject, ->user_id, course_id do
+    where "user_id = ? AND course_id = ?", user_id, course_id
+  end
   scope :load_users, ->status {where status: status}
   scope :not_finish, -> user_subjects {where.not(id: user_subjects)}
   scope :sort_by_course_subject, ->{joins(:course_subject).order("course_subjects.order asc")}
@@ -33,15 +35,7 @@ class UserSubject < ApplicationRecord
   delegate :name, :id, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
 
-  enum status: [:init, :progress, :finish, :waiting, :request]
-
-  def load_trainers
-    course.users.trainers
-  end
-
-  def load_trainees
-    course.users.trainees
-  end
+  enum status: [:init, :progress, :waiting, :finish]
 
   class << self
     def update_all_status status, current_user, course_subject
@@ -64,54 +58,22 @@ class UserSubject < ApplicationRecord
     end
   end
 
-  def update_status current_user, status
-    if init?
-      update_attributes status: :progress, start_date: Time.now,
-        end_date: during_time.business_days.from_now, current_progress: in_progress?
-      key = "user_subject.start_subject"
-      notification_key = Notification.keys[:start]
-    else
-      if is_of_user? current_user
-        if waiting? && status == Settings.subject_status.finish
-          update_attributes status: :finish, user_end_date: Time.now
-          key = "user_subject.finish_exam"
-          notification_key = Notification.keys[:finish]
-        elsif progress?
-          update_attributes status: :waiting
-          key = "user_subject.do_exam_subject"
-        end
-      elsif status == Settings.subject_status.reject
-        update_attributes status: :waiting
-        key = "user_subject.reject_finish_subject"
-        notification_key = Notification.keys[:reject]
-      elsif status == Settings.subject_status.finish
-        update_attributes status: :finish, user_end_date: Time.now
-        key = "user_subject.finish_subject"
-        notification_key = Notification.keys[:finish]
-      elsif status == Settings.subject_status.reopen
-        update_attributes status: :progress, user_end_date: nil, current_progress: in_progress?
-        key = "user_subject.reopen_subject"
-        notification_key = Notification.keys[:reopen]
-      end
-    end
+  def load_trainers
+    course.users.trainers
+  end
 
-    if changed?
-      create_activity key: key, owner: current_user, recipient: user if key
-      if notification_key
-        if is_of_user? current_user && (self.progress? || self.finish?)
-          CourseNotificationBroadCastJob.perform_now course: course,
-            key: notification_key, user_id: current_user.id,
-            user_subject: self
-        else
-          UserSubjectNotificationBroadCastJob.perform_now user_subject: self,
-            key: notification_key, user_id: current_user.id
-        end
-      end
-    end
+  def load_trainees
+    course.users.trainees
+  end
+
+  def update_status current_user, status
+    row = status_before_type_cast
+    column = UserSubject.statuses[status]
+    update_info status: status, row: row, column: column
   end
 
   def subject
-    self.course_subject.subject
+    course_subject.subject
   end
 
   def name
@@ -130,8 +92,8 @@ class UserSubject < ApplicationRecord
     course_subject.image_url
   end
 
-  def is_of_user? user
-    self.user == user
+  def is_of_user? user_param
+    user == user_param
   end
 
   def percent_progress
@@ -150,12 +112,21 @@ class UserSubject < ApplicationRecord
   end
 
   def create_user_task_if_create_task task
-    UserTask.create task: task, user: self.user, user_subject: self
+    user_tasks.create task: task, user: user
   end
 
-  def in_progress?
+  def in_progress
     user.user_subjects.update_all current_progress: false
     true
+  end
+
+  def check_current_progress
+    user_subject = user.user_subjects.where(status: [:progress, :waiting])
+      .order("updated_at DESC").first
+    user_subject ||= user.user_subjects.where(status: :finish)
+      .order("updated_at DESC").first
+    user_subject.update_attributes(current_progress: true) if user_subject
+    false
   end
 
   def locked?
@@ -167,6 +138,7 @@ class UserSubject < ApplicationRecord
 
     duration = subject.subject_detail_time_of_exam.minutes.to_i
     current_time = (Time.zone.now - recent_exams.first).to_i
+
     if current_time < duration*4
       update_attributes lock_for_create_exam: true
       ResetPermissionExamJob.set(wait: Settings.exams.time_for_lock.hours)
@@ -178,7 +150,7 @@ class UserSubject < ApplicationRecord
 
   def do_none_task?
     none_task = true
-    self.user_tasks.each do |user_task|
+    user_tasks.each do |user_task|
       if user_task.all_user_task_history.any?
         return none_task = false
       end
@@ -186,11 +158,42 @@ class UserSubject < ApplicationRecord
     none_task
   end
 
+  def plan_end_date
+    (course_subject.subject_during_time - 1).business_days.after Time.now
+  end
+
   private
   def create_user_tasks
     course_subject.tasks.each do |task|
       UserTask.find_or_create_by(user_subject_id: id,
         user_id: user_course.user_id, task_id: task.id)
+    end
+  end
+
+  def update_info args
+    arr = [
+      [[], [0,2,1,3], [0,2,1,3], [0,0,0,3]],
+      [[4,4,4,3], [], [1,1,1,1], [1,1,0,1]],
+      [[4,4,4,3], [1,1,1,1], [], [1,1,0,1]],
+      [[4,4,4,3], [1,1,4,3], [1,1,4,3], []]]
+    actions = ["Time.now", "", "plan_end_date", "in_progress", "nil"]
+    values = arr[args[:row]][args[:column]]
+
+    if values
+      if args[:row] == 0
+        actions.map {|e| e == "in_progress" ? "check_current_progress" : e}
+      end
+
+      columns = %w(start_date end_date user_end_date current_progress)
+      params = {status: args[:status]}
+
+      values.each_with_index do |key, index|
+        unless actions[key].blank?
+          params[columns[index]] = eval(actions[key]).to_s
+        end
+      end
+      user_subject_params = ActionController::Parameters.new params
+      update_attributes user_subject_params
     end
   end
 end
