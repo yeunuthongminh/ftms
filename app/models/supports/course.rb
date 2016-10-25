@@ -43,10 +43,6 @@ class Supports::Course
     end
   end
 
-  def groups
-    @groups ||= Group.group_of_user_in_course @course.id
-  end
-
   def subjects
     @subjects ||= Subject.all
   end

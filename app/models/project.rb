@@ -5,8 +5,6 @@ class Project < ApplicationRecord
     :_destroy]]
 
   has_many :project_requirements, dependent: :destroy
-  has_many :group_projects, dependent: :destroy
-  has_many :groups, through: :destroy
 
   validates :name, presence: true
 
