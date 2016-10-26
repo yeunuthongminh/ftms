@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014084210) do
+ActiveRecord::Schema.define(version: 20161026043404) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -257,6 +257,7 @@ ActiveRecord::Schema.define(version: 20161014084210) do
     t.integer  "location_id"
     t.decimal  "working_day",             precision: 2, scale: 1
     t.datetime "deleted_at"
+    t.integer  "stage_id"
     t.index ["deleted_at"], name: "index_profiles_on_deleted_at", using: :btree
     t.index ["location_id"], name: "index_profiles_on_location_id", using: :btree
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -272,23 +273,13 @@ ActiveRecord::Schema.define(version: 20161014084210) do
 
   create_table "project_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "project_id"
-    t.integer  "project_stage_id"
     t.string   "name"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "priority"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_project_requirements_on_deleted_at", using: :btree
     t.index ["project_id"], name: "index_project_requirements_on_project_id", using: :btree
-    t.index ["project_stage_id"], name: "index_project_requirements_on_project_stage_id", using: :btree
-  end
-
-  create_table "project_stages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_project_stages_on_deleted_at", using: :btree
   end
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -349,6 +340,10 @@ ActiveRecord::Schema.define(version: 20161014084210) do
     t.integer  "role_type"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_roles_on_deleted_at", using: :btree
+  end
+
+  create_table "stages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
   end
 
   create_table "statuses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -553,7 +548,6 @@ ActiveRecord::Schema.define(version: 20161014084210) do
   add_foreign_key "permissions", "roles"
   add_foreign_key "profiles", "locations"
   add_foreign_key "profiles", "users"
-  add_foreign_key "project_requirements", "project_stages"
   add_foreign_key "project_requirements", "projects"
   add_foreign_key "task_masters", "subjects"
   add_foreign_key "tasks", "course_subjects", on_delete: :cascade

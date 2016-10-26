@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     resources :questions, except: :show
     resources :exams, only: :index
     resources :statistics, only: [:index, :create]
+    resources :stages
   end
 
   namespace :trainer do
