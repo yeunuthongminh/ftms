@@ -43,10 +43,6 @@ class SubjectsController < ApplicationController
     @user_course = @user_subject.user_course
   end
 
-  def load_subject
-    @subject = Subject.find params[:id]
-  end
-
   def check_status
     redirect_to :back unless params[:status] == Settings.finish
   end
