@@ -97,8 +97,8 @@ ActiveRecord::Schema.define(version: 20161026043404) do
   end
 
   create_table "documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.string   "content"
+    t.string   "title"
+    t.string   "document_link"
     t.integer  "documentable_id"
     t.string   "documentable_type"
     t.datetime "created_at",                      null: false

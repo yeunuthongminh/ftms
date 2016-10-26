@@ -9,7 +9,7 @@ class Course < ApplicationRecord
   COURSE_ATTRIBUTES_PARAMS = [:name, :image, :description,
     :programming_language_id, :location_id,
     :start_date, :end_date, documents_attributes:
-    [:id, :name, :content, :description, :_destroy], subject_ids: []]
+    [:id, :title, :document_link, :description, :_destroy], subject_ids: []]
 
   belongs_to :programming_language
   belongs_to :location
