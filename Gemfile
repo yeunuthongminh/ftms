@@ -41,6 +41,7 @@ gem "exception_notification"
 gem "business_time"
 gem "paranoia", github: "rubysherpas/paranoia", branch: "rails5"
 gem "jquery-countdown-rails"
+gem "pundit"
 
 group :development, :test do
   gem "fabrication"

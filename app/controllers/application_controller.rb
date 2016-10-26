@@ -1,4 +1,9 @@
 class ApplicationController < ActionController::Base
+  include Pundit
+  include ApplicationHelper
+  include PublicActivity::StoreController
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!, :set_locale, except: :home
@@ -7,23 +12,12 @@ class ApplicationController < ActionController::Base
   before_action :get_namespace
   before_action :set_root_path
 
-  include ApplicationHelper
-  include PublicActivity::StoreController
-
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = exception.message
-    redirect_to get_root_path
-  end
 
   def default_url_options options = {}
     {locale: I18n.locale}
   end
 
   protected
-  def current_ability
-    @current_ability ||= Ability.new current_user, @namespace
-  end
-
   def after_sign_in_path_for resource
     get_root_path
   end
@@ -31,6 +25,11 @@ class ApplicationController < ActionController::Base
   private
   rescue_from ActiveRecord::RecordNotFound do
     flash[:alert] = flash_message "record_not_found"
+    redirect_to root_url
+  end
+
+  def user_not_authorized
+    flash[:alert] = t "error.not_authorize"
     redirect_to root_url
   end
 
