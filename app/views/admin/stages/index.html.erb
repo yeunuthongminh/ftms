@@ -1,0 +1,27 @@
+<div>
+  <table class="table table-striped tbl-programming_language">
+    <thead>
+      <tr>
+        <th class="name"><%= t "table.thead.name" %></th>
+        <th class="action"><%= t "table.thread.action" %></th>
+        <th>
+          <%= link_to t("buttons.new"), new_admin_stage_path,
+            class: "btn btn-success pull-right" %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @stages.each do |stage| %>
+        <tr>
+          <td class="name"><%= stage.name %></td>
+          <td class="action">
+            <%= link_to t("buttons.edit"), edit_admin_stage_path(stage) %>&nbsp;
+            <%= link_to t("buttons.delete"), admin_stage_path(stage),
+              method: :delete, data: {confirm: t("messages.delete.confirm")}
+              %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
