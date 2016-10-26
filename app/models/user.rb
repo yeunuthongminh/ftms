@@ -21,6 +21,9 @@ class User < ApplicationRecord
     :password_confirmation, :avatar, :trainer_id, role_ids: [],
     profile_attributes: ATTRIBUTES_PROFILE_PARAMS]
 
+  USER_ATTRIBUTES_PARAMS = [:name, :password, :password_confirmation, :avatar,
+    profile_attributes: [:working_day, :graduation, :university]]
+
   attr_accessor :current_role
 
   belongs_to :trainer, class_name: User.name, foreign_key: :trainer_id
