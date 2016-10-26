@@ -17,6 +17,14 @@ class ApplicationController < ActionController::Base
     {locale: I18n.locale}
   end
 
+  def load_user
+    @user = User.includes(:profile).find_by id: params[:id]
+    if @user.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to root_path
+    end
+  end
+
   protected
   def after_sign_in_path_for resource
     get_root_path
