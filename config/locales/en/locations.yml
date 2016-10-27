@@ -4,3 +4,6 @@ en:
       input_location_name: "Enter location name..."
     name: "Name"
     manager: "Manager"
+    panel:
+      new: "New Location"
+      edit: "Edit Location"

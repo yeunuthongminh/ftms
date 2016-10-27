@@ -2,13 +2,18 @@
   <div class="row">
     <%= render "shared/error_messages", object: @role %>
     <div class="col-md-12">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control", required: true %>
-      <%= f.select :role_type, Role.role_types.keys, {}, class: "form-control" %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :role_type %>
+        <%= f.select :role_type, Role.role_types.keys, {}, class: "form-control btn-success" %>
+      </div>
       <br>
-      <div class="pull-right">
+      <div class="form-group">
         <%= f.submit (f.object.new_record? ? t("buttons.create")
-          : t("buttons.update")), class: "btn btn-primary" %>
+          : t("buttons.update")), class: "btn btn-primary col-md-6 col-md-offset-3" %>
       </div>
     </div>
   </div>
