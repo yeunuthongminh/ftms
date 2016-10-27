@@ -33,6 +33,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def load_task
+    @task = Task.find_by id: params[:id]
+    if @task.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to root_path
+    end
+  end
+
+  def load_user_task
+    @user_task = UserTask.find_by id: params[:id]
+    if @user_task.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to root_path
+    end
+  end
+
   def load_user_subject
     @user_subject = UserSubject.find_by id: params[:id]
     if @user_subject.nil?
