@@ -25,6 +25,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def load_subject
+    @subject = Subject.find_by id: params[:id]
+    if @subject.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to root_path
+    end
+  end
+
+  def load_user_subject
+    @user_subject = UserSubject.find_by id: params[:id]
+    if @user_subject.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to root_path
+    end
+  end
+
   protected
   def after_sign_in_path_for resource
     get_root_path
