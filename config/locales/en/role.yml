@@ -4,3 +4,6 @@ en:
       thread:
         name: "Name"
     select_all: "Select All"
+    panel:
+      new: "New Role"
+      edit: "Edit Role"

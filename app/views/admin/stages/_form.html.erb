@@ -1,12 +1,13 @@
 <%= form_for [:admin, @stage] do |f| %>
-  <div class="row">
-    <%= render "shared/error_messages", object: @stage %>
-    <div class="col-md-6">
+  <%= render "shared/error_messages", object: @stage %>
+  <div>
+    <div class="form-group">
       <%= f.label :name %>
       <%= f.text_field :name, class: "form-control", required: true %>
-
+    </div>
+    <div class="form-group">
       <%= f.submit (f.object.new_record? ? t("buttons.create") : t("buttons.update")),
-        class: "btn btn-primary pull-right" %>
+        class: "btn btn-primary col-md-4 col-md-offset-4" %>
     </div>
   </div>
 <% end %>
