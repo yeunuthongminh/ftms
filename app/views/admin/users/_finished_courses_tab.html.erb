@@ -7,8 +7,7 @@
     <% else %>
       <p class="text text-danger">
         <%= t "user.titles.none_finished_course",
-          user_name: current_user?(@user) ? t("user.titles.me") :
-          @user.name %>
+          user_name: current_user?(@user) ? t("user.titles.me") : @user.name %>
       </p>
     <% end %>
   </ul>

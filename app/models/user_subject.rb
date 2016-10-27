@@ -69,7 +69,7 @@ class UserSubject < ApplicationRecord
   def update_status current_user, status
     row = status_before_type_cast
     column = UserSubject.statuses[status]
-    update_info status: status, row: row, column: column
+    update_info status: status, row: row, column: column, current_user: current_user
   end
 
   def subject
@@ -194,6 +194,11 @@ class UserSubject < ApplicationRecord
       end
       user_subject_params = ActionController::Parameters.new params
       update_attributes user_subject_params
+      key = "user_subject.change_status"
+      old_status = UserSubject.statuses.key args[:row]
+      new_status = UserSubject.statuses.key args[:column]
+      parameters = {old_status: old_status, new_status: new_status}
+      create_activity key: key, owner: args[:current_user], recipient: user, parameters: parameters
     end
   end
 end

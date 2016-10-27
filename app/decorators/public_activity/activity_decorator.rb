@@ -2,8 +2,7 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
   delegate_all
 
   def owner_name
-    path = h.current_user.is_trainee? ? owner : [:admin, owner]
-    h.link_to owner.name, path
+    h.link_to owner.name, path(owner)
   end
 
   def verb
@@ -14,26 +13,14 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
       I18n.t "activity.start_course"
     when "course.reopen_course"
       I18n.t "activity.reopen_course"
-    when "user_subject.start_subject"
-      I18n.t "activity.start_subject"
-    when "user_subject.finish_subject"
-      I18n.t "activity.finish_subject"
-    when "user_subject.request_subject"
-      I18n.t "activity.request_subject"
-    when "user_subject.reject_finish_subject"
-      I18n.t "activity.reject_subject"
-    when "user_subject.reopen_subject"
-      I18n.t "activity.reopen_subject"
     when "user_subject.start_all_subject"
       I18n.t "activity.start_all_subject"
     when "user_subject.finish_all_subject"
       I18n.t "activity.finish_all_subject"
-    when "user_subject.finish_exam"
-      I18n.t "activity.finish_exam"
     when "user_task.change_status"
-      I18n.t "activity.change_status"
-    when "user_subject.do_exam_subject"
-      I18n.t "activity.do_exam_subject"
+      I18n.t "activity.change_status_user_task"
+    when "user_subject.change_status"
+      I18n.t "activity.change_status_user_subject"
     else
       key
     end
@@ -58,7 +45,10 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
     case key
     when "user_task.change_status"
       "from #{I18n.t("user_tasks.statuses.#{parameters[:old_status]}")} to
-        #{I18n.t("user_tasks.statuses.#{parameters[:new_status]}")}"
+        #{I18n.t("user_tasks.statuses.#{parameters[:new_status]}")}."
+    when "user_subject.change_status"
+      "from #{I18n.t("user_subjects.statuses.#{parameters[:old_status]}")} to
+        #{I18n.t("user_subjects.statuses.#{parameters[:new_status]}")} for "
     else
       ""
     end
@@ -66,9 +56,8 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
 
   def recipient_name
     case key
-    when "user_subject.start_subject", "user_subject.finish_subject"
-      path = h.current_user.is_trainee? ? recipient : [:admin, recipient]
-      h.link_to recipient.name, path
+    when "user_subject.change_status"
+      h.link_to recipient.name, path(recipient)
     when "user_subject.start_all_subject", "user_subject.finish_all_subject"
       "#{trackable.subject_name}, #{recipient.name}"
     else
@@ -80,12 +69,20 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
     case key
     when "course.finish_course", "course.start_course", "course.reopen_course"
       trackable.name
-    when "user_subject.start_subject", "user_subject.finish_subject", "user_subject.finish_exam"
-      "#{trackable.subject_name}"
+    when "user_subject.change_status"
+      trackable.subject_name
     when "user_task.change_status"
       trackable.task_name
     else
       ""
+    end
+  end
+
+  def path user
+    if h.current_user.is_trainee? && h.namespace == Settings.namespace_roles.trainee
+      user
+    else
+      [h.namespace, user]
     end
   end
 end

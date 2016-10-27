@@ -264,4 +264,8 @@ module ApplicationHelper
       "style=background-color:red;"
     end
   end
+
+  def namespace
+    @namespace
+  end
 end
