@@ -25,7 +25,7 @@ class Supports::Subject
       @user_tasks_chart_data = {}
 
       user_subjects.each do |user_subject|
-        @user_tasks_chart_data[user_subject.user.name] = user_subject
+        @user_tasks_chart_data[user_subject.user_name] = user_subject
           .user_tasks.finished.size
       end
       @user_tasks_chart_data
@@ -35,5 +35,9 @@ class Supports::Subject
   def course
     @course ||= Course.includes(course_subjects: :user_subjects)
       .find_by id: @course_id
+  end
+
+  def statuses
+    @statuses ||= UserSubject.statuses
   end
 end

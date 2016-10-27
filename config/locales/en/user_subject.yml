@@ -1,10 +1,10 @@
 en:
   user_subjects:
     statuses:
-      init: "New"
+      init: "Init"
       progress: "Progress"
       finish: "Finish"
-      waiting: "Waiting finish"
+      waiting: "Waiting"
     labels:
       days: "days"
     chart:

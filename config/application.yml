@@ -88,7 +88,7 @@ defaults: &defaults
   subject_status:
     init: "init"
     progress: "progress"
-    reject: "reject"
+    waiting: "waiting"
     finish: "finish"
     reopen: "reopen"
   working_day:

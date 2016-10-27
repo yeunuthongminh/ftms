@@ -665,3 +665,55 @@ textarea {
   right: 46px;
   display: none;
 }
+
+.modal {
+  text-align: center;
+  border-radius: 10px;
+
+  .modal-footer {
+    text-align: center !important;
+    .btn {
+      margin: 0 10px;
+    }
+  }
+
+  .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .modal-content {
+    font-size: 18px;
+    .btn {
+      font-size: 18px;
+    }
+  }
+
+  .modal-header {
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+   }
+
+  .modal-body {
+    padding-left: 15px;
+  }
+
+  .dangerous {
+    background-color: red;
+  }
+
+  .label-dialog-status {
+    font-weight: bold;
+    border-radius: 2px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}

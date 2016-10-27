@@ -112,3 +112,28 @@
 .dialog {
   display: none;
 }
+
+.stt-finish {
+  background-color: rgba(100,100,100,0.7);
+}
+
+.stt-init {
+  background-color: rgba(104, 159, 56, 0.7);
+}
+
+.stt-progress {
+  background-color: rgba(33, 150, 243, 0.7);
+}
+
+.stt-request {
+  background-color: rgba(244, 81, 30, 0.7);
+}
+
+.stt-waiting {
+  background-color: rgba(255, 145, 0, 0.7);
+}
+
+.stt-user-subject {
+  height: 25px;
+  width: 90%;
+}

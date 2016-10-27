@@ -7,3 +7,11 @@ en:
     panel:
       new: "New Status"
       edit: "Edit Status"
+  status:
+    start: "start"
+    progress: "progress"
+    finished: "finished"
+    testing: "testing"
+    init: "init"
+    pass: "Pass"
+    fail: "Fail"

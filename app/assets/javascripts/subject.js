@@ -101,9 +101,13 @@ function setbutton() {
 
 $(document).on('turbolinks:load', function() {
   var tbl_subject = $('#subjects');
+
+  ajax_update_status();
+
   if (tbl_subject.length > 0) {
     set_datatable(tbl_subject, [0, 2]);
   }
+
   load_chart();
   setbutton();
 });
@@ -116,3 +120,51 @@ $(document).on('ajaxComplete', function(){
   }
 });
 
+function set_class_select_status(select_status) {
+  var color = $('option:selected', $(select_status)).attr('class');
+  $(select_status).attr('class', color + " stt-user-subject");
+}
+
+function ajax_update_status() {
+  var select_status = $('.stt-user-subject');
+
+  select_status.each(function() {
+    set_class_select_status(this);
+  });
+
+  select_status.change(function() {
+    status = $('option:selected', this).text().toLowerCase();
+    str = "<div class='modal' id='confirm-dialog' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='static' data-keyboard='false'><div class='modal-dialog modal-lg' role='document'><div class='modal-content'><div class='modal-header dangerous'><h4 class='modal-title' id='myModalLabel'>"+I18n.t("notices.attention")+"</h4> </div> <div class='modal-body'>"+I18n.t("notices.change_status.user_subject")+"<span class='label-dialog-status'>&nbsp;"+status+"&nbsp;</span></div> <div class='modal-footer'> <button type='button' class='btn btn-danger' id='submit-update-status'>"+I18n.t("buttons.update_status")+"</button><button type='button' id='cancel-update-status' class='btn btn-secondary' data-dismiss='modal'>"+I18n.t("buttons.cancel")+"</button></div></div></div></div>";
+    html = $.parseHTML(str);
+    $('#user-subject').after(html);
+
+    var text_color = $('option:selected', this).attr('class');
+    $('.label-dialog-status').attr('class', text_color + " label-dialog-status")
+    $('#confirm-dialog').modal('show');
+    element = this;
+
+    $('#cancel-update-status').click(element, function() {
+      reset_select_status(element);
+    });
+
+    $('#submit-update-status').click(element, function() {
+      $.ajax({
+        method: 'PATCH',
+        url: $(element).data('id'),
+        data: {status: $(element).val()},
+        complete: function() {
+          $('#confirm-dialog').modal('hide');
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          reset_select_status(element);
+        }
+      });
+    });
+  });
+
+  function reset_select_status(element) {
+    $('option', element).prop('selected', function() {
+      return this.defaultSelected;
+    });
+  }
+}

@@ -11,7 +11,7 @@ class Admin::UserSubjectsController < ApplicationController
         flash.now[:danger] = flash_message "not_updated"
       end
     else
-      @user_subject.update_status current_user, params["status"]
+      @user_subject.update_status current_user, status
     end
     load_data
     respond_to do |format|
@@ -33,5 +33,9 @@ class Admin::UserSubjectsController < ApplicationController
   def update_end_date_when_update_start_date
     @user_subject.update_attributes end_date:
       (@user_subject.during_time - 1).business_days.after(@user_subject.start_date)
+  end
+
+  def status
+    UserSubject.statuses.key params[:status].to_i
   end
 end
