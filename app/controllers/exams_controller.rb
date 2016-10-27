@@ -1,34 +1,42 @@
 class ExamsController < ApplicationController
   before_action :find_exam, only: [:show, :update]
-  authorize_resource only: [:show, :update]
   before_action :load_exams, only: :index
 
   def index
+    redirect_to root_path unless authorize @exams || @exams.any?
   end
 
   def show
-    check_status
+    if authorize @exam
+      check_status
+    else
+      redirect_to root_path
+    end
   end
 
   def update
-    if @exam.update_attributes exam_params
-      user_subject = @exam.user_subject
-      if params["finish"].nil?
-        flash[:notice] = t "exams.saved"
-        @exam.update_attributes status: :testing, spent_time: spent_time
-        redirect_to [user_subject.user_course, user_subject.subject]
-      else
-        flash[:success] = t "exams.finished"
-        @exam.update_attributes status: :finish, spent_time: spent_time
-        point = ExamServices::CalculatePointService.new(@exam).perform
-        unless point < user_subject.subject.subject_detail_min_score_to_pass
-          user_subject.update_status current_user, "finish"
+    if authorize @exam
+      if @exam.update_attributes exam_params
+        user_subject = @exam.user_subject
+        if params["finish"].nil?
+          flash[:notice] = t "exams.saved"
+          @exam.update_attributes status: :testing, spent_time: spent_time
+          redirect_to [user_subject.user_course, user_subject.subject]
+        else
+          flash[:success] = t "exams.finished"
+          @exam.update_attributes status: :finish, spent_time: spent_time
+          point = ExamServices::CalculatePointService.new(@exam).perform
+          unless point < user_subject.subject.subject_detail_min_score_to_pass
+            user_subject.update_status current_user, "finish"
+          end
+          redirect_to exams_path
         end
-        redirect_to exams_path
+      else
+        flash[:danger] = t "exams.update_fail"
+        redirect_to [@exam.user_subject.user_course, @exam.user_subject.subject]
       end
     else
-      flash[:danger] = t "exams.update_fail"
-      redirect_to [@exam.user_subject.user_course, @exam.user_subject.subject]
+      redirect_to root_path
     end
   end
 
