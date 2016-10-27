@@ -22,7 +22,8 @@
     </ul>
   <% else %>
     <p class="text text-danger">
-      <%= t "user.titles.not_learn_any_course" %>
+      <%= t "user.titles.not_learn_any_course",
+        user_name: current_user?(@user) ? t("user.titles.me") : @user.name %>
     </p>
   <% end %>
 </div>
