@@ -1,11 +1,11 @@
 <div class="row document-field">
   <div class="col-md-6">
-    <%= f.text_field :name, placeholder: t("courses.document_name"),
+    <%= f.text_field :title, placeholder: t("courses.document_name"),
       class: "form-control" %>
   </div>
   <div class="col-md-5">
-    <%= link_to f.object.name, f.object.content.url, target: "_blank" if f.object.name %>
-    <%= f.file_field :content %><br>
+    <%= link_to f.object.title, f.object.document_link.url, target: "_blank" if f.object.title %>
+    <%= f.file_field :document_link %><br>
   </div>
   <div class="col-md-1">
     <%= link_to_remove_fields t("courses.document_remove"), f %>

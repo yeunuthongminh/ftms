@@ -4,7 +4,7 @@ class Subject < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   SUBJECT_ATTRIBUTES_PARAMS = [:name, :description, :content, :image, :during_time,
-    documents_attributes: [:id, :name, :content, :_destroy],
+    documents_attributes: [:id, :title, :document_link, :_destroy],
     task_masters_attributes: [:id, :name, :description, :_destroy],
     subject_detail_attributes: [:id, :number_of_question, :time_of_exam,
     :min_score_to_pass, :percent_of_questions, :_destroy]]
