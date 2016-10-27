@@ -46,7 +46,8 @@
  *= require user_courses
  *= require footer
  *= require subject
- #= require table_config
+ *= require table_config
+ *= require statistic
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require chat_layout
  *= require admin/organization_charts

@@ -268,4 +268,8 @@ module ApplicationHelper
   def namespace
     @namespace
   end
+
+  def checked? params, type, object_id
+    !params.has_key?(type) || params[type].include?(object_id)
+  end
 end

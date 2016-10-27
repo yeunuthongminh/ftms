@@ -19,4 +19,10 @@ en:
       serie_name: "Total trainees"
       y_asis: "Trainees (persons)"
       surfix: "persons"
-
+    total_trainees:
+      title: "Total trainees"
+      headers:
+        trainee_type: "Trainee type"
+        language: "Language"
+        stage: "Stage"
+        location: "Location"

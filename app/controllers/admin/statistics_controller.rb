@@ -1,16 +1,19 @@
 class Admin::StatisticsController < ApplicationController
   load_and_authorize_resource class: false
   skip_load_resource only: :create
-  before_action :load_locations
+
+  include FilterData
+
+  before_action :load_locations, only: :index
+  before_action :load_statistic_view
+  before_action :load_filter, only: :index
 
   def index
     add_breadcrumb_index "statistics"
-    @statistics = Supports::Statistic.new
+    @filter_data_user = @filter_service.user_filter_data
   end
 
   def create
-    locations = @locations.where id: params[:location_ids]
-    @statistics = Supports::Statistic.new locations: locations
     respond_to do |format|
       format.js
     end
@@ -19,5 +22,12 @@ class Admin::StatisticsController < ApplicationController
   private
   def load_locations
     @locations = Location.includes profiles: :user_type
+  end
+
+  def load_statistic_view
+    @statistics = Supports::Statistic.new location_ids: (params[:location_ids] || Location.all.map(&:id)),
+      start_date: (params[:start_date] || Date.today.beginning_of_year),
+      end_date: (params[:end_date] || Date.today),
+      stage_ids: (params[:stage_ids] || Stage.all.map(&:id))
   end
 end
