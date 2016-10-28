@@ -4,6 +4,12 @@
       <div class="row form-group">
       <div class="col-md-9 form-group">
         <div class="col-md-8">
+          <%= ff.label :staff_code %>
+          <%= ff.text_field :staff_code, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-9 form-group">
+        <div class="col-md-8">
           <%= ff.label :location_id %>
           <%= select_profile_field "location", @supports.locations, ff %>
         </div>
@@ -13,6 +19,16 @@
         <% end %>
       </div>
       <div class="col-md-6 profile-form">
+        <div class="row form-group">
+          <div class="col-md-4">
+            <%= ff.label :join_div_date %>
+          </div>
+          <div class="col-md-7">
+            <%= ff.text_field :join_div_date, value: @user.profile.join_div_date ?
+              l(@user.profile.join_div_date, format: :default) : "",
+              class: "form-control datepicker profile" %>
+          </div>
+        </div>
         <div class="row form-group">
           <div class="col-md-4">
             <%= ff.label :start_training_date %>
@@ -63,16 +79,6 @@
               "", class: "form-control graduation profile" %>
           </div>
         </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :working_day %>
-          </div>
-          <div class="col-md-7">
-            <%= ff.number_field :working_day, step: Settings.working_day.step,
-              min: Settings.working_day.min, max: Settings.working_day.max,
-              class: "form-control profile"%>
-          </div>
-        </div>
       </div>
 
       <div class="col-md-6 profile-form">
@@ -112,6 +118,16 @@
           </div>
           <div class="col-md-7">
             <%= select_profile_field "status", @supports.statuses, ff %>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-4">
+            <%= ff.label :working_day %>
+          </div>
+          <div class="col-md-7">
+            <%= ff.number_field :working_day, step: Settings.working_day.step,
+              min: Settings.working_day.min, max: Settings.working_day.max,
+              class: "form-control profile"%>
           </div>
         </div>
         <div class="row form-group">
