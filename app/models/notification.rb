@@ -6,5 +6,7 @@ class Notification < ApplicationRecord
 
   has_many :user_notifications, dependent: :destroy
 
-  enum key: [:start, :finish, :reopen, :request, :reject]
+  delegate :name, to: :user, prefix: true, allow_nil: true
+
+  enum key: [:change_status_up, :change_status_down]
 end

@@ -194,11 +194,18 @@ class UserSubject < ApplicationRecord
       end
       user_subject_params = ActionController::Parameters.new params
       update_attributes user_subject_params
-      key = "user_subject.change_status"
+
+      activity_key = "user_subject.change_status"
       old_status = UserSubject.statuses.key args[:row]
       new_status = UserSubject.statuses.key args[:column]
       parameters = {old_status: old_status, new_status: new_status}
-      create_activity key: key, owner: args[:current_user], recipient: user, parameters: parameters
+      create_activity key: activity_key, owner: args[:current_user], recipient: user, parameters: parameters
+      user_ids = [args[:current_user].id, user_id]
+
+      notification_key = args[:row] > args[:column] ? :change_status_down : :change_status_up
+      Notifications::UserSubjectNotificationBroadCastJob.perform_now user_subject: self,
+        user: args[:current_user], user_ids: user_ids, key: notification_key,
+        parameters: new_status
     end
   end
 end

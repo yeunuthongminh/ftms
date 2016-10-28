@@ -11,7 +11,7 @@ en:
     start: "start"
     progress: "progress"
     finished: "finished"
-    testing: "testing"
+    waiting: "waiting"
     init: "init"
     pass: "Pass"
     fail: "Fail"

@@ -38,7 +38,7 @@ class User < ApplicationRecord
   has_one :evaluation, dependent: :destroy
   has_many :trainees, class_name: User.name, foreign_key: :trainer_id
   has_many :notes, dependent: :destroy
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
   has_many :user_notifications, dependent: :destroy
   has_many :senders, class_name: Conversation.name, foreign_key: :sender_id,
     dependent: :destroy
