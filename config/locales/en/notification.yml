@@ -1,6 +1,8 @@
 en:
   notifications:
     keys:
+      change_status_up: "has been change status of %{data} to "
+      change_status_down: "has been change status of %{data} back to "
       start: "%{data} has started"
       finish: "%{data} has finished"
       reopen: "%{data} has reopened"

@@ -3,13 +3,14 @@ module NotificationHelper
     trackable = notification.trackable
 
     if trackable.class.name == "Course"
-      data = "Course: #{trackable.name}"
+      data = "Course: #{trackable.name}: "
     elsif trackable.class.name == "UserSubject"
-      data = "Subject : #{trackable.course_subject.subject_name}"
-    end
 
-    content = t "notifications.keys.#{notification.key}", data: data
-    content << t("user_subjects.notifications.user", user: notification.user.name) if notification.key == "finish"
+      content = t("layouts.subject") << notification.user_name
+      content << t("notifications.keys.#{notification.key}",
+        data: notification.trackable.course_subject.subject_name)
+      content << notification.parameters
+    end
     content
   end
 
