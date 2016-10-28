@@ -111,6 +111,9 @@
           <div class="col-md-7">
             <%= select_profile_field "programming_language", @supports.programming_languages, ff %>
           </div>
+          <%= link_to "#", data: {toggle: "modal", target: "#programminglanguage-modal"} do %>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          <% end %>
         </div>
         <div class="row form-group">
           <div class="col-md-4">
@@ -119,6 +122,9 @@
           <div class="col-md-7">
             <%= select_profile_field "status", @supports.statuses, ff %>
           </div>
+          <%= link_to "#", data: {toggle: "modal", target: "#status-modal"} do %>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          <% end %>
         </div>
         <div class="row form-group">
           <div class="col-md-4">

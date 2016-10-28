@@ -6,12 +6,15 @@ class Admin::ProgrammingLanguagesController < ApplicationController
   end
 
   def create
-    if @programming_language.save
-      flash[:success] = flash_message "created"
-      redirect_to admin_programming_languages_path
-    else
-      flash[:failed] = flash_message "not_created"
-      render :new
+    respond_to do |format|
+      if @programming_language.save
+        flash.now[:success] = flash_message "created"
+        format.html{redirect_to admin_programming_languages_path}
+      else
+        flash.now[:failed] = flash_message "not_created"
+        format.html{render :new}
+      end
+      format.js
     end
   end
 

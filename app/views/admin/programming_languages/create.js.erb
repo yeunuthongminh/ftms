@@ -1,0 +1,10 @@
+<% if @programming_language.errors.any? %>
+  $(".errors").html("<%= j render "shared/error_messages", object: @programming_language %>");
+<% else %>
+  $("#user_profile_attributes_programming_language_id").append($("<option></option>")
+    .attr("value", <%= @programming_language.id %>)
+    .text("<%= @programming_language.name %>")
+    .prop("selected", true));
+  $("#programminglanguage-modal").modal("hide");
+  $(".flash").html("<%= j render "layouts/flash" %>");
+<% end %>
