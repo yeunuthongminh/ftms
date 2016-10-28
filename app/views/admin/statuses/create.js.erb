@@ -1,0 +1,10 @@
+<% if @status.errors.any? %>
+  $(".errors").html("<%= j render "shared/error_messages", object: @status %>");
+<% else %>
+  $("#user_profile_attributes_status_id").append($("<option></option>")
+    .attr("value", <%= @status.id %>)
+    .text("<%= @status.name %>")
+    .prop("selected", true));
+  $("#status-modal").modal("hide");
+  $(".flash").html("<%= j render "layouts/flash" %>");
+<% end %>

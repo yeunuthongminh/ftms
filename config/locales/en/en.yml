@@ -142,6 +142,8 @@ en:
     university: "Enter university name..."
     usertype: "Enter type name..."
     location: "Enter location name..."
+    programminglanguage: "Enter programming language name..."
+    status: "Enter status name..."
   mail:
     by_day:
       user_name: "%{user_name}"

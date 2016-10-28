@@ -47,7 +47,7 @@ class Supports::User
     end
   end
 
-  %w(location university user_type).each do |object|
+  %w(location university user_type programming_language status).each do |object|
     define_method object do
       instance_variable_set "@#{object}", object.classify.constantize.new
     end
