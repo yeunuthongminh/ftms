@@ -53,6 +53,8 @@ class User < ApplicationRecord
   has_many :track_logs, dependent: :destroy
   has_many :filters, dependent: :destroy
   has_many :exams, dependent: :destroy
+  has_many :user_funtions, dependent: :destroy
+  has_many :funtions, through: :user_funtions
 
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password

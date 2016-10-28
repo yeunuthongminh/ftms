@@ -4,10 +4,10 @@ class Role < ApplicationRecord
   ATTRIBUTES_PARAMS = [permissions_attributes: [:id, :model_class, :action, :_destroy]]
   ATTRIBUTES_ROLE_PARAMS = [:name, :role_type]
 
-  has_many :users, dependent: :destroy
-  has_many :permissions, dependent: :destroy
   has_many :user_roles, dependent: :destroy
   has_many :users, through: :user_roles
+  has_many :role_funtions, dependent: :destroy
+  has_many :funtions, through: :role_funtions
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
 
