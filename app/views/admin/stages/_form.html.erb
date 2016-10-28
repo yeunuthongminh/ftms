@@ -5,9 +5,9 @@
       <%= f.label :name %>
       <%= f.text_field :name, class: "form-control", required: true %>
     </div>
-    <div class="form-group">
+    <div class="form-group pull-right">
       <%= f.submit (f.object.new_record? ? t("buttons.create") : t("buttons.update")),
-        class: "btn btn-primary col-md-4 col-md-offset-4" %>
+        class: "btn btn-primary" %>
     </div>
   </div>
 <% end %>

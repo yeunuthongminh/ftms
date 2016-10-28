@@ -9,13 +9,12 @@
     <div class="form-group">
       <%= f.label :user_id %>
       <%= f.select :user_id, @managers.collect{|u| [u.name, u.id]}, {},
-        {selected: f.object.user_id, class: "form-control btn-success"} %>
+        {selected: f.object.user_id, class: "form-control"} %>
     </div>
     <br />
-    <div class="form-group">
+    <div class="form-group pull-right">
       <%= f.submit (f.object.new_record? ? t("buttons.create")
-        : t("buttons.save")), class: "btn btn-primary col-md-6
-        col-md-offset-3" %>
+        : t("buttons.save")), class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>
