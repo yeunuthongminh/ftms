@@ -113,6 +113,7 @@ defaults: &defaults
     finished: "finished"
     continue: "continue"
   statistics:
+    - total_trainees
     - locations
     - trainee_types
     - universities
