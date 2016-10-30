@@ -6,4 +6,8 @@ module UserSubjectHelper
   def url_user_subject args
     "/#{@namespace}/course_subjects/#{args[:course_subject_id]}/user_subjects/#{args[:user_subject_id]}"
   end
+
+  def disabled? course
+    course.finish? ? "disabled" : ""
+  end
 end

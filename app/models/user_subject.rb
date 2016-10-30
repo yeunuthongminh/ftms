@@ -39,22 +39,33 @@ class UserSubject < ApplicationRecord
 
   class << self
     def update_all_status status, current_user, course_subject
-      load_users(statuses[:init]).each do |user_subject|
-        user_subject.update_attributes status: statuses[:progress],
-          start_date: Time.now, current_progress: user_subject.in_progress?,
-          end_date: Time.now + course_subject.subject_during_time.days
-      end
+
       if status == "start"
+        user_subjects = load_users(statuses[:init]).each do |user_subject|
+          user_subject.update_attributes status: statuses[:progress],
+            start_date: Time.now, current_progress: user_subject.in_progress,
+            end_date: user_subject.plan_end_date
+        end
         key = "user_subject.start_all_subject"
       else
-        load_users(statuses[:waiting, :progress]).each do |user_subject|
-          user_subject.update_attributes  status: statuses[:finish],
-          user_end_date: Time.now, current_progress: user_subject.in_progress?
+        user_subjects = load_users([:waiting, :progress]).each do |user_subject|
+          user_subject.update_attributes status: statuses[:finish],
+          user_end_date: Time.now, current_progress: user_subject.in_progress
+        end
+        user_subjects += load_users(statuses[:init]).each do |user_subject|
+          user_subject.update_attributes status: statuses[:finished],
+            current_progress: user_subject.in_progress
         end
         key = "user_subject.finish_all_subject"
       end
       course_subject.create_activity key: key,
         owner: current_user, recipient: course_subject.course
+      user_subjects.each do |user_subject|
+        user_ids = [current_user.id, user_subject.user_id]
+        Notifications::UserSubjectNotificationBroadCastJob.perform_now user_subject: user_subject,
+        user: current_user, user_ids: user_ids, key: :change_status_up,
+        parameters: status
+      end
     end
   end
 

@@ -9,7 +9,7 @@ module NotificationHelper
       content = t("layouts.subject") << notification.user_name
       content << t("notifications.keys.#{notification.key}",
         data: notification.trackable.course_subject.subject_name)
-      content << notification.parameters
+      content << I18n.t("statuses.#{notification.parameters}")
     end
     content
   end
