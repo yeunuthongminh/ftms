@@ -5,6 +5,7 @@ en:
       trainee_types: "Trainees type"
       universities: "Universities"
       programming_languages: "Programming languages"
+      in_out_by_month: "In/out by month"
     user_types:
       title: "Total trainees by type"
       serie_name: "Trainees"
@@ -26,3 +27,11 @@ en:
         language: "Language"
         stage: "Stage"
         location: "Location"
+    in_out_by_month:
+      title: "Trainee in/out by month"
+      x_asis: "Total trainees"
+      surfix: " trainees"
+      series:
+        trainee_in: "Trainee in"
+        trainee_out: "Trainee out"
+        trainee_join_div: "Trainee join div"
