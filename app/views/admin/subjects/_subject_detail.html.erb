@@ -7,11 +7,11 @@
       <div class="row">
         <div class="col-md-4 col-xs-4">
           <b><%= t "subject_details.label.number_of_question" %></b>
-          <%= f.number_field :number_of_question, step: 1, min: 0, class: "subject-detail" %>
+          <%= f.number_field :number_of_question, step: 1, min: 1, class: "subject-detail" %>
         </div>
         <div class="col-md-4 col-xs-4">
           <b><%= t "subject_details.label.time_of_exam" %></b>
-          <%= f.number_field :time_of_exam, min: 0, step: 1, class: "subject-detail" %>
+          <%= f.number_field :time_of_exam, min: 1, step: 1, class: "subject-detail" %>
         </div>
         <div class="col-md-4 col-xs-4">
           <b><%= t "subject_details.label.min_score_to_pass" %></b>
