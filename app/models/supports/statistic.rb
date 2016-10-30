@@ -46,9 +46,13 @@ class Supports::Statistic
     @stages ||= Stage.all
   end
 
+  def trainee_in_out_by_month
+    @trainee_in_out_by_month ||= trainee_in_out
+  end
+
   private
   def total_trainee_by_month
-    @profiles = Profile.includes(:user_type, :programming_language)
+    profiles = Profile.includes(:user_type, :programming_language)
       .where location_id: @location_ids, stage_id: @stage_ids
     total_trainees = {}
 
@@ -57,9 +61,8 @@ class Supports::Statistic
       ProgrammingLanguage.all.each do |language|
         total_trainees[user_type][language] = {}
         months.each do |month|
-          total_trainees[user_type][language][month] = @profiles.select do |profile|
-            profile.start_training_date && profile.start_training_date >= month.to_date.beginning_of_month &&
-              profile.start_training_date <= month.to_date.end_of_month &&
+          total_trainees[user_type][language][month] = profiles.select do |profile|
+            in_month?(month, profile.start_training_date) &&
               profile.programming_language == language && profile.user_type == user_type
           end.size
         end
@@ -73,5 +76,31 @@ class Supports::Statistic
     date_range = @start_date..@end_date
     date_months = date_range.map {|d| Date.new(d.year, d.month, 1) }.uniq
     date_months.map {|d| d.strftime I18n.t('datetime.formats.year_month')}
+  end
+
+  def trainee_in_out
+    trainee_in = {}
+    trainee_out = {}
+    trainee_join_div = {}
+    Profile.all.each do |profile|
+      months.each do |month|
+        trainee_in[month] = 0 unless trainee_in[month]
+        trainee_out[month] = 0 unless trainee_out[month]
+        trainee_join_div[month] = 0 unless trainee_join_div[month]
+        if in_month? month, profile.start_training_date
+          trainee_in[month] += 1
+        elsif in_month? month, profile.leave_date
+          trainee_out[month] += 1
+        elsif in_month? month, profile.join_div_date
+          rainee_join_div[month] += 1
+        end
+      end
+    end
+    {trainee_in: trainee_in, trainee_out: trainee_out, trainee_join_div: trainee_join_div}
+  end
+
+  def in_month? month, date
+    date && date >= month.to_date.beginning_of_month &&
+      date <= month.to_date.end_of_month
   end
 end

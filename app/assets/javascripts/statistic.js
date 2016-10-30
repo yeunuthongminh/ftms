@@ -161,6 +161,61 @@ function load_locations_statistic_chart() {
   });
 }
 
+function load_trainee_in_out_by_month_statistic_chart() {
+  $('#in-out-by-month-statistic').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: false,
+    xAxis: {
+      categories: $('#in-out-by-month-statistic').data('months'),
+      min: 0.5,
+      tickmarkPlacement: 'on',
+      startOnTick: false,
+      endOnTick: false,
+      minPadding: 0,
+      maxPadding: 0,
+      align: 'left'
+    },
+    yAxis: {
+      title: {
+        text: I18n.t('statistics.in_out_by_month.x_asis')
+      },
+      plotLines: [{
+        value: 0,
+        width: 1,
+        color: '#808080'
+      }]
+    },
+    tooltip: {
+      valueSuffix: I18n.t('statistics.in_out_by_month.surfix')
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'middle',
+      borderWidth: 0
+    },
+    plotOptions: {
+      line: {
+        dataLabels: {
+          enabled: true
+        }
+      }
+    },
+    series: [{
+      name: I18n.t('statistics.in_out_by_month.series.trainee_in'),
+      data: $('#in-out-by-month-statistic').data('trainee-in')
+    }, {
+      name: I18n.t('statistics.in_out_by_month.series.trainee_out'),
+      data: $('#in-out-by-month-statistic').data('trainee-out')
+    }, {
+      name: I18n.t('statistics.in_out_by_month.series.trainee_join_div'),
+      data: $('#in-out-by-month-statistic').data('trainee-join-div')
+    },]
+  });
+}
+
 $(document).on('turbolinks:load', function() {
   if ($('#statistics').children().hasClass('trainee_types')) {
     load_trainee_types_statistic_chart();
@@ -170,5 +225,7 @@ $(document).on('turbolinks:load', function() {
     load_programming_languages_statistic_chart();
   } else if ($('#statistics').children().hasClass('locations')) {
     load_locations_statistic_chart();
+  } else if ($('#statistics').children().hasClass('in_out_by_month')) {
+    load_trainee_in_out_by_month_statistic_chart();
   }
 });

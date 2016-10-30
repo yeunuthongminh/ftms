@@ -118,6 +118,7 @@ defaults: &defaults
     - trainee_types
     - universities
     - programming_languages
+    - in_out_by_month
 development:
   <<: *defaults
   neat_setting: 800
