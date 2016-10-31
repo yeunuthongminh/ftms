@@ -32,9 +32,18 @@
   <div id="table-header" class="scroll-table">
     <div class="tbody">
       <div class="trow header">
-        <% @statistics.month_ranges.each do |month| %>
-          <div class="tcell total-trainees-month-<%= month %> trainee-by-month title">
-            <%= month %>
+        <% if @statistics.month_ranges.any? %>
+          <div class="clear-both all-months">
+            <div class="month">
+              <%= t "statistics.total_trainees.headers.months" %>
+            </div>
+
+            <% @statistics.month_ranges.each do |month| %>
+              <div class="tcell total-trainees-month-<%= month.gsub('/', '-') %> trainee-by-month title"
+                data-month="<%= month.gsub('/', '-') %>">
+                <%= month %>
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>

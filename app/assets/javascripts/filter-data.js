@@ -171,6 +171,7 @@ var filter_function = function(){
       reload_sum_assignee();
     }
     resetOrder();
+    totalTraineeValue();
     changeIconFilter();
   };
 

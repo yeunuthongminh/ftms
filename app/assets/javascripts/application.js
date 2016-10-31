@@ -152,3 +152,29 @@ $(document).on('ready, turbolinks:load', function() {
     $('#loading').hide();
   });
 });
+
+function totalTraineeValue() {
+  $.each($('.fixedTable-header .trainee-by-month'), function(key, value) {
+    var total_trainee_in_month = 0
+    var total_trainee_in_month_filter = 0;
+
+    $.each($('.fixedTable-body .total-trainees-month-' + $(value).data('month')), function(index, element) {
+      if(!$(element).hasClass('total')){
+        total_trainee_in_month += parseInt($(element).data("total-trainees"));
+      }
+    });
+
+    $.each($('.fixedTable-body .trow:visible .total-trainees-month-' + $(value).data('month')), function(index, element) {
+      if(!$(element).hasClass('total')){
+        total_trainee_in_month_filter += parseInt($(element).data("total-trainees"));
+      }
+    });
+
+    percent = total_trainee_in_month_filter / total_trainee_in_month * 100;
+    if (percent == 100 || total_trainee_in_month == 0) {
+      $('.fixedTable-body .total-trainees-month-' + $(value).data('month') + '.total').text(total_trainee_in_month_filter.toLocaleString());
+    } else {
+      $('.fixedTable-body .total-trainees-month-' + $(value).data('month') + '.total').text(total_trainee_in_month_filter.toLocaleString() + ' - ' + Math.round(percent).toFixed(2) + '%');
+    }
+  });
+}
