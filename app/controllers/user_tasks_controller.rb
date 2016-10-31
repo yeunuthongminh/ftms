@@ -21,8 +21,7 @@ class UserTasksController < ApplicationController
       end
     end
     track_activity
-    task_statistic
-    load_chart_data
+    load_data
     respond_to do |format|
       format.js
     end
@@ -38,21 +37,9 @@ class UserTasksController < ApplicationController
     end
   end
 
-  def task_statistic
-    user_tasks = @user_task.user_subject.user_tasks
-    @number_of_task = user_tasks.size
-    @task_statuses = UserTask.statuses
-    @task_statuses.each do |key, value|
-      instance_variable_set "@number_of_task_#{key}", user_tasks.send(key).size
-    end
-  end
-
-  def load_chart_data
-    @user_subject = @user_task.user_subject
-    @user_tasks_chart_data = {}
-
-    @user_subject.course_subject.user_subjects.each do |user_subject|
-      @user_tasks_chart_data[user_subject.user.name] = user_subject.user_tasks.finished.size
-    end
+  def load_data
+    @subject_supports = Supports::SubjectTrainee.new subject: @user_task
+      .user_subject.subject, user_course_id: @user_task.user_subject
+      .user_course_id
   end
 end

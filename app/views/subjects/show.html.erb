@@ -1,4 +1,4 @@
-<% provide :title, @user_subject.subject_name %>
+<% provide :title, @subject_supports.user_subject.subject_name %>
 
 <div id="subject-show">
   <div class="row">
@@ -12,44 +12,44 @@
             <% end %>
           </li>
           <li><%= link_to t("layouts.all_courses"), courses_path %></li>
-          <li><%= link_to @user_subject.course_name,
-            user_course_path(@user_subject.user_course) %></li>
-          <li class="active"><%= @user_subject.name %></li>
+          <li><%= link_to @subject_supports.user_subject.course_name,
+            user_course_path(@subject_supports.user_subject.user_course) %></li>
+          <li class="active"><%= @subject_supports.user_subject.name %></li>
         </ul>
       </div>
 
       <div class="subject-overview">
         <span class="header-title">
-          <%= @user_subject.name %>
+          <%= @subject_supports.user_subject.name %>
         </span>
-        <span class="label-status <%= set_background_color_status @user_subject.status %>">
-          <%= t "courses.labels.status.#{@user_subject.status}" %>
+        <span class="label-status <%= set_background_color_status @subject_supports.user_subject.status %>">
+          <%= t "courses.labels.status.#{@subject_supports.user_subject.status}" %>
         </span>
-        <% unless @user_subject.finish? %>
+        <% unless @subject_supports.user_subject.finish? || @subject_supports.course.finish? %>
           <div id="dialog-finish" title="<%= t "user_subjects.finish.confirm-title" %>"
             class="dialog">
-            <% if @user_subject.subject.subject_detail %>
+            <% if @subject_supports.user_subject.subject.subject_detail %>
               <p><%= t "user_subjects.finish.confirm_exam" %></p>
-              <%= link_to "", user_subject_path(@user_subject),
+              <%= link_to "", user_subject_path(@subject_supports.user_subject),
                 method: :put, class: "hidden", id: "finish-subject-exam" %>
             <% else %>
               <p><%= t "user_subjects.finish.confirm_project" %></p>
-              <%= link_to "", user_subject_path(@user_subject),
+              <%= link_to "", user_subject_path(@subject_supports.user_subject),
                 method: :put, class: "hidden", id: "finish-subject-project" %>
             <% end %>
           </div>
-          <% if current_user.is_trainee? && @user_subject.progress? %>
+          <% if current_user.is_trainee? && @subject_supports.user_subject.progress? %>
             <%= link_to t("buttons.finish"), "#",
               class: "btn btn-danger pull-right finish-subject" %>
-          <% elsif @user_subject.subject.subject_detail && @user_subject.waiting? %>
+          <% elsif @subject_supports.user_subject.subject.subject_detail && @subject_supports.user_subject.waiting? %>
             <%= link_to t("buttons.do_exam"), "#",
               class: "btn btn-info pull-right finish-subject" %>
           <% end %>
         <% end %>
-        <div class="description"><%= @user_subject.description %></div>
+        <div class="description"><%= @subject_supports.user_subject.description %></div>
         <div class="subject-content box-divider">
           <div class="label-title"><%= t "subjects.content" %></div>
-          <%= @user_subject.content.html_safe if @user_subject.content %>
+          <%= @subject_supports.user_subject.content.html_safe if @subject_supports.user_subject.content %>
         </div>
       </div>
 
@@ -62,7 +62,8 @@
         <div class="user-task">
           <div class="overview">
             <%= t "subjects.task_overview" %>
-            <% if current_user.is_trainee? && @user_subject.progress? %>
+            <% if current_user.is_trainee? && @subject_supports
+              .user_subject.progress? && !@subject_supports.course.finish? %>
               <%= link_to "#",
                 data: {toggle: "modal", target: "#TaskModal"},
                 class: "pull-right btn-new-task" do %>
@@ -73,7 +74,7 @@
           </div>
 
           <div class="note-list user-task-list">
-            <%= render partial: "user_task", collection: @user_tasks %>
+            <%= render partial: "user_task", collection: @subject_supports.user_tasks %>
           </div>
         </div>
       </div>
