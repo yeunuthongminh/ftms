@@ -90,8 +90,10 @@
     <div class="col-md-3 user-info right-side-course">
       <h2 class="label"><%= t "courses.labels.trainer" %>
         (<%= @supports.trainers.size %>)&nbsp;
-        <%= link_to edit_trainer_course_assign_trainers_path(@course) do %>
-          <i class="ionicons ion-android-person-add"></i>
+        <% unless @course.finish? %>
+          <%= link_to edit_trainer_course_assign_trainers_path(@course) do %>
+            <i class="ionicons ion-android-person-add"></i>
+          <% end %>
         <% end %>
       </h2>
       <ul>
@@ -107,8 +109,10 @@
       </ul>
       <h2 class="label"><%= t "courses.labels.trainee" %>
         (<%= @supports.trainees.size %>)
-        <%= link_to edit_trainer_course_assign_trainees_path(@course) do %>&nbsp;
-          <i class="ionicons ion-android-person-add"></i>
+        <% unless @course.finish? %>
+          <%= link_to edit_trainer_course_assign_trainees_path(@course) do %>&nbsp;
+            <i class="ionicons ion-android-person-add"></i>
+          <% end %>
         <% end %>
       </h2>
       <ul>

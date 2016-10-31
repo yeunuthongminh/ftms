@@ -38,18 +38,6 @@ function load_chart() {
 }
 
 function setbutton() {
-  $('.btn-reject').click(function () {
-    this.href = this.href + '?status=reject';
-  });
-
-  $('.btn-finish').click(function () {
-    this.href = this.href + '?status=finish';
-  });
-
-  $('.btn-reopen').click(function () {
-    this.href = this.href + '?status=reopen';
-  });
-
   $('.finish-subject').click(function(e) {
     e.preventDefault();
     var exec_finish = document.getElementById('finish-subject-exam');

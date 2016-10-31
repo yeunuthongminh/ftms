@@ -1,19 +1,9 @@
 <tr id="user-subject-<%= user_subject.id %>">
   <td class="user-name">
-    <%= link_to user_subject.user_name,
-      [:admin, user_subject.user] %>
-    <% if user_subject.finish? %>
-      <%= link_to [:admin, @supports.course_subject, user_subject],
-        data: {method: :patch, remote: true,
-        confirm: t("messages.delete.confirm")},
-        class: "btn-reopen pull-right",
-        title: t("buttons.reopen") do %>
-        <i><%= image_tag "reopen.png", class: "reopen-img img-circle" %></i>
-      <% end %>
-    <% end %>
+    <%= link_to user_subject.user_name, [:admin, user_subject.user] %>
   </td>
   <td>
-    <% if user_subject.finish? %>
+    <% if user_subject.finish? || @supports.course.finish? %>
       <%= l(user_subject.start_date, format: :default) if user_subject.start_date %>
     <% elsif user_subject.progress? || user_subject.waiting? %>
       <div class="form-edit">
@@ -28,7 +18,7 @@
     <% end %>
   </td>
   <td>
-    <% if user_subject.finish? %>
+    <% if user_subject.finish? || @supports.course.finish? %>
       <%= l(user_subject.end_date, format: :default) if user_subject.end_date %>
     <% elsif user_subject.progress? || user_subject.waiting? %>
       <div class="form-edit">

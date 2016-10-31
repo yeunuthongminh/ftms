@@ -1,20 +1,10 @@
 <tr id="user-subject-<%= user_subject.id %>">
   <td class="user-name">
-    <%= link_to user_subject.user_name,
-      [:trainer, user_subject.user] %>
-    <% if user_subject.finish? %>
-      <%= link_to [:trainer, @supports.course_subject, user_subject],
-        data: {method: :patch, remote: true,
-        confirm: t("messages.delete.confirm")},
-        class: "btn-reopen pull-right",
-        title: t("buttons.reopen") do %>
-        <i><%= image_tag "reopen.png", class: "reopen-img img-circle" %></i>
-      <% end %>
-    <% end %>
+    <%= link_to user_subject.user_name, [:trainer, user_subject.user] %>
   </td>
   <td>
-    <% if user_subject.finish? %>
-      <%= l user_subject.start_date, format: :default %>
+    <% if user_subject.finish? || @supports.course.finish? %>
+      <%= l(user_subject.start_date, format: :default) if user_subject.start_date %>
     <% elsif user_subject.progress? || user_subject.waiting? %>
       <div class="form-edit">
         <%= form_for [:trainer, @supports.course_subject, user_subject],
@@ -28,8 +18,8 @@
     <% end %>
   </td>
   <td>
-    <% if user_subject.finish? %>
-      <%= l user_subject.end_date, format: :default %>
+    <% if user_subject.finish? || @supports.course.finish? %>
+      <%= l(user_subject.end_date, format: :default) if user_subject.end_date %>
     <% elsif user_subject.progress? || user_subject.waiting? %>
       <div class="form-edit">
         <%= form_for [:trainer, @supports.course_subject, user_subject],
@@ -43,45 +33,25 @@
     <% end %>
   </td>
   <td>
-    <%= l(user_subject.user_end_date, format: :default) if user_subject.finish? %>
+    <%= l(user_subject.user_end_date, format: :default) if user_subject.user_end_date %>
   </td>
   <td>
-    <span class="label-status
-      <%= set_background_color_status user_subject.status %>">
-      <%= t "courses.labels.status.#{user_subject.status}" %>
-    </span>
+    <select data-id="<%= url_user_subject user_subject_id: user_subject.id,
+      course_subject_id: @supports.course_subject.id %>" class="stt-user-subject"
+      <%= disabled? @supports.course %>>
+      <% @supports.statuses.each do |status| %>
+        <option value="<%= status[1] %>" <%= is_selected? user_subject, status[0] %>
+          class="stt-<%= status[0] %>">
+          <%= t "user_subjects.statuses.#{status[0]}" %>
+        </option>
+      <% end %>
+    </select>
   </td>
   <td>
     <%= render "shared/progress_bar", percent: user_subject.percent_progress,
         status: user_subject.status %>
   </td>
   <td class="action">
-    <% if @supports.course.progress? %>
-      <% if user_subject.init? %>
-        <%= link_to t("trainer.actions.show_subject.start"),
-          [:trainer, @supports.course_subject, user_subject],
-          data: {method: :patch,
-          remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-primary btn-status" %>
-      <% elsif user_subject.progress? %>
-        <%= link_to t("trainer.actions.show_subject.finish"),
-          [:trainer, @supports.course_subject, user_subject],
-          data: {method: :patch,
-          remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-success btn-finish btn-status" %>
-      <% elsif user_subject.waiting? %>
-        <%= link_to t("trainer.actions.show_subject.finish"),
-          [:trainer, @supports.course_subject, user_subject],
-          data: {method: :patch,
-          remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-warning btn-finish btn-status" %>
-        <%= link_to t("trainer.actions.show_subject.reject"),
-          [:trainer, @supports.course_subject, user_subject],
-          data: {method: :patch,
-          remote: true, confirm: t("messages.delete.confirm")},
-          class: "btn btn-danger btn-reject btn-status" %>
-      <% end %>
-    <% end %>
   </td>
   <td>
     <%= link_to "javascript:void(0)",
