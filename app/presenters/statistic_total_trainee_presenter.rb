@@ -16,9 +16,6 @@ class StatisticTotalTraineePresenter < ActionView::Base
       end
     end
 
-    sidebar << sidebar_total
-    body << body_total
-
     body << "<div></div>"
     html = "<aside id=\"parent\" class=\"fixedTable-sidebar\">
       <div id=\"child\">
@@ -55,25 +52,5 @@ class StatisticTotalTraineePresenter < ActionView::Base
       </div>"
     end
     html += "</div>"
-  end
-
-  def sidebar_total
-    "<div class=\"trow list_total\" id=\"sidebar-row-total\">
-      <div class=\"tcell stt\">#</div>
-      <div class=\"tcell total-sidebar\"\">
-        #{"Total"}
-      </div>
-      <div class=\"tcell none\"\">
-      </div>
-    </div>"
-  end
-
-  def body_total
-    body_total = "<div class=\"trow list_total\" id=\"body-row-total\">"
-    @months.each do |month|
-      body_total += "<div class=\"tcell total-trainees-month-#{month.gsub('/', '-')} total trainee-by-month text-right\">
-      </div>"
-    end
-    body_total += "</div>"
   end
 end
