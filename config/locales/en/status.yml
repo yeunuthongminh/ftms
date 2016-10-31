@@ -7,6 +7,9 @@ en:
     panel:
       new: "New Status"
       edit: "Edit Status"
+    start: "in progress"
+    finish: "finish"
+    init: "init"
   status:
     start: "start"
     progress: "progress"

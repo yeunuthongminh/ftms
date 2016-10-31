@@ -2,7 +2,8 @@ class Admin::StatusSubjectsController < ApplicationController
   before_action :load_data
 
   def update
-    @user_subjects.update_all_status params[:status], current_user, @course_subject
+    @supports.user_subjects.update_all_status params[:status], current_user,
+      @supports.course_subject
     respond_to do |format|
       format.js {render template: "admin/user_subjects/update.js.erb"}
     end
@@ -10,10 +11,9 @@ class Admin::StatusSubjectsController < ApplicationController
 
   private
   def load_data
-    @course_subject = CourseSubject.find params[:course_subject_id]
-    @course = @course_subject.course
-    @user_subjects = @course_subject.user_subjects
-    @subject = @course_subject.subject
+    @supports = Supports::UserSubject.new user_subject: @user_subject,
+      course_subject_id: params[:course_subject_id]
+    redirect_if_object_nil @supports.course_subject
   end
 end
 

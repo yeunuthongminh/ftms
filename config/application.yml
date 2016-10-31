@@ -90,7 +90,6 @@ defaults: &defaults
     progress: "progress"
     waiting: "waiting"
     finish: "finish"
-    reopen: "reopen"
   working_day:
     min: 0.0
     max: 5.0

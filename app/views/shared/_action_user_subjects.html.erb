@@ -11,8 +11,7 @@
       <% if @supports.course.progress? %>
         <% if @supports.user_subjects.init.any? %>
           <a href="<%= admin_status_subject_path @supports.course_subject, "start" %>",
-            data-method="patch",
-            data-remote="true",
+            data-method="patch", data-remote="true",
             data-confirm="<%= t "admin.confirms.start_all" %>">
             <i class="fa fa-check" aria-hidden="true"></i>
             <%= t "admin.actions.show_subject.start_all" %>
@@ -22,8 +21,7 @@
         <% unless @supports.user_subjects.size == @supports.user_subjects.finish.size ||
           @supports.user_subjects.init.any? %>
           <a href="<%= admin_status_subject_path @supports.course_subject, "finish" %>",
-            data-method="patch",
-            data-remote="true",
+            data-method="patch", data-remote="true",
             data-confirm="<%= t "admin.confirms.finish_all" %>">
             <i class="fa fa-minus-square-o" aria-hidden="true"></i>
             <%= t "admin.actions.show_subject.finish_all" %>
