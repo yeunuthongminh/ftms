@@ -10,6 +10,8 @@ en:
     start: "in progress"
     finish: "finish"
     init: "init"
+    waiting: "waiting"
+    progress: "in progress"
   status:
     start: "start"
     progress: "progress"

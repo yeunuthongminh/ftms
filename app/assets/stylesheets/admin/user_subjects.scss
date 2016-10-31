@@ -36,15 +36,6 @@
   }
 
   .user-lists {
-    .user-name {
-      .btn-reopen {
-        display: none;
-      }
-      .reopen-img {
-        width: 17px;
-        height: 17px;
-      }
-    }
     .user-name:hover {
       .btn-reopen {
         display: inline !important;
