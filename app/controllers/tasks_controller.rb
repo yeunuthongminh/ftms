@@ -56,6 +56,6 @@ class TasksController < ApplicationController
   end
 
   def user_task
-     @task.user_tasks.first
+    @task.user_tasks.first
   end
 end
