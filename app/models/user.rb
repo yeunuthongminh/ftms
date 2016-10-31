@@ -53,8 +53,8 @@ class User < ApplicationRecord
   has_many :track_logs, dependent: :destroy
   has_many :filters, dependent: :destroy
   has_many :exams, dependent: :destroy
-  has_many :user_funtions, dependent: :destroy
-  has_many :funtions, through: :user_funtions
+  has_many :user_functions, dependent: :destroy
+  has_many :functions, through: :user_functions
 
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password
@@ -134,6 +134,18 @@ class User < ApplicationRecord
 
   def current_progress
     user_subjects.find {|user_subject| user_subject.current_progress?}
+  end
+
+  def has_role? role_name
+    self.roles.map(&:name).include? role_name
+  end
+
+  def user_functions
+    self.functions.collect{|function| [function.model_class, function.action]}
+  end
+
+  def has_function? controller, action
+    user_functions.include? [controller, action]
   end
 
   private
