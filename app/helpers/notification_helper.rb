@@ -2,14 +2,16 @@ module NotificationHelper
   def notification_content notification
     trackable = notification.trackable
 
-    if trackable.class.name == "Course"
-      data = "Course: #{trackable.name}: "
-    elsif trackable.class.name == "UserSubject"
-
+    if trackable.class.name == Course.name
+      content = t "layouts.course"
+      content << t("notifications.keys.#{notification.key}",
+        data: notification.trackable.name) if notification.key
+      content << notification.user_name
+    elsif trackable.class.name == UserSubject.name
       content = t("layouts.subject") << notification.user_name
       content << t("notifications.keys.#{notification.key}",
-        data: notification.trackable.course_subject.subject_name)
-      content << I18n.t("statuses.#{notification.parameters}")
+        data: notification.trackable.course_subject.subject_name) if notification.key
+      content << I18n.t("statuses.#{notification.parameters}") if notification.parameters
     end
     content
   end
