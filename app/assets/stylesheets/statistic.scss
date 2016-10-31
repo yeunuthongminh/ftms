@@ -70,4 +70,24 @@
       max-height: 30px;
     }
   }
+
+  #total {
+    margin-top: -6px;
+    float: left;
+
+    .total-title {
+      float: left;
+      border: 1px solid #CCC;
+      @include ellipsis(310px);
+      padding: 0px 5px;
+    }
+
+    .total-cell {
+      display: table-cell;
+      font-weight: bold;
+      border: 1px solid #CCC;
+      @include ellipsis(100px);
+      padding: 0px 5px;
+    }
+  }
 }

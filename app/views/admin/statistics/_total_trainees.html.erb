@@ -62,6 +62,15 @@
         <%= @statistics.total_trainees_presenter.html_safe %>
       </div>
 
+      <div id="total" class="list_total">
+        <div class="total-title"></div>
+        <% @statistics.month_ranges.each do |month| %>
+          <div class="text-right text-danger total-cell
+            total-trainees-month-<%= month.gsub('/', '-') %>">
+          </div>
+        <% end %>
+      </div>
+
       <div class="pull-right" id="number-records"></div>
 
       <div id="filter" data-filter-data="<%= @filter_data_user %>"
