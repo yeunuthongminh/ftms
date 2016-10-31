@@ -40,13 +40,6 @@
                     <i class="fa fa-minus-square-o" aria-hidden="true"></i>
                     <%= t "buttons.finish" %>
                   </a>
-                <% elsif @course.finish? %>
-                  <a href="<%= admin_course_change_status_courses_path @course %>",
-                    data-method="patch",
-                    data-confirm="<%= t "courses.confirms.confirm_reopen" %>">
-                    <i class="fa fa-retweet" aria-hidden="true"></i>
-                    <%= t "buttons.reopen" %>
-                  </a>
                 <% end %>
               </li>
               <li>

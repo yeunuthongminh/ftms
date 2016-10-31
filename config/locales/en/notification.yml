@@ -3,8 +3,5 @@ en:
     keys:
       change_status_up: " has been change status of %{data} to "
       change_status_down: " has been change status of %{data} back to "
-      start: "%{data} has started"
-      finish: "%{data} has finished"
-      reopen: "%{data} has reopened"
-      request: "%{data} has been requested to finish"
-      reject: "%{data}: request to finish has been rejected"
+      finish_course: " %{data} has been finished by "
+      start_course: "  %{data} has been started by "

@@ -76,14 +76,7 @@ class Course < ApplicationRecord
 
   def finish_course current_user
     update_attributes status: :finish
-    user_subjects.update_all status: UserSubject.statuses[:finish]
     create_activity key: "course.finish_course", owner: current_user
-  end
-
-  def reopen_course current_user
-    update_attributes status: :init
-    user_subjects.update_all status: UserSubject.statuses[:init]
-    create_activity key: "course.reopen_course", owner: current_user
   end
 
   def load_trainers
