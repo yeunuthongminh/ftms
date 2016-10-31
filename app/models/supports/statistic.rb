@@ -53,7 +53,7 @@ class Supports::Statistic
   private
   def total_trainee_by_month
     profiles = Profile.includes(:user_type, :programming_language)
-      .where location_id: @location_ids, stage_id: @stage_ids
+      .where location_id: @location_ids
     total_trainees = {}
 
     UserType.all.each do |user_type|

@@ -12,12 +12,6 @@
     width: 310px;
   }
 
-  .fixedTitle, .fixedTable-header {
-    max-height: 31px;
-    min-height: 31px;
-    height: 31px;
-  }
-
   .tcell {
     &.stt {
       min-width: 35px;
@@ -39,6 +33,41 @@
 
     &.trainee-by-month{
       @include ellipsis(100px);
+    }
+
+    &.total-sidebar {
+      @include ellipsis(150px);
+      border-right: none;
+    }
+
+    &.none {
+      @include ellipsis(125px);
+      position: relative;
+    }
+  }
+
+  .month {
+    @include experiences-title(31px);
+  }
+
+  .all-months {
+    border-right: 1px solid #ccc;
+    .tcell {
+      max-width: 80px;
+      min-width: 80px;
+      width: 80px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &.trainee-by-month{
+        @include ellipsis(100px);
+      }
+    }
+
+    &.clear-both > .tcell {
+      height: 30px;
+      min-height: 30px;
+      max-height: 30px;
     }
   }
 }

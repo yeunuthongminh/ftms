@@ -27,6 +27,7 @@ en:
         language: "Language"
         stage: "Stage"
         location: "Location"
+        months: "Month"
     in_out_by_month:
       title: "Trainee in/out by month"
       x_asis: "Total trainees"
