@@ -11,6 +11,7 @@ $(document).on("turbolinks:load",function() {
         .addClass("highlight");
     } else {
       $('div[class="'+ $row +'"]').addClass("highlight");
+      $('div[class="'+ $row +'"] div').addClass("highlight");
     }
   });
 
@@ -32,6 +33,7 @@ $(document).on("turbolinks:load",function() {
         click = false;
       } else {
         $('div[class="'+ $row +'"]').addClass("highlight-click");
+        $('div[class="'+ $row +'"] div').addClass("highlight-click");
       }
     } else {
       $("div").removeClass("highlight-click");
