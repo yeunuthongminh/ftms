@@ -4,6 +4,10 @@
     <div class="col-md-6">
       <%= f.label :name %>
       <%= f.text_field :name, class: "form-control", required: true %><br>
+      <div class="form-group">
+        <%= f.label :color %>
+        <%= f.text_field :color, id: "color-picker" %>
+      </div>
       <div class="pull-right">
         <%= f.submit (f.object.new_record? ? t("buttons.create")
           : t("buttons.update")), class: "btn btn-primary" %>

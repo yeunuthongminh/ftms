@@ -4,7 +4,8 @@
       <div class="avatar">
         <%= avatar_user_tag user, "img-circle",
           Settings.image_size_40 %></div>
-      <div>
+      <div style="color: <%= user.profile.user_type.color if
+        user.profile.user_type.color %>">
         <strong><%= t "organization_charts.trainee" %></strong><br>
         <%= user.name %>
       </div>
