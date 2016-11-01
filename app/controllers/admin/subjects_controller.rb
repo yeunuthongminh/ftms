@@ -1,9 +1,9 @@
 class Admin::SubjectsController < ApplicationController
   before_action :authorize
   before_action :find_subject_in_edit, only: [:edit, :update]
+  before_action :load_subject
   before_action :load_data, only: :show
   before_action :load_subject_detail, only: [:edit]
-  before_action :load_subject, except: [:show]
 
   def index
     @subject = Subject.new

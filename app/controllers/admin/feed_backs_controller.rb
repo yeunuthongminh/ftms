@@ -1,7 +1,8 @@
 class Admin::FeedBacksController < ApplicationController
-  load_and_authorize_resource
+  before_action :authorize, only: :index
 
   def index
+    @feed_backs = FeedBack.all
     @feed_backs = @feed_backs.order_by_time
     add_breadcrumb_index "feed_backs"
   end

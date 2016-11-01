@@ -39,6 +39,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def load_course
+    @course = Course.find_by id: params[:course_id]
+    if @course.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to admin_courses_path
+    end
+  end
+
   def load_subject
     @subject = Subject.find_by id: params[:id]
     if @subject.nil?

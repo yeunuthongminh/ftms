@@ -1,6 +1,6 @@
 class Admin::ExamsController < ApplicationController
   include FilterData
-  authorize_resource only: :index
+  before_action :authorize, only: :index
   before_action :load_filter, only: :index
 
   def index
