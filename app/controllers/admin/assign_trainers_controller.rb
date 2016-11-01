@@ -1,5 +1,5 @@
 class Admin::AssignTrainersController < ApplicationController
-  authorize_resource :course, class: false
+  before_action :authorize
   before_action :find_course, only: [:edit, :update]
 
   def edit
