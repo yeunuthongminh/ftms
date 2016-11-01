@@ -13,7 +13,7 @@
                   <i class="fa fa-sort-desc" aria-hidden="true"></i>
                 </strong>
               </button>
-              <ul class="dropdown-menu" role="menu">
+              <ul class="dropdown-menu" role="menu" id="locations-checkbox">
                 <% @locations.each do |location| %>
                   <li>
                     <%= check_box_tag "location_ids[]", location.id,
@@ -34,7 +34,7 @@
                   <i class="fa fa-sort-desc" aria-hidden="true"></i>
                 </strong>
               </button>
-              <ul class="dropdown-menu" role="menu">
+              <ul class="dropdown-menu" role="menu" id="stages-checkbox">
                 <% @statistics.load_stages.each do |stage| %>
                   <li>
                     <%= check_box_tag "stages_ids[]", stage.id,

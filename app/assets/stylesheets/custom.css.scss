@@ -723,3 +723,22 @@ textarea {
   padding-right: 10px;
   margin-top: 10px;
 }
+
+.date_input {
+  float: right; width: 170px;
+}
+
+.f-filter-month {
+  padding: 10px;
+  .margin-top-20 {
+    margin-top: 20px;
+  }
+
+  .btn-sm {
+    width: 60px;
+  }
+
+  #date_submit {
+    margin-right: 5px;
+  }
+}

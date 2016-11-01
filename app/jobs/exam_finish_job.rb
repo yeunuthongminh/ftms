@@ -3,7 +3,7 @@ class ExamFinishJob < ApplicationJob
 
   def perform exam
     exam.finish!
-    ExamServices::CalculatePointService.new(exam).perform
+    point = ExamServices::CalculatePointService.new(exam).perform
     unless point < exam.user_subject.subject.subject_detail_min_score_to_pass
       user_subject.update_status current_user, "finish"
     end
