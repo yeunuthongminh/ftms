@@ -1,11 +1,11 @@
 class Admin::CoursesController < ApplicationController
   include FilterData
 
-  load_and_authorize_resource
-  skip_load_resource only: [:index, :show, :edit]
   before_action :find_course_in_show, only: :show
   before_action :find_course_in_edit, only: :edit
   before_action :load_data, only: [:new, :edit, :show]
+  before_action :load_course, only: [:update, :destroy]
+  before_action :authorize
 
   def index
     add_breadcrumb_index "courses"
@@ -14,6 +14,7 @@ class Admin::CoursesController < ApplicationController
   end
 
   def new
+    @course = Course.new
     @course.documents.build
     add_breadcrumb_path "courses"
     add_breadcrumb_new "courses"
@@ -26,6 +27,7 @@ class Admin::CoursesController < ApplicationController
   end
 
   def create
+    @course = Course.new course_params
     if @course.save
       flash[:success] = flash_message "created"
       redirect_to admin_course_path @course
@@ -71,13 +73,18 @@ class Admin::CoursesController < ApplicationController
     @supports ||= Supports::Course.new course: @course
   end
 
+  def load_course
+    @course = Course.find_by id: params[:id]
+    redirect_if_object_nil @course
+  end
+
   def find_course_in_show
-    @course = Course.includes(:programming_language).find_by_id params[:id]
+    @course = Course.includes(:programming_language).find_by id: params[:id]
     redirect_if_object_nil @course
   end
 
   def find_course_in_edit
-    @course = Course.includes(:documents).find_by_id params[:id]
+    @course = Course.includes(:documents).find_by id: params[:id]
     redirect_if_object_nil @course
   end
 end

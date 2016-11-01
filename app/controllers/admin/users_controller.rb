@@ -1,8 +1,7 @@
 class Admin::UsersController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource only: :edit
-  before_action :load_user, only: :edit
-  before_action :load_data, only: [:new, :edit, :show]
+  before_action :authorize
+  before_action :load_user, except: [:index, :new, :create]
+  before_action :load_profile, only: [:new, :edit, :show]
   before_action :load_breadcrumb_edit, only: [:edit, :update]
   before_action :load_breadcrumb_new, only: [:new, :create]
 
@@ -16,10 +15,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def new
+    @user = User.new
     build_profile
   end
 
   def create
+    @user = User.new user_params
     user_send_mail_service = MailerServices::UserSendMailService.new user: @user
     if @user.save && user_send_mail_service.perform?
       flash[:success] = flash_message "created"
@@ -29,7 +30,7 @@ class Admin::UsersController < ApplicationController
         redirect_to new_admin_user_path
       end
     else
-      load_data
+      load_profile
       render :new
     end
   end
@@ -44,7 +45,7 @@ class Admin::UsersController < ApplicationController
       flash[:success] = flash_message "updated"
       redirect_to admin_users_path
     else
-      load_data
+      load_profile
       render :edit
     end
   end
@@ -69,7 +70,7 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit User::ATTRIBUTES_PARAMS
   end
 
-  def load_data
+  def load_profile
     @supports = Supports::User.new @user
   end
 

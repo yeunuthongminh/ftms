@@ -47,6 +47,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authorize
+    authorize_with_multiple page_params, Admin::UserFunctionPolicy
+  end
+
   def load_task
     @task = Task.find_by id: params[:id]
     if @task.nil?
