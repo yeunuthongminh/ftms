@@ -1,8 +1,6 @@
 class Admin::TrainingManagementsController < ApplicationController
-  load_and_authorize_resource class: false
-
   include FilterData
-
+  before_action :authorize
   before_action :load_filter, only: :index
 
   def index

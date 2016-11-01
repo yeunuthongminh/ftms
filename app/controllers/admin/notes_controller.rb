@@ -1,14 +1,14 @@
 class Admin::NotesController < ApplicationController
-  load_and_authorize_resource
-
-  before_action :load_notes, only: [:create, :update, :destroy]
+  before_action :authorize
+  before_action :load_notes, only: [:update, :destroy, :edit]
 
   def create
+    @note = Note.new note_params
     @note.author_id = current_user.id
     if @note.save
       flash.now[:success] = flash_message "created"
     end
-
+    load_notes
     respond_to do |format|
       format.js
     end

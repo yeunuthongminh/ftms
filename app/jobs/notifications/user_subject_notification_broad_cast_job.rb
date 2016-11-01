@@ -1,4 +1,4 @@
-class UserSubjectNotificationBroadCastJob < ApplicationJob
+class Notifications::UserSubjectNotificationBroadCastJob < ApplicationJob
   queue_as :default
 
   def perform args

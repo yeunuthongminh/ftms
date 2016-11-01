@@ -1,5 +1,6 @@
 class Admin::RolesController < ApplicationController
-  load_and_authorize_resource
+  before_action :authorize
+  before_action :load_role, only: [:edit, :update, :destroy]
 
   def index
     respond_to do |format|
@@ -11,11 +12,13 @@ class Admin::RolesController < ApplicationController
   end
 
   def new
+    @role = Role.new
     add_breadcrumb_path "roles"
     add_breadcrumb_new "roles"
   end
 
   def create
+    @role = Role.new role_params
     if @role.save
       flash[:success] = flash_message "created"
       redirect_to admin_roles_path
@@ -53,5 +56,13 @@ class Admin::RolesController < ApplicationController
   private
   def role_params
     params.require(:role).permit Role::ATTRIBUTES_ROLE_PARAMS
+  end
+
+  def load_role
+    @role = Role.find_by id: params[:id]
+    unless @role
+      redirect_to admin_roles_path
+      flash[:alert] = flash_message "not_find"
+    end
   end
 end

@@ -99,11 +99,11 @@ class UserSubject < ApplicationRecord
       create_activity key: key, owner: current_user, recipient: user if key
       if notification_key
         if is_of_user? current_user && (self.progress? || self.finish?)
-          CourseNotificationBroadCastJob.perform_now course: course,
+          Notifications::CourseNotificationBroadCastJob.perform_now course: course,
             key: notification_key, user_id: current_user.id,
             user_subject: self
         else
-          UserSubjectNotificationBroadCastJob.perform_now user_subject: self,
+          Notifications::UserSubjectNotificationBroadCastJob.perform_now user_subject: self,
             key: notification_key, user_id: current_user.id
         end
       end

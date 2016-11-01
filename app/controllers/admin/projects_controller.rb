@@ -1,5 +1,6 @@
 class Admin::ProjectsController < ApplicationController
-  load_and_authorize_resource
+  before_action :authorize
+  before_action :load_project, except: [:index, :new, :create]
 
   def index
     add_breadcrumb_index "projects"
@@ -51,5 +52,13 @@ class Admin::ProjectsController < ApplicationController
   private
   def params_projects
     params.require(:project).permit Project::ATTRIBUTES_PARAMS
+  end
+
+  def load_project
+    @project = Project.find_by id: params[:id]
+    unless @project
+      redirect_to admin_projects_path
+      flash[:alert] = flash_message "not_find"
+    end
   end
 end

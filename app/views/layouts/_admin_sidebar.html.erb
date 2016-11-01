@@ -93,15 +93,14 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <%= render "layouts/side_panel",
-            object: [Evaluation, EvaluationTemplate, Rank] %>
+            objects: Settings.object_evaluation %>
         </li>
         <li id="systems-header" class="treeview">
           <a href="javascript:void(0)">
             <i class="fa fa-book"></i><span><%= t "layouts.system" %></span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
-          <%= render "layouts/side_panel", object: [Role, Location, University,
-            Status, UserType] %>
+          <%= render "layouts/side_panel", objects: Settings.objects_system %>
         </li>
         <li id="schedule-header" class="treeview">
           <a href="javascript:void(0)">
@@ -146,7 +145,7 @@
             <i class="fa fa-book"></i><span><%= t "layouts.exams" %></span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
-          <%= render "layouts/side_panel", object: [Exam, Question] %>
+          <%= render "layouts/side_panel", objects: Settings.object_exam %>
         </li>
         <li>
           <%= link_to admin_feed_backs_path do %>

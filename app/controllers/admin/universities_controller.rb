@@ -1,8 +1,9 @@
 class Admin::UniversitiesController < ApplicationController
-  load_and_authorize_resource except: :show
+  before_action :load_university, except: [:index, :new, :create]
+  before_action :authorize
 
   def index
-    @university = University.new
+    @universities = University.all
     add_breadcrumb_index "universities"
     respond_to do |format|
       format.html
@@ -13,11 +14,13 @@ class Admin::UniversitiesController < ApplicationController
   end
 
   def new
+    @university = University.new
     add_breadcrumb_path "universities"
     add_breadcrumb_new "universities"
   end
 
   def create
+    @university = University.new university_params
     respond_to do |format|
       if @university.save
         flash.now[:success] = flash_message "created"
@@ -58,5 +61,13 @@ class Admin::UniversitiesController < ApplicationController
   private
   def university_params
     params.require(:university).permit University::ATTRIBUTES_PARAMS
+  end
+
+  def load_university
+    @university = University.find_by id: params[:id]
+    unless @university
+      redirect_to admin_universities_path
+      flash[:alert] = flash_message "not_find"
+    end
   end
 end
