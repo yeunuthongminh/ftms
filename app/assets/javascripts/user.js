@@ -1,4 +1,7 @@
 $(document).on("turbolinks:load", function() {
+  $('#total_trainees .dropdown-menu').click(function(event){
+    event.stopPropagation();
+  });
   $('#color-picker').spectrum({
     preferredFormat: "name",
     showPalette: true,
