@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
     @user = User.includes(:profile).find_by id: params[:id]
     if @user.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to root_path
+      back_or_root
     end
   end
 
@@ -43,19 +43,19 @@ class ApplicationController < ActionController::Base
     @subject = Subject.find_by id: params[:id]
     if @subject.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to root_path
+      back_or_root
     end
   end
 
   def authorize
-    authorize_with_multiple page_params, Admin::UserFunctionPolicy
+    authorize_with_multiple page_params, UserFunctionPolicy
   end
 
   def load_task
     @task = Task.find_by id: params[:id]
     if @task.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to root_path
+      back_or_root
     end
   end
 
@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
     @user_task = UserTask.find_by id: params[:id]
     if @user_task.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to root_path
+      back_or_root
     end
   end
 
@@ -71,8 +71,12 @@ class ApplicationController < ActionController::Base
     @user_subject = UserSubject.find_by id: params[:id]
     if @user_subject.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to root_path
+      back_or_root
     end
+  end
+
+  def authorize
+    authorize_with_multiple page_params, UserFunctionPolicy
   end
 
   protected
@@ -83,16 +87,22 @@ class ApplicationController < ActionController::Base
   private
   rescue_from ActiveRecord::RecordNotFound do
     flash[:alert] = flash_message "record_not_found"
-    redirect_to root_url
+    back_or_root
+  end
+
+  def back_or_root
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
   end
 
   def user_not_authorized
     flash[:alert] = t "error.not_authorize"
-    redirect_to root_url
+    back_or_root
   end
 
   def set_current_role
-    current_user.current_role ||= current_user.roles.pluck(:role_type) if current_user
+    current_user.current_role ||= current_user.roles.pluck(:role_type).first if current_user
   end
 
   def get_root_path
@@ -150,7 +160,7 @@ class ApplicationController < ActionController::Base
   def redirect_if_object_nil object
     if object.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to root_path
+      back_or_root
     end
   end
 end
