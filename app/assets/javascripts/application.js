@@ -68,6 +68,7 @@
 //= require exam
 //= require question
 //= require statistic
+//= require spectrum
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();
