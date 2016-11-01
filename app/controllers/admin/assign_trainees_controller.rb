@@ -1,6 +1,6 @@
 class Admin::AssignTraineesController < ApplicationController
-  authorize_resource :course, class: false
   before_action :find_course, only: [:edit, :update]
+  before_action :authorize, only: [:edit, :update]
 
   def edit
     @supports = Supports::Course.new course: @course
@@ -10,7 +10,7 @@ class Admin::AssignTraineesController < ApplicationController
   end
 
   def update
-    if params[:course] && @course.update_attributes course_params
+    if params[:course] && @course.update_attributes(course_params)
       ExpectedTrainingDateService.new(course: @course).perform
       flash[:success] = flash_message "updated"
     else
