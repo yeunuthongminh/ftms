@@ -173,9 +173,9 @@ function totalTraineeValue() {
 
     percent = total_trainee_in_month_filter / total_trainee_in_month * 100;
     if (percent == 100 || total_trainee_in_month == 0) {
-      $('#total .total-trainees-month-' + $(value).data('month')).text(total_trainee_in_month_filter.toLocaleString());
+      $('#fixed-bottom-body .total-trainees-month-' + $(value).data('month')).text(total_trainee_in_month_filter.toLocaleString());
     } else {
-      $('#total .total-trainees-month-' + $(value).data('month')).text(total_trainee_in_month_filter.toLocaleString() + ' - ' + Math.round(percent).toFixed(2) + '%');
+      $('#fixed-bottom-body .total-trainees-month-' + $(value).data('month')).text(total_trainee_in_month_filter.toLocaleString() + ' - ' + Math.round(percent).toFixed(2) + '%');
     }
   });
 }

@@ -34,20 +34,11 @@
     &.trainee-by-month{
       @include ellipsis(100px);
     }
-
-    &.total-sidebar {
-      @include ellipsis(150px);
-      border-right: none;
-    }
-
-    &.none {
-      @include ellipsis(125px);
-      position: relative;
-    }
   }
 
   .month {
     @include experiences-title(31px);
+    position: relative;
   }
 
   .all-months {
@@ -68,26 +59,6 @@
       height: 30px;
       min-height: 30px;
       max-height: 30px;
-    }
-  }
-
-  #total {
-    margin-top: -6px;
-    float: left;
-
-    .total-title {
-      float: left;
-      border: 1px solid #CCC;
-      @include ellipsis(310px);
-      padding: 0px 5px;
-    }
-
-    .total-cell {
-      display: table-cell;
-      font-weight: bold;
-      border: 1px solid #CCC;
-      @include ellipsis(100px);
-      padding: 0px 5px;
     }
   }
 }

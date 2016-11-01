@@ -1,3 +1,6 @@
+@import "variables";
+@import "mixin";
+
 .tcell {
   display: table-cell;
   border-right: 1px solid #ccc;
@@ -109,12 +112,14 @@
   max-height:22px;
   min-height: 22px;
   font-weight: normal;
+  border-top: 1px solid #ccc;
 
   .scroll-month {
     height: 22px;
     .tcell {
       height: 22px;
       text-align: right;
+      @include ellipsis(100px);
     }
   }
 }
