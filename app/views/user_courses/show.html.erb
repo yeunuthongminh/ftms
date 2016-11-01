@@ -1,4 +1,4 @@
-<% provide :title, @course.name %>
+<% provide :title, @user_course_supports.course.name %>
 
 <div id="user-course-show" class="row">
   <div class="col-md-9">
@@ -11,32 +11,40 @@
           <% end %>
         </li>
         <li><%= link_to t("layouts.all_courses"), courses_path %></li>
-        <li class="active"><%= @course.name %></li>
+        <li class="active"><%= @user_course_supports.course.name %></li>
       </ul>
     </div>
 
-    <span class="header-title"><%= @course.name %></span>
+    <span class="header-title"><%= @user_course_supports.course.name %></span>
 
-    <span class="label-status <%= set_background_color_status @course.status %>">
-      <%= t "courses.labels.status.#{@course.status}" %>
+    <span class="label-status
+      <%= set_background_color_status @user_course_supports.course.status %>">
+      <%= t "courses.labels.status.#{@user_course_supports.course.status}" %>
     </span>
 
-    <div class="description"><%= @course.description %></div>
+    <div class="description">
+      <%= @user_course_supports.course.description %>
+    </div>
 
     <div class="subject-list">
-      <% @user_subjects.each_with_index do |user_subject, index| %>
+      <% @user_course_supports.user_subjects.each_with_index do |user_subject,
+        index| %>
         <div class="col-xs-1">
-          <%= link_to user_course_subject_path(@user_course, user_subject.subject),
+          <%= link_to user_course_subject_path(@user_course_supports
+            .user_course, user_subject.subject),
             title: t("user_subjects.statuses.#{user_subject.status}") do %>
             <% if index == 0 %>
-              <div class="node <%= set_background_color_status user_subject.status %>"></div>
+              <div class="node <%= set_background_color_status user_subject
+                .status %>">
+              </div>
             <% else %>
               <div class="node node--connected
                 <%= set_background_color_status user_subject.status %>"></div>
             <% end %>
           <% end %>
         </div>
-        <%= link_to user_course_subject_path(@user_course, user_subject.subject) do %>
+        <%= link_to user_course_subject_path(@user_course,
+          user_subject.subject) do %>
           <div class="subject col-xs-11 row">
             <div class="col-xs-2 subject-image">
               <%= set_image user_subject %>
@@ -70,4 +78,5 @@
     <%= render "info_panel" %>
   </div>
 </div>
-<%= render "shared/member_modal" %>
+<%= render "shared/member_modal", trainers: @user_course_supports.users.trainers,
+  trainees: @user_course_supports.users.trainees %>

@@ -8,12 +8,12 @@
       <div class="modal-body info-panel">
         <div class="member-title"><%= t "subjects.modal.trainers" %></div>
         <ul class="user-list clearfix">
-          <%= render partial: "shared/member", collection: @subject_supports
-            .users.trainers, as: :user %></ul>
+          <%= render partial: "shared/member", collection: trainers, as: :user %>
+        </ul>
         <div class="member-title"><%= t "subjects.modal.trainees" %></div>
         <ul class="user-list clearfix">
-          <%= render partial: "shared/member", collection: @subject_supports
-            .users.trainees, as: :user %></ul>
+          <%= render partial: "shared/member", collection: trainees, as: :user %>
+        </ul>
       </div>
     </div>
   </div>
