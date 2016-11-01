@@ -6,7 +6,8 @@
     </h3>
   </div>
   <div class="box-body no-padding">
-    <%= render "shared/member_panel" %>
+    <%= render "shared/member_panel", show_members: @subject_supports.users
+      .show_members, count_member: @subject_supports.count_member %>
   </div>
 </div>
 
