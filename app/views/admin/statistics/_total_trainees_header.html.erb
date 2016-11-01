@@ -36,6 +36,12 @@
           <div class="clear-both all-months">
             <div class="month">
               <%= t "statistics.total_trainees.headers.months" %>
+              <%= link_to filter_datas_path(type: :month_ranges, filter_type: :total_trainees),
+                remote: true,
+                class: "open-select",
+                data: {name: "f-month_ranges"} do %>
+                <i class="fa ic ic-filter month_ranges"></i>
+              <% end %>
             </div>
 
             <% @statistics.month_ranges.each do |month| %>
