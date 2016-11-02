@@ -1,4 +1,5 @@
 class Admin::StatusSubjectsController < ApplicationController
+  before_action :authorize
   before_action :load_data
 
   def update

@@ -1,8 +1,8 @@
 class Admin::RanksController < ApplicationController
-  load_and_authorize_resource
+  before_action :authorize
+  before_action :load_rank, only: [:edit, :update, :destroy]
 
   def index
-    @rank = Rank.new
     respond_to do |format|
       format.html {add_breadcrumb_index "ranks"}
       format.json {
@@ -12,11 +12,13 @@ class Admin::RanksController < ApplicationController
   end
 
   def new
+    @rank = Rank.new
     add_breadcrumb_path "ranks"
     add_breadcrumb_new "ranks"
   end
 
   def create
+    @rank = Rank.new rank_params
     if @rank.save
       flash[:success] = flash_message "created"
       redirect_to admin_ranks_path
@@ -54,5 +56,13 @@ class Admin::RanksController < ApplicationController
   private
   def rank_params
     params.require(:rank).permit Rank::ATTRIBUTES_PARAMS
+  end
+
+  def load_rank
+    @rank = Rank.find_by id: params[:id]
+    unless @rank
+      redirect_to admin_ranks_path
+      flash[:alert] = flash_message "not_find"
+    end
   end
 end

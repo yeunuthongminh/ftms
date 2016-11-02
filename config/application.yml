@@ -125,6 +125,20 @@ defaults: &defaults
     - update
     - show
     - destroy
+  object_evaluation:
+    - Evaluation
+    - EvaluationTemplate
+    - Rank
+  objects_system:
+    - Role
+    - Location
+    - University
+    - ProgrammingLanguage
+    - Status
+    - UserType
+  object_exam:
+    - Exam
+    - Question
 development:
   <<: *defaults
   neat_setting: 800

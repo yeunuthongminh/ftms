@@ -1,17 +1,20 @@
 class Admin::UserTypesController < ApplicationController
-  load_and_authorize_resource except: :show
+  before_action :load_user_type, only: [:edit, :update, :destroy]
+  before_action :authorize
 
   def index
-    @user_type = UserType.new
+    @user_types = UserType.all
     add_breadcrumb_index "user_types"
   end
 
   def new
+    @user_type = UserType.new
     add_breadcrumb_path "user_types"
     add_breadcrumb_new "user_types"
   end
 
   def create
+    @user_type = UserType.new user_type_params
     respond_to do |format|
       if @user_type.save
         flash.now[:success] = flash_message "created"
@@ -52,5 +55,13 @@ class Admin::UserTypesController < ApplicationController
   private
   def user_type_params
     params.require(:user_type).permit UserType::ATTRIBUTES_PARAMS
+  end
+
+  def load_user_type
+    @user_type = UserType.find_by id: params[:id]
+    unless @user_type
+      redirect_to admin_user_user_types_path
+      flash[:alert] = flash_message "not_find"
+    end
   end
 end

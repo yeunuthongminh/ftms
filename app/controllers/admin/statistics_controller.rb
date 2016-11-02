@@ -1,6 +1,5 @@
 class Admin::StatisticsController < ApplicationController
-  load_and_authorize_resource class: false
-  skip_load_resource only: :create
+  before_action :authorize
   before_action :load_locations
 
   def index

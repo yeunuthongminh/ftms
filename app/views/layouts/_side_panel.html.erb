@@ -1,9 +1,9 @@
 <ul class="treeview-menu">
-  <% object.each do |item| %>
+  <% objects.each do |object| %>
     <li>
-      <%= link_to [@namespace.to_sym, item.table_name.to_sym] do %>
+      <%= link_to [@namespace.to_sym, object.constantize.table_name.to_sym] do %>
         <i class="fa fa-circle-o"></i>
-        <%= t "layouts.#{item.table_name}" %>
+        <%= t "layouts.#{object.constantize.table_name}" %>
       <% end %>
     </li>
   <% end %>
