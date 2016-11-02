@@ -42,6 +42,7 @@ gem "business_time"
 gem "paranoia", github: "rubysherpas/paranoia", branch: "rails5"
 gem "jquery-countdown-rails"
 gem "pundit"
+gem "activerecord-import"
 
 group :development, :test do
   gem "fabrication"

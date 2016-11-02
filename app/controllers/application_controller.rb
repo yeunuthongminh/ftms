@@ -26,9 +26,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def page_params
-    Hash[:controller, params[:controller], :action, params[:action],
-      :user_functions, current_user.user_functions]
+  protected
+  def after_sign_in_path_for resource
+    get_root_path
+  end
+
+  private
+  rescue_from ActiveRecord::RecordNotFound do
+    flash[:alert] = flash_message "record_not_found"
+    back_or_root
+  end
+
+  def authorize
+    authorize_with_multiple page_params, Admin::UserFunctionPolicy
   end
 
   def load_user
@@ -55,10 +65,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def authorize
-    authorize_with_multiple page_params, UserFunctionPolicy
-  end
-
   def load_task
     @task = Task.find_by id: params[:id]
     if @task.nil?
@@ -75,6 +81,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def back_or_root
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
   def load_user_subject
     @user_subject = UserSubject.find_by id: params[:id]
     if @user_subject.nil?
@@ -83,25 +95,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def authorize
-    authorize_with_multiple page_params, UserFunctionPolicy
-  end
-
-  protected
-  def after_sign_in_path_for resource
-    get_root_path
-  end
-
-  private
-  rescue_from ActiveRecord::RecordNotFound do
-    flash[:alert] = flash_message "record_not_found"
-    back_or_root
-  end
-
-  def back_or_root
-    redirect_to :back
-  rescue ActionController::RedirectBackError
-    redirect_to root_path
+  def page_params
+    Hash[:controller, params[:controller], :action, params[:action],
+      :user_functions, current_user.user_functions]
   end
 
   def user_not_authorized
