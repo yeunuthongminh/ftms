@@ -32,7 +32,7 @@
         </div>
       </div>
       <br>
-      <div class="row">
+      <div class="row form-group">
         <div class="col-md-2 text-right">
           <span><%= t "courses.start_date" %></span>
         </div>
@@ -52,10 +52,9 @@
             placeholder: I18n.t("courses.form.input_course_end_date") %>
         </div>
       </div>
-      <br>
     </div>
   </div>
-  <div class="row">
+  <div class="row form-group">
     <div class="col-md-2 text-right">
       <span><%= t "courses.language" %></span>
     </div>
@@ -72,7 +71,19 @@
         {prompt: ""}, {selected: f.object.location_id, required: true,
         class: "form-control"} %>
     </div>
-  </div><br>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-md-2 text-right">
+      <span><%= t "courses.program" %></span>
+    </div>
+    <div class="col-md-3">
+      <%= f.select :program_id, @supports.programs,
+        {prompt: ""}, {selected: f.object.program_id, class: "form-control"} %>
+    </div>
+    <div class="clear-fix"></div>
+  </div>
+
   <div class="row">
     <div class="col-md-2 text-right">
       <span><%= t "courses.list_subjects" %></span>

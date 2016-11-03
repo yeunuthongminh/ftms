@@ -7,7 +7,7 @@ class Course < ApplicationRecord
 
   USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy, :deleted_at]]
   COURSE_ATTRIBUTES_PARAMS = [:name, :image, :description,
-    :programming_language_id, :location_id,
+    :programming_language_id, :location_id, :program_id,
     :start_date, :end_date, documents_attributes:
     [:id, :title, :document_link, :description, :_destroy], subject_ids: []]
 
