@@ -1,11 +1,55 @@
 var open_select_event_target;
 
 $(document).on("turbolinks:load", function () {
+  restore_filter_session();
   filter_date();
   validateFilterRank();
   intSearcher();
   resetOrder();
   show_blank_option();
+
+  $('div.dropdown').on('hide.bs.dropdown', function() {
+    $(':checkbox').each(function(i,item){
+      this.checked = item.defaultChecked;
+    });
+  });
+
+  $('#filter_form').submit(function(e) {
+    if ($('#month-from').length == 0 && $('#month-to').length == 0) {
+      var filter_date = sessionStorage.getItem('filter_date');
+      if (filter_date) {
+        filter_date = filter_date.split("-");
+        var locations = [];
+        var stages = [];
+
+        $('input:checkbox:not(:checked)', '#locations-checkbox').each(function() {
+          locations.push($(this).val());
+        });
+        $('input:checkbox:not(:checked)', '#stages-checkbox').each(function() {
+          stages.push($(this).val());
+        });
+
+        $('<input>').attr({
+          type: 'hidden',
+          id: 'filter_start_date',
+          name: 'start_date',
+          value: filter_date[0]
+        }).appendTo('form#filter_form');
+
+        $('<input>').attr({
+          type: 'hidden',
+          id: 'filter_end_date',
+          name: 'end_date',
+          value: filter_date[1]
+        }).appendTo('form#filter_form');
+
+        store_session(locations, stages, filter_date[0], filter_date[1]);
+      }
+    } else {
+      set_filter_date_value();
+    }
+    return true;
+  })
 });
 
 $(window).on("resize", function(){
@@ -232,6 +276,12 @@ function filter_date() {
   $('#month-filter').click(function() {
     html = "<div class='filters f-filter-month'><div>"+I18n.t("buttons.from")+"<input type='text' name='month-from' id='month-from' class='date_input'></div><div class='margin-top-20'>"+I18n.t("buttons.to")+"<input type='text' name='month-to' id='month-to' class='date_input'></div><hr><a class='btn btn-primary btn-sm' href='javascript:void(0)' id='date_submit'>"+I18n.t("buttons.ok")+"</a><a href='javascript:void(0)' class='btn btn-sm btn-default button-cancel'>"+I18n.t("buttons.cancel")+"</a></div>";
     $('.filter-form').html(html);
+    var filter_date = sessionStorage.getItem('filter_date');
+    if (filter_date) {
+      filter_date = filter_date.split("-");
+      $('#month-from').val(filter_date[0]);
+      $('#month-to').val(filter_date[1]);
+    }
 
     $('.date_input').bind('focus', function() {
       $('.date_input').datepicker({
@@ -249,6 +299,8 @@ $(document).on('click', '#date_submit', function() {
   var stages = [];
   var start_date = $('#month-from').val();
   var end_date = $('#month-to').val();
+
+  set_filter_date_value();
   $('input:checkbox:not(:checked)', '#locations-checkbox').each(function() {
     locations.push($(this).val());
   });
@@ -264,9 +316,81 @@ $(document).on('click', '#date_submit', function() {
     if (stages.length > 0) {
       href_stages = "&stage_ids=" + stages;
     }
+    store_session(locations, stages, start_date, end_date);
+
     var filter_type = "?type=total_trainees";
     href = location.protocol + '//' + location.host + location.pathname
       + filter_type + "&start_date=" + start_date + "&end_date=" + end_date + href_locations + href_stages;
     $(this).attr('href', href);
   }
 });
+
+function restore_filter_session() {
+  var not_checked_locations = sessionStorage.getItem('not_checked_locations');
+  var not_checked_stages = sessionStorage.getItem('not_checked_stages');
+  if (not_checked_locations) {
+    not_checked_locations = not_checked_locations.split(',');
+    $(':checkbox', '#locations-checkbox').each(function(index, value) {
+      if ($.inArray($(value).val(), not_checked_locations) == -1) {
+        $(value).prop('checked', true);
+      } else {
+        $(value).prop('checked', false);
+      }
+    });
+  }
+
+  if (not_checked_stages) {
+    not_checked_stages = not_checked_stages.split(',');
+    $(':checkbox', '#stages-checkbox').each(function(index, value) {
+      if ($.inArray($(value).val(), not_checked_stages) == -1) {
+        $(value).prop('checked', true);
+      } else {
+        $(value).prop('checked', false);
+      }
+    });
+  }
+}
+
+function store_session(locations, stages, start_date, end_date) {
+  sessionStorage.setItem('not_checked_locations', locations);
+  sessionStorage.setItem('not_checked_stages', stages);
+  sessionStorage.setItem('filter_date', start_date + "-" + end_date);
+}
+
+function set_filter_date_value() {
+  var from = $('#month-from').val();
+  var to = $('#month-to').val();
+  var filter_start_date = $('#filter_start_date');
+  var filter_end_date = $('#filter_end_date');
+  var locations = [];
+  var stages = [];
+
+  $('input:checkbox:not(:checked)', '#locations-checkbox').each(function() {
+    locations.push($(this).val());
+  });
+  $('input:checkbox:not(:checked)', '#stages-checkbox').each(function() {
+    stages.push($(this).val());
+  });
+
+  if (Date.parse(from) && Date.parse(to)) {
+    if (filter_start_date > 0 && filter_end_date > 0) {
+      filter_start_date.val(from);
+      filter_end_date.val(to);
+    } else {
+      $('<input>').attr({
+        type: 'hidden',
+        id: 'filter_start_date',
+        name: 'start_date',
+        value: from
+      }).appendTo('form#filter_form');
+
+      $('<input>').attr({
+        type: 'hidden',
+        id: 'filter_end_date',
+        name: 'end_date',
+        value: to
+      }).appendTo('form#filter_form');
+    }
+    store_session(locations, stages, from, to);
+  }
+}
