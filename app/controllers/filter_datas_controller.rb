@@ -131,7 +131,7 @@ class FilterDatasController < ApplicationController
     @filter = current_user.filters.find_or_create_by filter_type: load_filter_type,
       target_id: filter_params[:target_id], target_params: filter_params[:target_params]
     respond_to do |format|
-      if @filter.update_attributes filter_params
+      if @filter.update_attributes filter_params && @filter.content
         format.json {render json: {content: JSON.parse(@filter.content)}}
       else
         format.json {render json: :fail}
