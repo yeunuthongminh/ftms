@@ -56,6 +56,8 @@ class User < ApplicationRecord
   has_many :exams, dependent: :destroy
   has_many :user_functions, dependent: :destroy
   has_many :functions, through: :user_functions
+  has_many :trainer_programs, dependent: :destroy
+  has_many :programs, through: :trainer_programs
 
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password

@@ -13,6 +13,7 @@ class Course < ApplicationRecord
 
   belongs_to :programming_language
   belongs_to :location
+  belongs_to :program
 
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
 

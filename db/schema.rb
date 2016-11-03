@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101033913) do
+ActiveRecord::Schema.define(version: 20161103021928) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -93,7 +93,9 @@ ActiveRecord::Schema.define(version: 20161101033913) do
     t.datetime "updated_at",                                        null: false
     t.integer  "location_id"
     t.datetime "deleted_at"
+    t.integer  "program_id"
     t.index ["deleted_at"], name: "index_courses_on_deleted_at", using: :btree
+    t.index ["program_id"], name: "index_courses_on_program_id", using: :btree
   end
 
   create_table "documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -272,6 +274,15 @@ ActiveRecord::Schema.define(version: 20161101033913) do
     t.index ["deleted_at"], name: "index_programming_languages_on_deleted_at", using: :btree
   end
 
+  create_table "programs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "program_type"
+    t.datetime "deleted_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["deleted_at"], name: "index_programs_on_deleted_at", using: :btree
+  end
+
   create_table "project_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "project_id"
     t.string   "name"
@@ -422,6 +433,17 @@ ActiveRecord::Schema.define(version: 20161101033913) do
     t.index ["user_id"], name: "index_track_logs_on_user_id", using: :btree
   end
 
+  create_table "trainer_programs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "program_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_trainer_programs_on_deleted_at", using: :btree
+    t.index ["program_id"], name: "index_trainer_programs_on_program_id", using: :btree
+    t.index ["user_id"], name: "index_trainer_programs_on_user_id", using: :btree
+  end
+
   create_table "universities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -552,6 +574,7 @@ ActiveRecord::Schema.define(version: 20161101033913) do
 
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "subjects"
+  add_foreign_key "courses", "programs"
   add_foreign_key "evaluation_details", "evaluation_templates"
   add_foreign_key "evaluation_details", "evaluations"
   add_foreign_key "evaluations", "users"
@@ -569,6 +592,8 @@ ActiveRecord::Schema.define(version: 20161101033913) do
   add_foreign_key "role_functions", "roles"
   add_foreign_key "task_masters", "subjects"
   add_foreign_key "tasks", "course_subjects", on_delete: :cascade
+  add_foreign_key "trainer_programs", "programs"
+  add_foreign_key "trainer_programs", "users"
   add_foreign_key "user_notifications", "notifications"
   add_foreign_key "user_notifications", "users"
   add_foreign_key "user_roles", "roles"
