@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       resources :clone_courses, only: :create
     end
     resources :roles do
-      resource :allocate_permissions
+      resource :allocate_functions
     end
     resources :subjects do
       resources :task_masters, only: :index
