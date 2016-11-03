@@ -71,3 +71,7 @@ en:
       edit: "Edit"
     statistics:
       all: "Statistics"
+    programs:
+      all: "All Programs"
+      edit: "Edit"
+      new: "New"

@@ -1,0 +1,13 @@
+<%= form_for [:admin, @program] do |f| %>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <%= f.label :program_name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+  <%= render "shared/error_messages", object: @program %>
+  <%= render "shared/form_assign_trainer", f: f,
+    assigned_trainer_ids: @program_supports.assigned_trainer_ids,
+    trainer_programs_handler: @program_supports.trainer_programs_handler,
+    action: action %>
+<% end %>

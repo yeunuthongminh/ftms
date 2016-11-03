@@ -1,0 +1,18 @@
+<%= f.fields_for :trainer_programs, trainer_programs_handler do
+  |trainer_program_builder| %>
+  <tr>
+    <td class="assign-checkbox">
+      <%= trainer_program_builder.check_box :_destroy,
+        {
+          checked: trainer_in_program(assigned_trainer_ids, trainer_program_builder)
+        }, false, true %>
+      <%= trainer_program_builder.hidden_field :user_id,
+        value: trainer_program_builder.object.user_id %>
+      <%= trainer_program_builder.hidden_field :id,
+        value: trainer_program_builder.object.id %>
+      <%= trainer_program_builder.hidden_field :deleted_at, value: nil %>
+    </td>
+    <td><%= trainer_program_builder.object.user.name %></td>
+    <td><%= trainer_program_builder.object.user.email %></td>
+  </tr>
+<% end %>
