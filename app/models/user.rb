@@ -27,20 +27,10 @@ class User < ApplicationRecord
 
   attr_accessor :current_role
 
-  belongs_to :trainer, class_name: User.name, foreign_key: :trainer_id
   belongs_to :role
 
-  has_one :location
-  has_many :user_courses, dependent: :destroy
-  has_many :user_subjects, dependent: :destroy
-  has_many :user_tasks, dependent: :destroy
-  has_many :courses, through: :user_courses
-  has_many :course_subjects, through: :user_subjects
-  has_many :tasks, through: :user_tasks
   has_one :profile, dependent: :destroy
-  has_one :evaluation, dependent: :destroy
-  has_many :trainees, class_name: User.name, foreign_key: :trainer_id
-  has_many :notes, dependent: :destroy
+
   has_many :notifications, dependent: :destroy
   has_many :user_notifications, dependent: :destroy
   has_many :senders, class_name: Conversation.name, foreign_key: :sender_id,
@@ -53,10 +43,8 @@ class User < ApplicationRecord
   has_many :feed_backs, dependent: :destroy
   has_many :track_logs, dependent: :destroy
   has_many :filters, dependent: :destroy
-  has_many :exams, dependent: :destroy
   has_many :user_functions, dependent: :destroy
   has_many :functions, through: :user_functions
-  has_many :trainer_programs, dependent: :destroy
   has_many :programs, through: :trainer_programs
 
   validates :name, presence: true, uniqueness: true
