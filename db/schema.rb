@@ -180,6 +180,15 @@ ActiveRecord::Schema.define(version: 20161101033913) do
     t.index ["user_id"], name: "index_filters_on_user_id", using: :btree
   end
 
+  create_table "functions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "model_class"
+    t.string   "action"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_functions_on_deleted_at", using: :btree
+  end
+
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -226,17 +235,6 @@ ActiveRecord::Schema.define(version: 20161101033913) do
     t.string   "parameters"
     t.index ["deleted_at"], name: "index_notifications_on_deleted_at", using: :btree
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
-  end
-
-  create_table "permissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "model_class"
-    t.string   "action"
-    t.integer  "role_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_permissions_on_deleted_at", using: :btree
-    t.index ["role_id"], name: "index_permissions_on_role_id", using: :btree
   end
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -334,6 +332,13 @@ ActiveRecord::Schema.define(version: 20161101033913) do
     t.index ["deleted_at"], name: "index_results_on_deleted_at", using: :btree
     t.index ["exam_id"], name: "index_results_on_exam_id", using: :btree
     t.index ["question_id"], name: "index_results_on_question_id", using: :btree
+  end
+
+  create_table "role_functions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "role_id"
+    t.integer "function_id"
+    t.index ["function_id"], name: "index_role_functions_on_function_id", using: :btree
+    t.index ["role_id"], name: "index_role_functions_on_role_id", using: :btree
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -434,6 +439,13 @@ ActiveRecord::Schema.define(version: 20161101033913) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_user_courses_on_deleted_at", using: :btree
     t.index ["user_id", "course_id"], name: "index_user_courses_on_user_id_and_course_id", unique: true, using: :btree
+  end
+
+  create_table "user_functions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id"
+    t.integer "function_id"
+    t.index ["function_id"], name: "index_user_functions_on_function_id", using: :btree
+    t.index ["user_id"], name: "index_user_functions_on_user_id", using: :btree
   end
 
   create_table "user_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -550,10 +562,11 @@ ActiveRecord::Schema.define(version: 20161101033913) do
   add_foreign_key "notes", "evaluations"
   add_foreign_key "notes", "users"
   add_foreign_key "notifications", "users"
-  add_foreign_key "permissions", "roles"
   add_foreign_key "profiles", "locations"
   add_foreign_key "profiles", "users"
   add_foreign_key "project_requirements", "projects"
+  add_foreign_key "role_functions", "functions"
+  add_foreign_key "role_functions", "roles"
   add_foreign_key "task_masters", "subjects"
   add_foreign_key "tasks", "course_subjects", on_delete: :cascade
   add_foreign_key "user_notifications", "notifications"

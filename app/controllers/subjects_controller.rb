@@ -1,9 +1,13 @@
 class SubjectsController < ApplicationController
-  load_and_authorize_resource :user
-  load_and_authorize_resource :subject, only: :show
+  before_action :load_user
+  before_action :load_subject
 
   def show
-    @subject_supports = Supports::SubjectTrainee.new subject: @subject,
-      user_course_id: params[:user_course_id]
+    if (authorize @user) && (authorize @subject)
+      @subject_supports = Supports::SubjectTrainee.new subject: @subject,
+        user_course_id: params[:user_course_id]
+    else
+      redirect_to root_path
+    end
   end
 end

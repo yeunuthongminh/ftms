@@ -1,5 +1,6 @@
 class Admin::CloneCoursesController < ApplicationController
-  load_and_authorize_resource :course
+  before_action :load_course, only: :edit
+  before_action :authorize
 
   def create
     clone_course_service = CloneCourseService.new course: @course

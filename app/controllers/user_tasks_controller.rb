@@ -1,29 +1,33 @@
 class UserTasksController < ApplicationController
-  load_and_authorize_resource
+  before_action :load_user_task
 
   def update
-    new_status = params[:status]
-    @old_status = @user_task.status
-    user_task_service = MailerServices::UserTaskService.new user_task: @user_task,
-      status: new_status
-    if new_status == Settings.status.finished
-      @user_task_history = user_task_service.perform
-      if @user_task.update_attributes status: Settings.status.finished
-        flash.now[:success] = flash_message "updated"
+    if authorize @user_task
+      new_status = params[:status]
+      @old_status = @user_task.status
+      user_task_service = MailerServices::UserTaskService.new user_task: @user_task,
+        status: new_status
+      if new_status == Settings.status.finished
+        @user_task_history = user_task_service.perform
+        if @user_task.update_attributes status: Settings.status.finished
+          flash.now[:success] = flash_message "updated"
+        else
+          flash.now[:error] = flash_message "not_updated"
+        end
       else
-        flash.now[:error] = flash_message "not_updated"
+        if user_task_service.perform
+          flash.now[:success] = flash_message "updated"
+        else
+          flash.now[:error] = flash_message "not_updated"
+        end
+      end
+      track_activity
+      load_data
+      respond_to do |format|
+        format.js
       end
     else
-      if user_task_service.perform
-        flash.now[:success] = flash_message "updated"
-      else
-        flash.now[:error] = flash_message "not_updated"
-      end
-    end
-    track_activity
-    load_data
-    respond_to do |format|
-      format.js
+      redirect_to root_path
     end
   end
 

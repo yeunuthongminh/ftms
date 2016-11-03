@@ -1,14 +1,18 @@
 class FeedBacksController < ApplicationController
-  load_and_authorize_resource
+  after_action :verify_authorized
 
   def create
-    @feed_back = current_user.feed_backs.build feed_back_params
-    if @feed_back.save
-      flash.now[:success] = flash_message "created"
-    end
-    respond_to do |format|
-      format.html
-      format.js
+    @feed_back = current_user.feed_backs.new feed_back_params
+    if authorize @feed_back
+      if @feed_back.save
+        flash.now[:success] = flash_message "created"
+      end
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      redirect_to root_path
     end
   end
 

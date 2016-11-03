@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
-  skip_authorize_resource :edit
-  before_action :load_user, :load_university, only: :edit
+  before_action :load_university, only: :edit
   before_action :load_data, only: :show
+  before_action :load_user
+  after_action :verify_authorized
+  before_action :authorize_user
 
   def show
     @supports = Supports::User.new @user
@@ -43,5 +44,9 @@ class UsersController < ApplicationController
 
   def load_university
     @universities = University.all
+  end
+
+  def authorize_user
+    authorize @user
   end
 end

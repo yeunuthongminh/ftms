@@ -1,12 +1,11 @@
 class Admin::StatisticsController < ApplicationController
-  load_and_authorize_resource class: false
-  skip_load_resource only: :create
 
   include FilterData
 
-  before_action :load_locations, only: :index
+  before_action :authorize
   before_action :load_statistic_view
   before_action :load_filter, only: :index
+  before_action :load_locations
 
   def index
     add_breadcrumb_index "statistics"

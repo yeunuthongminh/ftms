@@ -1,11 +1,9 @@
 class Admin::SubjectsController < ApplicationController
-  load_and_authorize_resource
-  load_and_authorize_resource :course
-  skip_load_resource :course, only: :show
-  skip_load_resource only: [:edit, :update]
+  before_action :authorize
   before_action :find_subject_in_edit, only: [:edit, :update]
+  before_action :load_subject
   before_action :load_data, only: :show
-  before_action :load_subject_detail, only: [:new, :edit]
+  before_action :load_subject_detail, only: [:edit]
 
   def index
     @subject = Subject.new
@@ -24,8 +22,10 @@ class Admin::SubjectsController < ApplicationController
   end
 
   def new
+    @subject = Subject.new
     @subject.documents.build
     @subject.task_masters.build
+    load_subject_detail
     add_breadcrumb_path "subjects"
     add_breadcrumb_new "subjects"
   end
@@ -73,11 +73,6 @@ class Admin::SubjectsController < ApplicationController
     params.require(:subject).permit Subject::SUBJECT_ATTRIBUTES_PARAMS
   end
 
-  def find_subject_in_edit
-    @subject = Subject.includes(:documents, :task_masters)
-      .find_by_id params[:id]
-    redirect_if_object_nil @subject
-  end
 
   def load_data
     @supports = Supports::Subject.new subject: @subject,
@@ -85,9 +80,19 @@ class Admin::SubjectsController < ApplicationController
     redirect_if_object_nil @supports.course
   end
 
+  def find_subject_in_edit
+    @subject = Subject.includes(:documents, :task_masters)
+      .find_by id: params[:id]
+    redirect_if_object_nil @subject
+  end
+
   def load_subject_detail
     if @subject.subject_detail.nil?
       @subject.build_subject_detail percent_of_questions: Settings.exams.percent_question.to_s
     end
+  end
+
+  def load_subject
+    @subject = Subject.find_by id: params[:id]
   end
 end

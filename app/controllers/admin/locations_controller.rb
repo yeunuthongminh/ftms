@@ -1,9 +1,7 @@
 class Admin::LocationsController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource only: :show
-
-  before_action :find_location, only: :show
+  before_action :authorize
   before_action :load_managers, except: [:destroy, :show, :index]
+  before_action :find_location, only: [:update, :edit, :destroy, :show]
   before_action :set_breadcrumb_new, only: [:new, :create]
   before_action :set_breadcrumb_edit, only: [:edit, :update]
 
@@ -18,15 +16,16 @@ class Admin::LocationsController < ApplicationController
 
   def show
     @location_support = Supports::LocationSupport.new location: @location
-
     add_breadcrumb_path "locations"
     add_breadcrumb @location.name
   end
 
   def new
+    @location = Location.new
   end
 
   def create
+    @location = Location.new location_params
     respond_to do |format|
       if @location.save
         flash.now[:success] = flash_message "created"
@@ -82,7 +81,7 @@ class Admin::LocationsController < ApplicationController
   end
 
   def find_location
-    @location = Location.includes(:manager).find_by_id params[:id]
+    @location = Location.includes(:manager).find_by id: params[:id]
     unless @location
       redirect_to admin_locations_path
       flash[:alert] = flash_message "not_find"
