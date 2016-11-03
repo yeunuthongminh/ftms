@@ -42,6 +42,7 @@
   }
 
   .all-months {
+    position: relative;
     border-right: 1px solid #ccc;
     .tcell {
       max-width: 80px;
@@ -53,6 +54,9 @@
       &.trainee-by-month{
         @include ellipsis(100px);
       }
+    }
+    .ft-month {
+      position: absolute;
     }
 
     &.clear-both > .tcell {

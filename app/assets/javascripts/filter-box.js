@@ -1,13 +1,9 @@
 var open_select_event_target;
 
 $(document).on("turbolinks:load", function () {
+  filter_date();
   validateFilterRank();
   intSearcher();
-  resetOrder();
-  show_blank_option();
-});
-
-$(document).on("turbolinks:load", function(){
   resetOrder();
   show_blank_option();
 });
@@ -232,3 +228,45 @@ function loadDataFilter(target) {
     $(".filter .end_date").val(list_date[1]);
   }
 }
+function filter_date() {
+  $('#month-filter').click(function() {
+    html = "<div class='filters f-filter-month'><div>"+I18n.t("buttons.from")+"<input type='text' name='month-from' id='month-from' class='date_input'></div><div class='margin-top-20'>"+I18n.t("buttons.to")+"<input type='text' name='month-to' id='month-to' class='date_input'></div><hr><a class='btn btn-primary btn-sm' href='javascript:void(0)' id='date_submit'>"+I18n.t("buttons.ok")+"</a><a href='javascript:void(0)' class='btn btn-sm btn-default button-cancel'>"+I18n.t("buttons.cancel")+"</a></div>";
+    $('.filter-form').html(html);
+
+    $('.date_input').bind('focus', function() {
+      $('.date_input').datepicker({
+        format: I18n.t("datepicker.time.short"),
+        viewMode: 'months',
+        minViewMode: 'months',
+        autoclose: true
+      });
+    });
+  });
+}
+
+$(document).on('click', '#date_submit', function() {
+  var locations = [];
+  var stages = [];
+  var start_date = $('#month-from').val();
+  var end_date = $('#month-to').val();
+  $('input:checkbox:not(:checked)', '#locations-checkbox').each(function() {
+    locations.push($(this).val());
+  });
+  $('input:checkbox:not(:checked)', '#stages-checkbox').each(function() {
+    stages.push($(this).val());
+  });
+  if (Date.parse(start_date) && Date.parse(end_date)) {
+    var href_locations = "";
+    var href_stages = "";
+    if (locations.length > 0) {
+      href_locations = "&location_ids=" + locations;
+    }
+    if (stages.length > 0) {
+      href_stages = "&stage_ids=" + stages;
+    }
+    var filter_type = "?type=total_trainees";
+    href = location.protocol + '//' + location.host + location.pathname
+      + filter_type + "&start_date=" + start_date + "&end_date=" + end_date + href_locations + href_stages;
+    $(this).attr('href', href);
+  }
+});
