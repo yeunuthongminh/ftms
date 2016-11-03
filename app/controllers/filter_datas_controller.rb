@@ -119,6 +119,10 @@ class FilterDatasController < ApplicationController
         @key_field = :score
         @value_field = :score
         @resources = Exam.order(:score).pluck(:score).uniq.compact
+      when "program"
+        @key_field = :id
+        @value_field = :program_name
+        @resources = Program.order(:name).pluck :name
       end
     end
 

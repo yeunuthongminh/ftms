@@ -43,6 +43,9 @@ class CoursePresenter < ActionView::Base
       <div class=\"tcell course_trainers\">
         #{course_trainers course}
       </div>
+      <div class=\"tcell program\">
+        #{course.program if course.program}
+      </div>
       <div class=\"tcell programming_language\" title=\"#{course.programming_language_name}\">
         #{course.programming_language_name}
       </div>

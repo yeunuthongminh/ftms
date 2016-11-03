@@ -32,6 +32,15 @@
             <i class="fa ic ic-filter course_trainers"></i>
           <% end %>
         </div>
+        <div class="tcell program title">
+          <%= t "courses.table.program" %>
+          <%= link_to filter_datas_path(type: :program, filter_type: :courses),
+            remote: true,
+            class: "open-select",
+            data: {name: "f-program"} do %>
+            <i class="fa ic ic-filter program"></i>
+          <% end %>
+        </div>
         <div class="tcell programming_language title">
           <%= t "courses.table.language" %>
           <%= link_to filter_datas_path(type: :programming_language, filter_type: :courses),

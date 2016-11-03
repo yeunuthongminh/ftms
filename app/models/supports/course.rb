@@ -47,7 +47,7 @@ class Supports::Course
     @subjects ||= Subject.all
   end
 
-  %w(programming_languages locations).each do |objects|
+  %w(programming_languages locations programs).each do |objects|
     define_method objects do
       instance_variable_set "@#{objects}",
         objects.classify.constantize.all.collect {|object| [object.name,
@@ -56,7 +56,7 @@ class Supports::Course
   end
 
   def courses
-    @courses = Course.includes :programming_language, :location
+    @courses = Course.includes :programming_language, :location, :program
   end
 
   def filter_data_user

@@ -174,5 +174,11 @@
       border-right: none;
       border-top: 2px solid #ccc;
     }
+
+    &.program {
+      min-width: 200px;
+      max-width: 200px;
+      position: relative;
+    }
   }
 }
