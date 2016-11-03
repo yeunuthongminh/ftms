@@ -1,4 +1,9 @@
 class ApplicationController < ActionController::Base
+  include Pundit
+  include ApplicationHelper
+  include PublicActivity::StoreController
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!, :set_locale, except: :home
@@ -7,23 +12,82 @@ class ApplicationController < ActionController::Base
   before_action :get_namespace
   before_action :set_root_path
 
-  include ApplicationHelper
-  include PublicActivity::StoreController
-
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = exception.message
-    redirect_to get_root_path
-  end
 
   def default_url_options options = {}
     {locale: I18n.locale}
   end
 
-  protected
-  def current_ability
-    @current_ability ||= Ability.new current_user, @namespace
+  def authorize_with_multiple args, policy
+    pundit_policy = policy.new current_user, args
+    query ||= "#{params[:action]}?"
+    unless pundit_policy.public_send query
+      error = NotAuthorizedError.new "not allowed"
+      raise error
+    end
   end
 
+  def page_params
+    Hash[:controller, params[:controller], :action, params[:action],
+      :user_functions, current_user.user_functions]
+  end
+
+  def load_user
+    @user = User.includes(:profile).find_by id: params[:id]
+    if @user.nil?
+      flash[:alert] = flash_message "not_find"
+      back_or_root
+    end
+  end
+
+  def load_course
+    @course = Course.find_by id: params[:course_id]
+    if @course.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to admin_courses_path
+    end
+  end
+
+  def load_subject
+    @subject = Subject.find_by id: params[:id]
+    if @subject.nil?
+      flash[:alert] = flash_message "not_find"
+      back_or_root
+    end
+  end
+
+  def authorize
+    authorize_with_multiple page_params, UserFunctionPolicy
+  end
+
+  def load_task
+    @task = Task.find_by id: params[:id]
+    if @task.nil?
+      flash[:alert] = flash_message "not_find"
+      back_or_root
+    end
+  end
+
+  def load_user_task
+    @user_task = UserTask.find_by id: params[:id]
+    if @user_task.nil?
+      flash[:alert] = flash_message "not_find"
+      back_or_root
+    end
+  end
+
+  def load_user_subject
+    @user_subject = UserSubject.find_by id: params[:id]
+    if @user_subject.nil?
+      flash[:alert] = flash_message "not_find"
+      back_or_root
+    end
+  end
+
+  def authorize
+    authorize_with_multiple page_params, UserFunctionPolicy
+  end
+
+  protected
   def after_sign_in_path_for resource
     get_root_path
   end
@@ -31,11 +95,22 @@ class ApplicationController < ActionController::Base
   private
   rescue_from ActiveRecord::RecordNotFound do
     flash[:alert] = flash_message "record_not_found"
-    redirect_to root_url
+    back_or_root
+  end
+
+  def back_or_root
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
+  def user_not_authorized
+    flash[:alert] = t "error.not_authorize"
+    back_or_root
   end
 
   def set_current_role
-    current_user.current_role ||= current_user.roles.pluck(:role_type) if current_user
+    current_user.current_role ||= current_user.roles.pluck(:role_type).first if current_user
   end
 
   def get_root_path
@@ -93,7 +168,7 @@ class ApplicationController < ActionController::Base
   def redirect_if_object_nil object
     if object.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to root_path
+      back_or_root
     end
   end
 end

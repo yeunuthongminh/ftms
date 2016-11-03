@@ -21,3 +21,5 @@ en:
     submit: "Update profile"
     create_and_continue: "Create and continue"
     update_status: "Update status"
+    from: "From"
+    to: "To"

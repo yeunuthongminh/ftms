@@ -1,12 +1,11 @@
 class Admin::StatisticsController < ApplicationController
-  load_and_authorize_resource class: false
-  skip_load_resource only: :create
 
   include FilterData
 
-  before_action :load_locations, only: :index
+  before_action :authorize
   before_action :load_statistic_view
   before_action :load_filter, only: :index
+  before_action :load_locations
 
   def index
     add_breadcrumb_index "statistics"
@@ -25,9 +24,11 @@ class Admin::StatisticsController < ApplicationController
   end
 
   def load_statistic_view
-    @statistics = Supports::Statistic.new location_ids: (params[:location_ids] || Location.all.map(&:id)),
-      start_date: (params[:start_date] || Date.today.beginning_of_year),
-      end_date: (params[:end_date] || Date.today),
-      stage_ids: (params[:stage_ids] || Stage.all.map(&:id))
+    start_date = params[:start_date] ? params[:start_date].to_date : Date.today.beginning_of_year
+    location_ids = params[:location_ids] ? params[:location_ids] : Location.all.map(&:id)
+    end_date = params[:end_date] ? params[:end_date].to_date : Date.today
+    stage_ids = params[:stage_ids] ? params[:stage_ids] : Stage.all.map(&:id)
+    @statistics = Supports::Statistic.new location_ids: location_ids,
+      start_date: start_date, end_date: end_date, stage_ids: stage_ids
   end
 end

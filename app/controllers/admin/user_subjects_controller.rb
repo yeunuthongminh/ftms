@@ -1,5 +1,6 @@
 class Admin::UserSubjectsController < ApplicationController
-  load_and_authorize_resource
+  before_action :load_user_subject
+  before_action :authorize
 
   def update
     if params[:user_subject].present?
@@ -28,6 +29,14 @@ class Admin::UserSubjectsController < ApplicationController
     @supports = Supports::UserSubject.new user_subject: @user_subject,
       course_subject_id: params[:course_subject_id]
     redirect_if_object_nil @supports.course_subject
+  end
+
+  def load_user_subject
+    @user_subject = UserSubject.find_by id: params[:id]
+    unless @user_subject
+      redirect_to admin_user_subjects_path
+      flash[:alert] = flash_message "not_find"
+    end
   end
 
   def update_end_date_when_update_start_date

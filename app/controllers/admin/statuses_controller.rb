@@ -1,17 +1,20 @@
 class Admin::StatusesController < ApplicationController
-  load_and_authorize_resource except: :show
+  before_action :authorize
+  before_action :load_status, only: [:edit, :update, :destroy]
 
   def index
-    @status = Status.new
+    @statuses = Status.all
     add_breadcrumb_index "statuses"
   end
 
   def new
+    @status = Status.new
     add_breadcrumb_path "statuses"
     add_breadcrumb_new "statuses"
   end
 
   def create
+    @status = Status.new status_params
     respond_to do |format|
       if @status.save
         flash.now[:success] = flash_message "created"
@@ -52,5 +55,13 @@ class Admin::StatusesController < ApplicationController
   private
   def status_params
     params.require(:status).permit Status::ATTRIBUTES_PARAMS
+  end
+
+  def load_status
+    @status = Status.find_by id: params[:id]
+    unless @status
+      redirect_to admin_statuses_path
+      flash[:alert] = flash_message "not_find"
+    end
   end
 end

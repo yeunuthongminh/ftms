@@ -1,5 +1,6 @@
 class Admin::ChangeStatusCoursesController < ApplicationController
-  load_and_authorize_resource :course
+  before_action :load_course, only: :update
+  before_action :authorize
 
   def update
     key = case @course.status

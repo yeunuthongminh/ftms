@@ -7,7 +7,7 @@ class Supports::Subject
   end
 
   def course_subject
-    @course_subject ||= @course.course_subjects.find do |course_subject|
+    @course_subject ||= course.course_subjects.find do |course_subject|
       course_subject.subject_id == @subject.id
     end
   end

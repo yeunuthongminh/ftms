@@ -1,9 +1,12 @@
 class UserCoursesController < ApplicationController
   before_action :find_user_course, only: :show
-  authorize_resource only: :show
 
   def show
-    @user_course_supports = Supports::UserCourse.new @user_course
+    if authorize @user_course
+      @user_course_supports = Supports::UserCourse.new @user_course
+    else
+      redirect_to root_path
+    end
   end
 
   private
