@@ -272,4 +272,9 @@ module ApplicationHelper
   def checked? params, type, object_id
     !params.has_key?(type) || params[type].include?(object_id)
   end
+
+  def trainer_in_program assigned_trainer_ids, trainer_program_builder
+    assigned_trainer_ids.include?(trainer_program_builder.object.user_id) &&
+      !trainer_program_builder.object.deleted?
+  end
 end
