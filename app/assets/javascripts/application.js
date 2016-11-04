@@ -69,6 +69,10 @@
 //= require question
 //= require statistic
 //= require spectrum
+//= require moment.min
+//= require fullcalendar.min
+//= require locale-all
+//= require full_calendar
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();
