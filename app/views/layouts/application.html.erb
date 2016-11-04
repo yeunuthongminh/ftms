@@ -9,6 +9,8 @@
     <%= javascript_include_tag Ckeditor.cdn_url %>
     <%= csrf_meta_tags %>
     <meta name="turbolinks-cache-control" content="no-cache">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <%= stylesheet_link_tag "fullcalendar.print", media: "print" %>
     <script type="text/javascript">
       I18n.defaultLocale = "<%= I18n.default_locale %>";
       I18n.locale = "<%= I18n.locale %>";
@@ -25,7 +27,7 @@
         </div>
       </div>
     </body>
-  <% elsif current_user.present? &&
+  <% elsif user_signed_in? &&
     (@namespace == "trainer" || @namespace == "admin") %>
     <body id="body-admin" class="skin-blue sidebar-mini wysihtml5-supported" >
       <div class="wrapper">
