@@ -1,4 +1,4 @@
-class UserPolicy < ApplicationPolicy
+class TaskPolicy < ApplicationPolicy
   attr_reader :user, :controller, :action, :user_functions, :record
 
   def initialize user, args
@@ -9,17 +9,13 @@ class UserPolicy < ApplicationPolicy
     @record = args[:record]
   end
 
-  def show?
-    @user = @record
-  end
-
-  def edit?
-    if @user = @record
-      User::ATTRIBUTES_PARAMS
+  def update?
+    if @user.is_trainee?
+      Task::ATTRIBUTES_PARAMS
     end
   end
 
-  def update?
-    edit?
+  def create?
+    @user.is_trainee? && @record.create_by_trainee = @user.is_trainee?
   end
 end

@@ -1,33 +1,30 @@
 class UserTasksController < ApplicationController
   before_action :load_user_task
+  before_action :authorize_user_task
 
   def update
-    if authorize @user_task
-      new_status = params[:status]
-      @old_status = @user_task.status
-      user_task_service = MailerServices::UserTaskService.new user_task: @user_task,
-        status: new_status
-      if new_status == Settings.status.finished
-        @user_task_history = user_task_service.perform
-        if @user_task.update_attributes status: Settings.status.finished
-          flash.now[:success] = flash_message "updated"
-        else
-          flash.now[:error] = flash_message "not_updated"
-        end
+    new_status = params[:status]
+    @old_status = @user_task.status
+    user_task_service = MailerServices::UserTaskService.new user_task: @user_task,
+      status: new_status
+    if new_status == Settings.status.finished
+      @user_task_history = user_task_service.perform
+      if @user_task.update_attributes status: Settings.status.finished
+        flash.now[:success] = flash_message "updated"
       else
-        if user_task_service.perform
-          flash.now[:success] = flash_message "updated"
-        else
-          flash.now[:error] = flash_message "not_updated"
-        end
-      end
-      track_activity
-      load_data
-      respond_to do |format|
-        format.js
+        flash.now[:error] = flash_message "not_updated"
       end
     else
-      redirect_to root_path
+      if user_task_service.perform
+        flash.now[:success] = flash_message "updated"
+      else
+        flash.now[:error] = flash_message "not_updated"
+      end
+    end
+    track_activity
+    load_data
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -45,5 +42,9 @@ class UserTasksController < ApplicationController
     @subject_supports = Supports::SubjectTrainee.new subject: @user_task
       .user_subject.subject, user_course_id: @user_task.user_subject
       .user_course_id
+  end
+
+  def authorize_user_task
+    authorize_with_multiple page_params.merge(record: @user_task), UserTaskPolicy
   end
 end

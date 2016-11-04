@@ -1,4 +1,4 @@
-class UserPolicy < ApplicationPolicy
+class ExamPolicy < ApplicationPolicy
   attr_reader :user, :controller, :action, :user_functions, :record
 
   def initialize user, args
@@ -9,17 +9,15 @@ class UserPolicy < ApplicationPolicy
     @record = args[:record]
   end
 
-  def show?
-    @user = @record
+  def index?
+    true
   end
 
-  def edit?
-    if @user = @record
-      User::ATTRIBUTES_PARAMS
-    end
+  def show?
+    @user = @record.user
   end
 
   def update?
-    edit?
+    @user = @record.user
   end
 end

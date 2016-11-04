@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
+  before_action :authorize_user
   before_action :load_university, only: :edit
   before_action :load_data, only: :show
   before_action :load_user
-  after_action :verify_authorized
-  before_action :authorize_user
 
   def show
     @supports = Supports::User.new @user
@@ -47,6 +46,6 @@ class UsersController < ApplicationController
   end
 
   def authorize_user
-    authorize @user
+    authorize_with_multiple page_params.merge(record: current_user), UserPolicy
   end
 end
