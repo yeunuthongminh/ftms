@@ -1,11 +1,8 @@
 class CoursesController < ApplicationController
   before_action :load_course, only: [:index]
-  after_action :verify_authorized
 
   def index
-    unless authorize @user_courses
-      redirect_to root_path
-    end
+    authorize_with_multiple page_params.merge(record: @user_courses.first), CoursePolicy
   end
 
   private

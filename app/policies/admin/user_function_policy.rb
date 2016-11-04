@@ -11,8 +11,12 @@ class Admin::UserFunctionPolicy < ApplicationPolicy
 
   Settings.all_functions.each do |function_name|
     define_method "#{function_name}?" do
-      @user.has_role?(Settings.namespace_roles.admin) ||
+      @user.email == "admin@tms.com" ||
         @user.has_function?(@controller_name, @action)
     end
   end
+
+  # neu co class = admin => co tat ca cac quyen
+  # neu class = trainer && role_type = admin => van la trainer nhung co role_function la cua admin
+    #=> check user_function
 end

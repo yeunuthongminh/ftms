@@ -2,11 +2,8 @@ class UserCoursesController < ApplicationController
   before_action :find_user_course, only: :show
 
   def show
-    if authorize @user_course
-      @user_course_supports = Supports::UserCourse.new @user_course
-    else
-      redirect_to root_path
-    end
+    authorize_with_multiple page_params.merge(record: @user_course), CoursePolicy
+    @user_course_supports = Supports::UserCourse.new @user_course
   end
 
   private
