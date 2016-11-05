@@ -49,7 +49,7 @@ function setbutton() {
           {
             text: I18n.t("user_subjects.finish.with_exam"),
             click: function() {
-              exec_finish.href = exec_finish.href + '?exam=now';
+              exec_finish.href = exec_finish.href + '?exam=waiting';
               $(exec_finish).trigger('click');
             }
           },
