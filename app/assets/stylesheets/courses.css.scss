@@ -163,7 +163,8 @@
       position: relative;
     }
 
-    &.course_start_date, &.course_end_date {
+    &.course_start_date, &.course_end_date, &.program_course_end_date,
+      &.program_course_start_date {
       min-width: 210px;
       max-width: 210px;
       position: relative;

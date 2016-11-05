@@ -1,10 +1,17 @@
 class Admin::ProgramsController < ApplicationController
+  include FilterData
+
   before_action :authorize
-  before_action :find_program, only: [:edit, :update]
+  before_action :find_program, only: [:edit, :update, :show]
   before_action :load_data, only: :edit
 
   def index
-    add_breadcrumb_index "programs"
+    respond_to do |format|
+      format.html {add_breadcrumb_index "programs"}
+      format.json {
+        render json: ProgramsDatatable.new(view_context, @namespace)
+      }
+    end
   end
 
   def new
@@ -25,6 +32,13 @@ class Admin::ProgramsController < ApplicationController
       add_breadcrumb_new "programs"
       render :new
     end
+  end
+
+  def show
+    @supports = Supports::Course.new namespace: @namespace,
+      filter_service: load_filter, program: @program
+    add_breadcrumb_path "programs"
+    add_breadcrumb @program.name, :admin_program_path
   end
 
   def edit
@@ -63,7 +77,7 @@ class Admin::ProgramsController < ApplicationController
   end
 
   def find_program
-    @program = Program.includes(trainer_programs: :user).find_by id: params[:id]
+    @program = Program.find_by id: params[:id]
     if @program.nil?
       flash[:alert] = flash_message "not_find"
       redirect_to admin_programs_path

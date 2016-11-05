@@ -1,9 +1,10 @@
 class Supports::Course
-  attr_reader :course
+  attr_reader :course, :program
 
   def initialize args
     @course = args[:course]
     @namespace = args[:namespace]
+    @program = args[:program]
     @filter_service = args[:filter_service]
   end
 
@@ -56,7 +57,11 @@ class Supports::Course
   end
 
   def courses
-    @courses = Course.includes :programming_language, :location, :program
+    @courses = if @program
+      @program.courses.includes :programming_language, :location
+    else
+      Course.includes :programming_language, :location, :program
+    end
   end
 
   def filter_data_user
@@ -64,6 +69,7 @@ class Supports::Course
   end
 
   def course_presenters
-    @course_presenters ||= CoursePresenter.new(courses, @namespace).render
+    @course_presenters ||=  CoursePresenter.new(courses: courses,
+      namespace: @namespace, program: @program).render
   end
 end

@@ -7,6 +7,7 @@ class FilterDatasController < ApplicationController
     @type = params[:type]
     @month = params[:month]
     @date = params[:date]
+    program = Program.find_by id: params[:program]
 
     if @type == "select_range_time"
       @range_select = params[:range_select]
@@ -88,7 +89,11 @@ class FilterDatasController < ApplicationController
         @key_field = :working_day
         @value_field = :working_day
       when "course_name"
-        @resources = Course.order(:name).pluck :name
+        @resources = if params[:program]
+          program.courses.order(:name).pluck :name
+        else
+          Course.order(:name).pluck :name
+        end
       when "course_status"
         @resources = i18n_enum(:course, :status)
       when "course_trainers"
@@ -98,11 +103,19 @@ class FilterDatasController < ApplicationController
       when "course_start_date"
         @key_field = :start_date
         @value_field = :start_date
-        @resources = Course.order(:start_date).pluck(:start_date).uniq.compact
+        @resources = if params[:program]
+          program.courses.order(:start_date).pluck(:start_date).uniq.compact
+        else
+          Course.order(:start_date).pluck(:start_date).uniq.compact
+        end
       when "course_end_date"
         @key_field = :end_date
         @value_field = :end_date
-        @resources = Course.order(:end_date).pluck(:end_date).uniq.compact
+        @resources = if params[:program]
+          program.courses.order(:end_date).pluck(:end_date).uniq.compact
+        else
+          Course.order(:end_date).pluck(:end_date).uniq.compact
+        end
       when "subject_name"
         @key_field = :subject_name
         @value_field = :subject_name

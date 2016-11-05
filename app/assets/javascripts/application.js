@@ -73,6 +73,7 @@
 //= require fullcalendar.min
 //= require locale-all
 //= require full_calendar
+//= require admin/program
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();

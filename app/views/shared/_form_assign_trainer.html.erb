@@ -6,6 +6,7 @@
         <th><%= t "courses.users.name" %></th>
         <th><%= t "courses.users.email" %></th>
       </thead>
+      <%= f.label :search_trainer, class: "label-select" %>
       <tbody>
         <%= render partial: "shared/assign_trainer_row",
           locals: {f: f, assigned_trainer_ids: assigned_trainer_ids,

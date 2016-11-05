@@ -1,0 +1,22 @@
+<% provide :title, t("layouts.programs") %>
+<div id="programs">
+  <div class="title">
+    <span>
+      <%= link_to t("buttons.new"), new_admin_program_path,
+        class: "btn btn-success pull-right" %>
+    </span>
+  </div>
+
+  <table id="tbl-program" class="table table-bordered display"
+    data-source="<%= admin_programs_url format: "json" %>">
+    <thead>
+      <tr class="active">
+        <th class="col-md-1"></th>
+        <th class="col-md-8"><%= t "programs.name" %></th>
+        <th class="col-md-3"></th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
