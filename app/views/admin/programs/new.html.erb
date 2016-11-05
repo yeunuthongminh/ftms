@@ -1,5 +1,10 @@
 <div id="programs">
-  <div class="new-program">
-    <%= render "form", action: "create" %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-primary new-program">
+        <div class="panel-heading"><%= t "button.new" %></div>
+        <div class="panel-body"><%= render "form", action: "create" %></div>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,9 +1,10 @@
 class CoursePresenter < ActionView::Base
   include Rails.application.routes.url_helpers
 
-  def initialize courses, namespace
-    @courses = courses
-    @namespace = namespace
+  def initialize args
+    @courses = args[:courses]
+    @namespace = args[:namespace]
+    @program = args[:program]
   end
 
   def render
@@ -43,8 +44,8 @@ class CoursePresenter < ActionView::Base
       <div class=\"tcell course_trainers\">
         #{course_trainers course}
       </div>
-      <div class=\"tcell program\">
-        #{course.program if course.program}
+      <div class=\"tcell program #{"hidden" if @program}\">
+        #{course.program_name}
       </div>
       <div class=\"tcell programming_language\" title=\"#{course.programming_language_name}\">
         #{course.programming_language_name}

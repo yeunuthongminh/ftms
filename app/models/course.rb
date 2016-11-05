@@ -46,6 +46,7 @@ class Course < ApplicationRecord
 
   delegate :name, to: :programming_language, prefix: true, allow_nil: true
   delegate :name, to: :location, prefix: true, allow_nil: true
+  delegate :name, to: :program, prefix: true, allow_nil: true
 
   def active_user_courses_when_start_course
     user_courses.update_all active: true

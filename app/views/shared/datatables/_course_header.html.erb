@@ -4,9 +4,8 @@
       <div class="tcell stt">#</div>
       <div class="tcell name display_name title">
         <%= t "courses.table.name" %>
-        <%= link_to filter_datas_path(type: :course_name, filter_type: :courses),
-          remote: true,
-          class: "open-select",
+        <%= link_to filter_datas_path(type: :course_name, filter_type: :courses,
+          program: @program), remote: true, class: "open-select",
           data: {name: "f-course_name"} do %>
           <i class="fa ic ic-filter course_name"></i>
         <% end %>
@@ -25,63 +24,59 @@
       <div class="trow header">
         <div class="tcell course_trainers title">
           <%= t "courses.table.trainers" %>
-          <%= link_to filter_datas_path(type: :course_trainers, filter_type: :courses),
-            remote: true,
-            class: "open-select",
-            data: {name: "f-course_trainers"} do %>
+          <%= link_to filter_datas_path(type: :course_trainers,
+            filter_type: :courses, program: @program), remote: true,
+            class: "open-select", data: {name: "f-course_trainers"} do %>
             <i class="fa ic ic-filter course_trainers"></i>
           <% end %>
         </div>
-        <div class="tcell program title">
-          <%= t "courses.table.program" %>
-          <%= link_to filter_datas_path(type: :program, filter_type: :courses),
-            remote: true,
-            class: "open-select",
-            data: {name: "f-program"} do %>
-            <i class="fa ic ic-filter program"></i>
-          <% end %>
-        </div>
+        <% unless @program %>
+          <div class="tcell program title">
+            <%= t "courses.table.program" %>
+            <%= link_to filter_datas_path(type: :program, filter_type: :courses),
+              remote: true, class: "open-select",
+              data: {name: "f-program"} do %>
+              <i class="fa ic ic-filter program"></i>
+            <% end %>
+          </div>
+        <% end %>
         <div class="tcell programming_language title">
           <%= t "courses.table.language" %>
-          <%= link_to filter_datas_path(type: :programming_language, filter_type: :courses),
-            remote: true,
-            class: "open-select",
-            data: {name: "f-programming_language"} do %>
+          <%= link_to filter_datas_path(type: :programming_language,
+            filter_type: :courses), remote: true,
+            class: "open-select", data: {name: "f-programming_language"} do %>
             <i class="fa ic ic-filter programming_language"></i>
           <% end %>
         </div>
         <div class="tcell location title">
           <%= t "courses.table.location" %>
           <%= link_to filter_datas_path(type: :location, filter_type: :courses),
-            remote: true,
-            class: "open-select",
+            remote: true, class: "open-select",
             data: {name: "f-location"} do %>
             <i class="fa ic ic-filter location"></i>
           <% end %>
         </div>
         <div class="tcell course_status title">
           <%= t "courses.table.status" %>
-          <%= link_to filter_datas_path(type: :course_status, filter_type: :courses),
-            remote: true,
-            class: "open-select",
-            data: {name: "f-course_status"} do %>
+          <%= link_to filter_datas_path(type: :course_status,
+            filter_type: :courses), remote: true,
+            class: "open-select", data: {name: "f-course_status"} do %>
             <i class="fa ic ic-filter course_status"></i>
           <% end %>
         </div>
         <div class="tcell course_start_date title">
           <%= t "courses.table.start_date" %>
-          <%= link_to filter_datas_path(type: :course_start_date, filter_type: :courses),
-            remote: true,
-            class: "open-select",
-            data: {name: "f-course_start_date"} do %>
+          <%= link_to filter_datas_path(type: :course_start_date,
+            filter_type: :courses, program: @program), remote: true,
+            class: "open-select", data: {name: "f-course_start_date"} do %>
             <i class="fa ic ic-filter course_start_date"></i>
           <% end %>
         </div>
         <div class="tcell course_end_date title">
           <%= t "courses.table.end_date" %>
-          <%= link_to filter_datas_path(type: :course_end_date, filter_type: :courses),
-            remote: true,
-            class: "open-select",
+          <%= link_to filter_datas_path(type: :course_end_date,
+            filter_type: :courses, program: @program),
+            remote: true, class: "open-select",
             data: {name: "f-course_end_date"} do %>
             <i class="fa ic ic-filter course_end_date"></i>
           <% end %>
