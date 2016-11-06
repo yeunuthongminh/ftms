@@ -1,0 +1,44 @@
+<% if @titles.nil? %>
+  <h3><%= t "layouts.synchronize_from_google" %></h3>
+  <%= form_tag admin_synchronizes_path, method: :get do %>
+    <div class="row">
+      <div class="col-md-2">
+        <strong><p><%= t "layouts.function" %></p></strong>
+      </div>
+      <div class="col-md-2">
+        <%= select_tag :function, options_for_select(Settings.sync_functions),
+          {class: "form-control w100", id: "selected_tags"} %>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-2">
+        <strong><p><%= t "layouts.google_link" %></p></strong>
+      </div>
+      <div class="col-md-8">
+        <%= text_field_tag :link, params[:link],
+        placeholder:  t("layouts.google_link"),
+        class: "form-control" %>
+      </div>
+    </div>
+    <br>
+    <%= button_tag t("index.synchronize"),
+      data: {disable_with: t("index.synchronizing")},
+      class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <strong><p><%= t "layouts.confirm_worksheet" %></p></strong>
+  <%= form_tag admin_synchronizes_path, method: :get do %>
+    <% @titles.each do |title| %>
+      <%= radio_button_tag :title, title %>
+      <%= title %>
+      <br>
+    <% end %>
+    <br>
+    <%= button_tag t("index.synchronize"),
+      data: {disable_with: t("index.synchronizing"),
+      validatelink: Settings.sync_google.valid_link},
+      class: "btn btn-primary link" %>
+  <% end %>
+<% end %>
+<hr>

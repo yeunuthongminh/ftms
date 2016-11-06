@@ -1,0 +1,12 @@
+en:
+  layouts:
+    synchronize_from_google: "Synchronize From Google"
+    confirm_worksheet: "Confirm worksheet"
+    function: "Function"
+    google_link: "Google link"
+  notice:
+    sync_success: "Synchronize timesheets successfully"
+    sync_fails: "Synchronize timesheets failure"
+  index:
+    synchronize: "Synchronize"
+    synchronizing: "Synchronizing..."
