@@ -111,6 +111,7 @@ GEM
     business_time (0.7.6)
       activesupport (>= 3.1.0)
       tzinfo
+    byebug (9.0.6)
     cancancan (1.15.0)
     carrierwave (0.11.2)
       activemodel (>= 3.2.0)
@@ -229,6 +230,11 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.4.0)
+      byebug (~> 9.0)
+      pry (~> 0.10)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     public_activity (1.5.0)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0)
@@ -395,6 +401,8 @@ DEPENDENCIES
   mysql2 (~> 0.3.20)
   paranoia!
   pry
+  pry-byebug
+  pry-rails
   public_activity
   puma (~> 3.0)
   pundit
@@ -416,4 +424,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.13.0
+   1.13.6
