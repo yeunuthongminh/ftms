@@ -9,8 +9,12 @@ class Supports::UserCourse
     @course ||= @user_course.course
   end
 
-  def users
-    @users ||= course.users
+  def trainers
+    @trainers ||= course.trainers
+  end
+
+  def trainees
+    @trainees ||= course.trainees
   end
 
   def user_subjects
@@ -19,7 +23,7 @@ class Supports::UserCourse
   end
 
   def count_member
-    @count_member ||= users.size - Settings.number_member_show
+    @count_member ||= trainees.size + trainers.size - Settings.number_member_show
   end
 
   def number_of_user_subjects

@@ -24,8 +24,8 @@ class Course < ApplicationRecord
   has_many :course_subjects, dependent: :destroy
   has_many :user_courses, -> {with_deleted}, dependent: :destroy
   has_many :user_subjects, dependent: :destroy
-  has_many :trainers, as: :userable, class_name: "Trainer", through: :user_courses
-  has_many :trainees, as: :userable, class_name: "Trainee", through: :user_courses
+  has_many :trainers, class_name: Trainer.name, through: :user_courses
+  has_many :trainees, class_name: Trainee.name, through: :user_courses
   has_many :subjects, through: :course_subjects
   has_many :documents, as: :documentable
   has_many :notifications, as: :trackable, dependent: :destroy

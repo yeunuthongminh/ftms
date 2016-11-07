@@ -22,8 +22,12 @@ class Supports::SubjectTrainee
       .find{|user_subject| user_subject.user_id == user_course.user_id}
   end
 
-  def users
-    @users ||= user_subject.course.users
+  def trainers
+    @trainers ||= user_subject.course.trainers
+  end
+
+  def trainees
+    @trainees ||= user_subject.course.trainees
   end
 
   def count_member
