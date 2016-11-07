@@ -1,10 +1,44 @@
 class SessionsController < Devise::SessionsController
   after_action :log_sign_in, only: :create
   before_action :log_sign_out, only: :destroy
+  respond_to :json
 
+  def create
+    session["user_auth"] = params[:user]
+    resource = warden.authenticate!(scope: resource_name,
+      recall: "#{controller_path}#failure")
+
+    sign_in resource_name, resource
+    message = I18n.t "devise.sessions.signed_in"
+
+    yield resource if block_given?
+
+    if request.xhr?
+      return render json: {success: true,
+        login: true, data: {message: message}}
+    else
+      respond_with resource, location: after_sign_in_path_for(resource)
+    end
+  end
+
+  def failure
+    user = User.find_by email: session["user_auth"][:email] rescue nill
+    message = I18n.t "devise.failure.invalid", authentication_keys: "email"
+
+    respond_to do |format|
+      format.json {
+        render json: {success: false,
+          data: {message: message, cause: "invalid"}}
+      }
+      format.html {
+        redirect_to "/users/sessions/new"
+      }
+    end
+  end
   private
   def log_sign_in
-    current_user.track_logs.create signin_time: Time.zone.now, signin_ip: request.remote_ip
+    current_user.track_logs.create signin_time: Time.zone.now,
+      signin_ip: request.remote_ip
   end
 
   def log_sign_out

@@ -1,6 +1,6 @@
 <h1><%= t "signins.banner" %></h1>
 <%= form_for resource, as: resource_name, url: session_path(resource_name),
-  id: "login-form" do |f| %>
+  id: "login-form", format: :json, remote: true do |f| %>
   <p><%= f.label :email %></p>
   <%= f.email_field :email, placeholder: t("user.fields.email"), type: "text" %>
   <p><%= f.label :password %></p>
