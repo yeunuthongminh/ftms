@@ -125,4 +125,5 @@ Rails.application.routes.draw do
   resources :feed_backs, only: :create
   resources :filter_datas, only: [:index, :create]
   resources :exams, only: [:show, :index, :update]
+  resources :calendars, only: :index
 end

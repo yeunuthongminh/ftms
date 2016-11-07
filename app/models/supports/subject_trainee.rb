@@ -47,7 +47,7 @@ class Supports::SubjectTrainee
   end
 
   def user_course
-    @user_course ||= UserCourse.includes(:user).find_by id: @user_course_id
+    @user_course ||= UserCourse.includes(:trainee).find_by id: @user_course_id
   end
 
   UserTask.statuses.each do |key, value|

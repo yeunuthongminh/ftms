@@ -24,7 +24,8 @@ class UserCourse < ApplicationRecord
   scope :find_user_by_role, ->role_id{joins(user: :user_roles)
     .where("user_roles.role_id = ?", role_id)}
 
-  delegate :id, :name, to: :user, prefix: true, allow_nil: true
+  delegate :id, :name, to: :trainee, prefix: true, allow_nil: true
+  delegate :id, :name, to: :trainer, prefix: true, allow_nil: true
   delegate :name, to: :course_programming_language, prefix: true, allow_nil: true
 
   enum status: [:init, :progress, :finish]

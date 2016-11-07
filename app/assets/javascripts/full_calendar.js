@@ -13,7 +13,7 @@ $(document).on('turbolinks:load', function() {
       dow: [1, 2, 3, 4, 5]
     },
     events: {
-      url: '',
+      url: "/calendars.json",
       error: function() {
         $('#script-warning').show();
       }
