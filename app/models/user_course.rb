@@ -6,7 +6,8 @@ class UserCourse < ApplicationRecord
   after_create :create_user_subjects_when_assign_new_user
   before_save :restore_data
 
-  belongs_to :user
+  belongs_to :trainer, foreign_key: :user_id
+  belongs_to :trainee, foreign_key: :user_id
   belongs_to :course
 
   delegate :name, :description, :start_date, :end_date, :status,
