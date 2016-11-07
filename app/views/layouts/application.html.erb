@@ -32,14 +32,12 @@
     <body id="body-admin" class="skin-blue sidebar-mini wysihtml5-supported" >
       <div class="wrapper">
         <%= render "layouts/#{@namespace}_sidebar" %>
-        <div class="content-wrapper">
           <section class="content">
             <div class="flash">
               <%= render "layouts/flash" %>
             </div>
             <%= yield %>
           </section>
-        </div>
       </div>
     </body>
   <% else %>
