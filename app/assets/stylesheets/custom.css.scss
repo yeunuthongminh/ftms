@@ -685,7 +685,6 @@ textarea {
   }
 
   .modal-content {
-    font-size: 18px;
     .btn {
       font-size: 18px;
     }
@@ -697,7 +696,7 @@ textarea {
    }
 
   .modal-body {
-    padding-left: 15px;
+    padding: 1px;
   }
 
   .dangerous {
@@ -755,9 +754,9 @@ textarea {
     padding: 0.6em 1em 0.6em 1em;
     display: block;
     border: none;
-    margin: 3em auto 0em;
+    margin-left: 35%;
     outline: none;
-    background: #d6921e;
+    background: darkgoldenrod;
     border: 1px solid #d6921e;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -810,9 +809,7 @@ textarea {
   }
   h1{
     text-align: center;
-    font-size: 1.7em;
-    color: #d6921e;
-    margin-bottom: 1em;
+    color: darkgoldenrod;
     font-weight: 100;
   }
   .login h3 a {
@@ -825,11 +822,10 @@ textarea {
   .login-main {
     margin: 0 auto;
     border: 1px solid #fff;
-    padding: 3em;
-    background: black;
+    padding: 10px;
+    background: darkslategray;
   }
   .login p {
-    font-size: 1em;
     color: #fff;
   }
   #register-form {

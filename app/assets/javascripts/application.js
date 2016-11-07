@@ -75,6 +75,7 @@
 //= require full_calendar
 //= require admin/program
 //= require navbar_admin
+//= require ajax_session_devise
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();
