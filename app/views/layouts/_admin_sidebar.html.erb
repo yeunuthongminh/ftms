@@ -62,7 +62,6 @@
   </header>
 
   <aside class="control-sidebar control-sidebar-dark">
-    <div class="tab-content">
       <ul class="sidebar-menu">
         <li>
           <%= link_to admin_courses_path do %>
@@ -92,30 +91,30 @@
             <span><%= t "layouts.programs" %></span>
           <% end %>
         </li>
-        <li id="evaluations-header" class="treeview">
-          <a href="javascript:void(0)">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-graduation-cap" aria-hidden="true"></i>
             <span><%= t "layouts.evaluations" %></span>
             <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <%= render "layouts/side_panel",
-            objects: Settings.object_evaluation %>
+            </a>
+            <%= render "layouts/side_panel",
+              objects: Settings.object_evaluation %>
         </li>
-        <li id="systems-header" class="treeview">
-          <a href="javascript:void(0)">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-cogs" aria-hidden="true"></i>
             <span><%= t "layouts.system" %></span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <%= render "layouts/side_panel", objects: Settings.objects_system %>
         </li>
-        <li id="schedule-header" class="treeview">
-          <a href="javascript:void(0)">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-sitemap" aria-hidden="true"></i>
             <span><%= t "layouts.training_schedule" %></span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
-          <ul class="treeview-menu">
+          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
             <li>
               <%= link_to admin_organization_charts_path do %>
                 <i class="fa fa-circle-o" aria-hidden="true"></i>
@@ -130,13 +129,13 @@
             </li>
           </ul>
         </li>
-        <li id="statistics-header" class="treeview">
-          <a href="javascript:void(0)">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-area-chart" aria-hidden="true"></i>
             <span><%= t "layouts.statistics" %></span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
-          <ul class="treeview-menu">
+          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
             <% Settings.statistics.each do |type| %>
               <li>
                 <%= link_to admin_statistics_path(type: type) do %>
@@ -147,8 +146,8 @@
             <% end %>
           </ul>
         </li>
-        <li id="exams-header" class="treeview">
-          <a href="javascript:void(0)">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-book"></i><span><%= t "layouts.exams" %></span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
@@ -161,8 +160,6 @@
           <% end %>
         </li>
       </ul>
-    </div>
   </aside>
   <div class="control-sidebar-bg"></div>
 </div>
-

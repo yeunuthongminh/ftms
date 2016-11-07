@@ -956,5 +956,29 @@ textarea {
 }
 
 .content {
-  background-color: white;
+  background-color: whitesmoke;
+}
+
+.container {
+  padding-right: 160px;
+}
+
+.sidebar-menu > li > .dropdown-menu {
+  margin-top: -50px;
+  margin-right: 230px;
+}
+
+.sidebar-menu > li > .dropdown-menu-right {
+  background-color: rgb(34,45,50);
+}
+.sidebar-menu a {
+  color: whitesmoke;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown:hover .dropdown-menu-right {
+  display: block;
 }
