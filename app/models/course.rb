@@ -24,7 +24,8 @@ class Course < ApplicationRecord
   has_many :course_subjects, dependent: :destroy
   has_many :user_courses, -> {with_deleted}, dependent: :destroy
   has_many :user_subjects, dependent: :destroy
-  has_many :users, through: :user_courses
+  has_many :trainers, as: :userable, class_name: "Trainer", through: :user_courses
+  has_many :trainees, as: :userable, class_name: "Trainee", through: :user_courses
   has_many :subjects, through: :course_subjects
   has_many :documents, as: :documentable
   has_many :notifications, as: :trackable, dependent: :destroy
@@ -79,13 +80,5 @@ class Course < ApplicationRecord
   def finish_course current_user
     update_attributes status: :finish
     create_activity key: "course.finish_course", owner: current_user
-  end
-
-  def load_trainers
-    users.trainers
-  end
-
-  def load_trainees
-    users.trainees
   end
 end
