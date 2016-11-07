@@ -4,6 +4,8 @@ class Admin::UserCoursesController < ApplicationController
   def update
     if @user_course.update_attributes status: params[:status]
       flash.now[:success] = flash_message "updated"
+      Notifications::UserCourseNotificationBroadCastJob.perform_now user_course: @user_course,
+        user: current_user, key: :change_status_up, status: params[:status]
     else
       flash.now[:error] = flash_message "not_updated"
     end
