@@ -11,7 +11,7 @@ class Admin::UserFunctionPolicy < ApplicationPolicy
 
   Settings.all_functions.each do |function_name|
     define_method "#{function_name}?" do
-      @user.email == "admin@tms.com" ||
+      @user.has_role?(Settings.namespace_roles.admin) ||
         @user.has_function?(@controller_name, @action)
     end
   end

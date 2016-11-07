@@ -1,8 +1,7 @@
 class Trainer::UsersController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource only: :edit
+  before_action :authorize_user
   before_action :load_user, only: :edit
-  before_action :load_data, except: [:index, :show, :destroy]
+  before_action :load_profile, except: [:index, :show, :destroy]
   before_action :load_breadcrumb_edit, only: [:edit, :update]
   before_action :load_breadcrumb_new, only: [:new, :create]
   before_action :quick_create_profile, except: [:index, :destroy, :show]
@@ -17,13 +16,14 @@ class Trainer::UsersController < ApplicationController
   end
 
   def new
+    @user = User.new
     build_profile
   end
 
   def create
+    @user = User.new user_params
     if @user.save
       flash[:success] = flash_message "created"
-
       if params[:commit].present?
         redirect_to trainer_users_path
       else
@@ -84,10 +84,9 @@ class Trainer::UsersController < ApplicationController
     params.require(:user).permit User::ATTRIBUTES_PARAMS
   end
 
-  def load_data
-    datas = [Role, University, ProgrammingLanguage, Status, UserType, Location]
-    datas.each do |data|
-      instance_variable_set "@#{data.table_name}", data.all
+  def load_profile
+    Settings.user_profiles.each do |data|
+      instance_variable_set "@#{data.constantize.table_name}", data.constantize.all
     end
     @trainers = User.trainers
   end
@@ -120,5 +119,9 @@ class Trainer::UsersController < ApplicationController
       flash[:alert] = flash_message "not_find"
       redirect_to trainer_users_path
     end
+  end
+
+  def authorize_user
+    authorize_with_multiple page_params.merge(record: current_user), Trainer::UserPolicy
   end
 end

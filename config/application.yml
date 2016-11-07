@@ -131,16 +131,29 @@ defaults: &defaults
     - EvaluationTemplate
     - Rank
   objects_system:
-    - Stage
     - Role
     - Location
     - University
     - ProgrammingLanguage
     - Status
     - UserType
+    - Stage
+  object_system:
+    - Role
+    - Location
+    - University
+    - Status
+    - UserType
   object_exam:
     - Exam
     - Question
+  user_profiles:
+    - Role
+    - Location
+    - University
+    - ProgrammingLanguage
+    - Status
+    - UserType
 development:
   <<: *defaults
   neat_setting: 800

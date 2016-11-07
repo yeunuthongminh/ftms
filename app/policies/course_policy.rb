@@ -10,10 +10,10 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def index?
-    @user == @record.user
+    @user == @record.trainee
   end
 
   def show?
-    @user == @record.user
+    @user == @record.trainee
   end
 end

@@ -14,6 +14,6 @@ class SubjectPolicy < ApplicationPolicy
   end
 
   def update?
-    @user == @record.user
+    @user == @record.trainee
   end
 end

@@ -15,7 +15,7 @@ class Supports::Course
   %w(trainees trainers).each do |objects|
     define_method objects do
       instance_variable_set "@#{objects}",
-        @course.send("load_#{objects}").users_in_course
+        @course.send("#{objects}").users_in_course
     end
   end
 
