@@ -1,4 +1,5 @@
 class Trainer < User
+  include StiRouting
   has_one :location
 
   has_many :trainees, foreign_key: :trainer_id
@@ -7,4 +8,5 @@ class Trainer < User
   has_many :courses, through: :user_courses
   has_many :trainer_programs, dependent: :destroy
   has_many :notes, dependent: :destroy
+  has_many :user_subjects, dependent: :destroy, foreign_key: :user_id
 end
