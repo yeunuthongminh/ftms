@@ -4,6 +4,7 @@
     <%= render "shared/error_messages", object: @course %>
     <%= render "shared/form_assign", f: f,
       assigned_user_ids: @supports.assigned_user_ids,
-      user_courses_handler: @supports.trainee_courses_handler %>
+      user_courses_handler: @supports.trainee_courses_handler,
+      user_handler: Settings.namespace_roles.trainee %>
   <% end %>
 </div>

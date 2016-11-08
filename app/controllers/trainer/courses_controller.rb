@@ -1,11 +1,10 @@
 class Trainer::CoursesController < ApplicationController
   include FilterData
 
-  load_and_authorize_resource
-  skip_load_resource only: [:index, :show, :edit]
   before_action :find_course_in_show, only: :show
   before_action :find_course_in_edit, only: :edit
   before_action :load_data, only: [:new, :edit, :show]
+  before_action :authorize
 
   def index
     add_breadcrumb_index "courses"

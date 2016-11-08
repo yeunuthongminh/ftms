@@ -6,7 +6,7 @@ class ExpectedTrainingDateService
   end
 
   def perform
-    @course.load_trainees.includes(:profile).each do |trainee|
+    @course.trainees.includes(:profile).each do |trainee|
       trainee.profile.update_attributes finish_training_date: @course.end_date
     end
   end

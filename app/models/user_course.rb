@@ -32,7 +32,7 @@ class UserCourse < ApplicationRecord
 
   private
   def create_user_subjects_when_assign_new_user
-    if user.is_trainee?
+    if trainee
       create_user_subjects [self], course.course_subjects, course_id
     end
   end
