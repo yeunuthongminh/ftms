@@ -65,7 +65,7 @@ class CoursePresenter < ActionView::Base
   end
 
   def course_trainers course
-    course.trainers.map do |trainer|
+    course.load_trainers.map do |trainer|
       link_to trainer.name, eval("#{@namespace}_user_path(trainer)"),
         title: trainer.name
     end.join(", ")

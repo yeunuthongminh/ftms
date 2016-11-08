@@ -3,6 +3,7 @@ class Course < ApplicationRecord
 
   include PublicActivity::Model
   include InitUserSubject
+  include LoadUser
   mount_uploader :image, ImageUploader
 
   USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy, :deleted_at]]
