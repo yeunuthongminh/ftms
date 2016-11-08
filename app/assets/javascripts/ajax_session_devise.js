@@ -4,17 +4,18 @@ $(document).ready(function(){
 
 var Authentication = {
   callbackSubmit: function(){
-    var self = this;
+    var form = this;
 
-    $("form").bind("ajax:success", function(e, response, status, xhr){
+    $("#login-form").bind('ajax:success', function(e, response, status, xhr){
       if(response.success){
         window.location.reload();
       }else{
-        self.errorsFromServer();
+        form.errorsFromServer(response.data.message);
       }
     });
   },
-  errorsFromServer: function(){
-    alert('Invalid email or password');
+  errorsFromServer: function(message){
+    $("#input-append").val('');
+    $(".error").html('<p>'+ message+ '</p>');
   }
 }
