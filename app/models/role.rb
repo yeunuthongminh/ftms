@@ -16,12 +16,4 @@ class Role < ApplicationRecord
   scope :not_admin, ->{where.not name: "admin"}
 
   enum role_type: [:admin, :trainer, :trainee]
-
-  def role_functions
-    self.functions.collect{|function| [function.model_class, function.action]}
-  end
-
-  def has_function? controller, action
-    role_functions.include? [controller, action]
-  end
 end

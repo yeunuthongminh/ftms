@@ -7,7 +7,7 @@ class UsersDatatable
     @namespace = namespace
     @view = view
     @current_user = @view.current_user
-    @trainees = User.trainees
+    @trainees = Trainee.all
   end
 
   def as_json options = {}

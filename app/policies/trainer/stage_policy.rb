@@ -1,5 +1,6 @@
-class UserPolicy < ApplicationPolicy
+class Trainer::StagePolicy < ApplicationPolicy
   attr_reader :user, :controller, :action, :user_functions, :record
+  include PolicyObject
 
   def initialize user, args
     @user = user
@@ -7,19 +8,5 @@ class UserPolicy < ApplicationPolicy
     @action = args[:action]
     @user_functions = args[:user_functions]
     @record = args[:record]
-  end
-
-  def show?
-    @user = @record
-  end
-
-  def edit?
-    if @user = @record
-      User::USER_ATTRIBUTES_PARAMS
-    end
-  end
-
-  def update?
-    edit?
   end
 end

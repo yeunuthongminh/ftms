@@ -23,7 +23,12 @@ class User < ApplicationRecord
     profile_attributes: ATTRIBUTES_PROFILE_PARAMS]
 
   USER_ATTRIBUTES_PARAMS = [:name, :password, :password_confirmation, :avatar,
-    profile_attributes: [:working_day, :graduation, :university]]
+    profile_attributes: [:working_day, :graduation, :university_id]]
+
+  TRAINER_ATTRIBUTES_PARAMS = [:name, :trainer_id,
+    profile_attributes: [:working_day, :graduation, :university_id,
+    :programming_language_id, :user_progress_id,
+    :status_id, :location_id]]
 
   attr_accessor :current_role
 

@@ -1,9 +1,7 @@
 class Trainer::SubjectsController < ApplicationController
-  load_and_authorize_resource
-  load_and_authorize_resource :course
-  skip_load_resource :course, only: :show
-  skip_load_resource only: [:edit, :update]
-  before_action :find_subject_in_edit, only: :edit
+  before_action :authorize
+  before_action :find_subject_in_edit, only: [:edit, :update]
+  before_action :load_subject, except: [:index, :new, :create]
   before_action :load_data, only: :show
 
   def index
@@ -23,6 +21,7 @@ class Trainer::SubjectsController < ApplicationController
   end
 
   def new
+    @subject = Subject.new
     @subject.documents.build
     @subject.task_masters.build
 
@@ -74,7 +73,7 @@ class Trainer::SubjectsController < ApplicationController
   end
 
   def find_subject_in_edit
-    @subject = Subject.includes(:documents, :task_masters).find_by_id params[:id]
+    @subject = Subject.includes(:documents, :task_masters).find_by id: params[:id]
     redirect_if_object_nil @subject
   end
 
@@ -82,5 +81,13 @@ class Trainer::SubjectsController < ApplicationController
     @supports = Supports::Subject.new subject: @subject,
       course_id: params[:course_id]
     redirect_if_object_nil @supports.course
+  end
+
+  def load_subject
+    @subject = Subject.find_by id: params[:id]
+    if @subject.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to trainer_subjects_path
+    end
   end
 end
