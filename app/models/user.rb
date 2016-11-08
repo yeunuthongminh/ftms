@@ -28,7 +28,6 @@ class User < ApplicationRecord
   attr_accessor :current_role
 
   belongs_to :role
-  belongs_to :userable, polymorphic: true
 
   has_one :profile, dependent: :destroy
 

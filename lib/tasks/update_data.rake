@@ -9,7 +9,7 @@ namespace :db do
 
   task rake_course_location: :environment do
     Course.all.each do |course|
-      location_id = course.load_trainers.first.try :profile_location_id
+      location_id = course.trainers.first.try :profile_location_id
       course.update_attributes location_id: location_id
     end
     puts "Update location success"

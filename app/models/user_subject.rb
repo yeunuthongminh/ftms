@@ -69,14 +69,6 @@ class UserSubject < ApplicationRecord
     end
   end
 
-  def load_trainers
-    course.users.trainers
-  end
-
-  def load_trainees
-    course.users.trainees
-  end
-
   def update_status current_user, status
     row = status_before_type_cast
     column = UserSubject.statuses[status]
