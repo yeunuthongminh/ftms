@@ -1,7 +1,7 @@
 class Role < ApplicationRecord
   acts_as_paranoid
 
-  ATTRIBUTES_PARAMS = [role_functions_attributes: [:id, :model_class, :action, :_destroy]]
+  ATTRIBUTES_PARAMS = [functions_attributes: [:id, :model_class, :action, :_destroy]]
   ATTRIBUTES_ROLE_PARAMS = [:name, :role_type]
 
   has_many :user_roles, dependent: :destroy
@@ -11,7 +11,7 @@ class Role < ApplicationRecord
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
 
-  accepts_nested_attributes_for :role_functions, allow_destroy: true
+  accepts_nested_attributes_for :functions, allow_destroy: true
 
   scope :not_admin, ->{where.not name: "admin"}
 

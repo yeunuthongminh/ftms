@@ -279,6 +279,6 @@ module ApplicationHelper
   end
 
   def find_user_course trainee, course
-    UserCourse.find_by user: trainee, course: course
+    UserCourse.find_by trainee: trainee, course: course
   end
 end

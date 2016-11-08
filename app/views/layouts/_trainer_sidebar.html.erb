@@ -92,21 +92,21 @@
         </div>
       </div>
       <ul class="sidebar-menu">
-        <% if can? :read, Course %>
+        <% if current_user.has_function?("trainer/courses", "index") %>
           <li>
             <%= link_to trainer_courses_path do %>
               <i class="fa fa-calendar"></i><span><%= t "layouts.courses" %></span>
             <% end %>
           </li>
         <% end %>
-        <% if can? :read, Subject %>
+        <% if current_user.has_function?("trainer/subjects", "index") %>
           <li>
             <%= link_to trainer_subjects_path do %>
               <i class="fa fa-laptop"></i><span><%= t "layouts.subjects" %></span>
             <% end %>
           </li>
         <% end %>
-        <% if can? :read, User %>
+        <% if current_user.has_function?("trainer/users", "index") %>
           <li>
             <%= link_to trainer_users_path do %>
               <i class="fa fa-users" aria-hidden="true"></i>
@@ -114,8 +114,9 @@
             <% end %>
           </li>
         <% end %>
-        <% if can?(:read, Evaluation) || can?(:read, EvaluationTemplate) ||
-          can?(:read, Rank) %>
+        <% if current_user.has_function?("trainer/evaluations", "index") ||
+          current_user.has_function?("trainer/evaluation_templates", "index") ||
+          current_user.has_function?("trainer/ranks", "index")%>
           <li id="evaluations-header" class="treeview">
             <a href="javascript:void(0)">
               <i class="fa fa-graduation-cap" aria-hidden="true"></i>
@@ -123,19 +124,21 @@
               <i class="fa fa-angle-left pull-right"></i>
             </a>
             <%= render "layouts/side_panel",
-              object: [Evaluation, EvaluationTemplate, Rank] %>
+            objects: Settings.object_evaluation %>
           </li>
         <% end %>
-        <% if can?(:read, Role) || can?(:read, Location) ||
-          can?(:read, University) || can?(:read, Status) || can?(:read, UserType) %>
+        <% if current_user.has_function?("trainer/roles", "index") ||
+          current_user.has_function?("trainer/locations", "index") ||
+          current_user.has_function?("trainer/universities", "index") ||
+          current_user.has_function?("trainer/statuses", "index") ||
+          current_user.has_function?("trainer/user_types", "index") %>
           <li id="systems-header" class="treeview">
             <a href="javascript:void(0)">
               <i class="fa fa-cogs" aria-hidden="true"></i>
               <span><%= t "layouts.system" %></span>
               <i class="fa fa-angle-left pull-right"></i>
             </a>
-            <%= render "layouts/side_panel", object: [Role, Location, University,
-              Status, UserType] %>
+            <%= render "layouts/side_panel", objects: Settings.object_system %>
           </li>
         <% end %>
         <li id="schedule-header" class="treeview">
@@ -159,14 +162,14 @@
             </li>
           </ul>
         </li>
-        <% if can? :read, FeedBack %>
+        <%# if can? :read, FeedBack %>
           <li>
             <%= link_to trainer_feed_backs_path do %>
               <i class="fa fa-question" aria-hidden="true"></i>
               <span><%= t "feed_backs.title" %></span>
             <% end %>
           </li>
-        <% end %>
+        <%# end %>
       </ul>
     </section>
   </aside>

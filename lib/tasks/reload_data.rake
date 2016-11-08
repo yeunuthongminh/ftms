@@ -18,24 +18,28 @@ namespace :db do
       RoleFunction.find_or_create_by function: function, role: trainee_role
     end
 
-    admins = User.find_by("1")
-    trainee = User.trainees.first
-    trainer = User.trainers.first
-
-    admin.roles << admin_role
-    trainer.roles << trainer_role
-    trainee.roles << trainee_role
-
-    admin_role.functions.each do |function|
-      UserFunction.find_or_create_by function: function, user: admin
+    trainers = []
+    Trainer.trainer_role.each do |trainer|
+      Function.all.each do |function|
+        trainers << UserFunction.new(function: function, user: trainer)
+      end
     end
+    UserFunction.import trainers
 
-    trainer_role.functions.each do |function|
-      UserFunction.find_or_create_by function: function, user: trainer
+    trainees = []
+    Trainee.trainee_role.each do |trainee|
+      Function.all.each do |function|
+        trainees << UserFunction.new(function: function, user: trainee)
+      end
     end
+    UserFunction.import trainees
 
-    trainee_role.functions.each do |function|
-      UserFunction.find_or_create_by function: function, user: trainee
+    admins = []
+    Admin.admin_roles.each do |admin|
+      Function.all.each do |function|
+        admins << UserFunction.new(function: function, user: admin)
+      end
     end
+    UserFunction.import admins
   end
 end

@@ -1,4 +1,4 @@
-class ExamPolicy < ApplicationPolicy
+class Trainer::UserPolicy < ApplicationPolicy
   attr_reader :user, :controller, :action, :user_functions, :record
 
   def initialize user, args
@@ -14,10 +14,26 @@ class ExamPolicy < ApplicationPolicy
   end
 
   def show?
-    @user = @record.trainee
+    @user.has_function? @controller_name, @action
   end
 
-  def update?
-    @user = @record.trainee
+  def new?
+    @user.has_function? @controller_name, @action
+  end
+
+  def create?
+    new?
+  end
+
+  def edit
+    @user.has_function? @controller_name, @action
+  end
+
+  def update
+
+  end
+
+  def destroy
+
   end
 end

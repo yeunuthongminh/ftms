@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
     @course = Course.find_by id: params[:course_id]
     if @course.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to admin_courses_path
+      back_or_root
     end
   end
 
