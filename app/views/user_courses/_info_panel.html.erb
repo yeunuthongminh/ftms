@@ -1,31 +1,36 @@
 <div class="box box-primary">
   <div class="box-header with-border">
+    <% t "calendars.tiny.label" %>
+  </div>
+  <div id="tiny-calendar"></div>
+</div>
+
+<div class="box box-primary">
+  <div class="box-header with-border">
     <h3 class="label box-title"><%= t "subjects.members" %></h3>
     <span class="badge label-primary">
       <%= @user_course_supports.count_member %>
     </span>
   </div>
   <div class="box-body no-padding">
-    <%= render "shared/member_panel", show_members: @user_course_supports.users
+    <%= render "shared/member_panel", show_members: @user_course_supports.trainees
       .show_members, count_member: @user_course_supports.count_member %>
   </div>
 </div>
 
-<div class="card">
-  <div id="image-course">
-    <%= image_course_tag @user_course_supports.course, @user_course_supports
-      .course.programming_language_name, Settings.image_size_200 %>
-  </div>
-  <div class="course-infor">
-    <% @user_course_supports.user_subject_statuses.each do |key, value| %>
-      <div class="status">
-        <i class="fa fa-circle <%= set_color_status key %>"
-          aria-hidden="true"></i> &nbsp;
-        <%= t "subjects.#{key}_subjects" %>
-        <%= @user_course_supports.send "number_of_user_subject_#{key}" %>/
-        <%= @user_course_supports.number_of_user_subjects %>
-      </div>
-    <% end %>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <div class="course-infor">
+      <% @user_course_supports.user_subject_statuses.each do |key, value| %>
+        <div class="status">
+          <i class="fa fa-circle <%= set_color_status key %>"
+            aria-hidden="true"></i> &nbsp;
+          <%= t "subjects.#{key}_subjects" %>
+          <%= @user_course_supports.send "number_of_user_subject_#{key}" %>/
+          <%= @user_course_supports.number_of_user_subjects %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
@@ -33,12 +38,11 @@
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="label box-title"><%= t "courses.note" %></h3>
-    </div>
-    <div class="box-body">
-      <div class="subject-note">
-        <%= t "courses.time", start_date: @user_course_supports.course
-          .start_date, end_date: @user_course_supports.course.end_date %>
-      </div>
+  </div>
+  <div class="box-body">
+    <div class="subject-note">
+      <%= t "courses.time", start_date: @user_course_supports.course
+        .start_date, end_date: @user_course_supports.course.end_date %>
     </div>
   </div>
 </div>

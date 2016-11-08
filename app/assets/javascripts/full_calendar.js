@@ -22,4 +22,16 @@ $(document).on('turbolinks:load', function() {
       $('#loading').toggle(bool);
     }
   });
+
+  $('#tiny-calendar').fullCalendar({
+    height: 'auto',
+    theme: true,
+    header: {
+      left: 'prev,next',
+      center: 'title',
+      right: 'today'
+    },
+    editable: true,
+    fixedWeekCount: false,
+  });
 });

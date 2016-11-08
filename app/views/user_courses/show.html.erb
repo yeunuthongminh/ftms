@@ -14,18 +14,24 @@
         <li class="active"><%= @user_course_supports.course.name %></li>
       </ul>
     </div>
+    <div class="image-course-header">
+      <div>
+        <%= image_course_tag @user_course_supports.course, @user_course_supports
+          .course.programming_language_name, Settings.image_size_100 %>
+      </div>
+      <div class="course-header">
+        <span class="header-title">
+          <%= @user_course_supports.course.name %></span>
 
-    <span class="header-title"><%= @user_course_supports.course.name %></span>
-
-    <span class="label-status
-      <%= set_background_color_status @user_course_supports.course.status %>">
-      <%= t "courses.labels.status.#{@user_course_supports.course.status}" %>
-    </span>
-
-    <div class="description">
-      <%= @user_course_supports.course.description %>
+        <span class="label-status
+          <%= set_background_color_status @user_course_supports.course.status %>">
+          <%= t "courses.labels.status.#{@user_course_supports.course.status}" %>
+        </span>
+        <div class="description">
+          <%= @user_course_supports.course.description %>
+        </div>
+      </div>
     </div>
-
     <div class="subject-list">
       <% @user_course_supports.user_subjects.each_with_index do |user_subject,
         index| %>

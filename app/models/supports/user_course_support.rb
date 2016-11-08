@@ -1,4 +1,4 @@
-class Supports::UserCourse
+class Supports::UserCourseSupport
   attr_reader :user_course
 
   def initialize user_course
