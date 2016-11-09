@@ -12,7 +12,7 @@ class Admin::StatusSubjectsController < ApplicationController
 
   private
   def load_data
-    @supports = Supports::UserSubject.new user_subject: @user_subject,
+    @supports = Supports::UserSubjectSupport.new user_subject: @user_subject,
       course_subject_id: params[:course_subject_id]
     redirect_if_object_nil @supports.course_subject
   end

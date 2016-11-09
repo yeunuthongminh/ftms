@@ -31,7 +31,7 @@ class Supports::SubjectTrainee
   end
 
   def count_member
-    @count_member ||= users.size - Settings.number_member_show
+    @count_member ||= trainees.size - Settings.number_member_show
   end
 
   def user_tasks

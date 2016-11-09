@@ -2,11 +2,11 @@
   <div class="box-header with-border">
     <h3 class="label box-title">
       <%= t "subjects.members" %>
-      <span class="badge label-primary"><%= @subject_supports.users.size %></span>
+      <span class="badge label-primary"><%= @subject_supports.trainees.size %></span>
     </h3>
   </div>
   <div class="box-body no-padding">
-    <%= render "shared/member_panel", show_members: @subject_supports.users
+    <%= render "shared/member_panel", show_members: @subject_supports.trainers
       .show_members, count_member: @subject_supports.count_member %>
   </div>
 </div>
