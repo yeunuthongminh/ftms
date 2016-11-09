@@ -1,5 +1,5 @@
 module ApplicationHelper
-  include SessionsHelper
+  include SessionsHelper, PolicyHelper
 
   def full_title page_title = ""
     base_title = t "staticpages.framgia"

@@ -2,7 +2,8 @@
   <div id="content">
     <div id="<%= controller_name %>">
       <%= link_to t("buttons.new"), new_trainer_course_path,
-        class: "btn btn-success pull-right" if can? :create, Course %>
+        class: "btn btn-success pull-right" if
+        policy controller: "courses", action: "new" %>
       <h3 class="title">
         <button id="btn-filter-on-off" title="<%= filter_title %>"
           class="btn-filter-onoff-project btn btn-default">

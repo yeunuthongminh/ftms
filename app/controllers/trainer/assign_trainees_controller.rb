@@ -1,9 +1,8 @@
 class Trainer::AssignTraineesController < ApplicationController
-  load_and_authorize_resource :course
-  authorize_resource class: false
+  before_action :load_course, only: [:edit, :update]
 
   def edit
-    @supports = Supports::Course.new course: course
+    @supports = Supports::Course.new course: @course
 
     add_breadcrumb_path "courses"
     add_breadcrumb @course.name, trainer_course_path(@course)

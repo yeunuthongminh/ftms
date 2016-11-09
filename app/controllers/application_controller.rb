@@ -38,7 +38,10 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize
-    authorize_with_multiple page_params, Admin::UserFunctionPolicy
+    controller_name = page_params[:controller].split("/")
+    authorize_with_multiple page_params,
+      "#{@namespace.classify}::#{controller_name[1].classify}Policy"
+      .safe_constantize
   end
 
   def load_user
