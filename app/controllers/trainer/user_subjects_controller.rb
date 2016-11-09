@@ -1,5 +1,6 @@
 class Trainer::UserSubjectsController < ApplicationController
-  load_and_authorize_resource
+  before_action :authorize
+  before_action :load_user_subject, only: [:update]
 
   def update
     if params[:user_subject].present?
@@ -33,5 +34,13 @@ class Trainer::UserSubjectsController < ApplicationController
   def update_end_date_when_update_start_date
     @user_subject.update_attributes end_date:
       (@user_subject.during_time - 1).business_days.after(@user_subject.start_date)
+  end
+
+  def load_user_subject
+    @user_subject = UserSubject.find_by id: params[:id]
+    unless @user_subject
+      redirect_to trainer_user_subjects_path
+      flash[:alert] = flash_message "not_find"
+    end
   end
 end

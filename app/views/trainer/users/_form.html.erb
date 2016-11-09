@@ -19,7 +19,9 @@
               <span class="label label-default">
                 <%= role.label do %>
                   <%= role.check_box id: "check_role_#{role.object.role_type}",
-                    disabled: true, checked: true %> &nbsp;
+                    disabled: (@namespace != "admin" &&
+                    current_user.has_function?("trainer/users", "edit")),
+                    checked: f.object.roles.include?(id: role.object.id) %> &nbsp;
                   <%= role.text %> &nbsp;
                 <% end %>
               </span>
@@ -28,8 +30,9 @@
         </div>
         <div class="form-group">
           <%= f.label :trainer_id %>
-          <%= f.select :trainer_id, options_for_select(@trainers.collect{|trainer| [trainer.name,
-            trainer.id]}, f.object.trainer_id), {}, {disabled: true,
+          <%= f.select :trainer_id, options_for_select(@trainers.collect{|trainer| [trainer.name, trainer.id]}, f.object.trainer_id), {},
+            {disabled: (@namespace != "admin" &&
+            current_user.has_function?("trainer/users", "edit")),
             class: "form-control"} %>
         </div>
       </div>

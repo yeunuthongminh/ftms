@@ -1,6 +1,6 @@
 class Trainer::UsersController < ApplicationController
-  before_action :authorize_user
-  before_action :load_user, only: :edit
+  before_action :authorize
+  before_action :load_user, only: [:edit, :show]
   before_action :load_profile, except: [:index, :show, :destroy]
   before_action :load_breadcrumb_edit, only: [:edit, :update]
   before_action :load_breadcrumb_new, only: [:new, :create]
@@ -88,7 +88,7 @@ class Trainer::UsersController < ApplicationController
     Settings.user_profiles.each do |data|
       instance_variable_set "@#{data.constantize.table_name}", data.constantize.all
     end
-    @trainers = User.trainers
+    @trainers = Trainer.all
   end
 
   def load_breadcrumb_edit
@@ -114,14 +114,10 @@ class Trainer::UsersController < ApplicationController
   end
 
   def load_user
-    @user = User.includes(:profile).find_by_id params[:id]
+    @user = User.includes(:profile).find_by id: params[:id]
     if @user.nil?
       flash[:alert] = flash_message "not_find"
       redirect_to trainer_users_path
     end
-  end
-
-  def authorize_user
-    authorize_with_multiple page_params.merge(record: current_user), Trainer::UserPolicy
   end
 end

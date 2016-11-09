@@ -1,5 +1,6 @@
 class Trainer::UserPolicy < ApplicationPolicy
   attr_reader :user, :controller, :action, :user_functions, :record
+  include PolicyObject
 
   def initialize user, args
     @user = user
@@ -7,33 +8,5 @@ class Trainer::UserPolicy < ApplicationPolicy
     @action = args[:action]
     @user_functions = args[:user_functions]
     @record = args[:record]
-  end
-
-  def index?
-    true
-  end
-
-  def show?
-    @user.has_function? @controller_name, @action
-  end
-
-  def new?
-    @user.has_function? @controller_name, @action
-  end
-
-  def create?
-    new?
-  end
-
-  def edit
-    @user.has_function? @controller_name, @action
-  end
-
-  def update
-
-  end
-
-  def destroy
-
   end
 end
