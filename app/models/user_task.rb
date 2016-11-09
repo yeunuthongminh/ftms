@@ -8,7 +8,7 @@ class UserTask < ApplicationRecord
 
   belongs_to :task
   belongs_to :user_subject
-  belongs_to :user
+  belongs_to :trainee, foreign_key: :user_id
 
   delegate :id, :name, :image_url, :description, to: :task, prefix: true, allow_nil: true
   delegate :name, :id, to: :user, prefix: true, allow_nil: true

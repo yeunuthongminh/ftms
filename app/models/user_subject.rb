@@ -1,5 +1,6 @@
 class UserSubject < ApplicationRecord
   include PublicActivity::Model
+  include LoadUser
   acts_as_paranoid
 
   ATTRIBUTES_PARAMS = [:start_date, :end_date]
