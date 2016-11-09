@@ -16,7 +16,6 @@ gem "jbuilder", "~> 2.0"
 gem "sdoc", "~> 0.4.0", group: :doc
 gem "settingslogic"
 gem "devise"
-gem "cancancan"
 gem "ransack"
 gem "draper", github: "audionerd/draper", branch: "rails5"
 gem "kaminari"

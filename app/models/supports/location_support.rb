@@ -10,6 +10,6 @@ class Supports::LocationSupport
   end
 
   def trainers
-    @trainers ||= User.trainers.includes(:trainees).by_location @location.id
+    @trainers ||= Trainer.includes(:trainees).by_location @location.id
   end
 end
