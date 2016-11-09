@@ -1,5 +1,6 @@
 class Trainer::AssignTraineesController < ApplicationController
   before_action :load_course, only: [:edit, :update]
+  before_action :authorize
 
   def edit
     @supports = Supports::Course.new course: @course

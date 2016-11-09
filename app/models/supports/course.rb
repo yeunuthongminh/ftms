@@ -37,8 +37,8 @@ class Supports::Course
       instance_variable_set "@#{object}_courses_handler",
         (
           send("#{object}s_assign").map do |user|
-            UserCourse.unscoped.find_or_initialize_by object.to_sym => user,
-              course: @course
+            UserCourse.unscoped.find_or_initialize_by user.class.name.underscore
+              .to_sym => user, course: @course
           end
         )
     end

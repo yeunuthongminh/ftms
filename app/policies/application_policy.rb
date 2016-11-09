@@ -1,5 +1,5 @@
 class ApplicationPolicy
-  attr_reader :user, :controller, :action, :user_functions, :record
+  attr_reader :user, :controller_name, :action, :user_functions, :record
 
   def initialize user, args
     @user = user
