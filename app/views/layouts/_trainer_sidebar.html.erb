@@ -4,8 +4,6 @@
       <span class="logo-lg"><%= t :name_system %></span>
     <% end %>
     <nav class="navbar navbar-static-top" role="navigation">
-      <a href="javascript:void(0)" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-      </a>
       <ol class="breadcrumb pull-left">
         <%= render_breadcrumbs tag: :li, separator: "" %>
       </ol>
@@ -20,7 +18,7 @@
           </li>
           <li class="dropdown messages-menu">
             <%= link_to update_notifications_path, class: "dropdown-toggle",
-              data: {toggle:"dropdown"}, method: :patch, remote: true do %>
+              data: {toggle: "dropdown"}, method: :patch, remote: true do %>
               <i class="fa fa-bell-o"></i>
               <span class="label label-danger dropdown-label number-notification"><%= not_seen_notification %></span>
             <% end %>
@@ -76,101 +74,130 @@
               </li>
             </ul>
           </li>
+          <li>
+            <a href="#" data-toggle="control-sidebar" id="toggle-navbar">
+              <i class="fa fa-gears"></i>
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
   </header>
 
-  <aside class="main-sidebar">
-    <section class="sidebar">
-      <div class="user-panel">
-        <div class="pull-left">
-          <%= avatar_user_tag current_user, "img-circle", Settings.image_size_50 %>
-        </div>
-        <div class="pull-left info">
-          <p><%= current_user.name %></p>
-        </div>
-      </div>
-      <ul class="sidebar-menu">
-        <% if current_user.has_function?("trainer/courses", "index") %>
-          <li>
-            <%= link_to trainer_courses_path do %>
-              <i class="fa fa-calendar"></i><span><%= t "layouts.courses" %></span>
-            <% end %>
-          </li>
-        <% end %>
-        <% if current_user.has_function?("trainer/subjects", "index") %>
-          <li>
-            <%= link_to trainer_subjects_path do %>
-              <i class="fa fa-laptop"></i><span><%= t "layouts.subjects" %></span>
-            <% end %>
-          </li>
-        <% end %>
-        <% if current_user.has_function?("trainer/users", "index") %>
-          <li>
-            <%= link_to trainer_users_path do %>
-              <i class="fa fa-users" aria-hidden="true"></i>
-              <span><%= t "layouts.users" %></span>
-            <% end %>
-          </li>
-        <% end %>
-        <% if current_user.has_function?("trainer/evaluations", "index") ||
-          current_user.has_function?("trainer/evaluation_templates", "index") ||
-          current_user.has_function?("trainer/ranks", "index")%>
-          <li id="evaluations-header" class="treeview">
-            <a href="javascript:void(0)">
-              <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-              <span><%= t "layouts.evaluations" %></span>
-              <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <%= render "layouts/side_panel",
-            objects: Settings.object_evaluation %>
-          </li>
-        <% end %>
-        <% if current_user.has_function?("trainer/roles", "index") ||
-          current_user.has_function?("trainer/locations", "index") ||
-          current_user.has_function?("trainer/universities", "index") ||
-          current_user.has_function?("trainer/statuses", "index") ||
-          current_user.has_function?("trainer/user_types", "index") %>
-          <li id="systems-header" class="treeview">
-            <a href="javascript:void(0)">
-              <i class="fa fa-cogs" aria-hidden="true"></i>
-              <span><%= t "layouts.system" %></span>
-              <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <%= render "layouts/side_panel", objects: Settings.object_system %>
-          </li>
-        <% end %>
-        <li id="schedule-header" class="treeview">
+  <aside class="control-sidebar control-sidebar-dark">
+    <ul class="sidebar-menu">
+      <% if current_user.has_function?("trainer/courses", "index") %>
+        <li>
+          <%= link_to trainer_courses_path do %>
+            <i class="fa fa-calendar"></i><span><%= t "layouts.courses" %></span>
+          <% end %>
+        </li>
+      <% end %>
+      <% if current_user.has_function?("trainer/subjects", "index") %>
+        <li>
+          <%= link_to trainer_subjects_path do %>
+            <i class="fa fa-laptop"></i><span><%= t "layouts.subjects" %></span>
+          <% end %>
+        </li>
+      <% end %>
+      <% if current_user.has_function?("trainer/users", "index") %>
+        <li>
+          <%= link_to trainer_users_path do %>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <span><%= t "layouts.users" %></span>
+          <% end %>
+        </li>
+      <% end %>
+      <% if current_user.has_function?("trainer/evaluations", "index") ||
+        current_user.has_function?("trainer/evaluation_templates", "index") ||
+        current_user.has_function?("trainer/ranks", "index") %>
+        <li id="evaluations-header" class="treeview">
           <a href="javascript:void(0)">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            <span><%= t "layouts.evaluations" %></span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <%= render "layouts/side_panel",
+            objects: Settings.object_evaluation %>
+        </li>
+      <% end %>
+      <% if current_user.has_function?("trainer/roles", "index") ||
+        current_user.has_function?("trainer/locations", "index") ||
+        current_user.has_function?("trainer/universities", "index") ||
+        current_user.has_function?("trainer/statuses", "index") ||
+        current_user.has_function?("trainer/user_types", "index") %>
+        <li id="systems-header" class="treeview">
+          <a href="javascript:void(0)">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            <span><%= t "layouts.system" %></span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <%= render "layouts/side_panel", objects: Settings.object_system %>
+        </li>
+      <% end %>
+      <% if current_user.has_function?("trainer/roles", "index") ||
+        current_user.has_function?("trainer/locations", "index") ||
+        current_user.has_function?("trainer/universities", "index") ||
+        current_user.has_function?("trainer/statuses", "index") ||
+        current_user.has_function?("trainer/user_types", "index") %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            <span><%= t "layouts.system" %></span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <%= render "layouts/side_panel", objects: Settings.object_system %>
+        </li>
+      <% end %>
+      <% if @namespace == "trainer" %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-sitemap" aria-hidden="true"></i>
             <span><%= t "layouts.training_schedule" %></span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
-          <ul class="treeview-menu">
+          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
             <li>
               <%= link_to trainer_organization_charts_path do %>
-                <i class="fa fa-circle-o" aria-hidden="true"></i>
                 <span><%= t "layouts.organization_chart" %></span>
               <% end %>
             </li>
             <li>
               <%= link_to trainer_training_managements_path do %>
-                <i class="fa fa-circle-o" aria-hidden="true"></i>
                 <span><%= t "layouts.training_management" %></span>
               <% end %>
             </li>
           </ul>
         </li>
-        <%# if can? :read, FeedBack %>
-          <li>
-            <%= link_to trainer_feed_backs_path do %>
-              <i class="fa fa-question" aria-hidden="true"></i>
-              <span><%= t "feed_backs.title" %></span>
-            <% end %>
-          </li>
-        <%# end %>
-      </ul>
-    </section>
+      <% end %>
+      <% if @namespace == "admin" %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-sitemap" aria-hidden="true"></i>
+            <span><%= t "layouts.training_schedule" %></span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
+            <li>
+              <%= link_to admin_organization_charts_path do %>
+                <span><%= t "layouts.organization_chart" %></span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to admin_training_managements_path do %>
+                <span><%= t "layouts.training_management" %></span>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+      <li>
+        <%= link_to admin_feed_backs_path do %>
+          <i class="fa fa-question" aria-hidden="true"></i>
+          <span><%= t "feed_backs.title" %></span>
+        <% end %>
+      </li>
+    </ul>
   </aside>
+  <div class="control-sidebar-bg"></div>
 </div>
