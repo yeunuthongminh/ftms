@@ -20,7 +20,8 @@ namespace :db do
     desc "assign user type to user course"
     UserCourse.find_each do |user_course|
       user = User.find_by id: user_course.user_id
-      user_course.send("#{user.class.name.downcase}!")
+      user_course.set_user_type
+      user_course.save
     end
   end
 end

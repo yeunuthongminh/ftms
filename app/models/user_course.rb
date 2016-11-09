@@ -11,6 +11,7 @@ class UserCourse < ApplicationRecord
 
   belongs_to :trainer, foreign_key: :user_id
   belongs_to :trainee, foreign_key: :user_id
+  belongs_to :admin, foreign_key: :user_id
   belongs_to :course
 
   delegate :name, :description, :start_date, :end_date, :status,
@@ -34,6 +35,15 @@ class UserCourse < ApplicationRecord
   enum status: [:init, :progress, :finish]
   enum user_type: [:admin, :trainer, :trainee]
 
+  def set_user_type
+    user = User.find_by id: self.user_id
+    if user.instance_of? Admin
+      self.user_type = Trainer.name.downcase
+    else
+      self.user_type = user.class.name.downcase
+    end
+  end
+
   private
   def create_user_subjects_when_assign_new_user
     if trainee
@@ -45,10 +55,5 @@ class UserCourse < ApplicationRecord
     if deleted_at_changed?
       restore recursive: true
     end
-  end
-
-  def set_user_type
-    user = User.find_by id: self.user_id
-    self.user_type = user.class.name.downcase
   end
 end
