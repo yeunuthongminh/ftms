@@ -11,30 +11,31 @@
           <%= f.label :email %>
           <%= f.text_field :email, class: "form-control" %><br>
         </div>
-        <div class="form-group">
-          <%= f.label :role_id %>
-          <span>
-            <%= f.collection_check_boxes :role_ids, load_user_roles(@user), :id,
-              :name do |role| %>
-              <span class="label label-default">
-                <%= role.label do %>
-                  <%= role.check_box id: "check_role_#{role.object.role_type}",
-                    disabled: (@namespace != "admin" &&
-                    current_user.has_function?("trainer/users", "edit")),
-                    checked: f.object.roles.include?(id: role.object.id) %> &nbsp;
-                  <%= role.text %> &nbsp;
-                <% end %>
-              </span>
-            <% end %>
-          </span>
-        </div>
-        <div class="form-group">
-          <%= f.label :trainer_id %>
-          <%= f.select :trainer_id, options_for_select(@trainers.collect{|trainer| [trainer.name, trainer.id]}, f.object.trainer_id), {},
-            {disabled: (@namespace != "admin" &&
-            current_user.has_function?("trainer/users", "edit")),
-            class: "form-control"} %>
-        </div>
+        <% if policy controller: "roles", action: "edit"%>
+          <div class="form-group">
+            <%= f.label :role_id %>
+            <span>
+              <%= f.collection_check_boxes :role_ids, @roles, :id,
+                :name do |role| %>
+                <span class="label label-default">
+                  <%= role.label do %>
+                    <%= role.check_box id: "check_role_#{role.object.role_type}",
+                      checked: f.object.roles.include?(role.object) %> &nbsp;
+                    <%= role.text %> &nbsp;
+                  <% end %>
+                </span>
+              <% end %>
+            </span>
+          </div>
+        <% end %>
+        <% if policy controller: "users", action: "edit"%>
+          <div class="form-group">
+            <%= f.label :trainer_id %>
+            <%= f.select :trainer_id, options_for_select(@trainers.
+              collect{|trainer| [trainer.name, trainer.id]}, f.object.trainer_id), {},
+              class: "form-control" %>
+          </div>
+        <% end %>
       </div>
       <%= render "shared/edit_profile_form", f: f %>
     </div>

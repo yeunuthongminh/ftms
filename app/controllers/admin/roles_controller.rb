@@ -57,12 +57,4 @@ class Admin::RolesController < ApplicationController
   def role_params
     params.require(:role).permit Role::ATTRIBUTES_ROLE_PARAMS
   end
-
-  def load_role
-    @role = Role.find_by id: params[:id]
-    unless @role
-      redirect_to admin_roles_path
-      flash[:alert] = flash_message "not_find"
-    end
-  end
 end

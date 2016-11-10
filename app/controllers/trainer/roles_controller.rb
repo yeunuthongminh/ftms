@@ -1,5 +1,6 @@
 class Trainer::RolesController < ApplicationController
-  load_and_authorize_resource
+  before_action :load_role, only: [:edit, :update, :destroy]
+  before_action :authorize
 
   def index
     respond_to do |format|
@@ -11,11 +12,13 @@ class Trainer::RolesController < ApplicationController
   end
 
   def new
+    @role = Role.new
     add_breadcrumb_path "roles"
     add_breadcrumb_new "roles"
   end
 
   def create
+    @role = Role.new role_params
     if @role.save
       flash[:success] = flash_message "created"
       redirect_to trainer_roles_path

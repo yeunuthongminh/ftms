@@ -98,6 +98,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def load_role
+    @role = Role.find_by id: params[:id]
+    unless @role
+      flash[:alert] = flash_message "not_find"
+      back_or_root
+    end
+  end
+
   def page_params
     Hash[:controller, params[:controller], :action, params[:action],
       :user_functions, current_user.user_functions]
