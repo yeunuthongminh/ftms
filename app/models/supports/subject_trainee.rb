@@ -8,7 +8,7 @@ class Supports::SubjectTrainee
 
   def course_subject
     @course_subject ||= CourseSubject.includes(
-      user_subjects: [:user_course, :course, user_tasks: [:task, :user,
+      user_subjects: [:user_course, :course, user_tasks: [:task, :trainee,
       :user_subject]])
       .find_by course_id: user_course.course_id, subject_id: @subject.id
   end
@@ -30,8 +30,12 @@ class Supports::SubjectTrainee
     @trainees ||= user_subject.course.load_trainees
   end
 
+  def member_size
+    @member_size ||= trainers.size + trainees.size
+  end
+
   def count_member
-    @count_member ||= trainees.size - Settings.number_member_show
+    @count_member ||= trainers.size + trainees.size - Settings.number_member_show
   end
 
   def user_tasks
