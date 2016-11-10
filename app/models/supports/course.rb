@@ -1,7 +1,8 @@
 class Supports::Course
-  attr_reader :course, :program
+  attr_reader :course, :program, :current_user
 
   def initialize args
+    @current_user = args[:current_user]
     @course = args[:course]
     @namespace = args[:namespace]
     @program = args[:program]
@@ -59,6 +60,8 @@ class Supports::Course
   def courses
     @courses = if @program
       @program.courses.includes :programming_language, :location
+    elsif @current_user
+      @current_user.courses.includes :programming_language, :location, :program
     else
       Course.includes :programming_language, :location, :program
     end

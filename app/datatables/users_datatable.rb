@@ -1,6 +1,7 @@
 class UsersDatatable
   include AjaxDatatablesRails::Extensions::Kaminari
-
+  include Pundit
+  include PolicyHelper
   delegate :params, :link_to, to: :@view
 
   def initialize view, namespace
@@ -27,10 +28,8 @@ class UsersDatatable
         link_to(user.name, eval("@view.#{@namespace}_user_path(user)")),
         user.email,
         user.roles.map(&:name).join(", "),
-        link_to(@view.t("buttons.edit"), eval("@view.edit_#{@namespace}_user_path(user)"), class: "pull-right"),
-        link_to(@view.t("buttons.delete"), eval("@view.#{@namespace}_user_path(user)"),
-          method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
-          class: "text-danger pull-right")
+        can_edit(user),
+        can_delete(user)
       ]
     end
   end
@@ -69,5 +68,28 @@ class UsersDatatable
 
   def sort_direction
     params[:sSortDir_0] == "desc" ? "desc" : "asc"
+  end
+
+  def current_user
+    @current_user
+  end
+
+  def can_edit user
+    if policy(controller: "user", action: "edit")
+      link_to @view.t("buttons.edit"),
+        eval("@view.edit_#{@namespace}_user_path(user)"), class: "pull-right"
+    else
+      ""
+    end
+  end
+
+  def can_delete user
+    if policy(controller: "user", action: "destroy")
+      link_to @view.t("buttons.delete"), eval("@view.#{@namespace}_user_path(user)"),
+        method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
+        class: "text-danger pull-right"
+    else
+      ""
+    end
   end
 end
