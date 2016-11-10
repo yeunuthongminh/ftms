@@ -1,11 +1,6 @@
 class Trainer::UserTypesController < ApplicationController
-  def load_user_subject
-    @user_subject = UserSubject.find_by id: params[:id]
-    unless @user_subject
-      redirect_to admin_user_subjects_path
-      flash[:alert] = flash_message "not_find"
-    end
-  end
+  before_action :authorize
+  before_action :load_user_type, only: [:edit, :update, :destroy]
 
   def index
     @user_types = UserType.all
