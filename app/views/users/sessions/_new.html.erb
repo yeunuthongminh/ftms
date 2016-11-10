@@ -2,9 +2,10 @@
   <%= form_for resource, as: resource_name, url: session_path(resource_name),
     id: "login-form", format: :json, remote: true do |f| %>
     <div>
-    <%= f.email_field :email, placeholder: t("user.fields.email"), type: "text" %>
-    <%= f.password_field :password, autocomplete: "off",
-      placeholder: t("user.fields.password"), class: "form-control", id: "input-append" %>
+      <%= f.email_field :email, placeholder: t("user.fields.email"),
+        type: "text", class: "form-control" %>
+      <%= f.password_field :password, autocomplete: "off",
+        placeholder: t("user.fields.password"), class: "form-control", id: "input-append" %>
       <div class="error"></div>
     </div>
     <% if devise_mapping.rememberable? %>
