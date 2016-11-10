@@ -1,5 +1,6 @@
 class Trainer::StatusesController < ApplicationController
-  load_and_authorize_resource except: :show
+  before_action :authorize
+  before_action :load_status, only: [:edit, :update, :destroy]
 
   def index
     @statuses = Status.all
@@ -8,11 +9,13 @@ class Trainer::StatusesController < ApplicationController
   end
 
   def new
+    @status = Status.new
     add_breadcrumb_path "statuses"
     add_breadcrumb_new "statuses"
   end
 
   def create
+    @status = Status.new status_params
     if @status.save
       flash[:success] = flash_message "created"
       redirect_to trainer_statuses_path
@@ -50,5 +53,13 @@ class Trainer::StatusesController < ApplicationController
   private
   def status_params
     params.require(:status).permit Status::ATTRIBUTES_PARAMS
+  end
+
+  def load_status
+    @status = Status.find_by id: params[:id]
+    unless @status
+      redirect_to trainer_statuses_path
+      flash[:alert] = flash_message "not_find"
+    end
   end
 end

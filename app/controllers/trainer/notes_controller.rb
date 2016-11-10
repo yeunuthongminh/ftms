@@ -1,9 +1,9 @@
 class Trainer::NotesController < ApplicationController
-  load_and_authorize_resource
-
+  before_action :authorize
   before_action :load_notes, only: [:create, :update, :destroy]
 
   def create
+    @note = Note.new note_params
     @note.author_id = current_user.id
     if @note.save
       flash.now[:success] = flash_message "created"

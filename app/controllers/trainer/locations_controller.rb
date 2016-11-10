@@ -1,6 +1,6 @@
 class Trainer::LocationsController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource only: :show
+  before_action :authorize
+  before_action :find_location, except: [:index, :create, :new]
 
   before_action :load_managers, except: [:destroy, :show, :index]
   before_action :set_breadcrumb_new, only: [:new, :create]
@@ -23,9 +23,11 @@ class Trainer::LocationsController < ApplicationController
   end
 
   def new
+    @location = Location.new
   end
 
   def create
+    @location = Location.new location_params
     respond_to do |format|
       if @location.save
         flash.now[:success] = flash_message "created"
@@ -81,7 +83,7 @@ class Trainer::LocationsController < ApplicationController
   end
 
   def find_location
-    @location = Location.includes(:manager).find_by_id params[:id]
+    @location = Location.includes(:manager).find_by id: params[:id]
     unless @location
       redirect_to admin_locations_path
       flash[:alert] = flash_message "not_find"
