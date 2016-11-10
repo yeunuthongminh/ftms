@@ -32,7 +32,7 @@ class UserSubject < ApplicationRecord
 
   accepts_nested_attributes_for :user_tasks
 
-  delegate :name, to: :user, prefix: true, allow_nil: true
+  delegate :name, to: :trainee, prefix: true, allow_nil: true
   delegate :name, :id, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
 
@@ -97,7 +97,7 @@ class UserSubject < ApplicationRecord
   end
 
   def is_of_user? user_param
-    user == user_param
+    trainee == user_param
   end
 
   def percent_progress
@@ -116,18 +116,18 @@ class UserSubject < ApplicationRecord
   end
 
   def create_user_task_if_create_task task
-    user_tasks.create task: task, user: user
+    user_tasks.create task: task, trainee: trainee
   end
 
   def in_progress
-    user.user_subjects.update_all current_progress: false
+    trainee.user_subjects.update_all current_progress: false
     true
   end
 
   def check_current_progress
-    user_subject = user.user_subjects.where(status: [:progress, :waiting])
+    user_subject = trainee.user_subjects.where(status: [:progress, :waiting])
       .order("updated_at DESC").first
-    user_subject ||= user.user_subjects.where(status: :finish)
+    user_subject ||= trainee.user_subjects.where(status: :finish)
       .order("updated_at DESC").first
     user_subject.update_attributes(current_progress: true) if user_subject
     false
@@ -203,7 +203,7 @@ class UserSubject < ApplicationRecord
       old_status = UserSubject.statuses.key args[:row]
       new_status = UserSubject.statuses.key args[:column]
       parameters = {old_status: old_status, new_status: new_status}
-      create_activity key: activity_key, owner: args[:current_user], recipient: user, parameters: parameters
+      create_activity key: activity_key, owner: args[:current_user], recipient: trainee, parameters: parameters
       user_ids = [args[:current_user].id, user_id]
 
       notification_key = args[:row] > args[:column] ? :change_status_down : :change_status_up

@@ -25,7 +25,7 @@ class Supports::Subject
       @user_tasks_chart_data = {}
 
       user_subjects.each do |user_subject|
-        @user_tasks_chart_data[user_subject.user_name] = user_subject
+        @user_tasks_chart_data[user_subject.trainee_name] = user_subject
           .user_tasks.finished.size
       end
       @user_tasks_chart_data
