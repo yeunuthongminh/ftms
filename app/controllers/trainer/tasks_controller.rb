@@ -1,6 +1,7 @@
 class Trainer::TasksController < ApplicationController
   before_action :load_course_subject
   before_action :load_task, except: [:new, :create]
+  before_action :authorize
   before_action :add_task_info, only: [:create]
 
   def new
@@ -84,6 +85,22 @@ class Trainer::TasksController < ApplicationController
       @task.create_by_trainee = current_user.is_trainee?
     end
     @task.course_subject = @course_subject
+  end
+
+  def load_course
+    @course = Course.find params[:course_id]
+    if @course.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to trainer_courses_path
+    end
+  end
+
+  def load_course_subject
+    @course_subject = CourseSubject.find_by id: params[:id]
+    if @course_subject.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to @course
+    end
   end
 end
 

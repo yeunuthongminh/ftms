@@ -1,7 +1,6 @@
 class Trainer::CourseSubjectsController < ApplicationController
-  load_and_authorize_resource
-  load_and_authorize_resource :course
   before_action :load_course, except: :new
+  before_action :load_course_subject
 
   def index
     @course_subjects = @course.course_subjects
@@ -51,6 +50,14 @@ class Trainer::CourseSubjectsController < ApplicationController
     if @course.nil?
       flash[:alert] = flash_message "not_find"
       redirect_to trainer_courses_path
+    end
+  end
+
+  def load_course_subject
+    @course_subject = CourseSubject.find_by id: params[:id]
+    if @course_subject.nil?
+      flash[:alert] = flash_message "not_find"
+      redirect_to @course
     end
   end
 end

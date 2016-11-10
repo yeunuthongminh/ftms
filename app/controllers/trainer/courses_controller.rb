@@ -2,7 +2,7 @@ class Trainer::CoursesController < ApplicationController
   include FilterData
 
   before_action :find_course_in_show, only: :show
-  before_action :find_course_in_edit, only: :edit
+  before_action :find_course_in_edit, only: [:edit, :update]
   before_action :load_data, only: [:new, :edit, :show]
   before_action :authorize
 
