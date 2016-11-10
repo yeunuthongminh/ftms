@@ -23,6 +23,7 @@ class Trainer::ChangeStatusCoursesController < ApplicationController
   private
   def load_course
     @course = Course.find_by id: params[:course_id]
+    flash[:alert] = flash_message "not_find"
     redirect_if_object_nil @course
   end
 end
