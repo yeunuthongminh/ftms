@@ -8,7 +8,7 @@ class Notifications::CourseNotificationBroadCastJob < ApplicationJob
       #{I18n.t "notifications.keys.#{notification.key}",
       data: notification.trackable.name} #{args[:user].name}"
 
-    args[:course].users.each do |user|
+    (args[:course].trainees + args[:course].trainers).each do |user|
       notification.user_notifications.create user: user
     end
 

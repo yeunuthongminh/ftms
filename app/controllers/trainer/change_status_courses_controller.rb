@@ -1,5 +1,6 @@
 class Trainer::ChangeStatusCoursesController < ApplicationController
-  load_and_authorize_resource :course
+  before_action :authorize
+  before_action :load_course
 
   def update
     key = case @course.status
@@ -15,7 +16,13 @@ class Trainer::ChangeStatusCoursesController < ApplicationController
     flash[:success] = flash_message "#{key}_course"
 
     Notifications::CourseNotificationBroadCastJob.perform_now course: @course,
-      key:Notification.keys[key], user_id: current_user.id
+      key:Notification.keys[key], user: current_user
     redirect_to [:trainer, @course]
+  end
+
+  private
+  def load_course
+    @course = Course.find_by id: params[:course_id]
+    redirect_if_object_nil @course
   end
 end
