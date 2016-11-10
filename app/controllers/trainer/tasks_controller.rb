@@ -1,9 +1,10 @@
 class Trainer::TasksController < ApplicationController
-  load_and_authorize_resource
-  load_and_authorize_resource :course_subject
+  before_action :load_course_subject
+  before_action :load_task, except: [:new, :create]
   before_action :add_task_info, only: [:create]
 
   def new
+    @task = Task.new
     load_breadcrumbs
     add_breadcrumb t("breadcrumbs.subjects.new_task")
   end
@@ -16,6 +17,7 @@ class Trainer::TasksController < ApplicationController
   end
 
   def create
+    @task = Task.build task_params
     if @task.save
       flash[:success] = flash_message "created"
       redirect_to edit_trainer_course_course_subject_path(@course_subject.course,
@@ -53,6 +55,16 @@ class Trainer::TasksController < ApplicationController
   private
   def task_params
     params.require(:task).permit Task::ATTRIBUTES_PARAMS
+  end
+
+  def load_course_subject
+    @course_subject = CourseSubject.find_by id: params[:course_subject_id]
+    redirect_if_object_nil @course_subject
+  end
+
+  def load_task
+    @task = Task.find_by id: params[:id]
+    redirect_if_object_nil @task
   end
 
   def load_breadcrumbs
