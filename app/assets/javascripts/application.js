@@ -69,6 +69,7 @@
 //= require question
 //= require statistic
 //= require spectrum
+//= require import
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();
