@@ -10,7 +10,7 @@
   </div>
 </div>
 <div class="col-md-3 col-xs-3">
-  <% if current_user?(user_task.user) && user_task.subject_in_progress? &&
+  <% if current_user?(user_task.trainee) && user_task.subject_in_progress? &&
     !user_task.finished? && !@subject_supports.course.finish? %>
     <div class="action text-center" hidden>
       <% if user_task.in_progress? %>

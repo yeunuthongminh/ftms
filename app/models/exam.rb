@@ -4,7 +4,7 @@ class Exam < ApplicationRecord
   EXAM_ATTRIBUTES_PARAMS = [:user_subject_id, :status, :spent_time,
     results_attributes: [:id, :questions_id, :answer_id]]
 
-  belongs_to :user
+  belongs_to :trainee, foreign_key: :user_id
   belongs_to :user_subject
 
   has_many :results, dependent: :destroy
