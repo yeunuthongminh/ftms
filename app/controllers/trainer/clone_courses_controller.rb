@@ -1,5 +1,6 @@
 class Trainer::CloneCoursesController < ApplicationController
-  load_and_authorize_resource :course
+  before_action :load_course
+  before_action :authorize
 
   def create
     clone_course_service = CloneCourseService.new course: @course
@@ -12,5 +13,11 @@ class Trainer::CloneCoursesController < ApplicationController
       flash[:failed] = t "courses.confirms.not_clone"
       redirect_to trainer_courses_path
     end
+  end
+
+  private
+  def load_course
+    @course = Course.find_by id: params[:course_id]
+    redirect_if_object_nil @course
   end
 end
