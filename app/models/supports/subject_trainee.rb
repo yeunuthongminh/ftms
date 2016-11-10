@@ -30,6 +30,10 @@ class Supports::SubjectTrainee
     @trainees ||= user_subject.course.load_trainees
   end
 
+  def users
+    @user ||= (trainees + trainers).take Settings.number_member_show
+  end
+
   def member_size
     @member_size ||= trainers.size + trainees.size
   end
@@ -68,9 +72,9 @@ class Supports::SubjectTrainee
     unless user_subject.init?
       @user_tasks_chart_data = {}
 
-      course_subject.user_subjects.includes(:user, :user_course)
+      course_subject.user_subjects.includes(:trainee, :user_course)
         .each do |user_subject|
-        @user_tasks_chart_data[user_subject.user.name] = user_subject.user_tasks
+        @user_tasks_chart_data[user_subject.trainee.name] = user_subject.user_tasks
           .finished.size
       end
       @user_tasks_chart_data

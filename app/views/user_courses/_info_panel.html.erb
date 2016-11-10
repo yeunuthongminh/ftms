@@ -13,8 +13,8 @@
     </span>
   </div>
   <div class="box-body no-padding">
-    <%= render "shared/member_panel", show_members: @user_course_supports.trainees
-      .show_members, count_member: @user_course_supports.count_member %>
+    <%= render "shared/member_panel", show_members: @user_course_supports.users,
+      count_member: @user_course_supports.count_member %>
   </div>
 </div>
 
