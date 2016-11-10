@@ -67,7 +67,6 @@ class User < ApplicationRecord
   scope :trainees, ->{trainee_roles.where.not(id: admin_roles.map(&:id))}
   scope :find_course, ->course{joins(:user_courses)
     .where("user_courses.course_id in (?)", course).distinct}
-  scope :show_members, ->{limit Settings.number_member_show}
   scope :select_all, ->{includes(:user_roles).distinct}
   scope :not_trainees, ->{joins(user_roles: :role)
     .where("roles.role_type != ?", Role.role_types[:trainee]).distinct}

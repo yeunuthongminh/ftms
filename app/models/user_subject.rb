@@ -5,7 +5,7 @@ class UserSubject < ApplicationRecord
 
   ATTRIBUTES_PARAMS = [:start_date, :end_date]
 
-  belongs_to :user
+  belongs_to :trainee, foreign_key: :user_id
   belongs_to :course
   belongs_to :user_course
   belongs_to :course_subject
