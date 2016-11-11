@@ -19,10 +19,10 @@
           <% course.course_subjects.each do |course_subject| %>
             <% unless course_subject.finished? %>
               <% course_subject.user_subjects.each do |user_subject| %>
-                <% if user_subject.progress? && user_subject.user.is_trainee? %>
+                <% if user_subject.progress? %>
                   <tr style="width: 100%; <%= 'color: #b22222' if user_subject.do_none_task? %>">
                     <td style='border: 1px solid #cecece; width: 15%; text-align: center'>
-                      <%= user_subject.user.name %></td>
+                      <%= user_subject.trainee.name %></td>
                     <td style='border: 1px solid #cecece; width: 15%; text-align: center'>
                       <%= course_subject.subject.name %></td>
                     <td style='border: 1px solid #cecece; width: 10%; text-align: center'>

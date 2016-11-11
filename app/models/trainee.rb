@@ -11,4 +11,5 @@ class Trainee < User
   has_many :courses, through: :user_courses
   has_many :user_tasks, dependent: :destroy, foreign_key: :user_id
   has_many :tasks, through: :user_tasks
+  has_many :notes, dependent: :destroy, foreign_key: :user_id
 end

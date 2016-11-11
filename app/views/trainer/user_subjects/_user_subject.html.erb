@@ -1,6 +1,6 @@
 <tr id="user-subject-<%= user_subject.id %>">
   <td class="user-name">
-    <%= link_to user_subject.trainee.name, [:trainer, user_subject.trainee] %>
+    <%= link_to user_subject.trainee_name, [:trainer, user_subject.trainee] %>
   </td>
   <td>
     <% if user_subject.finish? || @supports.course.finish? %>

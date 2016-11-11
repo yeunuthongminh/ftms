@@ -1,6 +1,7 @@
 class Admin::TasksController < ApplicationController
   before_action :load_course_subject
   before_action :load_task, except: [:new, :create]
+  before_action :authorize
   before_action :add_task_info, only: [:create]
 
   def new

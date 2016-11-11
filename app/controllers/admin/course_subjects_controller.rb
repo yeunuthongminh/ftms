@@ -1,4 +1,5 @@
 class Admin::CourseSubjectsController < ApplicationController
+  before_action :authorize
   before_action :load_course
   before_action :load_course_subject, except: :index
 
