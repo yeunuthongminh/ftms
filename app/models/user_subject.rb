@@ -25,9 +25,9 @@ class UserSubject < ApplicationRecord
   scope :order_by_course_subject , ->{joins(:course_subject).order "course_subjects.row_order"}
 
   scope :load_by_course_subject, ->course_subject_ids, trainer_id do
-    order_by_course_subject.joins(:user).where("course_subjects.id in (?)
+    order_by_course_subject.joins(:trainee).where("course_subjects.id in (?)
       AND user_subjects.status = ? AND users.trainer_id = ?", course_subject_ids,
-      UserSubject.statuses[:progress], trainer_id).includes :user
+      UserSubject.statuses[:progress], trainer_id)
   end
 
   accepts_nested_attributes_for :user_tasks

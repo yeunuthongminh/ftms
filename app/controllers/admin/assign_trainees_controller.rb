@@ -1,6 +1,6 @@
 class Admin::AssignTraineesController < ApplicationController
-  before_action :find_course, only: [:edit, :update]
-  before_action :authorize, only: [:edit, :update]
+  before_action :find_course
+  before_action :authorize
 
   def edit
     @supports = Supports::Course.new course: @course

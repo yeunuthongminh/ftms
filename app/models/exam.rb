@@ -17,5 +17,5 @@ class Exam < ApplicationRecord
 
   enum status: [:init, :testing, :finish]
 
-  delegate :name, to: :user, prefix: true, allow_nil: true
+  delegate :name, to: :trainee, prefix: true, allow_nil: true
 end

@@ -1,13 +1,17 @@
 class Admin::StagesController < ApplicationController
-  load_and_authorize_resource
+  before_action :authorize
+  before_action :load_stage, only: [:edit, :update, :destroy]
 
   def index
+    @stages = Stage.all
   end
 
   def new
+    @stage = Stage.new
   end
 
   def create
+    @stage = Stage.new stage_params
     if @stage.save
       flash[:success] = flash_message "created"
       redirect_to admin_stages_path
@@ -40,5 +44,10 @@ class Admin::StagesController < ApplicationController
   private
   def stage_params
     params.require(:stage).permit :name
+  end
+
+  def load_stage
+    @stage = Stage.find_by id: params[:id]
+    redirect_if_object_nil @stage
   end
 end

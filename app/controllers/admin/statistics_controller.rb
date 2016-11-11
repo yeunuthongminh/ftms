@@ -1,7 +1,5 @@
 class Admin::StatisticsController < ApplicationController
-
   include FilterData
-
   before_action :authorize
   before_action :load_statistic_view
   before_action :load_filter, only: :index
