@@ -1,10 +1,12 @@
 <div id="list-subjects">
   <div class="row">
     <div class="col-md-12 title">
-      <span>
-        <%= link_to t("buttons.new"),
-          new_trainer_subject_path, class: "btn btn-success pull-right" %>
-      </span>
+      <% if policy(controller: "subject", action: "new") %>
+        <span>
+          <%= link_to t("buttons.new"),
+            new_trainer_subject_path, class: "btn btn-success pull-right" %>
+        </span>
+      <% end %>
     </div>
   </div>
   <table id="subjects" class="table table-bordered display" data-source="<%= trainer_subjects_url(format: "json") %>" >

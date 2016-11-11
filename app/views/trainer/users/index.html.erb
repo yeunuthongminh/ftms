@@ -1,9 +1,11 @@
 <div id="users" class="profile-active">
   <div class="title">
-    <span>
-      <%= link_to t("buttons.new"), new_trainer_user_path,
-        class: "btn btn-success pull-right" %>
-    </span>
+    <% if policy(controller: "user", action: "new") %>
+      <span>
+        <%= link_to t("buttons.new"), new_trainer_user_path,
+          class: "btn btn-success pull-right" %>
+      </span>
+    <% end %>
   </div>
 
   <table id="tbl-user" class="table table-bordered display"
