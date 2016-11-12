@@ -1,7 +1,7 @@
 <div id="list-subjects">
   <div class="row">
     <div class="col-md-12 title">
-      <% if policy(controller: "subject", action: "new") %>
+      <% if policy(controller: "subjects", action: "new") %>
         <span>
           <%= link_to t("buttons.new"),
             new_trainer_subject_path, class: "btn btn-success pull-right" %>

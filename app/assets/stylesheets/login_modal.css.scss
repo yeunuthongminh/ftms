@@ -3,6 +3,12 @@
 }
 
 #login-modal {
+  .modal-dialog {
+    width: auto;
+    .modal-body {
+      padding: 1px;
+    }
+  }
   form {
     width: 85%;
     display: block;

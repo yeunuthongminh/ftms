@@ -181,3 +181,43 @@
     padding: 5% 0 5% 5%;
   }
 }
+
+#user-header {
+  .slimScrollDiv {
+    height: 250px !important;
+    ul {
+      height: 250px !important;
+    }
+  }
+  .container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 10%;
+  }
+  a {
+    color: rgb(89,169,187) !important;
+  }
+  a:hover {
+    color: black !important;
+  }
+}
+
+#user-header > nav > .container-fluid > ol {
+  padding-top: 15px;
+  font-size: 15px;
+  a {
+    padding-right: 20px;
+    color: black;
+  }
+}
+
+#bs-example-navbar-collapse-1 {
+ .messages-menu .fa-bell-o, .fa-file-excel-o {
+   padding-top: 15px;
+   font-size: 20px;
+ }
+}
+
+#dropdown-profile a {
+  border-left: double thin;
+}
