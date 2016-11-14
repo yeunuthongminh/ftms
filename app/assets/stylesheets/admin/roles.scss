@@ -1,6 +1,104 @@
+@import "variables";
+@import "mixin";
 #roles {
-  .input-group-btn {
-    padding-top: 20px;
-    padding-left: 30px;
+  @include customize-scrollbar;
+
+  .fixedTable-body {
+    height: auto;
+  }
+
+  .form-control {
+    padding: 0;
+  }
+
+  select {
+    text-indent: 0px;
+  }
+
+  #content {
+    position: relative;
+  }
+
+  .fixedTitle, .fixedTable-sidebar, #parent, #child {
+    width: 500px;
+  }
+
+  .scrollbarH {
+    margin-left: 500px;
+  }
+
+  .scrollbar {
+    top: 30px;
+  }
+
+  .fixedTitle, .fixedTable-header {
+    max-height: 31px;
+    min-height: 31px;
+    height: 31px;
+  }
+
+  .trow {
+    height: 23px;
+  }
+
+  .tcell {
+    &.stt {
+      min-width: 35px;
+      max-width: 35px;
+    }
+
+    &.index-function {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
+    }
+
+    &.new-function {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
+    }
+
+    &.create-function {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
+    }
+
+    &.show-function {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
+    }
+
+    &.edit-function {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
+    }
+
+    &.update-function {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
+    }
+
+    &.name {
+      min-width: 465px;
+      max-width: 465px;
+      position: relative;
+    }
+
+    &.none {
+      display: table-cell;
+      border-right: none;
+      border-top: 2px solid #ccc;
+    }
+
+    &.destroy-function {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
+    }
   }
 }

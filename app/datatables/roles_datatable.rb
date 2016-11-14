@@ -22,7 +22,7 @@ class RolesDatatable
     roles.map.each.with_index 1 do |role, index|
       [
         index,
-        link_to(role.name, eval("@view.edit_admin_role_allocate_functions_path(role)")),
+        link_to(role.name, eval("@view.edit_admin_role_path(role)")),
         link_to(@view.t("buttons.edit"), eval("@view.edit_#{@namespace}_role_path(role)"),
           class: "text-primary pull-right"),
         link_to(@view.t("buttons.delete"), eval("@view.#{@namespace}_role_path(role)"),
