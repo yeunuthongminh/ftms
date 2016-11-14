@@ -5,8 +5,10 @@
         <th class="name"><%= t "table.thead.name" %></th>
         <th class="action"><%= t "table.thread.action" %></th>
         <th>
-          <%= link_to t("buttons.new"), new_admin_stage_path,
-            class: "btn btn-success pull-right" %>
+          <% if policy(controller: "stages", action: "new") %>
+            <%= link_to t("buttons.new"), new_admin_stage_path,
+              class: "btn btn-success pull-right" %>
+          <% end %>
         </th>
       </tr>
     </thead>
@@ -15,10 +17,13 @@
         <tr>
           <td class="name"><%= stage.name %></td>
           <td class="action">
-            <%= link_to t("buttons.edit"), edit_admin_stage_path(stage) %>&nbsp;
-            <%= link_to t("buttons.delete"), admin_stage_path(stage),
-              method: :delete, data: {confirm: t("messages.delete.confirm")}
-              %>
+            <% if policy(controller: "stages", action: "edit") %>
+              <%= link_to t("buttons.edit"), edit_admin_stage_path(stage) %>&nbsp;
+            <% end %>
+            <% if policy(controller: "stages", action: "destroy") %>
+              <%= link_to t("buttons.delete"), admin_stage_path(stage),
+                method: :delete, data: {confirm: t("messages.delete.confirm")} %>
+            <% end %>
           </td>
         </tr>
       <% end %>
