@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     end
     resources :users do
       resource :evaluations
+      resource :stages, only: [:edit, :update]
     end
 
     resources :evaluations, only: :index
