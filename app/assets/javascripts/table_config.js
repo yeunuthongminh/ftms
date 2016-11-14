@@ -76,6 +76,10 @@ function setTableMaxHeight(tblElement) {
   if (height > 200) {
     tblElement.css({'max-height': height});
   }
+
+  if ($('.fixedTitle').find($('.controller_name')).length > 0) {
+    tblElement.css({'max-height': height - 220});
+  }
 }
 
 function load_tables(){

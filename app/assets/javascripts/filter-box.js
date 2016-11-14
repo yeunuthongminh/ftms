@@ -98,12 +98,18 @@ function toggleFilterMenu(element, resize) {
   if (fa.offset().left + filterDomWidth > windowWidth) {
     $filterDom.addClass(rightArowClass);
     _left = fa.offset().left - filterDomWidth + 24;
+  } else if (fa.hasClass('controller_name')) {
+    _left = 470;
   } else {
     $filterDom.removeClass(rightArowClass);
     _left = fa.offset().left - 12;
   }
 
   _top = fa.offset().top + fa.outerHeight();
+
+  if (fa.hasClass('controller_name')) {
+    _top = $(".panel").offset().top - 44;
+  }
 
   $filterDom.css({"top": _top, "left": _left});
 

@@ -7,3 +7,4 @@ en:
     panel:
       new: "New Role"
       edit: "Edit Role"
+    controller_name: "Controller name"

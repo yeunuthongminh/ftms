@@ -136,6 +136,16 @@ class FilterDatasController < ApplicationController
         @key_field = :id
         @value_field = :program_name
         @resources = Program.order(:name).pluck :name
+      when "controller_name"
+        routes = []
+        temp = Rails.application.routes.set.anchored_routes.map(&:defaults)
+          .reject {|route| route[:internal] || check_route(route[:controller])}
+
+        temp.pluck(:controller).uniq.each do |controller|
+          routes << Hash["controller".to_sym, controller, "actions".to_sym,
+            temp.select {|route| route[:controller] == controller}.pluck(:action).uniq]
+        end
+        @resources = routes.pluck :controller
       end
     end
 
@@ -197,5 +207,12 @@ class FilterDatasController < ApplicationController
     rescue
     end
     @dates << Date.today.beginning_of_month if @dates.blank?
+  end
+
+  def check_route route
+    Settings.controller_names.each do |object|
+      return true if route.include? object
+    end
+    false
   end
 end
