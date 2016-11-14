@@ -7,7 +7,7 @@ class Admin::RolesController < ApplicationController
     respond_to do |format|
       format.html {add_breadcrumb_index "roles"}
       format.json {
-        render json: RolesDatatable.new(view_context, @namespace)
+        render json: RolesDatatable.new(view_context, @namespace, current_user)
       }
     end
   end

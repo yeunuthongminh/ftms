@@ -277,4 +277,14 @@ module ApplicationHelper
   def find_user_course trainee, course
     UserCourse.find_by trainee: trainee, course: course
   end
+
+  def user_handler user_course
+    if user_course.trainee
+      "trainee"
+    elsif user_course.trainer
+      "trainer"
+    else
+      "admin"
+    end
+  end
 end
