@@ -1,5 +1,5 @@
 class Admin::CloneCoursesController < ApplicationController
-  before_action :load_course, only: :edit
+  before_action :load_course
   before_action :authorize
 
   def create

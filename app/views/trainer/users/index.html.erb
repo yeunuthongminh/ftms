@@ -1,13 +1,12 @@
 <div id="users" class="profile-active">
-  <div class="title">
-    <% if policy(controller: "users", action: "new") %>
+  <% if policy(controller: "users", action: "new") %>
+    <div class="title">
       <span>
         <%= link_to t("buttons.new"), new_trainer_user_path,
           class: "btn btn-success pull-right" %>
       </span>
-    <% end %>
-  </div>
-
+    </div>
+  <% end %>
   <table id="tbl-user" class="table table-bordered display"
     data-source="<%= trainer_users_url format: "json" %>" >
     <thead>

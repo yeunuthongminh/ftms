@@ -1,6 +1,6 @@
 class Trainer::UsersController < ApplicationController
-  before_action :authorize
-  before_action :load_user, only: [:edit, :show]
+  before_action :authorize, except: [:show, :edit, :update]
+  before_action :load_user, only: [:edit, :show, :update]
   before_action :load_profile, except: [:index, :show, :destroy]
   before_action :load_breadcrumb_edit, only: [:edit, :update]
   before_action :load_breadcrumb_new, only: [:new, :create]
@@ -35,10 +35,12 @@ class Trainer::UsersController < ApplicationController
   end
 
   def edit
+    authorize_with_multiple page_params.merge(record: @user), Trainer::UserPolicy
     build_profile unless @user.profile
   end
 
   def update
+    authorize_with_multiple page_params.merge(record: @user), Trainer::UserPolicy
     if @user.update_attributes user_params
       sign_in(@user, bypass: true) if current_user? @user
       flash[:success] = flash_message "updated"
@@ -58,6 +60,7 @@ class Trainer::UsersController < ApplicationController
   end
 
   def show
+    authorize_with_multiple page_params.merge(record: @user), Trainer::UserPolicy
     add_breadcrumb_path "users"
 
     @activities = PublicActivity::Activity.includes(:owner, :trackable)
@@ -111,13 +114,5 @@ class Trainer::UsersController < ApplicationController
     @user_type = UserType.new
     @university = University.new
     @managers = User.not_trainees
-  end
-
-  def load_user
-    @user = User.includes(:profile).find_by id: params[:id]
-    if @user.nil?
-      flash[:alert] = flash_message "not_find"
-      redirect_to trainer_users_path
-    end
   end
 end

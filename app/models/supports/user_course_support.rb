@@ -17,6 +17,14 @@ class Supports::UserCourseSupport
     @trainees ||= course.load_trainees
   end
 
+  def users
+    @users ||= (trainees + trainers).take Settings.number_member_show
+  end
+
+  def member_size
+    @member_size ||= trainers.size + trainees.size
+  end
+
   def user_subjects
     @user_subjects ||= @user_course.user_subjects
       .includes(course_subject: :subject).order_by_course_subject

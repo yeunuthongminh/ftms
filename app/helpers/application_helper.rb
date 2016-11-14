@@ -255,13 +255,6 @@ module ApplicationHelper
     controller_name == "sessions" || controller_name == "passwords"
   end
 
-  def load_user_roles user
-    Role.joins(:users).where users: {id: user.id}
-    if user.new_record?
-      Role.all
-    end
-  end
-
   def set_background_answer answer, result
     if answer == result.answer && !answer.is_correct?
       "style=background-color:red;"
