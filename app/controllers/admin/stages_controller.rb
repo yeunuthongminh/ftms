@@ -1,5 +1,7 @@
 class Admin::StagesController < ApplicationController
-  load_and_authorize_resource
+  load_resource only: [:index, :new, :create]
+  before_action :load_stage, only: [:edit, :update, :destroy]
+  authorize_resource
 
   def index
   end
@@ -17,6 +19,7 @@ class Admin::StagesController < ApplicationController
   end
 
   def edit
+    @supports = Supports::StageSupport.new(profile: @user.profile, stage: @stage) if params[:user_id]
   end
 
   def update
@@ -40,5 +43,16 @@ class Admin::StagesController < ApplicationController
   private
   def stage_params
     params.require(:stage).permit :name
+  end
+
+  def load_stage
+    if params[:id]
+      @stage = Stage.find_by id: params[:id]
+    elsif params[:user_id]
+      @user = User.find_by id: params[:user_id]
+      redirect_if_object_nil @user
+      @stage = @user.profile.stage
+    end
+    redirect_if_object_nil @stage
   end
 end

@@ -40,6 +40,10 @@ class Supports::User
     @trainers ||= User.trainers.includes :profile
   end
 
+  def stage
+    @stage ||= @user.profile.stage
+  end
+
   %w(roles universities programming_languages statuses user_types locations)
     .each do |objects|
     define_method objects do
