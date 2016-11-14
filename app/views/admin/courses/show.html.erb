@@ -27,8 +27,10 @@
       <h2 class="label"><%= t "courses.labels.trainer" %>
         (<%= @supports.trainers.size %>)&nbsp;
         <% unless @course.finish? %>
-          <%= link_to edit_admin_course_assign_trainers_path(@course) do %>
-            <i class="ionicons ion-android-person-add"></i>
+          <% if policy(controller: "assign_trainers", action: "edit") %>
+            <%= link_to edit_admin_course_assign_trainers_path(@course) do %>
+              <i class="ionicons ion-android-person-add"></i>
+            <% end %>
           <% end %>
         <% end %>
       </h2>
@@ -45,8 +47,10 @@
       <h2 class="label"><%= t "courses.labels.trainee" %>
         (<%= @supports.trainees.size %>)
         <% unless @course.finish? %>
-          <%= link_to edit_admin_course_assign_trainees_path(@course) do %>&nbsp;
-            <i class="ionicons ion-android-person-add"></i>
+          <% if policy(controller: "assign_trainees", action: "edit") %>
+            <%= link_to edit_admin_course_assign_trainees_path(@course) do %>&nbsp;
+              <i class="ionicons ion-android-person-add"></i>
+            <% end %>
           <% end %>
         <% end %>
       </h2>

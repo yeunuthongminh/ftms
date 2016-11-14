@@ -1,11 +1,13 @@
 <div id="list-locations" class="row systems-active">
   <div class="col-md-12">
-    <div class="title">
-      <span class="pull-right">
-        <%= link_to t("buttons.new"),
-          new_admin_location_path, class: "btn btn-success pull-right" %>
-      </span>
-    </div>
+    <% if policy(controller: "locations", action: "new") %>
+      <div class="title">
+        <span class="pull-right">
+          <%= link_to t("buttons.new"),
+            new_admin_location_path, class: "btn btn-success pull-right" %>
+        </span>
+      </div>
+    <% end %>
 
     <table id="tbl-location" class="table table-bordered"
       data-source="<%= admin_locations_url format: "json" %>">

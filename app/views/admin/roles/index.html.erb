@@ -1,11 +1,13 @@
 <div id="roles" class="systems-active">
   <div class="row">
-    <div class="col-md-12 title">
-      <span>
-        <%= link_to t("buttons.new"),
+    <% if policy(controller: "roles", action: "new") %>
+      <div class="col-md-12 title">
+        <span>
+          <%= link_to t("buttons.new"),
             new_admin_role_path, class: "btn btn-success pull-right" %>
-      </span>
-    </div>
+        </span>
+      </div>
+    <% end %>
   </div>
   <table id="role-tbl" class="table table-bordered display" data-source="<%= admin_roles_url(format: "json") %>" >
     <thead>

@@ -1,6 +1,10 @@
 <div id="types" class="profile-active">
-  <p class="pull-right"><%= link_to t("buttons.new"),
-    new_trainer_user_type_path, class: "btn btn-success" %></p>
+  <p class="pull-right">
+    <% if policy(controller: "user_types", action: "new") %>
+      <%= link_to t("buttons.new"),
+        new_trainer_user_type_path, class: "btn btn-success" %>
+    <% end %>
+  </p>
   <table class="table table-striped tbl-type">
     <thead>
       <tr>
@@ -12,15 +16,19 @@
       <% @user_types.each do |user_type| %>
         <tr>
           <td class="name"><%= user_type.name %></td>
-          <td class="action">
-            <%= link_to t("buttons.edit"), edit_trainer_user_type_path(user_type),
-              class: "text-primary" %> &nbsp;
-          </td>
-          <td>
-            <%= link_to t("buttons.delete"), trainer_user_type_path(user_type),
-              method: :delete, data: {confirm: t("messages.delete.confirm")},
-              class: "text-danger" %>
-          </td>
+          <% if policy(controller: "user_types", action: "edit") %>
+            <td class="action">
+              <%= link_to t("buttons.edit"), edit_trainer_user_type_path(user_type),
+                class: "text-primary" %> &nbsp;
+            </td>
+          <% end %>
+          <% if policy(controller: "user_types", action: "destroy") %>
+            <td>
+              <%= link_to t("buttons.delete"), trainer_user_type_path(user_type),
+                method: :delete, data: {confirm: t("messages.delete.confirm")},
+                class: "text-danger" %>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
