@@ -1,11 +1,14 @@
 class LocationsDatatable
   include AjaxDatatablesRails::Extensions::Kaminari
+  include Pundit
+  include PolicyHelper
 
   delegate :params, :link_to, to: :@view
 
-  def initialize view, namespace
+  def initialize view, namespace, current_user
     @view = view
     @namespace = namespace
+    @current_user = current_user
   end
 
   def as_json options = {}
@@ -29,13 +32,8 @@ class LocationsDatatable
             Settings.image_size_20), eval("@view.#{@namespace}_user_path(manager)"),
             title: manager.name)
         end,
-        link_to(@view.t("buttons.edit"),
-          eval("@view.edit_#{@namespace}_location_path(location)"),
-          class: "text-primary pull-right"),
-        link_to(@view.t("buttons.delete"),
-          eval("@view.#{@namespace}_location_path(location)"),
-          method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
-          class: "text-danger pull-right")
+        can_update(location),
+        can_delete(location)
       ]
     end
   end
@@ -68,5 +66,30 @@ class LocationsDatatable
 
   def sort_direction
     params[:sSortDir_0] == "desc" ? "desc" : "asc"
+  end
+
+  def current_user
+    @current_user
+  end
+
+  def can_update location
+    if policy(controller: "locations", action: "edit")
+      link_to @view.t("buttons.edit"),
+        eval("@view.edit_#{@namespace}_location_path(location)"),
+        class: "text-primary pull-right"
+    else
+      ""
+    end
+  end
+
+  def can_delete location
+    if policy(controller: "locations", action: "destroy")
+      link_to @view.t("buttons.delete"),
+        eval("@view.#{@namespace}_location_path(location)"),
+        method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
+        class: "text-danger pull-right"
+    else
+      ""
+    end
   end
 end

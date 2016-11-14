@@ -8,7 +8,7 @@ class Admin::UniversitiesController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        render json: UniversitiesDatatable.new(view_context, @namespace)
+        render json: UniversitiesDatatable.new(view_context, @namespace, current_user)
       }
     end
   end

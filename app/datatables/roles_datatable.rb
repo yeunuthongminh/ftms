@@ -1,11 +1,14 @@
 class RolesDatatable
   include AjaxDatatablesRails::Extensions::Kaminari
+  include Pundit
+  include PolicyHelper
 
   delegate :params, :link_to, to: :@view
 
-  def initialize view, namespace
+  def initialize view, namespace, current_user
     @namespace = namespace
     @view = view
+    @current_user = current_user
   end
 
   def as_json options = {}
@@ -22,12 +25,9 @@ class RolesDatatable
     roles.map.each.with_index 1 do |role, index|
       [
         index,
-        link_to(role.name, eval("@view.edit_admin_role_path(role)")),
-        link_to(@view.t("buttons.edit"), eval("@view.edit_#{@namespace}_role_path(role)"),
-          class: "text-primary pull-right"),
-        link_to(@view.t("buttons.delete"), eval("@view.#{@namespace}_role_path(role)"),
-          method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
-          class: "text-danger pull-right")
+        role.name,
+        can_edit(role),
+        can_delete(role)
       ]
     end
   end
@@ -60,5 +60,28 @@ class RolesDatatable
 
   def sort_direction
     params[:sSortDir_0] == "desc" ? "desc" : "asc"
+  end
+
+  def current_user
+    @current_user
+  end
+
+  def can_edit role
+    if policy(controller: "roles", action: "edit")
+      link_to @view.t("buttons.edit"), eval("@view.edit_#{@namespace}_role_path(role)"),
+        class: "text-primary pull-right"
+    else
+      ""
+    end
+  end
+
+  def can_delete role
+    if policy(controller: "roles", action: "destroy")
+      link_to @view.t("buttons.delete"), eval("@view.#{@namespace}_role_path(role)"),
+        method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
+        class: "text-danger pull-right"
+    else
+      ""
+    end
   end
 end
