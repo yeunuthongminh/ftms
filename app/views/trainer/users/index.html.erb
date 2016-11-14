@@ -1,6 +1,6 @@
 <div id="users" class="profile-active">
   <div class="title">
-    <% if policy(controller: "user", action: "new") %>
+    <% if policy(controller: "users", action: "new") %>
       <span>
         <%= link_to t("buttons.new"), new_trainer_user_path,
           class: "btn btn-success pull-right" %>

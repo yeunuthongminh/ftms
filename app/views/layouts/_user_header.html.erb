@@ -2,17 +2,26 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-
         <%= link_to root_url, class: "logo" do %>
           <%= image_tag "logo.png", title: t("name_system") %>
         <% end %>
       </div>
+      <% if user_signed_in? %>
+        <ol class="navbar-header">
+          <%= link_to courses_path do %>
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            <%= t "user-header.courses" %>
+          <% end %>
+          <%= link_to exams_path do %>
+            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+            <%= t "user-header.exams" %>
+          <% end %>
+          <%= link_to chats_path do %>
+            <i class="fa fa-weixin" aria-hidden="true"></i>
+            <%= t "chats.chat" %>
+          <% end %>
+        </ol>
+        <% end %>
       <div id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
@@ -26,16 +35,15 @@
                 <li class="header">
                   <%= t "layouts.notifications.notification" %></li>
                 <li>
-                  <div id="slimScrollDiv">
-                    <ul class="menu">
-                      <% current_user.user_notifications.includes(notification: :user).select_notifications
-                        .limit(10).each do |user_notification| %>
-                        <%= render "shared/notification",
-                          notification: user_notification.notification %>
-                      <% end %>
-                    </ul>
-                  </div>
-                </li>
+                <div id="slimScrollDiv">
+                  <ul class="menu">
+                    <% current_user.user_notifications.includes(notification: :user).select_notifications
+                      .limit(10).each do |user_notification| %>
+                      <%= render "shared/notification",
+                        notification: user_notification.notification %>
+                    <% end %>
+                  </ul>
+                </div>
                 <li class="footer">
                   <%= link_to t("layouts.notifications.view_all"), notifications_path %>
                 </li>
@@ -47,7 +55,7 @@
               <i class="fa fa-file-excel-o"></i>
               <% end %>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" id="dropdown-profile">
               <a class="dropdown-toggle avatar" data-toggle="dropdown">
                 <%= avatar_user_tag current_user, "user-image",
                   Settings.image_size_50 %>
@@ -62,27 +70,6 @@
                     <%= t "staticpages.profile" %>
                   <% end %>
                 </li>
-                <li class="m_2">
-                  <%= link_to courses_path do %>
-                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                    <%= t "user-header.courses" %>
-                  <% end %>
-                </li>
-                <li class="m_2">
-                  <%= link_to exams_path do %>
-                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-                    <%= t "user-header.exams" %>
-                  <% end %>
-                </li>
-                <li class="m_2">
-                  <%= link_to chats_path do %>
-                    <i class="fa fa-weixin" aria-hidden="true"></i>
-                    <span class="label label-danger dropdown-label number-message">
-                    </span>
-                    <%= t "chats.chat" %>
-                  <% end %>
-                </li>
-                <li class="divider"></li>
                 <li class="m_2">
                   <%= link_to destroy_user_session_path, method: :delete do %>
                     <i class="fa fa-lock"></i>

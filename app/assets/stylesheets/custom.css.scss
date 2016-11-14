@@ -633,7 +633,6 @@ textarea {
     display: inline-block;
     text-align: left;
     vertical-align: middle;
-    width: auto !important;
   }
 
   .modal-content {
@@ -646,10 +645,6 @@ textarea {
     padding:9px 15px;
     border-bottom:1px solid #eee;
    }
-
-  .modal-body {
-    padding: 1px;
-  }
 
   .dangerous {
     background-color: red;
@@ -694,3 +689,4 @@ textarea {
     margin-right: 5px;
   }
 }
+

@@ -54,13 +54,13 @@
   <aside class="control-sidebar control-sidebar-dark">
     <div class="user-profile-navbar">
       <div class="image-user-profile">
-        <%= link_to admin_user_path(current_user) do %>
+        <%= link_to trainer_user_path(current_user) do %>
           <%= avatar_user_tag current_user, "img-circle", Settings.image_size_100 %>
         <% end %>
       </div>
       <div class="image-user-profile">
         <div>
-          <%= link_to admin_user_path(current_user) do %>
+          <%= link_to trainer_user_path(current_user) do %>
             <p><%= current_user.name %><i class="fa fa-pencil"></i></p>
           <% end %>
         </div>

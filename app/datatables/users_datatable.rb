@@ -75,7 +75,7 @@ class UsersDatatable
   end
 
   def can_edit user
-    if policy(controller: "user", action: "edit")
+    if policy(controller: "users", action: "edit")
       link_to @view.t("buttons.edit"),
         eval("@view.edit_#{@namespace}_user_path(user)"), class: "pull-right"
     else
@@ -84,7 +84,7 @@ class UsersDatatable
   end
 
   def can_delete user
-    if policy(controller: "user", action: "destroy")
+    if policy(controller: "users", action: "destroy")
       link_to @view.t("buttons.delete"), eval("@view.#{@namespace}_user_path(user)"),
         method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
         class: "text-danger pull-right"
