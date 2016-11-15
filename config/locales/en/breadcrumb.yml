@@ -16,8 +16,8 @@ en:
       new: "New"
       edit: "Edit"
       allocate_permissions: "Allocate Permissions"
-    evaluation_templates:
-      all: "All Evaluation Templates"
+    evaluation_standards:
+      all: "All Evaluation Standards"
       new: "New"
       edit: "Edit"
     evaluations:

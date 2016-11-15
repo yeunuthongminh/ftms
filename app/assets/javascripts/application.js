@@ -50,7 +50,7 @@
 //= require evaluation
 //= require role
 //= require user
-//= require evaluation_template
+//= require evaluation_standard
 //= require rank
 //= require university
 //= require admin/assign_user

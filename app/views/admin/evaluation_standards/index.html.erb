@@ -1,14 +1,12 @@
-<div id="evaluation-templates" class="evaluation-active">
+<div id="evaluation-standards" class="evaluation-active">
   <div class="row">
     <div class="col-md-12 title">
-      <span>
-        <%= link_to t("buttons.new"),
-          new_admin_evaluation_template_path, class: "btn btn-success pull-right" %>
-      </span>
+      <%= link_to t("buttons.new"), new_admin_evaluation_standard_path,
+        class: "btn btn-success pull-right" %>
     </div>
   </div>
-  <table id="evaluation-template-tbl" class="table table-bordered display"
-    data-source="<%= admin_evaluation_templates_url format: "json" %>" >
+  <table id="evaluation-standard-tbl" class="table table-bordered display"
+    data-source="<%= admin_evaluation_standards_url format: "json" %>" >
     <thead>
       <tr class="active">
         <th></th>
@@ -23,4 +21,3 @@
     </tbody>
   </table>
 </div>
-
