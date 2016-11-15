@@ -5,7 +5,7 @@
         <div class="panel-body text-center">
           <h1><%= @supports.user.name %></h1>
           <label><%= t "profiles.columns.staff_code" %></label>
-          &nbsp;&nbsp;<%= ff.text_field :staff_code %>
+          &nbsp;&nbsp;<%= ff.text_field :staff_code, class: "text-center" %>
         </div>
       </div>
     </div>
@@ -20,39 +20,46 @@
           <div class="col-md-5">
             <%= ff.label :start_training_date %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :start_training_date, disabled: true, class: "for-form" %>
+          <div class="col-md-7">
+            <%= ff.text_field :start_training_date, value: @user.profile.start_training_date ?
+              l(@user.profile.start_training_date, format: :default) : "", disabled: true,
+              class: "for-form" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :leave_date %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :leave_date, disabled: true, class: "for-form" %>
+          <div class="col-md-7">
+            <%= ff.text_field :leave_date, value: @user.profile.leave_date ?
+              l(@user.profile.leave_date, format: :default) : "",
+              disabled: true, class: "for-form" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :finish_training_date %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :finish_training_date, disabled: true, class: "for-form" %>
+          <div class="col-md-7">
+            <%= ff.text_field :finish_training_date, value: @user.profile.finish_training_date ?
+              l(@user.profile.finish_training_date, format: :default) : "",
+              disabled: true, class: "for-form" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :contract_date %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :contract_date, disabled: true, class: "for-form" %>
+          <div class="col-md-7">
+            <%= ff.text_field :contract_date, disabled: true, value: @user.profile.contract_date ?
+              l(@user.profile.contract_date, format: :default) : "", class: "for-form" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :naitei_company %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <%= ff.text_field :naitei_company, disabled: true, class: "for-form" %>
           </div>
         </div>
@@ -60,15 +67,16 @@
           <div class="col-md-5">
             <%= ff.label :graduation %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :graduation, disabled: true, class: "for-form" %>
+          <div class="col-md-7">
+            <%= ff.text_field :graduation, disabled: true, value: @user.profile.graduation ?
+              l(@user.profile.graduation, format: :year_month) : "", class: "for-form" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :user_type_id %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <select class="for-form" disabled="disabled">
               <option selected="true"><%= @supports.profile.user_type_name %></option>
             </select>
@@ -78,7 +86,7 @@
           <div class="col-md-5">
             <%= ff.label :university_id %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <select class="for-form" disabled="disabled">
               <option selected="true"><%= @supports.profile.university_name %></option>
             </select>
@@ -88,7 +96,7 @@
           <div class="col-md-5">
             <%= ff.label :programming_language_id %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <select class="for-form" disabled="disabled">
               <option selected="true"><%= @supports.profile.programming_language_name %></option>
             </select>
@@ -98,7 +106,7 @@
           <div class="col-md-5">
             <%= ff.label :status_id %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <select class="for-form" disabled="disabled">
               <option selected="true"><%= @supports.profile.status_name %></option>
             </select>
@@ -108,7 +116,7 @@
           <div class="col-md-5">
             <%= ff.label :location_id %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <select class="for-form" disabled="disabled">
               <option selected="true"><%= @supports.profile.location_name %></option>
             </select>
@@ -118,7 +126,7 @@
           <div class="col-md-5">
             <%= ff.label :working_day %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <%= ff.text_field :working_day, disabled: true, class: "for-form" %>
           </div>
         </div>
@@ -126,15 +134,17 @@
           <div class="col-md-5">
             <%= ff.label :join_div_date %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :join_div_date, disabled: true, class: "for-form" %>
+          <div class="col-md-7">
+            <%= ff.text_field :join_div_date, value: @user.profile.join_div_date ?
+              l(@user.profile.join_div_date, format: :default) : "",
+              disabled: true, class: "for-form" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :ready_for_project %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <%= ff.check_box :ready_for_project, {disabled: true}, 1, 0 %>
           </div>
         </div>
@@ -142,7 +152,7 @@
     </div>
 
     <div class="col-md-2 text-center">
-      <%= f.submit t("buttons.update"), class: "btn btn-primary" %>
+      <%= f.submit t("buttons.move"), class: "btn btn-danger btn-lg btn-submit" %>
     </div>
 
     <div class="col-md-5">
@@ -155,39 +165,47 @@
           <div class="col-md-5">
             <%= ff.label :start_training_date %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :start_training_date, class: "for-form datepicker" %>
+          <div class="col-md-7">
+            <%= ff.text_field :start_training_date, value: @user.profile.start_training_date ?
+              l(@user.profile.start_training_date, format: :default) : "",
+              class: "for-form datepicker" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :leave_date %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :leave_date, class: "for-form datepicker" %>
+          <div class="col-md-7">
+            <%= ff.text_field :leave_date, value: @user.profile.leave_date ?
+              l(@user.profile.leave_date, format: :default) : "",
+              class: "for-form datepicker" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :finish_training_date %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :finish_training_date, class: "for-form datepicker" %>
+          <div class="col-md-7">
+            <%= ff.text_field :finish_training_date, value: @user.profile.finish_training_date ?
+              l(@user.profile.finish_training_date, format: :default) : "",
+              class: "for-form datepicker" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :contract_date %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :contract_date, class: "for-form datepicker" %>
+          <div class="col-md-7">
+            <%= ff.text_field :contract_date, value: @user.profile.contract_date ?
+              l(@user.profile.contract_date, format: :default) : "",
+              class: "for-form datepicker" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :naitei_company %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <%= ff.text_field :naitei_company, class: "for-form" %>
           </div>
         </div>
@@ -195,23 +213,25 @@
           <div class="col-md-5">
             <%= ff.label :graduation %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :graduation, class: "for-form graduation" %>
+          <div class="col-md-7">
+            <%= ff.text_field :graduation, value: @user.profile.graduation ?
+              l(@user.profile.graduation, format: :year_month) : "",
+              class: "for-form graduation" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :user_type_id %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :user_type_id, class: "for-form" %>
+          <div class="col-md-7">
+            <%= select_profile_field "user_type", @supports.user_types, ff, "for-form" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :university_id %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <%= select_profile_field "university", @supports.universities, ff, "for-form" %>
           </div>
         </div>
@@ -219,7 +239,7 @@
           <div class="col-md-5">
             <%= ff.label :programming_language_id %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <%= select_profile_field "programming_language",
               @supports.programming_languages, ff, "for-form" %>
           </div>
@@ -228,7 +248,7 @@
           <div class="col-md-5">
             <%= ff.label :status_id %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <%= select_profile_field "status", @supports.statuses, ff, "for-form" %>
           </div>
         </div>
@@ -236,7 +256,7 @@
           <div class="col-md-5">
             <%= ff.label :location_id %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <%= select_profile_field "location", @supports.locations, ff, "for-form" %>
           </div>
         </div>
@@ -244,7 +264,7 @@
           <div class="col-md-5">
             <%= ff.label :working_day %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <%= ff.number_field :working_day, step: Settings.working_day.step,
               min: Settings.working_day.min, max: Settings.working_day.max, class: "for-form" %>
           </div>
@@ -253,15 +273,17 @@
           <div class="col-md-5">
             <%= ff.label :join_div_date %>
           </div>
-          <div class="col-md-3">
-            <%= ff.text_field :join_div_date, class: "for-form datepicker" %>
+          <div class="col-md-7">
+            <%= ff.text_field :join_div_date, value: @user.profile.join_div_date ?
+              l(@user.profile.join_div_date, format: :default) : "",
+              class: "for-form datepicker" %>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-5">
             <%= ff.label :ready_for_project %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-7">
             <%= ff.check_box :ready_for_project, {}, 1, 0 %>
           </div>
         </div>
