@@ -2,3 +2,4 @@ en:
   calendars:
     tiny:
       label: "Mini calendar"
+    must_be_finished: "Must be finished: "
