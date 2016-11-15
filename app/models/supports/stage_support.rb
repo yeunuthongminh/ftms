@@ -42,4 +42,8 @@ class Supports::StageSupport
   def universities
     @universities ||= University.all
   end
+
+  def user_types
+    @user_types ||= UserType.all
+  end
 end

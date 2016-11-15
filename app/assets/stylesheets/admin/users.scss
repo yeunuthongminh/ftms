@@ -8,6 +8,10 @@
       text-align: center;
     }
   }
+
+  input.form-control {
+    width: 100%;
+  }
 }
 
 .profile-form {
@@ -17,7 +21,7 @@
 
 .edit_user, .new_user {
   .plus {
-    margin-top: 30px;
+    margin-top: 9px;
   }
 
   #user_profile_attributes_location_id {
