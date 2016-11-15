@@ -2,7 +2,7 @@ class ChangeEvaluationDetailsToEvaluationCheckLists < ActiveRecord::Migration[5.
   def change
     rename_table :evaluation_details, :evaluation_check_lists
     rename_column :evaluation_check_lists, :evaluation_template_id,
-      :evaluation_criteria_id
+      :evaluation_standard_id
     rename_column :evaluation_check_lists, :point, :score
     change_column :evaluation_check_lists, :score, :float
     remove_column :evaluation_check_lists, :name

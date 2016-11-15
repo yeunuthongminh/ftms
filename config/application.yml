@@ -127,9 +127,11 @@ defaults: &defaults
     - show
     - destroy
   object_evaluation:
-    - Evaluation
-    - EvaluationTemplate
-    - Rank
+    - TraineeEvaluation
+    - EvaluationCheckList
+    - EvaluationStandard
+    - EvaluationGroup
+    - EvaluationItem
   objects_system:
     - Role
     - Location

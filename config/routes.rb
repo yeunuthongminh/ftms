@@ -30,11 +30,14 @@ Rails.application.routes.draw do
       resource :evaluations
     end
 
-    resources :evaluations, only: :index
+    resources :trainee_evaluations, only: :index
+    resources :evaluation_standards
+    resources :evaluation_items
+    resources :evaluation_groups
 
     patch "status_subject/:course_subject_id/:status" => "status_subjects#update",
       as: :status_subject
-    resources :evaluation_templates
+    resources :evaluation_check_lists
     resources :ranks
     resources :universities, except: :show
     resources :programming_languages, except: :show

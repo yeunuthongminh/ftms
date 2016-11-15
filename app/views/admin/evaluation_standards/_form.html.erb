@@ -1,0 +1,23 @@
+<%= form_for [:admin, @evaluation_standard] do |f| %>
+  <div class="col-md-12">
+    <%= render "shared/error_messages", object: @evaluation_standard %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :min_point %>
+      <%= f.number_field :min_point, min: Settings.evaluations.min,
+        class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :max_point %>
+      <%= f.number_field :max_point, min: Settings.evaluations.min,
+        class: "form-control" %>
+    </div>
+    <br>
+    <div class="pull-right">
+      <%= f.submit yield(:submit), class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
