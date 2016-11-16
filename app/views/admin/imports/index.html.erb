@@ -1,0 +1,19 @@
+<h2><%= t "import_data.import_data" %></h2>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= form_tag admin_imports_path, method: :post, multipart: true do %>
+      <div class="control-group">
+        <div class="file-field-uploaded">
+          <%= file_field_tag "file", id: "file-select", class: "file-select" %>
+        </div>
+          <div id="loading-image"  class="load-image"></div>
+        </div>
+        <hr>
+      </div>
+      <div>
+        <%= submit_tag t("import_data.import_data"), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
