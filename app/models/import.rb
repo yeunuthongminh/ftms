@@ -37,10 +37,11 @@ class Import
       current_row = spread_sheet.row number
       content = current_row[1]
       if current_row.first == Question.name
-        subject_id = current_row.last.to_i
-        question = Question.create content: content, subject_id: subject_id
+        subject_id = current_row[2].to_i
+        level = current_row.last.to_i
+        question = Question.create content: content, subject_id: subject_id, level: level
       else
-        is_correct = current_row.last.to_i == 1 ? true : false
+        is_correct = current_row[2].to_i == 1
         Answer.create content: content, is_correct: is_correct, question_id: question.id
       end
     end
