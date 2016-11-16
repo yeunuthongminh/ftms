@@ -31,5 +31,17 @@
   .fc-day-number {
     font-size: 13px !important;
   }
+  .fc-day-number:hover, .fc-day-top:hover{
+    background: lightblue;
+  }
+  .fc-day-top {
+    height: 28px;
+  }
+  .fc-row .fc-content-skeleton {
+    padding-bottom: 0px;
+  }
+  .fc-today {
+    border: double thin yellow;
+  }
 }
 
