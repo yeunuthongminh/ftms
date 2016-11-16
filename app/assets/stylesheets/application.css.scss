@@ -41,7 +41,6 @@
  *= require admin/assign_user
  *= require bootstrap-datepicker3
  *= require admin/AdminLTE.min
- *= require admin/all-skins.min
  *= require admin/location
  *= require user_courses
  *= require footer
@@ -61,6 +60,7 @@
  *= require full_calendar
  *= require login_modal
  *= require navbar_head
+ *= require admin_trainer_navbar_head
  */
 
 @import "bootstrap-sprockets";

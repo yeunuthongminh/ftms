@@ -1,0 +1,35 @@
+#admin-header, #trainer-header {
+  .main-header {
+    background-color:  #1da1f2
+  }
+  a {
+    color: white;
+  }
+  a:hover {
+    color: black;
+    background-color:  #1da1f2;
+  }
+  .control-sidebar {
+    a:hover {
+      color: black;
+      background-color: #e1e3e9;
+      border-left: 3px solid black;
+    }
+    a:focus {
+      color: black;
+      background-color: #e1e3e9;
+    }
+  }
+  a:focus {
+    color: black;
+    background-color: #1da1f2;
+  }
+  .breadcrumb {
+    a {
+      color: black;
+    }
+    a:hover {
+      background-color: white;
+    }
+  }
+}
