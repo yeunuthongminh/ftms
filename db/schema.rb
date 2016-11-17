@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114074801) do
+ActiveRecord::Schema.define(version: 20161117071014) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -108,20 +108,6 @@ ActiveRecord::Schema.define(version: 20161114074801) do
     t.text     "description",       limit: 65535
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_documents_on_deleted_at", using: :btree
-  end
-
-  create_table "evaluation_check_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.float    "score",                  limit: 24
-    t.integer  "evaluation_id"
-    t.integer  "evaluation_standard_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.datetime "deleted_at"
-    t.integer  "user_id"
-    t.index ["deleted_at"], name: "index_evaluation_check_lists_on_deleted_at", using: :btree
-    t.index ["evaluation_id"], name: "index_evaluation_check_lists_on_evaluation_id", using: :btree
-    t.index ["evaluation_standard_id"], name: "index_evaluation_check_lists_on_evaluation_standard_id", using: :btree
-    t.index ["user_id"], name: "index_evaluation_check_lists_on_user_id", using: :btree
   end
 
   create_table "evaluation_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -594,9 +580,6 @@ ActiveRecord::Schema.define(version: 20161114074801) do
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "subjects"
   add_foreign_key "courses", "programs"
-  add_foreign_key "evaluation_check_lists", "evaluation_standards"
-  add_foreign_key "evaluation_check_lists", "trainee_evaluations", column: "evaluation_id"
-  add_foreign_key "evaluation_check_lists", "users"
   add_foreign_key "evaluation_items", "evaluation_groups"
   add_foreign_key "evaluation_items", "evaluation_standards"
   add_foreign_key "feed_backs", "users"
