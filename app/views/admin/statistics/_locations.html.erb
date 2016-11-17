@@ -17,7 +17,8 @@
   <div class="box-body">
     <div id="locations-statistic"
       data-locations="<%= @statistics.locations.keys %>"
-      data-trainees="<%= @statistics.locations.values %>">
+      data-trainees="<%= @statistics.locations.values %>"
+      data-charts="<%= @statistics.locations.values.collect.with_index{|value, index| Hash["x", index, "y", value]} %>">
     </div>
   </div>
 
