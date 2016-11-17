@@ -117,19 +117,10 @@ function load_locations_statistic_chart() {
     }]
   });
 
-  if (typeof localStorage.locations_statistic_data === typeof undefined || typeof localStorage.locations_statistic_data === typeof null) {
-    var data = []
-    for (i = 0; i < locations_chart.series[0].data.length; i++) {
-      data.push({x: locations_chart.series[0].data[i].x, y: locations_chart.series[0].data[i].y});
-    }
-
-    localStorage.setItem("locations_statistic_data", JSON.stringify(data));
-  }
-
   $.each($('[id^="location-select-"]'), function (index, value){
     $(value).click(function () {
       var data = [];
-      var data_points = JSON.parse(localStorage.locations_statistic_data);
+      var data_points = JSON.parse($('#locations-statistic').data('charts').replace(/:/g, "").replace(/=>/g, ":"));
 
       if ($(this).hasClass('checked')) {
         var categories = [];
