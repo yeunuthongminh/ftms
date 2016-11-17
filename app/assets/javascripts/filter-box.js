@@ -239,7 +239,7 @@ function loadDataFilter(target) {
       if (cell_element.length != 0){
         if (!row[row_child].hasClass('hide')) {
           cell_value = $.trim(cell_element.text());
-          cell_value = cell_value.toLowerCase();
+          cell_value = cell_value.toLowerCase().split(', ');
           row_is_visible = true;
         }
         break;
@@ -247,7 +247,7 @@ function loadDataFilter(target) {
     }
 
     if(row_is_visible) {
-      list_visible_row.push(cell_value);
+      list_visible_row = list_visible_row.concat(cell_value);
     }
   });
 
