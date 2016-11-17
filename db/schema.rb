@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117071014) do
+ActiveRecord::Schema.define(version: 20161114074801) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -110,6 +110,17 @@ ActiveRecord::Schema.define(version: 20161117071014) do
     t.index ["deleted_at"], name: "index_documents_on_deleted_at", using: :btree
   end
 
+  create_table "evaluation_check_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "point"
+    t.integer  "trainee_evaluation_id"
+    t.integer  "evaluation_standard_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["evaluation_standard_id"], name: "index_evaluation_check_lists_on_evaluation_standard_id", using: :btree
+    t.index ["trainee_evaluation_id"], name: "index_evaluation_check_lists_on_trainee_evaluation_id", using: :btree
+  end
+
   create_table "evaluation_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -127,13 +138,10 @@ ActiveRecord::Schema.define(version: 20161117071014) do
 
   create_table "evaluation_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.float    "min_point",  limit: 24
-    t.float    "max_point",  limit: 24
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.datetime "deleted_at"
-    t.float    "average",    limit: 24
-    t.index ["deleted_at"], name: "index_evaluation_standards_on_deleted_at", using: :btree
+    t.integer  "min_point"
+    t.integer  "max_point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -202,19 +210,6 @@ ActiveRecord::Schema.define(version: 20161117071014) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_messages_on_deleted_at", using: :btree
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
-  end
-
-  create_table "notes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.integer  "evaluation_id"
-    t.integer  "user_id"
-    t.integer  "author_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_notes_on_deleted_at", using: :btree
-    t.index ["evaluation_id"], name: "index_notes_on_evaluation_id", using: :btree
-    t.index ["user_id"], name: "index_notes_on_user_id", using: :btree
   end
 
   create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -425,14 +420,12 @@ ActiveRecord::Schema.define(version: 20161117071014) do
   end
 
   create_table "trainee_evaluations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "targetable_type"
-    t.integer  "targetable_id"
-    t.float    "total_point",     limit: 24
+    t.string   "assessment"
+    t.integer  "total_point"
+    t.float    "current_rank", limit: 24
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_trainee_evaluations_on_deleted_at", using: :btree
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.index ["user_id"], name: "index_trainee_evaluations_on_user_id", using: :btree
   end
 
@@ -580,14 +573,14 @@ ActiveRecord::Schema.define(version: 20161117071014) do
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "subjects"
   add_foreign_key "courses", "programs"
+  add_foreign_key "evaluation_check_lists", "evaluation_standards"
+  add_foreign_key "evaluation_check_lists", "trainee_evaluations"
   add_foreign_key "evaluation_items", "evaluation_groups"
   add_foreign_key "evaluation_items", "evaluation_standards"
   add_foreign_key "feed_backs", "users"
   add_foreign_key "filters", "users"
   add_foreign_key "locations", "users"
   add_foreign_key "messages", "users"
-  add_foreign_key "notes", "trainee_evaluations", column: "evaluation_id"
-  add_foreign_key "notes", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "locations"
   add_foreign_key "profiles", "users"

@@ -1,4 +1,4 @@
-class ChangeEvaluationDetailsToEvaluationCheckLists < ActiveRecord::Migration[5.0]
+class CreateEvaluationCheckLists < ActiveRecord::Migration[5.0]
   def change
     create_table :evaluation_check_lists do |t|
       t.string :name
