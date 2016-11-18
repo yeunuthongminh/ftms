@@ -170,6 +170,7 @@ GEM
       i18n (~> 0.5)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    flamegraph (0.9.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     highcharts-rails (4.2.5)
@@ -248,6 +249,8 @@ GEM
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.1)
+    rack-mini-profiler (0.10.1)
+      rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0)
@@ -391,6 +394,7 @@ DEPENDENCIES
   exception_notification
   fabrication
   faker (= 1.4.2)
+  flamegraph
   highcharts-rails
   i18n-js (>= 3.0.0.rc11)
   i18n-tasks (~> 0.8.7)
@@ -410,6 +414,7 @@ DEPENDENCIES
   public_activity
   puma (~> 3.0)
   pundit
+  rack-mini-profiler
   rails (~> 5.0.0)
   ranked-model
   ransack

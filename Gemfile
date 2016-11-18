@@ -46,6 +46,8 @@ gem "activerecord-import"
 gem "chatwork"
 
 group :development, :test do
+  gem "flamegraph"
+  gem "rack-mini-profiler"
   gem "pry-rails"
   gem "pry-byebug"
   gem "fabrication"
