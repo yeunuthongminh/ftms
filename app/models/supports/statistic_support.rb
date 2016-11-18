@@ -1,4 +1,4 @@
-class Supports::Statistic
+class Supports::StatisticSupport
   def initialize args = {}
     @location_ids = args[:location_ids]
     @start_date = args[:start_date]
@@ -39,7 +39,7 @@ class Supports::Statistic
   end
 
   def total_trainees_presenter
-    @presenter ||= StatisticTotalTraineePresenter.new(total_trainee_by_month, months).render
+    StatisticTotalTraineePresenter.new(total_trainee_by_month).render
   end
 
   def load_stages
@@ -52,24 +52,31 @@ class Supports::Statistic
 
   private
   def total_trainee_by_month
-    profiles = Profile.includes(:user_type, :programming_language)
-      .where location_id: @location_ids
+    @statistics ||= Statistic.includes(:user_type, :programming_language)
+      .where.not(total_trainee: 0).order(:month)
+      .where month: months.collect{|month| month.to_date.beginning_of_month},
+        location_id: @location_ids, stage_id: @stage_ids
+
     total_trainees = {}
 
     UserType.all.each do |user_type|
-      total_trainees[user_type] = {}
-      ProgrammingLanguage.all.each do |language|
-        total_trainees[user_type][language] = {}
-        months.each do |month|
-          total_trainees[user_type][language][month] = profiles.select do |profile|
-            in_month?(month, profile.start_training_date) &&
-              profile.programming_language == language && profile.user_type == user_type
-          end.size
-        end
+      ProgrammingLanguage.all.each do |programming_language|
+        total_trainees[user_type: user_type, language: programming_language] = Hash[months.collect {|item| [item, 0]}]
+      end
+    end
+
+    @statistics.each do |statistic|
+      if total_trainees[convert_to_hash statistic]
+        total_trainees[convert_to_hash statistic][statistic.month.strftime I18n.t('datetime.formats.year_month')] += statistic.total_trainee
       end
     end
 
     total_trainees
+  end
+
+  def convert_to_hash statistic
+    Hash[:user_type, statistic.user_type, :language,
+      statistic.programming_language]
   end
 
   def months
