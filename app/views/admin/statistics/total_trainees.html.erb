@@ -38,8 +38,8 @@
                 <ul class="dropdown-menu" role="menu" id="stages-checkbox">
                   <% @statistics.load_stages.each do |stage| %>
                     <li>
-                      <%= check_box_tag "stages_ids[]", stage.id,
-                        checked?(params, "stages_ids", stage.id.to_s) %>
+                      <%= check_box_tag "stage_ids[]", stage.id,
+                        checked?(params, "stage_ids", stage.id.to_s) %>
                       <%= stage.name %>
                     </li>
                   <% end %>
