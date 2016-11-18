@@ -61,7 +61,7 @@ class UserSubject < ApplicationRecord
       course_subject.create_activity key: key,
         owner: current_user, recipient: course_subject.course
       user_subjects.each do |user_subject|
-        user_ids = [current_user.id, user_subject.user_id]
+        user_ids = [current_user.id, user_subject.user_id].uniq
         Notifications::UserSubjectNotificationBroadCastJob.perform_now user_subject: user_subject,
         user: current_user, user_ids: user_ids, key: :change_status_up,
         parameters: status
@@ -211,7 +211,7 @@ class UserSubject < ApplicationRecord
       new_status = UserSubject.statuses.key args[:column]
       parameters = {old_status: old_status, new_status: new_status}
       create_activity key: activity_key, owner: args[:current_user], recipient: user, parameters: parameters
-      user_ids = [args[:current_user].id, user_id]
+      user_ids = [args[:current_user].id, user_id].uniq
 
       notification_key = args[:row] > args[:column] ? :change_status_down : :change_status_up
       Notifications::UserSubjectNotificationBroadCastJob.perform_now user_subject: self,
