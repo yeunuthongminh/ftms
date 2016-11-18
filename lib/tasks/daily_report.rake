@@ -1,6 +1,6 @@
-namespace :delayjob do
+namespace :db do
   desc "TODO"
-  task mailday: :environment do
+  task daily_report: :environment do
     User.trainers.each do |trainer|
       if trainer.courses.any?
         MailByDayJob.perform_now MailByDayJob::MAIL_DAY, trainer.id

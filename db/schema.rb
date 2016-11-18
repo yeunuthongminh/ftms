@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117085926) do
+ActiveRecord::Schema.define(version: 20161118020023) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -366,6 +366,21 @@ ActiveRecord::Schema.define(version: 20161117085926) do
     t.string "name"
   end
 
+  create_table "statistics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date     "month"
+    t.integer  "location_id"
+    t.integer  "stage_id"
+    t.integer  "user_type_id"
+    t.integer  "programming_language_id"
+    t.integer  "total_trainee",           default: 0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["location_id"], name: "index_statistics_on_location_id", using: :btree
+    t.index ["programming_language_id"], name: "index_statistics_on_programming_language_id", using: :btree
+    t.index ["stage_id"], name: "index_statistics_on_stage_id", using: :btree
+    t.index ["user_type_id"], name: "index_statistics_on_user_type_id", using: :btree
+  end
+
   create_table "statuses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -606,6 +621,10 @@ ActiveRecord::Schema.define(version: 20161117085926) do
   add_foreign_key "project_requirements", "projects"
   add_foreign_key "role_functions", "functions"
   add_foreign_key "role_functions", "roles"
+  add_foreign_key "statistics", "locations"
+  add_foreign_key "statistics", "programming_languages"
+  add_foreign_key "statistics", "stages"
+  add_foreign_key "statistics", "user_types"
   add_foreign_key "task_masters", "subjects"
   add_foreign_key "tasks", "course_subjects", on_delete: :cascade
   add_foreign_key "trainee_evaluations", "users"

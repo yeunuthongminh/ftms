@@ -3,5 +3,5 @@ every :day, at: "11:55 pm" do
 end
 
 every :day, at: "11:30 pm" do
-  rake "delayjob:mailday", output: "log/daily.log"
+  rake "db:daily_report", output: "log/daily.log"
 end
