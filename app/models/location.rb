@@ -5,6 +5,7 @@ class Location < ApplicationRecord
 
   has_many :profiles
   has_many :courses
+  has_many :statistics, dependent: :destroy
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates :manager, presence: true, uniqueness: {case_sensitive: false}

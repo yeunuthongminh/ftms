@@ -5,6 +5,7 @@ class ProgrammingLanguage < ApplicationRecord
 
   has_many :profiles
   has_many :courses
+  has_many :statistics, dependent: :destroy
 
   validates :name, presence: true
 end
