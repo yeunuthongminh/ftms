@@ -139,7 +139,7 @@
           <ul class="treeview-menu">
             <% Settings.statistics.each do |type| %>
               <li>
-                <%= link_to admin_statistics_path(type: type) do %>
+                <%= link_to admin_statistics_page_path(type) do %>
                   <i class="fa fa-circle-o" aria-hidden="true"></i>
                   <span><%= t "statistics.titles.#{type}" %></span>
                 <% end %>

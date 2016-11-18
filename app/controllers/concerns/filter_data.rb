@@ -1,7 +1,6 @@
 module FilterData
   def load_filter
-    controller = params[:controller].split("/").last
-    filter_type = Filter.filter_types[controller.to_sym]
+    filter_type = Filter.filter_types[params[:type]]
 
     selected_date = if params[:selected_date].blank?
       Date.today.beginning_of_month

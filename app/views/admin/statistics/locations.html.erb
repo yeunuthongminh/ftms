@@ -1,0 +1,35 @@
+<div id="statistics">
+  <div class="<%= params[:type] %> box box-success">
+    <div class="box-header with-border">
+      <h3 class="box-title">
+        <%= t "statistics.locations.title" %>
+      </h3>
+
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+          <i class="fa fa-minus"></i>
+        </button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="box-body">
+      <div id="locations-statistic"
+        data-locations="<%= @statistics.locations.keys %>"
+        data-trainees="<%= @statistics.locations.values %>"
+        data-charts="<%= @statistics.locations.values.collect.with_index{|value, index| Hash["x", index, "y", value]} %>">
+      </div>
+    </div>
+
+     <div class="box-footer">
+      <% @statistics.locations.keys.each_with_index do |location, index| %>
+        <div id="location-select-<%= index %>">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+          <span class="location-name"><%= location %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

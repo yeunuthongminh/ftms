@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     path_names: {sign_in: "login", sign_out: "logout"}
 
   namespace :admin do
-    root "dashboard#index"
+    root "statistics#show", type: "total_trainees"
     resources :course_masters
     resources :courses do
       resources :subjects, only: :show
@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
     patch "status_subject/:course_subject_id/:status" => "status_subjects#update",
       as: :status_subject
+    get "/statistics/:type" => "statistics#show", as: :statistics_page
     resources :evaluation_templates
     resources :ranks
     resources :universities, except: :show
