@@ -1,6 +1,28 @@
+@mixin box_sizing {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
 #calendar {
+  .fc-header {
+    display: inline-block;
+    vertical-align: top;
+    border: none !important;
+  }
+
   max-width: 900px;
   margin: 5px auto;
+  padding: auto;
+  .fc-head .fc-head-container .ui-widget-header {
+    text-align: center;
+    width: 100%;
+    border-color: #D2D2D2;
+    background: #5F9EA0;
+    color: #fff;
+    height: 30px;
+    @include box-sizing;
+  }
+  margin-bottom: 100px;
 }
 
 #tiny-calendar {

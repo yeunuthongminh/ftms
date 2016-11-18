@@ -6,6 +6,7 @@ $(document).on('turbolinks:load', function() {
       center: 'title',
       right: 'month,agendaWeek,agendaDay,listMonth'
     },
+    height: 'parent',
     navLinks: true,
     editable: true,
     eventLimit: true,

@@ -11,7 +11,7 @@ class UserTask < ApplicationRecord
   belongs_to :trainee, foreign_key: :user_id
 
   delegate :id, :name, :image_url, :description, to: :task, prefix: true, allow_nil: true
-  delegate :name, :id, to: :user, prefix: true, allow_nil: true
+  delegate :name, :id, to: :trainee, prefix: true, allow_nil: true
   delegate :description, to: :task, prefix: true, allow_nil: true
 
   scope :user_task_of_subject_progress,
