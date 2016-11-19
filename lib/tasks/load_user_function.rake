@@ -1,7 +1,6 @@
 namespace :db do
   desc "remake database data"
-  task reload_data: :environment do
-    Rake::Task["db:migrate:reset"].invoke
+  task load_user_function: :environment do
 
     puts "create function"
     Rails.application.routes.set.anchored_routes.map(&:defaults).reject {|route| route[:internal] || route[:controller].include?("devise")}.each do |route|
@@ -19,7 +18,7 @@ namespace :db do
     end
 
     trainers = []
-    User.trainers.each do |trainer|
+    Trainer.all.each do |trainer|
       Function.all.each do |function|
         trainers << UserFunction.new(function: function, user: trainer)
       end
@@ -27,7 +26,7 @@ namespace :db do
     UserFunction.import trainers
 
     trainees = []
-    User.trainees.each do |trainee|
+    Trainee.all.each do |trainee|
       Function.all.each do |function|
         trainees << UserFunction.new(function: function, user: trainee)
       end
@@ -35,7 +34,7 @@ namespace :db do
     UserFunction.import trainees
 
     admins = []
-    User.admin_roles.each do |admin|
+    Admin.all.each do |admin|
       Function.all.each do |function|
         admins << UserFunction.new(function: function, user: admin)
       end
