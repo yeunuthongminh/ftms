@@ -1,5 +1,5 @@
 $(document).on("turbolinks:load", function() {
-  $('#total_trainees .dropdown-menu').click(function(event){
+  $('#total_trainees .dropdown-menu').click(function(event) {
     event.stopPropagation();
   });
   $('#color-picker').spectrum({
@@ -34,14 +34,14 @@ $(document).on("turbolinks:load", function() {
       location_select.val('');
     }
   });
-   $('.btn-submit').click(function() {
+  $('.btn-submit').click(function() {
     var graduation = $('input.graduation');
     var graduation_date = graduation.val();
     if (graduation_date) {
       graduation.val(graduation_date + '/01');
     }
     $('.edit_user').submit();
-   });
+  });
 
   $(function() {
     var $formLogin = $('#login-form');
@@ -68,19 +68,20 @@ $(document).on("turbolinks:load", function() {
       modalAnimate($formRegister, $formLost);
     });
 
-    function modalAnimate ($oldForm, $newForm) {
+    function modalAnimate($oldForm, $newForm) {
       var $oldH = $oldForm.height();
       var $newH = $newForm.height();
-      $divForms.css("height",$oldH);
-      $oldForm.fadeToggle($modalAnimateTime, function(){
-        $divForms.animate({height: $newH}, $modalAnimateTime, function(){
+      $divForms.css("height", $oldH);
+      $oldForm.fadeToggle($modalAnimateTime, function() {
+        $divForms.animate({height: $newH}, $modalAnimateTime, function() {
           $newForm.fadeToggle($modalAnimateTime);
         });
       });
     }
 
-  $('input[name="location_ids[]"]').click( function(){
-    $('#form_total_trainee').submit();
+    $('input[name="location_ids[]"]').click(function () {
+      $('#form_total_trainee').submit();
+    });
   });
 });
 
