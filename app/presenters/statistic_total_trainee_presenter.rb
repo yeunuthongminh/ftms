@@ -36,10 +36,10 @@ class StatisticTotalTraineePresenter < ActionView::Base
     "<div class=\"trow list_#{user_type_index}_#{language_index}\" id=\"sidebar-row-#{user_type.id}-#{language.id}\">
       <div class=\"tcell stt\">#</div>
       <div class=\"tcell trainee_type\" title=\"#{user_type.name}\">
-        #{link_to user_type.name, admin_user_type_path(user_type)}
+        #{user_type.name}
       </div>
       <div class=\"tcell programming_language\" title=\"#{language.name}\">
-        #{link_to language.name, admin_programming_language_path(language)}
+        #{language.name}
       </div>
     </div>"
   end

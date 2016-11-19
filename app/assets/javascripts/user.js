@@ -42,6 +42,9 @@ $(document).on("turbolinks:load", function() {
     }
     $('.edit_user').submit();
    });
+  $('input[name="location_ids[]"]').click( function(){
+    $('#form_total_trainee').submit();
+  });
 });
 
 var datepicker_options = {

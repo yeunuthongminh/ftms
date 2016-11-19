@@ -1,8 +1,7 @@
-<%= form_tag admin_statistics_path, remote: true do %>
+<%= form_tag admin_statistics_path, remote: true, id: "form_total_trainee" do %>
   <%= hidden_field_tag :type, params[:type] %>
   <% @locations.each do |location| %>
     <%= check_box_tag "location_ids[]", location.id, checked: true %>
     <%= location.name %>
   <% end %>
-  <%= submit_tag t("buttons.ok"), class: "btn btn-info" %>
 <% end %>
