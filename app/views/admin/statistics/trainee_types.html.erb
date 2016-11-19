@@ -4,6 +4,8 @@
       <h3 class="box-title">
         <%= t "statistics.user_types.title" %>
       </h3>
+      <div class="div-space"></div>
+      <%= render "location_filters" %>
 
       <div class="box-tools pull-right">
         <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -19,10 +21,6 @@
       <div id="trainee-types-statistic"
         data-trainee-types="<%= @statistics.trainee_types %>">
       </div>
-    </div>
-
-    <div class="box-footer">
-      <%= render "location_filters" %>
     </div>
   </div>
 </div>

@@ -13,6 +13,17 @@
           <i class="fa fa-times"></i>
         </button>
       </div>
+      <div class="div-space"></div>
+      <% @statistics.locations.keys.each_with_index do |location, index| %>
+        <div class="checkbox-location">
+        <div id="location-select-<%= index %>">
+          <input type="checkbox" checked="true">
+        </div>
+        <strong>
+          <span class="location-name"><%= location %></span>
+        </strong>
+        </div>
+      <% end %>
     </div>
 
     <div class="box-body">
@@ -23,13 +34,5 @@
       </div>
     </div>
 
-     <div class="box-footer">
-      <% @statistics.locations.keys.each_with_index do |location, index| %>
-        <div id="location-select-<%= index %>">
-          <i class="fa fa-heart" aria-hidden="true"></i>
-          <span class="location-name"><%= location %></span>
-        </div>
-      <% end %>
-    </div>
   </div>
 </div>
