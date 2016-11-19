@@ -5,7 +5,6 @@ $(document).on('turbolinks:load', function(){
     $('#loading-image').show();
   });
   $('#file-select').on('change', function() {
-    $('#loading-image').hide();
     var file_extension = this.files[0].name.split('.').pop().toLowerCase();
     var allowed_file = ['csv', 'xls', 'xlsx'];
     var found_index = $.inArray(file_extension, allowed_file);
@@ -14,7 +13,6 @@ $(document).on('turbolinks:load', function(){
       $('#import-data input[type=submit]').prop('disabled',true);
     }
     else{
-      alert(I18n.t('import_data.allowed'));
       $('#import-data input[type=submit]').prop('disabled',false);
     }
   });
