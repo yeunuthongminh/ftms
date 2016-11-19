@@ -32,11 +32,11 @@ class StatisticTotalTraineePresenter < ActionView::Base
   def sidebar_item sidebar_items, index
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{index}\">
       <div class=\"tcell stt\">#</div>
-      <div class=\"tcell trainee_type\" title=\"#{user_type.name}\">
-        #{user_type.name}
+      <div class=\"tcell trainee_type\" title=\"#{sidebar_items[:user_type]}\">
+        #{sidebar_items[:user_type]}
       </div>
-      <div class=\"tcell programming_language\" title=\"#{language.name}\">
-        #{language.name}
+      <div class=\"tcell programming_language\" title=\"#{sidebar_items[:language]}\">
+        #{sidebar_items[:language]}
       </div>
     </div>"
   end
