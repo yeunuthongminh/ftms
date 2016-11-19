@@ -7,6 +7,6 @@ class UserTaskHistory < ApplicationRecord
   scope :all_user_task_history, ->course_id{
     joins(user_task: [user_subject: :course]).
     where("date(user_task_histories.created_at) = '#{Date.today}'
-    AND course_id = ?", course_id).order("user_tasks.user_id,
+    AND course_id = ?", course_id).order("user_tasks.trainee_id,
     user_tasks.user_subject_id, user_task_histories.status")}
 end

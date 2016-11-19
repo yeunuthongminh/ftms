@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     authorize_task
     load_user_subject_in_course
     if @task.save
-      user_task = @task.user_tasks.find_by user: current_user
+      user_task = @task.user_tasks.find_by trainee: current_user
       user_task_service = MailerServices::UserTaskService.new user_task: user_task,
         status: Settings.status.init
       @user_task_history = user_task_service.perform
@@ -46,7 +46,7 @@ class TasksController < ApplicationController
   end
 
   def load_user_subject_in_course
-    @user_subject = UserSubject.find_by user: current_user,
+    @user_subject = UserSubject.find_by trainee: current_user,
       course_subject: @task.course_subject
   end
 
