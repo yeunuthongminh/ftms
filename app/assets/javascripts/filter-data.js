@@ -280,7 +280,7 @@ var filter_function = function(){
     isFilterTurnOn = !isFilterTurnOn;
     $.ajax({
       type: "POST",
-      url: "http://localhost:3000/en/filter_datas",
+      url: "/filter_datas",
       data: ({filter: {filter_type: filter_type, user_id: user_id, is_turn_on: isFilterTurnOn,
         target_id: target_id, target_params: JSON.stringify(target_params) }}),
       dataType: "json",
@@ -315,7 +315,7 @@ var filter_function = function(){
         check_content = content;
         $.ajax({
           type: "POST",
-          url: "http://localhost:3000/en/filter_datas",
+          url: "/filter_datas",
           data: ({filter: {filter_type: filter_type, content: content, user_id: user_id, target_id: target_id,
             target_params: JSON.stringify(target_params)}}),
           dataType: "json",
