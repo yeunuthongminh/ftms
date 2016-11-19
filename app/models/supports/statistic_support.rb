@@ -1,18 +1,30 @@
 class Supports::StatisticSupport
   def initialize args = {}
-    @location_ids = args[:location_ids]
-    @start_date = args[:start_date]
-    @end_date = args[:end_date]
-    @stage_ids = args[:stage_ids]
+    @location_ids = args[:location_ids] || load_locations.map(&:id)
+    @stage_ids = args[:stage_ids] || load_stages.map(&:id)
+    @start_date = args[:start_date] || Date.today.beginning_of_year
+    @end_date = args[:end_date] || Date.today
+  end
+
+  def load_locations
+    @locations ||= Location.all
+  end
+
+  def load_stages
+    @stages ||= Stage.all
+  end
+
+  def trainee_by_locations
+    @trainee_by_locations ||= Hash[load_locations.collect{|l| [l.name, l.profiles.size]}]
   end
 
   def trainee_types
     @trainee_types ||= if @location_ids.nil?
-      UserType.all.collect{|u| Hash[:name, u.name, :y, u.profiles.size]}
+      load_trainee_types.collect{|u| Hash[:name, u.name, :y, u.profiles.size]}
         .delete_if{|p| p[:y] == 0}.sort_by{|u| u[:y]}.reverse
     else
       temp = []
-      Location.where(id: @location_ids).each do |location|
+      load_locations.where(id: @location_ids).includes(profiles: :user_type).each do |location|
         temp += location.profiles.collect{|p| p.user_type_name}.delete_if{|p| p.nil?}
       end
       temp.inject(Hash.new(0)) { |total, e| total[e] += 1 ;total}.
@@ -21,17 +33,13 @@ class Supports::StatisticSupport
   end
 
   def universities
-    @universities = University.all
+    @universities ||= University.includes(:profiles)
       .collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.sort_by {|u| u[:y]}.reverse
   end
 
   def programming_languages
-    @programming_languages = ProgrammingLanguage.all
+    @programming_languages ||= load_programming_languages.includes(:profiles)
       .collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.sort_by {|u| u[:y]}.reverse
-  end
-
-  def locations
-    @locations = Hash[Location.all.collect{|u| [u.name, u.profiles.size]}]
   end
 
   def month_ranges
@@ -40,10 +48,6 @@ class Supports::StatisticSupport
 
   def total_trainees_presenter
     StatisticTotalTraineePresenter.new(total_trainee_by_month).render
-  end
-
-  def load_stages
-    @stages ||= Stage.all
   end
 
   def trainee_in_out_by_month
@@ -58,8 +62,8 @@ class Supports::StatisticSupport
         location_id: @location_ids, stage_id: @stage_ids
     total_trainees = {}
 
-    UserType.all.each do |user_type|
-      ProgrammingLanguage.all.each do |programming_language|
+    load_trainee_types.each do |user_type|
+      load_programming_languages.each do |programming_language|
         total_trainees[user_type: user_type.name, language: programming_language.name] = Hash[months.collect {|item| [item, 0]}]
       end
     end
@@ -108,5 +112,13 @@ class Supports::StatisticSupport
   def in_month? month, date
     date && date >= month.to_date.beginning_of_month &&
       date <= month.to_date.end_of_month
+  end
+
+  def load_trainee_types
+    @trainee_types ||= UserType.all
+  end
+
+  def load_programming_languages
+    @programming_languages ||= ProgrammingLanguage.all
   end
 end

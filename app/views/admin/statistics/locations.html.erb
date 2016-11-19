@@ -14,7 +14,7 @@
         </button>
       </div>
       <div class="div-space"></div>
-      <% @statistics.locations.keys.each_with_index do |location, index| %>
+      <% @statistics.trainee_by_locations.keys.each_with_index do |location, index| %>
         <div class="checkbox-location">
         <div id="location-select-<%= index %>">
           <input type="checkbox" checked="true">
@@ -28,9 +28,9 @@
 
     <div class="box-body">
       <div id="locations-statistic"
-        data-locations="<%= @statistics.locations.keys %>"
-        data-trainees="<%= @statistics.locations.values %>"
-        data-charts="<%= @statistics.locations.values.collect.with_index{|value, index| Hash["x", index, "y", value]} %>">
+        data-locations="<%= @statistics.trainee_by_locations.keys %>"
+        data-trainees="<%= @statistics.trainee_by_locations.values %>"
+        data-charts="<%= @statistics.trainee_by_locations.values.collect.with_index{|value, index| Hash["x", index, "y", value]} %>">
       </div>
     </div>
 

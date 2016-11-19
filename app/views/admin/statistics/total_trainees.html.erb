@@ -15,7 +15,7 @@
                   </strong>
                 </button>
                 <ul class="dropdown-menu" role="menu" id="locations-checkbox">
-                  <% @locations.each do |location| %>
+                  <% @statistics.load_locations.each do |location| %>
                     <li>
                       <%= check_box_tag "location_ids[]", location.id,
                         checked?(params, "location_ids", location.id.to_s) %>
@@ -66,7 +66,7 @@
 
         <div class="pull-right" id="number-records"></div>
 
-        <div id="filter" data-filter-data="<%= @filter_data_user %>"
+        <div id="filter" data-filter-data="<%= @filter_service.user_filter_data %>"
           data-type="<%= :statistics %>" data-id="<%= current_user.id %>"
           data-is-turn-on="<%= @filter_service.is_on? %>">
         </div>
