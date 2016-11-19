@@ -8,7 +8,7 @@ class Supports::Statistic
 
   def trainee_types
     @trainee_types ||= if @locations.nil?
-      UserType.includes(:profiles).collect{|u| Hash[:name, u.name, :y, u.profiles.size]}
+      UserType.collect{|u| Hash[:name, u.name, :y, u.profiles.size]}
         .delete_if{|p| p[:y] == 0}.sort_by{|u| u[:y]}.reverse
     else
       temp = []
@@ -21,17 +21,17 @@ class Supports::Statistic
   end
 
   def universities
-    @universities = University.includes(:profiles)
+    @universities = University
       .collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.sort_by {|u| u[:y]}.reverse
   end
 
   def programming_languages
-    @programming_languages = ProgrammingLanguage.includes(:profiles)
+    @programming_languages = ProgrammingLanguage
       .collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.sort_by {|u| u[:y]}.reverse
   end
 
   def locations
-    @locations = Hash[Location.includes(:profiles).collect{|u| [u.name, u.profiles.size]}]
+    @locations = Hash[Location.collect{|u| [u.name, u.profiles.size]}]
   end
 
   def month_ranges

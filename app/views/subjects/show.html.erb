@@ -43,7 +43,7 @@
               class: "btn btn-danger pull-right finish-subject" %>
           <% elsif @subject_supports.user_subject.subject.subject_detail && @subject_supports.user_subject.waiting? %>
             <%= link_to t("buttons.do_exam"), "#",
-              class: "btn btn-info pull-right finish-subject" %>
+              class: "btn btn-info pull-right do-exam-now" %>
           <% end %>
         <% end %>
         <div class="description"><%= @subject_supports.user_subject.description %></div>
