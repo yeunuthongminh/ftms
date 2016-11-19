@@ -316,7 +316,8 @@ var filter_function = function(){
         $.ajax({
           type: "POST",
           url: "/filter_datas",
-          data: ({filter: {filter_type: filter_type, content: content, user_id: user_id, target_id: target_id,
+          data: ({filter: {filter_type: filter_type, content: content, user_id: user_id,
+            target_id: target_id, is_turn_on: isFilterTurnOn,
             target_params: JSON.stringify(target_params)}}),
           dataType: "json",
           success: function(msg) {
