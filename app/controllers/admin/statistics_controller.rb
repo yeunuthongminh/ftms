@@ -3,7 +3,7 @@ class Admin::StatisticsController < ApplicationController
 
   before_action :authorize
   before_action :load_statistic_view
-  before_action :load_filter, only: :index
+  before_action :load_filter, only: :show
   before_action :load_locations
 
   def show

@@ -60,7 +60,7 @@ class Supports::StatisticSupport
 
     UserType.all.each do |user_type|
       ProgrammingLanguage.all.each do |programming_language|
-        total_trainees[user_type: user_type, language: programming_language] = Hash[months.collect {|item| [item, 0]}]
+        total_trainees[user_type: user_type.name, language: programming_language.name] = Hash[months.collect {|item| [item, 0]}]
       end
     end
 
@@ -74,8 +74,8 @@ class Supports::StatisticSupport
   end
 
   def convert_to_hash statistic
-    Hash[:user_type, statistic.user_type, :language,
-      statistic.programming_language]
+    Hash[:user_type, statistic.user_type_name, :language,
+      statistic.programming_language_name]
   end
 
   def months
