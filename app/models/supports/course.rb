@@ -56,7 +56,7 @@ class Supports::Course
   end
 
   def courses
-    @courses = Course.includes :programming_language, :location
+    @courses = Course.includes :programming_language, :location, :users
   end
 
   def filter_data_user

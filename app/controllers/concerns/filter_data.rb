@@ -1,12 +1,6 @@
 module FilterData
   def load_filter
-    filter_type = Filter.filter_types[params[:type]]
-
-    selected_date = if params[:selected_date].blank?
-      Date.today.beginning_of_month
-    else
-      Date.strptime(params[:selected_date], t("date.formats.year_month")).beginning_of_month
-    end
+    filter_type = Filter.filter_types[params[:controller].split("/").last]
 
     target_params ||= nil
 

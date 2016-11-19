@@ -4,7 +4,7 @@
       <div class="tcell stt">#</div>
       <div class="tcell trainee_type title">
         <%= t "statistics.total_trainees.headers.trainee_type" %>
-        <%= link_to filter_datas_path(type: :trainee_type, filter_type: :total_trainees),
+        <%= link_to filter_datas_path(type: :trainee_type, filter_type: :statistics),
           remote: true,
           class: "open-select",
           data: {name: "f-trainee_type"} do %>
@@ -13,7 +13,7 @@
       </div>
       <div class="tcell programming_language title">
         <%= t "statistics.total_trainees.headers.language" %>
-        <%= link_to filter_datas_path(type: :programming_language, filter_type: :total_trainees),
+        <%= link_to filter_datas_path(type: :programming_language, filter_type: :statistics),
           remote: true,
           class: "open-select",
           data: {name: "f-programming_language"} do %>
