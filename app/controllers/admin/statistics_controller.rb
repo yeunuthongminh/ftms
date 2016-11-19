@@ -1,13 +1,20 @@
 class Admin::StatisticsController < ApplicationController
   include FilterData
+
   before_action :authorize
   before_action :load_statistic_view
   before_action :load_filter, only: :index
   before_action :load_locations
 
-  def index
+  def show
     add_breadcrumb_index "statistics"
     @filter_data_user = @filter_service.user_filter_data
+    template = "admin/statistics/#{params[:type]}"
+    if template_exists? template
+      render template
+    else
+      raise ActionController::RoutingError.new "Not Found"
+    end
   end
 
   def create

@@ -62,10 +62,12 @@ class UserSubject < ApplicationRecord
       course_subject.create_activity key: key,
         owner: current_user, recipient: course_subject.course
       user_subjects.each do |user_subject|
-        user_ids = [current_user.id, user_subject.user_id]
-        Notifications::UserSubjectNotificationBroadCastJob.perform_now user_subject: user_subject,
-        user: current_user, user_ids: user_ids, key: :change_status_up,
-        parameters: status
+        if user_subject.previous_changes.present?
+          user_ids = [current_user.id, user_subject.user_id].uniq
+          Notifications::UserSubjectNotificationBroadCastJob.perform_now user_subject: user_subject,
+            user: current_user, user_ids: user_ids, key: :change_status_up,
+            parameters: status
+        end
       end
     end
   end
@@ -199,17 +201,20 @@ class UserSubject < ApplicationRecord
       user_subject_params = ActionController::Parameters.new params
       update_attributes user_subject_params
 
-      activity_key = "user_subject.change_status"
-      old_status = UserSubject.statuses.key args[:row]
-      new_status = UserSubject.statuses.key args[:column]
-      parameters = {old_status: old_status, new_status: new_status}
-      create_activity key: activity_key, owner: args[:current_user], recipient: trainee, parameters: parameters
-      user_ids = [args[:current_user].id, user_id]
+      if previous_changes.present?
+        activity_key = "user_subject.change_status"
+        old_status = UserSubject.statuses.key args[:row]
+        new_status = UserSubject.statuses.key args[:column]
+        parameters = {old_status: old_status, new_status: new_status}
+        create_activity key: activity_key, owner: args[:current_user],
+          recipient: user, parameters: parameters
+        user_ids = [args[:current_user].id, user_id].uniq
 
-      notification_key = args[:row] > args[:column] ? :change_status_down : :change_status_up
-      Notifications::UserSubjectNotificationBroadCastJob.perform_now user_subject: self,
-        user: args[:current_user], user_ids: user_ids, key: notification_key,
-        parameters: new_status
+        notification_key = args[:row] > args[:column] ? :change_status_down : :change_status_up
+        Notifications::UserSubjectNotificationBroadCastJob.perform_now user_subject: self,
+          user: args[:current_user], user_ids: user_ids, key: notification_key,
+          parameters: new_status
+      end
     end
   end
 end

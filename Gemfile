@@ -44,6 +44,7 @@ gem "cloudinary"
 gem "pundit"
 gem "activerecord-import"
 gem "chatwork"
+gem "roo"
 
 group :development, :test do
   gem "rack-mini-profiler"
@@ -52,7 +53,6 @@ group :development, :test do
   gem "fabrication"
   gem "web-console", "~> 2.0"
   gem "spring"
-  gem "pry"
   gem "letter_opener"
   gem "faker", "1.4.2"
   gem "i18n-tasks", "~> 0.8.7"

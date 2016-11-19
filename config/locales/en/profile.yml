@@ -1,6 +1,8 @@
 en:
   profiles:
+    label_edit: "Edit user's profile"
     columns:
       ready_for_project:
         ready: "Yes"
         not_ready: "No"
+      staff_code: "Staff code: "

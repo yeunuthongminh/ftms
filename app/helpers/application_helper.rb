@@ -52,11 +52,11 @@ module ApplicationHelper
     members.map {|member| link_to member.name, member}.join(", ").html_safe
   end
 
-  def select_profile_field target, target_array, builder
+  def select_profile_field target, target_array, builder, klass = ""
     builder.select "#{target}_id".to_sym,
       options_for_select(target_array.collect {|t|
       [t.name, t.id ]}, builder.object.send("#{target}_id")),
-      {include_blank: true}, class: "form-control"
+      {include_blank: true}, class: "form-control #{klass}"
   end
 
   def avatar_user_tag user, class_name, avatar_size

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     path_names: {sign_in: "login", sign_out: "logout"}
 
   namespace :admin do
-    root "dashboard#index"
+    root "statistics#show", type: "total_trainees"
     resources :course_masters
     resources :courses do
       resources :subjects, only: :show
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     end
     resources :users do
       resource :evaluations
+      resource :stages, only: [:edit, :update]
     end
 
     resources :trainee_evaluations, only: :index
@@ -38,6 +39,7 @@ Rails.application.routes.draw do
     patch "status_subject/:course_subject_id/:status" => "status_subjects#update",
       as: :status_subject
     resources :evaluation_check_lists
+    get "/statistics/:type" => "statistics#show", as: :statistics_page
     resources :ranks
     resources :universities, except: :show
     resources :programming_languages, except: :show
@@ -56,6 +58,7 @@ Rails.application.routes.draw do
     resources :stages
     resources :programs, except: :destroy
     resources :user_courses, only: :update
+    resources :imports, only: [:index, :create]
   end
 
   namespace :trainer do

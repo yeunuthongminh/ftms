@@ -42,6 +42,7 @@ $(document).on("turbolinks:load", function() {
     }
     $('.edit_user').submit();
    });
+<<<<<<< HEAD
 
   $(function() {
     var $formLogin = $('#login-form');
@@ -78,6 +79,10 @@ $(document).on("turbolinks:load", function() {
         });
       });
     }
+=======
+  $('input[name="location_ids[]"]').click( function(){
+    $('#form_total_trainee').submit();
+>>>>>>> develop
   });
 });
 

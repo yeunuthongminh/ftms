@@ -111,16 +111,12 @@
     opacity: 0.7;
   }
 
-  .table {
-    // width: 1518px;
-  }
-
   .fixedTitle, .fixedTable-sidebar, #parent, #child {
-    width: 700px;
+    width: 435px;
   }
 
   .scrollbarH {
-    margin-left: 700px;
+    margin-left: 435px;
   }
 
   .scrollbar {
@@ -167,12 +163,18 @@
       min-width: 500px;
       max-width: 500px;
       position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     &.name {
-      min-width: 664px;
-      max-width: 664px;
+      min-width: 400px;
+      max-width: 400px;
       position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     &.course_start_date, &.course_end_date, &.program_course_end_date,

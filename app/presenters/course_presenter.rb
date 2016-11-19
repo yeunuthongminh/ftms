@@ -40,7 +40,7 @@ class CoursePresenter < ActionView::Base
   end
 
   def body_item course, index
-    html = "<div class=\"trow #{"list_#{index}" }\" id=\"body-row-#{course.id}\">
+    html = "<div class=\"trow list_#{index}\" id=\"body-row-#{course.id}\">
       <div class=\"tcell course_trainers\">
         #{course_trainers course}
       </div>

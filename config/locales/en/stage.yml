@@ -2,3 +2,4 @@ en:
   stages:
     new: "New Stage"
     edit: "Edit Stage"
+    change: "Move Stage"

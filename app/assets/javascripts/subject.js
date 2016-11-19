@@ -87,6 +87,32 @@ function setbutton() {
   });
 }
 
+function do_exam() {
+  $('.do-exam-now').click(function(e) {
+    e.preventDefault();
+    var exec_finish = document.getElementById('finish-subject-exam');
+    if (exec_finish) {
+      $("#dialog-finish").dialog({
+        modal: true,
+        width: 350,
+        buttons: [
+          {
+            text: I18n.t("user_subjects.finish.with_exam"),
+            click: function() {
+              exec_finish.href = exec_finish.href + '?exam=waiting';
+              $(exec_finish).trigger('click');
+            }
+          },
+          {
+            text: I18n.t("buttons.cancel"),
+            click: function() {$(this).dialog('close');}
+          }
+        ]
+      });
+    }
+  });
+}
+
 $(document).on('turbolinks:load', function() {
   var tbl_subject = $('#subjects');
 
@@ -98,6 +124,7 @@ $(document).on('turbolinks:load', function() {
 
   load_chart();
   setbutton();
+  do_exam();
 });
 
 $(document).on('ajaxComplete', function(){

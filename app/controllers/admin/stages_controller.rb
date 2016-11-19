@@ -21,6 +21,7 @@ class Admin::StagesController < ApplicationController
   end
 
   def edit
+    @supports = Supports::StageSupport.new(profile: @user.profile, stage: @stage) if params[:user_id]
   end
 
   def update

@@ -7,8 +7,8 @@ class Supports::StatisticSupport
   end
 
   def trainee_types
-    @trainee_types ||= if @locations.nil?
-      UserType.includes(:profiles).collect{|u| Hash[:name, u.name, :y, u.profiles.size]}
+    @trainee_types ||= if @location_ids.nil?
+      UserType.all.collect{|u| Hash[:name, u.name, :y, u.profiles.size]}
         .delete_if{|p| p[:y] == 0}.sort_by{|u| u[:y]}.reverse
     else
       temp = []
@@ -21,17 +21,17 @@ class Supports::StatisticSupport
   end
 
   def universities
-    @universities = University.includes(:profiles)
+    @universities = University.all
       .collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.sort_by {|u| u[:y]}.reverse
   end
 
   def programming_languages
-    @programming_languages = ProgrammingLanguage.includes(:profiles)
+    @programming_languages = ProgrammingLanguage.all
       .collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.sort_by {|u| u[:y]}.reverse
   end
 
   def locations
-    @locations = Hash[Location.includes(:profiles).collect{|u| [u.name, u.profiles.size]}]
+    @locations = Hash[Location.all.collect{|u| [u.name, u.profiles.size]}]
   end
 
   def month_ranges
@@ -56,7 +56,6 @@ class Supports::StatisticSupport
       .where.not(total_trainee: 0).order(:month)
       .where month: months.collect{|month| month.to_date.beginning_of_month},
         location_id: @location_ids, stage_id: @stage_ids
-
     total_trainees = {}
 
     UserType.all.each do |user_type|

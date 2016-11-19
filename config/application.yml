@@ -167,6 +167,12 @@ defaults: &defaults
     - "notifications"
     - "filter_datas"
     - "calendars"
+  import:
+    file_types:
+      csv: ".csv"
+      xls: ".xls"
+      xlsx: ".xlsx"
+
 development:
   <<: *defaults
   neat_setting: 800

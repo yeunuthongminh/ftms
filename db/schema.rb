@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 20161118020023) do
     t.integer  "duration"
     t.integer  "user_id"
     t.index ["deleted_at"], name: "index_exams_on_deleted_at", using: :btree
+    t.index ["user_id"], name: "fk_rails_1ef6db8efd", using: :btree
     t.index ["user_subject_id"], name: "index_exams_on_user_subject_id", using: :btree
   end
 
@@ -601,6 +602,7 @@ ActiveRecord::Schema.define(version: 20161118020023) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "answers", "questions"
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "subjects"
   add_foreign_key "courses", "programs"
@@ -609,6 +611,8 @@ ActiveRecord::Schema.define(version: 20161118020023) do
   add_foreign_key "evaluation_check_lists", "users"
   add_foreign_key "evaluation_items", "evaluation_groups"
   add_foreign_key "evaluation_items", "evaluation_standards"
+  add_foreign_key "exams", "user_subjects"
+  add_foreign_key "exams", "users"
   add_foreign_key "feed_backs", "users"
   add_foreign_key "filters", "users"
   add_foreign_key "locations", "users"
@@ -619,6 +623,10 @@ ActiveRecord::Schema.define(version: 20161118020023) do
   add_foreign_key "profiles", "locations"
   add_foreign_key "profiles", "users"
   add_foreign_key "project_requirements", "projects"
+  add_foreign_key "questions", "subjects"
+  add_foreign_key "results", "answers"
+  add_foreign_key "results", "exams"
+  add_foreign_key "results", "questions"
   add_foreign_key "role_functions", "functions"
   add_foreign_key "role_functions", "roles"
   add_foreign_key "statistics", "locations"

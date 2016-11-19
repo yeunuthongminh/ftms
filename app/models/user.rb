@@ -15,7 +15,7 @@ class User < ApplicationRecord
     :ready_for_project, :contract_date, :naitei_company,
     :user_type_id, :university_id, :programming_language_id, :user_progress_id,
     :status_id, :location_id, :graduation, :working_day, :staff_code,
-    :join_div_date
+    :join_div_date, :stage_id
   ]
 
   ATTRIBUTES_PARAMS = [:name, :email, :password,

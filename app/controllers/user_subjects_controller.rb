@@ -19,3 +19,4 @@ class UserSubjectsController < ApplicationController
     end
   end
 end
+
