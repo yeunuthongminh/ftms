@@ -45,6 +45,7 @@ gem "pundit"
 gem "activerecord-import"
 gem "chatwork"
 gem "roo"
+gem "closure_tree"
 
 group :development, :test do
   gem "rack-mini-profiler"
