@@ -41,7 +41,7 @@ class Supports::User
   end
 
   def stage
-    @stage ||= @user.profile.stage
+    @stage ||= @user.new_record? ? Stage.find_by(name: "In education") : @user.profile.stage
   end
 
   %w(roles universities programming_languages statuses user_types locations)
