@@ -106,14 +106,6 @@
             <% end %>
           </li>
         <% end %>
-        <% if can? :read, User %>
-          <li>
-            <%= link_to trainer_users_path do %>
-              <i class="fa fa-users" aria-hidden="true"></i>
-              <span><%= t "layouts.users" %></span>
-            <% end %>
-          </li>
-        <% end %>
         <% if can?(:read, Evaluation) || can?(:read, EvaluationTemplate) ||
           can?(:read, Rank) %>
           <li id="evaluations-header" class="treeview">
