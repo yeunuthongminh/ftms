@@ -42,3 +42,5 @@ en:
       trainee_name: "Trainee"
     duration: "%{duration} minutes"
     lock_for_create: "Sorry, you have been locked to create new exam for this subject"
+    pass: "%{user} has been pass Exam and finished subject %{subject}"
+    request: "%{user} had sent request finish subject %{subject}"

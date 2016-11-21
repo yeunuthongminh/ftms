@@ -23,3 +23,5 @@ en:
     init: "Init"
     in_progress: "In progress"
     finished: "Finished"
+    request_finish:
+      success: "Your request has been sent successfully!"
