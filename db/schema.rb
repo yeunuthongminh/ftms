@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120034523) do
+ActiveRecord::Schema.define(version: 20161122070232) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -229,7 +229,9 @@ ActiveRecord::Schema.define(version: 20161120034523) do
     t.integer  "author_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.datetime "deleted_at"
     t.index ["author_id"], name: "index_notes_on_author_id", using: :btree
+    t.index ["deleted_at"], name: "index_notes_on_deleted_at", using: :btree
     t.index ["trainee_evaluation_id"], name: "index_notes_on_trainee_evaluation_id", using: :btree
     t.index ["user_id"], name: "index_notes_on_user_id", using: :btree
   end

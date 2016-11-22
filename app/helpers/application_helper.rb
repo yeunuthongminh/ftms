@@ -287,4 +287,18 @@ module ApplicationHelper
       "admin"
     end
   end
+
+  def link_evaluate targetable
+    trainee_evaluation = TraineeEvaluation.find_by trainee: targetable
+      .trainee, trainer: current_user, targetable: targetable
+    if trainee_evaluation
+      [:edit, :admin, targetable, trainee_evaluation]
+    else
+      [:new, :admin, targetable, :trainee_evaluation]
+    end
+  end
+
+  def check_evaluation_standard ids, id
+    ids.include? id
+  end
 end

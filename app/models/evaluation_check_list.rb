@@ -1,6 +1,6 @@
 class EvaluationCheckList < ApplicationRecord
-  acts_as_paranoid
-
   belongs_to :trainee_evaluation
-  belongs_to :evaluation_criteria
+  belongs_to :evaluation_standard
+
+  delegate :name, to: :evaluation_standard, prefix: true, allow_nil: true
 end

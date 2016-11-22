@@ -128,10 +128,7 @@ defaults: &defaults
     - destroy
   object_evaluation:
     - TraineeEvaluation
-    - EvaluationCheckList
     - EvaluationStandard
-    - EvaluationGroup
-    - EvaluationItem
   objects_system:
     - Role
     - Location

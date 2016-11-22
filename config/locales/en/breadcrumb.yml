@@ -20,7 +20,7 @@ en:
       all: "All Evaluation Standards"
       new: "New"
       edit: "Edit"
-    evaluations:
+    trainee_evaluations:
       all: "All Evaluations"
       new: "New"
       edit: "Edit"

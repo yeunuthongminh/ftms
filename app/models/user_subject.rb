@@ -15,6 +15,7 @@ class UserSubject < ApplicationRecord
   has_many :notifications, as: :trackable, dependent: :destroy
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
   has_many :exams, dependent: :destroy
+  has_many :trainee_evaluations, as: :targetable
 
   after_create :create_user_tasks
 
@@ -37,6 +38,7 @@ class UserSubject < ApplicationRecord
   delegate :name, to: :trainee, prefix: true, allow_nil: true
   delegate :name, :id, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
+  delegate :name, to: :trainee, prefix: true, allow_nil: true
 
   enum status: [:init, :progress, :waiting, :finish]
 

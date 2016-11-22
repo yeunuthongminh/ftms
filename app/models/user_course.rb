@@ -18,6 +18,7 @@ class UserCourse < ApplicationRecord
     :programming_language, to: :course, prefix: true, allow_nil: true
 
   has_many :user_subjects, dependent: :destroy
+  has_many :trainee_evaluations, as: :targetable
 
   scope :course_progress, ->{joins(:course)
     .where("courses.status = ?", Course.statuses[:progress]).order :updated_at}

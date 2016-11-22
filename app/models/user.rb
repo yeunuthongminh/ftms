@@ -92,7 +92,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :profile
 
   delegate :id, :name, to: :role, prefix: true, allow_nil: true
-  delegate :total_point, :current_rank, to: :evaluation, prefix: true, allow_nil: true
   delegate :location_id, to: :profile, prefix: true, allow_nil: true
   delegate :name, to: :user_task, prefix: true, allow_nil: true
   delegate :working_day, to: :profile, prefix: true, allow_nil: true

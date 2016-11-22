@@ -22,6 +22,7 @@ en:
       progress: "Progress"
       action: "Action"
       status: "Status"
+      evaluate: "Evaluate"
     submit:
       create_task: "Create"
     task:

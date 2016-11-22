@@ -35,6 +35,7 @@
 //= require hight_light_table
 //= require notify
 //= require admin/role_permission
+//= require admin/trainee_evaluation
 //= require admin/note
 //= require jquery-ui/dialog
 //= require jquery-ui/sortable
