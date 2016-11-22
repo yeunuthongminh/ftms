@@ -23,6 +23,7 @@ class UniversitiesDatatable
       [
         index,
         university.name,
+        university.abbreviation,
         link_to(@view.t("buttons.edit"), eval("@view.edit_#{@namespace}_university_path(university)"),
           class: "text-primary pull-right"),
         link_to(@view.t("buttons.delete"), eval("@view.#{@namespace}_university_path(university)"),

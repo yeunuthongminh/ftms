@@ -59,7 +59,7 @@ class TrainingManagementPresenter < ActionView::Base
         #{user.profile.stage_name}
       </div>
       <div class=\"tcell university\" title=\"#{user.profile.university_name}\">
-        #{user.profile.university_name}
+        #{user.profile.university_abbreviation}
       </div>
       <div class=\"tcell graduation\">
       #{l user.profile_graduation, format: :year_month if user.profile_graduation}
