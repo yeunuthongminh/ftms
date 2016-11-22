@@ -27,7 +27,6 @@ Rails.application.routes.draw do
       resources :tasks, except: :show
     end
     resources :users do
-      resource :evaluations
       resource :stages, only: [:edit, :update]
     end
 
@@ -57,8 +56,13 @@ Rails.application.routes.draw do
     resources :statistics, only: [:index, :create]
     resources :stages
     resources :programs, except: :destroy
-    resources :user_courses, only: :update
     resources :imports, only: [:index, :create]
+    resources :user_courses, only: :update do
+      resources :trainee_evaluations, except: [:index, :destroy]
+    end
+    resources :user_subjects do
+      resources :trainee_evaluations, except: [:index, :destroy]
+    end
   end
 
   namespace :trainer do

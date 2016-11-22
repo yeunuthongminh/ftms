@@ -9,7 +9,8 @@ class ChangeEvaluationsToTraineeEvaluations < ActiveRecord::Migration[5.0]
       t.string :targetable_type
       t.integer :targetable_id
       t.float :total_point
-      t.references :user, index: true, foreign_key: true
+      t.integer :trainee_id
+      t.integer :trainer_id
 
       t.timestamps null: false
     end
