@@ -51,6 +51,12 @@
     <%= render "shared/progress_bar", percent: user_subject.percent_progress,
         status: user_subject.status %>
   </td>
+  <td class="evaluate">
+    <span>
+      <%= link_to t("subjects.fields.evaluate"), link_evaluate(user_subject) if
+        user_subject.finish? || user_subject.waiting? %>
+    </span>
+  </td>
   <td class="action">
   </td>
   <td>

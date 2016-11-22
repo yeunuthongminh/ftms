@@ -1,0 +1,16 @@
+<tr>
+  <td>
+    <%= f.check_box :_destroy, {checked: check_evaluation_standard(@supports
+      .evaluation_standard_ids, f.object.evaluation_standard_id)}, false, true %>
+    <%= f.hidden_field :evaluation_standard_id,
+      value: f.object.evaluation_standard_id %>
+  </td>
+  <td id="evaluation-template-name" class="name">
+    <%= f.object.evaluation_standard_name %>
+  </td>
+  <td class="point">
+    <%= f.number_field :score, min: Settings.evaluations.min,
+      max: f.object.evaluation_standard.max_point, step: 0.1,
+      class: "evaluation-detail-point form-control" %>
+  </td>
+</tr>

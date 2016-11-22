@@ -127,6 +127,8 @@ ActiveRecord::Schema.define(version: 20161120034523) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluation_groups_on_deleted_at", using: :btree
   end
 
   create_table "evaluation_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -134,6 +136,8 @@ ActiveRecord::Schema.define(version: 20161120034523) do
     t.integer  "evaluation_group_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluation_items_on_deleted_at", using: :btree
     t.index ["evaluation_group_id"], name: "index_evaluation_items_on_evaluation_group_id", using: :btree
     t.index ["evaluation_standard_id"], name: "index_evaluation_items_on_evaluation_standard_id", using: :btree
   end
@@ -145,6 +149,8 @@ ActiveRecord::Schema.define(version: 20161120034523) do
     t.float    "avarage",    limit: 24
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluation_standards_on_deleted_at", using: :btree
   end
 
   create_table "exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -463,10 +469,10 @@ ActiveRecord::Schema.define(version: 20161120034523) do
     t.string   "targetable_type"
     t.integer  "targetable_id"
     t.float    "total_point",     limit: 24
-    t.integer  "user_id"
+    t.integer  "trainee_id"
+    t.integer  "trainer_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.index ["user_id"], name: "index_trainee_evaluations_on_user_id", using: :btree
   end
 
   create_table "trainer_programs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -646,7 +652,6 @@ ActiveRecord::Schema.define(version: 20161120034523) do
   add_foreign_key "statistics", "user_types"
   add_foreign_key "task_masters", "subjects"
   add_foreign_key "tasks", "course_subjects", on_delete: :cascade
-  add_foreign_key "trainee_evaluations", "users"
   add_foreign_key "trainer_programs", "programs"
   add_foreign_key "trainer_programs", "users"
   add_foreign_key "user_notifications", "notifications"
