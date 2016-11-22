@@ -11,6 +11,7 @@ class Profile < ApplicationRecord
 
   delegate :name, :email, to: :user, prefix: true, allow_nil: true
   delegate :name, to: :university, prefix: true, allow_nil: true
+  delegate :abbreviation, to: :university, prefix: true, allow_nil: true
   delegate :name, to: :user_type, prefix: true, allow_nil: true
   delegate :name, to: :status, prefix: true, allow_nil: true
   delegate :name, to: :programming_language, prefix: true, allow_nil: true
