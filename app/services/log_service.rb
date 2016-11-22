@@ -15,11 +15,11 @@ class LogService
   end
 
   def write_success_log model_attributes
-    write_info "#{model_attributes[:content]} was imported successfully"
+    write_info "#{model_attributes} was imported successfully"
   end
 
   def write_fails_log model_attributes
-    write_error "#{model_attributes[:content]} was imported fail"
+    write_error "#{model_attributes} was imported fail"
   end
 
   def write_total_number_log

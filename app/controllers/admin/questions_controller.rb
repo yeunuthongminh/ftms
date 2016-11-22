@@ -1,14 +1,14 @@
 class Admin::QuestionsController < ApplicationController
   load_and_authorize_resource
+  include FilterData
+
   before_action :load_data, only: [:new, :edit]
+  before_action :load_filter, only: :index
+
 
   def index
-    respond_to do |format|
-      format.html {add_breadcrumb_index "questions"}
-      format.json {
-        render json: QuestionsDatatable.new(view_context, @namespace)
-      }
-    end
+    questions = Question.includes :subject
+    @question_presenters = QuestionPresenter.new(questions, @namespace).render
   end
 
   def new

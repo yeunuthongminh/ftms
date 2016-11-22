@@ -1,24 +1,41 @@
-<div id="questions" class="profile-active">
-  <div class="title">
-    <span>
-      <%= link_to t("buttons.new"), new_admin_question_path,
-        class: "btn btn-success pull-right" %>
-    </span>
-  </div>
+<div id="main" class="clearfix">
+  <div id="content">
+    <div class="title">
+      <span>
+        <%= link_to t("buttons.new"), new_admin_question_path,
+          class: "btn btn-success pull-right" %>
+      </span>
+    </div>
 
-  <table id="tbl-question" class="table table-bordered display"
-    data-source="<%= admin_questions_url format: "json" %>">
-    <thead>
-      <tr class="active">
-        <th></th>
-        <th><%= t "questions.table.content" %></th>
-        <th><%= t "questions.table.level" %></th>
-        <th><%= t "questions.table.subject" %></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
+    <div id="<%= controller_name %>">
+      <h3 class="title">
+        <%= t "questions.all" %>
+
+        <button id="btn-filter-on-off" title="<%= filter_title %>"
+          class="btn-filter-onoff-project btn btn-default">
+          &nbsp;
+        </button>
+        <span id="filter-loading" class="filter-loading-offset-top"></span>
+      </h3>
+      <%= image_tag "loading.gif", id: "loading" %>
+
+      <div class="table">
+        <%= render "shared/datatables/question_header" %>
+        <%= @question_presenters.html_safe %>
+      </div>
+
+      <div class="pull-right" id="number-records">
+      </div>
+
+      <div id="filter" data-filter-data="<%= @filter_service.user_filter_data %>"
+        data-type="<%= :questions %>" data-id="<%= current_user.id %>"
+        data-is-turn-on="<%= @filter_service.is_on? %>">
+      </div>
+
+      <div class="list-filters">
+        <div class="filter-form">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

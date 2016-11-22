@@ -1,11 +1,12 @@
 en:
   questions:
+    all: "All questions"
     add_answer: "Add Answer"
     table:
       content: "Content"
       subject: "Subject"
       level: "Level"
-    level:
+    levels:
       easy: "Easy"
       normal: "Normal"
       hard: "Hard"

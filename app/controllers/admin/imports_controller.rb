@@ -26,7 +26,7 @@ class Admin::ImportsController < ApplicationController
           @logfile.write_total_number_log
         end
       end
-      redirect_to admin_imports_path filename: @logfile
+      redirect_to admin_imports_path filename: log_filename
     else
       redirect_to admin_imports_path, alert: flash_message("import.no_select_file")
     end
@@ -44,7 +44,8 @@ class Admin::ImportsController < ApplicationController
 
   def new_log_file model_name
     current_time = Time.now.strftime t("datetime.formats.time_log")
-    log_filename = "#{current_user.name}_import_#{model_name}_at_#{current_time}"
+    current_user_name = current_user.name.gsub(" ", "-").downcase
+    log_filename = "#{current_user_name}_import_#{model_name}_at_#{current_time}"
 
     @logfile = LogService.new model_name: model_name, current_user: current_user,
       log_filename: log_filename

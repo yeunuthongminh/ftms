@@ -120,6 +120,16 @@ class FilterDatasController < ApplicationController
       @key_field = :id
       @value_field = :stage_name
       @resources = Stage.order(:name).pluck :name
+    when "question_content"
+      @key_field = :question_content
+      @value_field = :question_content
+      @resources = Question.order(:content).pluck(:content).uniq.compact
+    when "level"
+      @resources = i18n_enum(:question, :level)
+    when "subject_name"
+      @key_field = :subject_name
+      @value_field = :subject_name
+      @resources = Subject.order(:name).pluck(:name).uniq.compact
     end
 
     respond_to do |format|
