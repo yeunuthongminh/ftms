@@ -188,3 +188,4 @@ en:
     unknown: "Unknown file type"
     not_allowed: "Not Allowed File"
     import_questions: "Import Questions"
+  message_chatwork: "%{user} will finish %{subject} in %{day}/%{month}"
