@@ -37,6 +37,7 @@ en:
       unknow_errors: "Transaction fails"
       not_find: "%{model_name} couldn't find"
       record_not_found: "Sorry, no record was found!"
+      has_exist: "%{model_name} has exist"
   tasks:
     update: "Update"
   signins:
@@ -68,12 +69,12 @@ en:
     subject: "Subject:"
     course_masters: "Course Masters"
     roles: "Roles"
-    evaluation_templates: Evaluation Templates
+    evaluation_standards: Evaluation Standards
     ranks: "Ranks"
-    evaluation: "Evaluation"
+    evaluation_items: "Evaluation Items"
     university: "University"
     status: "Status"
-    evaluations: "Evaluations"
+    trainee_evaluations: "Trainee Evaluations"
     user_profiles: "User profiles"
     users: "Users"
     locations: "Locations"
@@ -88,6 +89,8 @@ en:
     exams: "Exams"
     questions: "Questions"
     programs: "Programs"
+    evaluation_check_lists: "Evaluation Check Lists"
+    evaluation_groups: "Evaluation Groups"
     footer:
       street: "13F Keangnam Landmark 72 Tower, Plot E6, Pham Hung Road, Nam Tu Liem, Ha Noi, Viet Nam"
       phone: "84-4-3795-5417"

@@ -3,7 +3,7 @@ class Note < ApplicationRecord
 
   ATTRIBUTES_PARAMS = [:name, :evaluation_id, :user_id]
 
-  belongs_to :evaluation
+  belongs_to :trainee_evaluation
   belongs_to :user
   belongs_to :author, class_name: User.name
 

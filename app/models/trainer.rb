@@ -9,4 +9,8 @@ class Trainer < User
   has_many :trainer_programs, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :user_subjects, dependent: :destroy, foreign_key: :user_id
+  has_many :trainee_evaluations, class_name: TraineeEvaluation.name,
+    foreign_key: :trainer_id
+  has_many :trainer_evaluations, through: :trainee_evaluations,
+    source: :trainer
 end
