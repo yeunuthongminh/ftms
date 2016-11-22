@@ -3,6 +3,7 @@ class UserSubject < ApplicationRecord
   include LoadUser
   include EstimateTime
   acts_as_paranoid
+  include ChatworkApi
 
   ATTRIBUTES_PARAMS = [:start_date, :end_date]
 
