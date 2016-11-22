@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     resources :statistics, only: [:index, :create]
     resources :stages
     resources :programs, except: :destroy
+    get "/programs/(:parent_id)/subprogram/new", to: "programs#new", as: :new_program
     resources :imports, only: [:index, :create]
     resources :user_courses, only: :update do
       resources :trainee_evaluations, except: [:index, :destroy]
