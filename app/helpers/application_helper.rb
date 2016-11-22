@@ -132,6 +132,18 @@ module ApplicationHelper
     end.flatten
   end
 
+  def percent_out number
+    number <= 100 ? number*90/100 : 100
+  end
+
+  def percentage_width number
+    percentage_format percent_out(number)
+  end
+
+  def percent_size number
+    number_to_percentage 10000/percent_out(number), precision: 1, strip_insignificant_zeros: true
+  end
+
   def percentage_format number
     number_to_percentage number, precision: 1, strip_insignificant_zeros: true
   end
@@ -157,18 +169,6 @@ module ApplicationHelper
   def class_body name
     name == "static_pages" || name == "sessions" || name == "passwords" ?
       "body_home" : "container body-wrapper-content"
-  end
-
-  def progressbar_color percent
-    if percent < 40
-      "progress-bar-info"
-    elsif percent < 60
-      "progress-bar-success"
-    elsif percent < 80
-      "progress-bar-warning"
-    else
-      "progress-bar-danger"
-    end
   end
 
   def task_color status

@@ -105,7 +105,7 @@ class UserSubject < ApplicationRecord
   end
 
   def percent_progress
-    if start_date.present?
+    if start_date
       return 0 if start_date > Time.zone.today
       current_date = user_end_date
       current_date ||= Time.zone.today
@@ -115,7 +115,7 @@ class UserSubject < ApplicationRecord
 
       user_current_time = (current_date - start_date).to_f
       percent = user_current_time * 100 / real_duration_time.to_f
-      [percent, 100].min
+      percent < 0 ? 0 : percent
     end
   end
 
