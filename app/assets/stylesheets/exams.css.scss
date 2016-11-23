@@ -6,10 +6,17 @@
   #show-exam, #do-exam {
     margin-top: 30px;
     .question-title {
-      height: 30px;
       font-size: 18px;
       margin: 5px 0 20px 0;
       font-weight: bold;
+    }
+
+    .result-correct {
+      background-color: #00e200;
+    }
+
+    .result-not-correct {
+      background-color: #ffc3c3;
     }
 
     .question-content {
