@@ -12,8 +12,8 @@ class Admin::ImportsController < ApplicationController
 
   def create
     if params[:type].present?
+      log_filename = new_log_file
       params[:type].each_with_index do |data_type, index|
-        log_filename = new_log_file data_type.capitalize.pluralize
 
         model = find_model data_type
         import = "ImportServices::Import#{model}".constantize.new model: model.constantize,
@@ -42,12 +42,12 @@ class Admin::ImportsController < ApplicationController
       .verify_attribute.to_sym
   end
 
-  def new_log_file model_name
+  def new_log_file
     current_time = Time.now.strftime t("datetime.formats.time_log")
     current_user_name = current_user.name.gsub(" ", "-").downcase
-    log_filename = "#{current_user_name}_import_#{model_name}_at_#{current_time}"
+    log_filename = "#{current_user_name}_import_at_#{current_time}"
 
-    @logfile = LogService.new model_name: model_name, current_user: current_user,
+    @logfile = LogService.new current_user: current_user,
       log_filename: log_filename
     log_filename
   end

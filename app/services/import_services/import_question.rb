@@ -12,33 +12,34 @@ class ImportServices::ImportQuestion < ImportServices::ImportService
   def perform
     spread_sheet = open_sheet
     header = spread_sheet.row(1)
-    questions = []
     (2..spread_sheet.last_row).each do |index|
+
       row = Hash[[header, spread_sheet.row(index)].transpose]
+
       subject = Subject.find_by name: row["subject"].strip
-      correct_answer = row["is_correct"]
-      answer_hash = row.except *REQUIRED_ATTRIBUTES
-      answers_attributes = Hash.new
-      i = 0
-      answer_hash.each do |key, answer|
-        next unless answer
-        is_correct = key == correct_answer
-        answer_attributes = {content: answer.to_s.strip, is_correct: is_correct}
-        answers_attributes[i] = answer_attributes
-        i += 1
-      end
-      question_content = row["question"].to_s.strip
-      question = subject.questions.new content: question_content,
-        level: row["level"].to_s.strip, answers_attributes: answers_attributes
-      if question.valid?
-        @logfile.write_success_log "Question: #{question_content}"
-        questions << question
-      else
-        write_fails_log Question.name
-        @logfile.write_fails_log "Question #{question_content}"
+      if subject
+        question_content = row["question"].to_s.strip
+
+        answers_attributes = Array.new
+        row.except(*REQUIRED_ATTRIBUTES).each do |key, answer|
+          if answer
+            answers_attributes << {content: answer.to_s.strip,
+              is_correct: (key == row["is_correct"])}
+          end
+        end
+
+        question = subject.questions.new content: question_content,
+          level: row["level"].to_s.strip, answers_attributes: answers_attributes
+
+        if question.valid?
+          @logfile.write_success_log "Question: #{question_content}"
+          question.save
+        else
+          write_fails_log Question.name
+          @logfile.write_fails_log "Question: #{question_content}"
+        end
       end
     end
-    Question.import questions
   end
 
   private

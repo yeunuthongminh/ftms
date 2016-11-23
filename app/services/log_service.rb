@@ -1,9 +1,8 @@
 class LogService
-  attr_accessor :model_name, :log_filename, :logfile,
+  attr_accessor :log_filename, :logfile,
     :number_success, :number_fails
 
   def initialize args
-    @model_name = args[:model_name]
     @log_filename = args[:log_filename]
     @number_success = 0
     @number_fails = 0
