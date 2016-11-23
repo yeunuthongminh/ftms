@@ -260,8 +260,12 @@ module ApplicationHelper
   end
 
   def set_background_answer answer, result
-    if answer == result.answer && !answer.is_correct?
-      "style=background-color:red;"
+    if answer == result.answer
+      if answer.is_correct?
+        "result-correct"
+      else
+        "result-not-correct"
+      end
     end
   end
 
