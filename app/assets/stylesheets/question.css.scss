@@ -1,0 +1,50 @@
+@import "variables";
+@import "mixin";
+
+#questions {
+  @include customize-scrollbar;
+
+  .fixedTable-body {
+    height: auto;
+  }
+
+  .fixedTitle, .fixedTable-sidebar, #parent, #child {
+    width: 835px;
+  }
+
+  .scrollbarH {
+    margin-left: 835px;
+  }
+
+  .fixedTitle, .fixedTable-header {
+    max-height: 31px;
+    min-height: 31px;
+    height: 31px;
+  }
+
+
+  .tcell {
+    &.stt {
+     @include ellipsis(35px);
+    }
+
+    &.question_content {
+      @include ellipsis(800px);
+      position: relative;
+    }
+
+    &.subject_name {
+      @include ellipsis(100px);
+      position: relative;
+    }
+
+    &.level {
+      @include ellipsis(80px);
+      position: relative;
+    }
+
+    &.action {
+      @include ellipsis(78px);
+    }
+  }
+}
