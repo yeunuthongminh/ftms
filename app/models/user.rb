@@ -33,9 +33,11 @@ class User < ApplicationRecord
   attr_accessor :current_role
 
   belongs_to :role
+  belongs_to :trainer, class_name: User.name, foreign_key: :trainer_id
 
   has_one :profile, dependent: :destroy
 
+  has_many :trainees, class_name: User.name, foreign_key: :trainer_id
   has_many :notifications, dependent: :destroy
   has_many :user_notifications, dependent: :destroy
   has_many :senders, class_name: Conversation.name, foreign_key: :sender_id,
@@ -51,6 +53,9 @@ class User < ApplicationRecord
   has_many :user_functions, dependent: :destroy
   has_many :functions, through: :user_functions
   has_many :programs, through: :trainer_programs
+
+  has_many :active_note, class_name: Note.name, foreign_key: :author_id
+  has_many :passive_note, class_name: Note.name, foreign_key: :user_id
 
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password
