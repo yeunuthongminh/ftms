@@ -1,4 +1,4 @@
-class Supports::Subject
+class Supports::SubjectSupport
   attr_reader :subject
 
   def initialize args
@@ -10,6 +10,14 @@ class Supports::Subject
     @course_subject ||= course.course_subjects.find do |course_subject|
       course_subject.subject_id == @subject.id
     end
+  end
+
+  def project_name
+    @project_name ||= course_subject.project_name
+  end
+
+  def subject_content
+    @subject_content ||= course_subject.subject_content
   end
 
   def user_subjects
