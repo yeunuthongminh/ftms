@@ -88,6 +88,7 @@ en:
     statistics: "Statistic"
     exams: "Exams"
     questions: "Questions"
+    imports: "Imports data"
 
     question:
       subject: "Subject"
@@ -186,5 +187,3 @@ en:
     attention: "Attention!!!"
     change_status:
       user_subject: "Are you sure want to switch status to "
-  import_data:
-    import_questions: "Import Questions"
