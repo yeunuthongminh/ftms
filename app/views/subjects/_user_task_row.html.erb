@@ -15,7 +15,7 @@
     <div class="action text-center" hidden>
       <% if user_task.in_progress? %>
         <div class="action-status">
-          <%= link_to "Add Pull", "#", data: {toggle: "modal",
+          <%= link_to t("buttons.pull"), "#", data: {toggle: "modal",
             target: "#user-pull-task-#{user_task.id}"},
             title: t("subjects.task.update"),
             class: "btn btn-finished btn-continue-task"%>

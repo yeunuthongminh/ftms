@@ -17,7 +17,11 @@ class TasksController < ApplicationController
     else
       flash[:failed] = flash_message "not_created"
     end
-    redirect_to :back
+    @user_task = @user_task_history.user_task
+    load_data
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
@@ -27,7 +31,11 @@ class TasksController < ApplicationController
     else
       flash[:failed] = flash_message "not_updated"
     end
-    redirect_to :back
+    @user_task = user_task
+    load_data
+    respond_to do |format|
+      format.js
+    end
   end
 
   def destroy
@@ -61,5 +69,11 @@ class TasksController < ApplicationController
 
   def authorize_task
     authorize_with_multiple page_params.merge(record: @task), TaskPolicy
+  end
+
+  def load_data
+    @subject_supports = Supports::SubjectTrainee.new subject: @user_task
+      .user_subject.subject, user_course_id: @user_task.user_subject
+      .user_course_id
   end
 end

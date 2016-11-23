@@ -25,7 +25,7 @@ class UserTasksController < ApplicationController
         if send_chatwork
           flash.now[:success] = flash_message "updated"
         else
-          flass.now[:error] = flash_message "not_updated"
+          flash.now[:error] = flash_message "not_updated"
         end
       else
         flash.now[:error] = flash_message "not_updated"

@@ -6,7 +6,7 @@
         <h3 class="label-modal"><%= t "subjects.task.new_task" %></h3>
       </div>
       <div class="modal-body">
-        <%= render "task_form", task: @subject_supports.task_new,
+        <%= render "subjects/task_form", task: @subject_supports.task_new,
           user_task: @subject_supports.user_task_handle %>
       </div>
     </div>

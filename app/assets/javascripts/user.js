@@ -84,6 +84,9 @@ $(document).on("turbolinks:load", function() {
       $('#form_total_trainee').submit();
     });
   });
+  $('#TaskModal').on('hidden.bs.modal', function () {
+    $(this).find(".form-control").val('').end();
+  });
 });
 
 var datepicker_options = {
