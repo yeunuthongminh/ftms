@@ -1,6 +1,5 @@
 class Trainee < User
   include StiRouting
-  belongs_to :trainer
 
   has_many :trainee_evaluations, class_name: TraineeEvaluation.name,
     foreign_key: :trainee_id

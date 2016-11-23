@@ -4,8 +4,8 @@ class Note < ApplicationRecord
   ATTRIBUTES_PARAMS = [:name, :evaluation_id, :user_id]
 
   belongs_to :trainee_evaluation
-  belongs_to :user
-  belongs_to :author, class_name: User.name
+  belongs_to :author, class_name: User.name, foreign_key: :author_id
+  belongs_to :target_user, class_name: User.name, foreign_key: :user_id
 
   validates :name, presence: true
 

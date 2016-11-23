@@ -1,5 +1,6 @@
 class Exam < ApplicationRecord
   acts_as_paranoid
+  include TraineeRelation
 
   EXAM_ATTRIBUTES_PARAMS = [:user_subject_id, :status, :spent_time,
     results_attributes: [:id, :questions_id, :answer_id]]

@@ -1,6 +1,7 @@
 class UserSubject < ApplicationRecord
   include PublicActivity::Model
   include LoadUser
+  include TraineeRelation
   include EstimateTime
   acts_as_paranoid
   include ChatworkApi

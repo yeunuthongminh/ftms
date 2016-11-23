@@ -1,6 +1,8 @@
 class UserCourse < ApplicationRecord
   include PublicActivity::Model
   include InitUserSubject
+  include TraineeRelation
+
   acts_as_paranoid
 
   #attr_readonly :user_type
