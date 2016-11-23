@@ -1,3 +1,5 @@
 en:
   programs:
     name: "Name"
+    parent_program: "Parent Program"
+    new_sub_program: "New Sub Program"

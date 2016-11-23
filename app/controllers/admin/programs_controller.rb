@@ -3,7 +3,8 @@ class Admin::ProgramsController < ApplicationController
 
   before_action :authorize
   before_action :find_program, only: [:edit, :update, :show]
-  before_action :load_data, only: :edit
+  before_action :find_parent_program, only: :new
+  before_action :load_data, only: [:edit, :new]
 
   def index
     respond_to do |format|
@@ -15,8 +16,6 @@ class Admin::ProgramsController < ApplicationController
   end
 
   def new
-    @program = Program.new
-    load_data
     add_breadcrumb_path "programs"
     add_breadcrumb_new "programs"
   end
@@ -78,9 +77,23 @@ class Admin::ProgramsController < ApplicationController
 
   def find_program
     @program = Program.find_by id: params[:id]
-    if @program.nil?
+    unless @program
       flash[:alert] = flash_message "not_find"
       redirect_to admin_programs_path
+    end
+  end
+
+  def find_parent_program
+    if params[:parent_id]
+      parent_program = Program.find_by id: params[:parent_id]
+      if parent_program
+        @program = parent_program.children.new
+      else
+        flash[:alert] = flash_message "not_find"
+        redirect_to admin_programs_path
+      end
+    else
+      @program = Program.new
     end
   end
 end

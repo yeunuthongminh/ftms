@@ -20,4 +20,8 @@ class Supports::Program
         .find_or_initialize_by user: trainer, program: @program
       end
   end
+
+  def programs
+    @programs ||= Program.all.collect {|program| [program.name, program.id]}
+  end
 end
