@@ -20,22 +20,20 @@ class ImportServices::ImportQuestion < ImportServices::ImportService
       if subject
         question_content = row["question"].to_s.strip
 
-        answers_attributes = Array.new
+        question = subject.questions.new content: question_content,
+          level: row["level"].to_s.strip
+
         row.except(*REQUIRED_ATTRIBUTES).each do |key, answer|
           if answer
-            answers_attributes << {content: answer.to_s.strip,
-              is_correct: (key == row["is_correct"])}
+            question.answers.build content: answer.to_s.strip,
+              is_correct: (key == row["is_correct"])
           end
         end
-
-        question = subject.questions.new content: question_content,
-          level: row["level"].to_s.strip, answers_attributes: answers_attributes
 
         if question.valid?
           @logfile.write_success_log "Question: #{question_content}"
           question.save
         else
-          write_fails_log Question.name
           @logfile.write_fails_log "Question: #{question_content}"
         end
       end
