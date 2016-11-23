@@ -1,25 +1,35 @@
 <div class="row">
-  <div class="col-md-2">
-    <%= set_image @supports.course_subject %>
+  <div class="col-md-1">
+    <div class="subject-title"><%= set_image @supports.course_subject %></div>
   </div>
-  <div class="col-md-5">
-    <h2 id="subject-h2-header">
-      <span id="subject-header">
-        <%= @supports.course_subject.subject_name %>
-      </span>
-    </h2>
-    <div>
-      <i><%= @supports.course_subject.subject_description %></i>
+  <div class="col-md-4">
+    <div class="subject-title">
+      <h2 id="subject-h2-header">
+        <span id="subject-header">
+          <%= @supports.course_subject.subject_name %>
+        </span>
+      </h2>
+      <div>
+        <i><%= @supports.course_subject.subject_description %></i>
+      </div>
+      <p class="working-days">
+        <%= "#{t "subjects.fields.during_time"}:
+          #{@subject.during_time} #{t "subjects.fields.days"}" %>
+      </p>
     </div>
-    <p class="working-days">
-      <%= "#{t "subjects.fields.during_time"}:
-        #{@subject.during_time} #{t "subjects.fields.days"}" %>
-    </p>
   </div>
-  <div class="box-divider col-md-4">
-    <div class="label-title"><%= t "user_tasks.description" %></div>
-    <p><%= @supports.course_subject.subject_content.html_safe if
-      @supports.course_subject.subject_content %></p>
+  <div class="col-md-3">
+    <div class="box-divider subject-title">
+      <div class="label-title"><%= t "user_tasks.content" %></div>
+      <p><%= @supports.subject_content.html_safe if
+        @supports.subject_content %></p>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="box-divider subject-title">
+      <div class="label-title"><%= t "subjects.project" %></div>
+      <p><%= @supports.project_name.html_safe if @supports.project_name %></p>
+    </div>
   </div>
   <div class="col-md-1 action">
     <%= render "shared/action_user_subjects" %>
