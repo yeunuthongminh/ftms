@@ -4,7 +4,7 @@ class Question < ApplicationRecord
   ATTRIBUTES_PARAMS = [:content, :subject_id, :level,
     answers_attributes: [:id, :content, :is_correct, :_destroy]]
 
-  belongs_to :subject
+  belongs_to :category
 
   has_many :answers, dependent: :destroy
   has_many :results, dependent: :destroy
