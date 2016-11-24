@@ -2,14 +2,6 @@ $(document).on("turbolinks:load", function() {
   $('#total_trainees .dropdown-menu').click(function(event){
     event.stopPropagation();
   });
-  $('#color-picker').spectrum({
-    preferredFormat: "name",
-    showPalette: true,
-    palette: ['#FFFF00', '#D02090', '#00FF7F',
-      '#6A5ACD', '#FF0000', '#000080', '#808080',
-      '#FFD700', '#FF8C00', '#00FFFF'],
-    showSelectionPalette: true,
-  });
   var tbl_user = $("#tbl-user");
   if(tbl_user.length > 0) {
     set_datatable(tbl_user, [0, 3, 4, 5]);

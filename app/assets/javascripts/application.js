@@ -70,6 +70,7 @@
 //= require statistic
 //= require spectrum
 //= require import
+//= require color-picker.js
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();
