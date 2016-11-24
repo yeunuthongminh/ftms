@@ -31,7 +31,7 @@ class ImportServices::ImportService
   end
 
   def correct_file_type?
-    extension = File.extname @file_path
+    extension = File.extname(@file_path).downcase
     Settings.import.file_types.include? extension
   end
 

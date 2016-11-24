@@ -4,7 +4,7 @@ en:
     add_answer: "Add Answer"
     table:
       content: "Content"
-      subject: "Subject"
+      category: "Category"
       level: "Level"
     levels:
       easy: "Easy"

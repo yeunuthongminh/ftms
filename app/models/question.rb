@@ -1,7 +1,7 @@
 class Question < ApplicationRecord
   acts_as_paranoid
 
-  ATTRIBUTES_PARAMS = [:content, :subject_id, :level,
+  ATTRIBUTES_PARAMS = [:content, :category_id, :level,
     answers_attributes: [:id, :content, :is_correct, :_destroy]]
 
   belongs_to :category
@@ -19,7 +19,7 @@ class Question < ApplicationRecord
 
   enum level: [:easy, :normal, :hard]
 
-  delegate :name, to: :subject, prefix: true, allow_nil: true
+  delegate :name, to: :category, prefix: true, allow_nil: true
 
   private
   def check_answers
