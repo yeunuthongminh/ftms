@@ -9,6 +9,8 @@ class CourseSubject < ApplicationRecord
 
   ATTRIBUTES_PARAMS = [:subject_name, :image, :subject_description, :subject_content,
     :course_id, :row_order_position, :chatwork_room_id]
+  PROJECT_ATTRIBUTES_PARAMS = [:project_id, course_subject_requirements_attributes:
+    [:id, :project_requirement_id]]
 
   belongs_to :subject
   belongs_to :course
@@ -17,6 +19,8 @@ class CourseSubject < ApplicationRecord
   has_many :user_subjects, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
+  has_many :course_subject_requirements, dependent: :destroy
+  has_many :project_requirements, through: :course_subject_requirement
 
   after_create :create_tasks
   after_create :create_user_subjects_when_add_new_subject

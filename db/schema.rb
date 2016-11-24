@@ -65,6 +65,13 @@ ActiveRecord::Schema.define(version: 20161123081836) do
     t.index ["deleted_at"], name: "index_conversations_on_deleted_at", using: :btree
   end
 
+  create_table "course_subject_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "requirement_id"
+    t.integer "course_subject_id"
+    t.index ["course_subject_id"], name: "index_course_subject_requirements_on_course_subject_id", using: :btree
+    t.index ["requirement_id"], name: "index_course_subject_requirements_on_requirement_id", using: :btree
+  end
+
   create_table "course_subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "subject_name"
     t.text     "subject_description", limit: 65535
@@ -306,8 +313,10 @@ ActiveRecord::Schema.define(version: 20161123081836) do
 
   create_table "project_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "project_id"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "priority"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_project_requirements_on_deleted_at", using: :btree
     t.index ["project_id"], name: "index_project_requirements_on_project_id", using: :btree
@@ -315,12 +324,10 @@ ActiveRecord::Schema.define(version: 20161123081836) do
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.integer  "{:index=>true, :foreign_key=>true}_id"
     t.index ["deleted_at"], name: "index_projects_on_deleted_at", using: :btree
-    t.index ["{:index=>true, :foreign_key=>true}_id"], name: "index_projects_on_{:index=>true, :foreign_key=>true}_id", using: :btree
   end
 
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -351,13 +358,6 @@ ActiveRecord::Schema.define(version: 20161123081836) do
     t.integer  "reader_id"
     t.datetime "timestamp"
     t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", using: :btree
-  end
-
-  create_table "requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text    "name",                                  limit: 65535
-    t.integer "priority"
-    t.integer "{:index=>true, :foreign_key=>true}_id"
-    t.index ["{:index=>true, :foreign_key=>true}_id"], name: "index_requirements_on_{:index=>true, :foreign_key=>true}_id", using: :btree
   end
 
   create_table "results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -480,10 +480,10 @@ ActiveRecord::Schema.define(version: 20161123081836) do
     t.string   "targetable_type"
     t.integer  "targetable_id"
     t.float    "total_point",     limit: 24
-    t.integer  "user_id"
+    t.integer  "trainee_id"
+    t.integer  "trainer_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.index ["user_id"], name: "index_trainee_evaluations_on_user_id", using: :btree
   end
 
   create_table "trainer_programs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -653,6 +653,7 @@ ActiveRecord::Schema.define(version: 20161123081836) do
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "locations"
   add_foreign_key "profiles", "users"
+  add_foreign_key "project_requirements", "projects"
   add_foreign_key "questions", "subjects"
   add_foreign_key "results", "answers"
   add_foreign_key "results", "exams"
@@ -665,7 +666,6 @@ ActiveRecord::Schema.define(version: 20161123081836) do
   add_foreign_key "statistics", "user_types"
   add_foreign_key "task_masters", "subjects"
   add_foreign_key "tasks", "course_subjects", on_delete: :cascade
-  add_foreign_key "trainee_evaluations", "users"
   add_foreign_key "trainer_programs", "programs"
   add_foreign_key "trainer_programs", "users"
   add_foreign_key "user_notifications", "notifications"

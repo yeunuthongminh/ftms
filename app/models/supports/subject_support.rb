@@ -16,6 +16,10 @@ class Supports::SubjectSupport
     @project_name ||= course_subject.project_name
   end
 
+  def projects
+    @projects ||= Project.all
+  end
+
   def subject_content
     @subject_content ||= course_subject.subject_content
   end
