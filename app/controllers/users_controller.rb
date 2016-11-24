@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :load_data, only: :show
 
   def show
-    @supports = Supports::User.new @user
+    @supports = Supports::UserSupport.new @user
     add_breadcrumb @user.name
   end
 
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def load_data
-    @supports ||= Supports::User.new @user
+    @supports ||= Supports::UserSupport.new @user
   end
 
   def load_user

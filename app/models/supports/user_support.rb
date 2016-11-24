@@ -1,4 +1,4 @@
-class Supports::User
+class Supports::UserSupport
   attr_reader :user, :current_user
 
   def initialize user

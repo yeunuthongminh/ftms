@@ -79,7 +79,7 @@ class Trainer::SubjectsController < ApplicationController
   end
 
   def load_data
-    @supports = Supports::Subject.new subject: @subject,
+    @supports = Supports::SubjectSupport.new subject: @subject,
       course_id: params[:course_id]
     redirect_if_object_nil @supports.course
   end

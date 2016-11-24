@@ -61,6 +61,6 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def load_data
-    @supports = Supports::Question.new @question
+    @supports = Supports::QuestionSupport.new @question
   end
 end

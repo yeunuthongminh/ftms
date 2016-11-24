@@ -3,7 +3,7 @@ class Admin::AssignTrainersController < ApplicationController
   before_action :find_course, only: [:edit, :update]
 
   def edit
-    @supports = Supports::Course.new course: @course
+    @supports = Supports::CourseSupport.new course: @course
     add_breadcrumb_path "courses"
     add_breadcrumb @course.name, admin_course_path(@course)
     add_breadcrumb t "courses.assign_trainers"

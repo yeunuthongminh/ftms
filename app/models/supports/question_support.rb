@@ -1,4 +1,4 @@
-class Supports::Question
+class Supports::QuestionSupport
   attr_reader :question
 
   def initialize question
