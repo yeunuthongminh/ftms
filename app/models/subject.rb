@@ -26,7 +26,8 @@ class Subject < ApplicationRecord
 
   accepts_nested_attributes_for :task_masters, allow_destroy: true,
     reject_if: proc {|attributes| attributes[:name].blank?}
-  accepts_nested_attributes_for :documents, allow_destroy: true
+  accepts_nested_attributes_for :documents, allow_destroy: true,
+    reject_if: proc {|attributes| attributes[:document_link].blank?}
   accepts_nested_attributes_for :subject_detail, allow_destroy: true
 
   delegate :name, to: :user_subject, prefix: true, allow_nil: true
