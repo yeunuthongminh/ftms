@@ -20,7 +20,10 @@ class UserSubjectsController < ApplicationController
         end
       end
     else
-      flash[:success] = t "user_subjects.request_finish.success"
+      room_id = @user_subject.course_subject.chatwork_room_id
+      send_chatwork = @user_subject.send_message_chatwork users: [current_user, current_user.trainer],
+        message: t("exams.request", user: current_user.name, subject: @user_subject.name),
+        room_id: room_id
       redirect_to user_course_subject_path user_course, subject
     end
   end

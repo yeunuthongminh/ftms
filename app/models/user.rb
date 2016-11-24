@@ -33,9 +33,11 @@ class User < ApplicationRecord
   attr_accessor :current_role
 
   belongs_to :role
+  belongs_to :trainer, class_name: User.name, foreign_key: :trainer_id
 
   has_one :profile, dependent: :destroy
 
+  has_many :trainees, class_name: User.name, foreign_key: :trainer_id
   has_many :notifications, dependent: :destroy
   has_many :user_notifications, dependent: :destroy
   has_many :senders, class_name: Conversation.name, foreign_key: :sender_id,
@@ -51,6 +53,9 @@ class User < ApplicationRecord
   has_many :user_functions, dependent: :destroy
   has_many :functions, through: :user_functions
   has_many :programs, through: :trainer_programs
+
+  has_many :active_note, class_name: Note.name, foreign_key: :author_id
+  has_many :passive_note, class_name: Note.name, foreign_key: :user_id
 
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password
@@ -92,7 +97,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :profile
 
   delegate :id, :name, to: :role, prefix: true, allow_nil: true
-  delegate :total_point, :current_rank, to: :evaluation, prefix: true, allow_nil: true
   delegate :location_id, to: :profile, prefix: true, allow_nil: true
   delegate :name, to: :user_task, prefix: true, allow_nil: true
   delegate :working_day, to: :profile, prefix: true, allow_nil: true
@@ -100,6 +104,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :rememberable, :trackable, :validatable,
     :recoverable
+  enum current_role_type: {admin: 0, trainer: 1, trainee: 2}
 
   def total_done_tasks user, course
     done_tasks = UserSubject.load_user_subject(user.id, course.id).map(&:user_tasks).flatten.count
@@ -131,16 +136,20 @@ class User < ApplicationRecord
     user_subjects.find {|user_subject| user_subject.current_progress?}
   end
 
+  def role_type_avaiable
+    self.roles.order(:role_type).map(&:role_type).uniq
+  end
+
   def has_role? role_name
     self.roles.map(&:name).include? role_name
   end
 
-  def user_functions
+  def collect_user_functions
     self.functions.collect{|function| [function.model_class, function.action]}
   end
 
   def has_function? controller, action
-    user_functions.include? [controller, action]
+    collect_user_functions.include? [controller, action]
   end
 
   private

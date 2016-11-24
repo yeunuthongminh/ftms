@@ -13,6 +13,7 @@ class CourseSubject < ApplicationRecord
   belongs_to :subject
   belongs_to :course
 
+  belongs_to :project
   has_many :user_subjects, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
@@ -33,6 +34,7 @@ class CourseSubject < ApplicationRecord
 
   delegate :name, to: :course, prefix: true, allow_nil: true
   delegate :during_time, to: :subject, prefix: true, allow_nil: true
+  delegate :name, to: :project, prefix: true, allow_nil: true
 
   ranks :row_order, with_same: :course_id
 

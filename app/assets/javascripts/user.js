@@ -2,6 +2,7 @@ $(document).on("turbolinks:load", function() {
   $('#total_trainees .dropdown-menu').click(function(event) {
     event.stopPropagation();
   });
+
   var tbl_user = $("#tbl-user");
   if(tbl_user.length > 0) {
     set_datatable(tbl_user, [0, 3, 4, 5]);
@@ -72,8 +73,12 @@ $(document).on("turbolinks:load", function() {
     }
 
     $('input[name="location_ids[]"]').click(function () {
+      $('input[name="check_visit"]').attr('checked', true);
       $('#form_total_trainee').submit();
     });
+  });
+  $('#TaskModal').on('hidden.bs.modal', function () {
+    $(this).find(".form-control").val('').end();
   });
 });
 

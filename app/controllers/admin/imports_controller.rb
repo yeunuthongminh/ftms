@@ -1,4 +1,6 @@
 class Admin::ImportsController < ApplicationController
+  before_action :authorize
+
   def index
     if params[:filename]
       if @filename = Dir["#{Rails.root}/log/imports/#{params[:filename]}.log"].first

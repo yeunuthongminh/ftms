@@ -70,7 +70,7 @@ class Admin::CoursesController < ApplicationController
   end
 
   def load_data
-    @supports ||= Supports::CourseSupport.new course: @course
+    @supports ||= Supports::CourseSupport.new course: @course,
       filter_service: @filter_service
   end
 

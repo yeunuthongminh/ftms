@@ -27,8 +27,8 @@ Rails.application.routes.draw do
       resources :tasks, except: :show
     end
     resources :users, except: :index do
-      resource :evaluations
       resource :stages, only: [:edit, :update]
+      resources :change_roles, only: [:index, :create]
     end
 
     resources :trainee_evaluations, only: :index
@@ -57,8 +57,14 @@ Rails.application.routes.draw do
     resources :statistics, only: [:index, :create]
     resources :stages
     resources :programs, except: :destroy
-    resources :user_courses, only: :update
+    get "/programs/(:parent_id)/subprogram/new", to: "programs#new", as: :new_program
     resources :imports, only: [:index, :create]
+    resources :user_courses, only: :update do
+      resources :trainee_evaluations, except: [:index, :destroy]
+    end
+    resources :user_subjects do
+      resources :trainee_evaluations, except: [:index, :destroy]
+    end
   end
 
   namespace :trainer do
@@ -129,4 +135,6 @@ Rails.application.routes.draw do
   resources :filter_datas, only: [:index, :create]
   resources :exams, only: [:show, :index, :update]
   resources :calendars, only: :index
+
+  resource :change_current_role_type, only: :update
 end

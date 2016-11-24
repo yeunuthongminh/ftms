@@ -103,8 +103,16 @@
     top: -50px;
   }
 
+  .menu-right-user-course {
+    display: inline-flex;
+  }
+
   .label-user .user-course {
     color: #fff;
+  }
+
+  .label-user {
+    height: 50px;
   }
 
   .label-user-finish {
@@ -195,5 +203,12 @@
       max-width: 200px;
       position: relative;
     }
+  }
+
+  .action-user-course {
+    margin-left: 10px;
+  }
+  .evaluation-show {
+    cursor: pointer;
   }
 }

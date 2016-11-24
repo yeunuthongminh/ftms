@@ -1,7 +1,10 @@
 class UserSubject < ApplicationRecord
   include PublicActivity::Model
   include LoadUser
+  include TraineeRelation
+  include EstimateTime
   acts_as_paranoid
+  include ChatworkApi
 
   ATTRIBUTES_PARAMS = [:start_date, :end_date]
 
@@ -13,6 +16,7 @@ class UserSubject < ApplicationRecord
   has_many :notifications, as: :trackable, dependent: :destroy
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
   has_many :exams, dependent: :destroy
+  has_many :trainee_evaluations, as: :targetable
 
   after_create :create_user_tasks
 
@@ -26,7 +30,7 @@ class UserSubject < ApplicationRecord
 
   scope :load_by_course_subject, ->course_subject_ids, trainer_id do
     order_by_course_subject.joins(:trainee).where("course_subjects.id in (?)
-      AND user_subjects.status = ? AND users.trainer_id = ?", course_subject_ids,
+      AND user_subjects.status = ? AND trainees.trainer_id = ?", course_subject_ids,
       UserSubject.statuses[:progress], trainer_id)
   end
 
@@ -35,6 +39,7 @@ class UserSubject < ApplicationRecord
   delegate :name, to: :trainee, prefix: true, allow_nil: true
   delegate :name, :id, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
+  delegate :name, to: :trainee, prefix: true, allow_nil: true
 
   enum status: [:init, :progress, :waiting, :finish]
 
@@ -103,7 +108,7 @@ class UserSubject < ApplicationRecord
   end
 
   def percent_progress
-    if start_date.present?
+    if start_date
       return 0 if start_date > Time.zone.today
       current_date = user_end_date
       current_date ||= Time.zone.today
@@ -113,7 +118,7 @@ class UserSubject < ApplicationRecord
 
       user_current_time = (current_date - start_date).to_f
       percent = user_current_time * 100 / real_duration_time.to_f
-      [percent, 100].min
+      percent < 0 ? 0 : percent
     end
   end
 
@@ -165,7 +170,10 @@ class UserSubject < ApplicationRecord
   end
 
   def plan_end_date
-    (course_subject.subject_during_time - 1).business_days.after Time.now
+    working_day = Profile.find_by(user_id: user_id).try :working_day
+    subject_time = course_subject.subject_during_time
+    estimate_time = working_day ? (subject_time*5/working_day.to_f).to_i : (subject_time - 1)
+    estimate_end_date estimate_time
   end
 
   private
@@ -207,7 +215,7 @@ class UserSubject < ApplicationRecord
         new_status = UserSubject.statuses.key args[:column]
         parameters = {old_status: old_status, new_status: new_status}
         create_activity key: activity_key, owner: args[:current_user],
-          recipient: user, parameters: parameters
+          recipient: trainee, parameters: parameters
         user_ids = [args[:current_user].id, user_id].uniq
 
         notification_key = args[:row] > args[:column] ? :change_status_down : :change_status_up

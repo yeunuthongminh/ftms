@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122034121) do
+ActiveRecord::Schema.define(version: 20161123081836) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -77,8 +77,10 @@ ActiveRecord::Schema.define(version: 20161122034121) do
     t.datetime "updated_at",                        null: false
     t.datetime "deleted_at"
     t.integer  "chatwork_room_id"
+    t.integer  "project_id"
     t.index ["course_id"], name: "index_course_subjects_on_course_id", using: :btree
     t.index ["deleted_at"], name: "index_course_subjects_on_deleted_at", using: :btree
+    t.index ["project_id"], name: "index_course_subjects_on_project_id", using: :btree
     t.index ["subject_id"], name: "index_course_subjects_on_subject_id", using: :btree
   end
 
@@ -127,6 +129,8 @@ ActiveRecord::Schema.define(version: 20161122034121) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluation_groups_on_deleted_at", using: :btree
   end
 
   create_table "evaluation_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -134,6 +138,8 @@ ActiveRecord::Schema.define(version: 20161122034121) do
     t.integer  "evaluation_group_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluation_items_on_deleted_at", using: :btree
     t.index ["evaluation_group_id"], name: "index_evaluation_items_on_evaluation_group_id", using: :btree
     t.index ["evaluation_standard_id"], name: "index_evaluation_items_on_evaluation_standard_id", using: :btree
   end
@@ -145,6 +151,8 @@ ActiveRecord::Schema.define(version: 20161122034121) do
     t.float    "avarage",    limit: 24
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluation_standards_on_deleted_at", using: :btree
   end
 
   create_table "exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -223,7 +231,9 @@ ActiveRecord::Schema.define(version: 20161122034121) do
     t.integer  "author_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.datetime "deleted_at"
     t.index ["author_id"], name: "index_notes_on_author_id", using: :btree
+    t.index ["deleted_at"], name: "index_notes_on_deleted_at", using: :btree
     t.index ["trainee_evaluation_id"], name: "index_notes_on_trainee_evaluation_id", using: :btree
     t.index ["user_id"], name: "index_notes_on_user_id", using: :btree
   end
@@ -296,10 +306,8 @@ ActiveRecord::Schema.define(version: 20161122034121) do
 
   create_table "project_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "project_id"
-    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "priority"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_project_requirements_on_deleted_at", using: :btree
     t.index ["project_id"], name: "index_project_requirements_on_project_id", using: :btree
@@ -307,10 +315,12 @@ ActiveRecord::Schema.define(version: 20161122034121) do
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.datetime "deleted_at"
+    t.integer  "{:index=>true, :foreign_key=>true}_id"
     t.index ["deleted_at"], name: "index_projects_on_deleted_at", using: :btree
+    t.index ["{:index=>true, :foreign_key=>true}_id"], name: "index_projects_on_{:index=>true, :foreign_key=>true}_id", using: :btree
   end
 
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -341,6 +351,13 @@ ActiveRecord::Schema.define(version: 20161122034121) do
     t.integer  "reader_id"
     t.datetime "timestamp"
     t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", using: :btree
+  end
+
+  create_table "requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text    "name",                                  limit: 65535
+    t.integer "priority"
+    t.integer "{:index=>true, :foreign_key=>true}_id"
+    t.index ["{:index=>true, :foreign_key=>true}_id"], name: "index_requirements_on_{:index=>true, :foreign_key=>true}_id", using: :btree
   end
 
   create_table "results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -504,6 +521,7 @@ ActiveRecord::Schema.define(version: 20161122034121) do
   create_table "user_functions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.integer "function_id"
+    t.integer "role_type"
     t.index ["function_id"], name: "index_user_functions_on_function_id", using: :btree
     t.index ["user_id"], name: "index_user_functions_on_user_id", using: :btree
   end
@@ -555,11 +573,12 @@ ActiveRecord::Schema.define(version: 20161122034121) do
   end
 
   create_table "user_task_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "status",       default: 0
+    t.integer  "status",           default: 0
     t.datetime "deleted_at"
     t.integer  "user_task_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "pull_request_url"
     t.index ["deleted_at"], name: "index_user_task_histories_on_deleted_at", using: :btree
     t.index ["user_task_id"], name: "index_user_task_histories_on_user_task_id", using: :btree
   end
@@ -568,11 +587,12 @@ ActiveRecord::Schema.define(version: 20161122034121) do
     t.integer  "task_id"
     t.integer  "user_subject_id"
     t.integer  "user_id"
-    t.integer  "progress",        default: 0
-    t.integer  "status",          default: 0
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "progress",         default: 0
+    t.integer  "status",           default: 0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
+    t.string   "pull_request_url"
     t.index ["deleted_at"], name: "index_user_tasks_on_deleted_at", using: :btree
     t.index ["task_id"], name: "index_user_tasks_on_task_id", using: :btree
     t.index ["user_id"], name: "index_user_tasks_on_user_id", using: :btree
@@ -607,6 +627,7 @@ ActiveRecord::Schema.define(version: 20161122034121) do
     t.datetime "deleted_at"
     t.string   "type",                   default: "Trainee"
     t.integer  "chatwork_id"
+    t.integer  "current_role_type"
     t.index ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -614,6 +635,7 @@ ActiveRecord::Schema.define(version: 20161122034121) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "course_subjects", "courses"
+  add_foreign_key "course_subjects", "projects"
   add_foreign_key "course_subjects", "subjects"
   add_foreign_key "courses", "programs"
   add_foreign_key "evaluation_check_lists", "evaluation_standards"
@@ -632,7 +654,6 @@ ActiveRecord::Schema.define(version: 20161122034121) do
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "locations"
   add_foreign_key "profiles", "users"
-  add_foreign_key "project_requirements", "projects"
   add_foreign_key "questions", "subjects"
   add_foreign_key "results", "answers"
   add_foreign_key "results", "exams"

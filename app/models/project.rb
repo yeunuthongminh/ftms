@@ -5,6 +5,7 @@ class Project < ApplicationRecord
     :_destroy]]
 
   has_many :project_requirements, dependent: :destroy
+  has_many :course_subjects
 
   validates :name, presence: true
 

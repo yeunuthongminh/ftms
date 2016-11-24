@@ -93,3 +93,48 @@
     border-radius: 16px;
   }
 }
+
+.prog-bar-cont{
+  height: 2.5em;
+  padding: 0.5em;
+  position: relative;
+  top: 50%;
+  box-sizing: border-box;
+  .prog-bar{
+    background: #000;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset, 0 0 1px 3px rgba(white, 0.75) inset;
+    background: transparent;
+    &:before{
+      border-radius: 50px;
+      content: '';
+      display: block;
+      height: 100%;
+      background: transparent;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 3;
+    }
+
+    .prog-bar-bg{
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(to right, mix(violet, deepskyblue, 20%),
+       mix(limegreen, yellow, 70%), yellow, orange, mix(red, deeppink, 20%));
+      clip-path: inset(0 100% 0 0);
+      &:before{
+        content: '';
+        display: block;
+        height: 100%;
+        box-sizing: border-box;
+        opacity: 0.75;
+        mix-blend-mode: overlay;
+      }
+    }
+  }
+}

@@ -35,7 +35,7 @@
 //= require hight_light_table
 //= require notify
 //= require admin/role_permission
-//= require admin/evaluation
+//= require admin/trainee_evaluation
 //= require admin/note
 //= require jquery-ui/dialog
 //= require jquery-ui/sortable
@@ -78,6 +78,7 @@
 //= require ajax_session_devise
 //= require import
 //= require color-picker.js
+//= require js.cookie
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();

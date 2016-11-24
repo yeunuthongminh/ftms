@@ -1,8 +1,10 @@
 class Trainee < User
   include StiRouting
-  belongs_to :trainer
 
-  has_one :evaluation, dependent: :destroy
+  has_many :trainee_evaluations, class_name: TraineeEvaluation.name,
+    foreign_key: :trainee_id
+  has_many :trainees_evaluations, through: :trainee_evaluations,
+    source: :trainee
 
   has_many :exams, dependent: :destroy, foreign_key: :user_id
   has_many :user_subjects, dependent: :destroy, foreign_key: :user_id

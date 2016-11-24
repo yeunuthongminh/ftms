@@ -1,0 +1,66 @@
+<%= form_for @supports.trainee_evaluation,
+  url: [:admin, @supports.targetable, @supports.trainee_evaluation] do |f| %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-2">
+      <div class="title"><%= @supports.targetable.trainee_name %></div>
+    </div>
+  </div>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="form-group">
+        <%= f.label :total_point %>
+        <%= f.number_field :total_point, class: "form-control", readonly: true %>
+      </div>
+      <div class="form-group">
+        <% if params[:user_subject_id] %>
+          <b><%= t "subjects.about_subject" %>: </b>
+          <%= @supports.targetable.subject_name %>
+        <% else %>
+          <b><%= t "courses.course" %>: </b>
+          <%= @supports.targetable.course_name %>
+        <% end %>
+      </div>
+      <%= f.hidden_field :trainee_id, value: @supports.targetable.user_id %>
+      <%= f.hidden_field :targetable_id, value: @supports.targetable.id %>
+      <%= f.hidden_field :targetable_type,
+        value: @supports.targetable.class.name %>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="evaluation-details col-md-6">
+      <div class="title"><%= t "layouts.trainee_evaluations" %></div>
+      <table class="table table-striped tbl-evaluation-details">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="name"><%= t "evaluation.table.thead.name" %></th>
+            <th class="point"><%= t "evaluation.table.thead.point" %></th>
+          </tr>
+        </thead>
+        <tbody id="tbl-evaluation-check-lists">
+          <%= f.fields_for :evaluation_check_lists,
+            @supports.evaluation_check_lists_handler do |builder| %>
+            <%= render "evaluation_check_lists", f: builder %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="note col-md-6">
+      <div class="title"><%= t "notes.title" %></div>
+      <%= f.fields_for :notes do |builder| %>
+        <%= render "note_fields", f: builder %>
+      <% end %>
+      <p><%= link_to_add_fields t("notes.dynamic_form.add"), f, :notes %></p>
+    </div>
+    <div class="row">
+      <div class="col-md-1 col-md-offset-10">
+        <p class="pull-right">
+          <%= f.submit (f.object.new_record? ? t("buttons.create") :
+            t("buttons.save")), class: "btn btn-primary" %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>

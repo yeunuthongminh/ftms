@@ -24,6 +24,10 @@ class ProgramsDatatable
         index,
         link_to(program.name,
           eval("@view.#{@namespace}_program_path(program)")),
+        program.parent_name,
+        link_to(I18n.t("programs.new_sub_program"),
+          eval("@view.#{@namespace}_new_program_path(parent_id: program.id)"),
+          title: I18n.t("programs.new_sub_program")),
         link_to(@view.t("buttons.edit"),
           eval("@view.edit_#{@namespace}_program_path(program)"),
           class: "pull-right")
@@ -36,7 +40,7 @@ class ProgramsDatatable
   end
 
   def fetch_programs
-    @programs = Program.all
+    @programs = Program.includes :parent
     programs = @programs.order("#{sort_column} #{sort_direction}")
       .per_page_kaminari(page).per per_page
     if params[:sSearch].present?

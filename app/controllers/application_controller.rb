@@ -8,10 +8,8 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!, :set_locale, except: :home
   before_action :new_feed_back
-  before_action :set_current_role
   before_action :get_namespace
   before_action :set_root_path
-
 
   def default_url_options options = {}
     {locale: I18n.locale}
@@ -114,10 +112,6 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = t "error.not_authorize"
     back_or_root
-  end
-
-  def set_current_role
-    current_user.current_role ||= current_user.roles.pluck(:role_type).first if current_user
   end
 
   def get_root_path
