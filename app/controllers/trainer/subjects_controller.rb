@@ -3,7 +3,7 @@ class Trainer::SubjectsController < ApplicationController
   load_and_authorize_resource :course
   skip_load_resource :course, only: :show
   skip_load_resource only: [:edit, :update]
-  before_action :find_subject_in_edit, only: :edit
+  before_action :find_subject, only: [:edit, :update]
   before_action :load_data, only: :show
 
   def index
@@ -34,7 +34,7 @@ class Trainer::SubjectsController < ApplicationController
     @subject = Subject.new subject_params
     if @subject.save
       flash[:success] = flash_message "created"
-      redirect_to trainer_subjects_path
+      redirect_to trainer_subject_task_masters_path @subject
     else
       flash[:failed] = flash_message "not_created"
       render :new
@@ -50,7 +50,7 @@ class Trainer::SubjectsController < ApplicationController
   def update
     if @subject.update_attributes subject_params
       flash[:success] = flash_message "updated"
-      redirect_to trainer_subject_task_masters_path(@subject)
+      redirect_to trainer_subject_task_masters_path @subject
     else
       flash[:failed] = flash_message "not_updated"
       render :edit
@@ -73,8 +73,8 @@ class Trainer::SubjectsController < ApplicationController
     params.require(:subject).permit Subject::SUBJECT_ATTRIBUTES_PARAMS
   end
 
-  def find_subject_in_edit
-    @subject = Subject.includes(:documents, :task_masters).find_by_id params[:id]
+  def find_subject
+    @subject = Subject.includes(:documents, :task_masters).find_by id: params[:id]
     redirect_if_object_nil @subject
   end
 
