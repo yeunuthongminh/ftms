@@ -61,7 +61,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def load_data
-    @supports = Supports::User.new @user
+    @supports = Supports::UserSupport.new @user
   end
 
   def load_breadcrumb_edit

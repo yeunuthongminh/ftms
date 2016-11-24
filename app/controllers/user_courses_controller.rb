@@ -3,7 +3,7 @@ class UserCoursesController < ApplicationController
   authorize_resource only: :show
 
   def show
-    @user_course_supports = Supports::UserCourse.new @user_course
+    @user_course_supports = Supports::UserCourseSupport.new @user_course
   end
 
   private

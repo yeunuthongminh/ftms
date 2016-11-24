@@ -3,7 +3,7 @@ class Trainer::AssignTraineesController < ApplicationController
   authorize_resource class: false
 
   def edit
-    @supports = Supports::Course.new course: course
+    @supports = Supports::CourseSupport.new course: course
 
     add_breadcrumb_path "courses"
     add_breadcrumb @course.name, trainer_course_path(@course)
