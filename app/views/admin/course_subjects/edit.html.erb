@@ -63,20 +63,7 @@
           </div>
         </div>
         <br>
-        <div class="row">
-          <div class="col-md-2 text-right">
-            <span><%= t "subjects.project" %></span>
-          </div>
-          <div class="col-md-8">
-            <%= f.text_field :project_id, value: @course_subject.project_name,
-              class: "form-control", disabled: true %>
-          </div>
-          <%= link_to t("subjects.change_project"), "#", data: {toggle: "modal",
-            target: "#update_project"}, class: "btn btn-info" %>
-        </div>
-        <br>
       </div>
-
       <div class="row">
         <div class="col-md-1 col-md-offset-10">
           <%= f.submit (f.object.new_record? ? t("buttons.create")

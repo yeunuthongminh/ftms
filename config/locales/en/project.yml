@@ -2,3 +2,4 @@ en:
   projects:
     title: "Projects"
     add_requirement: "Add Requirement"
+    assign_project: "Assign project"

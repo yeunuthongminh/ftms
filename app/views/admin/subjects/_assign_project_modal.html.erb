@@ -1,0 +1,27 @@
+<div id="update_project" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="label-modal"><%= t "projects.assign_project" %></h4>
+      </div>
+      <%= form_for [:admin, @supports.course_subject],
+        url: admin_course_subject_assign_project_path(@supports.course_subject),
+        method: :patch, remote: true, class: "form-control" do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= select_profile_field :project, @supports.projects, f %>
+          </div>
+          <div id="list-requirements">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit t("buttons.save"), class: "btn btn-primary" %>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <%= t "buttons.cancel" %>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

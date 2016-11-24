@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :task_masters, only: :index
     end
     resources :course_subjects do
+      resource :assign_project, only: :update
       resources :user_subjects, only: :update
       resources :tasks, except: :show
     end

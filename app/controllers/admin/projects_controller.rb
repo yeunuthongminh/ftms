@@ -13,6 +13,14 @@ class Admin::ProjectsController < ApplicationController
     add_breadcrumb_new "projects"
   end
 
+  def show
+    @requirements = @project.project_requirements
+    respond_to do |format|
+      format.html
+      format.json {render json: {requirements: @requirements}.to_json}
+    end
+  end
+
   def create
     if @project.save
       flash[:success] = flash_message "created"

@@ -28,13 +28,19 @@
   <div class="col-md-3">
     <div class="box-divider subject-title">
       <div class="label-title"><%= t "subjects.project" %></div>
-      <p><%= @supports.project_name.html_safe if @supports.project_name %></p>
+      <p id="project_name"
+        title="<%= @supports.project_name.html_safe if @supports.project_name %>">
+        <%= truncate @supports.project_name.html_safe if @supports.project_name %>
+      </p>
     </div>
+    <%= link_to t("subjects.change_project"), "#", data: {toggle: "modal",
+      target: "#update_project"}, class: "btn btn-info" %>
   </div>
   <div class="col-md-1 action">
     <%= render "shared/action_user_subjects" %>
   </div>
 </div>
+<%= render "assign_project_modal" %>
 <% if data_finish_task @supports.user_tasks_chart_data %>
   <div id="user-subjects-charts"
     data-user-name="<%= @supports.user_tasks_chart_data.keys %>"
