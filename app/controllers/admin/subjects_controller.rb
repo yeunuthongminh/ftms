@@ -34,7 +34,7 @@ class Admin::SubjectsController < ApplicationController
     @subject = Subject.new subject_params
     if @subject.save
       flash[:success] = flash_message "created"
-      redirect_to admin_subjects_path
+      redirect_to admin_subject_task_masters_path @subject
     else
       flash[:failed] = flash_message "not_created"
       render :new
@@ -50,7 +50,7 @@ class Admin::SubjectsController < ApplicationController
   def update
     if @subject.update_attributes subject_params
       flash[:success] = flash_message "updated"
-      redirect_to admin_subject_task_masters_path(@subject)
+      redirect_to admin_subject_task_masters_path @subject
     else
       flash[:failed] = flash_message "not_updated"
       render :edit
@@ -73,9 +73,8 @@ class Admin::SubjectsController < ApplicationController
     params.require(:subject).permit Subject::SUBJECT_ATTRIBUTES_PARAMS
   end
 
-
   def load_data
-    @supports = Supports::Subject.new subject: @subject,
+    @supports = Supports::SubjectSupport.new subject: @subject,
       course_id: params[:course_id]
     redirect_if_object_nil @supports.course
   end

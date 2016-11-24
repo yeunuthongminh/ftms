@@ -78,6 +78,8 @@ class Course < ApplicationRecord
   def finish_course current_user
     update_attributes status: :finish
     user_courses.progress.update_all status: :finish
+    update_current_progress = FalseCurrentProgressService.new self
+    update_current_progress.perform
     create_activity key: "course.finish_course", owner: current_user
   end
 end

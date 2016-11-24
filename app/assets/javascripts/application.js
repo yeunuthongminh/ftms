@@ -77,6 +77,7 @@
 //= require navbar_admin
 //= require ajax_session_devise
 //= require import
+//= require color-picker.js
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();

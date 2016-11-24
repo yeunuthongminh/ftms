@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       resources :user_subjects, only: :update
       resources :tasks, except: :show
     end
-    resources :users do
+    resources :users, except: :index do
       resource :evaluations
       resource :stages, only: [:edit, :update]
     end
@@ -75,7 +75,7 @@ Rails.application.routes.draw do
     resources :subjects do
       resources :task_masters, only: :index
     end
-    resources :users do
+    resources :users, except: :index do
       resource :evaluations
     end
     resources :feed_backs, only: :index

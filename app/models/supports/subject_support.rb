@@ -1,4 +1,4 @@
-class Supports::Subject
+class Supports::SubjectSupport
   attr_reader :subject
 
   def initialize args

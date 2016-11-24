@@ -112,6 +112,24 @@ class FilterDatasController < ApplicationController
       @key_field = :score
       @value_field = :score
       @resources = Exam.order(:score).pluck(:score).uniq.compact
+    when "staff_code"
+      @key_field = :staff_code
+      @value_field = :staff_code
+      @resources = Profile.order(:staff_code).pluck(:staff_code).uniq.compact
+    when "stage"
+      @key_field = :id
+      @value_field = :stage_name
+      @resources = Stage.order(:name).pluck :name
+    when "question_content"
+      @key_field = :question_content
+      @value_field = :question_content
+      @resources = Question.order(:content).pluck(:content).uniq.compact
+    when "level"
+      @resources = i18n_enum(:question, :level)
+    when "subject_name"
+      @key_field = :subject_name
+      @value_field = :subject_name
+      @resources = Subject.order(:name).pluck(:name).uniq.compact
     end
 
     respond_to do |format|

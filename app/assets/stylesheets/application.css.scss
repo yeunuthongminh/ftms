@@ -52,7 +52,6 @@
  *= require admin/organization_charts
  *= require exams
  *= require jquery.countdown
- *= require admin/question
  *= require spectrum
  *= require admin/program
  *= require fullcalendar.min
@@ -62,7 +61,7 @@
  *= require navbar_head
  *= require admin_trainer_navbar_head
  *= require admin/stage
- *= require admin/import
+ *= require question
  */
 
 @import "bootstrap-sprockets";

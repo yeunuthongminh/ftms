@@ -3,7 +3,7 @@ class Trainer::AssignTrainersController < ApplicationController
   before_action :authorize
 
   def edit
-    @supports = Supports::Course.new course: @course
+   @supports = Supports::CourseSupport.new course: @course
 
     add_breadcrumb_path "courses"
     add_breadcrumb @course.name, trainer_course_path(@course)

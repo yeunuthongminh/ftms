@@ -2,6 +2,7 @@ en:
   table:
     thead:
       name: "Name"
+      abbr: "Abbreviation"
   university:
     other: "Other University"
     new: "New University"

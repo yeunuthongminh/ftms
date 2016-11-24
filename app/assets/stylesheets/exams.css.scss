@@ -6,16 +6,23 @@
   #show-exam, #do-exam {
     margin-top: 30px;
     .question-title {
-      height: 30px;
       font-size: 18px;
       margin: 5px 0 20px 0;
       font-weight: bold;
     }
 
+    .result-correct {
+      background-color: #00e200;
+    }
+
+    .result-not-correct {
+      background-color: #ffc3c3;
+    }
+
     .question-content {
+      width: 100%;
       position: relative;
       span {
-        margin-left: 20px;
         font-weight: normal;
         font-size: 16px;
       }
@@ -119,7 +126,7 @@
   }
 
   .table {
-    width: 1518px;
+    width: auto;
   }
 
   .fixedTitle, .fixedTable-sidebar, #parent, #child {
@@ -138,6 +145,14 @@
     max-height: 31px;
     min-height: 31px;
     height: 31px;
+  }
+
+  #loading {
+    position: absolute;
+    width: 28px;
+    top: 85px;
+    right: 50px;
+    display: none;
   }
 
   .tcell {

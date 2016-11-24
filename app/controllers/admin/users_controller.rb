@@ -5,15 +5,6 @@ class Admin::UsersController < ApplicationController
   before_action :load_breadcrumb_edit, only: [:edit, :update]
   before_action :load_breadcrumb_new, only: [:new, :create]
 
-  def index
-    respond_to do |format|
-      format.html {add_breadcrumb_index "users"}
-      format.json {
-        render json: UsersDatatable.new(view_context, @namespace)
-      }
-    end
-  end
-
   def new
     @user = User.new
     build_profile
@@ -24,8 +15,8 @@ class Admin::UsersController < ApplicationController
     user_send_mail_service = MailerServices::UserSendMailService.new user: @user
     if @user.save && user_send_mail_service.perform?
       flash[:success] = flash_message "created"
-      if params[:commit].present?
-        redirect_to admin_users_path
+      if params[:create_and_continue].present?
+        redirect_to admin_training_managements_path
       else
         redirect_to new_admin_user_path
       end
@@ -43,7 +34,7 @@ class Admin::UsersController < ApplicationController
     if @user.update_attributes user_params
       sign_in(@user, bypass: true) if current_user? @user
       flash[:success] = flash_message "updated"
-      redirect_to admin_users_path
+      redirect_to admin_training_managements_path
     else
       load_profile
       render :edit
@@ -56,7 +47,7 @@ class Admin::UsersController < ApplicationController
     else
       flash[:alert] = flash_message "not_deleted"
     end
-    redirect_to admin_users_path
+    redirect_to admin_training_managements_path
   end
 
   def show
@@ -71,12 +62,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def load_profile
-    @supports = Supports::User.new @user
+    @supports = Supports::UserSupport.new @user
   end
 
   def load_breadcrumb_edit
     add_breadcrumb_path "users"
-    add_breadcrumb @user.name, admin_user_path(@user)
+    add_breadcrumb @user.name, [:admin, @user]
     add_breadcrumb_edit "users"
   end
 
@@ -93,7 +84,7 @@ class Admin::UsersController < ApplicationController
     @user = User.includes(:profile).find_by id: params[:id]
     if @user.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to admin_users_path
+      redirect_to admin_training_managements_path
     end
   end
 end

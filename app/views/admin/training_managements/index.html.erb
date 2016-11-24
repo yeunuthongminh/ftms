@@ -1,7 +1,14 @@
 <div id="main" class="clearfix">
   <div id="content">
+    <div class="title">
+      <span>
+        <%= link_to t("buttons.new"), new_admin_user_path,
+          class: "btn btn-success pull-right" %>
+      </span>
+    </div>
+
     <div id="<%= controller_name %>">
-      <%= image_tag "loading.svg", id: "loading" %>
+      <%= image_tag "loading.gif", id: "loading" %>
       <h3 class="title">
         <%= t "training_managements.titles.all_trainee" %>
 
@@ -18,10 +25,9 @@
       </div>
 
       <div class="pull-right" id="number-records">
-        <%= i18n_pluralize @users.size, Settings.record %>
       </div>
 
-      <div id="filter" data-filter-data="<%= @filter_data_user %>"
+      <div id="filter" data-filter-data="<%= @filter_service.user_filter_data %>"
         data-type="<%= :training_managements %>" data-id="<%= current_user.id %>"
         data-is-turn-on="<%= @filter_service.is_on? %>">
       </div>

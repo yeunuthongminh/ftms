@@ -4,16 +4,7 @@ class Trainer::UsersController < ApplicationController
   before_action :load_profile, except: [:index, :show, :destroy]
   before_action :load_breadcrumb_edit, only: [:edit, :update]
   before_action :load_breadcrumb_new, only: [:new, :create]
-  before_action :quick_create_profile, except: [:index, :destroy, :show]
-
-  def index
-    respond_to do |format|
-      format.html {add_breadcrumb_index "users"}
-      format.json {
-        render json: UsersDatatable.new(view_context, @namespace)
-      }
-    end
-  end
+  before_action :quick_create_profile, except: [:destroy, :show]
 
   def new
     @user = User.new
@@ -25,7 +16,7 @@ class Trainer::UsersController < ApplicationController
     if @user.save
       flash[:success] = flash_message "created"
       if params[:commit].present?
-        redirect_to trainer_users_path
+        redirect_to trainer_training_managements_path
       else
         redirect_to new_trainer_user_path
       end
@@ -44,7 +35,7 @@ class Trainer::UsersController < ApplicationController
     if @user.update_attributes user_params
       sign_in(@user, bypass: true) if current_user? @user
       flash[:success] = flash_message "updated"
-      redirect_to trainer_users_path
+      redirect_to trainer_training_managements_path
     else
       render :edit
     end
@@ -56,7 +47,7 @@ class Trainer::UsersController < ApplicationController
     else
       flash[:alert] = flash_message "not_deleted"
     end
-    redirect_to trainer_users_path
+    redirect_to trainer_training_managements_path
   end
 
   def show
@@ -96,7 +87,7 @@ class Trainer::UsersController < ApplicationController
 
   def load_breadcrumb_edit
     add_breadcrumb_path "users"
-    add_breadcrumb @user.name, trainer_user_path(@user)
+    add_breadcrumb @user.name, [:trainer, @user]
     add_breadcrumb_edit "users"
   end
 

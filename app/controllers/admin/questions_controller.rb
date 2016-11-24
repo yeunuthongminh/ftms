@@ -1,15 +1,16 @@
 class Admin::QuestionsController < ApplicationController
   before_action :authorize
   before_action :load_question, only: [:edit, :update, :destroy]
+
+  include FilterData
+
   before_action :load_data, only: [:new, :edit]
+  before_action :load_filter, only: :index
+
 
   def index
-    respond_to do |format|
-      format.html {add_breadcrumb_index "questions"}
-      format.json {
-        render json: QuestionsDatatable.new(view_context, @namespace)
-      }
-    end
+    questions = Question.includes :subject
+    @question_presenters = QuestionPresenter.new(questions, @namespace).render
   end
 
   def new
@@ -64,7 +65,7 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def load_data
-    @supports = Supports::Question.new @question
+    @supports = Supports::QuestionSupport.new @question
   end
 
   def load_question

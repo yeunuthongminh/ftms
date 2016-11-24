@@ -1,4 +1,4 @@
-class Supports::Course
+class Supports::CourseSupport
   attr_reader :course, :program, :current_user
 
   def initialize args

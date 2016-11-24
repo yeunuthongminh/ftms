@@ -75,9 +75,13 @@
             <%= ff.label :stage %>
           </div>
           <div class="col-md-7">
-            <h4><%= ff.label :stage, value: @supports.stage.name %>&nbsp;&nbsp;&nbsp;
-              <%= link_to t("stages.change"),
-                edit_admin_user_stages_path(@user), class: "btn btn-danger" %>
+            <h4><b><%= @supports.stage.name %></b>&nbsp;&nbsp;&nbsp;
+              <% if @user.new_record? %>
+                <%= ff.hidden_field :stage_id, value: @supports.stage.id %>
+              <% else %>
+                <%= link_to t("stages.change"),
+                  edit_admin_user_stages_path(@user), class: "btn btn-danger" %>
+              <% end %>
             </h4>
           </div>
         </div>

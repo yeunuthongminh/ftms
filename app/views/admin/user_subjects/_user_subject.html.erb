@@ -48,8 +48,10 @@
     </select>
   </td>
   <td>
-    <%= render "shared/progress_bar", percent: user_subject.percent_progress,
+    <% if user_subject.percent_progress %>
+      <%= render "shared/progress_bar", percent: user_subject.percent_progress,
         status: user_subject.status %>
+    <% end %>
   </td>
   <td class="action">
   </td>

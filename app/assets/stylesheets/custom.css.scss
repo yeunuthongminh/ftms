@@ -613,8 +613,8 @@ textarea {
 #loading {
   position: absolute;
   width: 28px;
-  top: 63px;
-  right: 46px;
+  top: 115px;
+  right: 50px;
   display: none;
 }
 
@@ -690,3 +690,7 @@ textarea {
   }
 }
 
+.awesome {
+  background: white !important;
+  border: black double thin !important;
+}

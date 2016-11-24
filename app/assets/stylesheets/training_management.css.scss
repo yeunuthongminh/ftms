@@ -8,10 +8,23 @@
     height: auto;
   }
 
+  .fixedTitle, .fixedTable-sidebar, #parent, #child {
+    width: 310px;
+  }
+
+  .scrollbarH {
+    margin-left: 310px;
+  }
+
   .tcell {
     &.stt {
       min-width: 35px;
       max-width: 35px;
+    }
+
+    &.staff_code {
+      @include ellipsis(65px);
+      position: relative;
     }
 
     &.trainee_type {
@@ -54,8 +67,13 @@
     }
 
     &.university {
-      min-width: 370px;
+      min-width: 140px;
       max-width: 370px;
+      position: relative;
+    }
+
+    &.stage {
+      @include ellipsis(120px);
       position: relative;
     }
 

@@ -244,8 +244,10 @@ function loadDataFilter(target) {
       cell_element = row[row_child].children("." + data_parent);
       if (cell_element.length != 0){
         if (!row[row_child].hasClass('hide')) {
-          cell_value = $.trim(cell_element.text());
-          cell_value = cell_value.toLowerCase().split(', ');
+          cell_value = $.trim(cell_element.text().toLowerCase());
+          if (data_name == "f-course_trainers") {
+            cell_value = cell_value.split(', ');
+          }
           row_is_visible = true;
         }
         break;
@@ -253,7 +255,11 @@ function loadDataFilter(target) {
     }
 
     if(row_is_visible) {
-      list_visible_row = list_visible_row.concat(cell_value);
+      if (data_name == "f-course_trainers") {
+        list_visible_row = list_visible_row.concat(cell_value);
+      } else {
+        list_visible_row.push(cell_value);
+      }
     }
   });
 
