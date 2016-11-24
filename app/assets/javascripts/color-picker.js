@@ -26,5 +26,18 @@ $(document).on("turbolinks:load", function() {
         '#134f5c', '#1155cc', '#0b5394', '#351c75', '#741b47'],
       ['#5b0f00', '#660000', '#783f04', '#7f6000', '#274e13',
         '#0c343d', '#1c4587', '#073763', '#20124d', '#4c1130']],
+    show: function() {
+      $(this).data('changed', false);
+    },
+    change: function(color) {
+      $(this).data('changed', true);
+    },
+    hide: function(color) {
+      if($(this).data('changed')) {
+        $('#color-picker').val($(this).data);
+      } else {
+        $('#color-picker').val('nil');
+      }
+    },
   });
 });
