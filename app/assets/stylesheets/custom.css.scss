@@ -690,3 +690,11 @@ textarea {
   }
 }
 
+#dropdown-admin {
+  a {
+    color: red !important
+  }
+  li:hover ul{
+    display: block
+  }
+}

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     end
     resources :users do
       resource :stages, only: [:edit, :update]
+      resources :change_roles, only: [:index, :create]
     end
 
     resources :trainee_evaluations, only: :index
@@ -134,4 +135,6 @@ Rails.application.routes.draw do
   resources :filter_datas, only: [:index, :create]
   resources :exams, only: [:show, :index, :update]
   resources :calendars, only: :index
+
+  resource :change_current_role_type, only: :update
 end

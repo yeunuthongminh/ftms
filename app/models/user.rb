@@ -104,6 +104,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :rememberable, :trackable, :validatable,
     :recoverable
+  enum current_role_type: {admin: 0, trainer: 1, trainee: 2}
 
   def total_done_tasks user, course
     done_tasks = UserSubject.load_user_subject(user.id, course.id).map(&:user_tasks).flatten.count
@@ -135,16 +136,20 @@ class User < ApplicationRecord
     user_subjects.find {|user_subject| user_subject.current_progress?}
   end
 
+  def role_type_avaiable
+    self.roles.order(:role_type).map(&:role_type).uniq
+  end
+
   def has_role? role_name
     self.roles.map(&:name).include? role_name
   end
 
-  def user_functions
+  def collect_user_functions
     self.functions.collect{|function| [function.model_class, function.action]}
   end
 
   def has_function? controller, action
-    user_functions.include? [controller, action]
+    collect_user_functions.include? [controller, action]
   end
 
   private

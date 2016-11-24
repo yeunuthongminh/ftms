@@ -14,18 +14,7 @@
         </div>
 
         <% if policy(controller: "users", action: "edit") %>
-          <div class="form-group">
-            <%= f.label :role_id %>
-            <%= f.collection_check_boxes :role_ids, @supports.roles, :id,
-              :name do |role| %>
-              <span class="label label-default">
-                <%= role.label do %>
-                  <%= role.check_box id: "check_role_#{role.object.role_type}" %> &nbsp;
-                  <%= role.text %> &nbsp;
-                <% end %>
-              </span>
-            <% end %>
-          </div>
+          <%= link_to "edit role", admin_user_change_roles_path(@user) %>
           <div class="form-group">
             <%= f.label :trainer_id %>
             <%= f.select :trainer_id, options_for_select(@supports.trainers

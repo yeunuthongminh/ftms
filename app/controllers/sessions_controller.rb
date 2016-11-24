@@ -1,6 +1,8 @@
 class SessionsController < Devise::SessionsController
   after_action :log_sign_in, only: :create
   before_action :log_sign_out, only: :destroy
+  after_action :update_current_role, only: :create
+  before_action :remove_current_role, only: :destroy
   respond_to :json
 
   def create
@@ -45,5 +47,14 @@ class SessionsController < Devise::SessionsController
     log = current_user.track_logs.order_by_time.first
     log.update_attributes(signout_time: Time.zone.now) if log &&
       log.signout_time.nil?
+  end
+
+  def update_current_role
+    current_user.update_attributes current_role_type: current_user.
+      role_type_avaiable.first
+  end
+
+  def remove_current_role
+    current_user.update_attributes current_role_type: nil
   end
 end

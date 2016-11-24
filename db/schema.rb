@@ -480,10 +480,10 @@ ActiveRecord::Schema.define(version: 20161123081836) do
     t.string   "targetable_type"
     t.integer  "targetable_id"
     t.float    "total_point",     limit: 24
-    t.integer  "trainee_id"
-    t.integer  "trainer_id"
+    t.integer  "user_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.index ["user_id"], name: "index_trainee_evaluations_on_user_id", using: :btree
   end
 
   create_table "trainer_programs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -520,6 +520,7 @@ ActiveRecord::Schema.define(version: 20161123081836) do
   create_table "user_functions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.integer "function_id"
+    t.integer "role_type"
     t.index ["function_id"], name: "index_user_functions_on_function_id", using: :btree
     t.index ["user_id"], name: "index_user_functions_on_user_id", using: :btree
   end
@@ -625,6 +626,7 @@ ActiveRecord::Schema.define(version: 20161123081836) do
     t.datetime "deleted_at"
     t.string   "type",                   default: "Trainee"
     t.integer  "chatwork_id"
+    t.integer  "current_role_type"
     t.index ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -663,6 +665,7 @@ ActiveRecord::Schema.define(version: 20161123081836) do
   add_foreign_key "statistics", "user_types"
   add_foreign_key "task_masters", "subjects"
   add_foreign_key "tasks", "course_subjects", on_delete: :cascade
+  add_foreign_key "trainee_evaluations", "users"
   add_foreign_key "trainer_programs", "programs"
   add_foreign_key "trainer_programs", "users"
   add_foreign_key "user_notifications", "notifications"
