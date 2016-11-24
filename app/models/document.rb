@@ -5,8 +5,6 @@ class Document < ApplicationRecord
 
   belongs_to :documentable, polymorphic: true
 
-  validates :document_link, presence: true
-
   def title
     if new_record?
       super
