@@ -1,9 +1,9 @@
 class StaticPagesController < ApplicationController
   def home
     if current_user.present?
-      if current_user.is_admin?
+      if current_user.current_role_type == "admin"
         redirect_to admin_root_path
-      elsif current_user.is_trainer?
+      elsif current_user.current_role_type == "trainer"
         redirect_to trainer_root_path
       end
     end
