@@ -44,20 +44,4 @@ class Trainer::CourseSubjectsController < ApplicationController
   def course_subject_params
     params.require(:course_subject).permit CourseSubject::ATTRIBUTES_PARAMS
   end
-
-  def load_course
-    @course = Course.find_by_id params[:course_id]
-    if @course.nil?
-      flash[:alert] = flash_message "not_find"
-      redirect_to trainer_courses_path
-    end
-  end
-
-  def load_course_subject
-    @course_subject = CourseSubject.find_by id: params[:id]
-    if @course_subject.nil?
-      flash[:alert] = flash_message "not_find"
-      redirect_to @course
-    end
-  end
 end
