@@ -40,8 +40,8 @@ class QuestionPresenter < ActionView::Base
 
   def body_item question, index
     html = "<div class=\"trow #{"list_#{index}" }\" id=\"body-row-#{question.id}\">
-      <div class=\"tcell subject_name\" title=\"#{question.subject.name}\">
-        #{question.subject.name}
+      <div class=\"tcell category_name\" title=\"#{question.category_name}\">
+        #{question.category_name}
       </div>
       <div class=\"tcell level\" tite=\"#{question.level}\">
         #{t "questions.levels.#{question.level}"}

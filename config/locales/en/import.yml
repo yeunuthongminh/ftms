@@ -7,3 +7,4 @@ en:
     allowed_csv: "Allowed only file csv"
     allowed_csv_json: "Allowed only file csv and json"
     importing: "Importing..."
+    not_allow_size: "File cannot blank!"

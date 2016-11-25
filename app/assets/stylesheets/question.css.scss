@@ -37,8 +37,8 @@
       position: relative;
     }
 
-    &.subject_name {
-      @include ellipsis(100px);
+    &.category_name {
+      @include ellipsis(150px);
       position: relative;
     }
 

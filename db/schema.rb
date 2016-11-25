@@ -44,8 +44,10 @@ ActiveRecord::Schema.define(version: 20161124085932) do
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.integer  "programming_language_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.index ["deleted_at"], name: "index_categories_on_deleted_at", using: :btree
     t.index ["programming_language_id"], name: "index_categories_on_programming_language_id", using: :btree
   end
 
@@ -162,8 +164,8 @@ ActiveRecord::Schema.define(version: 20161124085932) do
     t.integer  "score",           default: 0
     t.integer  "duration"
     t.integer  "user_id"
-    t.integer  "categories_id"
-    t.index ["categories_id"], name: "index_exams_on_categories_id", using: :btree
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_exams_on_category_id", using: :btree
     t.index ["deleted_at"], name: "index_exams_on_deleted_at", using: :btree
     t.index ["user_id"], name: "fk_rails_1ef6db8efd", using: :btree
     t.index ["user_subject_id"], name: "index_exams_on_user_subject_id", using: :btree
@@ -305,14 +307,14 @@ ActiveRecord::Schema.define(version: 20161124085932) do
   end
 
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text     "content",       limit: 65535
+    t.text     "content",     limit: 65535
     t.integer  "level"
     t.integer  "subject_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "categories_id"
-    t.index ["categories_id"], name: "index_questions_on_categories_id", using: :btree
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_questions_on_category_id", using: :btree
     t.index ["deleted_at"], name: "index_questions_on_deleted_at", using: :btree
     t.index ["subject_id"], name: "index_questions_on_subject_id", using: :btree
   end
@@ -566,7 +568,7 @@ ActiveRecord::Schema.define(version: 20161124085932) do
   add_foreign_key "evaluation_details", "evaluation_templates"
   add_foreign_key "evaluation_details", "evaluations"
   add_foreign_key "evaluations", "users"
-  add_foreign_key "exams", "categories", column: "categories_id"
+  add_foreign_key "exams", "categories"
   add_foreign_key "exams", "user_subjects"
   add_foreign_key "exams", "users"
   add_foreign_key "feed_backs", "users"
@@ -580,7 +582,7 @@ ActiveRecord::Schema.define(version: 20161124085932) do
   add_foreign_key "profiles", "locations"
   add_foreign_key "profiles", "users"
   add_foreign_key "project_requirements", "projects"
-  add_foreign_key "questions", "categories", column: "categories_id"
+  add_foreign_key "questions", "categories"
   add_foreign_key "questions", "subjects"
   add_foreign_key "results", "answers"
   add_foreign_key "results", "exams"
