@@ -1,15 +1,26 @@
 class Supports::Statistic
   def initialize args = {}
-    @location_ids = args[:location_ids]
+    @check = args[:check]
+    @location_ids = args[:location_ids] || Location.all.map(&:id)
     @start_date = args[:start_date]
     @end_date = args[:end_date]
     @stage_ids = args[:stage_ids]
+    @check_params_location = args[:location_ids]
+  end
+
+  def check
+    if @check.nil?
+      false
+    else
+      if @check_params_location.nil?
+        true
+      end
+    end
   end
 
   def trainee_types
-    @trainee_types ||= if @location_ids.nil?
-      UserType.all.collect{|u| Hash[:name, u.name, :y, u.profiles.size]}
-        .delete_if{|p| p[:y] == 0}.sort_by{|u| u[:y]}.reverse
+    @trainee_types ||= if check
+      UserType.all.collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.reverse.take(1)
     else
       temp = []
       Location.where(id: @location_ids).each do |location|
@@ -92,7 +103,7 @@ class Supports::Statistic
         elsif in_month? month, profile.leave_date
           trainee_out[month] += 1
         elsif in_month? month, profile.join_div_date
-          rainee_join_div[month] += 1
+          trainee_join_div[month] += 1
         end
       end
     end
