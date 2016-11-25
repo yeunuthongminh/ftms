@@ -183,6 +183,37 @@ defaults: &defaults
     question: "question"
   collum_check_import:
     question: "Question"
+  sync_google:
+    drive_url: "https://www.googleapis.com/auth/drive"
+    spreadsheets_url: "https://spreadsheets.google.com/feeds/"
+    valid_link: "docs.google.com/spreadsheets"
+  sync:
+    training_schedules:
+      staff_code: "UID"
+      name: "Name"
+      trainee_type: "Type"
+      location: "Place"
+      status: "Status"
+      university: "University"
+      graduation: "Graduation"
+      programming_language: "Language"
+      start_training_date: "Start Training Date"
+      leave_date: "Leave Date"
+      finish_training_date: "Finish Training Date"
+      ready_for_real_project: "Ready for real PJ"
+      contract_date: "Contract Date"
+      working_day: "working days/week"
+      trainer: "Trainer"
+      naitei_company: "Naitei company"
+      progress: "Progress"
+      note: "Note"
+      assessment: "Assessment"
+      join_div_date: "Join Div Date"
+      join_div: "Join Div"
+      resign_date: "Resign Date"
+      project_timing: "Project Timing"
+  sync_functions:
+    - Training schedule
 development:
   <<: *defaults
   neat_setting: 800

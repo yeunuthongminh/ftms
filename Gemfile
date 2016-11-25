@@ -46,6 +46,10 @@ gem "activerecord-import"
 gem "chatwork"
 gem "roo"
 gem "closure_tree"
+gem "redis-namespace"
+gem "redis-rails"
+gem "redis-rack-cache", git: "git://github.com/jodosha/redis-rack-cache.git"
+gem "google_drive"
 
 group :development, :test do
   gem "rack-mini-profiler"
