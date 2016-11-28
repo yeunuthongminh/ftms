@@ -21,7 +21,7 @@ namespace :db do
     trainers = []
     Trainer.all.each do |trainer|
       Function.all.each do |function|
-        trainers << UserFunction.new(function: function, user: trainer)
+        trainers << trainer.user_functions.new(function: function, user: trainer, role_type: 1)
       end
     end
     UserFunction.import trainers
@@ -30,7 +30,7 @@ namespace :db do
     trainees = []
     Trainee.all.each do |trainee|
       Function.all.each do |function|
-        trainees << UserFunction.new(function: function, user: trainee)
+        trainees << trainee.user_functions.new(function: function, user: trainee, role_type: 2)
       end
     end
     UserFunction.import trainees
@@ -39,7 +39,7 @@ namespace :db do
     admins = []
     Admin.all.each do |admin|
       Function.all.each do |function|
-        admins << UserFunction.new(function: function, user: admin)
+        admins << admin.user_functions.new(function: function, user: admin, role_type: 0)
       end
     end
     UserFunction.import admins

@@ -144,12 +144,9 @@ class User < ApplicationRecord
     self.roles.map(&:name).include? role_name
   end
 
-  def collect_user_functions
-    self.functions.collect{|function| [function.model_class, function.action]}
-  end
-
-  def has_function? controller, action
-    collect_user_functions.include? [controller, action]
+  def has_function? controller, action, role
+    role_type = Role.role_types[role]
+    self.user_functions.has_user_function controller, action, role_type
   end
 
   private
