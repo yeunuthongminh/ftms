@@ -1,6 +1,14 @@
 en:
   tasks:
-    description: Description
+    description: "Description"
+    finished_on_day: "task was finished in day "
+    to_do_list: "of %{subject} should be finishing early"
+    task_name: "Task: %{task}"
+    end_task: "task was finished by me on %{day}/%{month}"
+    task: "Tasks"
+    finish_task: "Task was finished"
+    time_ago: "Created at %{time} ago"
+    description: "Description"
     update: "Update"
     pull_request: "Pull request"
     fields:

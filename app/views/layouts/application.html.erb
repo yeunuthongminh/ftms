@@ -51,6 +51,9 @@
       </div>
       <%= render "layouts/footer" unless footer_not_show controller_name %>
     </body>
+    <% if user_signed_in? %>
+      <%= render "shared/do_list_modal" %>
+    <% end %>
   <% end %>
   <%= render "shared/feed_back_form" %>
 </html>

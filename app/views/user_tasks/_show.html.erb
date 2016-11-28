@@ -1,0 +1,36 @@
+<div class="task_detail">
+  <div class="task_detail_input">
+    <%= t "show_task.name" %>
+    <h5><%= @user_task.task.name %></h5>
+  </div>
+
+  <div class="task_detail_input">
+    <%= t "show_task.subject" %>
+    <%= link_to [@user_task.user_subject.user_course,
+      @user_task.user_subject.subject] do %>
+      <h5><%= @user_task.user_subject.subject.name %></h5>
+    <% end %>
+  </div>
+
+  <div class="task_detail_input">
+    <%= t "show_task.create_by" %>
+    <%= link_to user_path current_user do %>
+      <h5><%= current_user.name %></h5>
+    <% end %>
+  </div>
+
+  <div class="task_detail_input">
+    <%= t "show_task.create_at" %>
+    <h5>
+      <%= l @user_task.created_at, format: :year %>
+    </h5>
+  </div>
+  <% if @user_task.in_progress? %>
+    <div class="task_detail_button">
+      <%= link_to user_task_path(@user_task,
+        status: "finished"), method: :patch, remote: true do %>
+        <button><%= t "buttons.finish" %></button>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -2,6 +2,12 @@ class UserTasksController < ApplicationController
   before_action :load_user_task
   before_action :authorize_user_task
 
+  def show
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def update
     new_status = params[:status]
     pull_request = pull_request_url || @user_task.pull_request_url

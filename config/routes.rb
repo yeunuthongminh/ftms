@@ -130,13 +130,12 @@ Rails.application.routes.draw do
   resources :read_marks, only: :update
   resources :tasks, except: [:new, :edit]
   resources :user_subjects, only: :update
-  resources :user_tasks, only: :update
+  resources :user_tasks, only: [:show, :update]
   resources :notifications, only: :index
   patch "update_notifications" => "notifications#update"
   resources :feed_backs, only: :create
   resources :filter_datas, only: [:index, :create]
   resources :exams, only: [:show, :index, :update]
   resources :calendars, only: :index
-
   resource :change_current_role_type, only: :update
 end

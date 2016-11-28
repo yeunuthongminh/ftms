@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :new_feed_back
   before_action :get_namespace
   before_action :set_root_path
+  before_action :to_do_list
 
   def default_url_options options = {}
     {locale: I18n.locale}
@@ -179,5 +180,9 @@ class ApplicationController < ActionController::Base
       flash[:alert] = flash_message "not_find"
       back_or_root
     end
+  end
+
+  def to_do_list
+    @to_do_lists = current_user.user_tasks if user_signed_in? && current_user.trainee?
   end
 end
