@@ -32,7 +32,7 @@ class QuestionPresenter < ActionView::Base
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{question.id}\">
       <div class=\"tcell stt\">#</div>
       <div class=\"tcell question_content\" title=\"#{question.content}\">
-        #{question.content}
+        #{sanitize question.content}
       </div>
     </div>
     "

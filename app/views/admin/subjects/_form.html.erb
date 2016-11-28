@@ -67,17 +67,20 @@
     <br>
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <label>
-          <input type="checkbox" name="subject_detail" id="required-sd-checkbox">
-          <%= t "subjects.required" %>
-        </label>
-        <div id="required-subject-detail" class="hidden">
-          <%= f.fields_for :subject_detail do |builder| %>
-            <%= render "subject_detail", f: builder %>
-          <% end %>
-        </div>
+        <% if @subject.subject_detail.id %>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#subject-detail-modal">
+            <%= t "subject_details.button.edit" %>
+          </button>
+        <% else %>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#subject-detail-modal">
+            <%= t "subject_details.button.create" %>
+          </button>
+        <% end %>
       </div>
     </div>
+    <%= f.fields_for :subject_detail do |builder| %>
+      <%= render "subject_detail", f: builder %>
+    <% end %>
     <br>
     <div class="row">
       <div class="col-md-2 col-md-offset-6">

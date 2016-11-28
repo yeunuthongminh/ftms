@@ -89,5 +89,6 @@ class Admin::SubjectsController < ApplicationController
     if @subject.subject_detail.nil?
       @subject.build_subject_detail percent_of_questions: Settings.exams.percent_question.to_s
     end
+    @categories = Category.all
   end
 end
