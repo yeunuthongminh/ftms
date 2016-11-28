@@ -1,0 +1,135 @@
+@import "variables";
+@import "mixin";
+
+#trainee_evaluations {
+  @include customize-scrollbar;
+
+  .fixedTable-body {
+    height: auto;
+  }
+
+  .fixedTitle, .fixedTable-sidebar, #parent, #child {
+    width: 235px;
+  }
+
+  .scrollbarH {
+    margin-left: 235px;
+  }
+
+  .scrollbar {
+    top: 30px;
+  }
+
+  .fixedTitle, .fixedTable-header {
+    max-height: 31px;
+    min-height: 31px;
+    height: 31px;
+  }
+
+  .tcell {
+    &.stt {
+      min-width: 35px;
+      max-width: 35px;
+    }
+
+    &.trainee_name {
+      min-width: 120px;
+      max-width: 120px;
+      position: relative;
+    }
+
+    &.action {
+      min-width: 120px;
+      max-width: 120px;
+      position: relative;
+    }
+
+    &.trainer {
+      min-width: 200px;
+      max-width: 200px;
+      position: relative;
+    }
+
+    &.course_name {
+      min-width: 300px;
+      max-width: 300px;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.name {
+      min-width: 200px;
+      max-width: 200px;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.none {
+      display: table-cell;
+      border-right: none;
+      border-top: 2px solid #ccc;
+    }
+
+    &.subject_name {
+      min-width: 300px;
+      max-width: 300px;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.total_point {
+      min-width: 200px;
+      max-width: 200px;
+      position: relative;
+    }
+
+    &.blank {
+      width: 100vw;
+      position: relative;
+    }
+  }
+
+  .state-icon {
+    left: -5px;
+  }
+  .list-group-item-info {
+    color: rgb(255, 255, 255);
+    background-color: #5bc0de;
+    border-color: #46b8da;
+  }
+
+  .list-group-item {
+    margin: 0 0 5px 0 !important;
+  }
+
+  /* DEMO ONLY - REMOVES UNWANTED MARGIN */
+  .well .list-group {
+    margin-bottom: 0px;
+  }
+
+  .add-new-name {
+    display: inline-flex;
+  }
+
+  .state-icon {
+    cursor: pointer;
+  }
+
+  .add-new {
+    margin: 0px;
+  }
+
+  .evaluation-detail-point {
+    width: 90%;
+    display: inline;
+  }
+  .check-list-remove {
+    margin-left: 10px;
+  }
+}

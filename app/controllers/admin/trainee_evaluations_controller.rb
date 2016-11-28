@@ -1,18 +1,27 @@
 class Admin::TraineeEvaluationsController < ApplicationController
+  include FilterData
   before_action :authorize
   before_action :find_trainee_evaluation, only: [:edit, :update]
   before_action :load_data, except: [:index, :create, :update]
   before_action :check_trainee_evaluation, only: :new
 
+  def index
+    add_breadcrumb_index "trainee_evaluations"
+    @trainee_evaluation_supports = Supports::TraineeEvaluationSupport.new namespace:
+      @namespace, filter_service: load_filter, current_user: current_user
+  end
+
   def new
     add_breadcrumb_path "trainee_evaluations"
-    add_breadcrumb @supports.targetable.trainee_name, @supports.targetable
+    add_breadcrumb @supports.targetable.trainee_name,
+      [:admin, @supports.targetable.trainee]
     add_breadcrumb_new "trainee_evaluations"
+    render json: @supports.evaluation_group.evaluation_standards if
+      params[:evaluation_group_id]
   end
 
   def create
-    @trainee_evaluation = current_user.trainee_evaluations
-      .build trainee_evaluation_params
+    @trainee_evaluation = TraineeEvaluation.new trainee_evaluation_params
     if @trainee_evaluation.save
       flash[:success] = flash_message "created"
       redirect_to [:admin, :trainee_evaluations]
@@ -25,8 +34,11 @@ class Admin::TraineeEvaluationsController < ApplicationController
 
   def edit
     add_breadcrumb_path "trainee_evaluations"
-    add_breadcrumb @supports.targetable.trainee_name, @supports.targetable
+    add_breadcrumb @supports.targetable.trainee_name,
+      [:admin, @supports.targetable.trainee]
     add_breadcrumb_edit "trainee_evaluations"
+    render json: @supports.evaluation_group.evaluation_standards if
+      params[:evaluation_group_id]
   end
 
   def update
@@ -46,14 +58,17 @@ class Admin::TraineeEvaluationsController < ApplicationController
   end
 
   def load_data
+    evaluation_group = EvaluationGroup.find_by id: params[:evaluation_group_id]
     targetable = if params[:user_subject_id]
       UserSubject.find_by id: params[:user_subject_id]
     else
       UserCourse.find_by id: params[:user_course_id]
     end
     if targetable
+      @trainee_evaluation ||= TraineeEvaluation.new
       @supports = Supports::TraineeEvaluationSupport.new trainee_evaluation:
-        @trainee_evaluation || TraineeEvaluation.new, targetable: targetable
+        @trainee_evaluation, targetable: targetable,
+        evaluation_group: evaluation_group
     else
       flash[:alert] = flash_message "not_find"
       redirect_to [:admin, :trainee_evaluations]
@@ -61,8 +76,8 @@ class Admin::TraineeEvaluationsController < ApplicationController
   end
 
   def find_trainee_evaluation
-    @trainee_evaluation = TraineeEvaluation.includes(:evaluation_check_lists)
-      .find_by id: params[:id]
+    @trainee_evaluation = TraineeEvaluation.includes(
+      evaluation_check_lists: :evaluation_standard).find_by id: params[:id]
     unless @trainee_evaluation
       flash[:alert] = flash_message "not_find"
       redirect_to [:admin, :trainee_evaluations]
@@ -71,8 +86,7 @@ class Admin::TraineeEvaluationsController < ApplicationController
 
   def check_trainee_evaluation
     trainee_evaluation = TraineeEvaluation.find_by trainee_id: @supports
-      .targetable.user_id, trainer: current_user,
-      targetable: @supports.targetable
+      .targetable.user_id, targetable: @supports.targetable
     if trainee_evaluation
       flash[:alert] = flash_message "has_exist"
       redirect_to [:edit, :admin, @supports.targetable, trainee_evaluation]

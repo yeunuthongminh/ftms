@@ -1,26 +1,25 @@
-<% if user_course.progress? %>
-  <%= link_to t("buttons.finish"), [:admin, user_course, status: :finish],
-    remote: true, method: :patch, title: t("courses.finish_course"),
-    data: {confirm: t("user_courses.finish_confirm",
-    name: user_course.trainee_name)}, class: "btn btn-danger btn-xs" %>
-<% elsif user_course.finish? %>
-  <div class="menu-right-user-course">
+<div class="menu-right-user-course">
+  <% if user_course.progress? %>
+    <%= link_to t("buttons.finish"), [:admin, user_course, status: :finish],
+      remote: true, method: :patch, title: t("courses.finish_course"),
+      data: {confirm: t("user_courses.finish_confirm",
+      name: user_course.trainee_name)}, class: "btn btn-danger btn-xs" %>
+  <% elsif user_course.finish? %>
     <div class="btn-xs <%= set_background_color_status user_course.status %>"
       title="<%= t 'buttons.finished' %>">
       <%= t "buttons.finished" %>
     </div>
-    <div class="dropdown action-user-course">
-      <span id="dLabe" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false" class="evaluation-show">
-        <i class="glyphicon glyphicon-align-justify text-danger"></i>
-      </span>
-      <ul class="dropdown-menu dropdown-menu-right"
-        aria-labelledby="dLabel">
-        <li>
-          <%= link_to t("subjects.fields.evaluate"), link_evaluate(user_course) if
-            user_course.finish? %>
-        </li>
-      </ul>
-    </div>
-  </div>
 <% end %>
+  <div class="dropdown action-user-course">
+    <span id="dLabe" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false" class="evaluation-show">
+      <i class="glyphicon glyphicon-align-justify text-danger"></i>
+    </span>
+    <ul class="dropdown-menu dropdown-menu-right"
+      aria-labelledby="dLabel">
+      <li>
+        <%= link_to t("subjects.fields.evaluate"), link_evaluate(user_course) %>
+      </li>
+    </ul>
+  </div>
+</div>

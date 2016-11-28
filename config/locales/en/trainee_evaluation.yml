@@ -1,0 +1,8 @@
+en:
+  trainee_evaluations:
+    trainee_name: "Trainee Name"
+    trainer_name: "Trainer Name"
+    course_name: "Course Name"
+    subject_name: "Subject Name"
+    total_point: "Total Point"
+    add_new: "Add New"

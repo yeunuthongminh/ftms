@@ -1,9 +1,8 @@
 class TraineeEvaluation < ApplicationRecord
 
   ATTRIBUTES_PARAMS = [:trainer_id, :trainee_id, :total_point, :targetable_type,
-    :targetable_id, evaluation_check_lists_attributes: [:id, :score,
-    :evaluation_standard_id, :_destroy], notes_attributes: [:id, :name,
-    :trainee_evaluation_id, :_destroy]]
+    :targetable_id, evaluation_check_lists_attributes: [:id, :score, :name,
+    :evaluation_standard_id, :_destroy, :use]]
 
   belongs_to :targetable, polymorphic: true
   belongs_to :trainee, class_name: Trainee.name, foreign_key: :trainee_id
@@ -13,7 +12,8 @@ class TraineeEvaluation < ApplicationRecord
   has_many :evaluation_standards, through: :evaluation_check_lists
   has_many :notes, dependent: :destroy
 
+  delegate :name, to: :trainee, prefix: true, allow_nil: true
+  delegate :name, to: :trainer, prefix: true, allow_nil: true
+
   accepts_nested_attributes_for :evaluation_check_lists, allow_destroy: true
-  accepts_nested_attributes_for :notes, allow_destroy: true,
-    reject_if: proc {|attributes| attributes[:name].blank?}
 end
