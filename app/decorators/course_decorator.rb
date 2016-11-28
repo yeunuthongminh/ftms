@@ -101,7 +101,7 @@ class CourseDecorator < Draper::Decorator
             <td style='border: 1px solid #cecece;'>"
         end
         if user_task_history.init?
-          show_html += "#{I18n.t 'mail.by_day.continue_task',
+          show_html += "#{I18n.t 'mail.by_day.task_continue',
             task_name: user_task_history.user_task.task_name}<br>"
           if current_status == "init"
             current_status = "continue"
@@ -111,7 +111,7 @@ class CourseDecorator < Draper::Decorator
             show_html += "</td><td style='border: 1px solid #cecece;'>"
             current_status = "finished"
           end
-          show_html += "#{I18n.t 'mail.by_day.continue_task',
+          show_html += "#{I18n.t 'mail.by_day.task_continue',
             task_name: user_task_history.user_task.task_name}<br>"
         else
           if current_status == "continue"
@@ -121,7 +121,7 @@ class CourseDecorator < Draper::Decorator
             show_html += "</td><td style='border: 1px solid #cecece;'>"
             current_status = "init"
           end
-          show_html += "#{I18n.t 'mail.by_day.finish_task',
+          show_html += "#{I18n.t 'mail.by_day.task_finished',
             task_name: user_task_history.user_task.task_name}<br>"
         end
       end
