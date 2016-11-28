@@ -25,6 +25,11 @@
       <div id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
+            <li>
+              <%= link_to "#", data: {toggle: "modal", target: "#list_task"} do %>
+                <i class="fa fa-facebook"></i>
+              <% end %>
+            </li>
             <li class="dropdown messages-menu">
               <%= link_to update_notifications_path, class: "dropdown-toggle",
                 data: {toggle:"dropdown"}, method: :patch, remote: true do %>
