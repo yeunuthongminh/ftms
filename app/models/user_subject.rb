@@ -30,7 +30,7 @@ class UserSubject < ApplicationRecord
 
   scope :load_by_course_subject, ->course_subject_ids, trainer_id do
     order_by_course_subject.joins(:trainee).where("course_subjects.id in (?)
-      AND user_subjects.status = ? AND trainees.trainer_id = ?", course_subject_ids,
+      AND user_subjects.status = ? AND users.trainer_id = ?", course_subject_ids,
       UserSubject.statuses[:progress], trainer_id)
   end
 
