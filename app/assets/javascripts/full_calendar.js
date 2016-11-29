@@ -9,7 +9,6 @@ $(document).on('turbolinks:load', function() {
           localStorage.setItem('calendar_data', JSON.stringify(data.responseJSON));
         }
       });
-
     }
   } else if (localStorage.calendar_data) {
     localStorage.removeItem('calendar_data');
@@ -71,6 +70,11 @@ $(document).on('turbolinks:load', function() {
       $.each(JSON.parse(localStorage.calendar_data), function (i, v){
         if (selectDate === v.end) {
           chil += I18n.t("calendars.must_be_finished") + v.title + '<br/>';
+          chil += "Task finished " + '<br/>';
+          var arr = v.task_user.split('/');
+          for(var i=0; i < arr.length; i++){
+            chil += arr[i] + '<br/>';
+          };
         }
       });
       $('#dialog').html(chil);
