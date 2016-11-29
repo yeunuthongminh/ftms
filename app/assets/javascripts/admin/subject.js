@@ -1,4 +1,19 @@
 $(document).on('turbolinks:load', function () {
+  if ($('#category_questions').length > 0) {
+    temp_hash = $('#category_questions').val();
+    if (temp_hash.length > 0) {
+      temp_hash = JSON.parse(temp_hash);
+
+      for (var key in temp_hash) {
+        $('input[type="checkbox"][value="' + key + '"].selectCategory').prop('checked', true);
+
+        var n_ques = $('input.nQuestioninCategory[data-id="' + key + '"]');
+        n_ques.prop('disabled', false);
+        n_ques.val(temp_hash[key]);
+      }
+    }
+  }
+
   if ($('#percent_of_questions').length > 0) {
     var per_ques = $('#percent_of_questions').val();
     var ques_array = JSON.parse(per_ques);
