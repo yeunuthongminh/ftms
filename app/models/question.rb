@@ -12,7 +12,8 @@ class Question < ApplicationRecord
 
   validates :content, presence: true
 
-  scope :random, ->count, level{where(level: level).order("RAND()").limit(count)}
+  scope :random, ->count, level, category_id{where(level: level, category_id: category_id)
+    .order("RAND()").limit(count)}
 
   accepts_nested_attributes_for :answers, allow_destroy: true,
     reject_if: lambda {|a| a[:content].blank?}

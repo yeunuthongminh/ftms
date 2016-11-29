@@ -1,56 +1,95 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-    <%= t "subject_details.label.title" %>
-  </div>
-  <div class="panel-footer">
-    <div id="edit-subject-detail">
-      <div class="row">
-        <div class="col-md-4 col-xs-4">
-          <b><%= t "subject_details.label.number_of_question" %></b>
-          <%= f.number_field :number_of_question, step: 1, min: 1, class: "subject-detail" %>
-        </div>
-        <div class="col-md-4 col-xs-4">
-          <b><%= t "subject_details.label.time_of_exam" %></b>
-          <%= f.number_field :time_of_exam, min: 1, step: 1, class: "subject-detail" %>
-        </div>
-        <div class="col-md-4 col-xs-4">
-          <b><%= t "subject_details.label.min_score_to_pass" %></b>
-          <%= f.number_field :min_score_to_pass, min: 0, step: 1, class: "subject-detail" %>
-        </div>
-      </div>
-      <div class="row">
-        <br>
-        <div class="col-md-2">
-          <b><%= t "subject_details.label.percent_of_questions" %></b>
-        </div>
-        <div class="col-md-9 group-select">
-          <div id="per-questions">
+<div class="modal fade" id="subject-detail-modal" role="dialog" data-keyboard="false"
+   data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title"><label><%= t "subject_details.label.title" %></label></h4>
+        <div class="modal-body">
+          <ul class="list-group" id="categories-list">
+            <li class="list-group-item row" id="categories-label">
+              <label><%= t "subject_details.label.select_categories" %></label>
+            </li>
+            <% @categories.each do |category| %>
+              <li class="list-group-item row">
+                <div class="col-md-9">
+                  <label>
+                    <input type="checkbox" name="keywords" value="<%= category.id %>"
+                      class="selectCategory">
+                    <%= category.name %>
+                  </label>
+                </div>
+                <div class="col-md-2" float="right">
+                  <input type="number" name="category-name" min="0"
+                    class="form-control nQuestioninCategory" data-id="<%= category.id %>">
+                </div>
+                <div class="col-md-1" float="left">
+                  <%= t "subject_details.label.question" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+          <div id="edit-subject-detail">
+            <div class="row form-group">
+              <label><%= t "subject_details.label.percent_of_questions" %></label>
+              <div class="group-select">
+                <div id="per-questions">
+                  <div class="col-md-4 col-xs-4">
+                    <label>
+                      <%= t "subject_details.label.level.easy" %>
+                    </label><br>
+                    <input type="number" name="easy" id="per-easy" min="0" max="100"
+                        step="1" class="subject-detail">
+                  </div>
+                  <div class="col-md-4 col-xs-4">
+                    <label>
+                      <%= t "subject_details.label.level.normal" %>
+                    </label><br>
+                    <input type="number" name="normal" id="per-normal" min="0" max="100"
+                        step="1" class="subject-detail">
+                  </div>
+                  <div class="col-md-4 col-xs-4">
+                    <label>
+                      <%= t "subject_details.label.level.hard" %>
+                    </label><br>
+                    <input type="number" name="hard" id="per-hard" min="0" max="100"
+                        step="1" class="subject-detail">
+                  </div>
+                </div>
+                <div id="slider-percent-question"></div>
+              </div>
+            </div>
+            <%= f.hidden_field :percent_of_questions,
+              value: percent_of_question(f.object.percent_of_questions), id: "percent_of_questions" %>
+            <%= f.hidden_field :category_questions,
+              value: f.object.category_questions, id: "category_questions" %>
+          </div>
+          <div class="row">
             <div class="col-md-4 col-xs-4">
-              <label>
-                <%= t "subject_details.label.level.easy" %>
-              </label>
-              <input type="number" name="easy" id="per-easy" min="0" max="100"
-                  step="1" class="subject-detail">
+              <b><%= t "subject_details.label.number_of_question" %></b><br>
+              <%= f.number_field :number_of_question, step: 1, min: 1,
+                readonly: true, class: "subject-detail" %>
             </div>
             <div class="col-md-4 col-xs-4">
-              <label>
-                <%= t "subject_details.label.level.normal" %>
-              </label>
-              <input type="number" name="normal" id="per-normal" min="0" max="100"
-                  step="1" class="subject-detail">
+              <b><%= t "subject_details.label.time_of_exam" %></b><br>
+              <%= f.number_field :time_of_exam, min: 1, step: 1, class: "subject-detail" %>
             </div>
             <div class="col-md-4 col-xs-4">
-              <label>
-                <%= t "subject_details.label.level.hard" %>
-              </label>
-              <input type="number" name="hard" id="per-hard" min="0" max="100"
-                  step="1" class="subject-detail">
+              <b><%= t "subject_details.label.min_score_to_pass" %></b><br>
+              <%= f.number_field :min_score_to_pass, min: 0, step: 1, class: "subject-detail" %>
             </div>
           </div>
-          <div id="slider-percent-question"></div>
         </div>
-        <%= f.hidden_field :percent_of_questions,
-          value: percent_of_question(f.object.percent_of_questions), id: "percent_of_questions" %>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <%= t "buttons.cancel" %>
+          </button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="sSubjectDetail">
+            <%= t "buttons.save" %>
+          </button>
+        </div>
       </div>
     </div>
   </div>

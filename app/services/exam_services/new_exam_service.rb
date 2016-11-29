@@ -5,13 +5,13 @@ class ExamServices::NewExamService
     @user_subject = args[:user_subject]
     @level_for_exam = args[:level_for_exam]
     @level_for_exam ||= Settings.exams.percent_question
-    @level = Question.levels.map{|k,v| k.to_sym}
+    @category_questions = args[:category_questions]
   end
 
   def perform
     subject = @user_subject.subject
     number_of_question = subject.subject_detail_number_of_question
-    questions = random_question subject, number_of_question, @level, @level_for_exam
+    questions = random_question number_of_question, @category_questions, @level_for_exam
     if questions
       duration = subject.subject_detail_time_of_exam ?
         subject.subject_detail_time_of_exam : Settings.exams.duration
@@ -25,19 +25,51 @@ class ExamServices::NewExamService
   end
 
   private
-  def random_question subject, number_of_question, levels, level_for_exam
-    n = number_of_question
-    return nil if n.nil?
+  def random_question number_of_question, category_questions, level_for_exam
+    levels = questions_for_level level_for_exam, number_of_question
+    questions = make_list_questions category_questions, levels
+    questions.size == number_of_question ? questions : nil
+  end
+
+  def make_list_questions category_questions, levels
+    categories = category_questions.sort_by {|_key, value| value}
     questions = []
-    levels.each_with_index do |level, index|
-      if index < levels.size - 1
-        count_question = (number_of_question*level_for_exam[index]/100).to_i
-        questions += subject.questions.random count_question, level
-        n -= count_question
-      else
-        questions += subject.questions.random n, level
+
+    categories.each_with_index do |category, c_index|
+      levels.each_with_index do |level, l_index|
+        temp_take = level[1]
+
+        if level[1] > category[1]
+          level[1] -= category[1]
+          temp_take = category[1]
+          category[1] = 0
+        elsif level[1] == category[1]
+          levels -= [level]
+          category[1] = 0
+        else
+          category[1] -= level[1]
+          levels -= [level]
+        end
+        questions += Question.random temp_take, level[0], category[0]
+        break if category[1] == 0
       end
     end
-    questions.size == number_of_question ? questions.shuffle : nil
+    questions
+  end
+
+  def questions_for_level level_for_exam, total_questions
+    temp_sum = 0
+    lvls = {}
+    [:easy, :normal, :hard].each_with_index{|e,i| lvls[e] = level_for_exam[i]}
+    lvl_array = lvls.to_a
+    lvl_array.each_with_index do |e, index|
+      if index < level_for_exam.length - 1
+        lvl_array[index][1] = (e[1]*total_questions/100).to_i
+        temp_sum += lvl_array[index][1]
+      else
+        lvl_array[index][1] = total_questions - temp_sum
+      end
+    end
+    lvl_array.reverse
   end
 end

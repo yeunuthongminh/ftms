@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124085932) do
+ActiveRecord::Schema.define(version: 20161128094129) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -389,6 +389,7 @@ ActiveRecord::Schema.define(version: 20161124085932) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.string   "percent_of_questions"
+    t.string   "category_questions"
     t.index ["deleted_at"], name: "index_subject_details_on_deleted_at", using: :btree
     t.index ["subject_id"], name: "index_subject_details_on_subject_id", unique: true, using: :btree
   end
@@ -583,7 +584,6 @@ ActiveRecord::Schema.define(version: 20161124085932) do
   add_foreign_key "profiles", "users"
   add_foreign_key "project_requirements", "projects"
   add_foreign_key "questions", "categories"
-  add_foreign_key "questions", "subjects"
   add_foreign_key "results", "answers"
   add_foreign_key "results", "exams"
   add_foreign_key "results", "questions"

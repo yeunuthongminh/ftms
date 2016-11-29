@@ -7,7 +7,7 @@ class Subject < ApplicationRecord
     documents_attributes: [:id, :title, :document_link, :_destroy],
     task_masters_attributes: [:id, :name, :description, :_destroy],
     subject_detail_attributes: [:id, :number_of_question, :time_of_exam,
-    :min_score_to_pass, :percent_of_questions, :_destroy]]
+    :min_score_to_pass, :percent_of_questions, :category_questions, :_destroy]]
 
   has_one :subject_detail, dependent: :destroy
   has_many :task_masters, dependent: :destroy
@@ -15,7 +15,6 @@ class Subject < ApplicationRecord
   has_many :courses, through: :course_subjects
   has_many :documents, as: :documentable
   has_many :notifications, as: :trackable, dependent: :destroy
-  has_many :questions, dependent: :destroy
   has_many :subject_categories, dependent: :destroy
   has_many :categories, through: :subject_categories
 
