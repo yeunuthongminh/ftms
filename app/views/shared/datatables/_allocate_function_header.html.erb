@@ -2,7 +2,8 @@
   <div class="tbody">
     <div class="trow header">
       <div class="tcell stt">#</div>
-      <div class="tcell name display_name title">
+
+      <div class="tcell controller_name title">
         <%= t "roles.controller_name" %>
         <%= link_to filter_datas_path(type: :controller_name,
           filter_type: :courses), remote: true, class: "open-select",
@@ -27,6 +28,9 @@
             <%= function.capitalize %>
           </div>
         <% end %>
+        <div class="tcell checked-function title">
+          <input type="checkbox" id="checked_all">
+        </div>
       </div>
     </div>
   </div>

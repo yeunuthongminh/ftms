@@ -130,6 +130,8 @@ class FilterDatasController < ApplicationController
       @key_field = :subject_name
       @value_field = :subject_name
       @resources = Subject.order(:name).pluck(:name).uniq.compact
+    when "controller_name"
+      @resources = Function.order(:model_class).pluck(:model_class).uniq.compact
     end
 
     respond_to do |format|
