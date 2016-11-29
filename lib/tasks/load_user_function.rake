@@ -17,24 +17,6 @@ namespace :db do
       RoleFunction.find_or_create_by function: function, role: trainee_role
     end
 
-    puts "create function for trainers"
-    trainers = []
-    Trainer.all.each do |trainer|
-      Function.all.each do |function|
-        trainers << trainer.user_functions.new(function: function, user: trainer, role_type: 1)
-      end
-    end
-    UserFunction.import trainers
-
-    puts "create function for trainees"
-    trainees = []
-    Trainee.all.each do |trainee|
-      Function.all.each do |function|
-        trainees << trainee.user_functions.new(function: function, user: trainee, role_type: 2)
-      end
-    end
-    UserFunction.import trainees
-
     puts "create function for admin"
     admins = []
     Admin.all.each do |admin|
