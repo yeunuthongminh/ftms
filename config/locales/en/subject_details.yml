@@ -15,3 +15,4 @@ en:
     button:
       create: "Require test for finish subject"
       edit: "Edit subject details for test"
+    sum_questions: "(Total: %{sum} questions)"

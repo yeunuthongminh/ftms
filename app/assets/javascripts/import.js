@@ -1,5 +1,6 @@
 var import_data = function() {
   $('.file-select').bind('change', function() {
+    allow_submit_file($(this));
     var file = this.files[0];
     var message;
     if (file.size > 0) {
@@ -20,6 +21,11 @@ var import_data = function() {
 
 $(document).on('turbolinks:load', function(){
   import_data();
+
+  $('.file-select').each(function() {
+    allow_submit_file($(this));
+  });
+
   $('#form-import-file').submit(function(){
     var file_inputs = $('input[type=file]');
     for (var i = 0; i < file_inputs.length; i++){
@@ -37,4 +43,8 @@ $(document).on('turbolinks:load', function(){
 
 function not_allow_extension(filename, exts) {
   return !(new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$', "i")).test(filename);
+}
+
+function allow_submit_file(e) {
+  $('#submit-file').prop('disabled', $(e).val().length == 0);
 }

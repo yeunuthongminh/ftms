@@ -19,10 +19,14 @@
                     <input type="checkbox" name="keywords" value="<%= category.id %>"
                       class="selectCategory">
                     <%= category.name %>
+                    <small>
+                      <i><%= t "subject_details.sum_questions", sum: category.questions.count %></i>
+                    </small>
                   </label>
                 </div>
                 <div class="col-md-2" float="right">
                   <input type="number" name="category-name" min="0"
+                    max="<%= category.questions.count %>"
                     class="form-control nQuestioninCategory" data-id="<%= category.id %>">
                 </div>
                 <div class="col-md-1" float="left">
