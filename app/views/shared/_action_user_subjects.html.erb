@@ -18,7 +18,7 @@
         <% end %>
         <% unless @supports.user_subjects.size == @supports.user_subjects.finish.size ||
           @supports.user_subjects.init.any? %>
-          <%= link_to eval("#{@namespace}_status_subject_path(#{@supports.course_subject}, :finish)"),
+          <%= link_to eval("#{@namespace}_status_subject_path #{@supports.course_subject.id}, :finish"),
             method: :patch, remote: true,
             data: {confirm: t("admin.confirms.finish_all")} do %>
             <i class="fa fa-minus-square-o" aria-hidden="true"></i>
