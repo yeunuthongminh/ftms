@@ -3,49 +3,65 @@ module SynchronizeTrainingSchedule
     worksheet = @file.worksheet_by_title title
     worksheet.list.each do |line|
       trainee = User.find_by_name line[Settings.sync.training_schedules.name].strip
+
+      start_training_date = get_date line[Settings.sync.training_schedules.start_training_date]
+      leave_date = get_date line[Settings.sync.training_schedules.leave_date]
+      finish_training_date = get_date line[Settings.sync.training_schedules.finish_training_date]
+      graduation = get_date line[Settings.sync.training_schedules.graduation]
+      trainee_type = find_object UserType, line[Settings.sync.training_schedules.trainee_type]
+      university = find_object University, line[Settings.sync.training_schedules.university]
+      programming_language = find_object ProgrammingLanguage,
+        line[Settings.sync.training_schedules.programming_language]
+      location = find_object Location, line[Settings.sync.training_schedules.location]
+      working_day = line[Settings.sync.training_schedules.working_day]
+      staff_code = line[Settings.sync.training_schedules.staff_code]
+      join_div_date = line[Settings.sync.training_schedules.join_div_date]
+      status = find_status line[Settings.sync.training_schedules.status].strip
+      stage = find_stage status
+      ready_for_project = get_date line[Settings.sync.training_schedules.ready_for_project]
+      trainer = find_trainer line[Settings.sync.training_schedules.trainer]
+
       if trainee
-
+        trainee.leave_date ||= leave_date
+        trainee.finish_training_date ||= finish_training_date
+        trainee.graduation ||= graduation
+        trainee.user_type ||= trainee_type
+        trainee.university ||= university
+        trainee.programming_language ||= programming_language
+        trainee.location ||= location
+        trainee.working_day ||= working_day
+        trainee.staff_code ||= staff_code
+        trainee.join_div_date ||= join_div_date
+        trainee.status ||= status
+        trainee.stage ||= stage
+        trainee.ready_for_project ||= ready_for_project
+        trainee.trainer_id ||= trainer.try :id
       else
-        # name = line[Settings.sync.training_schedules.name].strip
-        # start_training_date = get_date line[Settings.sync.training_schedules.start_training_date]
-        # leave_date = get_date line[Settings.sync.training_schedules.leave_date]
-        # finish_training_date = get_date line[Settings.sync.training_schedules.finish_training_date]
-        # contract_date = get_date line[Settings.sync.training_schedules.contract_date]
-        # graduation = get_date line[Settings.sync.training_schedules.graduation]
-        # #naitei_company = line[Settings.sync.training_schedules.naitei_company]
-        # trainee_type = find_object UserType, line[Settings.sync.training_schedules.trainee_type]
-        # university = find_object University, line[Settings.sync.training_schedules.university]
-        # programming_language = find_object ProgrammingLanguage, line[Settings.sync.training_schedules.programming_language]
-        # location = find_object Location, line[Settings.sync.training_schedules.location]
-        # working_day = line[Settings.sync.training_schedules.working_day]
-        # #staff_code = line[Settings.sync.training_schedules.staff_code]
-        # join_div_date = line[Settings.sync.training_schedules.join_div_date]
-        # status = find_status line[Settings.sync.training_schedules.status].strip
-        # stage = find_stage status
-        # email = convert_to_email name
-        # trainer = find_trainer line[Settings.sync.training_schedules.trainer]
+        name = line[Settings.sync.training_schedules.name].strip
+        email = convert_to_email name
 
-        # trainee = trainee.new name: line[Settings.sync.training_schedules.name], type: "trainee"
-        # trainee.build_profile start_training_date: start_training_date,
-        #   leave_date: leave_date,
-        #   finish_training_date: finish_training_date,
-        #   ready_for_project: false,
-        #   contract_date: contract_date,
-        #   naitei_company: naitei_company,
-        #   graduation: graduation,
-        #   user_type: trainee_type,
-        #   university: university,
-        #   programming_language: programming_language,
-        #   user_progress_id: nil,
-        #   status: status,
-        #   created_at: start_training_date,
-        #   updated_at: start_training_date,
-        #   location: location,
-        #   working_day: working_day,
-        #   stage: stage,
-        #   staff_code: staff_code,
-        #   join_div_date: join_div_date
+        trainee = Trainee.new name: line[Settings.sync.training_schedules.name],
+          email: email, trainer_id: trainer.try(:id)
+        trainee.build_profile start_training_date: start_training_date,
+          leave_date: leave_date,
+          finish_training_date: finish_training_date,
+          graduation: graduation,
+          user_type: trainee_type,
+          university: university,
+          programming_language: programming_language,
+          location: location,
+          working_day: working_day,
+          staff_code: staff_code,
+          join_div_date: join_div_date,
+          status: status,
+          stage: stage,
+          ready_for_project: ready_for_project,
+          user_progress_id: nil,
+          created_at: start_training_date,
+          updated_at: start_training_date
       end
+
+      trainee.save!
     end
 
   end
@@ -61,11 +77,7 @@ module SynchronizeTrainingSchedule
   end
 
   def find_object model, name
-    if model == University
-      model.find_or_create_by abbreviation: name.strip
-    else
-      model.find_or_create_by name: name.strip
-    end
+    model.find_or_create_by (model == University ? "abbreviation" : "name").to_sym => name.strip
   end
 
   def find_status name
@@ -133,12 +145,11 @@ module SynchronizeTrainingSchedule
   end
 
   def find_trainer trainer_name
-    @trainers ||= User.where type: ["admin", "trainer"]
-
-    @trainers.each do |trainer|
+    trainer = User.where(type: ["admin", "trainer"]).each do |trainer|
       if convert_to_abbr(trainer.name) == trainer_name
-        return trainer
+        break trainer
       end
     end
+    trainer.size > 1 ? nil : trainer
   end
 end

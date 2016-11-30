@@ -4,6 +4,4 @@ class University < ApplicationRecord
   ATTRIBUTES_PARAMS = [:name, :abbreviation]
 
   has_many :profiles
-
-  validates :name, presence: true
 end

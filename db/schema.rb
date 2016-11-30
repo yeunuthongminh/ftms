@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123081836) do
+ActiveRecord::Schema.define(version: 20161130021317) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -263,7 +263,7 @@ ActiveRecord::Schema.define(version: 20161123081836) do
     t.date     "start_training_date"
     t.date     "leave_date"
     t.date     "finish_training_date"
-    t.boolean  "ready_for_project"
+    t.string   "ready_for_project"
     t.date     "contract_date"
     t.string   "naitei_company"
     t.date     "graduation"
@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(version: 20161123081836) do
     t.integer  "stage_id"
     t.string   "staff_code"
     t.date     "join_div_date"
+    t.string   "div_name"
     t.index ["deleted_at"], name: "index_profiles_on_deleted_at", using: :btree
     t.index ["location_id"], name: "index_profiles_on_location_id", using: :btree
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
