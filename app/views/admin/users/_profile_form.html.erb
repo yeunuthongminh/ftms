@@ -160,7 +160,10 @@
             <%= ff.label :ready_for_project %>
           </div>
           <div class="col-md-7">
-            <%= ff.check_box :ready_for_project, {}, 1, 0 %>
+            <%= ff.text_field :ready_for_project,
+              value: @user.profile.ready_for_project ?
+              l(@user.profile.ready_for_project, format: :default) : "",
+              class: "form-control datepicker profile" %>
           </div>
         </div>
       </div>

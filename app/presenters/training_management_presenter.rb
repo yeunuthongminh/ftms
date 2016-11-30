@@ -77,8 +77,7 @@ class TrainingManagementPresenter < ActionView::Base
         #{l user.profile.finish_training_date, format: :default if user.profile.finish_training_date}
       </div>
       <div class=\"tcell ready_for_project\">
-        #{user.profile.ready_for_project? ? t("profiles.columns.ready_for_project.ready") :
-          t("profiles.columns.ready_for_project.not_ready")}
+        #{l user.profile.ready_for_project, format: :default if user.profile.ready_for_project}
       </div>
       <div class=\"tcell contract_date text-right\">
         #{l user.profile.contract_date, format: :default if user.profile.contract_date}

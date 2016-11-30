@@ -212,6 +212,7 @@ defaults: &defaults
       join_div: "Join Div"
       resign_date: "Resign Date"
       project_timing: "Project Timing"
+      ready_for_project: "Ready for real PJ"
   sync_functions:
     - Training schedule
 development:
