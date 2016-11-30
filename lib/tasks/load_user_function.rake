@@ -7,16 +7,6 @@ namespace :db do
       Function.find_or_create_by model_class: route[:controller], action: route[:action]
     end
 
-    admin_role = Role.find_or_create_by name: "admin"
-    trainer_role = Role.find_or_create_by name: "trainer"
-    trainee_role = Role.find_or_create_by name: "trainee"
-
-    Function.all.each do |function|
-      RoleFunction.find_or_create_by function: function, role: admin_role
-      RoleFunction.find_or_create_by function: function, role: trainer_role
-      RoleFunction.find_or_create_by function: function, role: trainee_role
-    end
-
     puts "create function for admin"
     admins = []
     Admin.all.each do |admin|
@@ -25,5 +15,23 @@ namespace :db do
       end
     end
     UserFunction.import admins
+
+    puts "create function for trainer"
+    trainers = []
+    Trainer.all.each do |trainer|
+      Function.all.each do |function|
+        trainers << trainer.user_functions.new(function: function, user: trainer, role_type: 1)
+      end
+    end
+    UserFunction.import trainers
+
+    puts "create function for trainee"
+    trainees = []
+    Trainee.all.each do |trainee|
+      Function.all.each do |function|
+        trainees << trainee.user_functions.new(function: function, user: trainee, role_type: 2)
+      end
+    end
+    UserFunction.import trainees
   end
 end
