@@ -79,6 +79,7 @@
 //= require import
 //= require color-picker.js
 //= require js.cookie
+//= require role_type
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();

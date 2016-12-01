@@ -34,7 +34,6 @@
       <%= label_tag "#{name}_blank", t("filters.show.blank"),
         for: "filter_#{name}_blank" %>
     </div>
-
     <% objects.each_with_index do |element, index| %>
       <div class="option">
         <div class="checkbox-opt" data-name="<%= element.try(value_field) %>">

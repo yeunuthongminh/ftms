@@ -14,7 +14,7 @@ class Admin::RolesController < ApplicationController
 
   def new
     @role = Role.new
-    @supports = Supports::Role.new @role, load_filter
+    @supports = Supports::RoleSupport.new @role, load_filter
     add_breadcrumb_path "roles"
     add_breadcrumb_new "roles"
   end
@@ -31,7 +31,7 @@ class Admin::RolesController < ApplicationController
   end
 
   def edit
-    @supports = Supports::Role.new @role, load_filter
+    @supports = Supports::RoleSupport.new @role, load_filter
     add_breadcrumb_path "roles"
     add_breadcrumb @role.name
     add_breadcrumb_edit "roles"
