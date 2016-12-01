@@ -11,7 +11,7 @@ namespace :db do
 
     trainee_permissions = {
       Answer: ["read"],
-      Exam: ["read"],
+      Exam: ["read", "update"],
       Question: ["read"],
       Result: ["read", "update"]
     }

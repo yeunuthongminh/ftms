@@ -122,5 +122,6 @@ function max_exam_point(easy, normal, hard) {
     var hard_questions = 3*parseInt(number_question*hard.val()/100);
     var min_score = easy_questions + normal_questions + hard_questions;
     $('#subject_subject_detail_attributes_min_score_to_pass').attr('max', parseInt(min_score));
+    $('#subject_subject_detail_attributes_min_score_to_pass').val(parseInt(min_score*70/100));
   }
 }
