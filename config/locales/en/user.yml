@@ -1,6 +1,5 @@
 en:
   user:
-    role: Role
     login: "Log in"
     edit_profile: "Edit profile"
     new_user: "New user"
@@ -15,9 +14,6 @@ en:
       password_confirmation: "Password Confirmation"
     profile:
       email: "Email: "
-    table:
-      name: "Name"
-      email: "Email"
     tabs:
       activities: "Activities"
       finished_courses: "Finished courses"
@@ -31,10 +27,9 @@ en:
       trainee: "Trainee"
       admin: "Admin"
       trainer: "Trainer"
-    for_got_password: "Forgot your password?"
+    forgot_password: "Forgot your password?"
     sent_mail_forgot: "Send me reset password instructions"
     password_change: "Change Password"
   signins:
     banner: "Please Login"
     remember: "Remember me"
-  member: "Member"

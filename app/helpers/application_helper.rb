@@ -210,7 +210,7 @@ module ApplicationHelper
     return if element.nil?
     if element.try(value_field).kind_of?(Date) || element.kind_of?(Date)
       return (element.try(value_field)
-        .strftime(t "date.formats.default") rescue element.strftime(t "date.formats.default"))
+        .strftime(t "datetime.formats.default") rescue element.strftime(t "date.formats.default"))
     end
     element.try(value_field).strip rescue element.to_s.strip
   end

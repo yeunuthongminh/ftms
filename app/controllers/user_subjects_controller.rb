@@ -11,7 +11,10 @@ class UserSubjectsController < ApplicationController
         flash[:alert] = t "exams.lock_for_create"
         redirect_to user_course_subject_path user_course, subject
       else
-        exam = ExamServices::NewExamService.new(user_subject: @user_subject).perform
+        category_questions = JSON.parse subject.subject_detail.category_questions
+        new_exam_service = ExamServices::NewExamService.new user_subject: @user_subject,
+          category_questions: category_questions
+        exam = new_exam_service.perform
         if exam
           redirect_to exam
         else

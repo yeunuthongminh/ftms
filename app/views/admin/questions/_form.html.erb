@@ -1,9 +1,8 @@
 <%= form_for [:admin, @question] do |f| %>
   <%= render "shared/error_messages", object: @question %>
   <div class="form-group">
-    <%= f.label :subject %>
-    <%= f.collection_select :subject_id, @supports.subjects, :id, :name,
-      {include_blank: false}, class: "form-control" %>
+    <%= f.label :category %>
+    <%= select_profile_field :category, @supports.categories, f %>
   </div>
   <div class="form-group">
     <%= f.label :content %>

@@ -1,10 +1,10 @@
 class Question < ApplicationRecord
   acts_as_paranoid
 
-  ATTRIBUTES_PARAMS = [:content, :subject_id, :level,
+  ATTRIBUTES_PARAMS = [:content, :category_id, :level,
     answers_attributes: [:id, :content, :is_correct, :_destroy]]
 
-  belongs_to :subject
+  belongs_to :category
 
   has_many :answers, dependent: :destroy
   has_many :results, dependent: :destroy
@@ -12,14 +12,15 @@ class Question < ApplicationRecord
 
   validates :content, presence: true
 
-  scope :random, ->count, level{where(level: level).order("RAND()").limit(count)}
+  scope :random, ->count, level, category_id{where(level: level, category_id: category_id)
+    .order("RAND()").limit(count)}
 
   accepts_nested_attributes_for :answers, allow_destroy: true,
     reject_if: lambda {|a| a[:content].blank?}
 
   enum level: [:easy, :normal, :hard]
 
-  delegate :name, to: :subject, prefix: true, allow_nil: true
+  delegate :name, to: :category, prefix: true, allow_nil: true
 
   private
   def check_answers

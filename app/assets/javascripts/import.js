@@ -1,40 +1,50 @@
 var import_data = function() {
   $('.file-select').bind('change', function() {
-    var file_extension = this.files[0].name.split('.').pop().toLowerCase();
-    var allowed_file, message;
-    if($(this).attr('id') == 'file-select-question') {
-      allowed_file = ['csv', 'xlsx', 'xls'];
-      message = I18n.t('imports.allowed_csv')
-    }
+    allow_submit_file($(this));
+    var file = this.files[0];
+    var message;
+    if (file.size > 0) {
+      var allowed_file = ['csv', 'xlsx', 'xls'];
+      message = I18n.t('imports.allowed_csv');
 
-    var found_index = $.inArray(file_extension, allowed_file);
-    if(found_index < 0) {
+      if(not_allow_extension(file.name, allowed_file)) {
+        alert(message);
+        $(this).val('');
+      }
+    } else {
+      message = I18n.t('imports.not_allow_size');
       alert(message);
       $(this).val('');
     }
   });
 }
 
-$(document).ready(function(){
+$(document).on('turbolinks:load', function(){
   import_data();
-  $('#form-submit-btn').click(function(){
+
+  $('.file-select').each(function() {
+    allow_submit_file($(this));
+  });
+
+  $('#form-import-file').submit(function(){
     var file_inputs = $('input[type=file]');
-
     for (var i = 0; i < file_inputs.length; i++){
-      if (file_inputs[i].value === '')
-        file_inputs[i].disabled = true;
-      else{
-        var model = $('#' + file_inputs[i].id).data('model');
-
-        $('#check-box-tag-file-select-' + model).prop('checked', true);
-        $('#loading-image-' + model).removeClass('hidden');
-      }
+      var model = $('#' + file_inputs[i].id).data('model');
+      $('#check-box-tag-file-select-' + model).prop('checked', true);
+      $('#loading-image-' + model).removeClass('hidden');
     }
-
-    $('form').submit();
+    return true;
   });
 
   $(document).on('change', '.check-box', function(){
     $('.check-box').not(this).prop('checked', false);
   });
 });
+
+function not_allow_extension(filename, exts) {
+  return !(new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$', "i")).test(filename);
+}
+
+function allow_submit_file(e) {
+  $('#submit-file').prop('disabled', $(e).val().length == 0);
+}

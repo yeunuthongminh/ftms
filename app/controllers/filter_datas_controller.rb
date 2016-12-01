@@ -126,12 +126,12 @@ class FilterDatasController < ApplicationController
       @resources = Question.order(:content).pluck(:content).uniq.compact
     when "level"
       @resources = i18n_enum(:question, :level)
-    when "subject_name"
-      @key_field = :subject_name
-      @value_field = :subject_name
-      @resources = Subject.order(:name).pluck(:name).uniq.compact
     when "controller_name"
       @resources = Function.order(:model_class).pluck(:model_class).uniq.compact
+    when "category_name"
+      @key_field = :category_name
+      @value_field = :category_name
+      @resources = Category.order(:name).pluck(:name).uniq.compact
     end
 
     respond_to do |format|

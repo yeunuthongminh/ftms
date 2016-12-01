@@ -7,6 +7,7 @@ class Exam < ApplicationRecord
 
   belongs_to :trainee, foreign_key: :user_id
   belongs_to :user_subject
+  belongs_to :category
 
   has_many :results, dependent: :destroy
   has_many :questions, through: :results

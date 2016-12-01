@@ -8,6 +8,7 @@ $(document).on("turbolinks:load", function() {
     togglePaletteLessText: 'less',
     containerClassName: 'awesome',
     maxSelectionSize: 10,
+    allowEmpty: true,
     showInput: true,
     className: "full-spectrum",
     palette: [['#000000', '#434343', '#666666', '#999999', '#b7b7b7',
@@ -25,19 +26,6 @@ $(document).on("turbolinks:load", function() {
       ['#85200c', '#990000', '#b45f06', '#bf9000', '#38761d',
         '#134f5c', '#1155cc', '#0b5394', '#351c75', '#741b47'],
       ['#5b0f00', '#660000', '#783f04', '#7f6000', '#274e13',
-        '#0c343d', '#1c4587', '#073763', '#20124d', '#4c1130']],
-    show: function() {
-      $(this).data('changed', false);
-    },
-    change: function(color) {
-      $(this).data('changed', true);
-    },
-    hide: function(color) {
-      if($(this).data('changed')) {
-        $('#color-picker').val($(this).data);
-      } else {
-        $('#color-picker').val('nil');
-      }
-    },
+        '#0c343d', '#1c4587', '#073763', '#20124d', '#4c1130']]
   });
 });

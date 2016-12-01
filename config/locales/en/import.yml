@@ -1,10 +1,12 @@
 en:
   imports:
     question: "Questions"
-    imports: "Import"
+    import: "Import"
+    imports: "Imports"
     synchronizes: "Synchronizes"
     import_data: "Import data"
     no_select_file: "Please, select some file!"
     allowed_csv: "Allowed only file csv"
     allowed_csv_json: "Allowed only file csv and json"
     importing: "Importing..."
+    not_allow_size: "Not Allowed File"

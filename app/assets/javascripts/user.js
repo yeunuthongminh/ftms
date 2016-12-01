@@ -27,6 +27,7 @@ $(document).on("turbolinks:load", function() {
       location_select.val('');
     }
   });
+
   $('.btn-submit').click(function() {
     var graduation = $('input.graduation');
     var graduation_date = graduation.val();
@@ -71,14 +72,15 @@ $(document).on("turbolinks:load", function() {
         });
       });
     }
-
-    $('input[name="location_ids[]"]').click(function () {
-      $('input[name="check_visit"]').attr('checked', true);
-      $('#form_total_trainee').submit();
-    });
   });
+
   $('#TaskModal').on('hidden.bs.modal', function () {
     $(this).find(".form-control").val('').end();
+  });
+
+  $('input[name="location_ids[]"]').click( function(){
+    $('#form_total_trainee').submit();
+    $('input[name="check_visit"]').attr('checked', true);
   });
 });
 

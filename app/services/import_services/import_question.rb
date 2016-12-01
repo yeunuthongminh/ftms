@@ -1,12 +1,8 @@
 class ImportServices::ImportQuestion < ImportServices::ImportService
-  REQUIRED_ATTRIBUTES = ["subject", "question", "level", "is_correct"]
-
-  def initialize args
-    super args
-  end
+  REQUIRED_ATTRIBUTES = ["category", "question", "level", "is_correct"]
 
   def valid?
-    File.exists?(@file_path) && correct_file_type? && data_type_valid?
+    super && data_type_valid?
   end
 
   def perform
@@ -16,11 +12,11 @@ class ImportServices::ImportQuestion < ImportServices::ImportService
 
       row = Hash[[header, spread_sheet.row(index)].transpose]
 
-      subject = Subject.find_by name: row["subject"].strip
-      if subject
+      category = Category.find_by name: row["category"].strip
+      if category
         question_content = row["question"].to_s.strip
 
-        question = subject.questions.new content: question_content,
+        question = category.questions.new content: question_content,
           level: row["level"].to_s.strip
 
         row.except(*REQUIRED_ATTRIBUTES).each do |key, answer|

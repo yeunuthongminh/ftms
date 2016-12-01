@@ -18,7 +18,6 @@ en:
       trainees: "Trainees"
       trainers: "Trainers"
     table:
-      id: "ID"
       name: "Name"
       trainers: "Trainers"
       language: "Language"
@@ -26,11 +25,9 @@ en:
       status: "Status"
       start_date: "Start date"
       end_date: "End date"
-      all_status: "All status"
     labels:
       trainer: "Trainers "
       trainee: "Trainees "
-      location: "Location: "
       status:
         init: "New"
         progress: "Progress"
@@ -50,10 +47,6 @@ en:
     assign_trainers: "Assign trainers"
     assign_trainees: "Assign trainees"
     location: "Location"
-    statuses:
-      init: "Init"
-      progress: "Progress"
-      finish: "Finish"
     course: "Course"
     name: "Name:"
     description: "Description:"

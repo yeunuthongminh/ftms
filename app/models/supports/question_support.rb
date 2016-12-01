@@ -9,7 +9,7 @@ class Supports::QuestionSupport
     @levels ||= Question.levels.collect {|key, value| [key.humanize, key]}
   end
 
-  def subjects
-    @subjects ||= Subject.all
+  def categories
+    @categories ||= Category.all
   end
 end

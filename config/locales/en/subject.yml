@@ -8,9 +8,9 @@ en:
     about_subject: "Subject"
     create_subject: "Create new subject"
     subject_name: "Name Subject"
+    edit_subject: "Edit subject"
     subject_description: "Description"
     subject_content: "Content"
-    edit_subject: "Edit subject"
     fields:
       name: "Name"
       description: "Description"
@@ -20,16 +20,15 @@ en:
       end_date: "Due date"
       user_end_date: "End date"
       progress: "Progress"
-      action: "Action"
       status: "Status"
       evaluate: "Evaluate"
+      content: "Content"
     submit:
       create_task: "Create"
     task:
       new_task: "New task"
       list_tasks: "List tasks"
       update: "Update Task"
-      finish: "Finish"
     form:
       input_subject_name: "Enter subject name..."
       input_subject_description: "Enter subject description..."
@@ -50,22 +49,13 @@ en:
     document_url: "Document Url"
     document_remove: "Remove"
     modal:
-      member_details: "Member details"
       trainees: "Trainees"
       trainers: "Trainers"
+      member_details: "Member Detail"
     new_task: New Task
-    init_subjects: "New subjects:"
-    progress_subjects: "Inprogress subjects:"
-    finish_subjects: "Finished subjects:"
-    tasks:
-      in_progress_tasks: "Inprogress tasks:"
-      finished_tasks: "Finished tasks:"
     start_date: "Start date: %{start_date}"
     required: "Require test for finish subject"
     project: "Project"
     content: "Content"
     chatwork_id: "Chatwork room id"
-  subject:
-    fields:
-      content: "Content"
-      description: "Description"
+    content: "Content"

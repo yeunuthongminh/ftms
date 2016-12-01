@@ -1,7 +1,8 @@
 <h3><%= t "imports.import_data" %></h3>
 <div class="row">
   <div class="col-md-12">
-    <%= form_tag admin_imports_path, method: :post, multipart: true do %>
+    <%= form_tag admin_imports_path, method: :post, multipart: true,
+      id: "form-import-file" do %>
       <div class="control-group">
         <% Settings.import.data_types.each do |data_type| %>
           <div class="list-group-items select-file-buttons" data-id="<%= data_type.model %>">
@@ -24,10 +25,8 @@
         <% end %>
       </div>
       <div>
-        <%= submit_tag t("imports.import"),
-          data: {disable_with: t("imports.importing")},
-          class: "btn btn-primary",
-          id: "form-submit-btn" %>
+        <%= submit_tag t("imports.import"), data: {disable_with: t("imports.importing")},
+          class: "btn btn-primary", id: "submit-file" %>
       </div>
     <% end %>
   </div>

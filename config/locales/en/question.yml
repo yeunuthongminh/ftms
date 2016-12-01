@@ -4,11 +4,7 @@ en:
     add_answer: "Add Answer"
     table:
       content: "Content"
-      subject: "Subject"
+      category: "Category"
       level: "Level"
-    levels:
-      easy: "Easy"
-      normal: "Normal"
-      hard: "Hard"
   error:
     wrong_answer: "is single choise -> must 1 answers correct"

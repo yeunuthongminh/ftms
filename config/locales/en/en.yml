@@ -9,11 +9,8 @@ en:
   error:
     form: "The form contains "
     error: "error"
-    supervisor: "Must has at least one supervisor"
-    leader: "Must has one leader"
     wrong_end_date: "Must be greater than start date"
     not_authorize: "You are not authorized to access this page."
-    wrong_format: "must have format dd/mm/yyyy"
     something_went_wrong: "Sorry, something went wrong"
   messages:
     delete:
@@ -49,14 +46,13 @@ en:
     signup_now: " Sign Up Now !"
   datetime: &datetime
     formats:
+      year_month: "%Y/%m"
+      time_log: "%d:%m:%Y_%H:%M:%S"
       default: "%Y/%m/%d"
       short: "%y/%m/%d"
       year: "%d/%m/%Y"
-      month_year: "%m/%Y"
-      year_month: "%Y/%m"
       datetime: "%Y-%m-%d %I:%M %p"
       times: "%H:%M:%S"
-      time_log: "%d:%m:%Y_%H:%M:%S"
   date:
     <<: *datetime
   time:
@@ -101,6 +97,9 @@ en:
       question_content: "Question Content"
     evaluation_check_lists: "Evaluation Check Lists"
     evaluation_groups: "Evaluation Groups"
+    evaluations: "Evaluations"
+    evaluation: "Evaluation"
+    users: "User"
     footer:
       street: "13F Keangnam Landmark 72 Tower, Plot E6, Pham Hung Road, Nam Tu Liem, Ha Noi, Viet Nam"
       phone: "84-4-3795-5417"
@@ -163,20 +162,14 @@ en:
     status: "Enter status name..."
   mail:
     by_day:
-      user_name: "%{user_name}"
-      subject_name: "%{subject_name}"
-      progress_done: "%{progress}%"
       title: "[Report][Daily] Framgia Education - [%{time}]"
-      task_name: "- %{task_name}"
       course: "Course: %{name}"
-      no_task_finish: "None"
       name: "Trainee"
       subject: "Subject"
-      task_finish: "Finish Task"
       progress: "Progress"
       task_continue: "Continue Task"
       task_init: "Init Task"
-  record: "record"
+      task_finished: "Finish Task"
   filters:
     btn_on: "Turn on filter"
     btn_off: "Turn off filter"
@@ -193,3 +186,6 @@ en:
     attention: "Attention!!!"
     change_status:
       user_subject: "Are you sure want to switch status to "
+  employees:
+    show:
+      blank: "Blank"

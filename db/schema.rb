@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(version: 20161130021317) do
     t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
   end
 
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "programming_language_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["deleted_at"], name: "index_categories_on_deleted_at", using: :btree
+    t.index ["programming_language_id"], name: "index_categories_on_programming_language_id", using: :btree
+  end
+
   create_table "ckeditor_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "data_file_name",               null: false
     t.string   "data_content_type"
@@ -173,6 +183,8 @@ ActiveRecord::Schema.define(version: 20161130021317) do
     t.integer  "score",           default: 0
     t.integer  "duration"
     t.integer  "user_id"
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_exams_on_category_id", using: :btree
     t.index ["deleted_at"], name: "index_exams_on_deleted_at", using: :btree
     t.index ["user_id"], name: "fk_rails_1ef6db8efd", using: :btree
     t.index ["user_subject_id"], name: "index_exams_on_user_subject_id", using: :btree
@@ -332,12 +344,14 @@ ActiveRecord::Schema.define(version: 20161130021317) do
   end
 
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text     "content",    limit: 65535
+    t.text     "content",     limit: 65535
     t.integer  "level"
     t.integer  "subject_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_questions_on_category_id", using: :btree
     t.index ["deleted_at"], name: "index_questions_on_deleted_at", using: :btree
     t.index ["subject_id"], name: "index_questions_on_subject_id", using: :btree
   end
@@ -418,6 +432,13 @@ ActiveRecord::Schema.define(version: 20161130021317) do
     t.index ["deleted_at"], name: "index_statuses_on_deleted_at", using: :btree
   end
 
+  create_table "subject_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "subject_id"
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_subject_categories_on_category_id", using: :btree
+    t.index ["subject_id"], name: "index_subject_categories_on_subject_id", using: :btree
+  end
+
   create_table "subject_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "number_of_question"
     t.integer  "time_of_exam"
@@ -427,6 +448,7 @@ ActiveRecord::Schema.define(version: 20161130021317) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.string   "percent_of_questions"
+    t.string   "category_questions"
     t.index ["deleted_at"], name: "index_subject_details_on_deleted_at", using: :btree
     t.index ["subject_id"], name: "index_subject_details_on_subject_id", unique: true, using: :btree
   end
@@ -635,6 +657,7 @@ ActiveRecord::Schema.define(version: 20161130021317) do
   end
 
   add_foreign_key "answers", "questions"
+  add_foreign_key "categories", "programming_languages"
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "projects"
   add_foreign_key "course_subjects", "subjects"
@@ -644,6 +667,7 @@ ActiveRecord::Schema.define(version: 20161130021317) do
   add_foreign_key "evaluation_check_lists", "users"
   add_foreign_key "evaluation_items", "evaluation_groups"
   add_foreign_key "evaluation_items", "evaluation_standards"
+  add_foreign_key "exams", "categories"
   add_foreign_key "exams", "user_subjects"
   add_foreign_key "exams", "users"
   add_foreign_key "feed_backs", "users"
@@ -656,7 +680,7 @@ ActiveRecord::Schema.define(version: 20161130021317) do
   add_foreign_key "profiles", "locations"
   add_foreign_key "profiles", "users"
   add_foreign_key "project_requirements", "projects"
-  add_foreign_key "questions", "subjects"
+  add_foreign_key "questions", "categories"
   add_foreign_key "results", "answers"
   add_foreign_key "results", "exams"
   add_foreign_key "results", "questions"
@@ -666,6 +690,8 @@ ActiveRecord::Schema.define(version: 20161130021317) do
   add_foreign_key "statistics", "programming_languages"
   add_foreign_key "statistics", "stages"
   add_foreign_key "statistics", "user_types"
+  add_foreign_key "subject_categories", "categories"
+  add_foreign_key "subject_categories", "subjects"
   add_foreign_key "task_masters", "subjects"
   add_foreign_key "tasks", "course_subjects", on_delete: :cascade
   add_foreign_key "trainer_programs", "programs"

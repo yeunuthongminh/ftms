@@ -23,6 +23,7 @@ class Admin::ImportsController < ApplicationController
           verify_attribute: find_verify_attribute(data_type),
           data_type: data_type,
           logfile: @logfile
+
         if import.valid?
           import.perform
           @logfile.write_total_number_log
