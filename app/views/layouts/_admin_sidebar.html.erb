@@ -42,11 +42,11 @@
         <div id="dropdown-admin" >
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <%= @namespace.capitalize %> <b class="caret"></b>
+              <h4><%= @namespace.capitalize %> <b class="caret"></b></h4>
             </a>
             <ul class="dropdown-menu">
               <% current_user.role_type_avaiable.each do |role| %>
-                <li class="dropdown text-color"><%= link_to role,
+                <li class="dropdown"><%= link_to role,
                   change_current_role_type_path(role), method: :patch %></li>
               <% end %>
             </ul>
@@ -123,7 +123,6 @@
             <% Settings.statistics.each do |type| %>
               <li>
                 <%= link_to admin_statistics_page_path(type) do %>
-                  <i class="fa fa-circle-o" aria-hidden="true"></i>
                   <span><%= t "statistics.titles.#{type}" %></span>
                 <% end %>
               </li>

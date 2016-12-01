@@ -36,4 +36,23 @@
     border-left: none;
     background-color: transparent;
   }
+
+
+  #dropdown-admin {
+    a {
+      color: whitesmoke;
+    }
+    a:hover {
+      color: blue;
+    }
+    ul {
+      background: transparent;
+      border: transparent
+    }
+  }
+  .image-user-profile {
+    a:hover {
+      color: deepskyblue;
+    }
+  }
 }
