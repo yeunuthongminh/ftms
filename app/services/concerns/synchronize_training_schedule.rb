@@ -19,29 +19,28 @@ module SynchronizeTrainingSchedule
       status = find_status line[Settings.sync.training_schedules.status].strip
       stage = find_stage status
       ready_for_project = get_date line[Settings.sync.training_schedules.ready_for_project]
-      trainer = find_trainer line[Settings.sync.training_schedules.trainer]
 
       if trainee
-        trainee.leave_date ||= leave_date
-        trainee.finish_training_date ||= finish_training_date
-        trainee.graduation ||= graduation
-        trainee.user_type ||= trainee_type
-        trainee.university ||= university
-        trainee.programming_language ||= programming_language
-        trainee.location ||= location
-        trainee.working_day ||= working_day
-        trainee.staff_code ||= staff_code
-        trainee.join_div_date ||= join_div_date
-        trainee.status ||= status
-        trainee.stage ||= stage
-        trainee.ready_for_project ||= ready_for_project
-        trainee.trainer_id ||= trainer.try :id
+        trainee.profile.leave_date ||= leave_date
+        trainee.profile.finish_training_date ||= finish_training_date
+        trainee.profile.graduation ||= graduation
+        trainee.profile.user_type ||= trainee_type
+        trainee.profile.university ||= university
+        trainee.profile.programming_language ||= programming_language
+        trainee.profile.location ||= location
+        trainee.profile.working_day ||= working_day
+        trainee.profile.staff_code ||= staff_code
+        trainee.profile.join_div_date ||= join_div_date
+        trainee.profile.status ||= status
+        trainee.profile.stage ||= stage
+        trainee.profile.ready_for_project ||= ready_for_project
+        trainee.trainer_id ||= trainer_id
       else
         name = line[Settings.sync.training_schedules.name].strip
         email = convert_to_email name
 
         trainee = Trainee.new name: line[Settings.sync.training_schedules.name],
-          email: email, trainer_id: trainer.try(:id)
+          email: email, trainer_id: trainer_id
         trainee.build_profile start_training_date: start_training_date,
           leave_date: leave_date,
           finish_training_date: finish_training_date,
@@ -61,7 +60,7 @@ module SynchronizeTrainingSchedule
           updated_at: start_training_date
       end
 
-      trainee.save!
+      trainee.try :save!
     end
 
   end
@@ -92,11 +91,12 @@ module SynchronizeTrainingSchedule
     elsif "Resigned" == name
       Status.find_by name: "Resigned"
     elsif "Will go to Japan" == name
-
+      Status.find_by name: "Resigned"
     end
   end
 
   def find_stage status
+    return if status.nil?
     case status.name
     when "In Progress"
       Stage.find_by name: "In education"
@@ -109,7 +109,7 @@ module SynchronizeTrainingSchedule
     when "Joined Edu Project"
       Stage.find_by name: "In education"
     when "Pending"
-      Stage.find_by name: "In education"
+      Stage.find_or_create_by name: "Away"
     end
   end
 
@@ -144,12 +144,7 @@ module SynchronizeTrainingSchedule
     end
   end
 
-  def find_trainer trainer_name
-    trainer = User.where(type: ["admin", "trainer"]).each do |trainer|
-      if convert_to_abbr(trainer.name) == trainer_name
-        break trainer
-      end
-    end
-    trainer.size > 1 ? nil : trainer
+  def trainer_id
+    User.find_by(email: "nguyen.binh.dieu@framgia.com").id
   end
 end
