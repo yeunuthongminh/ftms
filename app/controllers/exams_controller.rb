@@ -15,9 +15,7 @@ class ExamsController < ApplicationController
     if @exam.user_subject.subject.subject_detail_min_score_to_pass.nil?
       flash[:danger] = t "error.something_went_wrong"
       redirect_to exams_path
-    end
-
-    if @exam.update_attributes exam_params
+    elsif @exam.update_attributes exam_params
       user_subject = @exam.user_subject
       if params["finish"].nil?
         flash[:notice] = t "exams.saved"
