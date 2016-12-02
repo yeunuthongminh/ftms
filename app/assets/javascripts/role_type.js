@@ -1,7 +1,9 @@
 $(document).on("turbolinks:load", function() {
   var selected = document.getElementById("role_type");
-  var value_seledted = selected.options[selected.selectedIndex].value;
-  select_role_type(value_seledted);
+  if (selected) {
+    var value_seledted = selected.options[selected.selectedIndex].value;
+    select_role_type(value_seledted);
+  }
 
   $('#role_type').change(function () {
     var select = document.getElementById("role_type");
