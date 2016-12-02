@@ -11,27 +11,9 @@ namespace :db do
     admins = []
     Admin.all.each do |admin|
       Function.all.each do |function|
-        admins << admin.user_functions.new(function: function, user: admin, role_type: 0)
+        admins << UserFunction.new(function: function, user: admin, role_type: 0)
       end
     end
     UserFunction.import admins
-
-    puts "create function for trainer"
-    trainers = []
-    Trainer.all.each do |trainer|
-      Function.all.each do |function|
-        trainers << trainer.user_functions.new(function: function, user: trainer, role_type: 1)
-      end
-    end
-    UserFunction.import trainers
-
-    puts "create function for trainee"
-    trainees = []
-    Trainee.all.each do |trainee|
-      Function.all.each do |function|
-        trainees << trainee.user_functions.new(function: function, user: trainee, role_type: 2)
-      end
-    end
-    UserFunction.import trainees
   end
 end
