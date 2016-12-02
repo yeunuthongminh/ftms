@@ -5,16 +5,16 @@ class ExamServices::NewExamService
     @user_subject = args[:user_subject]
     @level_for_exam = args[:level_for_exam]
     @level_for_exam ||= Settings.exams.percent_question
-    @category_questions = args[:category_questions]
+    @subject = @user_subject.subject
+    @category_questions = JSON.parse @subject.subject_detail.category_questions
   end
 
   def perform
-    subject = @user_subject.subject
-    number_of_question = subject.subject_detail_number_of_question
+    number_of_question = @subject.subject_detail_number_of_question
     questions = random_question number_of_question, @category_questions, @level_for_exam
     if questions
-      duration = subject.subject_detail_time_of_exam ?
-        subject.subject_detail_time_of_exam : Settings.exams.duration
+      duration = @subject.subject_detail_time_of_exam ?
+        @subject.subject_detail_time_of_exam : Settings.exams.duration
       exam = @user_subject.exams.create duration: duration,
         spent_time: duration, user_id: @user_subject.user_id
       questions.pluck(:id).each{|id| exam.results.create question_id: id}
@@ -26,8 +26,8 @@ class ExamServices::NewExamService
 
   private
   def random_question number_of_question, category_questions, level_for_exam
-    levels = questions_for_level level_for_exam, number_of_question
-    questions = make_list_questions category_questions, levels
+    questions_by_levels = questions_for_level level_for_exam, number_of_question
+    questions = make_list_questions category_questions, questions_by_levels
     questions.size == number_of_question ? questions : nil
   end
 
