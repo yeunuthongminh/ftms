@@ -32,7 +32,7 @@ class Admin::SynchronizesController < ApplicationController
       @titles = sync_google.list_sheets
     else
       if sync_google.send "synchronize", title
-        flash[:alert] =  t "notice.sync_success", function: function
+        flash[:success] =  t "notice.sync_success", function: function
       else
         flash[:alert] = t "notice.sync_fails", function: function
       end
