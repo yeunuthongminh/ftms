@@ -117,6 +117,7 @@ class Supports::StatisticSupport
         end
       end
     end
+
     {trainee_in: trainee_in, trainee_out: trainee_out, trainee_join_div: trainee_join_div}
   end
 

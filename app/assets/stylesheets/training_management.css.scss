@@ -35,7 +35,7 @@
       position: relative;
     }
 
-    &.leave_date, &.contract_date {
+    &.leave_date, &.contract_date, &.away_date, &.comeback_date {
       min-width: 100px;
       max-width: 100px;
       position: relative;
@@ -98,21 +98,27 @@
       position: relative;
     }
 
-    &.start_training_date, &.finish_training_date, &.trainer {
+    &.start_training_date, &.finish_training_date {
+      min-width: 150px;
+      max-width: 150px;
+      position: relative;
+    }
+
+    &.trainer {
       min-width: 200px;
       max-width: 200px;
       position: relative;
     }
 
     &.ready_for_project {
-      min-width: 250px;
-      max-width: 250px;
+      min-width: 140px;
+      max-width: 140px;
       position: relative;
     }
 
     &.working_day {
-      min-width: 220px;
-      max-width: 220px;
+      min-width: 150px;
+      max-width: 150px;
       position: relative;
     }
 

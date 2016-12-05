@@ -132,6 +132,14 @@ class FilterDatasController < ApplicationController
       @key_field = :category_name
       @value_field = :category_name
       @resources = Category.order(:name).pluck(:name).uniq.compact
+    when "away_date"
+      @key_field = :away_date
+      @value_field = :away_date
+      @resources = Profile.order(:away_date).pluck(:away_date).uniq.compact
+    when "comeback_date"
+      @key_field = :comeback_date
+      @value_field = :comeback_date
+      @resources = Profile.order(:comeback_date).pluck(:comeback_date).uniq.compact
     end
 
     respond_to do |format|
