@@ -146,7 +146,7 @@ class User < ApplicationRecord
 
   def has_function? controller, action, role
     if self.role_type_avaiable.include? role
-      self.user_functions.has_function(controller, action).any?
+      self.functions.has_function(controller, action).any?
     end
   end
 

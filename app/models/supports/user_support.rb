@@ -2,7 +2,7 @@ class Supports::UserSupport
   attr_reader :user, :current_user
 
   def initialize user
-    @user = user
+    @user = user ||= User.new
   end
 
   def activities

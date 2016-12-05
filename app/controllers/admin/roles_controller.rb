@@ -39,6 +39,9 @@ class Admin::RolesController < ApplicationController
 
   def update
     if @role.update_attributes role_params
+      User.send(@role.role_type.pluralize).each do |user|
+        user.functions << @role.functions
+      end
       flash[:success] = flash_message "updated"
       redirect_to admin_roles_path
     else

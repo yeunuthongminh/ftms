@@ -14,7 +14,8 @@
         </div>
 
         <% if policy(controller: "users", action: "edit") %>
-          <%= link_to "edit role", admin_user_change_roles_path(@user) %>
+          <%= link_to "edit role", admin_user_change_roles_path(@user) unless
+            @user.new_record? %>
           <div class="form-group">
             <%= f.label :trainer_id %>
             <%= f.select :trainer_id, options_for_select(@supports.trainers
