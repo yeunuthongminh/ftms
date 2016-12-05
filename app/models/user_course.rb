@@ -1,7 +1,6 @@
 class UserCourse < ApplicationRecord
   include PublicActivity::Model
   include InitUserSubject
-  include TraineeRelation
 
   acts_as_paranoid
 
@@ -11,9 +10,9 @@ class UserCourse < ApplicationRecord
   after_create :create_user_subjects_when_assign_new_user
   before_save :restore_data
 
-  belongs_to :trainer, foreign_key: :user_id
-  belongs_to :trainee, foreign_key: :user_id
-  belongs_to :admin, foreign_key: :user_id
+  belongs_to :trainee, foreign_key: :user_id, class_name: User.name
+  belongs_to :trainer, foreign_key: :user_id, class_name: User.name
+  belongs_to :admin, foreign_key: :user_id, class_name: User.name
   belongs_to :course
 
   delegate :name, :description, :start_date, :end_date, :status,
@@ -44,6 +43,12 @@ class UserCourse < ApplicationRecord
       self.user_type = Trainer.name.downcase
     else
       self.user_type = user.class.name.downcase
+    end
+  end
+
+  %w(trainee trainer).each do |user_type|
+    define_method "#{user_type}" do
+      return User.find_by(id: self.user_id) if eval("#{user_type}?")
     end
   end
 
