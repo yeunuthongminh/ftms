@@ -34,6 +34,14 @@ $(document).on('turbolinks:load', function() {
         $('#script-warning').show();
       }
     },
+    dayRender: function (date, cell){
+      var dateObj = new Date(date);
+      var event_array = JSON.parse(localStorage.calendar_data);
+      var temp_date = new Date(event_array[event_array.length-1].end);
+      if (dateObj.getDate() === temp_date.getDate()){
+        cell.css('background', 'red');
+      }
+    },
     loading: function(bool) {
       $('#loading').toggle(bool);
     }
