@@ -79,59 +79,61 @@
 //= require color-picker.js
 //= require js.cookie
 //= require role_type
+//= require jquery.flexslider
+//= require landing_page
 
-$(document).on("turbolinks:load ajaxComplete", function() {
-  $(".alert").delay(3000).fadeOut();
-  $("#error_explanation").delay(3000).slideUp();
+$(document).on('turbolinks:load ajaxComplete', function() {
+  $('.alert').delay(3000).fadeOut();
+  $('#error_explanation').delay(3000).slideUp();
 });
 
 function remove_fields(link) {
-  $(link).prev("input[type=hidden]").val("1");
+  $(link).prev('input[type=hidden]').val('1');
   $(link).parent().parent().hide();
 }
 
 function add_fields(link, association, content) {
   var new_id = new Date().getTime();
-  var regexp = new RegExp("new_" + association, "g")
+  var regexp = new RegExp('new_' + association, 'g')
   $(link).parent().before(content.replace(regexp, new_id));
 }
 
-$(document).on("turbolinks:load", function() {
-  $(".ckeditor-field").each(function() {
-    CKEDITOR.replace($(this).attr("id"));
+$(document).on('turbolinks:load', function() {
+  $('.ckeditor-field').each(function() {
+    CKEDITOR.replace($(this).attr('id'));
   });
 
-  $(".sidebar-toggle").click(function() {
-    $("#body-admin").toggleClass("sidebar-collapse")
+  $('.sidebar-toggle').click(function() {
+    $('#body-admin').toggleClass('sidebar-collapse')
   });
 
-  $(".treeview").click(function() {
-    $(this).toggleClass("active");
-    $(".treeview-menu").toggleClass("menu-open");
+  $('.treeview').click(function() {
+    $(this).toggleClass('active');
+    $('.treeview-menu').toggleClass('menu-open');
   });
 
-  if ($(".evaluation-active").length > 0) {
-    $("#evaluations-header").addClass("active");
+  if ($('.evaluation-active').length > 0) {
+    $('#evaluations-header').addClass('active');
   }
 
-  if ($(".systems-active").length > 0) {
-    $("#systems-header").addClass("active");
+  if ($('.systems-active').length > 0) {
+    $('#systems-header').addClass('active');
   }
 
-  if ($(".shedules-active").length > 0) {
-    $("#schedule-header").addClass("active");
+  if ($('.shedules-active').length > 0) {
+    $('#schedule-header').addClass('active');
   }
 
-  $("#slimScrollDiv").slimScroll();
-  $("#slimscroll_admin").slimScroll();
+  $('#slimScrollDiv').slimScroll();
+  $('#slimscroll_admin').slimScroll();
 });
 
 function isDatepicker(element) {
-  var arr_element = ["prev", "next", "datepicker-switch", "old day", "new day",
-    "active day", "year old", "year new", "dow", "day", "month", "today", "clear",
-    "datepicker datepicker-dropdown dropdown-menu datepicker-orient-left datepicker-orient-top",
-    "year active", "year", "month active"];
-  return arr_element.indexOf(element.attr("class")) !== -1
+  var arr_element = ['prev', 'next', 'datepicker-switch', 'old day', 'new day',
+    'active day', 'year old', 'year new', 'dow', 'day', 'month', 'today', 'clear',
+    'datepicker datepicker-dropdown dropdown-menu datepicker-orient-left datepicker-orient-top',
+    'year active', 'year', 'month active'];
+  return arr_element.indexOf(element.attr('class')) !== -1
 }
 
 $(document).on('turbolinks:load', '.open-select', function(e, xhr, opts) {
@@ -171,13 +173,13 @@ function totalTraineeValue() {
 
     $.each($('.fixedTable-body .total-trainees-month-' + $(value).data('month')), function(index, element) {
       if(!$(element).hasClass('total')){
-        total_trainee_in_month += parseInt($(element).data("total-trainees"));
+        total_trainee_in_month += parseInt($(element).data('total-trainees'));
       }
     });
 
     $.each($('.fixedTable-body .trow:visible .total-trainees-month-' + $(value).data('month')), function(index, element) {
       if(!$(element).hasClass('total')){
-        total_trainee_in_month_filter += parseInt($(element).data("total-trainees"));
+        total_trainee_in_month_filter += parseInt($(element).data('total-trainees'));
       }
     });
 
@@ -189,7 +191,8 @@ function totalTraineeValue() {
     }
   });
 }
-$(document).on("turbolinks:load", function(){
+
+$(document).on('turbolinks:load', function(){
 
   $('ul.tabs li').click(function(){
     var tab_id = $(this).attr('data-tab');
@@ -198,7 +201,7 @@ $(document).on("turbolinks:load", function(){
     $('.tab-content').removeClass('current');
 
     $(this).addClass('current');
-    $("#"+tab_id).addClass('current');
-  })
+    $('#'+tab_id).addClass('current');
+  });
 
 });

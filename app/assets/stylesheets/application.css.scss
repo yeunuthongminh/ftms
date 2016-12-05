@@ -64,11 +64,13 @@
  *= require question
  *= require to_do_list
  *= require role
+*= require landing_page
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "mixin";
+@import "flexslider";
 
 .filters {
   @include customize-scrollbar;
