@@ -82,6 +82,12 @@ class TrainingManagementPresenter < ActionView::Base
       <div class=\"tcell contract_date text-right\">
         #{l user.profile.contract_date, format: :default if user.profile.contract_date}
       </div>
+      <div class=\"tcell away_date text-right\">
+        #{l user.profile.away_date, format: :default if user.profile.away_date}
+      </div>
+      <div class=\"tcell comeback_date text-right\">
+        #{l user.profile.comeback_date, format: :default if user.profile.comeback_date}
+      </div>
       <div class=\"tcell working_day text-right\" title=\"#{user.profile_working_day}\">
         #{user.profile_working_day}
       </div>

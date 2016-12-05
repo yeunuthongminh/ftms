@@ -9,3 +9,7 @@ end
 every :day, at: "7:45 am" do
   rake "db:daily_remind_deadline", output: "log/daily_deadline.log"
 end
+
+every :day, at: "11:50 pm" do
+  rake "db:remake_statistic_data", output: "log/remake_statistic_data.log"
+end

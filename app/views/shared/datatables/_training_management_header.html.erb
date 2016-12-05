@@ -140,6 +140,24 @@
             <i class="fa ic ic-filter contract_date"></i>
           <% end %>
         </div>
+        <div class="tcell away_date title">
+          <%= t "training_managements.headers.start_away_date" %>
+          <%= link_to filter_datas_path(type: :away_date, filter_type: :training_managements),
+            remote: true,
+            class: "open-select",
+            data: {name: "f-away_date"} do %>
+            <i class="fa ic ic-filter away_date"></i>
+          <% end %>
+        </div>
+        <div class="tcell comeback_date title">
+          <%= t "training_managements.headers.comeback_date" %>
+          <%= link_to filter_datas_path(type: :comeback_date, filter_type: :training_managements),
+            remote: true,
+            class: "open-select",
+            data: {name: "f-comeback_date"} do %>
+            <i class="fa ic ic-filter comeback_date"></i>
+          <% end %>
+        </div>
         <div class="tcell working_day title">
           <%= t "training_managements.headers.working_days" %>
           <%= link_to filter_datas_path(type: :working_day, filter_type: :training_managements),
