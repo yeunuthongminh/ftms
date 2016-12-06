@@ -13,7 +13,43 @@ en:
     place_holder:
       password_confirmation: "Password Confirmation"
     profile:
+      title_info: "WHO AM I"
+      title_personal: "PERSONAL SKILL"
+      title_comment: "TRAINER COMMENT"
       email: "Email: "
+      download_pdf: "Download as pdf"
+      university: "University: "
+      fullname: "Name"
+      graduation: "Graduation"
+      start_trainning_date: "Start trainning date"
+      finish_trainning_date: "Finish training date"
+      developer: "Web designer / Web developer"
+      education: "Education"
+      location: "Location"
+      description: "Hard working, friendly, helping people"
+      note: "Notes"
+      html_css: "Html/Css"
+      js: "Javascript"
+      ruby: "Ruby"
+      dry: "Dry"
+      convention: "Convetion"
+      thinking: "Thinking"
+      attitude: "Attitude"
+      comunicate: "Comunicate"
+      question: "Question"
+      teamwork: "TEAM WORK"
+      coding: "CODING"
+      logic: "LOGIC"
+      advantage: "Advantages"
+      disadvantage: "Disadvantages"
+      test_data: "Sed ut perspiciatis unde omnis iste natus error
+        sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+        eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
+        vitae dicta sunt explicabo. Nemo enim ipsam voluptatem."
+      test_data1: "Sed ut perspiciatis unde omnis iste natus error
+       sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+       eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
+       vitae dicta sunt explicabo. Nemo enim ipsam voluptatem."
     tabs:
       activities: "Activities"
       finished_courses: "Finished courses"

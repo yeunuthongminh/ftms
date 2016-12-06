@@ -59,6 +59,7 @@ en:
     language: "Language"
     trainees: "Trainees"
     trainers: "Trainers"
+    title: "Course detail"
     tab:
       trainees: "Trainees"
       trainers: "Trainers"

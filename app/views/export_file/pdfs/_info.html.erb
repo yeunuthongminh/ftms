@@ -1,0 +1,63 @@
+<div class="content list-group-item info_prof finished_course nobreak">
+  <div class="main-title">
+    <h3><%= t "user.profile.title_info" %></h3>
+    <hr>
+  </div>
+  <div class="block-content margBSmall">
+    <div class=" profile margBSmall">
+      <h1><%= @user.name %></h1>
+      <h3><%= t "user.profile.developer" %></h3>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <p><%= t "user.profile.test_data" %></p>
+      </div>
+      <div class="col-md-6">
+        <p><%= t "user.profile.test_data1" %></p>
+      </div>
+    </div>
+  </div>
+  <div class="block-content">
+    <div class="info">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="box-body no-padding">
+            <table class="table table-striped">
+              <tr>
+                <td><%= t "user.profile.fullname" %></td>
+                <td><%= @user.name %></td>
+              </tr>
+              <tr>
+                <td><%= t "user.profile.university" %></td>
+                <td><%= @user.profile.university.abbreviation %>
+                  </td>
+              </tr>
+              <tr>
+                <td><%= t "user.profile.graduation" %></td>
+                <td><%= @user.profile.graduation %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="box-body no-padding">
+            <table class="table table-striped">
+              <tr>
+                <td><%= t "user.profile.email" %></td>
+                <td><%= @user.email %></td>
+              </tr>
+              <tr>
+                <td><%= t "user.profile.start_trainning_date" %></td>
+                <td><%= @user.profile.start_training_date %></td>
+              </tr>
+              <tr>
+                <td><%= t "user.profile.start_trainning_date" %></td>
+                <td><%= @user.profile.finish_training_date %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

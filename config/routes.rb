@@ -140,6 +140,12 @@ Rails.application.routes.draw do
     resources :roles, only: [:index, :create]
   end
 
+  namespace :export_file do
+    resources :users, only: :show do
+      resource :pdfs, only: :show
+    end
+  end
+
   root "static_pages#home"
 
   resources :courses, only: [:show, :index] do

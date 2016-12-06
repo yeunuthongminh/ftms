@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title yield :title %></title>
+    <%= favicon_link_tag "logo.png" %>
+    <meta name="current-user" id="<%= current_user.try :id %>">
+    <%= wicked_pdf_stylesheet_link_tag "admin/pdf" %>
+    <%= wicked_pdf_stylesheet_link_tag "admin/users" %>
+    <%= wicked_pdf_stylesheet_link_tag "admin/subject" %>
+    <%= wicked_pdf_stylesheet_link_tag "admin/user_subjects" %>
+    <%= wicked_pdf_stylesheet_link_tag "admin/AdminLTE_unminified"%>
+    <%= wicked_pdf_stylesheet_link_tag "status_color" %>
+    <%= wicked_pdf_stylesheet_link_tag "users" %>
+    <%= wicked_pdf_stylesheet_link_tag "navbar_head" %>
+    <%= wicked_pdf_stylesheet_link_tag "variables" %>
+
+    <%= csrf_meta_tags %>
+    <meta name="turbolinks-cache-control" content="no-cache">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <script type="text/javascript">
+      I18n.defaultLocale = "<%= I18n.default_locale %>";
+      I18n.locale = "<%= I18n.locale %>";
+    </script>
+  </head>
+  <body id="body-admin" class="skin-blue sidebar-mini wysihtml5-supported" >
+    <div class="wrapper">
+        <section class="content">
+          <div class="flash">
+            <%= render "layouts/flash" %>
+          </div>
+          <%= yield %>
+        </section>
+    </div>
+  </body>
+</html>

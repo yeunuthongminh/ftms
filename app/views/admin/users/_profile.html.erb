@@ -16,6 +16,10 @@
           <i class="fa fa-pencil" aria-hidden="true"></i>
         <% end %>
       <% end %>
+
+      <p><%= link_to t("user.profile.download_pdf"),
+        export_file_user_pdfs_path(@user, format: "pdf") %>
+      </p>
     </p>
   </div>
 </div>
