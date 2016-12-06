@@ -30,6 +30,7 @@ en:
     forgot_password: "Forgot your password?"
     sent_mail_forgot: "Send me reset password instructions"
     password_change: "Change Password"
+    edit_role: "Edit Role"
   signins:
     banner: "Please Login"
     remember: "Remember me"
