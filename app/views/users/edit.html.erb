@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-          <%= ff.label :graduation %>            
+          <%= ff.label :graduation %>
           <%= ff.text_field :graduation, value: @user.profile_graduation ?
             l(@user.profile_graduation, format: :year_month) : "",
             class: "form-control graduation profile" %>
@@ -47,9 +47,9 @@
         <div class="form-group profile-input">
           <%= ff.label :university %>
           <%= ff.select :university_id,
-            options_from_collection_for_select(@universities, 
+            options_from_collection_for_select(@universities,
             :id, :name, selected: @user.profile.university_id),
-            {include_blank: t("university.other")},
+            {include_blank: t("universities.other")},
             class: "form-control" %>
         </div>
       <% end %>

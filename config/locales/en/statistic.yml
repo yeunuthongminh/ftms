@@ -1,5 +1,6 @@
 en:
   statistics:
+    other: Other
     titles:
       locations: "Locations"
       trainee_types: "Trainees type"

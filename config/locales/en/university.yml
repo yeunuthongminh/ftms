@@ -2,8 +2,11 @@ en:
   table:
     thead:
       name: "Name"
+  universities:
+    header:
+      name: Name
       abbr: "Abbreviation"
-  university:
     other: "Other University"
-    new: "New University"
-    edit: "Edit University"
+    actions:
+      new: "New University"
+      edit: "Edit University"

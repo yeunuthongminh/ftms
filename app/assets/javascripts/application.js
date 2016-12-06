@@ -26,7 +26,6 @@
 //= require datepicker
 //= require highcharts
 //= require highcharts/highcharts-more
-//= require admin/dark-unica
 //= require jquery.slimscroll
 //= require filter-data
 //= require filter-box
