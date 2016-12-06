@@ -1,14 +1,16 @@
 <div class="div-task-history">
-  <% @to_do_lists.each do |user_task| %>
-    <% if user_task.finished? && user_task.user_subject.end_date > Time.now %>
-      <div class="dolist">
-        <%= link_to user_task_path(user_task), remote: true do %>
-          <div class="task">
-            <h5><%= t "tasks.task_name", task: user_task.task.name %></h5>
-          </div>
-          <div class="space"></div>
-        <% end %>
-      </div>
+  <% if @to_do_lists.any? %>
+    <% @to_do_lists.each do |user_task| %>
+      <% if user_task.finished? && user_task.user_subject.end_date > Time.now %>
+        <div class="dolist">
+          <%= link_to user_task_path(user_task), remote: true do %>
+            <div class="task">
+              <h5><%= t "tasks.task_name", task: user_task.task.name %></h5>
+            </div>
+            <div class="space"></div>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>

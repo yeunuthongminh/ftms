@@ -2,12 +2,11 @@ class Admin::UsersController < ApplicationController
   before_action :authorize
   before_action :load_user, except: [:index, :new, :create]
   before_action :load_profile, only: [:new, :edit, :show]
+  before_action :build_profile, only: :new
   before_action :load_breadcrumb_edit, only: [:edit, :update]
   before_action :load_breadcrumb_new, only: [:new, :create]
 
   def new
-    @user = User.new
-    build_profile
   end
 
   def create
@@ -16,9 +15,9 @@ class Admin::UsersController < ApplicationController
     if @user.save && user_send_mail_service.perform?
       flash[:success] = flash_message "created"
       if params[:create_and_continue].present?
-        redirect_to admin_training_managements_path
-      else
         redirect_to new_admin_user_path
+      else
+        redirect_to admin_training_managements_path
       end
     else
       load_profile
@@ -62,17 +61,18 @@ class Admin::UsersController < ApplicationController
   end
 
   def load_profile
+    @user ||= User.new
     @supports = Supports::UserSupport.new @user
   end
 
   def load_breadcrumb_edit
-    add_breadcrumb_path "users"
+    add_breadcrumb_path "training_managements"
     add_breadcrumb @user.name, [:admin, @user]
     add_breadcrumb_edit "users"
   end
 
   def load_breadcrumb_new
-    add_breadcrumb_path "users"
+    add_breadcrumb_path "training_managements"
     add_breadcrumb_new "users"
   end
 
