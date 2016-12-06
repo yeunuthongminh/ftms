@@ -23,11 +23,11 @@ class Supports::SubjectTrainee
   end
 
   def trainers
-    @trainers ||= user_subject.course.load_trainers
+    @trainers ||= user_subject.course.trainers
   end
 
   def trainees
-    @trainees ||= user_subject.course.load_trainees
+    @trainees ||= user_subject.course.trainees
   end
 
   def users
