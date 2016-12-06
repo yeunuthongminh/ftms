@@ -39,6 +39,7 @@ class Admin::RolesController < ApplicationController
 
   def update
     if @role.update_attributes role_params
+      add_user_function
       flash[:success] = flash_message "updated"
       redirect_to admin_roles_path
     else
@@ -59,5 +60,17 @@ class Admin::RolesController < ApplicationController
   private
   def role_params
     params.require(:role).permit Role::ATTRIBUTES_ROLE_PARAMS
+  end
+
+  def add_user_function
+    user_functions = []
+    Object.const_get(@role.role_type.classify).all.each do |user|
+      user.user_functions.delete_all
+      @role.functions.each do |function|
+        user_functions << {user_id: user.id, function_id: function.id,
+          role_type: @role.role_type_before_type_cast}
+      end
+    end
+    UserFunction.create user_functions
   end
 end
