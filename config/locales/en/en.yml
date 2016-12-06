@@ -189,3 +189,9 @@ en:
   employees:
     show:
       blank: "Blank"
+  number:
+    percentage:
+      format:
+        delimiter: ""
+        precision: 2
+        format: "%n%"

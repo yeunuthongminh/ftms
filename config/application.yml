@@ -215,6 +215,7 @@ defaults: &defaults
       ready_for_project: "Ready for real PJ"
   sync_functions:
     - Training schedule
+  minimum_percent_to_join: 5
 development:
   <<: *defaults
   neat_setting: 800

@@ -44,8 +44,7 @@ class Supports::StatisticSupport
   end
 
   def universities
-    @universities ||= University.includes(:profiles)
-      .collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.sort_by {|u| u[:y]}.reverse
+    @universities ||= trainee_by_university
   end
 
   def programming_languages
@@ -132,5 +131,28 @@ class Supports::StatisticSupport
 
   def load_programming_languages
     @programming_languages ||= ProgrammingLanguage.all
+  end
+
+  def trainee_by_university
+    universities = Array.new
+    other_university = Hash[:name, I18n.t("statistics.other"), :y, 0]
+
+    list_universities = University.includes(:profiles)
+      .collect{|u| Hash[:name, u.abbreviation, :y, u.profiles.size]}
+    total_trainee = list_universities.sum{|u| u[:y]}
+
+    list_universities.each do |university|
+      percent = university[:y].to_f / total_trainee.to_f * 100
+      if percent <= Settings.minimum_percent_to_join
+        other_university[:y] += university[:y]
+      else
+        universities << university
+          .merge(extraValue: ActionController::Base.helpers.number_to_percentage(percent))
+      end
+    end
+    universities = universities.sort_by {|u| u[:y]}.reverse
+    universities << other_university
+      .merge(extraValue: ActionController::Base.helpers
+        .number_to_percentage(other_university[:y].to_f / total_trainee.to_f * 100))
   end
 end
