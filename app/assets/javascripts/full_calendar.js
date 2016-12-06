@@ -37,8 +37,14 @@ $(document).on('turbolinks:load', function() {
     dayRender: function (date, cell){
       var dateObj = new Date(date);
       var event_array = JSON.parse(localStorage.calendar_data);
-      var temp_date = new Date(event_array[event_array.length-1].end);
-      if (dateObj.getDate() === temp_date.getDate()){
+      var nearest_date = new Date(event_array[0].end);
+
+      for(var i = 1; i < event_array.length; i++){
+        var temp_date = new Date(event_array[i].end);
+        if(temp_date > nearest_date) nearest_date = temp_date;
+      }
+
+      if (dateObj.toDateString() === nearest_date.toDateString()){
         cell.css('background', 'red');
       }
     },

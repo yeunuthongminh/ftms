@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-  skip_filter :authenticate_user!, only: :create
+  skip_before_action :authenticate_user!, only: :create
   after_action :log_sign_in, only: :create
   before_action :log_sign_out, only: :destroy
   after_action :update_current_role, only: :create

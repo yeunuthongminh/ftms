@@ -3,7 +3,6 @@ class Course < ApplicationRecord
 
   include PublicActivity::Model
   include InitUserSubject
-  include LoadUser
   include EstimateTime
   mount_uploader :image, ImageUploader
 

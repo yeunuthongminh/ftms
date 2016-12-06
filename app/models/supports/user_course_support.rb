@@ -10,11 +10,11 @@ class Supports::UserCourseSupport
   end
 
   def trainers
-    @trainers ||= course.load_trainers
+    @trainers ||= course.trainers
   end
 
   def trainees
-    @trainees ||= course.load_trainees
+    @trainees ||= course.trainees
   end
 
   def users
