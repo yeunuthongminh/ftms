@@ -128,15 +128,21 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     flash[:alert] = t "error.not_authorize"
-    back_or_root
+    if current_user.current_role_type == "admin"
+      redirect_to admin_root_path
+    elsif current_user.current_role_type == "trainer"
+      redirect_to trainer_root_path
+    else
+      redirect_to root_path
+    end
   end
 
   def get_root_path
     if current_user.nil?
       root_path
-    elsif current_user.is_admin?
+    elsif current_user.current_role_type == "admin"
       admin_root_path
-    elsif current_user.is_trainer?
+    elsif current_user.current_role_type == "trainer"
       trainer_root_path
     else
       root_path
@@ -191,6 +197,8 @@ class ApplicationController < ActionController::Base
   end
 
   def to_do_list
-    @to_do_lists = current_user.user_tasks if user_signed_in? && current_user.trainee?
+    if user_signed_in? && current_user.is_trainee?
+      @to_do_lists = current_user.user_tasks 
+    end
   end
 end
