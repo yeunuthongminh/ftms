@@ -50,6 +50,7 @@ gem "redis-namespace"
 gem "redis-rails"
 gem "redis-rack-cache", git: "git://github.com/jodosha/redis-rack-cache.git"
 gem "google_drive"
+gem "flexslider-rails"
 
 group :development, :test do
   gem "rack-mini-profiler"

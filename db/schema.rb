@@ -275,6 +275,7 @@ ActiveRecord::Schema.define(version: 20161205071720) do
     t.date     "start_training_date"
     t.date     "leave_date"
     t.date     "finish_training_date"
+    t.string   "ready_for_project"
     t.date     "contract_date"
     t.string   "naitei_company"
     t.date     "graduation"
@@ -292,7 +293,6 @@ ActiveRecord::Schema.define(version: 20161205071720) do
     t.string   "staff_code"
     t.date     "join_div_date"
     t.string   "div_name"
-    t.datetime "ready_for_project"
     t.datetime "away_date"
     t.datetime "comeback_date"
     t.index ["deleted_at"], name: "index_profiles_on_deleted_at", using: :btree

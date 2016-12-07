@@ -24,117 +24,7 @@ html {
   padding-top: 30px;
 }
 .body_wrapper {
-
   min-height: 70%;
-  .text-content {
-    padding-top: 150px;
-    padding-bottom: 150px;
-    text-align: center;
-
-    .content {
-      padding: 40px;
-      background-color: rgba(0,0,0,0.6);
-      margin: 20px;
-
-      .content-title, .content-lead-in {
-        font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-        text-transform: uppercase;
-        font-weight: 700;
-        font-size: 50px;
-        line-height: 50px;
-        margin-bottom: 40px;
-        text-align: center;
-        color: #fff;
-      }
-
-      .content-lead-in {
-        text-transform: none;
-        font-size: 40px;
-      }
-
-      .btn-xl {
-        border-color: #e13640;
-        background-color: #e13640;
-        margin: 10px;
-        color: #fff;
-        font-size: 30px;
-      }
-
-      .btn-xl:hover, .btn-xl:focus, .btn-xl:active, .btn-xl.active {
-        border-color: #eb797f;
-        background-color: #eb797f;
-      }
-
-      .btn-box {
-        width: 200px;
-      }
-    }
-
-  }
-
-  .image-php {
-    width: 130px;
-    height: 130px;
-  }
-
-  #portfolio, #principles {
-    padding: 80px 0;
-    background-color: white !important;
-
-    .title, .portfolio-content {
-      font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-      text-transform: uppercase;
-      font-weight: 700;
-      font-size: 50px;
-      line-height: 50px;
-      text-align: center;
-      color: #000;
-    }
-
-    .fa-stack {
-      width: 3em;
-    }
-
-    .portfolio-content {
-      text-transform: none;
-      font-weight: normal;
-      font-size: 20px;
-      color: #777;
-    }
-
-    .service-heading {
-      margin-top: 30px;
-      font-weight: 700;
-      text-transform: none;
-      font-size: 24px;
-    }
-
-    .text-muted {
-      font-size: 18px;
-    }
-  }
-
-  #principles {
-    background-color: #fff;
-    .fa-stack {
-      width: 3em;
-      height: 2.5em;
-    }
-  }
-
-  .dark-bg-white-text {
-    padding: 80px 0;
-    color: white;
-    background-color: #404040;
-
-    .section-heading {
-      font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-      text-transform: uppercase;
-      font-weight: 700;
-      font-size: 50px;
-      line-height: 50px;
-    }
-  }
 
   #counters {
     padding: 80px 0;
@@ -158,6 +48,7 @@ html {
       font-style: italic;
       font-weight: 400;
       min-height: 0;
+      color: #888;
     }
 
     .counters-v2 {
@@ -235,21 +126,22 @@ html {
     }
   }
 
-   a:focus {
+  a:focus {
     background-color: white;
-   }
+  }
+
   li > .dropdown-menu::before {
-      position: absolute;
-      top: -7px;
-      right: 15px;
-      display: inline-block;
-      margin-bottom: 6px;
-      border-right: 7px solid transparent;
-      border-bottom: 7px solid #CCC;
-      border-left: 7px solid transparent;
-      border-bottom-color: rgba(0, 0, 0, 0.2);
-      content: '';
-    }
+    position: absolute;
+    top: -7px;
+    right: 15px;
+    display: inline-block;
+    margin-bottom: 6px;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #CCC;
+    border-left: 7px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: '';
+  }
 
   li > .dropdown-menu::after {
     position: absolute;
@@ -286,14 +178,6 @@ html {
       overflow-x: initial !important;
     }
   }
-}
-
-.home-index {
-  background-image: asset_url("home.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  background-attachment: scroll;
 }
 
 select {
