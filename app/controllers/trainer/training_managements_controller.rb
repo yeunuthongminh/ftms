@@ -1,6 +1,4 @@
 class Trainer::TrainingManagementsController < ApplicationController
-  before_action :verify_trainer
-
   include FilterData
 
   before_action :load_filter, only: :index
@@ -11,7 +9,4 @@ class Trainer::TrainingManagementsController < ApplicationController
       profile: [:status, :user_type, :location, :university, :programming_language, :stage]).order :name
     @training_management_presenters = TrainingManagementPresenter.new(users, @namespace).render
   end
-
-  private
-  include VerifyTrainer
 end
