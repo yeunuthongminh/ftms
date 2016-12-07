@@ -40,9 +40,16 @@
           <% if current_user.is_trainee? && @subject_supports.user_subject.progress? %>
             <%= link_to t("buttons.finish"), "#",
               class: "btn btn-danger pull-right finish-subject" %>
-          <% elsif @subject_supports.user_subject.subject.subject_detail && @subject_supports.user_subject.waiting? %>
-            <%= link_to t("buttons.do_exam"), "#",
-              class: "btn btn-info pull-right do-exam-now" %>
+          <% elsif @subject_supports.user_subject.subject.subject_detail && 
+            @subject_supports.user_subject.waiting? %>
+            <% if @subject_supports.exam_process && 
+              @subject_supports.exam_process.testing? %>
+              <%= link_to t("buttons.continute_do_exam"), @subject_supports.exam_process,
+                class: "btn btn-info pull-right" %>
+            <% else %>
+              <%= link_to t("buttons.do_exam"), "#",
+                class: "btn btn-info pull-right do-exam-now" %>
+            <% end %>
           <% end %>
         <% end %>
         <div class="description"><%= @subject_supports.user_subject.description %></div>

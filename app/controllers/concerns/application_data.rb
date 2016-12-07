@@ -9,7 +9,11 @@ module ApplicationData
   end
 
   def to_do_lists
-    @to_do_lists = current_user.user_tasks if user_signed_in? && current_user.trainee?
+    @to_do_lists = if user_signed_in? && current_user.role_type_avaiable.first == "trainee"
+      current_user.user_tasks
+    else
+      Array.new
+    end
   end
 
   def load_root_path
