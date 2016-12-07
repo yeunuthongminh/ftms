@@ -111,6 +111,8 @@ Rails.application.routes.draw do
     resources :locations
     resources :organization_charts, only: :index
     resources :training_managements, only: :index
+    resources :projects
+    resources :programs, except: :destroy
   end
 
   root "static_pages#home"
