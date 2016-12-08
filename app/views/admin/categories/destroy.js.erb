@@ -1,0 +1,8 @@
+<% if flash.key? :failed %>
+  alert('<%= flash[:success] %>');
+  <% flash.delete :failed %>
+<% else %>
+  alert('<%= flash[:success] %>');
+  $("#tbl-category").DataTable().ajax.reload();
+  <% flash.delete :success %>
+<% end %>

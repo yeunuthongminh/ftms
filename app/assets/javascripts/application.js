@@ -81,6 +81,7 @@
 //= require role_type
 //= require jquery.flexslider
 //= require landing_page
+//= require admin/category
 
 $(document).on('turbolinks:load ajaxComplete', function() {
   $('.alert').delay(3000).fadeOut();
