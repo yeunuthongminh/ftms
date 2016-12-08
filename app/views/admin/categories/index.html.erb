@@ -1,0 +1,31 @@
+<% provide :title, t("layouts.categories") %>
+<div id="categories">
+  <div class="row">
+    <div class="col-md-12 title">
+      <span>
+       <%= link_to t("buttons.new"), new_admin_category_path,
+        class: "btn btn-primary pull-right", remote: true %>
+      </span>
+    </div>
+  </div>
+
+  <table id="tbl-category" class="table table-bordered display"
+    data-source="<%= admin_categories_url format: "json" %>">
+    <thead>
+      <tr class="active">
+        <th>#</th>
+        <th><%= t "categories.name" %></th>
+        <th><%= t "categories.language" %></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <div class="modal fade" id="category-modal">
+    <div class="modal-dialog">
+    </div>
+  </div>
+</div>

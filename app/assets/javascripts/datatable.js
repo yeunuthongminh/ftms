@@ -22,6 +22,14 @@ function set_datatable(selector, not_order_column, dom) {
       search: "_INPUT_",
       searchPlaceholder: I18n.t("datatables.search_name"),
       sLengthMenu: I18n.t("datatables.show_menu")
+    },
+    "fnDrawCallback": function(oSettings) {
+      var pgr = $('.dataTables_paginate', oSettings.nTableWrapper);
+      if (oSettings._iDisplayLength < oSettings.fnRecordsDisplay()) {
+        pgr.show();
+      } else {
+        pgr.hide();
+      }
     }
   });
 }

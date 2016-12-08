@@ -67,6 +67,7 @@ Rails.application.routes.draw do
       resources :trainee_evaluations, except: [:index, :destroy]
     end
     resources :synchronizes
+    resources :categories
   end
 
   namespace :trainer do

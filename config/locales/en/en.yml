@@ -118,6 +118,7 @@ en:
     notifications:
       view_all: "View all"
       notification: "New notifications"
+    categories: "Categories"
   evaluations:
     evaluate: "Evaluate"
     create: "Create"
