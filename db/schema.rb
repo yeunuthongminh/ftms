@@ -163,12 +163,13 @@ ActiveRecord::Schema.define(version: 20161208083418) do
 
   create_table "evaluation_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.float    "min_point",  limit: 24
-    t.float    "max_point",  limit: 24
-    t.float    "avarage",    limit: 24
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.float    "min_point",       limit: 24
+    t.float    "max_point",       limit: 24
+    t.float    "avarage",         limit: 24
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.datetime "deleted_at"
+    t.integer  "evaluation_type",            default: 0
     t.index ["deleted_at"], name: "index_evaluation_standards_on_deleted_at", using: :btree
   end
 
