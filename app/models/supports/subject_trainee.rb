@@ -80,4 +80,8 @@ class Supports::SubjectTrainee
       @user_tasks_chart_data
     end
   end
+
+  def exam_process
+    user_subject.exams.last
+  end
 end
