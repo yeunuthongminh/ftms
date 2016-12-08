@@ -1,7 +1,7 @@
 class Category < ApplicationRecord
   acts_as_paranoid
 
-  belongs_to :programming_language
+  belongs_to :language
 
   has_many :exams, dependent: :destroy
   has_many :questions, dependent: :destroy

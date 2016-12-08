@@ -1,4 +1,4 @@
-class ProgrammingLanguage < ApplicationRecord
+class Language < ApplicationRecord
   acts_as_paranoid
 
   ATTRIBUTES_PARAMS = [:name]

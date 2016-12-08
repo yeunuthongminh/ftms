@@ -44,14 +44,14 @@ class Supports::UserSupport
     @stage ||= @user.new_record? ? Stage.find_by(name: "In education") : @user.profile.stage
   end
 
-  %w(roles universities programming_languages statuses user_types locations)
+  %w(roles universities languages statuses user_types locations)
     .each do |objects|
     define_method objects do
       instance_variable_set "@#{objects}", objects.classify.constantize.all
     end
   end
 
-  %w(location university user_type programming_language status).each do |object|
+  %w(location university user_type language status).each do |object|
     define_method object do
       instance_variable_set "@#{object}", object.classify.constantize.new
     end

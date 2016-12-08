@@ -47,8 +47,8 @@ class Supports::StatisticSupport
     @universities ||= trainee_by_university
   end
 
-  def programming_languages
-    @programming_languages ||= load_programming_languages.includes(:profiles)
+  def languages
+    @languages ||= load_languages.includes(:profiles)
       .collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.sort_by {|u| u[:y]}.reverse
   end
 
@@ -66,15 +66,15 @@ class Supports::StatisticSupport
 
   private
   def total_trainee_by_month
-    @statistics ||= Statistic.includes(:user_type, :programming_language)
+    @statistics ||= Statistic.includes(:user_type, :language)
       .where.not(total_trainee: 0).order(:month)
       .where month: months.collect{|month| month.to_date.beginning_of_month},
         location_id: @location_ids, stage_id: @stage_ids
     total_trainees = {}
 
     load_trainee_types.each do |user_type|
-      load_programming_languages.each do |programming_language|
-        total_trainees[user_type: user_type.name, language: programming_language.name] = Hash[months.collect {|item| [item, 0]}]
+      load_languages.each do |language|
+        total_trainees[user_type: user_type.name, language: language.name] = Hash[months.collect {|item| [item, 0]}]
       end
     end
 
@@ -89,7 +89,7 @@ class Supports::StatisticSupport
 
   def convert_to_hash statistic
     Hash[:user_type, statistic.user_type_name, :language,
-      statistic.programming_language_name]
+      statistic.language_name]
   end
 
   def months
@@ -112,7 +112,7 @@ class Supports::StatisticSupport
         elsif in_month? month, profile.leave_date
           trainee_out[month] += 1
         elsif in_month? month, profile.join_div_date
-          rainee_join_div[month] += 1
+          trainee_join_div[month] += 1
         end
       end
     end
@@ -129,8 +129,8 @@ class Supports::StatisticSupport
     @trainee_types ||= UserType.all
   end
 
-  def load_programming_languages
-    @programming_languages ||= ProgrammingLanguage.all
+  def load_languages
+    @languages ||= Language.all
   end
 
   def trainee_by_university

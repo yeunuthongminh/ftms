@@ -13,7 +13,7 @@ class User < ApplicationRecord
   ATTRIBUTES_PROFILE_PARAMS = [
     :id, :start_training_date, :leave_date, :finish_training_date,
     :ready_for_project, :contract_date, :naitei_company,
-    :user_type_id, :university_id, :programming_language_id, :user_progress_id,
+    :user_type_id, :university_id, :language_id, :user_progress_id,
     :status_id, :location_id, :graduation, :working_day, :staff_code,
     :join_div_date, :stage_id, :away_date, :comeback_date
   ]
@@ -27,7 +27,7 @@ class User < ApplicationRecord
 
   TRAINER_ATTRIBUTES_PARAMS = [:name, :trainer_id,
     profile_attributes: [:working_day, :graduation, :university_id,
-    :programming_language_id, :user_progress_id,
+    :language_id, :user_progress_id,
     :status_id, :location_id]]
 
   attr_accessor :current_role

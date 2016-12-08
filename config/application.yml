@@ -116,7 +116,7 @@ defaults: &defaults
     - locations
     - trainee_types
     - universities
-    - programming_languages
+    - languages
     - in_out_by_month
   all_functions:
     - index
@@ -133,7 +133,7 @@ defaults: &defaults
     - Role
     - Location
     - University
-    - ProgrammingLanguage
+    - Language
     - Status
     - UserType
     - Stage
@@ -150,7 +150,7 @@ defaults: &defaults
     - Role
     - Location
     - University
-    - ProgrammingLanguage
+    - Language
     - Status
     - UserType
   controller_names:
@@ -196,7 +196,7 @@ defaults: &defaults
       status: "Status"
       university: "University"
       graduation: "Graduation"
-      programming_language: "Language"
+      language: "Language"
       start_training_date: "Start Training Date"
       leave_date: "Leave Date"
       finish_training_date: "Finish Training Date"

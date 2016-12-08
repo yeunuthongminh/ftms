@@ -11,13 +11,13 @@
           <i class="fa ic ic-filter trainee_type"></i>
         <% end %>
       </div>
-      <div class="tcell programming_language title">
+      <div class="tcell language title">
         <%= t "statistics.total_trainees.headers.language" %>
-        <%= link_to filter_datas_path(type: :programming_language, filter_type: :statistics),
+        <%= link_to filter_datas_path(type: :language, filter_type: :statistics),
           remote: true,
           class: "open-select",
-          data: {name: "f-programming_language"} do %>
-          <i class="fa ic ic-filter programming_language"></i>
+          data: {name: "f-language"} do %>
+          <i class="fa ic ic-filter language"></i>
         <% end %>
       </div>
       <div class="clear-both">

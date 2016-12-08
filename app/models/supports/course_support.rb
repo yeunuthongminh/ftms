@@ -49,7 +49,7 @@ class Supports::CourseSupport
     @subjects ||= Subject.all
   end
 
-  %w(programming_languages locations programs).each do |objects|
+  %w(languages locations programs).each do |objects|
     define_method objects do
       instance_variable_set "@#{objects}",
         objects.classify.constantize.all.collect {|object| [object.name,
@@ -59,11 +59,11 @@ class Supports::CourseSupport
 
   def courses
     @courses = if @program
-      @program.courses.includes :programming_language, :location
+      @program.courses.includes :language, :location
     elsif @current_user
-      @current_user.courses.includes :programming_language, :location, :program
+      @current_user.courses.includes :language, :location, :program
     else
-      Course.includes :programming_language, :location, :program, :user_courses, :trainers
+      Course.includes :language, :location, :program, :user_courses, :trainers
     end
   end
 

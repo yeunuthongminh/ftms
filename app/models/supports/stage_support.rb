@@ -27,8 +27,8 @@ class Supports::StageSupport
     @stages ||= Stage.all.map{|e| [e.name, e.id]}
   end
 
-  def programming_languages
-    @programming_languages ||= ProgrammingLanguage.all
+  def languages
+    @languages ||= Language.all
   end
 
   def locations

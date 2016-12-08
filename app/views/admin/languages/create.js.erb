@@ -1,0 +1,10 @@
+<% if @language.errors.any? %>
+  $(".errors").html("<%= j render "shared/error_messages", object: @language %>");
+<% else %>
+  $("#user_profile_attributes_language_id").append($("<option></option>")
+    .attr("value", <%= @language.id %>)
+    .text("<%= @language.name %>")
+    .prop("selected", true));
+  $("#language-modal").modal("hide");
+  $(".flash").html("<%= j render "layouts/flash" %>");
+<% end %>

@@ -71,10 +71,10 @@ class FilterDatasController < ApplicationController
       @value_field = :ready_for_project
       @resources = [t("profiles.columns.ready_for_project.ready"),
         t("profiles.columns.ready_for_project.not_ready")]
-    when "programming_language"
+    when "language"
       @key_field = :id
-      @value_field = :programming_language_name
-      @resources = ProgrammingLanguage.order(:name).pluck :name
+      @value_field = :language_name
+      @resources = Language.pluck(:name).sort!
     when "working_day"
       @resources = Profile.order(:working_day).pluck(:working_day).uniq.compact
       @blank = @type == "working_day"

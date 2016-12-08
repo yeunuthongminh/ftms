@@ -94,11 +94,11 @@
         </div>
         <div class="row form-group">
           <div class="col-md-5">
-            <%= ff.label :programming_language_id %>
+            <%= ff.label :language_id %>
           </div>
           <div class="col-md-7">
             <select class="for-form" disabled="disabled">
-              <option selected="true"><%= @supports.profile.programming_language_name %></option>
+              <option selected="true"><%= @supports.profile.language_name %></option>
             </select>
           </div>
         </div>
@@ -240,11 +240,11 @@
         </div>
         <div class="row form-group">
           <div class="col-md-5">
-            <%= ff.label :programming_language_id %>
+            <%= ff.label :language_id %>
           </div>
           <div class="col-md-7">
-            <%= select_profile_field "programming_language",
-              @supports.programming_languages, ff, "for-form" %>
+            <%= select_profile_field "language",
+              @supports.languages, ff, "for-form" %>
           </div>
         </div>
         <div class="row form-group">

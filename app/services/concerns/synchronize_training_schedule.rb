@@ -10,8 +10,8 @@ module SynchronizeTrainingSchedule
       graduation = get_date line[Settings.sync.training_schedules.graduation]
       trainee_type = find_object UserType, line[Settings.sync.training_schedules.trainee_type]
       university = find_object University, line[Settings.sync.training_schedules.university]
-      programming_language = find_object ProgrammingLanguage,
-        line[Settings.sync.training_schedules.programming_language]
+      language = find_object Language,
+        line[Settings.sync.training_schedules.language]
       location = find_object Location, line[Settings.sync.training_schedules.location]
       working_day = line[Settings.sync.training_schedules.working_day]
       staff_code = line[Settings.sync.training_schedules.staff_code]
@@ -26,7 +26,7 @@ module SynchronizeTrainingSchedule
         trainee.profile.graduation ||= graduation
         trainee.profile.user_type ||= trainee_type
         trainee.profile.university ||= university
-        trainee.profile.programming_language ||= programming_language
+        trainee.profile.language ||= language
         trainee.profile.location ||= location
         trainee.profile.working_day ||= working_day
         trainee.profile.staff_code ||= staff_code
@@ -47,7 +47,7 @@ module SynchronizeTrainingSchedule
           graduation: graduation,
           user_type: trainee_type,
           university: university,
-          programming_language: programming_language,
+          language: language,
           location: location,
           working_day: working_day,
           staff_code: staff_code,

@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     get "/statistics/:type" => "statistics#show", as: :statistics_page
     resources :ranks
     resources :universities, except: :show
-    resources :programming_languages, except: :show
+    resources :languages, except: :show
     resources :statuses, except: :show
     resources :user_types, except: :show
     resources :profiles

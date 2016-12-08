@@ -35,7 +35,7 @@ class StatisticTotalTraineePresenter < ActionView::Base
       <div class=\"tcell trainee_type\" title=\"#{sidebar_items[:user_type]}\">
         #{sidebar_items[:user_type]}
       </div>
-      <div class=\"tcell programming_language\" title=\"#{sidebar_items[:language]}\">
+      <div class=\"tcell language\" title=\"#{sidebar_items[:language]}\">
         #{sidebar_items[:language]}
       </div>
     </div>"
