@@ -33,9 +33,9 @@
               </div>
             <% end %>
           </div>
-        </div>
-        <div class="size-nonselect col-md-offset-9">
-          <%= t "evaluation_templates.standards.standards", size: @evaluation_standards.size %>
+          <div class="panel-footer text-right">
+            <%= t "count_records", record: @evaluation_standards.size %>
+          </div>
         </div>
       </div>
 
@@ -80,9 +80,9 @@
               </div>
             <% end %>
           </div>
-        </div>
-        <div class="size-select col-md-offset-9">
-          <%= t "evaluation_templates.standards.standards", size: @evaluation_template.evaluation_standards.size %>
+          <div class="panel-footer text-right">
+            <%= t "count_records", record: @evaluation_template.evaluation_standards.size %>
+          </div>
         </div>
       </div>
     </div>
