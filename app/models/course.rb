@@ -8,11 +8,11 @@ class Course < ApplicationRecord
 
   USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy, :deleted_at]]
   COURSE_ATTRIBUTES_PARAMS = [:name, :image, :description,
-    :programming_language_id, :location_id, :program_id,
+    :language_id, :location_id, :program_id,
     :start_date, :end_date, documents_attributes:
     [:id, :title, :document_link, :description, :_destroy], subject_ids: []]
 
-  belongs_to :programming_language
+  belongs_to :language
   belongs_to :location
   belongs_to :program
 
@@ -20,7 +20,7 @@ class Course < ApplicationRecord
 
   validate :check_end_date, on: [:create, :update]
   validates :name, presence: true
-  validates :programming_language_id, presence: true
+  validates :language_id, presence: true
 
   has_many :course_subjects, dependent: :destroy
   has_many :user_courses, -> {with_deleted}, dependent: :destroy
@@ -50,7 +50,7 @@ class Course < ApplicationRecord
 
   enum status: [:init, :progress, :finish]
 
-  delegate :name, to: :programming_language, prefix: true, allow_nil: true
+  delegate :name, to: :language, prefix: true, allow_nil: true
   delegate :name, to: :location, prefix: true, allow_nil: true
   delegate :name, to: :program, prefix: true, allow_nil: true
 

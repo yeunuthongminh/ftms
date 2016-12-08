@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205071720) do
+ActiveRecord::Schema.define(version: 20161208020624) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -43,12 +43,12 @@ ActiveRecord::Schema.define(version: 20161205071720) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.integer  "programming_language_id"
+    t.integer  "language_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["deleted_at"], name: "index_categories_on_deleted_at", using: :btree
-    t.index ["programming_language_id"], name: "index_categories_on_programming_language_id", using: :btree
+    t.index ["language_id"], name: "index_categories_on_language_id", using: :btree
   end
 
   create_table "ckeditor_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -104,13 +104,13 @@ ActiveRecord::Schema.define(version: 20161205071720) do
   create_table "courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "image"
-    t.text     "description",             limit: 65535
-    t.integer  "status",                                default: 0
-    t.integer  "programming_language_id"
+    t.text     "description", limit: 65535
+    t.integer  "status",                    default: 0
+    t.integer  "language_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "location_id"
     t.datetime "deleted_at"
     t.integer  "program_id"
@@ -221,6 +221,14 @@ ActiveRecord::Schema.define(version: 20161205071720) do
     t.index ["deleted_at"], name: "index_functions_on_deleted_at", using: :btree
   end
 
+  create_table "languages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_languages_on_deleted_at", using: :btree
+  end
+
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -280,13 +288,13 @@ ActiveRecord::Schema.define(version: 20161205071720) do
     t.date     "graduation"
     t.integer  "user_type_id"
     t.integer  "university_id"
-    t.integer  "programming_language_id"
+    t.integer  "language_id"
     t.integer  "user_progress_id"
     t.integer  "status_id"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "location_id"
-    t.decimal  "working_day",             precision: 2, scale: 1
+    t.decimal  "working_day",          precision: 2, scale: 1
     t.datetime "deleted_at"
     t.integer  "stage_id"
     t.string   "staff_code"
@@ -306,14 +314,6 @@ ActiveRecord::Schema.define(version: 20161205071720) do
     t.integer "generations",   null: false
     t.index ["ancestor_id", "descendant_id", "generations"], name: "program_anc_desc_idx", unique: true, using: :btree
     t.index ["descendant_id"], name: "program_desc_idx", using: :btree
-  end
-
-  create_table "programming_languages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_programming_languages_on_deleted_at", using: :btree
   end
 
   create_table "programs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -415,12 +415,12 @@ ActiveRecord::Schema.define(version: 20161205071720) do
     t.integer  "location_id"
     t.integer  "stage_id"
     t.integer  "user_type_id"
-    t.integer  "programming_language_id"
-    t.integer  "total_trainee",           default: 0
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.integer  "language_id"
+    t.integer  "total_trainee", default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["language_id"], name: "index_statistics_on_language_id", using: :btree
     t.index ["location_id"], name: "index_statistics_on_location_id", using: :btree
-    t.index ["programming_language_id"], name: "index_statistics_on_programming_language_id", using: :btree
     t.index ["stage_id"], name: "index_statistics_on_stage_id", using: :btree
     t.index ["user_type_id"], name: "index_statistics_on_user_type_id", using: :btree
   end
@@ -659,7 +659,7 @@ ActiveRecord::Schema.define(version: 20161205071720) do
   end
 
   add_foreign_key "answers", "questions"
-  add_foreign_key "categories", "programming_languages"
+  add_foreign_key "categories", "languages"
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "projects"
   add_foreign_key "course_subjects", "subjects"
@@ -688,8 +688,8 @@ ActiveRecord::Schema.define(version: 20161205071720) do
   add_foreign_key "results", "questions"
   add_foreign_key "role_functions", "functions"
   add_foreign_key "role_functions", "roles"
+  add_foreign_key "statistics", "languages"
   add_foreign_key "statistics", "locations"
-  add_foreign_key "statistics", "programming_languages"
   add_foreign_key "statistics", "stages"
   add_foreign_key "statistics", "user_types"
   add_foreign_key "subject_categories", "categories"

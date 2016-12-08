@@ -70,7 +70,7 @@ class Trainer::CoursesController < ApplicationController
   end
 
   def find_course_in_show
-    @course = Course.includes(:programming_language).find_by_id params[:id]
+    @course = Course.includes(:language).find_by_id params[:id]
     redirect_if_object_nil @course
   end
 

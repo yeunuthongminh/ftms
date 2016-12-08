@@ -59,8 +59,8 @@
       <span><%= t "courses.language" %></span>
     </div>
     <div class="col-md-3">
-      <%= f.select :programming_language_id, @supports.programming_languages,
-        {prompt: ""}, {selected: f.object.programming_language_id,
+      <%= f.select :language_id, @supports.languages,
+        {prompt: ""}, {selected: f.object.language_id,
         required: true, class: "form-control"} %>
     </div>
     <div class="col-md-3 text-right">

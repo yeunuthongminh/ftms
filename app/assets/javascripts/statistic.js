@@ -59,8 +59,8 @@ function load_universities_statistic_chart() {
   });
 }
 
-function load_programming_languages_statistic_chart() {
-  $('#programming-languages-statistic').highcharts({
+function load_languages_statistic_chart() {
+  $('#languages-statistic').highcharts({
     chart: {
       plotBackgroundColor: null,
       plotBorderWidth: null,
@@ -79,9 +79,9 @@ function load_programming_languages_statistic_chart() {
       }
     },
     series: [{
-      name: I18n.t('statistics.programming_languages.serie_name'),
+      name: I18n.t('statistics.languages.serie_name'),
       colorByPoint: true,
-      data: eval('(' + $('#programming-languages-statistic').attr('data-programming-languages').replace(/&gt;/g, ">").replace(/&quot;/g,"\"").replace(/:y=>/g, "y:").replace(/:name=>/g, "name:") + ')')
+      data: eval('(' + $('#languages-statistic').attr('data-languages').replace(/&gt;/g, ">").replace(/&quot;/g,"\"").replace(/:y=>/g, "y:").replace(/:name=>/g, "name:") + ')')
     }]
   });
 }
@@ -219,8 +219,8 @@ $(document).on('turbolinks:load', function() {
     load_trainee_types_statistic_chart();
   } else if ($('#statistics').children().hasClass('universities')) {
     load_universities_statistic_chart();
-  } else if ($('#statistics').children().hasClass('programming_languages')) {
-    load_programming_languages_statistic_chart();
+  } else if ($('#statistics').children().hasClass('languages')) {
+    load_languages_statistic_chart();
   } else if ($('#statistics').children().hasClass('locations')) {
     load_locations_statistic_chart();
   } else if ($('#statistics').children().hasClass('in_out_by_month')) {

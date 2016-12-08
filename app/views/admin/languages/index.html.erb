@@ -1,0 +1,34 @@
+<div id="languages profile-active">
+   <p class="pull-right">
+     <% if policy(controller: "languages", action: "new") %>
+       <%= link_to t("buttons.create"),
+         new_admin_language_path, class: "btn btn-success" %>
+     <% end %>
+   </p>
+   <table class="table table-striped tbl-language">
+     <thead>
+       <tr>
+         <th class="name"><%= t "table.thead.name" %></th>
+         <th class="action"><%= t "table.thread.action" %></th>
+       </tr>
+     </thead>
+     <tbody>
+       <% @languages.each do |language| %>
+         <tr>
+           <td class="name"><%= language.name %></td>
+           <td class="action">
+             <% if policy(controller: "languages", action: "edit") %>
+              <%= link_to t("buttons.edit"),
+                edit_admin_language_path(language) %>&nbsp;
+             <% end %>
+             <% if policy(controller: "languages", action: "destroy") %>
+               <%= link_to t("buttons.delete"),
+                 admin_language_path(language),
+                 method: :delete, data: {confirm: t("messages.delete.confirm")} %>
+             <% end %>
+           </td>
+         </tr>
+       <% end %>
+     </tbody>
+   </table>
+ </div>

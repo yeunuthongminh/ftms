@@ -11,9 +11,9 @@ namespace :db do
       University.create! name: name
     end
 
-    puts "Create Programming Languages"
+    puts "Create  Languages"
     ["Ruby", "PHP", "Android", "Java", "iOS"].each do |name|
-      ProgrammingLanguage.create! name: name
+      Language.create! name: name
     end
 
     puts "Create User Types"
@@ -145,17 +145,17 @@ namespace :db do
       {name: "Ruby on Rails",
         image: File.open(File.join(Rails.root, "app/assets/images/course/Rails_1.png")),
         description: "Learn more Rails with this sequel to the infamous Rails for Zombies course. Increase your Ruby on Rails knowledge with even more zombie learning.",
-        status: 1, programming_language_id: 1, start_date: Time.now, end_date: Time.now + Settings.during_time.course.days},
+        status: 1, language_id: 1, start_date: Time.now, end_date: Time.now + Settings.during_time.course.days},
 
       {name: "Android",
         image: File.open(File.join(Rails.root, "app/assets/images/android.png")),
         description: "This tutorial will teach you basic Android programming and will also take you through some advance concepts related to Android application development.",
-        status: 0, programming_language_id: 1, start_date: Time.now, end_date: Time.now + Settings.during_time.course.days},
+        status: 0, language_id: 1, start_date: Time.now, end_date: Time.now + Settings.during_time.course.days},
 
       {name: "PHP",
         image: File.open(File.join(Rails.root, "app/assets/images/php.png")),
         description: "PHP is a server scripting language, and a powerful tool for making dynamic and interactive Web pages",
-        status: 1, programming_language_id: 1, start_date: Time.now, end_date: Time.now + Settings.during_time.course.days},
+        status: 1, language_id: 1, start_date: Time.now, end_date: Time.now + Settings.during_time.course.days},
     ])
 
     puts "Create Subject"

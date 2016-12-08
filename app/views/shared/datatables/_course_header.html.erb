@@ -40,12 +40,12 @@
             <% end %>
           </div>
         <% end %>
-        <div class="tcell programming_language title">
+        <div class="tcell language title">
           <%= t "courses.table.language" %>
-          <%= link_to filter_datas_path(type: :programming_language,
+          <%= link_to filter_datas_path(type: :language,
             filter_type: :courses), remote: true,
-            class: "open-select", data: {name: "f-programming_language"} do %>
-            <i class="fa ic ic-filter programming_language"></i>
+            class: "open-select", data: {name: "f-language"} do %>
+            <i class="fa ic ic-filter language"></i>
           <% end %>
         </div>
         <div class="tcell location title">

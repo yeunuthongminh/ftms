@@ -64,8 +64,8 @@ class TrainingManagementPresenter < ActionView::Base
       <div class=\"tcell graduation\">
       #{l user.profile_graduation, format: :year_month if user.profile_graduation}
       </div>
-      <div class=\"tcell programming_language\" title=\"#{user.profile.programming_language_name}\">
-        #{user.profile.programming_language_name}
+      <div class=\"tcell language\" title=\"#{user.profile.language_name}\">
+        #{user.profile.language_name}
       </div>
       <div class=\"tcell start_training_date text-right\">
         #{l user.profile.start_training_date, format: :default if user.profile.start_training_date}

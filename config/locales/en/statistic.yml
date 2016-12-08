@@ -5,7 +5,7 @@ en:
       locations: "Locations"
       trainee_types: "Trainees type"
       universities: "Universities"
-      programming_languages: "Programming languages"
+      languages: "Programming languages"
       total_trainees: "Total trainees in by month"
       in_out_by_month: "In/out by month"
     user_types:

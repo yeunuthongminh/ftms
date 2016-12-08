@@ -16,7 +16,7 @@ class UserCourse < ApplicationRecord
   belongs_to :course
 
   delegate :name, :description, :start_date, :end_date, :status,
-    :programming_language, to: :course, prefix: true, allow_nil: true
+    :language, to: :course, prefix: true, allow_nil: true
 
   has_many :user_subjects, dependent: :destroy
   has_many :trainee_evaluations, as: :targetable
@@ -32,7 +32,7 @@ class UserCourse < ApplicationRecord
 
   delegate :id, :name, to: :trainee, prefix: true, allow_nil: true
   delegate :id, :name, to: :trainer, prefix: true, allow_nil: true
-  delegate :name, to: :course_programming_language, prefix: true, allow_nil: true
+  delegate :name, to: :course_language, prefix: true, allow_nil: true
 
   enum status: [:init, :progress, :finish]
   enum user_type: [:admin, :trainer, :trainee]
