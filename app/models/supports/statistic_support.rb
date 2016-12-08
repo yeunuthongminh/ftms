@@ -35,8 +35,8 @@ class Supports::StatisticSupport
       load_trainee_types.collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.reverse.take(1)
     else
       temp = []
-      load_locations.where(id: @location_ids).includes(profiles: :user_type).each do |location|
-        temp += location.profiles.collect{|p| p.user_type_name}.delete_if{|p| p.nil?}
+      load_locations.where(id: @location_ids).includes(profiles: :trainee_type).each do |location|
+        temp += location.profiles.collect{|p| p.trainee_type_name}.delete_if{|p| p.nil?}
       end
       temp.inject(Hash.new(0)) { |total, e| total[e] += 1 ;total}.
         to_a.collect {|e| Hash[:name, e.first, :y, e.last]}.sort_by{|u| u[:y]}.reverse
@@ -66,15 +66,15 @@ class Supports::StatisticSupport
 
   private
   def total_trainee_by_month
-    @statistics ||= Statistic.includes(:user_type, :language)
+    @statistics ||= Statistic.includes(:trainee_type, :language)
       .where.not(total_trainee: 0).order(:month)
       .where month: months.collect{|month| month.to_date.beginning_of_month},
         location_id: @location_ids, stage_id: @stage_ids
     total_trainees = {}
 
-    load_trainee_types.each do |user_type|
+    load_trainee_types.each do |trainee_type|
       load_languages.each do |language|
-        total_trainees[user_type: user_type.name, language: language.name] = Hash[months.collect {|item| [item, 0]}]
+        total_trainees[trainee_type: trainee_type.name, language: language.name] = Hash[months.collect {|item| [item, 0]}]
       end
     end
 
@@ -88,7 +88,7 @@ class Supports::StatisticSupport
   end
 
   def convert_to_hash statistic
-    Hash[:user_type, statistic.user_type_name, :language,
+    Hash[:trainee_type, statistic.trainee_type_name, :language,
       statistic.language_name]
   end
 
@@ -126,7 +126,7 @@ class Supports::StatisticSupport
   end
 
   def load_trainee_types
-    @trainee_types ||= UserType.all
+    @trainee_types ||= TraineeType.all
   end
 
   def load_languages

@@ -18,7 +18,7 @@ function load_trainee_types_statistic_chart() {
       }
     },
     series: [{
-      name: I18n.t('statistics.user_types.serie_name'),
+      name: I18n.t('statistics.trainee_types.serie_name'),
       colorByPoint: true,
       data: eval("(" + $('#trainee-types-statistic').attr("data-trainee-types").replace(/&gt;/g, ">").replace(/&quot;/g,"\"").replace(/:name=>/g, "name:").replace(/:y=>/g, "y:") + ")")
     }]

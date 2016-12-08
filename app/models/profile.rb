@@ -2,7 +2,7 @@ class Profile < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :user
-  belongs_to :user_type
+  belongs_to :trainee_type
   belongs_to :university
   belongs_to :language
   belongs_to :status
@@ -12,7 +12,7 @@ class Profile < ApplicationRecord
   delegate :name, :email, to: :user, prefix: true, allow_nil: true
   delegate :name, to: :university, prefix: true, allow_nil: true
   delegate :abbreviation, to: :university, prefix: true, allow_nil: true
-  delegate :name, to: :user_type, prefix: true, allow_nil: true
+  delegate :name, to: :trainee_type, prefix: true, allow_nil: true
   delegate :name, to: :status, prefix: true, allow_nil: true
   delegate :name, to: :language, prefix: true, allow_nil: true
   delegate :name, to: :location, prefix: true, allow_nil: true

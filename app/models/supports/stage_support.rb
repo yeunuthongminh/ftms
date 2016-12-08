@@ -43,7 +43,7 @@ class Supports::StageSupport
     @universities ||= University.all
   end
 
-  def user_types
-    @user_types ||= UserType.all
+  def trainee_types
+    @trainee_types ||= TraineeType.all
   end
 end

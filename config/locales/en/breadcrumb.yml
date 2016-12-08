@@ -39,7 +39,7 @@ en:
       all: "All Statuses"
       new: "New"
       edit: "Edit"
-    user_types:
+    trainee_types:
       all: "All Types"
       new: "New"
       edit: "Edit"

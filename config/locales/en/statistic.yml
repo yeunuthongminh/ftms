@@ -8,7 +8,7 @@ en:
       languages: "Programming languages"
       total_trainees: "Total trainees in by month"
       in_out_by_month: "In/out by month"
-    user_types:
+    trainee_types:
       title: "Total trainees by type"
       serie_name: "Trainees"
     universities:

@@ -80,7 +80,7 @@ en:
     organization_chart: "Orgazination Chart"
     universities: "Universities"
     statuses: "Statuses"
-    user_types: "User types"
+    trainee_types: "trainee types"
     training_schedule: "Training schedule"
     training_management: "Training management"
     project_trainings: "Project trainings"
@@ -156,7 +156,7 @@ en:
     description: "Description"
   quick_form:
     university: "Enter university name..."
-    usertype: "Enter type name..."
+    traineetype: "Enter type name..."
     location: "Enter location name..."
     programminglanguage: "Enter programming language name..."
     status: "Enter status name..."

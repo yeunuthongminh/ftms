@@ -74,11 +74,11 @@
         </div>
         <div class="row form-group">
           <div class="col-md-5">
-            <%= ff.label :user_type_id %>
+            <%= ff.label :trainee_type_id %>
           </div>
           <div class="col-md-7">
             <select class="for-form" disabled="disabled">
-              <option selected="true"><%= @supports.profile.user_type_name %></option>
+              <option selected="true"><%= @supports.profile.trainee_type_name %></option>
             </select>
           </div>
         </div>
@@ -224,10 +224,10 @@
         </div>
         <div class="row form-group">
           <div class="col-md-5">
-            <%= ff.label :user_type_id %>
+            <%= ff.label :trainee_type_id %>
           </div>
           <div class="col-md-7">
-            <%= select_profile_field "user_type", @supports.user_types, ff, "for-form" %>
+            <%= select_profile_field "trainee_type", @supports.trainee_types, ff, "for-form" %>
           </div>
         </div>
         <div class="row form-group">

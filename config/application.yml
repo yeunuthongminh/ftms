@@ -52,7 +52,7 @@ defaults: &defaults
     evaluation: "evaluations"
     university: "university"
     status: "status"
-    type: "user_type"
+    type: "Trainee type"
     user_profile: "User profiles"
     user: "user"
   default_password: 12345678
@@ -135,14 +135,14 @@ defaults: &defaults
     - University
     - Language
     - Status
-    - UserType
+    - TraineeType
     - Stage
   object_system:
     - Role
     - Location
     - University
     - Status
-    - UserType
+    - TraineeType
   object_exam:
     - Exam
     - Question
@@ -152,7 +152,7 @@ defaults: &defaults
     - University
     - Language
     - Status
-    - UserType
+    - TraineeType
   controller_names:
     - "devise"
     - "sessions"
