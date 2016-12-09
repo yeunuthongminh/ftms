@@ -2,3 +2,8 @@ en:
   projects:
     add_requirement: "Add Requirement"
     assign_project: "Assign project"
+    label:
+      projects: "Project"
+      requirements: "Requirement"
+      empty: "Nothing to show"
+      records: " records."

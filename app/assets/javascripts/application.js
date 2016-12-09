@@ -47,7 +47,8 @@
 //= require datatable
 //= require subject
 //= require evaluation
-//= require role
+//= require admin/role
+//= require admin/project
 //= require user
 //= require evaluation_standard
 //= require rank
