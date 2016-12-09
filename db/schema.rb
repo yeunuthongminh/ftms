@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208020624) do
+ActiveRecord::Schema.define(version: 20161208083418) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -286,7 +286,7 @@ ActiveRecord::Schema.define(version: 20161208020624) do
     t.date     "contract_date"
     t.string   "naitei_company"
     t.date     "graduation"
-    t.integer  "user_type_id"
+    t.integer  "trainee_type_id"
     t.integer  "university_id"
     t.integer  "language_id"
     t.integer  "user_progress_id"
@@ -414,15 +414,15 @@ ActiveRecord::Schema.define(version: 20161208020624) do
     t.date     "month"
     t.integer  "location_id"
     t.integer  "stage_id"
-    t.integer  "user_type_id"
+    t.integer  "trainee_type_id"
     t.integer  "language_id"
-    t.integer  "total_trainee", default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "total_trainee",   default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["language_id"], name: "index_statistics_on_language_id", using: :btree
     t.index ["location_id"], name: "index_statistics_on_location_id", using: :btree
     t.index ["stage_id"], name: "index_statistics_on_stage_id", using: :btree
-    t.index ["user_type_id"], name: "index_statistics_on_user_type_id", using: :btree
+    t.index ["trainee_type_id"], name: "index_statistics_on_trainee_type_id", using: :btree
   end
 
   create_table "statuses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -509,6 +509,15 @@ ActiveRecord::Schema.define(version: 20161208020624) do
     t.integer  "trainer_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "trainee_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.string   "color"
+    t.index ["deleted_at"], name: "index_trainee_types_on_deleted_at", using: :btree
   end
 
   create_table "trainer_programs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -624,15 +633,6 @@ ActiveRecord::Schema.define(version: 20161208020624) do
     t.index ["user_subject_id"], name: "index_user_tasks_on_user_subject_id", using: :btree
   end
 
-  create_table "user_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.string   "color"
-    t.index ["deleted_at"], name: "index_user_types_on_deleted_at", using: :btree
-  end
-
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "avatar"
@@ -691,7 +691,7 @@ ActiveRecord::Schema.define(version: 20161208020624) do
   add_foreign_key "statistics", "languages"
   add_foreign_key "statistics", "locations"
   add_foreign_key "statistics", "stages"
-  add_foreign_key "statistics", "user_types"
+  add_foreign_key "statistics", "trainee_types"
   add_foreign_key "subject_categories", "categories"
   add_foreign_key "subject_categories", "subjects"
   add_foreign_key "task_masters", "subjects"

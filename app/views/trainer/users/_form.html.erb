@@ -56,7 +56,7 @@
     </div>
   <% end %>
 </div>
-<% [@location, @user_type, @university].each do |object| %>
+<% [@location, @trainee_type, @university].each do |object| %>
   <div class="modal fade modal-form" id="<%= object.class.name.downcase %>-modal" role="dialog">
     <%= render "shared/quick_form", object: object, managers: @managers %>
   </div>

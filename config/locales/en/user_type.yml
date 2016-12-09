@@ -3,6 +3,6 @@ en:
     edit_type: "Edit Type"
     create_type: "Create Type"
     types: "Types"
-  user_type:
+  trainee_type:
     new: "New User Type"
     edit: "Edit User Type"

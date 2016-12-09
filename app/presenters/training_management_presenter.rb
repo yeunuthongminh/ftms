@@ -46,8 +46,8 @@ class TrainingManagementPresenter < ActionView::Base
   def body_item user, index
     html = "<div class=\"trow #{"list_#{index}" }\" id=\"body-row-#{user.id}\"
       style=\"background-color: #{user.profile.status_color if user.profile.status}\">
-      <div class=\"tcell trainee_type\" title=\"#{user.profile.user_type_name}\">
-        #{user.profile.user_type_name}
+      <div class=\"tcell trainee_type\" title=\"#{user.profile.trainee_type_name}\">
+        #{user.profile.trainee_type_name}
       </div>
       <div class=\"tcell location\" title=\"#{user.profile.location_name}\">
         #{user.profile.location_name}

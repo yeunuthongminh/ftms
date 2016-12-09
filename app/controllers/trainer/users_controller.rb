@@ -104,7 +104,7 @@ class Trainer::UsersController < ApplicationController
 
   def quick_create_profile
     @location = Location.new
-    @user_type = UserType.new
+    @trainee_type = TraineeType.new
     @university = University.new
     @managers = User.not_trainees
   end

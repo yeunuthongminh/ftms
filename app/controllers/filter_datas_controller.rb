@@ -16,8 +16,8 @@ class FilterDatasController < ApplicationController
       @resources = User.trainees.order(:name).pluck :name
     when "trainee_type"
       @key_field = :id
-      @value_field = :user_type_name
-      @resources = UserType.order(:name).pluck :name
+      @value_field = :trainee_type_name
+      @resources = TraineeType.pluck(:name).sort!
     when "location"
       @key_field = :id
       @value_field = :location_name

@@ -13,7 +13,7 @@ class User < ApplicationRecord
   ATTRIBUTES_PROFILE_PARAMS = [
     :id, :start_training_date, :leave_date, :finish_training_date,
     :ready_for_project, :contract_date, :naitei_company,
-    :user_type_id, :university_id, :language_id, :user_progress_id,
+    :trainee_type_id, :university_id, :language_id, :user_progress_id,
     :status_id, :location_id, :graduation, :working_day, :staff_code,
     :join_div_date, :stage_id, :away_date, :comeback_date
   ]
@@ -119,12 +119,12 @@ class User < ApplicationRecord
     return course.user_courses.find_by(leader_id: self.id) ? true :false
   end
 
-  %w(admin trainee trainer).each do |user_type|
-    define_method "is_#{user_type}?" do
+  %w(admin trainee trainer).each do |trainee_type|
+    define_method "is_#{trainee_type}?" do
       if current_role.present?
-        current_role.include? eval("Settings.namespace_roles.#{user_type}")
+        current_role.include? eval("Settings.namespace_roles.#{trainee_type}")
       else
-        check_role eval("Role.role_types[:#{user_type}]")
+        check_role eval("Role.role_types[:#{trainee_type}]")
       end
     end
   end

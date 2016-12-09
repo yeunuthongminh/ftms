@@ -1,4 +1,4 @@
-class UserType < ApplicationRecord
+class TraineeType < ApplicationRecord
   acts_as_paranoid
 
   ATTRIBUTES_PARAMS = [:name, :color]
