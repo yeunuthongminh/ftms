@@ -25,7 +25,7 @@ class CategoriesDatatable
     categories.map.each.with_index 1 do |category, index|
       [
         index,
-        category.name,
+        can_view(category),
         category.language_name,
         can_edit(category),
         can_delete(category)
@@ -77,6 +77,14 @@ class CategoriesDatatable
 
   def current_user
     @current_user
+  end
+
+  def can_view category
+    if policy(controller: "categories", action: "show")
+      link_to category.name, eval("@view.#{@namespace}_category_path(category)")
+    else
+      ""
+    end
   end
 
   def can_edit category
