@@ -10,7 +10,8 @@ class Admin::QuestionsController < ApplicationController
 
   def index
     questions = Question.includes :category
-    @question_presenters = QuestionPresenter.new(questions, @namespace).render
+    @question_presenters = QuestionPresenter.new({questions: questions,
+      namespace: @namespace}).render
   end
 
   def new

@@ -1,9 +1,10 @@
 class QuestionPresenter < ActionView::Base
   include Rails.application.routes.url_helpers
 
-  def initialize questions, namespace
-    @questions = questions
-    @namespace = namespace
+  def initialize args
+    @questions = args[:questions]
+    @namespace = args[:namespace]
+    @category = args[:category]
   end
 
   def render
@@ -39,11 +40,15 @@ class QuestionPresenter < ActionView::Base
   end
 
   def body_item question, index
-    html = "<div class=\"trow #{"list_#{index}" }\" id=\"body-row-#{question.id}\">
-      <div class=\"tcell category_name\" title=\"#{question.category_name}\">
-        #{question.category_name}
-      </div>
-      <div class=\"tcell level\" tite=\"#{question.level}\">
+    html = "<div class=\"trow #{"list_#{index}" }\" id=\"body-row-#{question.id}\">"
+
+    unless @category
+      html << "<div class=\"tcell category_name\" title=\"#{question.category_name}\">
+          #{question.category_name}
+        </div>"
+    end
+
+    html << "<div class=\"tcell level\" tite=\"#{question.level}\">
         #{t "questions.levels.#{question.level}"}
       </div>
       <div class=\"tcell action\">

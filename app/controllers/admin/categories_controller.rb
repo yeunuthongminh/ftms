@@ -2,8 +2,9 @@ class Admin::CategoriesController < ApplicationController
   include FilterData
 
   before_action :authorize
-  before_action :load_category, only: [:edit, :update, :destroy]
+  before_action :load_category, except: [:index, :new, :create]
   before_action :load_supports, only: :edit
+  before_action :load_filter, only: :show
 
   def index
     respond_to do |format|
@@ -12,6 +13,14 @@ class Admin::CategoriesController < ApplicationController
         render json: CategoriesDatatable.new(view_context, @namespace, current_user)
       end
     end
+  end
+
+  def show
+    add_breadcrumb_path "categories"
+    add_breadcrumb @category.name, :admin_course_path
+
+    @question_presenters = QuestionPresenter.new({questions: @category.questions,
+      namespace: @namespace, category: @category}).render
   end
 
   def new

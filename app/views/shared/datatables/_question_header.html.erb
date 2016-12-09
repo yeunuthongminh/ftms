@@ -1,13 +1,11 @@
 <div class="fixedTitle">
-
   <div class="tbody">
     <div class="trow header">
       <div class="tcell stt">#</div>
       <div class="tcell question_content title">
         <%= t "questions.table.content" %>
-        <%= link_to filter_datas_path(type: :question_content, filter_type: :questions),
-          remote: true,
-          class: "open-select",
+        <%= link_to filter_datas_path(type: :question_content,
+          filter_type: :questions), remote: true, class: "open-select",
           data: {name: "f-question_content"} do %>
           <i class="fa ic ic-filter question_content"></i>
         <% end %>
@@ -24,21 +22,21 @@
   <div id="table-header" class="scroll-table">
     <div class="tbody">
       <div class="trow header">
-        <div class="tcell category_name title">
-          <%= t "questions.table.category" %>
-          <%= link_to filter_datas_path(type: :category_name, filter_type: :questions),
-            remote: true,
-            class: "open-select",
-            data: {name: "f-category_name"} do %>
-            <i class="fa ic ic-filter category_name"></i>
-          <% end %>
-        </div>
+        <% unless defined? category %>
+          <div class="tcell category_name title">
+            <%= t "questions.table.category" %>
+            <%= link_to filter_datas_path(type: :category_name,
+              filter_type: :questions), remote: true, class: "open-select",
+              data: {name: "f-category_name"} do %>
+              <i class="fa ic ic-filter category_name"></i>
+            <% end %>
+          </div>
+        <% end %>
+
         <div class="tcell level title">
           <%= t "questions.table.level" %>
           <%= link_to filter_datas_path(type: :level, filter_type: :questions),
-            remote: true,
-            class: "open-select",
-            data: {name: "f-level"} do %>
+            remote: true, class: "open-select", data: {name: "f-level"} do %>
             <i class="fa ic ic-filter level"></i>
           <% end %>
         </div>

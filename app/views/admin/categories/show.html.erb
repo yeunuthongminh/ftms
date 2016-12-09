@@ -1,0 +1,40 @@
+<div id="categories">
+  <div class="row">
+    <div class="col-md-12 title">
+      <span>
+        <%= link_to t("buttons.new"), new_admin_question_path,
+          class: "btn btn-primary pull-right" %>
+      </span>
+    </div>
+  </div>
+  <div id="questions">
+    <h3 class="title">
+      <%= t "questions.all" %> - <%= @category.name %>
+
+      <button id="btn-filter-on-off" title="<%= filter_title %>"
+        class="btn-filter-onoff-project btn btn-default">
+        &nbsp;
+      </button>
+      <span id="filter-loading" class="filter-loading-offset-top"></span>
+    </h3>
+    <%= image_tag "loading.gif", id: "loading" %>
+
+    <div class="table">
+      <%= render "shared/datatables/question_header", category: @category %>
+      <%= @question_presenters.html_safe %>
+    </div>
+
+    <div class="pull-right" id="number-records">
+    </div>
+
+    <div id="filter" data-filter-data="<%= @filter_service.user_filter_data %>"
+      data-type="<%= :questions %>" data-id="<%= current_user.id %>"
+      data-is-turn-on="<%= @filter_service.is_on? %>">
+    </div>
+
+    <div class="list-filters">
+      <div class="filter-form">
+      </div>
+    </div>
+  </div>
+</div>
