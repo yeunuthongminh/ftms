@@ -7,3 +7,11 @@ en:
       requirements: "Requirement"
       empty: "Nothing to show"
       records: " records."
+      new_project: "New project"
+      new_requirement: "New requirement"
+    create_project:
+      success: "Create project successfully"
+      fail: "Sorry, something went wrong!"
+    create_requirement:
+      success: "Create requirement successfully"
+      fail: "Sorry, something went wrong!"

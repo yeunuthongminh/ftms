@@ -1,5 +1,4 @@
 #projects {
-
   .fa-pencil::before {
     color: black;
   }
@@ -8,7 +7,7 @@
     color: red;
   }
 
-  .list-project {
+  .list-project, .list-requirement {
     height: 80vh;
     background: #fff;
     overflow: auto;
@@ -92,6 +91,10 @@
   }
 
   .active {
+    background-color: #5caf38;
+    &:hover {
+      color: #000;
+    }
     .action a {
       color: #fff !important;
     }
@@ -101,5 +104,18 @@
     margin-top: 5px;
     padding-right: 5px;
     text-align: right;
+  }
+
+  .edit-name-field {
+    width: 80%;
+    color: #000;
+  }
+
+  .edit-prj-cancel, .edit-prj-save {
+    margin-left: 5px;
+  }
+
+  #new-rqm, #new-prj {
+    margin-bottom: 10px;
   }
 }
