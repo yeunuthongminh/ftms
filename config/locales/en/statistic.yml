@@ -14,7 +14,7 @@ en:
     universities:
       title: "Total trainees by universities"
       serie_name: "Trainees"
-    programming_languages:
+    languages:
       title: "Total trainees by languages"
       serie_name: "Trainees"
     locations:
