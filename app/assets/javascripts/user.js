@@ -78,9 +78,16 @@ $(document).on("turbolinks:load", function() {
     $(this).find(".form-control").val('').end();
   });
 
-  $('input[name="location_ids[]"]').click( function(){
-    $('#form_total_trainee').submit();
+  $('input[name="location_ids[]"]').click(function(){
     $('input[name="check_visit"]').attr('checked', true);
+    $('input[name="check_location"]').val(1);
+    $('#form_total_trainee').submit();
+    $('#form_universities_filter').submit();
+  });
+
+  $('input[name="trainee_type_ids[]"]').click(function(){
+    $('input[name="check_trainee_type"]').val(1);
+    $('#form_universities_filter').submit();
   });
 });
 

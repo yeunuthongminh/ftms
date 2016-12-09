@@ -1,0 +1,27 @@
+<%= form_tag admin_statistics_path, remote: true,
+  id: "form_universities_filter" do %>
+  <%= hidden_field_tag :type, params[:type] %>
+  <div class="col-md-12 locations-filter">
+    <label><%= t "statistics.titles.locations" %></label>
+    <%= hidden_field_tag "location_ids[]", "" %>
+    <% @statistics.load_locations.each do |location| %>
+      <p><label class="location">
+        <%= check_box_tag "location_ids[]", location.id, checked: true %>
+        <%= location.name %>
+      </label></p>
+    <% end %>
+  </div>
+  <div class="col-md-12 trainee-types-filter">
+    <label><%= t "statistics.titles.trainee_types" %></label>
+    <%= hidden_field_tag "trainee_type_ids[]", "" %>
+    <div class="row">
+      <% @statistics.load_trainee_types.each do |trainee_type| %>
+        <p class="col-sm-6"><label class="trainee_type">
+          <%= check_box_tag "trainee_type_ids[]", trainee_type.id,
+            checked: true %>
+          <%= trainee_type.name %>
+        </label></p>
+      <% end %>
+    </div>
+  </div>
+<% end %>

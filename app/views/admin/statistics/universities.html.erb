@@ -17,8 +17,15 @@
       </div>
 
       <div class="box-body">
-        <div id="universities-statistic"
-          data-universities="<%= @statistics.universities %>">
+        <div class="col-md-3">
+          <div class="row">
+            <%= render "universities_filter" %>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div id="universities-statistic"
+            data-universities="<%= @statistics.universities %>">
+          </div>
         </div>
       </div>
     </div>
