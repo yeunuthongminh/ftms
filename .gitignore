@@ -36,3 +36,4 @@ bower.json
 # Ignore pow environment settings
 .powenv
 app/assets/javascripts/i18n/translations.js
+doc/
