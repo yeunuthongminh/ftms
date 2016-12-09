@@ -1,0 +1,105 @@
+#projects {
+
+  .fa-pencil::before {
+    color: black;
+  }
+
+  .fa-remove::before {
+    color: red;
+  }
+
+  .list-project {
+    height: 80vh;
+    background: #fff;
+    overflow: auto;
+  }
+
+  .list-group-item {
+    position: relative;
+    &:first-child {
+      border-top-right-radius: 0px;
+      border-top-left-radius: 0px;
+    }
+    .project-item {
+      cursor: pointer;
+    }
+    &:hover {
+      background-color: #DDEBD7;
+    }
+  }
+
+  .project-item {
+    cursor: pointer;
+  }
+
+  .panel {
+    margin-bottom: -3px;
+  }
+
+  .action {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    width: 25px;
+    height: 25px;
+    a {
+      float: right;
+      position: absolute;
+      right: 0;
+      margin-left: 5px;
+      transition: all 0.5s ease-in-out;
+      .fa {
+        padding: 4px 0 0 6px;
+        width: 25px;
+        height: 25px;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      &:first-child {
+        z-index: 99;
+      }
+
+      &:last-child {
+        visibility: hidden;
+      }
+    }
+
+    &:hover {
+      width: 65px;
+      a {
+        -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2);
+        &:last-child {
+          visibility: visible;
+          margin-right: 35px;
+        }
+      }
+    }
+  }
+
+  .empty {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .active {
+    .action a {
+      color: #fff !important;
+    }
+  }
+
+  .sum-record {
+    margin-top: 5px;
+    padding-right: 5px;
+    text-align: right;
+  }
+}

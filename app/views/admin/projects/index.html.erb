@@ -1,0 +1,52 @@
+<div id="projects" class="systems-active">
+  <div class="col-md-5 col-md-offset-1">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title" align="center">
+          <%= t "projects.label.projects" %>
+        </h3>
+      </div>
+    </div>
+    <div class="panel panel-primary list-project">
+      <ul class="list-group">
+        <% @projects.each.with_index 1 do |project, index| %>
+          <li class="list-group-item project-item" data-prj="<%= project.id %>">
+            <%= "#{index}." %>&nbsp;&nbsp;<%= project.name %>
+            <div class="action">
+              <a href="#" class="edit" title="<%= t "buttons.edit" %>">
+                <i class="fa fa-pencil"></i></a>
+              <a href="#" class="delete" title="<%= t "buttons.delete" %>">
+                <i class="fa fa-remove"></i></a>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="sum-record">
+      <h5 id="sumProject">
+        <b><%= @projects.size %></b>&nbsp;<%= t "projects.label.records" %>
+      </h5>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title" align="center">
+          <%= t "projects.label.requirements" %>
+        </h3>
+      </div>
+    </div>
+    <div class="panel panel-info list-project">
+      <ul class="list-group" id="list-rqms">
+        <div class="empty">
+          <h2><%= t "projects.label.empty" %></h2>
+        </div>
+      </ul>
+    </div>
+    <div class="sum-record">
+      <h5 id="sumRequirement">
+        <b>0</b>&nbsp;<%= t "projects.label.records" %>
+      </h5>
+    </div>
+  </div>
+</div>
