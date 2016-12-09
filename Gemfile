@@ -64,4 +64,5 @@ group :development, :test do
   gem "i18n-tasks", "~> 0.8.7"
   gem "rspec-rails", "~> 3.0"
   gem "bullet"
+  gem "railroady"
 end
