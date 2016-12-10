@@ -4,6 +4,7 @@
 #statistics {
   @include customize-scrollbar;
 
+
   #total_trainees {
     .fixedTable-body {
       height: auto;
@@ -78,76 +79,24 @@
   }
 
   #universities {
-    .fixedTable-body {
-      height: auto;
-    }
-
-    .fixedTitle, .fixedTable-header {
-      max-height: 31px;
-      min-height: 31px;
-      height: 31px;
-    }
-
-    #fixed-bottom-body {
-      max-height: 22px;
-      min-height: 22px;
-      height: 22px;
-      .tcell {
-        max-height: 22px;
-        min-height: 22px;
-        height: 22px;
-      }
-    }
-
-    #fixed-bottom-sidebar {
-      max-height: 22px;
-      min-height: 22px;
-      height: 22px;
-    }
+    @include fixed-statistic-style;
 
     .tcell {
-      &.stt {
-        min-width: 35px;
-        max-width: 35px;
-      }
-
-      &.university {
-        text-align: left;
-        text-transform: capitalize;
-        border-left: 0;
-        @include ellipsis(210px);
-        position: relative;
-      }
-
-      &.number_trainees{
-        @include ellipsis(300px);
-      }
-    }
-
-    h3 {
-      margin-top: 0px;
-    }
-
-    .total-trainees {
-      font-size: 16px;
-    }
-
-  }
-
-  #tbl-universities {
-    .table {
-      min-height: 380px;
-    }
-
-    #btn-filter-on-off {
-      float: none;
-    }
-
-    #loading {
-      top: 0;
-      right: 80px;
+      @include tcell-statistic-style("university");
     }
   }
+
+  @include tbl-statistic-style("universities");
+
+  #languages {
+    @include fixed-statistic-style;
+
+    .tcell {
+      @include tcell-statistic-style("language");
+    }
+  }
+
+  @include tbl-statistic-style("languages");
 
   .universities_filter_form {
     border: 1px solid #BCD;

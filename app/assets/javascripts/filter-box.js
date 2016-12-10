@@ -146,6 +146,8 @@ function toggleFilterMenu(element, resize) {
     _left = 470;
   } else if (fa.hasClass('university')){
     _left = fa.offset().left - 24;
+  } else if (fa.hasClass('language')){
+    _left = fa.offset().left - 24;
   } else {
     $filterDom.removeClass(rightArowClass);
     _left = fa.offset().left - 12;
@@ -157,8 +159,9 @@ function toggleFilterMenu(element, resize) {
     _top = $(".panel").offset().top - 44;
   } else if (fa.hasClass('university') && $('#tbl-universities').offset()) {
     _top = fa.offset().top - $('#tbl-universities').offset().top + 10;
+  } else if (fa.hasClass('language') && $('#tbl-languages').offset()) {
+    _top = fa.offset().top - $('#tbl-languages').offset().top + 10;
   }
-
   $filterDom.css({"top": _top, "left": _left});
 
   if (!resize) {
