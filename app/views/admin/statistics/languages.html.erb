@@ -1,23 +1,32 @@
 <div id="statistics">
-  <div class="<%= params[:type] %> box box-success">
-    <div class="box-header with-border">
-      <h3 class="box-title">
-        <%= t "statistics.languages.title" %>
-      </h3>
+  <div class="<%= params[:type] %>">
+    <div class="box box-success">
+      <div class="box-header with-border">
+        <h3 class="box-title">
+          <%= t "statistics.languages.title" %>
+        </h3>
 
-      <div class="box-tools pull-right">
-        <button type="button" class="btn btn-box-tool" data-widget="collapse">
-          <i class="fa fa-minus"></i>
-        </button>
-        <button type="button" class="btn btn-box-tool" data-widget="remove">
-          <i class="fa fa-times"></i>
-        </button>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse">
+            <i class="fa fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="box-body">
-      <div id="languages-statistic"
-        data-languages="<%= @statistics.languages %>">
+      <div class="box-body">
+        <div class="col-md-3 filter_form_chart">
+          <div class="row">
+            <%= render "filter_form",type: "language" %>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div id="languages-statistic"
+            data-languages="<%= @statistics.languages %>">
+          </div>
+        </div>
       </div>
     </div>
     <%= render "table_statistic_below_chart", type: "language" %>

@@ -83,11 +83,13 @@ $(document).on("turbolinks:load", function() {
     $('input[name="check_location"]').val(1);
     $('#form_total_trainee').submit();
     $('#form_universities_filter').submit();
+    $('#form_languages_filter').submit();
   });
 
   $('input[name="trainee_type_ids[]"]').click(function(){
     $('input[name="check_trainee_type"]').val(1);
     $('#form_universities_filter').submit();
+    $('#form_languages_filter').submit();
   });
 });
 

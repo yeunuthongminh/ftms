@@ -68,12 +68,19 @@ function load_languages_statistic_chart() {
       type: 'pie'
     },
     title: false,
+    tooltip: {
+      formatter: function () {
+        return I18n.t('languages.header.name') + ': ' + '<strong>' + this.key + '</strong>' + ' <br/>' +
+          I18n.t('statistics.languages.serie_name') + ': ' + '<strong>' + this.y + '</strong>';
+      }
+    },
     plotOptions: {
       pie: {
         allowPointSelect: true,
         cursor: 'pointer',
         dataLabels: {
-          enabled: false
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.extraValue}'
         },
         showInLegend: true
       }
@@ -81,7 +88,7 @@ function load_languages_statistic_chart() {
     series: [{
       name: I18n.t('statistics.languages.serie_name'),
       colorByPoint: true,
-      data: eval('(' + $('#languages-statistic').attr('data-languages').replace(/&gt;/g, ">").replace(/&quot;/g,"\"").replace(/:y=>/g, "y:").replace(/:name=>/g, "name:") + ')')
+      data: eval('(' + $('#languages-statistic').attr('data-languages').replace(/&gt;/g, ">").replace(/&quot;/g,"\"").replace(/:y=>/g, "y:").replace(/:name=>/g, "name:").replace(/:extraValue=>/g, "extraValue:") + ')')
     }]
   });
 }

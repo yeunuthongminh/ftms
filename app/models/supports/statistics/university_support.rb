@@ -8,9 +8,7 @@ class Supports::Statistics::UniversitySupport < Supports::Statistics::Applicatio
   end
 
   def trainee_by_university
-    @trainee_ids ||= User.where(type: Trainee.to_s).pluck :id
-
-    @load_trainee_by_location_and_type ||= Profile.where(user_id: @trainee_ids,
+    @load_trainee_by_location_and_type ||= Profile.where(user_id: load_all_trainee,
       location_id: @location_ids, trainee_type_id: @trainee_type_ids)
       .includes :university
 

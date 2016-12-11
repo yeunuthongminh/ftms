@@ -36,6 +36,14 @@ function totalTraineeValue() {
     if($('#languages').length > 0) {
       counting_trainee("language");
     }
+
+    if($('#trainee_types').length > 0) {
+      counting_trainee("trainee_type");
+    }
+
+    if($('#locations').length > 0) {
+      counting_trainee("location");
+    }
   }
 }
 

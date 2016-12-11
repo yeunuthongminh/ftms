@@ -105,7 +105,27 @@
 
   @include tbl-statistic-style("languages");
 
-  .universities_filter_form {
+  #locations {
+    @include fixed-statistic-style;
+
+    .tcell {
+      @include tcell-statistic-style("location");
+    }
+  }
+
+  @include tbl-statistic-style("locations");
+
+  #trainee_types {
+    @include fixed-statistic-style;
+
+    .tcell {
+      @include tcell-statistic-style("trainee_type");
+    }
+  }
+
+  @include tbl-statistic-style("trainee_types");
+
+  .filter_form_chart {
     border: 1px solid #BCD;
     padding: 10px;
     margin-bottom: 20px;
