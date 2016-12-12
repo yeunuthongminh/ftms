@@ -1,5 +1,6 @@
 <div id="projects" class="systems-active">
   <div class="col-md-5 col-md-offset-1">
+    <button id="new-prj" class="btn btn-primary"><%= t "projects.label.new_project" %></button>
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title" align="center">
@@ -11,11 +12,11 @@
       <ul class="list-group">
         <% @projects.each.with_index 1 do |project, index| %>
           <li class="list-group-item project-item" data-prj="<%= project.id %>">
-            <%= "#{index}." %>&nbsp;&nbsp;<%= project.name %>
+            <%= "#{index}." %>&nbsp;&nbsp;<span><%= project.name %></span>
             <div class="action">
-              <a href="#" class="edit" title="<%= t "buttons.edit" %>">
+              <a href="#" class="prj-edit" title="<%= t "buttons.edit" %>">
                 <i class="fa fa-pencil"></i></a>
-              <a href="#" class="delete" title="<%= t "buttons.delete" %>">
+              <a href="#" class="prj-delete" title="<%= t "buttons.delete" %>">
                 <i class="fa fa-remove"></i></a>
             </div>
           </li>
@@ -29,6 +30,9 @@
     </div>
   </div>
   <div class="col-md-5">
+    <button id="new-rqm" class="btn btn-primary" disabled="disabled">
+      <%= t "projects.label.new_requirement" %>
+    </button>
     <div class="panel panel-info">
       <div class="panel-heading">
         <h3 class="panel-title" align="center">
@@ -36,7 +40,7 @@
         </h3>
       </div>
     </div>
-    <div class="panel panel-info list-project">
+    <div class="panel panel-info list-requirement">
       <ul class="list-group" id="list-rqms">
         <div class="empty">
           <h2><%= t "projects.label.empty" %></h2>
