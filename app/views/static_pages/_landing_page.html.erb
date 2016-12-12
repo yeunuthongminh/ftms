@@ -21,115 +21,247 @@
     <div class="col-md-12">
       <div class="flexslider">
         <ul class="slides">
-          <% 3.times do |i| %>
-            <li class="program-progress">
-              <div id="program-<%= i %>" class="clearfix">
-                <div class="section-title">
-                  <%= t "staticpages.program_timeline.title" %>
-                </div>
-                <div class="container-fluid">
-                  <div class="col-sm-12 program-timeline" data-total-col="36">
-                    <div class="col-sm-3 timeline-block" data-col="2">
-                      <div class="timeline-content">
-                        <div class="timeline-heading">
-                          <h2 class="title">
-                            <%= t "staticpages.program_timeline.git.title" %>
-                          </h2>
-                          <h4 class="subject-duration">
-                            <%= t "staticpages.program_timeline.git.duration" %>
-                          </h4>
-                        </div>
-                        <div class="timeline-body">
-                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
-                            title="<%= t "staticpages.program_timeline.git.body" %>"></span>
-                        </div>
+          <li class="program-progress">
+            <div id="program-open-edu" class="clearfix">
+              <div class="section-title">
+                <%= t "staticpages.open_edu.title" %>
+              </div>
+              <div class="container-fluid">
+                <div class="col-sm-12 program-timeline" data-total-col="22">
+                  <div class="col-sm-3 timeline-block" data-col="2">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.open_edu.git.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.open_edu.git.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.open_edu.git.body" %>"></span>
                       </div>
                     </div>
-                    <div class="col-sm-3 timeline-block" data-col="5">
-                      <div class="timeline-content">
-                        <div class="timeline-heading">
-                          <h2 class="title">
-                            <%= t "staticpages.program_timeline.ruby.title" %>
-                          </h2>
-                          <h4 class="subject-duration">
-                            <%= t "staticpages.program_timeline.ruby.duration" %>
-                          </h4>
-                        </div>
-                        <div class="timeline-body">
-                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
-                            title="<%= t "staticpages.program_timeline.ruby.body" %>"></span>
-                        </div>
+                  </div>
+                  <div class="col-sm-3 timeline-block" data-col="10">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.open_edu.tutorial.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.open_edu.tutorial.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.open_edu.tutorial.body" %>"></span>
                       </div>
                     </div>
-                    <div class="col-sm-3 timeline-block" data-col="7">
-                      <div class="timeline-content">
-                        <div class="timeline-heading">
-                          <h2 class="title">
-                            <%= t "staticpages.program_timeline.rails.title" %>
-                          </h2>
-                          <h4 class="subject-duration">
-                            <%= t "staticpages.program_timeline.rails.duration" %>
-                          </h4>
-                        </div>
-                        <div class="timeline-body">
-                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
-                            title="<%= t "staticpages.program_timeline.rails.body" %>"></span>
-                        </div>
+                  </div>
+                  <div class="col-sm-3 timeline-block" data-col="10">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.open_edu.project1.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.open_edu.project1.duration" %>
+                        </h4>
                       </div>
-                    </div>
-                    <div class="col-sm-3 timeline-block" data-col="10">
-                      <div class="timeline-content">
-                        <div class="timeline-heading">
-                          <h2 class="title">
-                            <%= t "staticpages.program_timeline.project1.title" %>
-                          </h2>
-                          <h4 class="subject-duration">
-                            <%= t "staticpages.program_timeline.project1.duration" %>
-                          </h4>
-                        </div>
-                        <div class="timeline-body">
-                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
-                            title="<%= t "staticpages.program_timeline.project1.body" %>"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-3 timeline-block" data-col="2">
-                      <div class="timeline-content">
-                        <div class="timeline-heading">
-                          <h2 class="title">
-                            <%= t "staticpages.program_timeline.mysql.title" %>
-                          </h2>
-                          <h4 class="subject-duration">
-                            <%= t "staticpages.program_timeline.mysql.duration" %>
-                          </h4>
-                        </div>
-                        <div class="timeline-body">
-                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
-                            title="<%= t "staticpages.program_timeline.mysql.body" %>"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-3 timeline-block" data-col="10">
-                      <div class="timeline-content">
-                        <div class="timeline-heading">
-                          <h2 class="title">
-                            <%= t "staticpages.program_timeline.project2.title" %>
-                          </h2>
-                          <h4 class="subject-duration">
-                            <%= t "staticpages.program_timeline.project2.duration" %>
-                          </h4>
-                        </div>
-                        <div class="timeline-body">
-                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
-                            title="<%= t "staticpages.program_timeline.project2.body" %>"></span>
-                        </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.open_edu.project1.body" %>"></span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </li>
-          <% end %>
+            </div>
+          </li>
+          <li class="program-progress">
+            <div id="program-intern" class="clearfix">
+              <div class="section-title">
+                <%= t "staticpages.intern.title" %>
+              </div>
+              <div class="container-fluid">
+                <div class="col-sm-12 program-timeline" data-total-col="34">
+                  <div class="col-sm-3 timeline-block" data-col="2">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.intern.git.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.intern.git.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.intern.git.body" %>"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 timeline-block" data-col="10">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.intern.tutorial.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.intern.tutorial.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.intern.tutorial.body" %>"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 timeline-block" data-col="10">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.intern.project1.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.intern.project1.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.intern.project1.body" %>"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 timeline-block" data-col="2">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.intern.mysql.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.intern.mysql.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.intern.mysql.body" %>"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 timeline-block" data-col="10">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.intern.project2.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.intern.project2.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.intern.project2.body" %>"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="program-progress">
+            <div id="program-new-dev" class="clearfix">
+              <div class="section-title">
+                <%= t "staticpages.new_dev.title" %>
+              </div>
+              <div class="container-fluid">
+                <div class="col-sm-12 program-timeline" data-total-col="34">
+                  <div class="col-sm-3 timeline-block" data-col="2">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.new_dev.git.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.new_dev.git.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.new_dev.git.body" %>"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 timeline-block" data-col="10">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.new_dev.tutorial.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.new_dev.tutorial.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.new_dev.tutorial.body" %>"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 timeline-block" data-col="10">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.new_dev.project1.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.new_dev.project1.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.new_dev.project1.body" %>"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 timeline-block" data-col="2">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.new_dev.mysql.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.new_dev.mysql.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.new_dev.mysql.body" %>"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 timeline-block" data-col="10">
+                    <div class="timeline-content">
+                      <div class="timeline-heading">
+                        <h2 class="title">
+                          <%= t "staticpages.new_dev.project2.title" %>
+                        </h2>
+                        <h4 class="subject-duration">
+                          <%= t "staticpages.new_dev.project2.duration" %>
+                        </h4>
+                      </div>
+                      <div class="timeline-body">
+                        <span data-toggle="tooltip" data-placement="bottom"
+                          title="<%= t "staticpages.new_dev.project2.body" %>"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>

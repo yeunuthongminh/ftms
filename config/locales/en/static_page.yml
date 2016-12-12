@@ -15,38 +15,64 @@ en:
       excerpt: "Aenean eu leo quam. Pellentesque ornare sem lacinia quam
         venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod.
         Praesent commodo cursus magna, vel scelerisque nisl consectetur et."
-    program_timeline:
-      title: "Ruby on Rails"
+    open_edu:
+      title: "Open Education"
       git:
         title: "Git"
         duration: "2 days"
-        body: "Nemo enim ipsam voluptatem quia voluptas sit atur aut odit aut
-          fugit, sed quia consequuntur magni res."
-      ruby:
-        title: "Ruby"
-        duration: "5 days"
-        body: "Nemo enim ipsam voluptatem quia voluptas sit atur aut odit aut
-          fugit, sed quia consequuntur magni res."
-      rails:
-        title: "Rails"
-        duration: "7 days"
-        body: "Nemo enim ipsam voluptatem quia voluptas sit atur aut odit aut
-          fugit, sed quia consequuntur magni res."
+        body: "Learn how to work with Git"
+      tutorial:
+        title: "Tutorial"
+        duration: "10 days"
+        body: "Learn tutorials about the languages."
       project1:
         title: "Project 1"
         duration: "10 days"
-        body: "Nemo enim ipsam voluptatem quia voluptas sit atur aut odit aut
-          fugit, sed quia consequuntur magni res."
+        body: "Use what you've learned to build a project."
+    intern:
+      title: "Intern"
+      git:
+        title: "Git"
+        duration: "2 days"
+        body: "Learn how to work with Git"
+      tutorial:
+        title: "Tutorial"
+        duration: "10 days"
+        body: "Learn tutorials about the languages."
+      project1:
+        title: "Project 1"
+        duration: "10 days"
+        body: "Use what you've learned to build a project."
       mysql:
         title: "MySQL"
         duration: "2 days"
-        body: "Nemo enim ipsam voluptatem quia voluptas sit atur aut odit aut
-          fugit, sed quia consequuntur magni res."
+        body: "Learn MySQL."
       project2:
         title: "Project 2"
         duration: "10 days"
-        body: "Nemo enim ipsam voluptatem quia voluptas sit atur aut odit aut
-          fugit, sed quia consequuntur magni res."
+        body: "Use what you've learned to build a project."
+    new_dev:
+      title: "New dev"
+      git:
+        title: "Git"
+        duration: "2 days"
+        body: "Learn how to work with Git"
+      tutorial:
+        title: "Tutorial"
+        duration: "10 days"
+        body: "Learn tutorials about the languages."
+      project1:
+        title: "Project 1"
+        duration: "10 days"
+        body: "Use what you've learned to build a project."
+      mysql:
+        title: "MySQL"
+        duration: "2 days"
+        body: "Learn MySQL."
+      project2:
+        title: "Project 2"
+        duration: "10 days"
+        body: "Use what you've learned to build a project."
     counters:
       title: "Developing Developers"
       content: "Master new skills in programming, design and product building."
