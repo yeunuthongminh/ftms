@@ -2,27 +2,34 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <%= link_to root_url, class: "logo" do %>
+        <%= link_to root_url, class: "navbar-brand logo" do %>
           <%= image_tag "logo.png", title: t("name_system") %>
         <% end %>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-navbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
       </div>
-      <% if user_signed_in? %>
-        <ol class="navbar-header">
-          <%= link_to courses_path do %>
-            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-            <%= t "user-header.courses" %>
-          <% end %>
-          <%= link_to exams_path do %>
-            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-            <%= t "user-header.exams" %>
-          <% end %>
-          <%= link_to chats_path do %>
-            <i class="fa fa-weixin" aria-hidden="true"></i>
-            <%= t "chats.chat" %>
-          <% end %>
-        </ol>
+
+      <div class="collapse navbar-collapse" id="header-navbar">
+        <% if user_signed_in? %>
+          <ul class="nav navbar-nav">
+            <%= link_to courses_path do %>
+              <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+              <%= t "user-header.courses" %>
+            <% end %>
+            <%= link_to exams_path do %>
+              <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+              <%= t "user-header.exams" %>
+            <% end %>
+            <%= link_to chats_path do %>
+              <i class="fa fa-weixin" aria-hidden="true"></i>
+              <%= t "chats.chat" %>
+            <% end %>
+          </ul>
         <% end %>
-      <div id="bs-example-navbar-collapse-1">
+
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
             <li>
@@ -85,9 +92,25 @@
             </li>
           <% else %>
             <li>
-              <a href="#" data-toggle="modal" data-target="#login-modal">
-                <%= t "staticpages.login" %>
-              </a>
+              <%= link_to t("staticpages.home"), root_path(anchor: "home-index"),
+                class: "scroll_to_section", data: {target: "#home-index"} %>
+            </li>
+            <li>
+              <%= link_to t("staticpages.about"), root_path(anchor: "footer-distributed"),
+                class: "scroll_to_section", data: {target: "#footer-distributed"} %>
+            </li>
+            <li>
+              <%= link_to t("staticpages.learning_programs"), root_path(anchor: "learning-programs"),
+                class: "scroll_to_section", data: {target: "#learning-programs"} %>
+            </li>
+            <li>
+              <%= link_to t("staticpages.faq"), root_path(anchor: "faq_homepage"),
+                class: "scroll_to_section", data: {target: "#faq_homepage"} %>
+            </li>
+            <li>
+              <button class="btn btn-danger btn-login" data-toggle="modal" data-target="#login-modal">
+                <i class="fa fa-sign-in"></i> <%= t "staticpages.login" %>
+              </button>
             </li>
           <% end %>
         </ul>
