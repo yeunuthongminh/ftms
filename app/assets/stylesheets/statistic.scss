@@ -148,4 +148,14 @@
       right: 80px;
     }
   }
+
+  .locations-filter {
+    margin-bottom: 20px;
+  }
+
+  label {
+    &.location, &.trainee_type {
+      font-weight: normal;
+    }
+  }
 }
