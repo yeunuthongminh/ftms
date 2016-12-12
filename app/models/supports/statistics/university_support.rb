@@ -8,30 +8,28 @@ class Supports::Statistics::UniversitySupport < Supports::Statistics::Applicatio
   end
 
   def trainee_by_university
-    @load_trainee_by_location_and_type ||= Profile.where(location_id:
-      @location_ids, trainee_type_id: @trainee_type_ids)
+    @trainee_ids ||= User.where(type: Trainee.to_s).pluck :id
+
+    @load_trainee_by_location_and_type ||= Profile.where(user_id: @trainee_ids,
+      location_id: @location_ids, trainee_type_id: @trainee_type_ids)
       .includes :university
 
-    @other_university ||= Hash[:name, I18n.t("statistics.other"), :y, 0]
-
     unless @load_all_trainee_by_university
-      all_universities = Array.new
+      none_university = Hash[:name, I18n.t("statistics.none"), :y, 0]
+      all_universities = University.all.map do |u|
+        Hash[:name, u[:abbreviation], :y, 0, :full_name, u[:name]]
+      end
       @load_trainee_by_location_and_type.each do |trainee|
         if trainee.university
           found_university = all_universities.find do |u|
             u[:name] == trainee.university_abbreviation
           end
-          if found_university
-            found_university[:y] += 1
-          else
-            all_universities << Hash[:name, trainee.university_abbreviation,
-              :y, 1, :full_name, trainee.university_name]
-          end
+          found_university[:y] += 1
         else
-          @other_university[:y] += 1
+          none_university[:y] += 1
         end
       end
-      all_universities << @other_university
+      all_universities << none_university
       @load_all_trainee_by_university = all_universities.sort_by {|u| u[:y]}
         .reverse
     end
@@ -41,10 +39,8 @@ class Supports::Statistics::UniversitySupport < Supports::Statistics::Applicatio
   def percentage_trainee_by_university
     list_universities = trainee_by_university
     total_trainee = list_universities.sum {|u| u[:y]}
-    list_universities -= [@other_university]
 
-    other_university = Hash[:name, @other_university[:name], :y,
-      @other_university[:y]]
+    other_university = Hash[:name, I18n.t("statistics.other"), :y, 0]
     universities = Array.new
 
     list_universities.each do |university|

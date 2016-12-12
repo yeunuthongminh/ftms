@@ -149,13 +149,19 @@
     }
   }
 
-  .locations-filter {
+  .universities_filter_form {
+    border: 1px solid #BCD;
+    padding: 10px;
     margin-bottom: 20px;
-  }
 
-  label {
-    &.location, &.trainee_type {
-      font-weight: normal;
+    .locations-filter {
+      margin-bottom: 20px;
+    }
+
+    label {
+      &.location, &.trainee_type {
+        font-weight: normal;
+      }
     }
   }
 }
