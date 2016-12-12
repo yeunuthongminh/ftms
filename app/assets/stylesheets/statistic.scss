@@ -4,7 +4,6 @@
 #statistics {
   @include customize-scrollbar;
 
-
   #total_trainees {
     .fixedTable-body {
       height: auto;
@@ -134,9 +133,231 @@
       margin-bottom: 20px;
     }
 
+
     label {
       &.location, &.trainee_type {
         font-weight: normal;
+      }
+    }
+  }
+  #trainee_progress {
+    @include customize-scrollbar;
+
+    .fixedTable-body .tcell{
+      padding: 0;
+    }
+
+    #loading{
+      position: absolute;
+      width: 28px;
+      top: 90px;
+      right: 50px;
+      display: none;
+    }
+
+    .fixedTable-body {
+      height: auto;
+    }
+
+    .fixedTitle, .fixedTable-sidebar, #parent, #child {
+      width: 304px;
+    }
+    .fixedTitle{
+      max-height: 31px;
+      min-height: 31px;
+    }
+    .fixedTable-header{
+      max-height: 31px;
+      min-height: 31px;
+    }
+
+    .scrollbarH {
+      margin-left: 304px;
+      display: block !important;
+    }
+    .trow.header{
+      height: 69px;
+    }
+
+    .tcell {
+      height: 35px;
+      &.stt {
+        min-width: 35px;
+        max-width: 35px;
+      }
+
+      &.staff_code {
+        @include ellipsis(70px);
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &.trainee_type {
+        text-align: left;
+        text-transform: capitalize;
+        border-left: 0;
+        @include ellipsis(80px);
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &.leave_date, &.contract_date, &.away_date, &.comeback_date {
+        min-width: 100px;
+        max-width: 100px;
+        position: relative;
+      }
+
+      &.empty {
+        min-width: 2700px;
+        max-width: 2700px;
+        border:0;
+        height:0px;
+      }
+
+      &.location {
+        min-width: 120px;
+        max-width: 120px;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &.action {
+        min-width: 60px;
+        max-width: 60px;
+        position: relative;
+      }
+
+      &.trainee_status {
+        min-width: 112px;
+        max-width: 112px;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &.university {
+        min-width: 140px;
+        max-width: 370px;
+        position: relative;
+      }
+
+      &.stage {
+        @include ellipsis(120px);
+        position: relative;
+      }
+
+      &.graduation {
+        min-width: 130px;
+        max-width: 130px;
+        position: relative;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+      }
+
+      &.current_progress, &.note {
+        min-width: 300px;
+        max-width: 300px;
+        position: relative;
+      }
+
+      &.language {
+        min-width: 120px;
+        max-width: 120px;
+        position: relative;
+      }
+
+      &.start_training_date, &.finish_training_date {
+        min-width: 150px;
+        max-width: 150px;
+        position: relative;
+      }
+
+      &.trainer {
+        min-width: 200px;
+        max-width: 200px;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &.ready_for_project {
+        min-width: 140px;
+        max-width: 140px;
+        position: relative;
+      }
+
+      &.working_day {
+        min-width: 150px;
+        max-width: 150px;
+        position: relative;
+      }
+
+      &.trainee_name {
+        min-width: 200px;
+        max-width: 200px;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &.none {
+        display: table-cell;
+        border-right: none;
+        border-top: 2px solid #ccc;
+      }
+
+      &.course_name {
+        min-width: 150px;
+        max-width: 150px;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &.course{
+        min-width: 2500px;
+        position: relative;
+        .list-progbar{
+          display: inline-flex;
+          .prog-bar-cont{
+            width: 350px;
+            padding: 0 10px 0 10px;
+            height: 25px;
+            top: 5px;
+          }
+        }
+        .prog-bar-bg-finish{
+          height: 19px;
+          text-align: center;
+          background: grey;
+        }
+        .prog-bar-bg-init{
+          text-align: center;
+          height: 19px;
+          background: green;
+        }
+        .prog-bar-bg-waiting{
+          text-align: center;
+          height: 19px;
+          background: orange;
+        }
+        .prog-bar{
+          box-shadow: none;
+        }
+        .prog-bar-bg{
+          position: relative;
+        }
       }
     }
   }
