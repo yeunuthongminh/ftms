@@ -14,7 +14,6 @@ gem "jquery-rails"
 gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.0"
 gem "sdoc", "~> 0.4.0", group: :doc
-gem "settingslogic"
 gem "devise"
 gem "ransack"
 gem "draper", github: "audionerd/draper", branch: "rails5"
@@ -51,6 +50,7 @@ gem "redis-rails"
 gem "redis-rack-cache", git: "git://github.com/jodosha/redis-rack-cache.git"
 gem "google_drive"
 gem "flexslider-rails"
+gem "config"
 
 group :development, :test do
   gem "rack-mini-profiler"
@@ -65,4 +65,5 @@ group :development, :test do
   gem "rspec-rails", "~> 3.0"
   gem "bullet"
   gem "railroady"
+  gem "figaro"
 end

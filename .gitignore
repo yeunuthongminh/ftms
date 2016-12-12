@@ -37,3 +37,10 @@ bower.json
 .powenv
 app/assets/javascripts/i18n/translations.js
 doc/
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
+
+# Ignore application configuration
+/config/application.yml
