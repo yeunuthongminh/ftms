@@ -16,9 +16,11 @@ en:
       title: "Total trainees by universities"
       title_detail: "Total trainees by universities detail"
       serie_name: "Trainees"
+      number_trainees: "Number trainees"
     languages:
       number_trainees: "Number trainees"
       title: "Total trainees by languages"
+      title_detail: "Total trainees by languages detail"
       serie_name: "Trainees"
     locations:
       title: "Total trainees by locations"

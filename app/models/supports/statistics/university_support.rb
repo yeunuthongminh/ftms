@@ -3,7 +3,7 @@ class Supports::Statistics::UniversitySupport < Supports::Statistics::Applicatio
     @universities ||= percentage_trainee_by_university
   end
 
-  def university_presenters
+  def presenters
     StatisticUniversityPresenter.new(trainee_by_university).render
   end
 
