@@ -1,6 +1,6 @@
 <div id="roles" class="systems-active">
   <div class="row">
-    <% if policy(controller: "roles", action: "new") %>
+    <% if policy new_admin_role_path %>
       <div class="col-md-12 title">
         <span>
           <%= link_to t("buttons.new"),

@@ -67,8 +67,9 @@ class RolesDatatable
   end
 
   def can_edit role
-    if policy(controller: "roles", action: "edit")
-      link_to @view.t("buttons.edit"), eval("@view.edit_#{@namespace}_role_path(role)"),
+    url = eval("@view.edit_#{@namespace}_role_path(role)")
+    if policy url
+      link_to @view.t("buttons.edit"), url,
         class: "text-primary pull-right"
     else
       ""
@@ -76,8 +77,9 @@ class RolesDatatable
   end
 
   def can_delete role
-    if policy(controller: "roles", action: "destroy")
-      link_to @view.t("buttons.delete"), eval("@view.#{@namespace}_role_path(role)"),
+    url = eval("@view.#{@namespace}_role_path(role)")
+    if policy_with_method(url: url, action: "destroy")
+      link_to @view.t("buttons.delete"), url,
         method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
         class: "text-danger pull-right"
     else

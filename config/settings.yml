@@ -164,6 +164,12 @@ controller_names:
   - "notifications"
   - "filter_datas"
   - "calendars"
+training_schedule:
+  - organization_charts
+  - training_managements
+imports:
+  - imports
+  - synchronizes
 import:
   file_types:
     - ".csv"
