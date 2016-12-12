@@ -210,6 +210,9 @@ function load_trainee_in_out_by_month_statistic_chart() {
     }, {
       name: I18n.t('statistics.in_out_by_month.series.trainee_join_div'),
       data: $('#in-out-by-month-statistic').data('trainee-join-div')
+    }, {
+      name: I18n.t('statistics.in_out_by_month.series.trainee_away'),
+      data: $('#in-out-by-month-statistic').data('trainee-away')
     },]
   });
 }

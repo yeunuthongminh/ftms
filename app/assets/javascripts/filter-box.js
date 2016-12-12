@@ -155,7 +155,7 @@ function toggleFilterMenu(element, resize) {
 
   if (fa.hasClass('controller_name')) {
     _top = $(".panel").offset().top - 44;
-  } else if (fa.hasClass('university')) {
+  } else if (fa.hasClass('university') && $('#tbl-universities').offset()) {
     _top = fa.offset().top - $('#tbl-universities').offset().top + 10;
   }
 
