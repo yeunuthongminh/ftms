@@ -25,7 +25,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-right"
               aria-labelledby="dLabel">
-              <% if policy controller: "courses", action: "update" %>
+              <% if policy trainer_courses_path(@course) %>
                 <li>
                   <% if @course.init? %>
                     <a href="<%= trainer_course_change_status_courses_path @course %>",
@@ -65,7 +65,7 @@
                   </a>
                 </li>
               <% end %>
-              <% if policy controller: "courses", action: "destroy" %>
+              <% if policy trainer_course_path(@course) %>
                 <li>
                   <a href="<%= trainer_course_path @course %>",
                     data-method="delete",
@@ -89,7 +89,7 @@
       <h2 class="label"><%= t "courses.labels.trainer" %>
         (<%= @supports.trainers.size %>)&nbsp;
         <% unless @course.finish? %>
-          <% if policy(controller: "courses", action: "edit") %>
+          <% if policy edit_trainer_course_assign_trainers_path(@course) %>
             <%= link_to edit_trainer_course_assign_trainers_path(@course) do %>
               <i class="ionicons ion-android-person-add"></i>
             <% end %>
@@ -109,7 +109,7 @@
       <h2 class="label"><%= t "courses.labels.trainee" %>
         (<%= @supports.trainees.size %>)
         <% unless @course.finish? %>
-          <% if policy(controller: "courses", action: "edit") %>
+          <% if policy edit_trainer_course_assign_trainees_path(@course) %>
             <%= link_to edit_trainer_course_assign_trainees_path(@course) do %>&nbsp;
               <i class="ionicons ion-android-person-add"></i>
             <% end %>
