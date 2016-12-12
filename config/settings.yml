@@ -1,0 +1,218 @@
+default_email: "framgia.tms@gmail.com"
+update_supervisor_params:
+  - supervisor
+  - leader
+languages:
+  en: "en"
+  jp: "ja"
+course:
+  init: 0
+admin_user_course_image_size: "40x40"
+flag_size: "20x15"
+image_size_20: "20x20"
+image_size_30: "30x30"
+image_size_40: "40x40"
+image_size_50: "50x50"
+image_size_100: "100x100"
+image_profile: "150x150"
+image_size_200: "200x200"
+finish: "finish"
+finished: "finished"
+date_format: "%H:%M:%S %-d %B %Y"
+date_course_format: "%-d %B %Y"
+course_subject:
+  finish: "finish"
+  start: "progress"
+form:
+  field_size: 50
+  min_size: 30
+position:
+  check_position: 0
+  index: 1
+roles:
+  trainer: "trainer"
+  actions:
+    - "create"
+    - "read"
+    - "update"
+    - "destroy"
+hours_working_day: 8
+number_user_display: 4
+number_member_show: 5
+tabs:
+  overview: "overview"
+  subjects: "subjects"
+  trainees: "trainees"
+  trainers: "trainers"
+  course: "courses"
+  course_master: "course_masters"
+  evaluation_templete: "evaluation_templetes"
+  rank: "ranks"
+  evaluation: "evaluations"
+  university: "university"
+  status: "status"
+  type: "Trainee type"
+  user_profile: "User profiles"
+  user: "user"
+default_password: 12345678
+users:
+  tabs:
+    - inprogress_courses
+    - finished_courses
+    - activities
+per_page: 10
+chats:
+  chat_room_per_page: 20
+  message_per_page: 20
+
+namespace_roles:
+  admin: "admin"
+  trainee: "trainee"
+  trainer: "trainer"
+number_day_of_user_chart: 7
+role_types:
+  admin: 0
+  trainer: 1
+  trainee: 2
+evaluations:
+  min: 1
+during_time:
+  course: 60
+  project_1: 10
+  project_2: 7
+  git_tutorial: 2
+  mysql: 2
+  tutorial_book: 10
+  javascript: 4
+subject_status:
+  init: "init"
+  progress: "progress"
+  waiting: "waiting"
+  finish: "finish"
+working_day:
+  min: 0.0
+  max: 5.0
+  step: 0.5
+record: "record"
+fields_decimal:
+  "difference": 2
+  "working_day": 1
+exams:
+  percent_question: [50, 30, 20]
+  duration: 20
+  unit: 1
+  max_recent_exams: 3
+  time_for_lock: 6
+default_number_of_answers: 2
+default_number_of_requirement: 4
+working_days: 44
+status:
+  init: "init"
+  finished: "finished"
+  continue: "continue"
+statistics:
+  - total_trainees
+  - locations
+  - trainee_types
+  - universities
+  - languages
+  - in_out_by_month
+all_functions:
+  - index
+  - new
+  - create
+  - edit
+  - update
+  - show
+  - destroy
+object_evaluation:
+  - TraineeEvaluation
+  - EvaluationStandard
+objects_system:
+  - Role
+  - Location
+  - University
+  - Language
+  - Status
+  - TraineeType
+  - Stage
+  - Category
+object_system:
+  - Role
+  - Location
+  - University
+  - Status
+  - TraineeType
+object_exam:
+  - Exam
+  - Question
+user_profiles:
+  - Role
+  - Location
+  - University
+  - Language
+  - Status
+  - TraineeType
+controller_names:
+  - "devise"
+  - "sessions"
+  - "passwords"
+  - "static_pages"
+  - "read_marks"
+  - "chats"
+  - "messages"
+  - "notifications"
+  - "filter_datas"
+  - "calendars"
+import:
+  file_types:
+    - ".csv"
+    - ".xls"
+    - ".xlsx"
+  employee:
+    id: id
+    email: email
+    display_name: display_name
+    uid: uid
+    category_id: category_id
+  data_types:
+    - model: question
+      verify_attribute: Question
+  image_loading_size: "30x30"
+data_types_import:
+  question: "question"
+collum_check_import:
+  question: "Question"
+sync_google:
+  drive_url: "https://www.googleapis.com/auth/drive"
+  spreadsheets_url: "https://spreadsheets.google.com/feeds/"
+  valid_link: "docs.google.com/spreadsheets"
+sync:
+  training_schedules:
+    staff_code: "UID"
+    name: "Name"
+    trainee_type: "Type"
+    location: "Place"
+    status: "Status"
+    university: "University"
+    graduation: "Graduation"
+    language: "Language"
+    start_training_date: "Start Training Date"
+    leave_date: "Leave Date"
+    finish_training_date: "Finish Training Date"
+    ready_for_real_project: "Ready for real PJ"
+    contract_date: "Contract Date"
+    working_day: "working days/week"
+    trainer: "Trainer"
+    naitei_company: "Naitei company"
+    progress: "Progress"
+    note: "Note"
+    assessment: "Assessment"
+    join_div_date: "Join Div Date"
+    join_div: "Join Div"
+    resign_date: "Resign Date"
+    project_timing: "Project Timing"
+    ready_for_project: "Ready for real PJ"
+sync_functions:
+  - Training schedule
+minimum_percent_to_join: 5
