@@ -1,6 +1,10 @@
 #user-header {
   .navbar .navbar-nav li a {
     position: relative;
+
+    &.active {
+      background: #F1FFDC;
+    }
   }
 
 

@@ -1,6 +1,7 @@
 #landing_page {
   #home-index {
     margin-bottom: 50px;
+    min-height: calc(100vh - 80px);
   }
 
   .flexslider {
@@ -54,6 +55,7 @@
 
   #learning-programs {
     margin-bottom: 50px;
+    min-height: calc(100vh - 100px);
 
     .program-progress {
       background: #404040;
@@ -192,6 +194,7 @@
   #faq_homepage {
     padding: 30px 0;
     background-color: #292c2f;
+    min-height: calc(100vh - 100px);
 
     .title {
       font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
