@@ -44,6 +44,7 @@ class StatisticUniversityPresenter < ActionView::Base
         data-total-trainees=\"#{body_items[:y]}\">
         #{body_items[:y]}
       </div>
+      <div class=\"tcell blank\"></div>
     </div>"
   end
 end

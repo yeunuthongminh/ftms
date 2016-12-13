@@ -1,6 +1,9 @@
 @import "variables";
 @import "mixin";
 
+$color-header: #85C1E9;
+$color-body: #D9E4E6;
+
 .tcell {
   display: table-cell;
   border-right: 1px solid #ccc;
@@ -26,9 +29,9 @@
 
     &.header {
       background-color: #F5F5F5;
-      height: 30px;
-      min-height: 30px;
-      max-height: 30px;
+      height: 35px;
+      min-height: 35px;
+      max-height: 35px;
       font-weight: bold;
       .tcell {
         border-bottom: 1px solid #ccc;
@@ -163,7 +166,7 @@ div.table {
   max-height: 61px;
   min-height: 61px;
   overflow: hidden;
-  background-color: #F5F5F5;
+  background-color: $color-header;
   border-bottom: 1px solid #CCC;
   border-right: 2px solid #CCC;
   float: left;
@@ -181,7 +184,7 @@ div.table {
   max-height: 61px;
   min-height: 61px;
   overflow: hidden;
-  background-color: #F5F5F5;
+  background-color: $color-header;
   border-bottom: 1px solid #CCC;
   margin-right: 12px;
   > .tcell {
@@ -238,6 +241,17 @@ div.table {
   height: auto;
   border-right: 2px solid #CCC;
   float: left;
+  .trow {
+    &:nth-child(odd) {
+    background-color: $color-body;
+    }
+  }
+  .tcell {
+    padding: 4px 5px;
+    height: 30px;
+    min-height: 30px;
+    max-height: 30px;
+  }
 }
 
 .fixedTable-body {
@@ -245,6 +259,17 @@ div.table {
   width: auto;
   border-left: 0;
   margin-right: 12px;
+  .trow {
+    &:nth-child(odd) {
+    background-color: $color-body;
+    }
+  }
+  .tcell {
+    padding: 4px 5px;
+    height: 30px;
+    min-height: 30px;
+    max-height: 30px;
+  }
 }
 
 #parent{
