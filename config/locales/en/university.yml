@@ -4,7 +4,7 @@ en:
       name: "Name"
   universities:
     header:
-      name: Name
+      name: "Name"
       abbr: "Abbreviation"
     other: "Other University"
     actions:
