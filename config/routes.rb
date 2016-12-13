@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resources :trainee_evaluations, only: :index
     resources :evaluation_standards
     resources :evaluation_items
-    resources :evaluation_groups
+    resources :evaluation_templates
 
     patch "status_subject/:course_subject_id/:status" => "status_subjects#update",
       as: :status_subject

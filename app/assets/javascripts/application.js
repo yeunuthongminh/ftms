@@ -46,6 +46,7 @@
 //= require jquery.dataTables.columnFilter
 //= require datatable
 //= require subject
+//= require admin/evaluation_template
 //= require evaluation
 //= require admin/role
 //= require admin/project

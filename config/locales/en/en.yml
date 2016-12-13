@@ -100,7 +100,7 @@ en:
       qid: "QID"
       question_content: "Question Content"
     evaluation_check_lists: "Evaluation Check Lists"
-    evaluation_groups: "Evaluation Groups"
+    evaluation_templates: "Evaluation Templates"
     evaluations: "Evaluations"
     evaluation: "Evaluation"
     users: "User"
@@ -200,3 +200,10 @@ en:
         delimiter: ""
         precision: 2
         format: "%n%"
+  evaluation_templates:
+    label:
+      name: "Name"
+    all: "All Evaluation Template"
+    selected: "Selected Evaluation Standards"
+    standards:
+      all: "All Evaluation Standards"

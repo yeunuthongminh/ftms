@@ -1,0 +1,38 @@
+<div id="evaluation_templates" class="container systems-active">
+  <div class="col-md-5">
+    <div class="panel panel-primary list-standards">
+      <div class="panel-heading">
+        <%= t "evaluation_templates.standards.all" %>
+      </div>
+      <div class="list-group" id="all-standards">
+        <% @evaluation_standards.each do |standard| %>
+          <div class="list-group-item">
+            <%= standard.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-primary" id="select-standards">
+      <%= t "buttons.move" %></button>
+  </div>
+  <div class="col-md-5">
+    <%= form_for [:admin, @evaluation_item], method: :post do |f| %>
+      <%= f.hidden_field :evaluation_template_id, value: params[:id] %>
+      <div class="panel panel-primary list-selected-standards">
+        <div class="panel-heading">
+          <%= t "evaluation_templates.selected" %>
+        </div>
+        <div class="list-group" id="all-selected-standards">
+          <%binding.pry%>
+          <% @evaluation_items.each do |item| %>
+            <%= f.hidden_field :id, value: item.id %>
+            <div class="list-group"><%= item.name %></div>
+          <% end %>
+        </div>
+      </div>
+      <%= submit_tag t("buttons.save"), class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
