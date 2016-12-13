@@ -116,7 +116,7 @@
               width: 100%;
               position: relative;
 
-              .tooltip {
+              span[data-toggle=tooltip] {
                 height: 10px;
                 width: 100%;
                 position: absolute;
