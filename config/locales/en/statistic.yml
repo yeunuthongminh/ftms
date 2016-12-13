@@ -10,8 +10,10 @@ en:
       total_trainees: "Total trainees in by month"
       in_out_by_month: "In/out by month"
     trainee_types:
+      title_detail: "Total trainees by trainee types detail"
       title: "Total trainees by type"
       serie_name: "Trainees"
+      number_trainees: "Number trainees"
     universities:
       title: "Total trainees by universities"
       title_detail: "Total trainees by universities detail"
@@ -22,7 +24,10 @@ en:
       title: "Total trainees by languages"
       title_detail: "Total trainees by languages detail"
       serie_name: "Trainees"
+      name: "Name"
     locations:
+      number_trainees: "Number trainees"
+      title_detail: "Total trainees by locations detail"
       title: "Total trainees by locations"
       serie_name: "Total trainees"
       y_asis: "Trainees (persons)"
