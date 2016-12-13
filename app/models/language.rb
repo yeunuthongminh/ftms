@@ -4,6 +4,7 @@ class Language < ApplicationRecord
   ATTRIBUTES_PARAMS = [:name]
 
   has_many :profiles
+  has_many :categories
   has_many :courses
   has_many :statistics, dependent: :destroy
 

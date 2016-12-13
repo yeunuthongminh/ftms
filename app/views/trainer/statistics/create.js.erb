@@ -1,0 +1,7 @@
+<% if params[:type] == "trainee_types" %>
+  $('#trainee-types-statistic').attr("data-trainee-types", "<%= @statistics.trainee_types %>");
+  load_trainee_types_statistic_chart();
+<% elsif params[:type] == "universities" %>
+  $('#universities-statistic').attr("data-universities", "<%= @statistics.universities %>");
+  load_universities_statistic_chart();
+<% end %>

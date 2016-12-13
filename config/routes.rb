@@ -101,6 +101,7 @@ Rails.application.routes.draw do
 
     patch "status_subject/:course_subject_id/:status" => "status_subjects#update",
       as: :status_subject
+    get "/statistics/:type" => "statistics#show", as: :statistics_page
     resources :evaluations, only: :index
     resources :evaluation_templates
     resources :ranks
@@ -113,6 +114,7 @@ Rails.application.routes.draw do
     resources :training_managements, only: :index
     resources :projects
     resources :programs, except: :destroy
+    resources :statistics, only: [:index, :create]
   end
 
   root "static_pages#home"
