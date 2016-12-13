@@ -83,6 +83,13 @@
 
     .tcell {
       @include tcell-statistic-style("university");
+
+      &.blank {
+        width: 100vw;
+      }
+    }
+    .scrollbar {
+      top: 31px;
     }
   }
 
