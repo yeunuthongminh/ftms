@@ -1,5 +1,5 @@
 <%= form_tag admin_statistics_path, remote: true,
-  id: "form_universities_filter" do %>
+  id: "form_"+"#{type.pluralize}"+"_filter" do %>
   <%= hidden_field_tag :type, params[:type] %>
   <div class="col-md-12 locations-filter">
     <label><%= t "statistics.titles.locations" %></label>

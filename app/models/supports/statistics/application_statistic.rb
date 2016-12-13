@@ -13,6 +13,10 @@ class Supports::Statistics::ApplicationStatistic
     @locations ||= Location.all
   end
 
+  def load_all_trainee
+    @trainee_ids ||= Trainee.all.pluck :id
+  end
+
   def load_trainee_types
     @load_trainee_types ||= TraineeType.all
   end

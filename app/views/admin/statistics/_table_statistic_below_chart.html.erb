@@ -1,7 +1,7 @@
-<div class="box box-success" id="tbl-#{type}s">
+<div class="box box-success" id="tbl-<%= "#{type}".pluralize %>">
   <div class="box-header with-border">
     <h3 class="box-title">
-      <%= t "statistics.#{type}s.title_detail" %>
+      <%= t "statistics.#{type.pluralize}.title_detail" %>
     </h3>
 
     <div class="box-tools pull-right">
@@ -21,9 +21,10 @@
   </div>
   <div id="<%= params[:type] %>" class="box-body">
     <div class="table">
-      <%= render "shared/datatables/statistic_#{type}_header" %>
+      <%= render "shared/datatables/statistic_header",
+        type: "#{type}" %>
       <%= @statistics.presenters.html_safe %>
-      <%= render "total_statistic_#{type}_number" %>
+      <%= render "total_statistic_trainee_number", type: "#{type}" %>
     </div>
 
     <div class="pull-right" id="number-records">

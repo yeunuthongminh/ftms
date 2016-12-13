@@ -3,13 +3,13 @@
   <div class="tbody">
     <div class="trow header">
       <div class="tcell stt">#</div>
-      <div class="tcell language title">
-        <%= t "training_managements.headers.language" %>
-        <%= link_to filter_datas_path(type: :language, filter_type: :statistics),
+      <div class="tcell <%= "#{type}" %> title">
+        <%= t "training_managements.headers.#{type}" %>
+        <%= link_to filter_datas_path(type: "#{type}", filter_type: :statistics),
           remote: true,
           class: "open-select",
-          data: {name: "f-language"} do %>
-          <i class="fa ic ic-filter language"></i>
+          data: {name: "f-#{type}"} do %>
+          <i class="fa ic ic-filter <%= "#{type}" %>"></i>
         <% end %>
       </div>
       <div class="clear-both">
@@ -25,7 +25,7 @@
     <div class="tbody">
       <div class="trow header">
         <div class="tcell number_trainees title">
-          <%= t "statistics.languages.number_trainees" %>
+          <%= t "statistics.#{type}.number_trainees" %>
         </div>
       </div>
     </div>

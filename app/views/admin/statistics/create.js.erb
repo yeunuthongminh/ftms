@@ -4,4 +4,7 @@
 <% elsif params[:type] == "universities" %>
   $('#universities-statistic').attr("data-universities", "<%= @statistics.universities %>");
   load_universities_statistic_chart();
+<% elsif params[:type] == "languages" %>
+  $('#languages-statistic').attr("data-languages", "<%= @statistics.languages %>");
+  load_languages_statistic_chart();
 <% end %>

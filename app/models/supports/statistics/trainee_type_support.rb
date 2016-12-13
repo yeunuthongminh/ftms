@@ -15,6 +15,16 @@ class Supports::Statistics::TraineeTypeSupport < Supports::Statistics::Applicati
     end
   end
 
+  def trainee_by_trainee_type
+    @load_all_trainee_by_language ||= TraineeType.includes(:profiles)
+      .collect{|u| Hash[:name, u.name, :y, u.profiles.size]}
+      .sort_by {|u| u[:y]}.reverse
+  end
+
+  def presenters
+    StatisticTraineeTypePresenter.new(trainee_by_trainee_type).render
+  end
+
   private
   def check
     if @check.nil?
