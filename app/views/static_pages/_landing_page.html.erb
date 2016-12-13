@@ -1,5 +1,5 @@
 <div id="landing_page">
-  <div class="container-fluid home-index">
+  <div class="container-fluid" id="home-index">
     <div class="flexslider">
       <ul class="slides">
         <% 4.times do %>
@@ -17,154 +17,145 @@
     </div>
   </div>
 
-  <section class="programs-homepage">
-    <div class="container text-center">
-      <div class="title">
-        <%= t "staticpages.programs.title" %>
-      </div>
-      <div class="programs-content">
-        <i><%= t "staticpages.programs.content" %></i>
-      </div>
-      <div class="row">
-        <% 4.times do |i| %>
-          <%= link_to "#", class: "scroll_to_section",
-            data: {target: "program-#{i}"} do %>
-            <div class="col-md-6">
-              <div class="program clearfix text-left">
-                <div class="col-md-3">
-                  <%= image_tag "ruby.png", class: "program-image" %>
+  <section id="learning-programs" class="clearfix">
+    <div class="col-md-12">
+      <div class="flexslider">
+        <ul class="slides">
+          <% 3.times do |i| %>
+            <li class="program-progress">
+              <div id="program-<%= i %>" class="clearfix">
+                <div class="section-title">
+                  <%= t "staticpages.program_timeline.title" %>
                 </div>
-                <div class="col-md-9">
-                  <h4 class="program-title">
-                    <%= t "staticpages.programs.program.title" %>
-                  </h4>
-                  <p class="program-description">
-                    <strong>
-                      <%= t "staticpages.programs.program.description" %>
-                    </strong>
-                  </p>
+                <div class="container-fluid">
+                  <div class="col-sm-12 program-timeline" data-total-col="36">
+                    <div class="col-sm-3 timeline-block" data-col="2">
+                      <div class="timeline-content">
+                        <div class="timeline-heading">
+                          <h2 class="title">
+                            <%= t "staticpages.program_timeline.git.title" %>
+                          </h2>
+                          <h4 class="subject-duration">
+                            <%= t "staticpages.program_timeline.git.duration" %>
+                          </h4>
+                        </div>
+                        <div class="timeline-body">
+                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
+                            title="<%= t "staticpages.program_timeline.git.body" %>"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3 timeline-block" data-col="5">
+                      <div class="timeline-content">
+                        <div class="timeline-heading">
+                          <h2 class="title">
+                            <%= t "staticpages.program_timeline.ruby.title" %>
+                          </h2>
+                          <h4 class="subject-duration">
+                            <%= t "staticpages.program_timeline.ruby.duration" %>
+                          </h4>
+                        </div>
+                        <div class="timeline-body">
+                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
+                            title="<%= t "staticpages.program_timeline.ruby.body" %>"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3 timeline-block" data-col="7">
+                      <div class="timeline-content">
+                        <div class="timeline-heading">
+                          <h2 class="title">
+                            <%= t "staticpages.program_timeline.rails.title" %>
+                          </h2>
+                          <h4 class="subject-duration">
+                            <%= t "staticpages.program_timeline.rails.duration" %>
+                          </h4>
+                        </div>
+                        <div class="timeline-body">
+                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
+                            title="<%= t "staticpages.program_timeline.rails.body" %>"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3 timeline-block" data-col="10">
+                      <div class="timeline-content">
+                        <div class="timeline-heading">
+                          <h2 class="title">
+                            <%= t "staticpages.program_timeline.project1.title" %>
+                          </h2>
+                          <h4 class="subject-duration">
+                            <%= t "staticpages.program_timeline.project1.duration" %>
+                          </h4>
+                        </div>
+                        <div class="timeline-body">
+                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
+                            title="<%= t "staticpages.program_timeline.project1.body" %>"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3 timeline-block" data-col="2">
+                      <div class="timeline-content">
+                        <div class="timeline-heading">
+                          <h2 class="title">
+                            <%= t "staticpages.program_timeline.mysql.title" %>
+                          </h2>
+                          <h4 class="subject-duration">
+                            <%= t "staticpages.program_timeline.mysql.duration" %>
+                          </h4>
+                        </div>
+                        <div class="timeline-body">
+                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
+                            title="<%= t "staticpages.program_timeline.mysql.body" %>"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-3 timeline-block" data-col="10">
+                      <div class="timeline-content">
+                        <div class="timeline-heading">
+                          <h2 class="title">
+                            <%= t "staticpages.program_timeline.project2.title" %>
+                          </h2>
+                          <h4 class="subject-duration">
+                            <%= t "staticpages.program_timeline.project2.duration" %>
+                          </h4>
+                        </div>
+                        <div class="timeline-body">
+                          <span data-toggle="tooltip" data-placement="bottom" class="tooltip"
+                            title="<%= t "staticpages.program_timeline.project2.body" %>"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </li>
           <% end %>
-        <% end %>
+        </ul>
       </div>
     </div>
   </section>
 
-  <% 4.times do |i| %>
-    <section id="program-<%= i %>" class="program-progress clearfix">
-      <div class="section-title">
-        <%= t "staticpages.program_timeline.title" %>
-      </div>
-      <div class="container">
-        <div class="col-sm-12 program-timeline">
-          <div class="col-sm-3 timeline-block">
-            <div class="timeline-content">
-              <div class="timeline-heading">
-                <h2 class="title">
-                  <%= t "staticpages.program_timeline.git.title" %>
-                </h2>
-                <h4>
-                  <%= t "staticpages.program_timeline.git.duration" %>
+  <section id="faq_homepage">
+      <div class="container text-center">
+        <div class="title">
+          <%= t "staticpages.faq_homepage.title" %>
+        </div>
+        <div class="faq-description">
+          <i><%= t "staticpages.faq_homepage.description" %></i>
+        </div>
+        <div class="row">
+          <% 10.times do |i| %>
+            <%= link_to "#" do %>
+              <div class="col-md-12 question">
+                <h4 class="title text-left">
+                  <%= "#{i + 1}. #{t 'staticpages.faq_homepage.question.title'}" %>
                 </h4>
               </div>
-              <div class="timeline-body">
-                <p>
-                  <%= t "staticpages.program_timeline.git.body" %>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 timeline-block">
-            <div class="timeline-content">
-              <div class="timeline-heading">
-                <h2 class="title">
-                  <%= t "staticpages.program_timeline.ruby.title" %>
-                </h2>
-                <h4>
-                  <%= t "staticpages.program_timeline.ruby.duration" %>
-                </h4>
-              </div>
-              <div class="timeline-body">
-                <p>
-                  <%= t "staticpages.program_timeline.ruby.body" %>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 timeline-block">
-            <div class="timeline-content">
-              <div class="timeline-heading">
-                <h2 class="title">
-                  <%= t "staticpages.program_timeline.rails.title" %>
-                </h2>
-                <h4>
-                  <%= t "staticpages.program_timeline.rails.duration" %>
-                </h4>
-              </div>
-              <div class="timeline-body">
-                <p>
-                  <%= t "staticpages.program_timeline.rails.body" %>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 timeline-block">
-            <div class="timeline-content">
-              <div class="timeline-heading">
-                <h2 class="title">
-                  <%= t "staticpages.program_timeline.project1.title" %>
-                </h2>
-                <h4>
-                  <%= t "staticpages.program_timeline.project1.duration" %>
-                </h4>
-              </div>
-              <div class="timeline-body">
-                <p>
-                  <%= t "staticpages.program_timeline.project1.body" %>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 timeline-block">
-            <div class="timeline-content">
-              <div class="timeline-heading">
-                <h2 class="title">
-                  <%= t "staticpages.program_timeline.mysql.title" %>
-                </h2>
-                <h4>
-                  <%= t "staticpages.program_timeline.mysql.duration" %>
-                </h4>
-              </div>
-              <div class="timeline-body">
-                <p>
-                  <%= t "staticpages.program_timeline.mysql.body" %>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3 timeline-block">
-            <div class="timeline-content">
-              <div class="timeline-heading">
-                <h2 class="title">
-                  <%= t "staticpages.program_timeline.project2.title" %>
-                </h2>
-                <h4>
-                  <%= t "staticpages.program_timeline.project2.duration" %>
-                </h4>
-              </div>
-              <div class="timeline-body">
-                <p>
-                  <%= t "staticpages.program_timeline.project2.body" %>
-                </p>
-              </div>
-            </div>
-          </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
-    </section>
-  <% end %>
+  </section>
 
   <section id="counters">
     <div class="container-fluid">
@@ -181,10 +172,10 @@
           <div class="counters-v2">
             <i class="counters-v2-icon fa fa-book"></i>
             <figure class="counter color-base counters-v2-no">
-              <%= @programs_size %>
+              <%= @courses_size %>
             </figure>
             <h4 class="counters-v2-title">
-              <%= t "layouts.programs" %>
+              <%= t "layouts.courses" %>
             </h4>
             <span class="counters-v2-subtitle">
               <%= t "staticpages.counters.completed" %>
@@ -198,7 +189,7 @@
               <%= @trainees_size %>
             </figure>
             <h4 class="counters-v2-title">
-              <%= t "programs.trainees" %>
+              <%= t "courses.trainees" %>
             </h4>
             <span class="counters-v2-subtitle">
               <%= t "staticpages.counters.learning" %>
@@ -212,7 +203,7 @@
               <%= @trainers_size %>
             </figure>
             <h4 class="counters-v2-title">
-              <%= t "programs.trainers" %>
+              <%= t "courses.trainers" %>
             </h4>
             <span class="counters-v2-subtitle">
               <%= t "staticpages.counters.manage" %>
