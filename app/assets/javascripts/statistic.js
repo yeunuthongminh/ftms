@@ -1,103 +1,17 @@
 function load_trainee_types_statistic_chart() {
-  $('#trainee-types-statistic').highcharts({
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: 'pie'
-    },
-    title: false,
-    tooltip: {
-      formatter: function () {
-        return I18n.t('universities.header.name') + ': ' + '<strong>' + this.key + '</strong>' + ' <br/>' +
-          I18n.t('statistics.universities.serie_name') + ': ' + '<strong>' + this.y + '</strong>';
-      }
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          format: '<b>{point.name}</b>: {point.extraValue}'
-        },
-        showInLegend: true
-      }
-    },
-    series: [{
-      name: I18n.t('statistics.trainee_types.serie_name'),
-      colorByPoint: true,
-      data: eval("(" + $('#trainee-types-statistic').attr("data-trainee-types").replace(/&gt;/g, ">").replace(/&quot;/g,"\"").replace(/:name=>/g, "name:").replace(/:y=>/g, "y:").replace(/:extraValue=>/g, "extraValue:") + ')')
-    }]
-  });
+  load_statistic_pie_chart('trainee-types');
 }
 
 function load_universities_statistic_chart() {
-  $('#universities-statistic').highcharts({
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: 'pie'
-    },
-    title: false,
-    tooltip: {
-      formatter: function () {
-        return I18n.t('universities.header.name') + ': ' + '<strong>' + this.key + '</strong>' + ' <br/>' +
-          I18n.t('statistics.universities.serie_name') + ': ' + '<strong>' + this.y + '</strong>';
-      }
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          format: '<b>{point.name}</b>: {point.extraValue}'
-        },
-        showInLegend: true
-      }
-    },
-    series: [{
-      name: I18n.t('statistics.universities.serie_name'),
-      colorByPoint: true,
-      data: eval('(' + $('#universities-statistic').attr('data-universities').replace(/&gt;/g, ">").replace(/&quot;/g,"\"").replace(/:y=>/g, "y:").replace(/:name=>/g, "name:").replace(/:extraValue=>/g, "extraValue:") + ')')
-    }]
-  });
+  load_statistic_pie_chart('universities');
 }
 
 function load_languages_statistic_chart() {
-  $('#languages-statistic').highcharts({
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: 'pie'
-    },
-    title: false,
-    tooltip: {
-      formatter: function () {
-        return I18n.t('statistics.languages.name') + ': ' + '<strong>' + this.key + '</strong>' + ' <br/>' +
-          I18n.t('statistics.languages.serie_name') + ': ' + '<strong>' + this.y + '</strong>';
-      }
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          format: '<b>{point.name}</b>: {point.extraValue}'
-        },
-        showInLegend: true
-      }
-    },
-    series: [{
-      name: I18n.t('statistics.languages.serie_name'),
-      colorByPoint: true,
-      data: eval('(' + $('#languages-statistic').attr('data-languages').replace(/&gt;/g, ">").replace(/&quot;/g,"\"").replace(/:y=>/g, "y:").replace(/:name=>/g, "name:").replace(/:extraValue=>/g, "extraValue:") + ')')
-    }]
-  });
+  load_statistic_pie_chart('languages');
+}
+
+function load_stages_statistic_chart() {
+  load_statistic_pie_chart('stages');
 }
 
 function load_locations_statistic_chart() {
@@ -231,6 +145,40 @@ function load_trainee_in_out_by_month_statistic_chart() {
   });
 }
 
+function load_statistic_pie_chart(type_statistic){
+  $('#'+type_statistic+'-statistic').highcharts({
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: false,
+    tooltip: {
+      formatter: function () {
+        return I18n.t('statistics.'+type_statistic+'.name') + ': ' + '<strong>' + this.key + '</strong>' + ' <br/>' +
+          I18n.t('statistics.'+type_statistic+'.serie_name') + ': ' + '<strong>' + this.y + '</strong>';
+      }
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.extraValue}'
+        },
+        showInLegend: true
+      }
+    },
+    series: [{
+      name: I18n.t('statistics.'+type_statistic+'.serie_name'),
+      colorByPoint: true,
+      data: eval("(" + $('#'+type_statistic+'-statistic').attr("data-"+type_statistic).replace(/&gt;/g, ">").replace(/&quot;/g,"\"").replace(/:name=>/g, "name:").replace(/:y=>/g, "y:").replace(/:extraValue=>/g, "extraValue:") + ')')
+    }]
+  });
+}
+
 $(document).on('turbolinks:load', function() {
   if ($('#statistics').children().hasClass('trainee_types')) {
     load_trainee_types_statistic_chart();
@@ -242,5 +190,7 @@ $(document).on('turbolinks:load', function() {
     load_locations_statistic_chart();
   } else if ($('#statistics').children().hasClass('in_out_by_month')) {
     load_trainee_in_out_by_month_statistic_chart();
+  } else if ($('#statistics').children().hasClass('stages')) {
+    load_stages_statistic_chart();
   }
 });

@@ -44,4 +44,30 @@ class Supports::Statistics::ApplicationStatistic
   def load_languages
     @languages ||= Language.all
   end
+
+  def trainee_by_statistic load_trainee_by_location_and_type, type_statistic
+    @load_trainee_by_location_and_type = load_trainee_by_location_and_type
+    unless @load_all_trainee
+      none_statistic = Hash[:name, I18n.t("statistics.none"), :y, 0]
+      all_statistics = Object.const_get("#{type_statistic.humanize}")
+        .all.map do |u|
+        Hash[:name, u[:name], :y, 0]
+      end
+      @load_trainee_by_location_and_type.each do |trainee|
+        if trainee.language
+          found_language = all_statistics.find do |u|
+            u[:name] == trainee.send("#{type_statistic}").name
+          end
+          found_language[:y] += 1
+        else
+          none_statistic[:y] += 1
+        end
+      end
+      all_statistics << none_statistic
+      @load_all_trainee = all_statistics.sort_by {|u| u[:y]}
+        .reverse
+    end
+    @load_all_trainee
+  end
+
 end

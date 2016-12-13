@@ -1,12 +1,12 @@
-class StatisticTraineeTypePresenter < ActionView::Base
-  def initialize trainee_by_trainee_type
-    @trainee_by_trainee_type = trainee_by_trainee_type
+class StatisticStagePresenter < ActionView::Base
+  def initialize trainee_in_edu_by_language
+    @trainee_in_edu_by_language = trainee_in_edu_by_language
   end
 
   def render
     sidebar = Array.new
     body = Array.new
-    @trainee_by_trainee_type.each_with_index do |items, index|
+    @trainee_in_edu_by_language.each_with_index do |items, index|
       sidebar << sidebar_item(items, index)
       body << body_item(items, index)
     end
@@ -30,8 +30,8 @@ class StatisticTraineeTypePresenter < ActionView::Base
   def sidebar_item sidebar_items, index
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{index}\">
       <div class=\"tcell stt\">#</div>
-      <div class=\"tcell trainee_type trainee_type-<%= sidebar_items[:name] %>\"
-        title=\"sidebar_items[:name]}\">
+      <div class=\"tcell stage stage-<%= sidebar_items[:name] %>\"
+        title=\"#{sidebar_items[:name]}\">
         #{sidebar_items[:name]}
       </div>
     </div>"
@@ -39,8 +39,8 @@ class StatisticTraineeTypePresenter < ActionView::Base
 
   def body_item body_items, index
     "<div class=\"trow list_#{index}\" id=\"body-row-#{index}\">
-      <div class=\"tcell total-trainees-trainee_type-#{body_items[:name]}
-        number_trainees text-right trainee-by-trainee_type\"
+      <div class=\"tcell total-trainees-stage-#{body_items[:name]}
+        number_trainees text-right trainee-by-stage\"
         data-total-trainees=\"#{body_items[:y]}\">
         #{body_items[:y]}
       </div>

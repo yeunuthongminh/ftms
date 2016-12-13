@@ -83,13 +83,7 @@
 
     .tcell {
       @include tcell-statistic-style("university");
-
-      &.blank {
-        width: 100vw;
-      }
-    }
-    .scrollbar {
-      top: 31px;
+      @include blank-column-style
     }
   }
 
@@ -100,6 +94,7 @@
 
     .tcell {
       @include tcell-statistic-style("language");
+      @include blank-column-style
     }
   }
 
@@ -110,6 +105,7 @@
 
     .tcell {
       @include tcell-statistic-style("location");
+      @include blank-column-style
     }
   }
 
@@ -120,10 +116,26 @@
 
     .tcell {
       @include tcell-statistic-style("trainee_type");
+      @include blank-column-style
     }
   }
 
   @include tbl-statistic-style("trainee_types");
+
+  #stages {
+    @include fixed-statistic-style;
+
+    .tcell {
+      @include tcell-statistic-style("stage");
+      @include blank-column-style
+    }
+
+    .tcell {
+      @include tcell-statistic-style("language")
+    }
+  }
+
+  @include tbl-statistic-style("stages");
 
   .filter_form_chart {
     border: 1px solid #BCD;

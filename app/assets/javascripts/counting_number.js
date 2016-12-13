@@ -44,6 +44,10 @@ function totalTraineeValue() {
     if($('#locations').length > 0) {
       counting_trainee("location");
     }
+
+    if($('#stages').length > 0) {
+      counting_trainee("stage");
+    }
   }
 }
 

@@ -9,6 +9,7 @@ en:
       languages: "Programming languages"
       total_trainees: "Total trainees in by month"
       in_out_by_month: "In/out by month"
+      stages: "Trainee in edu"
     trainee_types:
       title_detail: "Total trainees by trainee types detail"
       title: "Total trainees by type"
@@ -19,6 +20,7 @@ en:
       title_detail: "Total trainees by universities detail"
       serie_name: "Trainees"
       number_trainees: "Number trainees"
+      name: "Name"
     languages:
       number_trainees: "Number trainees"
       title: "Total trainees by languages"
@@ -49,3 +51,10 @@ en:
         trainee_out: "Trainee out"
         trainee_join_div: "Trainee join div"
         trainee_away: "Trainee away"
+    stages:
+      title_detail: "Total trainees in edu by language detail"
+      title: "Total trainees in edu by language"
+      number_trainees: "Number trainees"
+      serie_name: "Trainees"
+      name: "Name"
+

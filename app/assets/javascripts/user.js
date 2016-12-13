@@ -84,12 +84,14 @@ $(document).on("turbolinks:load", function() {
     $('#form_total_trainee').submit();
     $('#form_universities_filter').submit();
     $('#form_languages_filter').submit();
+    $('#form_stages_filter').submit();
   });
 
   $('input[name="trainee_type_ids[]"]').click(function(){
     $('input[name="check_trainee_type"]').val(1);
     $('#form_universities_filter').submit();
     $('#form_languages_filter').submit();
+    $('#form_stages_filter').submit();
   });
 });
 

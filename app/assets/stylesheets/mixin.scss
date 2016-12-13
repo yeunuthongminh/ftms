@@ -228,6 +228,9 @@
   .total-trainees {
     font-size: 16px;
   }
+  .scrollbar {
+      top: 31px;
+  }
 }
 
 @mixin tcell-statistic-style($selector) {
@@ -263,6 +266,12 @@
       top: 0;
       right: 80px;
     }
+  }
+}
+
+@mixin blank-column-style{
+  &.blank {
+    width: 100vw;
   }
 }
 

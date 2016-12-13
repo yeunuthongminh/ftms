@@ -116,6 +116,7 @@ statistics:
   - trainee_types
   - universities
   - languages
+  - stages
   - in_out_by_month
 all_functions:
   - index

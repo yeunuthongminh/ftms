@@ -11,26 +11,7 @@ class Supports::Statistics::TraineeTypeSupport < Supports::Statistics::Applicati
     @load_trainee_by_location ||= Profile.where(user_id: load_all_trainee,
       location_id: @location_ids).includes :trainee_type
 
-    unless @load_all_trainee_by_trainee_type
-      none_trainee_type = Hash[:name, I18n.t("statistics.none"), :y, 0]
-      all_trainee_types = TraineeType.all.map do |u|
-        Hash[:name, u[:name], :y, 0]
-      end
-      @load_trainee_by_location.each do |trainee|
-        if trainee.trainee_type
-          found_trainee_type = all_trainee_types.find do |u|
-            u[:name] == trainee.trainee_type.name
-          end
-          found_trainee_type[:y] += 1
-        else
-          none_trainee_type[:y] += 1
-        end
-      end
-      all_trainee_types << none_trainee_type
-      @load_all_trainee_by_trainee_type = all_trainee_types
-        .sort_by {|u| u[:y]}.reverse
-    end
-    @load_all_trainee_by_trainee_type
+    @load_trainee = trainee_by_statistic @load_trainee_by_location, "university"
   end
 
   def percentage_trainee_by_trainee_type
