@@ -2,7 +2,7 @@ class Admin::AssignProjectsController < ApplicationController
   before_action :load_data
 
   def update
-    if params[:course_subject] && @course_subject.update_attributes(course_subject_params)
+    if params[:course_subject] && @course_subject.update_project_assign(course_subject_params)
       flash.now[:success] = flash_message "updated"
     else
       flash.now[:danger] = flash_message "not_updated"

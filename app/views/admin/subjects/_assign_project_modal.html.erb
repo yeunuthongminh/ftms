@@ -12,11 +12,20 @@
           <div class="form-group">
             <%= select_profile_field :project, @supports.projects, f %>
           </div>
+          <div id="loading-project"></div>
+          <div id="sA-requirements">
+            <span class="state-icon glyphicon glyphicon-unchecked"></span>
+            <input type="checkbox" class="hidden" id="s_All_rqm" />
+            <%= t "select_all" %>
+          </div>
           <div id="list-requirements">
+            <div id="list-rqms" class="list-group checked-list-box">
+            </div>
           </div>
         </div>
         <div class="modal-footer">
-          <%= f.submit t("buttons.save"), class: "btn btn-primary" %>
+          <%= f.submit t("buttons.save"), class: "btn btn-primary",
+            id: "subject-requirements-submit" %>
           <button type="button" class="btn btn-danger" data-dismiss="modal">
             <%= t "buttons.cancel" %>
           </button>

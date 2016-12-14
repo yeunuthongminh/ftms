@@ -5,7 +5,11 @@ class Admin::ProjectRequirementsController < ApplicationController
   def index
     @requirements = ProjectRequirement.select(:id, :name)
       .where project_id: params[:project_id]
-    render json: @requirements
+    if params[:course_subject]
+      subject_requirements = CourseSubjectRequirement.where(course_subject_id: params[:course_subject])
+        .pluck(:project_requirement_id, :id).to_h
+    end
+    render json: {requirement: @requirements, subject_requirements: subject_requirements}
   end
 
   def create
