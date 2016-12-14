@@ -7,4 +7,7 @@
 <% elsif params[:type] == "languages" %>
   $('#languages-statistic').attr("data-languages", "<%= @statistics.languages %>");
   load_languages_statistic_chart();
+<% elsif params[:type] == "stages" %>
+  $('#stages-statistic').attr("data-stages", "<%= @statistics.stages %>");
+  load_stages_statistic_chart();
 <% end %>
