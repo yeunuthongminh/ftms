@@ -15,31 +15,39 @@
       <div class="collapse navbar-collapse" id="header-navbar">
         <% if user_signed_in? %>
           <ul class="nav navbar-nav">
-            <%= link_to courses_path do %>
-              <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-              <%= t "user-header.courses" %>
-            <% end %>
-            <%= link_to exams_path do %>
-              <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-              <%= t "user-header.exams" %>
-            <% end %>
-            <%= link_to chats_path do %>
-              <i class="fa fa-weixin" aria-hidden="true"></i>
-              <%= t "chats.chat" %>
-            <% end %>
+            <li>
+              <%= link_to courses_path do %>
+                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                <%= t "user-header.courses" %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to exams_path do %>
+                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                <%= t "user-header.exams" %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to chats_path do %>
+                <i class="fa fa-weixin" aria-hidden="true"></i>
+                <%= t "chats.chat" %>
+              <% end %>
+            </li>
           </ul>
         <% end %>
 
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
             <li>
-              <%= link_to "#", data: {toggle: "modal", target: "#list_task"} do %>
-                <i class="fa fa-facebook"></i>
+              <%= link_to "#", data: {toggle: "modal", target: "#list_task"},
+                title: t("user-header.todolist") do %>
+                <i class="fa fa-tasks"></i>
               <% end %>
             </li>
             <li class="dropdown messages-menu">
               <%= link_to update_notifications_path, class: "dropdown-toggle",
-                data: {toggle:"dropdown"}, method: :patch, remote: true do %>
+                data: {toggle: "dropdown"}, method: :patch, remote: true,
+                title: t("user-header.notifications") do %>
                 <i class="fa fa-bell-o"></i>
                 <span class="label label-danger dropdown-label number-notification"><%= not_seen_notification %></span>
               <% end %>
@@ -63,14 +71,15 @@
             </li>
             <li>
               <%= link_to "#", class: "btn-feed-back",
-                data: {toggle: "modal", target: "#feed-back-modal"} do %>
-              <i class="fa fa-file-excel-o"></i>
+                data: {toggle: "modal", target: "#feed-back-modal"},
+                title: t("user-header.feedbacks") do %>
+              <i class="fa fa-envelope"></i>
               <% end %>
             </li>
             <li class="dropdown" id="dropdown-profile">
               <a class="dropdown-toggle avatar" data-toggle="dropdown">
                 <%= avatar_user_tag current_user, "user-image",
-                  Settings.image_size_50 %>
+                  Settings.image_size_40 %>
                 <span class="hidden-xs">
                   <%= current_user.name %>
                 </span><span class="caret"></span>

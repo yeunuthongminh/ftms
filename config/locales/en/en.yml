@@ -3,6 +3,9 @@ en:
   user-header:
     courses: "Courses"
     exams: "Exams"
+    todolist: "TODO list"
+    notifications: "Notifications"
+    feedbacks: "Feedback"
   document:
     name: "Documents"
     description: "Document description"

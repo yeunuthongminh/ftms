@@ -76,10 +76,10 @@ ActiveRecord::Schema.define(version: 20161208083418) do
   end
 
   create_table "course_subject_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "project_requirement_id"
+    t.integer "requirement_id"
     t.integer "course_subject_id"
     t.index ["course_subject_id"], name: "index_course_subject_requirements_on_course_subject_id", using: :btree
-    t.index ["project_requirement_id"], name: "index_course_subject_requirements_on_project_requirement_id", using: :btree
+    t.index ["requirement_id"], name: "index_course_subject_requirements_on_requirement_id", using: :btree
   end
 
   create_table "course_subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

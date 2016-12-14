@@ -6,8 +6,8 @@
     <ul class="doc-field">
       <% documents.each do |doc| %>
         <li>
-          <%= link_to doc.content.document_link, target: "_blank" do %>
-            <abbr title="<%= doc.description %>"><%= doc.name %></abbr>
+          <%= link_to doc.document_link.url, target: "_blank" do %>
+            <abbr title="<%= doc.description %>"><%= doc.title %></abbr>
           <% end %>
         </li>
       <% end %>
