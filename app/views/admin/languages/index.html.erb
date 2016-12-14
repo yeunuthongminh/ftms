@@ -1,6 +1,6 @@
 <div id="languages profile-active">
    <p class="pull-right">
-     <% if policy(controller: "languages", action: "new") %>
+     <% if policy new_admin_language_path %>
        <%= link_to t("buttons.create"),
          new_admin_language_path, class: "btn btn-success" %>
      <% end %>

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       resource :assign_project, only: :update
       resources :user_subjects, only: :update
       resources :tasks, except: :show
+      resources :course_subject_requirement, only: :update
     end
     resources :users, except: :index do
       resource :stages, only: [:edit, :update]

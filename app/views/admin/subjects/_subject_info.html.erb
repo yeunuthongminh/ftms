@@ -34,7 +34,8 @@
       </p>
     </div>
     <%= link_to t("subjects.change_project"), "#", data: {toggle: "modal",
-      target: "#update_project"}, class: "btn btn-info" %>
+      target: "#update_project", course_subject: @supports.course_subject.id},
+      class: "btn btn-info", id: "btn-assign-project" %>
   </div>
   <div class="col-md-1 action">
     <%= render "shared/action_user_subjects" %>

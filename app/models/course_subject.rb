@@ -10,7 +10,7 @@ class CourseSubject < ApplicationRecord
   ATTRIBUTES_PARAMS = [:subject_name, :image, :subject_description, :subject_content,
     :course_id, :row_order_position, :chatwork_room_id]
   PROJECT_ATTRIBUTES_PARAMS = [:project_id, course_subject_requirements_attributes:
-    [:id, :project_requirement_id]]
+    [:id, :project_requirement_id, :_destroy]]
 
   belongs_to :subject
   belongs_to :course
@@ -26,6 +26,7 @@ class CourseSubject < ApplicationRecord
   after_create :create_user_subjects_when_add_new_subject
   after_create :update_subject_course
 
+  accepts_nested_attributes_for :course_subject_requirements, allow_destroy: true
   accepts_nested_attributes_for :tasks, allow_destroy: true,
     reject_if: proc {|attributes| attributes["name"].blank?}
 
@@ -48,6 +49,17 @@ class CourseSubject < ApplicationRecord
       return status = false
     end
     status
+  end
+
+  def update_project_assign project_params
+    CourseSubject.transaction do
+      self.update_attributes project_params
+      _rqm_ids = ProjectRequirement.where(project_id: project_id).pluck :id
+      CourseSubjectRequirement.where("course_subject_id = ? AND project_requirement_id NOT IN (?)",
+        id, _rqm_ids).destroy_all
+      return true
+    end
+    false
   end
 
   private

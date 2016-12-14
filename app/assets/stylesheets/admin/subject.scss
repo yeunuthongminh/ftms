@@ -149,3 +149,44 @@
     }
   }
 }
+
+#update_project {
+  .modal-body {
+    min-height: 100px;
+    max-height: 800px;
+  }
+
+  #loading-project {
+    display: none;
+    margin-left: 48%;
+    height: 30px;
+    text-align: center;
+    background: asset_url("loading.gif") no-repeat;
+    background-size: 30px 30px;
+  }
+
+  #list-requirements {
+    max-height: 400px;
+    overflow: auto;
+
+    .list-group {
+      margin-bottom: 0px;
+    }
+  }
+
+  .list-group-item-info {
+    color: #31708f !important;
+    background-color: #d9edf7 !important;
+  }
+
+  .state-icon {
+    left: -5px;
+  }
+
+  #sA-requirements {
+    margin-bottom: 5px;
+    padding-left: 15px;
+    display: none;
+    cursor: pointer;
+  }
+}
