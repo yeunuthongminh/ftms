@@ -71,18 +71,19 @@ class UniversitiesDatatable
   end
 
   def can_edit university
-    if policy(controller: "universities", action: "edit")
-      link_to @view.t("buttons.edit"), eval("@view.edit_#{@namespace}_university_path(university)"),
-        class: "text-primary pull-right"
+    url = eval "@view.edit_#{@namespace}_university_path(university)"
+    if policy url
+      link_to @view.t("buttons.edit"), url, class: "text-primary pull-right"
     else
       ""
     end
   end
 
   def can_destroy university
-    if policy(controller: "universities", action: "destroy")
-      link_to @view.t("buttons.delete"), eval("@view.#{@namespace}_university_path(university)"),
-        method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
+    url = eval "@view.#{@namespace}_university_path(university)"
+    if policy_with_method(url: url, action: "destroy")
+      link_to @view.t("buttons.delete"), url, method: :delete,
+        data: {confirm: @view.t("messages.delete.confirm")},
         class: "text-danger pull-right"
     else
       ""

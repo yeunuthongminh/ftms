@@ -40,9 +40,9 @@
           <% if current_user.is_trainee? && @subject_supports.user_subject.progress? %>
             <%= link_to t("buttons.finish"), "#",
               class: "btn btn-danger pull-right finish-subject" %>
-          <% elsif @subject_supports.user_subject.subject.subject_detail && 
+          <% elsif @subject_supports.user_subject.subject.subject_detail &&
             @subject_supports.user_subject.waiting? %>
-            <% if @subject_supports.exam_process && 
+            <% if @subject_supports.exam_process &&
               @subject_supports.exam_process.testing? %>
               <%= link_to t("buttons.continute_do_exam"), @subject_supports.exam_process,
                 class: "btn btn-info pull-right" %>
@@ -52,6 +52,7 @@
             <% end %>
           <% end %>
         <% end %>
+
         <div class="description"><%= @subject_supports.user_subject.description %></div>
         <div class="subject-content box-divider">
           <div class="label-title"><%= t "subjects.content" %></div>
@@ -92,4 +93,5 @@
   <%= render "shared/task_modal" %>
   <%= render "shared/member_modal", trainers: @subject_supports.trainers,
     trainees: @subject_supports.trainees %>
+  <%= render "project_assignments_modal", project: @subject_supports.project %>
 </div>
