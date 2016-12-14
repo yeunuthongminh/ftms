@@ -5,6 +5,7 @@ $(document).on('turbolinks:load', function() {
         url: '/calendars.json',
         type: 'json',
         method: 'get',
+        async: false,
         complete: function (data) {
           localStorage.setItem('calendar_data', JSON.stringify(data.responseJSON));
         }
@@ -95,6 +96,7 @@ $(document).on('turbolinks:load', function() {
       $('#dialog').dialog('open');
     },
   });
+
   $('#dialog').dialog({
     autoOpen: false,
     height: 350,
