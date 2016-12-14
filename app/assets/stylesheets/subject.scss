@@ -96,6 +96,12 @@
   .action-status {
     display: inline-flex;
   }
+
+  .list-group-item {
+    &:hover {
+      background: #eee;
+    }
+  }
 }
 
 .header-title {

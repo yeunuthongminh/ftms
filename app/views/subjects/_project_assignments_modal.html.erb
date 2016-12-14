@@ -1,0 +1,28 @@
+<div id="user-course-project-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <% if project %>
+          <h3 class="label-modal"><%= project.name %></h3>
+          <small>
+            <%= t "projects.requirements.total" %>
+            <%= pluralize project.project_requirements.size,
+              t("projects.requirements.requirement") %>
+          </small>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        <div class="list-group">
+          <% if project && project.project_requirements.any? %>
+            <% project.project_requirements.each_with_index do |requirement, index| %>
+              <div class="list-group-item">
+                <%= "#{index + 1}. #{requirement.name}" %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

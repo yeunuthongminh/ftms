@@ -80,17 +80,18 @@ class CategoriesDatatable
   end
 
   def can_view category
-    if policy(controller: "categories", action: "show")
-      link_to category.name, eval("@view.#{@namespace}_category_path(category)")
+    url = eval "@view.#{@namespace}_category_path(category)"
+    if policy url
+      link_to category.name, url
     else
       ""
     end
   end
 
   def can_edit category
-    if policy(controller: "categories", action: "edit")
-      link_to @view.t("buttons.edit"),
-        eval("@view.edit_#{@namespace}_category_path(category)"),
+    url = eval "@view.edit_#{@namespace}_category_path(category)"
+    if policy url
+      link_to @view.t("buttons.edit"), url,
         class: "text-primary pull-right edit_category", remote: true
     else
       ""
@@ -98,10 +99,10 @@ class CategoriesDatatable
   end
 
   def can_delete category
-    if policy(controller: "categories", action: "destroy")
-      link_to @view.t("buttons.delete"),
-        eval("@view.#{@namespace}_category_path(category)"),
-        method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
+    url = eval "@view.#{@namespace}_category_path(category)"
+    if policy_with_method(url: url, action: "destroy")
+      link_to @view.t("buttons.delete"), url, method: :delete,
+        data: {confirm: @view.t("messages.delete.confirm")},
         class: "text-danger pull-right", remote: true
     else
       ""

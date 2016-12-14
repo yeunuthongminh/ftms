@@ -4,6 +4,14 @@
       <%= t "subjects.members" %>
       <span class="badge label-primary"><%= @subject_supports.member_size %></span>
     </h3>
+    <% if @subject_supports.project %>
+      <%= button_tag class: "btn btn-success pull-right",
+        data: {toggle: "modal", target: "#user-course-project-modal"},
+        title: t("projects.label.projects") do %>
+        <i class="fa fa-tasks"></i>
+      <% end %>
+    <% end %>
+
   </div>
   <div class="box-body no-padding">
     <%= render "shared/member_panel", show_members: @subject_supports.users,

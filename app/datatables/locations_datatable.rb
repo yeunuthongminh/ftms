@@ -73,20 +73,19 @@ class LocationsDatatable
   end
 
   def can_update location
-    if policy(controller: "locations", action: "edit")
-      link_to @view.t("buttons.edit"),
-        eval("@view.edit_#{@namespace}_location_path(location)"),
-        class: "text-primary pull-right"
+    url = eval "@view.edit_#{@namespace}_location_path(location)"
+    if policy url
+      link_to @view.t("buttons.edit"), url, class: "text-primary pull-right"
     else
       ""
     end
   end
 
   def can_delete location
-    if policy(controller: "locations", action: "destroy")
-      link_to @view.t("buttons.delete"),
-        eval("@view.#{@namespace}_location_path(location)"),
-        method: :delete, data: {confirm: @view.t("messages.delete.confirm")},
+    url = eval "@view.#{@namespace}_location_path(location)"
+    if policy_with_method(url: url, action: "destroy")
+      link_to @view.t("buttons.delete"), url, method: :delete,
+        data: {confirm: @view.t("messages.delete.confirm")},
         class: "text-danger pull-right"
     else
       ""

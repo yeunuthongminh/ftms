@@ -15,5 +15,23 @@ namespace :db do
       end
     end
     UserFunction.import admins
+
+    puts "create function for trainee"
+    trainees = []
+    Trainee.all.each do |trainee|
+      Function.where("model_class NOT LIKE ?", "%/%").each do |function|
+        trainees << UserFunction.new(function: function, user: trainee, role_type: 2)
+      end
+    end
+    UserFunction.import trainees
+
+    puts "create function for trainer"
+    trainers = []
+    Trainer.all.each do |trainer|
+      Function.where("model_class NOT LIKE ?", "trainer/%").each do |function|
+        trainers << UserFunction.new(function: function, user: trainer, role_type: 1)
+      end
+    end
+    UserFunction.import trainers
   end
 end

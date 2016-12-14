@@ -15,3 +15,6 @@ en:
     create_requirement:
       success: "Create requirement successfully"
       fail: "Sorry, something went wrong!"
+    requirements:
+      total: "Total "
+      requirement: "requirement"

@@ -13,6 +13,10 @@ class Supports::SubjectTrainee
       .find_by course_id: user_course.course_id, subject_id: @subject.id
   end
 
+  def project
+    @project ||= course_subject.project
+  end
+
   def course
     @course ||= course_subject.course
   end
