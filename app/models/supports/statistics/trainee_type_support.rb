@@ -10,8 +10,7 @@ class Supports::Statistics::TraineeTypeSupport < Supports::Statistics::Applicati
   def trainee_by_trainee_type
     @load_trainee_by_location ||= Profile.where(user_id: load_all_trainee,
       location_id: @location_ids).includes :trainee_type
-
-    @load_trainee = trainee_by_statistic @load_trainee_by_location, "university"
+    @load_trainee = trainee_by_statistic @load_trainee_by_location, "trainee_type"
   end
 
   def percentage_trainee_by_trainee_type
