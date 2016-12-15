@@ -1,4 +1,4 @@
-class Supports::Program
+class Supports::ProgramSupport
   attr_reader :program
 
   def initialize args
@@ -18,7 +18,7 @@ class Supports::Program
       .find_by(name: Settings.roles.trainer).users.map do |trainer|
       TrainerProgram.unscoped
         .find_or_initialize_by user: trainer, program: @program
-      end
+    end
   end
 
   def programs

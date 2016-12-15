@@ -72,7 +72,7 @@ class Admin::ProgramsController < ApplicationController
   end
 
   def load_data
-    @program_supports = Supports::Program.new program: @program
+    @program_supports = Supports::ProgramSupport.new program: @program
   end
 
   def find_program

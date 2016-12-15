@@ -6,11 +6,15 @@
     </div>
   </div>
   <div class="col-sm-6">
-    <div class="form-group">
-      <%= f.label :parent_program %>
-      <%= f.select :parent_id, @program_supports.programs, {prompt: ""},
-        {selected: f.object.parent_id, class: "form-control"} %>
-    </div>
+    <% if @program.new_record? %>
+      <%= f.hidden_field :parent_id %>
+    <% else %>
+      <div class="form-group">
+        <%= f.label :parent_program %>
+        <%= f.select :parent_id, @program_supports.programs, {prompt: ""},
+          {selected: f.object.parent_id, class: "form-control"} %>
+      </div>
+    <% end %>
   </div>
   <%= render "shared/error_messages", object: f.object %>
   <%= render "shared/form_assign_trainer", f: f,
