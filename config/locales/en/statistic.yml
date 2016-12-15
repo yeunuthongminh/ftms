@@ -2,6 +2,7 @@ en:
   statistics:
     other: "Other"
     none: "None"
+    join_edu: "Join education"
     titles:
       locations: "Locations"
       trainee_types: "Trainees type"
@@ -55,6 +56,9 @@ en:
       title_detail: "Total trainees in edu by language detail"
       title: "Total trainees in edu by language"
       number_trainees: "Number trainees"
+      serie_name: "Trainees"
+      name: "Name"
+    trainee-types:
       serie_name: "Trainees"
       name: "Name"
 

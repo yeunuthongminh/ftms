@@ -49,7 +49,7 @@ class Supports::Statistics::ApplicationStatistic
     @load_trainee_by_location_and_type = load_trainee_by_location_and_type
     unless @load_all_trainee
       none_statistic = Hash[:name, I18n.t("statistics.none"), :y, 0]
-      all_statistics = Object.const_get("#{type_statistic.humanize}")
+      all_statistics = Object.const_get("#{type_statistic.classify}")
         .all.map do |u|
         Hash[:name, u[:name], :y, 0]
       end

@@ -42,7 +42,11 @@
                       <li>
                         <%= check_box_tag "stage_ids[]", stage.id,
                           checked?(params, "stage_ids", stage.id.to_s) %>
-                        <%= stage.name %>
+                        <% if stage.name == "In education" %>
+                          <%= t "statistics.join_edu" %>
+                        <% else %>
+                          <%= stage.name %>
+                        <% end %>
                       </li>
                     <% end %>
                     <li class="divider"></li>
