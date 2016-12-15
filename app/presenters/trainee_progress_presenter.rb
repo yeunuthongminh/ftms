@@ -9,12 +9,11 @@ class TraineeProgressPresenter < ActionView::Base
   def render
     sidebar = Array.new
     body = Array.new
-    @trainee_by_course.each_with_index do |items, index|
-      sidebar << sidebar_item(items, index)
-      body << body_item(items, index)
+    @trainee_by_course.each_with_index do |trainee, index|
+      sidebar << sidebar_item(trainee, index)
+      body << body_item(trainee, index)
     end
-    html =
-      "<aside id=\"parent\" class=\"fixedTable-sidebar\">
+    html = "<aside id=\"parent\" class=\"fixedTable-sidebar\">
       <div id=\"child\">
         <div id=\"table-sidebar\">
           <div class=\"tbody listsort filter_table_left_part\" id=\"list-records\">"
@@ -28,63 +27,48 @@ class TraineeProgressPresenter < ActionView::Base
 
   private
   def sidebar_item trainee, index
-    html = "
-      <div class=\"trow list_#{index}\" id=\"sidebar-row-#{index}\">
-        <div class=\"tcell stt\">#</div>
-        <div class=\"tcell staff_code\">
-          #{trainee.profile.staff_code}
-        </div>
-        <div class=\"tcell trainee_name\" title=\"#{trainee.name}\">
-          #{link_to trainee.name, eval("admin_user_path(trainee)")}
-        </div>
-      </div>"
+    html = "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{index}\">
+      <div class=\"tcell stt\">#</div>
+      <div class=\"tcell staff_code\" title=\"#{trainee.profile.staff_code}\">
+        #{trainee.profile.staff_code}
+      </div>
+      <div class=\"tcell trainee_name\" title=\"#{trainee.name}\">
+        #{link_to trainee.name, admin_user_path(trainee)}
+      </div>
+    </div>"
   end
 
   def body_item trainee, index
-    @supports = Supports::UserSupport.new trainee
-    last_course = trainee.user_courses.course_progress.last
-    html = "
-      <div class=\"trow #{"list_#{index}"}\" id=\"body-row-#{trainee.id}\">"
+    last_course = trainee.user_courses.select {|user_course| user_course.progress?}.last
+    html = "<div class=\"trow #{"list_#{index}"}\" id=\"body-row-#{trainee.id}\">"
     courses_html = ""
-    title = ""
-    if @supports.inprogress_course
-      @supports.user_subjects.each do |user_subject|
-        courses_html << "
-          <div class=\"prog-bar-cont\">
+    if last_course
+      last_course.user_subjects.each do |user_subject|
+        courses_html << "<div class=\"prog-bar-cont\">
           <div class=\"prog-bar\">"
         if user_subject.init?
-          courses_html << "
-            <div class=\"prog-bar-bg-init\"
-              style=\"width: 100%;
-              background-size: 100%\">
-              #{user_subject.name}(#{user_subject.status})
-            </div>
-          </div>
-        </div>"
+          courses_html << "<div class=\"prog-bar-bg-init\"
+            style=\"width: 100%;
+            background-size: 100%\">
+            #{user_subject.name}(#{I18n.t "user_subjects.statuses.#{user_subject.status}"})
+          </div></div></div>"
         else
-          if user_subject.finish?
-            courses_html << "
-              <div class=\"prog-bar-bg-finish\""
+          courses_html << if user_subject.finish?
+            "<div class=\"prog-bar-bg-finish\""
           elsif user_subject.waiting?
-            courses_html << "
-              <div class=\"prog-bar-bg-waiting\""
+            "<div class=\"prog-bar-bg-waiting\""
           else
-            courses_html << "
-              <div class=\"prog-bar-bg\""
+            "<div class=\"prog-bar-bg\""
           end
-          courses_html << "
-            <div class=\"prog-bar-bg-finish\"
-                style=\"width:100%;
-                background-size: 100%\">
-                #{user_subject.name}(#{percentage_format user_subject.percent_progress} #{user_subject.status})
-              </div>
-            </div>
-          </div>"
-        end 
+          courses_html << "<div class=\"prog-bar-bg-finish\"
+            style=\"width:100%;
+            background-size: 100%\">
+            #{user_subject.name}(#{percentage_format user_subject.percent_progress} #{I18n.t "user_subjects.statuses.#{user_subject.status}"})
+          </div></div></div>"
+        end
       end
     end
-    html << "
-      <div class=\"tcell trainee_type\" title=\"#{trainee.profile.trainee_type_name}\">
+    html << "<div class=\"tcell trainee_type\" title=\"#{trainee.profile.trainee_type_name}\">
         #{trainee.profile.trainee_type_name}
       </div>
       <div class=\"tcell location\" title=\"#{trainee.profile.location_name}\">
@@ -93,13 +77,12 @@ class TraineeProgressPresenter < ActionView::Base
       <div class=\"tcell trainee_status\" title=\"#{trainee.profile.status_name}\">
         #{trainee.profile.status_name}
       </div>
-
-      <div class=\"tcell course_name\" title=\"#{last_course ? last_course.course_name : " "}\">
-        #{last_course ? (link_to last_course.course_name, eval("admin_course_path(last_course)")) : ""}
+      <div class=\"tcell course_name\" title=\"#{last_course ? last_course.course_name : ""}\">
+        #{last_course ? (link_to last_course.course_name, admin_course_path(last_course)) : ""}
       </div>
-      <div class=\"tcell course\" title=\"#{title}\">
-        <div class=\"list-progbar\">" << 
-          courses_html << "
+      <div class=\"tcell course\">
+        <div class=\"list-progbar\">
+          #{courses_html}
         </div>
       </div>
     </div>"
