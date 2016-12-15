@@ -118,6 +118,7 @@ statistics:
   - languages
   - stages
   - in_out_by_month
+  - trainee_progress
 all_functions:
   - index
   - new

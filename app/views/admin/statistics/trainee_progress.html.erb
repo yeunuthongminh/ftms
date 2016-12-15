@@ -1,0 +1,34 @@
+<div id="statistics" class="clearfix">
+  <div id="content">
+    <div id="<%= params[:type] %>">
+      <%= image_tag "loading.gif", id: "loading" %>
+      <h3 class="title">
+        <%= t "statistics.trainee_progress.trainee_progress" %>
+
+        <button id="btn-filter-on-off" title="<%= filter_title %>"
+        class="btn-filter-onoff-project btn btn-default">
+          &nbsp;
+        </button>
+        <span id="filter-loading" class="filter-loading-offset-top"></span>
+      </h3>
+
+      <div class="table">
+        <%= render "shared/datatables/trainee_progress_header" %>
+        <%= @statistics.presenters.html_safe %>
+      </div>
+
+      <div class="pull-right" id="number-records">
+      </div>
+
+      <div id="filter" data-filter-data="<%= @filter_service.user_filter_data %>"
+      data-type="<%= :training_managements %>" data-id="<%= current_user.id %>"
+      data-is-turn-on="<%= @filter_service.is_on? %>">
+      </div>
+
+      <div class="list-filters">
+        <div class="filter-form">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
