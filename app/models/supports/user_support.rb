@@ -15,17 +15,16 @@ class Supports::UserSupport
   end
 
   def finished_courses
-    @finished_courses ||= @user.user_courses.course_finished
+    @finished_courses ||= user_courses.finish
   end
 
   def inprogress_course
-    @inprogress_course ||= @user.user_courses.course_progress.last
+    @inprogress_course ||= user_courses.progress.last
   end
 
   def user_subjects
-    inprogress_course
-    @user_subjects ||= @inprogress_course.user_subjects.includes(:course_subject)
-      .order_by_course_subject if @inprogress_course
+    @user_subjects ||= inprogress_course.user_subjects.includes(:course_subject)
+      .order_by_course_subject if inprogress_course
   end
 
   def note
