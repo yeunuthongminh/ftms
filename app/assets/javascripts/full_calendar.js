@@ -31,6 +31,7 @@ $(document).on('turbolinks:load', function() {
     },
     events: {
       url: '/calendars.json',
+      async: false,
       error: function() {
         $('#script-warning').show();
       }
