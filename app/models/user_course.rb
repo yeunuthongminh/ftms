@@ -21,10 +21,6 @@ class UserCourse < ApplicationRecord
   has_many :user_subjects, dependent: :destroy
   has_many :trainee_evaluations, as: :targetable
 
-  scope :course_progress, ->{joins(:course)
-    .where("courses.status = ?", Course.statuses[:progress]).order :updated_at}
-  scope :course_finished, ->{joins(:course)
-    .where("courses.status = ?", Course.statuses[:finish])}
   scope :course_not_init, ->{joins(:course)
     .where("courses.status <> ?", Course.statuses[:init])}
   scope :find_user_by_role, ->role_id{joins(trainee: :user_roles)
