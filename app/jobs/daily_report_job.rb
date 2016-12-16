@@ -1,4 +1,4 @@
-class MailByDayJob < ApplicationJob
+class DailyReportJob < ApplicationJob
   queue_as :default
 
   MAIL_DAY = 1
@@ -12,6 +12,6 @@ class MailByDayJob < ApplicationJob
 
   private
   def send_email_by_day user_id
-    UsersMailer.mail_by_day(user_id).deliver_now
+    DailyReportMailer.daily_mail(user_id).deliver_now
   end
 end

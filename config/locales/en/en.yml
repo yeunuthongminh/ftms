@@ -175,6 +175,7 @@ en:
       task_continue: "Continue Task"
       task_init: "Init Task"
       task_finished: "Finish Task"
+      none_courses: "You do not have any inprogress course!"
   filters:
     btn_on: "Turn on filter"
     btn_off: "Turn off filter"

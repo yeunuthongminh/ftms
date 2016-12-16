@@ -15,11 +15,11 @@ class Supports::UserSupport
   end
 
   def finished_courses
-    @finished_courses ||= user_courses.finish
+    @finished_courses ||= user_courses.select {|user_course| user_course.finish?}
   end
 
   def inprogress_course
-    @inprogress_course ||= user_courses.progress.last
+    @inprogress_course ||= user_courses.find {|user_course| user_course.progress?}
   end
 
   def user_subjects
