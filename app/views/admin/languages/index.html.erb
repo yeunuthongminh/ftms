@@ -17,14 +17,15 @@
          <tr>
            <td class="name"><%= language.name %></td>
            <td class="action">
-             <% if policy(controller: "languages", action: "edit") %>
+            <% if policy edit_admin_language_path(language) %>
               <%= link_to t("buttons.edit"),
                 edit_admin_language_path(language) %>&nbsp;
-             <% end %>
-             <% if policy(controller: "languages", action: "destroy") %>
-               <%= link_to t("buttons.delete"),
-                 admin_language_path(language),
-                 method: :delete, data: {confirm: t("messages.delete.confirm")} %>
+            <% end %>
+            <% if policy_with_method(url:
+              edit_admin_language_path(language), action: "destroy") %>
+                <%= link_to t("buttons.delete"),
+                  admin_language_path(language),
+                  method: :delete, data: {confirm: t("messages.delete.confirm")} %>
              <% end %>
            </td>
          </tr>
