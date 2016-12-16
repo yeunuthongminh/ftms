@@ -9,6 +9,12 @@
       font-size: 18px;
       margin: 5px 0 20px 0;
       font-weight: bold;
+      display: inline;
+      .score{
+        color: green;
+        font-style: italic ;
+        float: right;
+      }
     }
 
     .result-correct {
@@ -35,13 +41,14 @@
 
     .question-content:hover {
       background-color: #DDEBD7;
+      border-radius: 2px;
     }
 
     input[type='radio']:after {
       width: 15px;
       height: 15px;
       border-radius: 15px;
-      top: 0px;
+      top: -5px;
       left: -1px;
       position: relative;
       background-color: #d1d3d1;
@@ -55,7 +62,7 @@
       width: 15px;
       height: 15px;
       border-radius: 15px;
-      top: 0px;
+      top: -5px;
       left: -1px;
       position: relative;
       background-color: black;
@@ -83,7 +90,7 @@
       float: right;
       position: fixed;
       right: 70px;
-      top: 140px;
+      top: 105px;
       width: 200px;
       padding-bottom: 10px;
     }
@@ -91,21 +98,25 @@
       background-color: #fff;
       border-radius: 20px;
       padding: 30px;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
+      ol{
+        font-weight: bold;
+        font-size: 18px;
+      }
     }
   }
 
   .right-side-do-exams {
     position: fixed;
     right: 45px;
-    top: 120px;
+    top: 90px;
     background-color: #fff;
     border-radius: 20px;
     padding: 30px;
-    height: 300px;
+    height: 230px;
     width: 250px;
     .subject-title {
-      margin-top: 130px;
+      margin-top: 100px;
       text-align: center;
     }
   }
@@ -114,7 +125,7 @@
     position: fixed;
     right: 70px;
     background-color: #fff;
-    top: 350px;
+    top: 270px;
     border: none;
     .btn {
       width: 98px;

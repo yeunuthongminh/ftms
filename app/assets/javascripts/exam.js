@@ -10,3 +10,6 @@ $(document).on('turbolinks:load', function() {
     });
   }
 });
+window.onbeforeunload = function (){
+  $('.save-close-browser').trigger('click');
+};

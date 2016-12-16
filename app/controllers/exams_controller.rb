@@ -58,7 +58,8 @@ class ExamsController < ApplicationController
   end
 
   def load_exams
-    @exams = current_user.exams.per_page_kaminari(params[:page]).per Settings.per_page
+    @exams = current_user.exams.order_exam_finish_desc.
+      per_page_kaminari(params[:page]).per Settings.per_page
   end
 
   def spent_time
