@@ -14,6 +14,7 @@ class Exam < ApplicationRecord
 
   scope :finished, ->{where status: :finish}
   scope :not_finished, ->{where.not status: :finish}
+  scope :order_exam_finish_desc, ->{order created_at: :desc}
 
   accepts_nested_attributes_for :results, allow_destroy: true
 

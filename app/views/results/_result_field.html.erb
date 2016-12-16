@@ -1,10 +1,19 @@
 <li>
-  <div class="question-title"><%= result.object.question.content %></div>
+  <div class="question-title">
+    <%= result.object.question.content %>
+    <div class="score">
+      <%= t "exams.score_question", score:
+        (result.object.question.level_before_type_cast + 1)*Settings.exams.unit %>
+    </div>
+  </div>
+
   <% result.object.question.answers.each do |answer| %>
-    <label class="question-content <%= set_background_answer answer, result.object if @exam.finish? %>">
+    <label class="question-content <%= set_background_answer answer,
+      result.object if @exam.finish? %>">
       <div class="col-xs-1"><%= result.radio_button :answer_id, answer.id,
         checked: answer == result.object.answer, disabled: disabled %></div>
-      <div class="col-xs-9"><span><%= answer.content %></span></div><br>
+      <div class="col-xs-9"><span><%= answer.content %></span></div>
+      <br>
     </label><br>
   <% end %>
 </li>
