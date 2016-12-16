@@ -224,3 +224,5 @@ sync:
 sync_functions:
   - Training schedule
 minimum_percent_to_join: 5
+static_pages:
+  num_of_faq: 10

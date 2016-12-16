@@ -1,8 +1,8 @@
-<% if flash.key? :failed %>
-  alert('<%= flash[:success] %>');
-  <% flash.delete :failed %>
-<% else %>
-  alert('<%= flash[:success] %>');
+<% if @category.deleted? %>
   $("#tbl-category").DataTable().ajax.reload();
+  $(".flash").html("<%= j render "layouts/flash" %>");
   <% flash.delete :success %>
+<% else %>
+  $(".flash").html("<%= j render "layouts/flash" %>");
+  <% flash.delete :failed %>
 <% end %>

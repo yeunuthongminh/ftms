@@ -6,4 +6,6 @@ class Post < ApplicationRecord
   belongs_to :user
 
   has_many :comments
+
+  scope :most_viewed, ->{order views: :desc}
 end

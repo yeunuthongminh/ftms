@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20161216074900) do
     t.text     "content",    limit: 65535
     t.integer  "user_id"
     t.integer  "post_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
@@ -293,6 +294,7 @@ ActiveRecord::Schema.define(version: 20161216074900) do
     t.text     "content",    limit: 65535
     t.integer  "views",                    default: 0
     t.integer  "user_id"
+    t.datetime "deleted_at"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
