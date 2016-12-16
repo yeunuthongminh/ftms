@@ -1,13 +1,15 @@
 @import "variables";
 @import "mixin";
 
-#roles-edit {
+#roles-edit, #roles {
   .space {
     height: 20px
   }
+
   .table {
     min-height: 355px;
   }
+
   #child,#parent, .fixedTitle, #table-sidebar {
     min-width: 355px;
     max-width: 355px
@@ -16,6 +18,10 @@
   .filters {
     top: 28% !important;
     left: 29% !important;
+  }
+
+  input[type="checkbox"] {
+    margin: 0px;
   }
 
   @include customize-scrollbar;

@@ -1,46 +1,41 @@
 class Supports::RoleSupport
-  attr_reader :role, :filter_service
+  attr_reader :role
 
-  def initialize role, filter_service
+  def initialize role
     @role = role
-    @filter_service = filter_service
-    @routes = routes(String "value")
   end
 
-  def filter_data_user
-    @filter_data_user ||= @filter_service.user_filter_data
-  end
-
-  def role_allocate_function_presenters role
-    @role_allocate_function_presenters_admin ||= AllocateFunctionPresenter.new(routes_admin: routes("admin"),
-      routes_trainer: routes("trainer"), routes_trainee: routes("trainee"),
-      namespace: @namespace, role: role).render
-  end
-
-  def routes value
-    @routes = []
-    temp = Rails.application.routes.set.anchored_routes.map(&:defaults)
-      .reject {|route| route[:internal] || check_route(route[:controller], value)}
-
-    temp.pluck(:controller).uniq.each do |controller|
-      @routes << Hash["controller".to_sym, controller, "actions".to_sym,
-        temp.select {|route| route[:controller] == controller}.pluck(:action).uniq]
-    end
-    @routes
+  def presenter form
+    @role_allocate_function_presenters_admin ||= AllocateFunctionPresenter.new(routes_admin: admin_routes,
+      routes_trainer: trainer_routes, routes_trainee: trainee_routes,
+      namespace: @namespace, role: @role, form: form).render
   end
 
   private
-  def check_route route, value
-    if value == "trainee"
-      Settings.controller_names.each do |object|
-        return true if route.include?(object) || route.include?("admin") || route.include?("trainer")
+  def functions
+    @functions ||= Function.all
+  end
+
+  def trainee_functions
+    @trainee_functions ||= functions.reject{|route| route.model_class.include?("admin") || route.model_class.include?("trainer")}
+  end
+
+  def admin_functions
+    @admin_functions ||= functions.select{|route| route.model_class.include?("admin")}
+  end
+
+  def trainer_functions
+    @trainer_functions ||= functions.select{|route| route.model_class.include?("trainer")}
+  end
+
+  ["trainer", "trainee", "admin"].each do |type|
+    define_method "#{type}_routes" do
+      routes = []
+      send("#{type}_functions").map(&:model_class).uniq.each do |controller|
+        routes << Hash[:controller, controller, :actions,
+          send("#{type}_functions").select {|function| function.model_class == controller}.pluck(:action).uniq]
       end
-      false
-    else
-      Settings.controller_names.each do
-        return false if route.include?(value)
-      end
-      true
+      routes
     end
   end
 end
