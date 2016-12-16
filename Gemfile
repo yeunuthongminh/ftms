@@ -51,6 +51,8 @@ gem "redis-rack-cache", git: "git://github.com/jodosha/redis-rack-cache.git"
 gem "google_drive"
 gem "flexslider-rails"
 gem "config"
+gem "acts-as-taggable-on", "~> 4.0"
+gem "acts_as_votable", "~> 0.10.0"
 
 group :development, :test do
   gem "rack-mini-profiler"

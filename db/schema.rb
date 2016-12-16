@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208083418) do
+ActiveRecord::Schema.define(version: 20161216074900) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(version: 20161208083418) do
     t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
 
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text     "content",    limit: 65535
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
   create_table "conversations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "sender_id"
     t.integer  "receiver_id"
@@ -76,10 +86,10 @@ ActiveRecord::Schema.define(version: 20161208083418) do
   end
 
   create_table "course_subject_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "requirement_id"
+    t.integer "project_requirement_id"
     t.integer "course_subject_id"
     t.index ["course_subject_id"], name: "index_course_subject_requirements_on_course_subject_id", using: :btree
-    t.index ["requirement_id"], name: "index_course_subject_requirements_on_requirement_id", using: :btree
+    t.index ["project_requirement_id"], name: "index_course_subject_requirements_on_project_requirement_id", using: :btree
   end
 
   create_table "course_subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -278,6 +288,16 @@ ActiveRecord::Schema.define(version: 20161208083418) do
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title"
+    t.text     "content",    limit: 65535
+    t.integer  "views",                    default: 0
+    t.integer  "user_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
+  end
+
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.date     "start_training_date"
@@ -465,6 +485,31 @@ ActiveRecord::Schema.define(version: 20161208083418) do
     t.datetime "updated_at",                null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_subjects_on_deleted_at", using: :btree
+  end
+
+  create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "tag_id"
+    t.string   "taggable_type"
+    t.integer  "taggable_id"
+    t.string   "tagger_type"
+    t.integer  "tagger_id"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+    t.index ["context"], name: "index_taggings_on_context", using: :btree
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+    t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy", using: :btree
+    t.index ["taggable_id"], name: "index_taggings_on_taggable_id", using: :btree
+    t.index ["taggable_type"], name: "index_taggings_on_taggable_type", using: :btree
+    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type", using: :btree
+    t.index ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
+  end
+
+  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "name",                       collation: "utf8_bin"
+    t.integer "taggings_count", default: 0
+    t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
 
   create_table "task_masters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -658,8 +703,24 @@ ActiveRecord::Schema.define(version: 20161208083418) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "votable_type"
+    t.integer  "votable_id"
+    t.string   "voter_type"
+    t.integer  "voter_id"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
+  end
+
   add_foreign_key "answers", "questions"
   add_foreign_key "categories", "languages"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "projects"
   add_foreign_key "course_subjects", "subjects"
@@ -679,6 +740,7 @@ ActiveRecord::Schema.define(version: 20161208083418) do
   add_foreign_key "notes", "trainee_evaluations"
   add_foreign_key "notes", "users"
   add_foreign_key "notifications", "users"
+  add_foreign_key "posts", "users"
   add_foreign_key "profiles", "locations"
   add_foreign_key "profiles", "users"
   add_foreign_key "project_requirements", "projects"
