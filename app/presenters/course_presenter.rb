@@ -54,7 +54,7 @@ class CoursePresenter < ActionView::Base
         #{course.location_name}
       </div>
       <div class=\"tcell course_status text-center\">
-        #{course.decorate.set_status}
+        #{course.status}
       </div>
       <div class=\"tcell course_start_date text-right\">
         #{l course.start_date, format: :default if course.start_date}
