@@ -7,6 +7,7 @@ class AllocateFunctionPresenter < ActionView::Base
     @routes_trainee = args[:routes_trainee]
     @namespace = args[:namespace]
     @role = args[:role]
+    @form = args[:form]
   end
 
   def render
@@ -74,15 +75,12 @@ class AllocateFunctionPresenter < ActionView::Base
       id=\"body-row-#{route[:controller]}\">"
     Settings.all_functions.each do |function|
       if route[:actions].include? function
-        @role.fields_for :functions, @role.object.functions.build do |builder|
-          html += "#{builder.hidden_field :id,
-            value: @role.object.decorate.function(function, route[:controller])}
+        @form.fields_for :functions, @role.functions.build do |builder|
+          html += "#{builder.hidden_field :id, value: find_function(function, route[:controller])}
           #{builder.hidden_field :model_class, value: route[:controller]}
           #{builder.hidden_field :action, value: function}
-          <div class=\"tcell #{function}-function text-center\"
-            title=\"#{function}\">
-            #{builder.check_box :_destroy, {checked: @role.object.decorate
-              .function(function, route[:controller]).present?}, false, true}
+          <div class=\"tcell #{function}-function text-center\" title=\"#{function}\">
+            #{builder.check_box :_destroy, {checked: find_function(function, route[:controller]).present?}, false, true}
           </div>"
         end
       else
@@ -93,5 +91,10 @@ class AllocateFunctionPresenter < ActionView::Base
     html += "<div class=\"tcell text-center\">
       <input type=\"checkbox\" data-parent=\"#{index}\" class=\"sltAll\"></input></div>"
     html += "</div>"
+  end
+
+  def find_function action, model_class
+    function = @role.functions.find {|function| function.action == action && function.model_class == model_class}
+    function.present? ? function.id : nil
   end
 end
