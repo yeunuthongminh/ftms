@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration[5.0]
       t.text :content
       t.integer :views, default: 0
       t.belongs_to :user, foreign_key: true
+      t.datetime :deleted_at
 
       t.timestamps
     end

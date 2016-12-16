@@ -276,11 +276,11 @@
           <i><%= t "staticpages.faq_homepage.description" %></i>
         </div>
         <div class="row">
-          <% 10.times do |i| %>
-            <%= link_to "#" do %>
+          <% @supports.most_viewed_posts.each.with_index 1 do |post, index| %>
+            <%= link_to post do %>
               <div class="col-md-12 question">
                 <h4 class="title text-left">
-                  <%= "#{i + 1}. #{t 'staticpages.faq_homepage.question.title'}" %>
+                  <%= "#{index}. #{post.title}" %>
                 </h4>
               </div>
             <% end %>
@@ -305,7 +305,7 @@
             <i class="counters-v2-icon fa fa-book"></i>
             <figure class="counter color-base counters-v2-no"
               data-remaining="<%= @courses_size %>">
-              <%= @courses_size %>
+              <%= @supports.courses_size %>
             </figure>
             <h4 class="counters-v2-title">
               <%= t "layouts.courses" %>
@@ -320,7 +320,7 @@
             <i class="counters-v2-icon fa fa-mortar-board"></i>
             <figure class="counter color-base counters-v2-no"
               data-remaining="<%= @trainees_size %>">
-              <%= @trainees_size %>
+              <%= @supports.trainees_size %>
             </figure>
             <h4 class="counters-v2-title">
               <%= t "courses.trainees" %>
@@ -335,7 +335,7 @@
             <i class="counters-v2-icon fa fa-users"></i>
             <figure class="counter color-base counters-v2-no"
               data-remaining="<%= @trainers_size %>">
-              <%= @trainers_size %>
+              <%= @supports.trainers_size %>
             </figure>
             <h4 class="counters-v2-title">
               <%= t "courses.trainers" %>

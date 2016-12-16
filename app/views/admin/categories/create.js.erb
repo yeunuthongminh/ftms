@@ -1,11 +1,12 @@
 <% if @category.errors.any? %>
   $('.form_errors').html('<%= j render("shared/error_messages", object: @category) %>');
 
+  $(".flash").html("<%= j render "layouts/flash" %>");
   <% flash.delete :failed %>
 <% else %>
   $('#category-modal').modal('hide');
-  alert('<%= flash[:success] %>');
   $("#tbl-category").DataTable().ajax.reload();
 
+  $(".flash").html("<%= j render "layouts/flash" %>");
   <% flash.delete :success %>
 <% end %>

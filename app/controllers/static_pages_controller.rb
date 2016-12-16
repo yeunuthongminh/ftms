@@ -7,8 +7,6 @@ class StaticPagesController < ApplicationController
         redirect_to trainer_root_path
       end
     end
-    @trainees_size = User.trainees.size
-    @trainers_size = User.trainers.size
-    @courses_size = Course.all.size
+    @supports = Supports::StaticPageSupport.new
   end
 end

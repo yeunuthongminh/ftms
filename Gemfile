@@ -62,7 +62,7 @@ group :development, :test do
   gem "web-console", "~> 2.0"
   gem "spring"
   gem "letter_opener"
-  gem "faker", "1.4.2"
+  gem "faker"
   gem "i18n-tasks", "~> 0.8.7"
   gem "rspec-rails", "~> 3.0"
   gem "bullet"
