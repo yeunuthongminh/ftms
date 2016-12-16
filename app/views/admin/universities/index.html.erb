@@ -1,6 +1,6 @@
 <div id="universities" class="systems-active">
   <div class="row">
-    <% if policy(controller: "universities", action: "new") %>
+    <% if policy new_admin_university_path %>
       <div class="col-md-12 title">
         <span>
           <%= link_to t("buttons.new"),

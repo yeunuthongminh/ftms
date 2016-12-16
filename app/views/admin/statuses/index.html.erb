@@ -1,6 +1,6 @@
 <div id="statuses" class="systems-active">
   <p class="pull-right">
-    <% if policy(controller: "statuses", action: "new") %>
+    <% if policy new_admin_status_path %>
       <%= link_to t("buttons.new"), new_admin_status_path, class: "btn btn-success" %>
     <% end %>
   </p>
@@ -17,13 +17,14 @@
           <tr>
             <td><%= index + 1 %></td>
             <td><%= status.name %></td>
-            <% if policy(controller: "statuses", action: "edit") %>
+            <% if policy edit_admin_status_path(status) %>
               <td class="action">
                 <%= link_to t("buttons.edit"), edit_admin_status_path(status),
                   class: "text-primary" %> &nbsp;
               </td>
             <% end %>
-            <% if policy(controller: "statuses", action: "destroy") %>
+            <% if policy_with_method(url:
+              edit_admin_status_path(status), action: "destroy") %>
               <td>
                 <%= link_to t("buttons.delete"), admin_status_path(status),
                   method: :delete, data: {confirm: t("messages.delete.confirm")},
