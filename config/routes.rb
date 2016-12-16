@@ -118,6 +118,14 @@ Rails.application.routes.draw do
     resources :statistics, only: [:index, :create]
   end
 
+  namespace :assign_trainee do
+    resources :courses, only: [:edit, :update]
+  end
+
+  namespace :assign_trainer do
+    resources :courses, only: [:edit, :update]
+  end
+
   root "static_pages#home"
 
   resources :courses, only: [:show, :index] do

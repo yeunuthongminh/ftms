@@ -1,21 +1,19 @@
-class Admin::AssignTrainersController < ApplicationController
+class AssignTrainee::CoursesController < ApplicationController
+  before_action :find_course
   before_action :authorize
-  before_action :find_course, only: [:edit, :update]
 
   def edit
     @supports = Supports::CourseSupport.new course: @course
-    add_breadcrumb_path "courses"
-    add_breadcrumb @course.name, admin_course_path(@course)
-    add_breadcrumb t "courses.assign_trainers"
   end
 
   def update
     if params[:course] && @course.update_attributes(course_params)
+      ExpectedTrainingDateService.new(course: @course).perform
       flash[:success] = flash_message "updated"
     else
       flash[:danger] = flash_message "not_updated"
     end
-    redirect_to admin_course_path @course
+    redirect_to [@namespace.to_sym, @course]
   end
 
   private
@@ -24,10 +22,10 @@ class Admin::AssignTrainersController < ApplicationController
   end
 
   def find_course
-    @course = Course.includes(user_courses: :trainer).find_by_id params[:course_id]
+    @course = Course.includes(user_courses: :trainee).find_by id: params[:id]
     if @course.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to admin_courses_path
+      redirect_to [@namespace.to_sym, :courses]
     end
   end
 end

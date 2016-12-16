@@ -4,8 +4,7 @@ module ApplicationData
   end
 
   def load_namespace
-    @namespace = self.class.parent.to_s.downcase
-    @namespace = Settings.namespace_roles.trainee if @namespace == "object"
+    @namespace = current_user.try(:current_role_type) || "trainee"
   end
 
   def to_do_lists
