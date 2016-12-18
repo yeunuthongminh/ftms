@@ -44,29 +44,26 @@ class TraineeProgressPresenter < ActionView::Base
     courses_html = ""
     if last_course
       last_course.user_subjects.each do |user_subject|
-        courses_html << "<div class=\"prog-bar-cont\">
-          <div class=\"prog-bar\">"
         if user_subject.init?
-          courses_html << "<div class=\"prog-bar-bg-init\"
-            style=\"width: 100%;
-            background-size: 100%\">
+          courses_html << "<div class=\"prog-bar-bg-init\">
             #{user_subject.name}(#{I18n.t "user_subjects.statuses.#{user_subject.status}"})
-          </div></div></div>"
+          </div>"
         else
           courses_html << if user_subject.finish?
-            "<div class=\"prog-bar-bg-finish\""
+            "<div class=\"prog-bar-bg-finish\">"
           elsif user_subject.waiting?
-            "<div class=\"prog-bar-bg-waiting\""
+            "<div class=\"prog-bar-bg-waiting\">"
           else
-            "<div class=\"prog-bar-bg\""
+            "<div class=\"prog-bar-bg-processing\">"
           end
-          courses_html << "<div class=\"prog-bar-bg-finish\"
-            style=\"width:100%;
-            background-size: 100%\">
-            #{user_subject.name}(#{percentage_format user_subject.percent_progress} #{I18n.t "user_subjects.statuses.#{user_subject.status}"})
-          </div></div></div>"
+          courses_html << "#{user_subject.name}(#{percentage_format user_subject.percent_progress} #{I18n.t "user_subjects.statuses.#{user_subject.status}"})
+            </div>"
         end
       end
+    else
+    courses_html << "<div class=\"prog-bar-bg-empty\">
+      #{I18n.t "user_subjects.empty"}
+    </div>"
     end
     html << "<div class=\"tcell trainee_type\" title=\"#{trainee.profile.trainee_type_name}\">
         #{trainee.profile.trainee_type_name}
@@ -81,9 +78,7 @@ class TraineeProgressPresenter < ActionView::Base
         #{last_course ? (link_to last_course.course_name, admin_course_path(last_course)) : ""}
       </div>
       <div class=\"tcell course\">
-        <div class=\"list-progbar\">
-          #{courses_html}
-        </div>
+        #{courses_html}
       </div>
     </div>"
   end
