@@ -1,0 +1,21 @@
+<div class="list-group checked-list-box" id="list-evaluation">
+  <% if @trainee_evaluation.evaluation_check_lists.any? %>
+    <%= f.fields_for :evaluation_check_lists,
+      @trainee_evaluation.evaluation_check_lists do |ff| %>
+      <li class="list-group-item row exist"
+        data-id="<%= ff.object.evaluation_standard_id %>">
+        <div data-checked="<%= ff.object.use %>" data-color="info"
+          class="col-md-6 check-box">
+          <%= ff.object.name || ff.object.evaluation_standard_name %>
+        </div>
+        <div class="col-md-6">
+          <%= ff.number_field :score, step: 0.1,
+            class: "form-control evaluation-detail-point" %>
+          <%= link_to "#", class: "check-list-remove" do %>
+            <i class="fa fa-remove"></i>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  <% end %>
+</div>

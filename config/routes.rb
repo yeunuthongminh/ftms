@@ -87,9 +87,7 @@ Rails.application.routes.draw do
     resources :subjects do
       resources :task_masters, only: :index
     end
-    resources :users, except: :index do
-      resource :evaluations
-    end
+    resources :users, except: :index
     resources :feed_backs, only: :index
 
     resources :course_subjects do
@@ -103,7 +101,6 @@ Rails.application.routes.draw do
     patch "status_subject/:course_subject_id/:status" => "status_subjects#update",
       as: :status_subject
     get "/statistics/:type" => "statistics#show", as: :statistics_page
-    resources :evaluations, only: :index
     resources :evaluation_templates
     resources :ranks
     resources :notes, except: :index
@@ -116,6 +113,13 @@ Rails.application.routes.draw do
     resources :projects
     resources :programs, except: :destroy
     resources :statistics, only: [:index, :create]
+    resources :trainee_evaluations, only: :index
+    resources :user_courses, only: :update do
+      resources :trainee_evaluations, except: [:index, :destroy]
+    end
+    resources :user_subjects do
+      resources :trainee_evaluations, except: [:index, :destroy]
+    end
   end
 
   namespace :assign_trainee do
