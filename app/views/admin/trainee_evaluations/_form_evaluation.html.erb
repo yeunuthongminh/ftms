@@ -1,4 +1,4 @@
-<%= form_for @supports.trainee_evaluation,
+<%= form_for @trainee_evaluation,
   url: [:admin, @supports.targetable, @supports.trainee_evaluation] do |f| %>
   <div class="row">
     <div class="col-md-6 col-md-offset-2">
@@ -23,36 +23,21 @@
       </div>
       <%= f.hidden_field :trainee_id, value: @supports.targetable.user_id %>
       <%= f.hidden_field :targetable_id, value: @supports.targetable.id %>
-      <%= f.hidden_field :targetable_type,
-        value: @supports.targetable.class.name %>
+      <%= f.hidden_field :targetable_type, value: @supports.targetable.class.name %>
     </div>
   </div>
-  <hr/>
   <div class="row">
-    <div class="evaluation-details col-md-6">
+    <div class="evaluation-details col-md-8 col-md-offset-2">
       <div class="title"><%= t "layouts.trainee_evaluations" %></div>
-      <table class="table table-striped tbl-evaluation-details">
-        <thead>
-          <tr>
-            <th></th>
-            <th class="name"><%= t "evaluation.table.thead.name" %></th>
-            <th class="point"><%= t "evaluation.table.thead.point" %></th>
-          </tr>
-        </thead>
-        <tbody id="tbl-evaluation-check-lists">
-          <%= f.fields_for :evaluation_check_lists,
-            @supports.evaluation_check_lists_handler do |builder| %>
-            <%= render "evaluation_check_lists", f: builder %>
-          <% end %>
-        </tbody>
-      </table>
+      <div class="form-group">
+        <%= select_tag :evaluation_group,
+          options_for_select(@supports.evaluation_groups), {include_blank: true,
+          class: "form-control"} %>
+      </div>
+      <%= render "evaluation_check_lists", f: f %>
     </div>
-    <div class="note col-md-6">
-      <div class="title"><%= t "notes.title" %></div>
-      <%= f.fields_for :notes do |builder| %>
-        <%= render "note_fields", f: builder %>
-      <% end %>
-      <p><%= link_to_add_fields t("notes.dynamic_form.add"), f, :notes %></p>
+    <div class="col-md-2">
+      <%= link_to t("trainee_evaluations.add_new"), "#", id: "add-new" %>
     </div>
     <div class="row">
       <div class="col-md-1 col-md-offset-10">

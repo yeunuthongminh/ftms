@@ -87,10 +87,10 @@ ActiveRecord::Schema.define(version: 20161216074900) do
   end
 
   create_table "course_subject_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "project_requirement_id"
+    t.integer "requirement_id"
     t.integer "course_subject_id"
     t.index ["course_subject_id"], name: "index_course_subject_requirements_on_course_subject_id", using: :btree
-    t.index ["project_requirement_id"], name: "index_course_subject_requirements_on_project_requirement_id", using: :btree
+    t.index ["requirement_id"], name: "index_course_subject_requirements_on_requirement_id", using: :btree
   end
 
   create_table "course_subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -148,6 +148,8 @@ ActiveRecord::Schema.define(version: 20161216074900) do
     t.integer  "user_id"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.string   "name"
+    t.boolean  "use"
     t.index ["evaluation_standard_id"], name: "index_evaluation_check_lists_on_evaluation_standard_id", using: :btree
     t.index ["trainee_evaluation_id"], name: "index_evaluation_check_lists_on_trainee_evaluation_id", using: :btree
     t.index ["user_id"], name: "index_evaluation_check_lists_on_user_id", using: :btree

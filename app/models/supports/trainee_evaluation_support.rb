@@ -1,24 +1,39 @@
 class Supports::TraineeEvaluationSupport
-  attr_reader :trainee_evaluation, :targetable
+  attr_reader :trainee_evaluation, :targetable, :evaluation_group
 
   def initialize args
     @trainee_evaluation = args[:trainee_evaluation]
     @targetable = args[:targetable]
+    @filter_service = args[:filter_service]
+    @namespace = args[:namespace]
+    @current_user = args[:current_user]
+    @evaluation_group = args[:evaluation_group]
   end
 
   def evaluation_standards
     @evaluation_standards ||= EvaluationStandard.all
   end
 
-  def evaluation_standard_ids
-    @evaluation_standard_ids ||= @trainee_evaluation.evaluation_check_lists
-      .map &:evaluation_standard_id
+  def evaluation_groups
+    @evaluation_groups ||= EvaluationGroup.all.collect {|object| [object.name,
+      object.id]}
   end
 
-  def evaluation_check_lists_handler
-    @evaluation_check_lists_handler ||= evaluation_standards.map do |standard|
-      EvaluationCheckList.find_or_initialize_by evaluation_standard: standard,
-        trainee_evaluation: @trainee_evaluation
+  def trainee_evaluations
+    @trainee_evaluations ||= if @current_user.is_admin?
+      TraineeEvaluation.includes :trainee
+    else
+      @current_user.trainee_evaluations.includes :trainee
     end
+  end
+
+  def filter_data_user
+    @filter_data_user ||= @filter_service.user_filter_data
+  end
+
+  def trainee_evaluation_presenters
+    @trainee_evaluation_presenters ||= TraineeEvaluationPresenter.new(namespace:
+      @namespace, trainee_evaluations: trainee_evaluations,
+      current_user: @current_user).render
   end
 end
