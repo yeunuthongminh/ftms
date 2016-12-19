@@ -19,20 +19,28 @@ class Admin::EvaluationStandardsController < ApplicationController
     add_breadcrumb_new "evaluation_standards"
   end
 
+  def create
+    @evaluation_standard = EvaluationStandard.new evaluation_standard_params
+    respond_to do |format|
+      if @evaluation_standard.save
+        format.html do
+          redirect_to admin_evaluation_standards_path
+          flash[:success] = flash_message "created"
+        end
+        format.js
+      else
+        format.html do
+          flash[:failed] = flash_message "not_created"
+          render :new
+        end
+        format.js
+      end
+    end
+  end
+
   def edit
     add_breadcrumb_index "evaluation_standards"
     add_breadcrumb_edit "evaluation_standards"
-  end
-
-  def create
-    @evaluation_standard = EvaluationStandard.new evaluation_standard_params
-    if @evaluation_standard.save
-      flash[:success] = flash_message "created"
-      redirect_to admin_evaluation_standards_path
-    else
-      flash[:failed] = flash_message "not_created"
-      render :new
-    end
   end
 
   def update

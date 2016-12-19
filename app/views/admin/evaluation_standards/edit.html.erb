@@ -5,7 +5,15 @@
     <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-primary">
         <div class="panel-heading"><%= t "buttons.edit" %></div>
-        <div class="panel-body"><%= render "form" %></div>
+        <div class="panel-body">
+          <%= form_for [:admin, @evaluation_standard] do |f| %>
+            <%= render "shared/error_messages", object: @evaluation_standard %>
+            <%= render "form", f: f %>
+            <div class="pull-right">
+              <%= f.submit yield(:submit), class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

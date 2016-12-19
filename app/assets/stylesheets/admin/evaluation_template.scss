@@ -1,17 +1,51 @@
-#evaluation-templates {
-  #evaluation-template-tbl {
-    .name {
-      width: 40%;
+@import "variables";
+@import "mixin";
+
+#evaluation_templates {
+  @include customize-scrollbar;
+
+  .fixedTable-body {
+    height: auto;
+  }
+
+  .fixedTitle, .fixedTable-sidebar, #parent, #child {
+    width: 335px;
+  }
+
+  .scrollbarH {
+    margin-left: 335px;
+  }
+
+  .scrollbar {
+    top: 30px;
+  }
+
+  .fixedTitle, .fixedTable-header {
+    max-height: 31px;
+    min-height: 31px;
+    height: 31px;
+  }
+
+  .list-selected-standards {
+    margin-bottom: 20px;
+  }
+
+  .tcell {
+    &.stt {
+     @include ellipsis(35px);
     }
-    .min-point, .max-point, .action {
-      width: 20%;
-      text-align: center;
+
+    &.evaluation_template_name {
+      @include ellipsis(700px);
+      position: relative;
+    }
+
+    &.action-edit, &.action-delete {
+      @include ellipsis(100px);
     }
   }
-}
-#evaluation-template-name {
-  input {
-    border: 0;
-    background-color: #f9f9f9;
+
+  .selected {
+    background-color: #90B6EE;
   }
 }

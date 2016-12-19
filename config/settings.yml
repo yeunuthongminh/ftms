@@ -135,6 +135,8 @@ functions:
   - destroy
 object_evaluation:
   - TraineeEvaluation
+  - EvaluationStandard
+  - EvaluationTemplate
 objects_system:
   - Role
   - Location

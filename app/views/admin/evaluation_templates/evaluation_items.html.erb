@@ -1,0 +1,11 @@
+<%= form_for [:admin, @evaluation_item], method: :post do |f| %>
+  <%= f.hidden_field :evaluation_template_id, value: params[:id] %>
+  <div class="panel panel-primary list-selected-standards">
+    <div class="panel-heading">
+      <%= t "evaluation_templates.selected" %>
+    </div>
+    <div class="list-group" id="all-selected-standards">
+    </div>
+  </div>
+  <%= submit_tag t("buttons.save"), class: "btn btn-primary" %>
+<% end %>
