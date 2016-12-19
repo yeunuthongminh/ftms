@@ -38,4 +38,14 @@ module PolicyHelper
     end
     false
   end
+
+  def policy_statistic multi_paths
+    multi_paths.each do |path|
+      url = eval("#{@namespace}_statistics_page_path path")
+      if policy url
+        return true
+      end
+    end
+    false
+  end
 end
