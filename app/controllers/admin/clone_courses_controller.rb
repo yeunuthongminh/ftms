@@ -13,4 +13,10 @@ class Admin::CloneCoursesController < ApplicationController
       redirect_to admin_courses_path
     end
   end
+
+  private
+  def load_course
+    @course = Course.find_by id: params[:course_id]
+    redirect_if_object_nil @course
+  end
 end
