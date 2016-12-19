@@ -73,7 +73,7 @@ class AllocateFunctionPresenter < ActionView::Base
   def body_item route, index
     html = "<div class=\"trow #{"list_#{index}" }\"
       id=\"body-row-#{route[:controller]}\">"
-    Settings.all_functions.each do |function|
+    Settings.functions.each do |function|
       if route[:actions].include? function
         @form.fields_for :functions, @role.functions.build do |builder|
           html += "#{builder.hidden_field :id, value: find_function(function, route[:controller])}

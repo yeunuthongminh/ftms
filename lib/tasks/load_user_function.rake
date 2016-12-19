@@ -6,7 +6,8 @@ namespace :db do
     Rails.application.routes.set.anchored_routes.map(&:defaults)
       .reject {|route| route[:internal] || Settings.controller_names.include?(route[:controller])}
       .each do |route|
-      Function.find_or_create_by model_class: route[:controller], action: route[:action]
+      Function.find_or_create_by model_class: route[:controller], 
+        action: route[:action] unless route[:action] == "edit" || route[:action] == "new"
     end
 
     puts "create function for admin"
