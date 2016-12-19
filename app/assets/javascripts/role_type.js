@@ -68,6 +68,7 @@ function select_role_type(value_seledted) {
       checked_all();
       break;
   }
+  load_tables();  
 }
 
 function stt() {
