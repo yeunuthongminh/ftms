@@ -154,6 +154,15 @@
   }
   #trainee_progress {
     @include customize-scrollbar;
+    .scrollbar{
+      top: 45px;
+    }
+    .f-trainee_type{
+      left: 375px !important;
+    }
+    .f-location{
+      left: 494px !important;
+    }
 
     .fixedTable-body .tcell{
       padding: 0;
@@ -175,11 +184,11 @@
       width: 304px;
     }
     .fixedTitle{
-      max-height: 31px;
+      max-height: 47px;
       min-height: 31px;
     }
     .fixedTable-header{
-      max-height: 31px;
+      max-height: 47px;
       min-height: 31px;
     }
 
@@ -193,6 +202,8 @@
 
     .tcell {
       height: 35px;
+      padding-top: 9px;
+      padding-left: 5px;
       &.stt {
         min-width: 35px;
         max-width: 35px;
@@ -216,20 +227,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-
-      &.leave_date, &.contract_date, &.away_date, &.comeback_date {
-        min-width: 100px;
-        max-width: 100px;
-        position: relative;
-      }
-
-      &.empty {
-        min-width: 2700px;
-        max-width: 2700px;
-        border:0;
-        height:0px;
-      }
-
       &.location {
         min-width: 120px;
         max-width: 120px;
@@ -237,12 +234,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-      }
-
-      &.action {
-        min-width: 60px;
-        max-width: 60px;
-        position: relative;
       }
 
       &.trainee_status {
@@ -254,65 +245,11 @@
         text-overflow: ellipsis;
       }
 
-      &.university {
-        min-width: 140px;
-        max-width: 370px;
-        position: relative;
-      }
-
-      &.stage {
-        @include ellipsis(120px);
-        position: relative;
-      }
-
-      &.graduation {
-        min-width: 130px;
-        max-width: 130px;
-        position: relative;
-        overflow:hidden;
-        text-overflow:ellipsis;
-        white-space:nowrap;
-      }
-
-      &.current_progress, &.note {
-        min-width: 300px;
-        max-width: 300px;
-        position: relative;
-      }
-
       &.language {
         min-width: 120px;
         max-width: 120px;
         position: relative;
       }
-
-      &.start_training_date, &.finish_training_date {
-        min-width: 150px;
-        max-width: 150px;
-        position: relative;
-      }
-
-      &.trainer {
-        min-width: 200px;
-        max-width: 200px;
-        position: relative;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      &.ready_for_project {
-        min-width: 140px;
-        max-width: 140px;
-        position: relative;
-      }
-
-      &.working_day {
-        min-width: 150px;
-        max-width: 150px;
-        position: relative;
-      }
-
       &.trainee_name {
         min-width: 200px;
         max-width: 200px;
@@ -320,12 +257,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-      }
-
-      &.none {
-        display: table-cell;
-        border-right: none;
-        border-top: 2px solid #ccc;
       }
 
       &.course_name {
@@ -338,8 +269,9 @@
       }
 
       &.course{
-        min-width: 2500px;
+        min-width: 2180px;
         position: relative;
+        display: inline-flex;
         .list-progbar{
           display: inline-flex;
           .prog-bar-cont{
@@ -349,26 +281,56 @@
             top: 5px;
           }
         }
+        $top: -4px;
         .prog-bar-bg-finish{
-          height: 19px;
+          width: 300px;
+          position: relative;
+          top: $top;
+          color: white;
+          height: 25px;
+          margin-left: 10px;
           text-align: center;
           background: grey;
+          border-radius: 3px;
+
         }
         .prog-bar-bg-init{
+          width: 300px;
+          position: relative;
+          top: $top;
+          height: 25px;
+          color: white;
+          margin-left: 10px;
           text-align: center;
-          height: 19px;
           background: green;
+          border-radius: 3px;
         }
         .prog-bar-bg-waiting{
-          text-align: center;
-          height: 19px;
-          background: orange;
-        }
-        .prog-bar{
-          box-shadow: none;
-        }
-        .prog-bar-bg{
+          width: 300px;
           position: relative;
+          top: $top;
+          height: 25px;
+          margin-left: 10px;
+          text-align: center;
+          background: orange;
+          border-radius: 3px;
+        }
+        .prog-bar-bg-processing{
+          width: 300px;
+          position: relative;
+          top: $top;
+          height: 25px;
+          margin-left: 10px;
+          text-align: center;
+          border-radius: 3px;
+          background: linear-gradient(to right, mix(violet, deepskyblue, 20%),
+          mix(limegreen, yellow, 70%), yellow, orange, mix(red, deeppink, 20%) );
+        }
+        .prog-bar-bg-empty{
+          width: 300px;
+          margin-left: 10px;
+          position: relative;
+          top: 5px;
         }
       }
     }
