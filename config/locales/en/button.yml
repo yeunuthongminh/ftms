@@ -1,6 +1,7 @@
 en:
   buttons:
     save: "Save"
+    saving: "Saving ..."
     edit: "Edit"
     delete: "Delete"
     new: "New"
@@ -27,3 +28,5 @@ en:
     move: "Move"
     show: "Show"
     pull: "Add Pull"
+    remove: "Remove"
+    add: "Add"

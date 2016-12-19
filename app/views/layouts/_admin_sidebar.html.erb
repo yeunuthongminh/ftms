@@ -114,16 +114,16 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
-            <% if policy admin_organization_charts_path %>
+            <% if policy trainer_organization_charts_path %>
               <li>
-                <%= link_to admin_organization_charts_path do %>
+                <%= link_to trainer_organization_charts_path do %>
                   <span><%= t "layouts.organization_chart" %></span>
                 <% end %>
               </li>
             <% end %>
-            <% if policy admin_training_managements_path %>
+            <% if policy trainer_training_managements_path %>
               <li>
-                <%= link_to admin_training_managements_path do %>
+                <%= link_to trainer_training_managements_path do %>
                   <span><%= t "layouts.training_management" %></span>
                 <% end %>
               </li>

@@ -1,0 +1,19 @@
+<% if @evaluation_standard.errors.any? %>
+  $('#errors-create-evaluations').html('<%= j render "shared/error_messages", object: @evaluation_standard %>');
+<% else %>
+  var evaluation_standard_form = '';
+  <% if eval(params[:selected]) %>
+    evaluation_standard_form = '<div class="list-group-item" data-id="<%= @evaluation_standard.id %>" data-name="<%= @evaluation_standard.name %>">'
+      + '<input class="hidden" type="checkbox" value="<%= @evaluation_standard.id %>" checked="checked" name="evaluation_template[evaluation_standard_ids][]" id="evaluation_template_evaluation_standard_ids_<%= @evaluation_standard.id %>">'
+      + '<%= @evaluation_standard.name %></div>';
+
+    $('.selected-evaluation-standards').prepend(evaluation_standard_form);
+  <% else %>
+    evaluation_standard_form += '<div class="list-group-item" data-id="<%= @evaluation_standard.id %>" data-name="<%= @evaluation_standard.name %>">'
+      + '<%= @evaluation_standard.name %></div>';
+
+    $('.noneselected-evaluation-standards').prepend(evaluation_standard_form);
+  <% end %>
+
+  $('#new-evaluation-standard-modal').modal('hide');
+<% end %>

@@ -1,0 +1,52 @@
+<div id="evaluation_templates" class="container systems-active">
+  <%= form_for [:admin, @evaluation_template] do |f| %>
+    <div class="row">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="panel panel-info noneselected-list-standards">
+          <div class="panel-heading">
+            <%= t "evaluation_templates.standards.all" %>
+            <%= link_to "#", "data-toggle": "modal",
+              "data-target": "#new-evaluation-standard-modal", class: "new-evaluation-standard" do %>
+              <i class="fa fa-plus pull-right" aria-hidden="true"></i>
+            <% end %>
+          </div>
+          <div class="list-group noneselected-evaluation-standards">
+            <%= render @evaluation_standards %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-7">
+        <div class="panel panel-success selected-list-standards">
+          <div class="panel-heading">
+            <%= t "evaluation_templates.standards.all" %>
+            <%= link_to "#", "data-toggle": "modal",
+              "data-target": "#new-evaluation-standard-modal", class: "new-evaluation-standard" do %>
+              <i class="fa fa-plus pull-right" aria-hidden="true"></i>
+            <% end %>
+          </div>
+          <div class="list-group selected-evaluation-standards">
+            <%= f.collection_check_boxes :evaluation_standard_ids, @evaluation_template.evaluation_standards,
+              :id, :name do |evaluation_standard| %>
+              <div class="list-group-item"
+                data-id="<%= evaluation_standard.object.id %>"
+                data-name= "<%= evaluation_standard.object.name %>">
+                <%= evaluation_standard.check_box class: "hidden" %>
+                <%= evaluation_standard.text %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= f.submit t("buttons.save"), class: "btn btn-primary pull-right" %>
+  <% end %>
+</div>
+<%= render "new_evaluation_standard_modal" %>

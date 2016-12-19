@@ -1,0 +1,9 @@
+en:
+  evaluation_standards:
+    actions:
+      create: "Create new standard"
+    headers:
+      name: "Name"
+      min_point: "Min point"
+      max_point: "Max point"
+      avarage: "Avarage"
