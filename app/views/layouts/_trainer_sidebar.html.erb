@@ -95,6 +95,17 @@
         </li>
       <% end %>
       <li class="dropdown">
+        <% if policy_with_multi_path Settings.object_evaluation %>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            <span><%= t "layouts.trainee_evaluations" %></span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <%= render "layouts/side_panel",
+            objects: Settings.object_evaluation %>
+        <% end %>
+      </li>
+      <li class="dropdown">
         <% if policy_with_multi_path Settings.object_system %>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-cogs" aria-hidden="true"></i>

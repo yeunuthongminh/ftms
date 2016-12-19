@@ -129,7 +129,6 @@ all_functions:
   - destroy
 object_evaluation:
   - TraineeEvaluation
-  - EvaluationStandard
 objects_system:
   - Role
   - Location
