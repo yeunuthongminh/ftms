@@ -79,7 +79,7 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
   end
 
   def path user
-    if h.current_user.is_trainee? && h.namespace == Settings.namespace_roles.trainee
+    if h.current_user.is_trainee?
       user
     else
       [h.namespace, user]

@@ -39,26 +39,12 @@
         </div>
         <div class="tcell created_at title">
           <%= t "exams.label.created_at" %>
-          <%= link_to filter_datas_path(type: :exam_created_at,
-            filter_type: :exams), remote: true, class: "open-select",
-            data: {name: "f-created_at"} do %>
-            <i class="fa ic ic-filter created_at"></i>
-          <% end %>
         </div>
         <div class="tcell spent_time title">
           <%= t "exams.label.spent_time" %>
-          <%= link_to filter_datas_path(type: :exam_spent_time,
-            filter_type: :exams), remote: true, class: "open-select",
-            data: {name: "f-spent_time"} do %>
-            <i class="fa ic ic-filter spent_time"></i>
-          <% end %>
         </div>
         <div class="tcell score title">
           <%= t "exams.label.score" %>
-          <%= link_to filter_datas_path(type: :exam_score, filter_type: :exams),
-            remote: true, class: "open-select", data: {name: "f-score"} do %>
-            <i class="fa ic ic-filter score"></i>
-          <% end %>
         </div>
       </div>
     </div>
