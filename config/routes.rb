@@ -120,6 +120,9 @@ Rails.application.routes.draw do
     resources :user_subjects do
       resources :trainee_evaluations, except: [:index, :destroy]
     end
+
+    resources :trainee_evaluations, only: :index
+    resources :evaluation_standards
   end
 
   namespace :assign_trainee do

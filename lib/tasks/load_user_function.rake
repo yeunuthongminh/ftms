@@ -6,7 +6,7 @@ namespace :db do
     Rails.application.routes.set.anchored_routes.map(&:defaults)
       .reject {|route| route[:internal] || Settings.controller_names.include?(route[:controller])}
       .each do |route|
-      Function.find_or_create_by model_class: route[:controller], 
+      Function.find_or_create_by model_class: route[:controller],
         action: route[:action] unless route[:action] == "edit" || route[:action] == "new"
     end
 
@@ -31,7 +31,7 @@ namespace :db do
     puts "create function for trainer"
     trainers = []
     Trainer.all.each do |trainer|
-      Function.where("model_class NOT LIKE ?", "trainer/%").each do |function|
+      Function.where("model_class LIKE ?", "trainer/%").each do |function|
         trainers << UserFunction.new(function: function, user: trainer, role_type: 1)
       end
     end
