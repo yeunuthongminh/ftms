@@ -6,6 +6,7 @@ en:
     todolist: "TODO list"
     notifications: "Notifications"
     feedbacks: "Feedback"
+    faq: "FAQ"
   document:
     name: "Documents"
     description: "Document description"
@@ -123,6 +124,7 @@ en:
       view_all: "View all"
       notification: "New notifications"
     categories: "Categories"
+    paths: "Paths"
   evaluations:
     evaluate: "Evaluate"
     create: "Create"

@@ -65,7 +65,8 @@
  *= require question
  *= require to_do_list
  *= require role
-*= require landing_page
+ *= require landing_page
+ *= require faq
  */
 
 @import "bootstrap-sprockets";

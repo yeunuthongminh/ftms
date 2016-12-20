@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161216074900) do
+ActiveRecord::Schema.define(version: 20161220064454) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -87,10 +87,10 @@ ActiveRecord::Schema.define(version: 20161216074900) do
   end
 
   create_table "course_subject_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "requirement_id"
+    t.integer "project_requirement_id"
     t.integer "course_subject_id"
     t.index ["course_subject_id"], name: "index_course_subject_requirements_on_course_subject_id", using: :btree
-    t.index ["requirement_id"], name: "index_course_subject_requirements_on_requirement_id", using: :btree
+    t.index ["project_requirement_id"], name: "index_course_subject_requirements_on_project_requirement_id", using: :btree
   end
 
   create_table "course_subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -129,6 +129,15 @@ ActiveRecord::Schema.define(version: 20161216074900) do
     t.index ["program_id"], name: "index_courses_on_program_id", using: :btree
   end
 
+  create_table "daily_post_views", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "post_id"
+    t.integer  "views",      default: 0
+    t.datetime "deleted_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["post_id"], name: "index_daily_post_views_on_post_id", using: :btree
+  end
+
   create_table "documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
     t.string   "document_link"
@@ -146,10 +155,10 @@ ActiveRecord::Schema.define(version: 20161216074900) do
     t.integer  "trainee_evaluation_id"
     t.integer  "evaluation_standard_id"
     t.integer  "user_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.string   "name"
-    t.boolean  "use"
+    t.boolean  "use",                               default: false
     t.index ["evaluation_standard_id"], name: "index_evaluation_check_lists_on_evaluation_standard_id", using: :btree
     t.index ["trainee_evaluation_id"], name: "index_evaluation_check_lists_on_trainee_evaluation_id", using: :btree
     t.index ["user_id"], name: "index_evaluation_check_lists_on_user_id", using: :btree
@@ -729,6 +738,7 @@ ActiveRecord::Schema.define(version: 20161216074900) do
   add_foreign_key "course_subjects", "projects"
   add_foreign_key "course_subjects", "subjects"
   add_foreign_key "courses", "programs"
+  add_foreign_key "daily_post_views", "posts"
   add_foreign_key "evaluation_check_lists", "evaluation_standards"
   add_foreign_key "evaluation_check_lists", "trainee_evaluations"
   add_foreign_key "evaluation_check_lists", "users"

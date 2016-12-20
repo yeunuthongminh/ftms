@@ -1,0 +1,55 @@
+<% provide :title, t("faq.index.title") %>
+
+<div id="faq">
+  <div class="breadcrumb-bar">
+    <ul class="list breadcrumb">
+      <li>
+        <%= link_to root_url do %>
+          <i class="glyphicon glyphicon-th-list"></i>
+          <%= t "layouts.paths" %>
+        <% end %>
+      </li>
+      <li class="active"><%= t "faq.index.title" %></li>
+    </ul>
+  </div>
+  <div class="row search">
+    <div class="col-md-4 col-md-offset-8 text-right">
+      <%= render "search_form" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="clearfix tabs">
+        <ul class="nav nav-tabs main-tabs pull-right"
+          data-selected-tab="<%= params[:tab] %>">
+          <% %w(newest unanswered).each_with_index do |post_type, index| %>
+            <li class="<%= 'active' if index == 0 %>">
+              <a data-toggle="tab" href="#<%= post_type %>">
+                <%= t "faq.index.#{post_type}" %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="tab-content">
+        <% %w(newest unanswered).each_with_index do |post_type, index| %>
+          <div id="<%= post_type %>"
+            class="tab-pane fade <%= 'in active' if index == 0 %>">
+            <%= render @supports.send "#{post_type}_posts" %>
+            <% if @supports.send("#{post_type}_posts").any? %>
+              <div class="row">
+                <div class="col-md-12">
+                  <%= paginate @supports.send("#{post_type}_posts"),
+                    params: {tab: "newest"} %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-4 sidebar">
+      <%= render "sidebar" %>
+    </div>
+  </div>
+</div>

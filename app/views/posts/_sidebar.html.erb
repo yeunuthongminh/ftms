@@ -1,0 +1,44 @@
+<div class="most-viewed-posts tabs">
+  <div class="heading clearfix">
+    <div class="title pull-left"><%= t "faq.index.most_viewed" %></div>
+    <ul class="nav nav-tabs pull-right">
+      <% %w(day week month).each.with_index do |period, index| %>
+        <li class="<%= 'active' if index == 0 %>">
+          <a data-toggle="tab" href="#<%= period %>">
+            <%= t "faq.index.#{period}" %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="tab-content">
+    <% %w(day week month).each.with_index do |period, index| %>
+      <div id="<%= period %>"
+        class="tab-pane fade <%= 'in active' if index == 0 %>">
+        <% @supports.send("most_viewed_posts_#{period}").each do |post| %>
+          <div class="row post">
+            <div class="col-md-12 summary">
+              <h3 class="title"><%= link_to post.title, post %></h3>
+              <div class="tags">
+                <% post.tag_list.each do |tag| %>
+                  <%= link_to tag, "#", class: "tag" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="popular-tags">
+  <div class="heading">
+    <h3 class="title"><%= t "faq.index.popular_tags" %></h3>
+  </div>
+  <div class="tags">
+    <% @supports.most_tagged_tags.each do |tag| %>
+      <%= link_to tag, "#", class: "tag" %>
+    <% end %>
+    <%= link_to t("faq.index.view_all"), "#", class: "tag" %>
+  </div>
+</div>

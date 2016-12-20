@@ -85,6 +85,7 @@
 //= require admin/category
 //= require counting_number
 //= require admin/assign_project
+//= require faq
 
 $(document).on('turbolinks:load ajaxComplete', function() {
   $('.alert').delay(3000).fadeOut();
