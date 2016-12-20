@@ -208,3 +208,6 @@ en:
     selected: "Selected Evaluation Standards"
     standards:
       all: "All Evaluation Standards"
+      select: "Evaluation standards selected"
+      search: "Search ..."
+      standards: "%{size} standards"
