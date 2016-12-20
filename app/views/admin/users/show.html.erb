@@ -1,5 +1,5 @@
 <% provide :title, @user.name %>
-<div class="row user-profile">
+<div class="row user-profile" id="users">
   <section class="content">
     <div class="row">
       <div class="col-md-3">
@@ -10,7 +10,7 @@
         <div class="nav-tabs-custom">
           <ul class="nav nav-tabs">
             <% Settings.users.tabs.each_with_index do |tab, index| %>
-              <li class="<%= 'active' if index == 0 %>">
+              <li class="<%= 'active' if index == 3 %>">
                 <a href="#<%= tab %>" data-toggle="tab">
                   <%= t "user.tabs.#{tab}" %>
                 </a>
@@ -22,6 +22,7 @@
             <%= render "admin/users/activities_tab" %>
             <%= render "admin/users/finished_courses_tab" %>
             <%= render "admin/users/inprogress_courses_tab" %>
+            <%= render "admin/users/timeline" %>
           </div>
         </div>
       </div>

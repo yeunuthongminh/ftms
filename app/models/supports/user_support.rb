@@ -11,7 +11,8 @@ class Supports::UserSupport
   end
 
   def user_courses
-    @user_courses ||= @user.user_courses
+    @user_courses ||= @user.user_courses.includes(user_subjects: [:course,
+      :trainee_evaluations, :exams, course_subject: :subject])
   end
 
   def finished_courses
@@ -53,6 +54,51 @@ class Supports::UserSupport
   %w(location university trainee_type language status).each do |object|
     define_method object do
       instance_variable_set "@#{object}", object.classify.constantize.new
+    end
+  end
+
+  def fa_icon index
+    case index
+    when 1
+      "fa-star-o"
+    when 2
+      "fa-sun-o"
+    when 3
+      "fa-check-circle-o"
+    when 4
+      "fa-moon-o"
+    else
+      "fa-smile-o"
+    end
+  end
+
+  def fa_background index
+    case index
+    when 1
+      "bg-blue"
+    when 2
+      "bg-green"
+    when 3
+      "bg-orange"
+    when 4
+      "bg-blue"
+    else
+      "bg-red"
+    end
+  end
+
+  def background_icon index
+    case index
+    when 1
+      "primary"
+    when 2
+      "success"
+    when 3
+      "warning"
+    when 4
+      "info"
+    else
+      "danger"
     end
   end
 end
