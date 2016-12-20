@@ -14,9 +14,7 @@ Rails.application.routes.draw do
       resources :subjects, only: :show
       resource :assign_trainers, only: [:edit, :update]
       resource :assign_trainees, only: [:edit, :update]
-      resource :change_status_courses, only: :update
       resources :course_subjects, except: [:new, :show]
-      resources :clone_courses, only: :create
     end
     resources :roles
     resources :subjects do
@@ -80,9 +78,7 @@ Rails.application.routes.draw do
       resources :subjects, only: :show
       resource :assign_trainers, only: [:edit, :update]
       resource :assign_trainees, only: [:edit, :update]
-      resource :change_status_courses, only: :update
       resources :course_subjects, except: :new
-      resources :clone_courses, only: :create
     end
     resources :subjects do
       resources :task_masters, only: :index
@@ -131,6 +127,14 @@ Rails.application.routes.draw do
 
   namespace :assign_trainer do
     resources :courses, only: [:edit, :update]
+  end
+
+  namespace :change_status do
+    resources :courses, only: [:edit, :update]
+  end
+
+  namespace :clone do
+    resources :courses, only: :create
   end
 
   root "static_pages#home"

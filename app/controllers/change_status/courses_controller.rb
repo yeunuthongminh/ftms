@@ -1,4 +1,4 @@
-class Admin::ChangeStatusCoursesController < ApplicationController
+class ChangeStatus::CoursesController < ApplicationController
   before_action :load_course, only: :update
   before_action :authorize
 
@@ -14,6 +14,6 @@ class Admin::ChangeStatusCoursesController < ApplicationController
 
     Notifications::CourseNotificationBroadCastJob.perform_now course: @course,
       key: Notification.keys[key], user: current_user
-    redirect_to [:admin, @course]
+    redirect_to [@namespace.to_sym, @course]
   end
 end

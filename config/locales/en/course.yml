@@ -1,6 +1,7 @@
 en:
   courses:
     start: "Start"
+    clone: "Clone"
     confirms:
       confirm_clone: "Are you sure to clone this course?"
       clone_success: "Clone success"
