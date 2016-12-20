@@ -9,7 +9,7 @@
     aria-labelledby="dLabel">
     <% if @course.init? %>
       <li>
-        <%= link_to admin_course_change_status_courses_path(@course),
+        <%= link_to change_status_course_path(@course),
           data: {method: :patch,
           confirm: t("courses.confirms.confirm_start")} do %>
           <i class="fa fa-check" aria-hidden="true"></i>
@@ -18,7 +18,7 @@
       </li>
     <% elsif @course.progress? %>
       <li>
-        <%= link_to admin_course_change_status_courses_path(@course),
+        <%= link_to change_status_course_path(@course),
           data: {method: :patch,
           confirm: t("courses.confirms.confirm_finish")} do %>
           <i class="fa fa-minus-square-o" aria-hidden="true"></i>
@@ -27,7 +27,7 @@
       </li>
     <% end %>
     <li>
-      <%= link_to admin_course_clone_courses_path(@course),
+      <%= link_to clone_courses_path(id: @course),
         data: {method: :post,
         confirm: t("courses.confirms.confirm_clone")} do %>
         <i class="fa fa-minus-square-o" aria-hidden="true"></i>

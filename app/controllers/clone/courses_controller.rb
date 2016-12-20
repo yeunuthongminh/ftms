@@ -1,4 +1,4 @@
-class Admin::CloneCoursesController < ApplicationController
+class Clone::CoursesController < ApplicationController
   before_action :load_course
   before_action :authorize
 
@@ -7,16 +7,10 @@ class Admin::CloneCoursesController < ApplicationController
     @clone_course = clone_course_service.perform
     if @clone_course
       flash[:success] = t "courses.confirms.clone_success"
-      redirect_to [:admin, @clone_course]
+      redirect_to [@namespace.to_sym, @clone_course]
     else
       flash[:failed] = t "courses.confirms.not_clone"
-      redirect_to admin_courses_path
+      back_or_root
     end
-  end
-
-  private
-  def load_course
-    @course = Course.find_by id: params[:course_id]
-    redirect_if_object_nil @course
   end
 end

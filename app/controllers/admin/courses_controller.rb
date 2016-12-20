@@ -74,11 +74,6 @@ class Admin::CoursesController < ApplicationController
       filter_service: load_filter
   end
 
-  def load_course
-    @course = Course.find_by id: params[:id]
-    redirect_if_object_nil @course
-  end
-
   def find_course_in_show
     @course = Course.includes(:language).find_by id: params[:id]
     redirect_if_object_nil @course

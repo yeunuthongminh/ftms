@@ -38,4 +38,9 @@ class Admin::CourseSubjectsController < ApplicationController
   def course_subject_params
     params.require(:course_subject).permit CourseSubject::ATTRIBUTES_PARAMS
   end
+
+  def load_course
+    @course = Course.find_by id: params[:course_id]
+    redirect_if_object_nil @course
+  end
 end
