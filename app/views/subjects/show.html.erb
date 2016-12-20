@@ -68,7 +68,7 @@
       <div class="render-task">
         <div class="user-task">
           <div class="overview">
-            <%= t "subjects.task_overview" %>
+            <h1><%= t "subjects.task_overview" %></h1>
             <% if current_user.is_trainee? && @subject_supports
               .user_subject.progress? && !@subject_supports.course.finish? %>
               <%= link_to "#",
@@ -80,7 +80,7 @@
             <% end %>
           </div>
 
-          <div class="note-list user-task-list" id="user-task-list">
+          <div class="note-list all-task-list" id="user-task-list">
             <%= render partial: "user_task", collection: @subject_supports.user_tasks %>
           </div>
         </div>

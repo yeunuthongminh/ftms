@@ -87,6 +87,7 @@
 //= require counting_number
 //= require admin/assign_project
 //= require faq
+//= require task
 
 $(document).on('turbolinks:load ajaxComplete', function() {
   $('.alert').delay(3000).fadeOut();
@@ -196,5 +197,33 @@ $(document).on('turbolinks:load', function(){
     $(this).addClass('current');
     $('#'+tab_id).addClass('current');
   });
-
 });
+
+function popup_html(object) {
+  var large_modal = object.large_modal ? "modal-lg" : "",
+      mid = object.id ? object.id : "",
+      mclass = object.class ? object.class : "",
+      header_type = object.header_type ? object.header_type : "dangerous",
+      header_title = object.header_title ? object.header_title : I18n.t("notices.attention"),
+      body_content = object.body_content ? object.body_content : "",
+      footer_content = "";
+
+  for (var i = 0; i < object.footer_btn.length; i++) {
+    var btn_object = object.footer_btn[i],
+        custom_data = object.data ? object.data : "",
+        btn_dismiss = btn_object.dismiss ? "data-dismiss='modal'" : "";
+    footer_content += "<button type='button' class='btn " + btn_object.class
+      + "' id='"+ btn_object.id + "' " + btn_dismiss + custom_data + ">"
+      + btn_object.title + "</button>";
+  }
+
+  var html = "<div class='modal " + mclass + "' tabindex='-1' role='dialog' id='"
+    + mid + "' aria-labelledby='modalLabel' aria-hidden='true' data-backdrop='static'\
+    data-keyboard='false'><div class='modal-dialog " + large_modal
+    + "' role='document'><div class='modal-content'><div class='modal-header "
+    + header_type + "'><h4 class='modal-title' id='modalLabel'>"
+    + header_title + "</h4></div><div class='modal-body'>"
+    + body_content + "</div><div class='modal-footer'>"
+    + footer_content + "</div></div></div></div>";
+  return $.parseHTML(html);
+}

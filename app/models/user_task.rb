@@ -24,7 +24,7 @@ class UserTask < ApplicationRecord
     date(user_tasks.updated_at) = '#{Date.today}' AND course_id = ? ",
     course_id).order(:user_id, :user_subject_id)}
 
-  enum status: [:in_progress, :finished]
+  enum status: [:init, :inprogress, :onhold, :complete]
 
   def nil_master?
     task.task_master_id.nil?

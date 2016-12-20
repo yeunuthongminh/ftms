@@ -148,10 +148,33 @@ function ajax_update_status() {
   });
 
   select_status.change(function() {
-    status = $('option:selected', this).text().toLowerCase();
-    str = "<div class='modal' id='confirm-dialog' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' data-backdrop='static' data-keyboard='false'><div class='modal-dialog modal-lg' role='document'><div class='modal-content'><div class='modal-header dangerous'><h4 class='modal-title' id='myModalLabel'>"+I18n.t("notices.attention")+"</h4> </div> <div class='modal-body'>"+I18n.t("notices.change_status.user_subject")+"<span class='label-dialog-status'>&nbsp;"+status+"&nbsp;</span></div> <div class='modal-footer'> <button type='button' class='btn btn-danger' id='submit-update-status'>"+I18n.t("buttons.update_status")+"</button><button type='button' id='cancel-update-status' class='btn btn-secondary' data-dismiss='modal'>"+I18n.t("buttons.cancel")+"</button></div></div></div></div>";
-    html = $.parseHTML(str);
-    $('#user-subject').after(html);
+    var status = $('option:selected', this).text().toLowerCase(),
+        popup_body = I18n.t("notices.change_status.user_subject")
+          + "<span class='label-dialog-status'>&nbsp;" + status + "&nbsp;</span>";
+
+    var popup_object = {
+      id: "confirm-dialog",
+      large_modal: true,
+      header_type: "dangerous",
+      header_title: I18n.t("notices.attention"),
+      body_content: popup_body,
+      footer_btn: [
+        {
+          id: "submit-update-status",
+          class: "btn-danger",
+          title: I18n.t("buttons.update_status"),
+          dismiss: false
+        },
+        {
+          id: "cancel-update-status",
+          class: "btn-secondary",
+          title: I18n.t("buttons.cancel"),
+          dismiss: true
+        }
+      ]
+    };
+
+    $('#user-subject').after(popup_html(popup_object));
 
     var text_color = $('option:selected', this).attr('class');
     $('.label-dialog-status').attr('class', text_color + " label-dialog-status")

@@ -1,7 +1,7 @@
 <div class="div-task-history">
   <% if @to_do_lists.any? %>
     <% @to_do_lists.each do |user_task| %>
-      <% if user_task.finished? && user_task.user_subject.end_date > Time.now %>
+      <% if user_task.complete? && user_task.user_subject.end_date > Time.now %>
         <div class="dolist">
           <%= link_to user_task_path(user_task), remote: true do %>
             <div class="task">

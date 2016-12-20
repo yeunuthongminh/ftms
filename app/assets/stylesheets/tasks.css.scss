@@ -54,3 +54,230 @@
     }
   }
 }
+
+.all-task-list {
+  margin-bottom: 10px;
+
+  div,h2,span,em {
+    outline: 0;
+    line-height: 1em;
+    vertical-align: baseline;
+    list-style: none;
+  }
+
+  h2 {
+    font-size: 1.4em;
+    margin: 0 0 5px 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: #485777;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  .author {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+  }
+
+  .author-name {
+    display: block;
+    margin: 0 0 15px 0;
+    font-size: 1.1em;
+  }
+
+  .task {
+    position: relative;
+    padding: 15px 30px 40px 130px;
+    min-height: 100px;
+    margin: 0 3px 3px 0;
+    border-radius: 2px;
+    background: #fff !important;
+
+    &:before {
+      content: "";
+      display: block;
+      border-left: solid 1px #f3f3e7;
+      position: absolute;
+      top: 0;
+      left: 100px;
+      height: 100%;
+    }
+
+    div.task-action {
+      position: absolute;
+      top: 20px;
+      left: calc(100% - 50px);
+      border: none !important;
+      display: none;
+    }
+
+    &:hover {
+      div.task-action {
+        display: block;
+      }
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+
+      .dropdown-menu {
+        position: relative;
+        &:after {
+          bottom: 100%;
+          left: 50%;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+          border-bottom-color: #fff;
+          border-width: 7px;
+          margin-left: -73px;
+        }
+      }
+    }
+  }
+
+  .priority {
+    display: block;
+    position: absolute;
+    top: 29px;
+    left: 93px;
+    width: 16px;
+    height: 16px;
+    display: block;
+    border-radius: 100%;
+    font-size: 0;
+  }
+
+  .priority-inprogress {
+    border: solid 2px #43bce9;
+    background: #b4e4f6;
+  }
+
+  .priority-init {
+    border: solid 2px #48CF5F;
+    background: #b2e8b8;
+  }
+
+  .priority-onhold {
+    border: solid 2px #f9b851;
+    background: #f9dfb2;
+  }
+
+  .priority-complete {
+    border: solid 2px #fb6e52;
+    background: #f9c1b3;
+  }
+
+  .priority-init::before,
+  .priority-inprogress::before,
+  .priority-onhold::before,
+  .priority-complete::before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: calc(100% + 2px);
+    position: absolute;
+    top: -1px;
+    left: -1px;
+  }
+
+  .priority-init,
+  .priority-inprogress,
+  .priority-onhold,
+  .priority-complete {
+    width: 16px;
+    height: 16px;
+    display: block;
+    border-radius: 100%;
+    position: relative;
+    top: 2px;
+  }
+
+  p.task-details {
+    font-size: 0.9em;
+    margin-bottom: 0 !important;
+  }
+
+  .task-details {
+    position: absolute;
+    bottom: 0;
+    padding: 11px 30px 11px 20px;
+    left: 100px;
+    border-top: solid 1px #f3f3e7;
+    width: calc(100% - 100px);
+
+    span {
+      position: relative;
+      padding: 0 35px 0 0;
+      float: left;
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: -12px;
+        right: 0;
+        background: #f3f3e7;
+        width: 1px;
+        height: 35px;
+        margin: 0 15px;
+      }
+    }
+
+    i:before {
+      margin-right: 3px;
+    }
+  }
+
+  .task-id strong {
+    display: none;
+  }
+
+  .start-date:before {
+    top: -1px;
+    background-position: -689px 0;
+  }
+
+  .progress-bar {
+    height: 3px;
+    background: rgba(72, 87, 119, 0.1);
+    position: absolute;
+    border-radius: 2px;
+    width: calc(100% - 100px);
+    left: 100px;
+    .progress-box {
+      position: relative;
+      width: 100%;
+      .expand {
+        top: 0;
+        left: 0;
+        height: 3px;
+        position: absolute;
+        transition: all 3s ease-in-out;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .progress-bar::before {
+    content: "";
+    display: block;
+    width: 0px;
+    height: 10px;
+    background: #f3f3e7;
+    position: absolute;
+    left: -35px;
+    top: 0;
+    z-index: 99
+  }
+}
