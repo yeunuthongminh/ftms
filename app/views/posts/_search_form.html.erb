@@ -1,0 +1,11 @@
+<%= form_tag posts_path, method: :get do %>
+  <div class="input-group">
+    <%= text_field_tag :q, params[:q], class: "form-control",
+      placeholder: t("faq.index.search_placeholder") %>
+    <span class="input-group-btn">
+      <%= button_tag name: "", type: :submit, class: "btn btn-default" do %>
+        <i class="fa fa-search"></i>
+      <% end %>
+    </span>
+  </div>
+<% end %>

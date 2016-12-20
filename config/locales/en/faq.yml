@@ -1,0 +1,17 @@
+en:
+  faq:
+    index:
+      title: "FAQ"
+      newest: "Newest"
+      unanswered: "Unanswered"
+      answer: "answer"
+      view: "view"
+      time_ago: "Created %{time} ago"
+      by: "by"
+      search_placeholder: "Search for questions..."
+      day: "day"
+      week: "week"
+      month: "month"
+      most_viewed: "Most viewed"
+      popular_tags: "Popular tags"
+      view_all: "View all..."

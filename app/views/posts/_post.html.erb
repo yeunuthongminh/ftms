@@ -1,0 +1,31 @@
+<div class="row post">
+  <div class="col-md-2 stats">
+    <div class="answer">
+      <div class="answer-count"><%= post.comments.count %></div>
+      <div>
+        <%= t("faq.index.answer").pluralize post.comments.count %>
+      </div>
+    </div>
+    <div class="views">
+      <div><%= pluralize post.views, t("faq.index.view") %></div>
+    </div>
+  </div>
+  <div class="col-md-10 summary">
+    <h3 class="title"><%= link_to post.title, post %></h3>
+    <div class="quote">
+      <%= truncate post.content,
+        length: Settings.faq.truncated_characters %>
+    </div>
+    <div class="tags">
+      <% post.tag_list.each do |tag| %>
+        <%= link_to tag, "#", class: "tag" %>
+      <% end %>
+    </div>
+    <p class="create-time">
+      <%= t "faq.index.time_ago",
+        time: time_ago_in_words(post.created_at) %>
+      <%= t "faq.index.by" %>
+      <%= link_to post.user.name, post.user %>
+    </p>
+  </div>
+</div>

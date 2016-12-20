@@ -233,3 +233,8 @@ sync_functions:
 minimum_percent_to_join: 5
 static_pages:
   num_of_faq: 10
+faq:
+  posts_per_page: 20
+  most_viewed_posts: 10
+  most_tagged_tags: 15
+  truncated_characters: 160
