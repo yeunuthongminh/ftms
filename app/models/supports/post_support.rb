@@ -1,6 +1,7 @@
 class Supports::PostSupport
   def initialize args = {}
     @params = args[:params]
+    @post = args[:post]
   end
 
   %w(newest unanswered).each do |post_type|
@@ -29,5 +30,14 @@ class Supports::PostSupport
   def most_tagged_tags
     @most_tagged_tags ||= Post.tag_counts_on(:tags).order("COUNT DESC")
       .limit Settings.faq.most_tagged_tags
+  end
+
+  def votes
+    @votes ||= @post.get_upvotes.size - @post.get_downvotes.size
+  end
+
+  def related_posts
+    @posts ||= @post.find_related_tags.take(Settings.faq.related_posts)
+      .sort_by{|post| post.get_upvotes.size - post.get_downvotes.size}
   end
 end

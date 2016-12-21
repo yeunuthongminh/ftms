@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   acts_as_taggable
   acts_as_votable
 
+  POST_ATTRIBUTES_PARAMS = [:title, :content, :tag_list]
+
   belongs_to :user
 
   has_many :comments, dependent: :destroy
@@ -14,11 +16,11 @@ class Post < ApplicationRecord
     left_outer_joins(:comments).group(:id).having "COUNT(post_id) = 0"
   end
   scope :most_viewed_by, -> period do
-    start_date = if period == :day
+    start_date = if period == "day"
       Date.today
-    elsif period == :week
+    elsif period == "week"
       Date.today.last_week
-    elsif period == :month
+    elsif period == "month"
       Date.today.last_month
     else
       Date.today.last_year
@@ -26,5 +28,10 @@ class Post < ApplicationRecord
     left_outer_joins(:daily_post_views).group(:id)
       .where("daily_post_views.created_at >= ?", start_date)
       .order "SUM(daily_post_views.views) DESC"
+  end
+
+  def today_post_views
+    today_post_views = self.daily_post_views.where("created_at >= ?",
+      Date.today).first || self.daily_post_views.create
   end
 end

@@ -1,4 +1,6 @@
 #faq {
+  margin-bottom: 20px;
+
   .search {
     margin-bottom: 20px;
     input.form-control {
@@ -41,20 +43,20 @@
     text-align: center;
     padding-left: 0;
 
-    .answer {
-      width: 75px;
+    .wrapper {
       border: 1px solid #ddd;
       margin: 0 auto 5px;
       background: #fff;
       padding: 10px;
-      .answer-count {
-        font-size: 16px;
+      .count {
+        font-size: 20px;
+        font-weight: bold;
       }
     }
   }
 
   .summary {
-    padding-left: 0;
+    padding: 0;
 
     h3.title {
       text-align: left;
@@ -111,19 +113,98 @@
     .tags {
       margin-bottom: 0;
     }
-  }
+    .popular-tags {
+      margin-top: 20px;
+      .heading {
+        padding: 10px 0;
+      }
 
-  .popular-tags {
-    margin-top: 20px;
-    .heading {
-      padding: 10px 0;
-    }
-
-    .tags {
-      .tag {
-        border: 1px solid #67C2EB;
-        background: #fff;
+      .tags {
+        .tag {
+          border: 1px solid #67C2EB;
+          background: #fff;
+          line-height: 30px;
+        }
       }
     }
+    .related-posts {
+      .heading {
+        padding: 10px 0;
+      }
+      .post {
+        border: none;
+        border-bottom: 1px solid #ddd;
+        margin: 0;
+        padding: 10px;
+        background: #fff;
+
+        &:last-child {
+          border: none;
+        }
+
+        &:hover {
+          background: #FCFFB7;
+        }
+      }
+    }
+  }
+
+
+  &.post-show {
+    .main {
+      background: #FFF;
+      .heading {
+        border-bottom: 1px solid #ddd;
+        margin: 0 0 20px 0;
+        padding: 10px;
+        h1.title {
+          margin: 0;
+          text-align: left;
+        }
+      }
+
+      .actions {
+        .upvote {
+          color: #ABAAAA;
+          font-size: 25px;
+          padding: 5px;
+          &:hover {
+            color: #14AB00;
+          }
+        }
+        .downvote {
+          color: #ABAAAA;
+          font-size: 25px;
+          padding: 5px;
+          transform: rotateY(180deg);
+          &:hover {
+            color: #E01B1B;
+          }
+        }
+      }
+
+      .votes {
+        margin: 0 0 10px 0;
+        padding: 0;
+        .count {
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+
+      .content {
+        padding: 0;
+        min-height: 100px;
+        background: #fff;
+      }
+
+      .create-time {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .padding-left-0 {
+    padding-left: 0;
   }
 }

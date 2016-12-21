@@ -15,3 +15,14 @@ en:
       most_viewed: "Most viewed"
       popular_tags: "Popular tags"
       view_all: "View all..."
+    new:
+      title: "Create new question"
+    edit:
+      title: "Edit question"
+    form:
+      title: "Title"
+      content: "Content"
+      tags: "Tags"
+      tags_placeholder: "Tags seperated by commas"
+    show:
+      vote: "vote"
