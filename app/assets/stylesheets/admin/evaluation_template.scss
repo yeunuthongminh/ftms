@@ -32,7 +32,7 @@
 
   .tcell {
     &.stt {
-     @include ellipsis(35px);
+      @include ellipsis(35px);
     }
 
     &.evaluation_template_name {
@@ -47,5 +47,54 @@
 
   .selected {
     background-color: #90B6EE;
+  }
+
+  /* css item select */
+  .select-item-evaluation-templates{
+    background-color: bisque;
+  }
+
+  .left{
+    margin-bottom: 15px;
+  }
+
+  .add-evaluation{
+    margin: 5px 0 5px 0;
+  }
+  .remove-all-evaluation{
+    margin: 5px 0 5px 0;
+  }
+  .btn-success{
+    width: 40px;
+    height: 35px;
+    background-color: cadetblue;
+    border: none;
+  }
+  .index-nonselect{
+    height: 100%;
+    text-align: center;
+    padding-top: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .index-select{
+    height: 100%;
+    text-align: center;
+    padding-top: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  .content_item{
+    height: 100%;
+    padding-top: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .one-item{
+    height: 45px;
+    margin-bottom: 3px;
+  }
+
+  .list-group{
+    overflow-y: auto;
   }
 }

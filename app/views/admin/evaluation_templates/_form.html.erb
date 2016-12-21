@@ -10,39 +10,79 @@
     <div class="row">
       <div class="col-md-5">
         <div class="panel panel-info noneselected-list-standards">
-          <div class="panel-heading">
+          <div class="panel-heading text-center">
             <%= t "evaluation_templates.standards.all" %>
             <%= link_to "#", "data-toggle": "modal",
               "data-target": "#new-evaluation-standard-modal", class: "new-evaluation-standard" do %>
               <i class="fa fa-plus pull-right" aria-hidden="true"></i>
             <% end %>
-          </div>
-          <div class="list-group noneselected-evaluation-standards">
-            <%= render @evaluation_standards %>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-md-7">
-        <div class="panel panel-success selected-list-standards">
-          <div class="panel-heading">
-            <%= t "evaluation_templates.standards.all" %>
-            <%= link_to "#", "data-toggle": "modal",
-              "data-target": "#new-evaluation-standard-modal", class: "new-evaluation-standard" do %>
-              <i class="fa fa-plus pull-right" aria-hidden="true"></i>
-            <% end %>
+            <%= text_field_tag "filter-nonselected", nil,
+              placeholder: t("evaluation_templates.standards.search"),
+              class: "form-control" %>
           </div>
-          <div class="list-group selected-evaluation-standards">
-            <%= f.collection_check_boxes :evaluation_standard_ids, @evaluation_template.evaluation_standards,
-              :id, :name do |evaluation_standard| %>
-              <div class="list-group-item"
-                data-id="<%= evaluation_standard.object.id %>"
-                data-name= "<%= evaluation_standard.object.name %>">
-                <%= evaluation_standard.check_box class: "hidden" %>
-                <%= evaluation_standard.text %>
+
+          <div class="panel-body list-group noneselected-evaluation-standards">
+            <% @evaluation_standards.each_with_index do |evaluation, index| %>
+              <div class="one-item">
+                <div class="index-nonselect col-md-1">
+                </div>
+                <div class="content_item col-md-11" data-id="<%= evaluation.id %>" data-name="<%= evaluation.name %>">
+                  <%= evaluation.name %>
+                </div>
               </div>
             <% end %>
           </div>
+        </div>
+        <div class="size-nonselect col-md-offset-9">
+          <%= t "evaluation_templates.standards.standards", size: @evaluation_standards.size %>
+        </div>
+      </div>
+
+      <div class="col-md-1 text-center div-button-center">
+        <div class="left">
+          <%= link_to ">", "#", remote: true, class: "btn btn-success add-evaluation" %>
+          <%= link_to ">>", "#", remote: true, class: "btn btn-success add-all-evaluation" %>
+        </div>
+
+        <div class="right">
+          <%= link_to "<<", "#", remote: true, class: "btn btn-success remove-all-evaluation" %>
+          <%= link_to "<", "#", remote: true, class: "btn btn-success remove-evaluation" %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel panel-success selected-list-standards">
+          <div class="panel-heading text-center">
+            <%= t "evaluation_templates.standards.select" %>
+            <%= link_to "#", "data-toggle": "modal",
+              "data-target": "#new-evaluation-standard-modal", class: "new-evaluation-standard" do %>
+              <i class="fa fa-plus pull-right" aria-hidden="true"></i>
+            <% end %>
+
+            <%= text_field_tag "filter-selected", nil,
+              placeholder: t("evaluation_templates.standards.search"),
+              class: "form-control text-filter" %>
+          </div>
+          <div class="list-group selected-evaluation-standards panel-body">
+            <%= f.collection_check_boxes :evaluation_standard_ids,
+              @evaluation_template.evaluation_standards,
+              :id, :name do |evaluation_standard, index| %>
+              <div class="one-item">
+                <div class="index-select col-md-1">
+                </div>
+                <div class="content_item col-md-11"
+                data-id="<%= evaluation_standard.object.id %>"
+                data-name="<%= evaluation_standard.object.name %>">
+                  <%= evaluation_standard.check_box class: "hidden" %>
+                  <%= evaluation_standard.text %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="size-select col-md-offset-9">
+          <%= t "evaluation_templates.standards.standards", size: @evaluation_template.evaluation_standards.size %>
         </div>
       </div>
     </div>
