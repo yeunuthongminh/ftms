@@ -1,0 +1,80 @@
+<%= render "users/course", user_course: user_course %>
+<div class="timeline-profile">
+  <ul class="timeline timeline-inverse">
+    <% user_course.user_subjects.each.with_index do |user_subject, index| %>
+      <li class="time-label">
+        <span class="<%= @supports.fa_background index %>">
+          <%= user_subject.start_date ? (l user_subject.start_date,
+            format: :default) : t("user.no_start_date") %>
+        </span>
+      </li>
+      <li>
+        <div class="timeline-badge <%= @supports.background_icon index %>
+          timeline-header">
+          <i class="fa <%= @supports.fa_icon index %>"></i>
+        </div>
+        <div class="timeline-panel <%= @supports.background_icon index %>
+          box box-widget collapsed-box">
+          <div class="box-header with-border">
+            <h3>
+              <%= link_to user_subject.subject.name,
+                [:admin, user_subject.course, user_subject.subject] %>
+            </h3>
+            <table class="table table-hover">
+              <tr>
+                <th class="col-md-3"><%= t "user.evaluation_point" %></th>
+                <th class="col-md-3"><%= t "user.link_github" %></th>
+                <th class="col-md-3"><%= t "user.link_heroku" %></th>
+                <th class="col-md-3"><%= t "user.exams" %></th>
+              </tr>
+              <tbody>
+                <tr>
+                  <td>
+                    <%= user_subject.trainee_evaluations.first.total_point if
+                      user_subject.trainee_evaluations.any? %>
+                  </td>
+                  <td><%= user_subject.course_subject_link_github %></td>
+                  <td><%= user_subject.course_subject_link_heroku %></td>
+                  <td>
+                    <% if user_subject.exams.any? %>
+                      <% user_subject.exams.each.with_index 1 do |exam, index| %>
+                        <div>
+                          <%= link_to t("users.exam", index: index),
+                            [@namespace.to_sym, exam] %>
+                          (<%= exam.score %>)
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool"
+                data-widget="collapse">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body">
+            <table class="table table-hover">
+              <tr class="user-subject user-subject-<%= user_subject.id %>">
+                <th><%= t "tasks.task" %></th>
+                <th><%= t "layouts.status" %></th>
+                <th><%= t "users.pull_request" %></th>
+              </tr>
+              <% user_subject.user_tasks.includes(:task).each do |user_task| %>
+                <tr class="user-subject user-subject-<%= user_subject.id %>">
+                  <td><p><%= user_task.task_name %></p></td>
+                  <td class=<%= task_color user_task.status %>>
+                    <%= t "user_tasks.statuses.#{user_task.status}" %></td>
+                    <td><%= user_task.pull_request_url %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

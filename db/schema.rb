@@ -87,10 +87,10 @@ ActiveRecord::Schema.define(version: 20161220064454) do
   end
 
   create_table "course_subject_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "project_requirement_id"
+    t.integer "requirement_id"
     t.integer "course_subject_id"
     t.index ["course_subject_id"], name: "index_course_subject_requirements_on_course_subject_id", using: :btree
-    t.index ["project_requirement_id"], name: "index_course_subject_requirements_on_project_requirement_id", using: :btree
+    t.index ["requirement_id"], name: "index_course_subject_requirements_on_requirement_id", using: :btree
   end
 
   create_table "course_subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 20161220064454) do
     t.datetime "deleted_at"
     t.integer  "chatwork_room_id"
     t.integer  "project_id"
+    t.string   "link_github"
+    t.string   "link_heroku"
     t.index ["course_id"], name: "index_course_subjects_on_course_id", using: :btree
     t.index ["deleted_at"], name: "index_course_subjects_on_deleted_at", using: :btree
     t.index ["project_id"], name: "index_course_subjects_on_project_id", using: :btree
@@ -155,24 +157,32 @@ ActiveRecord::Schema.define(version: 20161220064454) do
     t.integer  "trainee_evaluation_id"
     t.integer  "evaluation_standard_id"
     t.integer  "user_id"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "name"
-    t.boolean  "use",                               default: false
+    t.boolean  "use"
     t.index ["evaluation_standard_id"], name: "index_evaluation_check_lists_on_evaluation_standard_id", using: :btree
     t.index ["trainee_evaluation_id"], name: "index_evaluation_check_lists_on_trainee_evaluation_id", using: :btree
     t.index ["user_id"], name: "index_evaluation_check_lists_on_user_id", using: :btree
   end
 
+  create_table "evaluation_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluation_groups_on_deleted_at", using: :btree
+  end
+
   create_table "evaluation_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "evaluation_standard_id"
-    t.integer  "evaluation_template_id"
+    t.integer  "evaluation_group_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_evaluation_items_on_deleted_at", using: :btree
+    t.index ["evaluation_group_id"], name: "index_evaluation_items_on_evaluation_group_id", using: :btree
     t.index ["evaluation_standard_id"], name: "index_evaluation_items_on_evaluation_standard_id", using: :btree
-    t.index ["evaluation_template_id"], name: "index_evaluation_items_on_evaluation_template_id", using: :btree
   end
 
   create_table "evaluation_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -184,14 +194,6 @@ ActiveRecord::Schema.define(version: 20161220064454) do
     t.datetime "updated_at",            null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_evaluation_standards_on_deleted_at", using: :btree
-  end
-
-  create_table "evaluation_templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_evaluation_templates_on_deleted_at", using: :btree
   end
 
   create_table "exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -742,8 +744,8 @@ ActiveRecord::Schema.define(version: 20161220064454) do
   add_foreign_key "evaluation_check_lists", "evaluation_standards"
   add_foreign_key "evaluation_check_lists", "trainee_evaluations"
   add_foreign_key "evaluation_check_lists", "users"
+  add_foreign_key "evaluation_items", "evaluation_groups"
   add_foreign_key "evaluation_items", "evaluation_standards"
-  add_foreign_key "evaluation_items", "evaluation_templates"
   add_foreign_key "exams", "categories"
   add_foreign_key "exams", "user_subjects"
   add_foreign_key "exams", "users"

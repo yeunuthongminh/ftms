@@ -39,6 +39,8 @@ class UserSubject < ApplicationRecord
   delegate :name, :id, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
   delegate :name, to: :trainee, prefix: true, allow_nil: true
+  delegate :link_github, :link_heroku, to: :course_subject, prefix: true,
+    allow_nil: true
 
   enum status: [:init, :progress, :waiting, :finish]
 
