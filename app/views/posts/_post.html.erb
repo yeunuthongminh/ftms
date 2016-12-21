@@ -1,16 +1,17 @@
 <div class="row post">
-  <div class="col-md-2 stats">
-    <div class="answer">
-      <div class="answer-count"><%= post.comments.count %></div>
+  <div class="col-sm-2 col-xs-4 stats">
+    <div class="wrapper">
+      <div class="count"><%= post.comments.count %></div>
       <div>
         <%= t("faq.index.answer").pluralize post.comments.count %>
       </div>
-    </div>
-    <div class="views">
-      <div><%= pluralize post.views, t("faq.index.view") %></div>
+      <div class="count"><%= post.views %></div>
+      <div>
+        <%= t("faq.index.view").pluralize post.views %>
+      </div>
     </div>
   </div>
-  <div class="col-md-10 summary">
+  <div class="col-sm-10 col-xs-8  summary">
     <h3 class="title"><%= link_to post.title, post %></h3>
     <div class="quote">
       <%= truncate post.content,
@@ -21,11 +22,11 @@
         <%= link_to tag, "#", class: "tag" %>
       <% end %>
     </div>
-    <p class="create-time">
+    <div class="create-time">
       <%= t "faq.index.time_ago",
         time: time_ago_in_words(post.created_at) %>
       <%= t "faq.index.by" %>
       <%= link_to post.user.name, post.user %>
-    </p>
+    </div>
   </div>
 </div>

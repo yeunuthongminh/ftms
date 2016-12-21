@@ -12,24 +12,25 @@
       <li class="active"><%= t "faq.index.title" %></li>
     </ul>
   </div>
-  <div class="row search">
-    <div class="col-md-4 col-md-offset-8 text-right">
-      <%= render "search_form" %>
-    </div>
-  </div>
   <div class="row">
     <div class="col-md-8">
-      <div class="clearfix tabs">
-        <ul class="nav nav-tabs main-tabs pull-right"
-          data-selected-tab="<%= params[:tab] %>">
-          <% %w(newest unanswered).each_with_index do |post_type, index| %>
-            <li class="<%= 'active' if index == 0 %>">
-              <a data-toggle="tab" href="#<%= post_type %>">
-                <%= t "faq.index.#{post_type}" %>
-              </a>
-            </li>
-          <% end %>
-        </ul>
+      <div class="tabs">
+        <div class="heading clearfix">
+          <div class="pull-left">
+            <%= link_to t("faq.new.title"), new_post_path,
+              class: "btn btn-primary" %>
+          </div>
+          <ul class="nav nav-tabs main-tabs pull-right"
+            data-selected-tab="<%= params[:tab] %>">
+            <% %w(newest unanswered).each_with_index do |post_type, index| %>
+              <li class="<%= 'active' if index == 0 %>">
+                <a data-toggle="tab" href="#<%= post_type %>">
+                  <%= t "faq.index.#{post_type}" %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
       <div class="tab-content">
         <% %w(newest unanswered).each_with_index do |post_type, index| %>
@@ -40,7 +41,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <%= paginate @supports.send("#{post_type}_posts"),
-                    params: {tab: "newest"} %>
+                    params: {tab: post_type} %>
                 </div>
               </div>
             <% end %>
@@ -49,7 +50,8 @@
       </div>
     </div>
     <div class="col-md-4 sidebar">
-      <%= render "sidebar" %>
+      <%= render "sidebar",
+        parts: ["search", "most_viewed_posts", "popular_tags"] %>
     </div>
   </div>
 </div>

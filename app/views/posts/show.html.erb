@@ -1,0 +1,79 @@
+<% provide :title, @post.title.html_safe %>
+
+<div id="faq" class="post-show">
+  <div class="breadcrumb-bar">
+    <ul class="list breadcrumb">
+      <li>
+        <%= link_to root_url do %>
+          <i class="glyphicon glyphicon-th-list"></i>
+          <%= t "layouts.paths" %>
+        <% end %>
+      </li>
+      <li><%= link_to t("faq.index.title"), posts_path %></li>
+      <li class="active"><%= @post.title %></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="clearfix main">
+        <div class="clearfix heading">
+          <h1 class="title"><%= @post.title.html_safe %></h1>
+        </div>
+        <div class="col-sm-2 col-xs-4 text-center padding-left-0">
+          <%= link_to @post.user, class: "user-info" do %>
+            <p class="avatar">
+              <%= avatar_user_tag @post.user, "profile-user img-circle",
+                Settings.image_size_50 %>
+            </p>
+            <p><%= @post.user.name %></p>
+          <% end %>
+          <div class="actions">
+            <% if current_user? @post.user %>
+              <%= link_to edit_post_path(@post), class: "btn btn-info",
+                title: t("buttons.edit") do %>
+                <fa class="fa fa-pencil"></fa>
+              <% end %>
+              <%= link_to post_path(@post), class: "btn btn-danger",
+                remote: true, method: :delete, title: t("buttons.delete"),
+                data: {confirm: t("messages.delete.confirm")} do %>
+                <fa class="fa fa-remove"></fa>
+              <% end %>
+            <% else %>
+              <%= link_to edit_post_path(@post), class: "btn upvote",
+                remote: true, title: t("buttons.upvote") do %>
+                <fa class="fa fa-thumbs-up"></fa>
+              <% end %>
+              <%= link_to edit_post_path(@post), class: "btn downvote",
+                remote: true, title: t("buttons.downvote") do %>
+                <fa class="fa fa-thumbs-down"></fa>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="votes">
+            <div class="count"><%= @supports.votes %></div>
+            <div>
+              <%= t("faq.show.vote").pluralize @supports.votes %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-10 col-xs-8 padding-left-0">
+          <div class="content">
+            <%= @post.content.html_safe %>
+          </div>
+          <div class="tags">
+            <% @post.tag_list.each do |tag| %>
+              <%= link_to tag, "#", class: "tag" %>
+            <% end %>
+          </div>
+          <div class="create-time">
+            <%= t "faq.index.time_ago",
+              time: time_ago_in_words(@post.created_at) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 sidebar">
+      <%= render "sidebar", parts: ["search", "related_posts"] %>
+    </div>
+  </div>
+</div>
