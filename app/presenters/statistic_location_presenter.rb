@@ -30,19 +30,19 @@ class StatisticLocationPresenter < ActionView::Base
   def sidebar_item sidebar_items, index
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{index}\">
       <div class=\"tcell stt\">#</div>
-      <div class=\"tcell location location-<%= sidebar_items[:name] %>\"
-        title=\"sidebar_items[:name]}\">
-        #{sidebar_items[:name]}
+      <div class=\"tcell location location-#{sidebar_items.first}\"
+        title=\"sidebar_items.first}\">
+        #{sidebar_items.first}
       </div>
     </div>"
   end
 
   def body_item body_items, index
     "<div class=\"trow list_#{index}\" id=\"body-row-#{index}\">
-      <div class=\"tcell total-trainees-location-#{body_items[:name]}
+      <div class=\"tcell total-trainees-location-#{body_items.first}
         number_trainees text-right trainee-by-location\"
-        data-total-trainees=\"#{body_items[:y]}\">
-        #{body_items[:y]}
+        data-total-trainees=\"#{body_items.last}\">
+        #{body_items.last}
       </div>
       <div class=\"tcell blank\"></div>
     </div>"
