@@ -15,24 +15,7 @@ class Question < ApplicationRecord
   scope :random, ->count, level, category_id{where(level: level, category_id: category_id)
     .order("RAND()").limit(count)}
 
-  accepts_nested_attributes_for :answers, allow_destroy: true,
-    reject_if: lambda {|a| a[:content].blank?}
-
   enum level: [:easy, :normal, :hard]
 
   delegate :name, to: :category, prefix: true, allow_nil: true
-
-  private
-  def check_answers
-    if answers.blank?
-      errors.add :question, I18n.t("error.wrong_answer")
-      return
-    end
-    size_answer_correct = 0
-    answers.each do |answer|
-      size_answer_correct += 1 if answer.is_correct?
-    end
-    errors.add :question, I18n.t("error.wrong_answer") unless
-      size_answer_correct == 1
-  end
 end

@@ -54,6 +54,7 @@ class QuestionPresenter < ActionView::Base
       <div class=\"tcell action\">
         #{link_to t("buttons.edit"), eval("edit_#{@namespace}_question_path(question)")}
       </div>
+      <div class=\"tcell blank\"></div>
     </div>"
   end
 end

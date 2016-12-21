@@ -1,5 +1,5 @@
-<%= form_for [:admin, @question] do |f| %>
-  <%= render "shared/error_messages", object: @question %>
+<%= form_for [:admin, @question_form] do |f| %>
+  <%= render "shared/error_messages", object: @question_form %>
   <div class="form-group">
     <%= f.label :category %>
     <%= select_profile_field :category, @supports.categories, f %>
@@ -14,16 +14,22 @@
       class: "form-control" %>
   </div>
 
-  <div class="col-sm-10 col-sm-offset-1">
-    <h3><%= f.label :answer %></h3>
-    <%= f.fields_for :answers do |builder| %>
-      <%= render "answer_fields", f: builder %>
-    <% end %>
-    <strong><%= link_to_add_fields t("questions.add_answer"),
-      f, :answers %></strong>
-    <% if f.object.new_record? %>
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <h3><%= f.label :answer %></h3>
+      <%= f.fields_for :answers do |builder| %>
+        <%= render "answer_fields", f: builder %>
+      <% end %>
+      <strong>
+        <%= link_to_add_form_fields t("questions.add_answer"), f, :answers %>
+      </strong>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <% if f.object.model.new_record? %>
       <%= f.submit t("buttons.create_and_continue"),
-        name: "create_and_continue",
+        continue: true,
         class: "btn btn-primary pull-right btn-create-and-continue" %>
       <%= f.submit t("buttons.create"),
         class: "btn btn-primary pull-right" %>

@@ -1,12 +1,20 @@
-<fieldset class="field">
-  <%= f.label :answer %>
-  <%= f.text_area :content, class: "form-control" %>
-  <div class="correct-choose">
-    <%= f.label :is_correct %>
-    <%= f.check_box :is_correct, class: "check" %>
+<fieldset class="field row">
+  <div class="col-md-9">
+    <%= f.label :answer %>
+    <%= f.text_area :content, class: "form-control" %>
   </div>
-  <div class="remove-choose">
+
+  <div class="col-md-2 colcorrect-choose">
+    <%= f.label :is_correct %>
+    <div class="form-group">
+      <%= f.check_box :is_correct, class: "check" %>
+    </div>
+  </div>
+
+  <div class="col-md-1">
     <%= f.hidden_field :_destroy %>
-    <%= link_to_remove_fields t("subjects.document_remove"), f %>
+    <%= link_to "#", class: "remove_fields" do %>
+      <i class="fa fa-times" aria-hidden="true"></i>
+    <% end %>
   </div>
 </fieldset>

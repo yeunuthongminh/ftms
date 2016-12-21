@@ -50,5 +50,6 @@
     &.action {
       @include ellipsis(78px);
     }
+    @include blank-column-style
   }
 }
