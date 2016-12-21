@@ -17,36 +17,46 @@ class Admin::QuestionsController < ApplicationController
   def new
     @question = Question.new
     Settings.default_number_of_answers.times {@question.answers.build}
+    @question_form = QuestionForm.new @question
     add_breadcrumb_path "questions"
     add_breadcrumb_new "questions"
   end
 
   def create
-    @question = Question.new params_questions
-    if @question.save
+    @question = Question.new
+
+    @question_form = QuestionForm.new @question
+    if @question_form.validate question_params
+      @question_form.save
       flash[:success] = flash_message "created"
-      if params[:commit].present?
-        redirect_to admin_questions_path
-      else
+      if params[:continue].present?
         redirect_to new_admin_question_path
+      else
+        redirect_to admin_questions_path
       end
     else
       load_data
+      flash_message[:failed] = flash_message "not_created"
       render :new
     end
   end
 
   def edit
+    @question_form = QuestionForm.new @question
     add_breadcrumb_path "questions"
     add_breadcrumb_edit "questions"
   end
 
   def update
-    if @question.update_attributes params_questions
+    @question_form = QuestionForm.new @question
+
+    if @question_form.validate question_params
+      @question_form.save
       flash[:success] = flash_message "updated"
       redirect_to admin_questions_path
     else
       load_data
+      flash[:success] = flash_message "not_updated"
       render :edit
     end
   end
@@ -61,7 +71,7 @@ class Admin::QuestionsController < ApplicationController
   end
 
   private
-  def params_questions
+  def question_params
     params.require(:question).permit Question::ATTRIBUTES_PARAMS
   end
 
