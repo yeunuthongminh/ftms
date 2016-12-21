@@ -96,10 +96,10 @@ class Trainer::TasksController < ApplicationController
   end
 
   def load_course_subject
-    @course_subject = CourseSubject.find_by id: params[:id]
+    @course_subject = CourseSubject.find_by id: params[:course_subject_id]
     if @course_subject.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to @course
+      back_or_root
     end
   end
 end

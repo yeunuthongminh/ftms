@@ -12,7 +12,7 @@ class Trainer::UserSubjectsController < ApplicationController
         flash.now[:danger] = flash_message "not_updated"
       end
     else
-      @user_subject.update_status current_user, params["status"]
+      @user_subject.update_status current_user, status
     end
     load_data
     respond_to do |format|
@@ -42,5 +42,9 @@ class Trainer::UserSubjectsController < ApplicationController
       redirect_to trainer_user_subjects_path
       flash[:alert] = flash_message "not_find"
     end
+  end
+
+  def status
+    UserSubject.statuses.key params[:status].to_i
   end
 end

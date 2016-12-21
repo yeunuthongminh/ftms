@@ -16,10 +16,10 @@
         <% end %>
       </p>
     </div>
-    <% if policy(controller: "subjects", action: "edit") ||
-      policy(controller: "subjects", action: "destroy") %>
+    <% if policy(edit_trainer_subject_path @subject) ||
+      policy_with_method(url: trainer_subject_path(@subject), action: "destroy") %>
       <div class="col-md-2">
-        <div class="dropdown pull-left">
+        <div class="dropdown pull-right">
           <button id="dLabel" type="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false"
             class="btn btn-default">
@@ -28,7 +28,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-right"
               aria-labelledby="dLabel">
-              <% if policy(controller: "subjects", action: "edit") %>
+              <% if policy edit_trainer_subject_path @subject %>
                 <li>
                   <%= link_to edit_trainer_subject_path @subject do %>
                     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -36,7 +36,8 @@
                   <% end %>
                 </li>
               <% end %>
-              <% if policy(controller: "subjects", action: "destroy") %>
+              <% if policy_with_method url: trainer_subject_path(@subject),
+                action: "destroy" %>
                 <li>
                   <%= link_to trainer_subject_path(@subject), method: :delete,
                     data: {confirm: t("messages.delete.confirm")} do %>

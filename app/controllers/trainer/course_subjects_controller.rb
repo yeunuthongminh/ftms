@@ -22,7 +22,8 @@ class Trainer::CourseSubjectsController < ApplicationController
         end
         format.html do
           flash[:success] = flash_message "updated"
-          redirect_to trainer_course_subject_path @course, @course_subject.subject
+          redirect_to trainer_course_subject_path @course_subject.course,
+            @course_subject.subject
         end
       end
     else
