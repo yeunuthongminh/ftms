@@ -63,7 +63,7 @@ class Supports::CourseSupport
     elsif @current_user
       @current_user.courses.includes :language, :location, :program
     else
-      Course.includes :language, :location, :program, :user_courses, :trainers
+      Course.includes :language, :location, :program
     end
   end
 

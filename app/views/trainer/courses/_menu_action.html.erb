@@ -1,0 +1,60 @@
+<div class="dropdown pull-right menu-action-course">
+  <button id="dLabel" type="button" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false"
+    class="btn btn-default">
+    <span class="glyphicon glyphicon-align-justify"
+      aria-hidden="true"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right"
+    aria-labelledby="dLabel">
+    <% if policy trainer_course_path @course %>
+      <li>
+        <% if @course.init? %>
+          <%= link_to change_status_course_path(@course),
+            data: {method: :patch,
+            confirm: t("courses.confirms.confirm_start")} do %>
+            <i class="fa fa-check" aria-hidden="true"></i>
+            <%= t "courses.start" %>
+          <% end %>
+        <% elsif @course.progress? %>
+          <%= link_to change_status_course_path(@course),
+            data: {method: :patch,
+            confirm: t("courses.confirms.confirm_finish")} do %>
+            <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+            <%= t "buttons.finish" %>
+          <% end %>
+        <% elsif @course.finish? %>
+          <%= link_to change_status_course_path(@course),
+            data: {method: :patch,
+            confirm: t("courses.confirms.confirm_reopen")} do %>
+            <i class="fa fa-retweet" aria-hidden="true"></i>
+            <%= t "buttons.reopen" %>
+          <% end %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to clone_courses_path(id: @course), data: {method: :post,
+          confirm: t("courses.confirms.confirm_clone")} do %>
+          <i class="fa fa-clone" aria-hidden="true"></i>
+          <%= t "buttons.clone" %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to edit_trainer_course_path do %>
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <%= t "buttons.edit" %>
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy_with_method url: trainer_course_path(@course), action: "destroy" %>
+      <li>
+        <%= link_to trainer_course_path(@course),
+          data: {method: :delete,
+          confirm: t("messages.delete.confirm")} do %>
+          <i class="fa fa-trash" aria-hidden="true"></i>
+          <%= t "buttons.delete" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

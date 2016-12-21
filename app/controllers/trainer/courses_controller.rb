@@ -8,7 +8,7 @@ class Trainer::CoursesController < ApplicationController
 
   def index
     add_breadcrumb_index "courses"
-    @supports ||= Supports::CourseSupport.new course: @course, namespace: @namespace,
+    @supports ||= Supports::CourseSupport.new namespace: @namespace,
       filter_service: load_filter
   end
 
