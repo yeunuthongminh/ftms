@@ -51,6 +51,9 @@ class User < ApplicationRecord
   has_many :track_logs, dependent: :destroy
   has_many :filters, dependent: :destroy
   has_many :user_functions, dependent: :destroy
+  has_many :trainer_functions, class_name: TrainerFunction.name, dependent: :destroy
+  has_many :trainee_functions, class_name: TraineeFunction.name, dependent: :destroy
+  has_many :admin_functions, class_name: AdminFunction.name, dependent: :destroy
   has_many :functions, through: :user_functions
   has_many :programs, through: :trainer_programs
   has_many :user_courses

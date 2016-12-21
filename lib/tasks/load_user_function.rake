@@ -14,7 +14,7 @@ namespace :db do
     admins = []
     Admin.all.each do |admin|
       Function.all.each do |function|
-        admins << UserFunction.new(function: function, user: admin, role_type: 0)
+        admins << UserFunction.new(function: function, user: admin, type: "AdminFunction")
       end
     end
     UserFunction.import admins
@@ -23,7 +23,7 @@ namespace :db do
     trainees = []
     Trainee.all.each do |trainee|
       Function.where("model_class NOT LIKE ?", "%/%").each do |function|
-        trainees << UserFunction.new(function: function, user: trainee, role_type: 2)
+        trainees << UserFunction.new(function: function, user: trainee, type: "TraineeFunction")
       end
     end
     UserFunction.import trainees
@@ -32,7 +32,7 @@ namespace :db do
     trainers = []
     Trainer.all.each do |trainer|
       Function.where("model_class LIKE ?", "trainer/%").each do |function|
-        trainers << UserFunction.new(function: function, user: trainer, role_type: 1)
+        trainers << UserFunction.new(function: function, user: trainer, type: "TrainerFunction")
       end
     end
     UserFunction.import trainers

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161220064454) do
+ActiveRecord::Schema.define(version: 20161222010231) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -166,23 +166,15 @@ ActiveRecord::Schema.define(version: 20161220064454) do
     t.index ["user_id"], name: "index_evaluation_check_lists_on_user_id", using: :btree
   end
 
-  create_table "evaluation_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_evaluation_groups_on_deleted_at", using: :btree
-  end
-
   create_table "evaluation_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "evaluation_standard_id"
-    t.integer  "evaluation_group_id"
+    t.integer  "evaluation_template_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_evaluation_items_on_deleted_at", using: :btree
-    t.index ["evaluation_group_id"], name: "index_evaluation_items_on_evaluation_group_id", using: :btree
     t.index ["evaluation_standard_id"], name: "index_evaluation_items_on_evaluation_standard_id", using: :btree
+    t.index ["evaluation_template_id"], name: "index_evaluation_items_on_evaluation_template_id", using: :btree
   end
 
   create_table "evaluation_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -194,6 +186,14 @@ ActiveRecord::Schema.define(version: 20161220064454) do
     t.datetime "updated_at",            null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_evaluation_standards_on_deleted_at", using: :btree
+  end
+
+  create_table "evaluation_templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluation_templates_on_deleted_at", using: :btree
   end
 
   create_table "exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -615,7 +615,7 @@ ActiveRecord::Schema.define(version: 20161220064454) do
   create_table "user_functions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.integer "function_id"
-    t.integer "role_type"
+    t.string  "type"
     t.index ["function_id"], name: "index_user_functions_on_function_id", using: :btree
     t.index ["user_id"], name: "index_user_functions_on_user_id", using: :btree
   end
@@ -744,8 +744,8 @@ ActiveRecord::Schema.define(version: 20161220064454) do
   add_foreign_key "evaluation_check_lists", "evaluation_standards"
   add_foreign_key "evaluation_check_lists", "trainee_evaluations"
   add_foreign_key "evaluation_check_lists", "users"
-  add_foreign_key "evaluation_items", "evaluation_groups"
   add_foreign_key "evaluation_items", "evaluation_standards"
+  add_foreign_key "evaluation_items", "evaluation_templates"
   add_foreign_key "exams", "categories"
   add_foreign_key "exams", "user_subjects"
   add_foreign_key "exams", "users"
