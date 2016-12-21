@@ -13,9 +13,11 @@
           <%= f.text_field :email, class: "form-control" %>
         </div>
 
-        <% if policy(controller: "users", action: "edit") %>
+        <% if policy change_roles_path @user %>
           <%= link_to t("user.edit_role"),
-            admin_user_change_roles_path(@user) unless @user.new_record? %>
+            change_roles_path(@user) unless @user.new_record? %>
+        <% end %>
+        <% if policy edit_admin_user_path @user %>
           <div class="form-group">
             <%= f.label :trainer_id %>
             <%= f.select :trainer_id, options_for_select(@supports.trainers

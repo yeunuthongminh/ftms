@@ -11,28 +11,17 @@
           <%= f.label :email %>
           <%= f.text_field :email, class: "form-control" %><br>
         </div>
-        <% if policy controller: "roles", action: "edit"%>
-          <div class="form-group">
-            <%= f.label :role_id %>
-            <span>
-              <%= f.collection_check_boxes :role_ids, @roles, :id,
-                :name do |role| %>
-                <span class="label label-default">
-                  <%= role.label do %>
-                    <%= role.check_box id: "check_role_#{role.object.role_type}",
-                      checked: f.object.roles.include?(role.object) %> &nbsp;
-                    <%= role.text %> &nbsp;
-                  <% end %>
-                </span>
-              <% end %>
-            </span>
-          </div>
+        <% if policy change_roles_path(@user) %>
+          <%= link_to t("user.edit_role"),
+            change_roles_path(user_id: @user.id) unless @user.new_record? %>
         <% end %>
-        <% if policy controller: "users", action: "edit"%>
+        <% if policy edit_trainer_user_path(@user) %>
           <div class="form-group">
             <%= f.label :trainer_id %>
-            <%= f.select :trainer_id, options_for_select(@trainers.
-              collect{|trainer| [trainer.name, trainer.id]}, f.object.trainer_id), {},
+            <%= f.select :trainer_id, options_for_select(@supports.trainers
+              .collect{|trainer| [trainer.name, trainer.id,
+              {"data-location-id": trainer.profile_location_id}]},
+              f.object.trainer_id), {include_blank: true},
               class: "form-control" %>
           </div>
         <% end %>
@@ -56,8 +45,8 @@
     </div>
   <% end %>
 </div>
-<% [@location, @trainee_type, @university].each do |object| %>
+<% [@supports.location, @supports.trainee_type, @supports.university].each do |object| %>
   <div class="modal fade modal-form" id="<%= object.class.name.downcase %>-modal" role="dialog">
-    <%= render "shared/quick_form", object: object, managers: @managers %>
+    <%= render "shared/quick_form", object: object, managers: @supports.managers %>
   </div>
 <% end %>

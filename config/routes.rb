@@ -28,7 +28,6 @@ Rails.application.routes.draw do
     end
     resources :users, except: :index do
       resource :stages, only: [:edit, :update]
-      resources :change_roles, only: [:index, :create]
     end
 
     resources :trainee_evaluations, only: :index
@@ -135,6 +134,10 @@ Rails.application.routes.draw do
 
   namespace :clone do
     resources :courses, only: :create
+  end
+
+  namespace :change do
+    resources :roles, only: [:index, :create]
   end
 
   root "static_pages#home"
