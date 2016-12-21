@@ -11,10 +11,11 @@
 
     <p class="text-muted text-center">
       <b><%= t "user.profile.email" %></b><%= @user.email %> &nbsp;
-      <%= link_to edit_admin_user_path(@user) do %>
-        <i class="fa fa-pencil" aria-hidden="true"></i>
+      <% if policy edit_trainer_user_path(@user) %>
+        <%= link_to edit_admin_user_path(@user) do %>
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        <% end %>
       <% end %>
     </p>
-
   </div>
 </div>

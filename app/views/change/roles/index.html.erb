@@ -1,0 +1,17 @@
+<%=form_for [@user], url: change_roles_path(@user),
+  method: :post do |f|%>
+  <div class="form-group">
+    <%= f.label :role_ids %>
+    <%= f.collection_check_boxes :role_ids, @roles, :id,
+      :name do |role| %>
+      <span class="label label-default">
+        <%= role.label do %>
+          <%= role.check_box id: "check_role_#{role.object.role_type}" %> &nbsp;
+          <%= role.text %> &nbsp;
+        <% end %>
+      </span>
+    <% end %>
+  </div>
+
+  <%= f.submit t("roles.update"), class: "btn btn-danger" %>
+<%end%>

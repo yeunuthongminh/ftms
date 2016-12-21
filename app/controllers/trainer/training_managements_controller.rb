@@ -2,7 +2,7 @@ class Trainer::TrainingManagementsController < ApplicationController
   include FilterData
 
   before_action :load_filter, only: :index
-  before_action :authorize 
+  before_action :authorize
 
   def index
     add_breadcrumb_index "training_managements"

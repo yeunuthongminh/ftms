@@ -1,4 +1,4 @@
-class Admin::ChangeRolesController < ApplicationController
+class Change::RolesController < ApplicationController
   before_action :find_user
   before_action :authorize
 
@@ -22,7 +22,7 @@ class Admin::ChangeRolesController < ApplicationController
       end
       UserFunction.import user_functions
     end
-    redirect_to edit_admin_user_path(@user)
+    redirect_to eval("edit_#{@namespace}_user_path(@user)")
   end
 
   private
@@ -40,5 +40,9 @@ class Admin::ChangeRolesController < ApplicationController
 
   def find_user
     @user = User.find_by id: params[:user_id]
+    unless @user
+      flash[:alert] = flash_message "not_find"
+      back_or_root
+    end
   end
 end

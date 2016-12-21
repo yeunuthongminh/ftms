@@ -1,4 +1,4 @@
-<div id="<%= @note.new_record? ? "new" : "edit" %>-note-modal"
+<div id="<%= @supports.note.new_record? ? "new" : "edit" %>-note-modal"
   class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -8,7 +8,7 @@
       </div>
       <div class="modal-body row">
         <div class="col-md-12">
-          <%= render "trainer/notes/form" %>
+          <%= render "admin/notes/form" %>
         </div>
       </div>
     </div>
