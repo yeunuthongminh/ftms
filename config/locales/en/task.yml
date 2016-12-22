@@ -22,3 +22,23 @@ en:
     statuses:
       in_progress: "In Progress"
       finished: "Finished"
+    label:
+      start_date: "Start date: "
+      spent_time: "Spent time: "
+      git_link: "Github: "
+      sent_count: "Sent count: "
+    title:
+      start_date: "The beginning of the task"
+      spent_time: "Spent time of the task"
+      git_link: "Github links"
+      sent_count: "Pull request sent counter"
+      complete: "Complete"
+      onhold: "Onhold"
+      inprogress: "Inprogress"
+      delete: "Delete"
+      edit: "Edit"
+      init: "Init"
+      complete_tasks: "Are you want to finish task %{task_name}?"
+      onhold_tasks: "Are you want to pause task %{task_name}?"
+      delete_tasks: "Are you want to delete task %{task_name}?"
+      inprogress_tasks: "Are you want to start task %{task_name}?"

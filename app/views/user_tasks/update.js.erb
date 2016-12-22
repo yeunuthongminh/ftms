@@ -1,12 +1,6 @@
 $('.flash').html('<%= j render "layouts/flash" %>');
-<% if @user_task.status == Settings.status.finished %>
-  $('#user-task-row-<%= @user_task.id %>')
-    .html('<%= j render "subjects/user_task_row", user_task: @user_task %>');
-  $('.task-infor').html('<%= j render "subjects/task_statistic" %>')
-  $('.user-subjects-charts').html('<%= j render "subjects/user_subject_charts" %>');
-  $('#user_task').html('<%= j render "do_lists/user_task" %>');
-  $('#task_finished').html('<%= j render "do_lists/user_task_was_finished" %>');
-  $('#task_finished_on_day').html('<%= j render "do_lists/user_task_do_by_day" %>');
-<% else %>
-  $('#user-pull-task-<%= @user_task.id %>').modal("hide");
-<% end %>
+$('.task-infor').html('<%= j render "subjects/task_statistic" %>')
+$('.user-subjects-charts').html('<%= j render "subjects/user_subject_charts" %>');
+$('#user_task').html('<%= j render "do_lists/user_task" %>');
+$('#task_finished').html('<%= j render "do_lists/user_task_was_finished" %>');
+$('#task_finished_on_day').html('<%= j render "do_lists/user_task_do_by_day" %>');

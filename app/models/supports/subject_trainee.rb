@@ -79,7 +79,7 @@ class Supports::SubjectTrainee
       course_subject.user_subjects.includes(:trainee, :user_course)
         .each do |user_subject|
         @user_tasks_chart_data[user_subject.trainee.name] = user_subject.user_tasks
-          .finished.size
+          .complete.size
       end
       @user_tasks_chart_data
     end

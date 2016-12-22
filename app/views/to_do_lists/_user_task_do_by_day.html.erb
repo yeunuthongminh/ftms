@@ -1,7 +1,7 @@
 <div class="div_task_finished_on_day ">
   <% if @to_do_lists.any? %>
     <% @to_do_lists.each do |user_task| %>
-      <% if user_task.finished? &&
+      <% if user_task.complete? &&
         user_task.updated_at.to_date == Time.now.to_date %>
         <div class="dolist">
           <%= link_to user_task_path(user_task), remote: true do %>
