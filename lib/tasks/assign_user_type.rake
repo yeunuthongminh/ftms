@@ -16,12 +16,5 @@ namespace :db do
 
     puts "Assign admin"
     User.first.update_attributes type: "Admin"
-
-    desc "assign user type to user course"
-    UserCourse.find_each do |user_course|
-      user = User.find_by id: user_course.user_id
-      user_course.set_user_type
-      user_course.save
-    end
   end
 end

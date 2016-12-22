@@ -67,8 +67,7 @@ class Admin::RolesController < ApplicationController
     @role.role_type.classify.constantize.all.each do |user|
       user.user_functions.delete_all
       @role.functions.each do |function|
-        user_functions << UserFunction.new(function: function,
-          role_type: @role.role_type, user: user)
+        user_functions << UserFunction.new(function: function, user: user)
       end
     end
     UserFunction.import user_functions
