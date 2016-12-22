@@ -1,6 +1,6 @@
 <div class="menu-right-user-course">
   <% if user_course.progress? %>
-    <%= link_to t("buttons.finish"), [:admin, user_course, status: :finish],
+    <%= link_to t("buttons.finish"), [@namespace.to_sym, user_course, status: :finish],
       remote: true, method: :patch, title: t("courses.finish_course"),
       data: {confirm: t("user_courses.finish_confirm",
       name: user_course.trainee_name)}, class: "btn btn-danger btn-xs" %>

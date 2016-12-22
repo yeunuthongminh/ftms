@@ -63,7 +63,7 @@
                 <th><%= t "layouts.status" %></th>
                 <th><%= t "users.pull_request" %></th>
               </tr>
-              <% user_subject.user_tasks.includes(:task).each do |user_task| %>
+              <% user_subject.user_tasks.each do |user_task| %>
                 <tr class="user-subject user-subject-<%= user_subject.id %>">
                   <td><p><%= user_task.task_name %></p></td>
                   <td class=<%= task_color user_task.status %>>

@@ -12,11 +12,11 @@ class Supports::UserSupport
 
   def user_courses
     @user_courses ||= @user.user_courses.includes(user_subjects: [:course,
-      :trainee_evaluations, :exams, course_subject: :subject])
+      :trainee_evaluations, :exams, {user_tasks: :task}, course_subject: :subject])
   end
 
   def finished_courses
-    @finished_courses ||= user_courses.select {|user_course| user_course.finish?}
+    @finished_courses ||= user_courses.finish
   end
 
   def inprogress_course
@@ -24,8 +24,8 @@ class Supports::UserSupport
   end
 
   def user_subjects
-    @user_subjects ||= inprogress_course.user_subjects.includes(:course_subject)
-      .order_by_course_subject if inprogress_course
+    @user_subjects ||= inprogress_course.user_subjects.includes([course_subject:
+      :subject], user_tasks: :task).order_by_course_subject if inprogress_course
   end
 
   def note
