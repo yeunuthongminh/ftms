@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!, except: :home
   before_action :set_locale, :load_namespace, :load_root_path,
-    :init_feedback, :to_do_lists
+    :init_feedback, :to_do_lists, :notifications
 
   protected
   def after_sign_in_path_for resource
