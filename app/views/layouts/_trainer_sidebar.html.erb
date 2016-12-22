@@ -28,8 +28,7 @@
               <li>
                 <div id="slimScrollDiv">
                   <ul class="menu" id="slimscroll_admin">
-                    <% current_user.user_notifications.select_notifications
-                      .limit(10).each do |user_notification| %>
+                    <% @notifications.limit(10).each do |user_notification| %>
                       <%= render "shared/notification",
                         notification: user_notification.notification %>
                     <% end %>
