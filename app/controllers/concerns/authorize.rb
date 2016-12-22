@@ -1,7 +1,7 @@
 module Authorize
   def authorize_with_multiple args, policy
     pundit_policy = policy.new current_user, args
-    query ||= "#{params[:action]}?"
+    query = "#{params[:action]}?"
     unless pundit_policy.public_send query
       error = Pundit::NotAuthorizedError.new "not allowed"
       raise error
