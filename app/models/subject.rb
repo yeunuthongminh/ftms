@@ -20,6 +20,7 @@ class Subject < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :during_time, presence: true, numericality: {greater_than: 0}
+  validate :check_require_subject_detail
 
   scope :subject_not_start_course, ->course{where "id NOT IN (SELECT subject_id
     FROM course_subjects WHERE course_id = ? AND status <> 0)", course.id}
@@ -34,4 +35,15 @@ class Subject < ApplicationRecord
   delegate :name, to: :user_subject, prefix: true, allow_nil: true
   delegate :number_of_question, :min_score_to_pass, :time_of_exam,
     to: :subject_detail, prefix: true, allow_nil: true
+
+  def check_require_subject_detail
+    if subject_detail.present?
+      errors.add :number_question,
+        I18n.t("subjects.error.number_question") if subject_detail.number_of_question.blank?
+      errors.add :time_of_exam,
+        I18n.t("subjects.error.time_of_exam") if subject_detail.time_of_exam.blank?
+      errors.add :min_score,
+        I18n.t("subjects.error.min_score") if subject_detail.min_score_to_pass.blank?
+    end
+  end
 end

@@ -1,4 +1,7 @@
 $(document).on('turbolinks:load', function () {
+
+  $('#remove-subject-detail').find('input').val(1);
+
   if ($('#category_questions').length > 0) {
     temp_hash = $('#category_questions').val();
     if (temp_hash.length > 0) {
@@ -82,6 +85,7 @@ $(document).on('turbolinks:load', function () {
     });
 
     $('#sSubjectDetail').click(function() {
+      $('#remove-subject-detail').find('input').val(false);
       var h_cQuestions = {};
       var temp_number;
       $('li input[type="checkbox"].selectCategory:checked').each(function() {
@@ -123,5 +127,15 @@ function max_exam_point(easy, normal, hard) {
     var min_score = easy_questions + normal_questions + hard_questions;
     $('#subject_subject_detail_attributes_min_score_to_pass').attr('max', parseInt(min_score));
     $('#subject_subject_detail_attributes_min_score_to_pass').val(parseInt(min_score*70/100));
+    ques_array = calulate_precent(easy.val(),normal.val(),hard.val());
+    $('#percent_of_questions').val(ques_array);
   }
+}
+
+function calulate_precent(easy, normal, hard) {
+  var easy_percent = easy;
+  var normal_percent = normal;
+  var hard_percent = hard;
+  arr = '[' + easy_percent + ', ' + normal_percent + ', ' + hard_percent + ']';
+  return arr;
 }

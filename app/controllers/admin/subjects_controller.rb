@@ -1,7 +1,7 @@
 class Admin::SubjectsController < ApplicationController
   before_action :authorize
   before_action :find_subject_in_edit, only: [:edit, :update]
-  before_action :load_subject
+  before_action :load_subject, only: [:show, :destroy]
   before_action :load_data, only: :show
   before_action :load_subject_detail, only: [:edit]
 
@@ -36,6 +36,7 @@ class Admin::SubjectsController < ApplicationController
       flash[:success] = flash_message "created"
       redirect_to admin_subject_task_masters_path @subject
     else
+      load_subject_detail
       flash[:failed] = flash_message "not_created"
       render :new
     end
@@ -52,6 +53,7 @@ class Admin::SubjectsController < ApplicationController
       flash[:success] = flash_message "updated"
       redirect_to admin_subject_task_masters_path @subject
     else
+      load_subject_detail
       flash[:failed] = flash_message "not_updated"
       render :edit
     end
@@ -89,7 +91,7 @@ class Admin::SubjectsController < ApplicationController
     if @subject.subject_detail.nil?
       @subject.build_subject_detail percent_of_questions: Settings.exams.percent_question.to_s
     end
-    @categories = Category.all
+    @categories = Category.includes(:questions).all
   end
 
   def load_subject

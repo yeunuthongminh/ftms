@@ -85,6 +85,11 @@
               <%= f.number_field :min_score_to_pass, min: 0, step: 1, class: "subject-detail" %>
             </div>
           </div>
+          <% unless @subject.subject_detail.id %>
+            <div id="remove-subject-detail">
+              <%= link_to_remove_fields "remove", f %>
+            </div>
+          <% end %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
