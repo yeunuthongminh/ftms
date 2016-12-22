@@ -63,8 +63,7 @@
                 <li>
                 <div id="slimScrollDiv">
                   <ul class="menu">
-                    <% current_user.user_notifications.includes(notification: :user).select_notifications
-                      .limit(10).each do |user_notification| %>
+                    <% @notifications.limit(10).each do |user_notification| %>
                       <%= render "shared/notification",
                         notification: user_notification.notification %>
                     <% end %>

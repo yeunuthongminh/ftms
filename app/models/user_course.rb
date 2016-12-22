@@ -4,8 +4,6 @@ class UserCourse < ApplicationRecord
 
   acts_as_paranoid
 
-  #attr_readonly :user_type
-
   before_create :set_user_type
   after_create :create_user_subjects_when_assign_new_user
   before_save :restore_data
@@ -21,8 +19,7 @@ class UserCourse < ApplicationRecord
   has_many :user_subjects, dependent: :destroy
   has_many :trainee_evaluations, as: :targetable
 
-  scope :course_not_init, ->{joins(:course)
-    .where("courses.status <> ?", Course.statuses[:init])}
+  scope :course_not_init, ->{where "status <> ?", Course.statuses[:init]}
   scope :find_user_by_role, ->role_id{joins(trainee: :user_roles)
     .where("user_roles.role_id = ?", role_id)}
 

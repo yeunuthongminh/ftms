@@ -29,7 +29,7 @@ module NotificationHelper
   end
 
   def not_seen_notification
-    if (size = current_user.user_notifications.not_seen.size) > 0
+    if (size = @notifications.where(seen: false).size) > 0
       size
     end
   end

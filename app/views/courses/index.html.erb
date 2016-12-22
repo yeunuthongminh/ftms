@@ -13,7 +13,7 @@
     </ul>
   </div>
   <div class="row">
-    <% if @user_courses.size > 0 %>
+    <% if @user_courses.any? %>
       <% @user_courses.each do |user_course| %>
         <div class="col-md-6">
           <div class="card">
@@ -26,13 +26,13 @@
                   </div>
                 </div>
                 <div class="bucket-content">
-                    <span class="course-name">
-                      <%= truncate user_course.course_name, length: 20 %>
-                    </span>
-                    <span class="label-status
-                      <%= set_background_color_status user_course.course_status %>">
-                      <%= user_course.course.status.humanize %>
-                    </span>
+                  <span class="course-name">
+                    <%= truncate user_course.course_name, length: 20 %>
+                  </span>
+                  <span class="label-status
+                    <%= set_background_color_status user_course.course_status %>">
+                    <%= t "courses.statuses.#{user_course.course.status}" %>
+                  </span>
                   <p class="course-description">
                     <%= truncate user_course.course_description, length: 129 %>
                   </p>
