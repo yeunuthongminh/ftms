@@ -6,9 +6,9 @@ $(document).on('turbolinks:load', function() {
     build_list_selectbox_evaluation($('#list-evaluation li.exist .check-box'));
     var $input_exists = $('#list-evaluation input[type="hidden"]');
 
-    $('#evaluation_group').change(function() {
+    $('#evaluation_template').change(function() {
       var arr_url = document.location.pathname;
-      var evaluation_group_id = this.value;
+      var evaluation_template_id = this.value;
       if (this.value == "") {
         $('#list-evaluation').html($('#list-evaluation .exist'));
         $('#list-evaluation').append($input_exists);
@@ -20,7 +20,7 @@ $(document).on('turbolinks:load', function() {
           url: arr_url,
           method: "GET",
           dataType: "json",
-          data: {evaluation_group_id: evaluation_group_id},
+          data: {evaluation_template_id: evaluation_template_id},
           success: function(data) {
             var html = "";
             var index = $('#list-evaluation li').length;

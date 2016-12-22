@@ -1,6 +1,6 @@
 class Trainer::UsersController < ApplicationController
   before_action :authorize, except: :edit
-  before_action :load_user, except: [:index, :new, :create]
+  before_action :find_user, except: [:index, :new, :create]
   before_action :load_profile, only: [:new, :edit, :show]
   before_action :build_profile, only: :new
   before_action :load_breadcrumb_edit, only: [:edit, :update]
@@ -80,9 +80,9 @@ class Trainer::UsersController < ApplicationController
     @user.build_profile
   end
 
-  def load_user
-    @user = User.includes(:profile).find_by id: params[:id]
-    if @user.nil?
+  def find_user
+    @user = User.find_by id: params[:id]
+    unless @user
       flash[:alert] = flash_message "not_find"
       redirect_to trainer_training_managements_path
     end

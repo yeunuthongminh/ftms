@@ -82,7 +82,7 @@ class Admin::UsersController < ApplicationController
 
   def find_user
     @user = User.find_by id: params[:id]
-    if @user.nil?
+    unless @user
       flash[:alert] = flash_message "not_find"
       redirect_to admin_training_managements_path
     end

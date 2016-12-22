@@ -16,8 +16,8 @@ class Trainer::TraineeEvaluationsController < ApplicationController
     add_breadcrumb @supports.targetable.trainee_name,
       [:trainer, @supports.targetable.trainee]
     add_breadcrumb_new "trainee_evaluations"
-    render json: @supports.evaluation_group.evaluation_standards if
-      params[:evaluation_group_id]
+    render json: @supports.evaluation_template.evaluation_standards if
+      params[:evaluation_template_id]
   end
 
   def create
@@ -37,8 +37,8 @@ class Trainer::TraineeEvaluationsController < ApplicationController
     add_breadcrumb @supports.targetable.trainee_name,
       [:trainer, @supports.targetable.trainee]
     add_breadcrumb_edit "trainee_evaluations"
-    render json: @supports.evaluation_group.evaluation_standards if
-      params[:evaluation_group_id]
+    render json: @supports.evaluation_template.evaluation_standards if
+      params[:evaluation_template_id]
   end
 
   def update
@@ -58,7 +58,7 @@ class Trainer::TraineeEvaluationsController < ApplicationController
   end
 
   def load_data
-    evaluation_group = EvaluationGroup.find_by id: params[:evaluation_group_id]
+    evaluation_template = EvaluationTemplate.find_by id: params[:evaluation_template_id]
     targetable = if params[:user_subject_id]
       UserSubject.find_by id: params[:user_subject_id]
     else
@@ -68,7 +68,7 @@ class Trainer::TraineeEvaluationsController < ApplicationController
       @trainee_evaluation ||= TraineeEvaluation.new
       @supports = Supports::TraineeEvaluationSupport.new trainee_evaluation:
         @trainee_evaluation, targetable: targetable,
-        evaluation_group: evaluation_group
+        evaluation_template: evaluation_template
     else
       flash[:alert] = flash_message "not_find"
       redirect_to [:trainer, :trainee_evaluations]
