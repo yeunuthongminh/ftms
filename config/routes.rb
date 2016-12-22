@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     end
     resources :synchronizes
     resources :categories
+    resources :posts, only: [:index, :show, :destroy]
   end
 
   namespace :trainer do

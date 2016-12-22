@@ -1,0 +1,80 @@
+<% provide :title, @post.title.html_safe %>
+
+<div id="posts" class="post-show">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="clearfix main">
+        <div class="clearfix heading">
+          <h1 class="title show-post"><%= @post.title.html_safe %></h1>
+          <%= link_to admin_post_path(@post),
+            class: "btn btn-danger button-delete",
+            remote: true, method: :delete, title: t("buttons.delete"),
+            data: {confirm: t("messages.delete.confirm")} do %>
+            <fa class="fa fa-remove"></fa>
+          <% end %>
+        </div>
+
+        <div class="col-sm-2 col-xs-4 text-center">
+          <%= link_to admin_user_path(@post.user), class: "user-info" do %>
+            <p class="avatar">
+              <%= avatar_user_tag @post.user, "profile-user img-circle",
+                Settings.image_size_50 %>
+            </p>
+            <p><%= @post.user.name %></p>
+          <% end %>
+          <div class="votes">
+            <span class="count"><%= @post.cached_votes_score %></span>
+
+          </div>
+        </div>
+        <div class="col-sm-10 col-xs-8">
+          <div class="content">
+            <%= @post.content.html_safe %>
+          </div>
+          <div class="tags">
+            <% @post.tag_list.each do |tag| %>
+              <%= link_to tag, "#", class: "tag" %>
+            <% end %>
+          </div>
+          <div class="create-time">
+            <%= t "faq.index.time_ago",
+              time: time_ago_in_words(@post.created_at) %>
+          </div>
+        </div>
+      </div>
+
+      <div class="title_answer">
+        <h4><%= pluralize @post.comments.roots.count, t("faq.show.answer") %></h4>
+      </div>
+      <div>
+        <% @post.comments.roots.each do |root_comment| %>
+          <div class="root_comment">
+            <div class="avatar">
+              <%= link_to admin_user_path(root_comment.user), class: "avatar" do %>
+                <%= avatar_user_tag root_comment.user, "profile-user img-circle",
+                  Settings.image_size_40 %>
+                <%= root_comment.user_name %>
+              <% end %>
+              <i><%= t "posts.comment" %></i>
+            </div>
+            <%= root_comment.content %>
+
+            <% root_comment.children.each do |sub_comment| %>
+              <div class="subcomment">
+                <div class="avatar">
+                  <%= link_to admin_user_path(sub_comment.user), class: "avatar" do %>
+                    <%= avatar_user_tag sub_comment.user, "profile-user img-circle",
+                      Settings.image_size_40 %>
+                    <%= sub_comment.user_name %>
+                  <% end %>
+                  <i><%= t "posts.reply" %></i>
+                </div>
+                <%= sub_comment.content %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

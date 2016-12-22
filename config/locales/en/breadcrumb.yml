@@ -83,3 +83,7 @@ en:
       all: "All Categories"
       edit: "Edit"
       new: "New"
+    posts:
+      all: "All Post"
+      edit: "Edit"
+      new: "New"

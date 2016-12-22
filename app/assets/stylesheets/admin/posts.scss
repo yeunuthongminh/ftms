@@ -1,0 +1,191 @@
+@import "variables";
+@import "mixin";
+
+#posts{
+  @include customize-scrollbar;
+
+  $width_fixedtitle: 506px;
+  .fixedTable-body .tcell{
+    padding: 4px 5px;
+  }
+  
+  #loading{
+    position: absolute;
+    width: 28px;
+    top: 133px;
+    right: 50px;
+    display: none;
+  }
+
+  .fixedTable-body {
+    height: auto;
+  }
+
+  .fixedTitle, .fixedTable-sidebar, #parent, #child {
+    width: $width_fixedtitle;
+  }
+  .fixedTitle{
+    max-height: 31px;
+    min-height: 31px;
+  }
+  .fixedTable-header{
+    max-height: 31px;
+    min-height: 31px;
+  }
+  .scrollbar{
+    top: 30px;
+  }
+
+  .scrollbarH {
+    margin-left: $width_fixedtitle;
+  }
+  
+  .trow.header{
+    height: 69px;
+  }
+
+  .fixedTitle, .fixedTable-header {
+    max-height: 35px;
+    min-height: 35px;
+  }
+
+  .tcell {
+    height: 35px;
+    &.stt {
+      min-width: 35px;
+      max-width: 35px;
+    }
+
+    &.trainee_name {
+      text-align: left;
+      text-transform: capitalize;
+      border-left: 0;
+      @include ellipsis(170px);
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.post_title {
+      min-width: 300px;
+      max-width: 300px;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.post_views {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+    }
+
+    &.post_content {
+      min-width: 680px;
+      max-width: 680px;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.post_date{
+      text-align: center;
+      min-width: 190px;
+      max-width: 190px;
+      position: relative;
+    }
+    &.tag{
+      text-align: center;
+      min-width: 190px;
+      max-width: 190px;
+      position: relative;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    &.action{
+      text-align: center;
+      min-width: 190px;
+      max-width: 190px;
+      position: relative;
+    }
+  }
+  .main {
+    margin-top: 50px;
+    background: #FFF;
+    .heading {
+      border-bottom: 1px solid #ddd;
+      margin: 0 0 20px 0;
+      padding: 10px;
+      h1.title {
+        margin: 0;
+        text-align: left;
+      }
+    }
+  }
+  .content {
+    padding: 0;
+    min-height: 100px;
+    background: #fff;
+  }
+
+  .create-time {
+    margin-bottom: 20px;
+  }
+  .fix-title-show-post{
+    background-color: white;
+    padding: 20px;
+  }
+  .content{
+    margin-bottom: 20px;
+  }
+  .tags {
+    margin: 10px 0;
+
+    .tag {
+      border: 1px solid #DDD;
+      background: #EEE;
+      margin-right: 10px;
+      padding: 3px 5px;
+      font-size: 14px;
+    }
+  }
+  .show-post{
+    float: left; 
+  }
+  .button-delete{
+    float: right;
+    margin-top: 12px;
+  }
+  .one-post-relation{
+    width: 100%;
+    padding: 10px 0 10px 5px;
+    margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .sidebar{
+    margin-top: 50px;
+    background-color: white;
+  }
+  .root_comment{
+    padding: 10px;
+    background-color: white;
+    margin-top: 10px;
+    word-wrap: break-word;
+  }
+  .subcomment{
+    padding: 10px;
+    background-color: #f6f8f7;
+    margin-top: 5px;
+    margin-left: 50px;
+    word-wrap: break-word;
+  }
+}
