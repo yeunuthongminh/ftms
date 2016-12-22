@@ -1,4 +1,8 @@
-<li class="list-group-item finished_course">
+<li class="list-group-item finished_course tag-content nobreak">
+  <div class="main-title">
+    <h3><%= t "courses.title" %></h3>
+    <hr>
+  </div>
   <dl class="dl-horizontal">
     <dt><strong><%= t "courses.name" %></strong></dt>
     <dd><%= link_to user_course.course_name, @namespace == Settings.namespace_roles.trainee ?

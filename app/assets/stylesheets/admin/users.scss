@@ -97,7 +97,7 @@
   .timeline > li > .timeline-panel:after {
     position: absolute;
     top: 27px;
-    left: -14px;
+    left: -13px;
     display: inline-block;
     content: " ";
   }
@@ -241,5 +241,96 @@
   }
   .timeline-profile {
     margin-top: 20px;
+  }
+
+  .profile-username {
+    font-size: 21px;
+    margin-top: 13px;
+  }
+
+  ol, ul {
+    list-style: none;
+  }
+  .info_prof {
+    background-color: #fff;
+  }
+  .main-title {
+    font-family: 'open_sansextrabold',Arial,sans-serif;
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #333333;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+  .skill .title {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    left: -37px;
+    padding: 5px 25px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: 60px;
+    font-size: 20px;
+  }
+  .skill .title.dev {
+    border: 1px dashed #00b4d9;
+  }
+
+  .progress {
+    background-color: #888888;
+  }
+
+  .personal-skill {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-top: 25px;
+  }
+
+  .tag-content {
+    margin-top: 25px;
+  }
+
+  .progress.xs, .progress-xs {
+    height: 10px;
+  }
+
+  .advantage {
+    font-weight: 600;
+    padding: 5px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 4px;
+    background-color: #00a65a !important;
+    color: white;
+  }
+
+  .img-custom {
+    margin: 0 auto;
+    width: auto;
+    padding: 3px;
+    border: 3px solid #d2d6de;
+  }
+
+  .icon-profile {
+    color: #e53f51;
+  }
+
+  .disadvantage {
+    font-weight: 600;
+    padding: 5px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 4px;
+    background-color: #dd4b39 !important;
+    color: white;
+  }
+  .bar-width {
+    width: 55%
   }
 }

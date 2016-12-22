@@ -1,0 +1,36 @@
+<% provide :title, @user.name %>
+<div class="row user-profile" id="users">
+  <section class="content">
+    <div class="row">
+      <div class="col-md-3">
+        <%= render "export_file/pdfs/profile" %>
+      </div>
+      <div class="col-md-9">
+        <%= render "export_file/pdfs/info" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-10">
+        <%= render "export_file/pdfs/personal_skill" %>
+      </div>
+      <div class="col-md-1">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <%= render "export_file/pdfs/timeline" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-10">
+        <%= render "export_file/pdfs/trainer_note" %>
+      </div>
+      <div class="col-md-1">
+      </div>
+    </div>
+  </section>
+</div>
