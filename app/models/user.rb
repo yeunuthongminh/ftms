@@ -129,7 +129,7 @@ class User < ApplicationRecord
       if current_role.present?
         current_role.include? eval("Settings.namespace_roles.#{trainee_type}")
       else
-        check_role eval("Role.role_types[:#{trainee_type}]")
+        self.has_role? trainee_type
       end
     end
   end
@@ -151,20 +151,12 @@ class User < ApplicationRecord
   end
 
   def has_function? controller, action, role
-    if self.is_trainee?
+    if self.has_role? role
       functions.has_function(controller, action).any?
-    else
-      if self.role_type_avaiable.include? role
-        functions.has_function(controller, action).any?
-      end
     end
   end
 
   private
-  def check_role role_type
-    roles.exists? role_type: role_type
-  end
-
   def set_password
     if new_record?
       self.password = Settings.default_password

@@ -136,8 +136,8 @@ Rails.application.routes.draw do
     resources :courses, only: :create
   end
 
-  namespace :change do
-    resources :roles, only: [:index, :create]
+  namespace :change_role do
+    resources :users, only: [:edit]
   end
 
   namespace :export_file do

@@ -8,7 +8,7 @@ namespace :db do
     if File.exists?(File.expand_path path)
       puts "Restore user_task's status from file"
       str = File.read path
-      content = JSON.load srt
+      content = JSON.load str
       content.each do |user_task|
         task = UserTask.find_by id: user_task[0]
         status = case user_task[1]

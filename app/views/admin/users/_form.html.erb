@@ -13,9 +13,9 @@
           <%= f.text_field :email, class: "form-control" %>
         </div>
 
-        <% if policy change_roles_path @user %>
+        <% if policy edit_change_role_user_path @user %>
           <%= link_to t("user.edit_role"),
-            change_roles_path(@user) unless @user.new_record? %>
+            edit_change_role_user_path(@user) unless @user.new_record? %>
         <% end %>
         <% if policy edit_admin_user_path @user %>
           <div class="form-group">

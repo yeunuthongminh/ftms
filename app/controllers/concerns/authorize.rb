@@ -10,8 +10,9 @@ module Authorize
 
   def authorize
     controller_name = page_params[:controller].split("/")
+    namespace = controller_name[0]
     authorize_with_multiple page_params,
-      "#{@namespace.classify}::#{controller_name[1].classify}Policy"
+      "#{namespace.classify}::#{controller_name[1].classify}Policy"
       .safe_constantize
   end
 

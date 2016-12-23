@@ -1,12 +1,9 @@
-class Change::RolesController < ApplicationController
+class ChangeRole::UsersController < ApplicationController
   before_action :find_user
   before_action :authorize
 
-  def index
+  def edit
     @roles = Role.all
-  end
-
-  def create
     if role_changed?
       @user.user_roles.delete_all
       @user.user_functions.delete_all
@@ -39,7 +36,7 @@ class Change::RolesController < ApplicationController
   end
 
   def find_user
-    @user = User.find_by id: params[:user_id]
+    @user = User.find_by id: params[:id]
     unless @user
       flash[:alert] = flash_message "not_find"
       back_or_root
