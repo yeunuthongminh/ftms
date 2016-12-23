@@ -16,24 +16,22 @@ class Admin::CoursesController < ApplicationController
   def new
     @course = Course.new
     @course.documents.build
+    @course_form = CourseForm.new @course
     add_breadcrumb_path "courses"
     add_breadcrumb_new "courses"
   end
 
-  def edit
-    add_breadcrumb_path "courses"
-    add_breadcrumb @course.name, :admin_course_path
-    add_breadcrumb_edit "courses"
-  end
-
   def create
     @course = Course.new course_params
-    if @course.save
+
+    course_form = CourseForm.new @course
+    if course_form.validate course_params
+      course_form.save
       flash[:success] = flash_message "created"
       redirect_to admin_course_path @course
     else
-      flash[:failed] = flash_message "not_created"
       load_data
+      flash_message[:failed] = flash_message "not_created"
       render :new
     end
   end
@@ -43,14 +41,24 @@ class Admin::CoursesController < ApplicationController
     add_breadcrumb @course.name, :admin_course_path
   end
 
+  def edit
+    @course_form = CourseForm.new @course
+    add_breadcrumb_path "courses"
+    add_breadcrumb @course.name, :admin_course_path
+    add_breadcrumb_edit "courses"
+  end
+
   def update
-    if @course.update_attributes course_params
+    course_form = CourseForm.new @course
+
+    if course_form.validate course_params
+      course_form.save
       ExpectedTrainingDateService.new(course: @course).perform
       flash[:success] = flash_message "updated"
-      redirect_to admin_course_path(@course)
+      redirect_to admin_course_path @course
     else
-      flash[:failed] = flash_message "not_updated"
       load_data
+      flash[:failed] = flash_message "not_updated"
       render :edit
     end
   end
@@ -70,8 +78,7 @@ class Admin::CoursesController < ApplicationController
   end
 
   def load_data
-    @supports ||= Supports::CourseSupport.new course: @course,
-      filter_service: load_filter
+    @supports ||= Supports::CourseSupport.new course: @course
   end
 
   def find_course_in_show
