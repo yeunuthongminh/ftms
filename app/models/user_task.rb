@@ -2,7 +2,8 @@ class UserTask < ApplicationRecord
   acts_as_paranoid
   include PublicActivity::Model
   include ChatworkApi
-  include TraineeRelation
+
+  alias_attribute :trainee, :user
 
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity",
     dependent: :destroy
@@ -10,11 +11,7 @@ class UserTask < ApplicationRecord
 
   belongs_to :task
   belongs_to :user_subject
-  belongs_to :trainee, foreign_key: :user_id
-
-  delegate :id, :name, :image_url, :description, to: :task, prefix: true, allow_nil: true
-  delegate :name, :id, to: :trainee, prefix: true, allow_nil: true
-  delegate :description, to: :task, prefix: true, allow_nil: true
+  belongs_to :user
 
   scope :user_task_of_subject_progress,
     -> {joins(:user_subject).where "user_subjects.status = ?",
@@ -25,6 +22,10 @@ class UserTask < ApplicationRecord
     course_id).order(:user_id, :user_subject_id)}
 
   enum status: [:init, :inprogress, :onhold, :complete]
+
+  delegate :id, :name, :image_url, :description, to: :task, prefix: true, allow_nil: true
+  delegate :name, :id, to: :trainee, prefix: true, allow_nil: true
+  delegate :description, to: :task, prefix: true, allow_nil: true
 
   def nil_master?
     task.task_master_id.nil?

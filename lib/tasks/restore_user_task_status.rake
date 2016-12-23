@@ -4,6 +4,7 @@ namespace :db do
   desc "Restore user_task_status"
   # Only run after remove table user_task_histories
   task restore_user_task_statuses: :environment do
+    path = "/tmp/user_task_status.txt"
     if File.exists?(File.expand_path path)
       puts "Restore user_task's status from file"
       str = File.read path

@@ -1,11 +1,12 @@
 class Exam < ApplicationRecord
   acts_as_paranoid
-  include TraineeRelation
+
+  alias_attribute :trainee, :user
 
   EXAM_ATTRIBUTES_PARAMS = [:user_subject_id, :status, :spent_time,
     results_attributes: [:id, :questions_id, :answer_id]]
 
-  belongs_to :trainee, foreign_key: :user_id
+  belongs_to :user
   belongs_to :user_subject
   belongs_to :category
 

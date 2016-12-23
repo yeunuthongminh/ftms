@@ -1,15 +1,16 @@
 class UserSubject < ApplicationRecord
   include PublicActivity::Model
-  include TraineeRelation
   include EstimateTime
   acts_as_paranoid
   include ChatworkApi
 
+  alias_attribute :trainee, :user
+
   ATTRIBUTES_PARAMS = [:start_date, :end_date]
 
-  belongs_to :trainee, foreign_key: :user_id
+  belongs_to :user
   belongs_to :course
-  belongs_to :user_course
+  belongs_to :trainee_course, foreign_key: :user_course_id
   belongs_to :course_subject
   has_many :user_tasks, dependent: :destroy
   has_many :notifications, as: :trackable, dependent: :destroy
@@ -38,7 +39,6 @@ class UserSubject < ApplicationRecord
   delegate :name, to: :trainee, prefix: true, allow_nil: true
   delegate :name, :id, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
-  delegate :name, to: :trainee, prefix: true, allow_nil: true
   delegate :link_github, :link_heroku, to: :course_subject, prefix: true,
     allow_nil: true
 
