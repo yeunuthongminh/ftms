@@ -24,14 +24,12 @@ class Course < ApplicationRecord
 
   has_many :course_subjects, dependent: :destroy
   has_many :user_courses, -> {with_deleted}, dependent: :destroy
-  has_many :trainer_courses, -> {where(user_type: 1).unscope(where: :deleted_at)}, class_name: UserCourse, dependent: :destroy
-  has_many :trainee_courses, -> {where(user_type: 2).unscope(where: :deleted_at)}, class_name: UserCourse, dependent: :destroy
-  has_many :admin_courses, -> {where(user_type: 0).unscope(where: :deleted_at)}, class_name: UserCourse, dependent: :destroy
-  has_many :user_subjects, dependent: :destroy
+  has_many :trainer_courses, -> {with_deleted}, class_name: TrainerCourse.name, dependent: :destroy
+  has_many :trainee_courses, -> {with_deleted}, class_name: TraineeCourse.name, dependent: :destroy
   has_many :trainers, through: :trainer_courses, class_name: User.name
   has_many :trainees, through: :trainee_courses, class_name: User.name
-  has_many :admins, through: :admin_courses, class_name: User.name
   has_many :subjects, through: :course_subjects
+  has_many :user_subjects, dependent: :destroy
   has_many :documents, as: :documentable
   has_many :notifications, as: :trackable, dependent: :destroy
   has_many :messages, as: :chat_room, dependent: :destroy
