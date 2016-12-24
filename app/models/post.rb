@@ -24,14 +24,17 @@ class Post < ApplicationRecord
       Date.today.last_month
     else
       Date.today.last_year
-    end
+    end.in_time_zone
     left_outer_joins(:daily_post_views).group(:id)
       .where("daily_post_views.created_at >= ?", start_date)
       .order "SUM(daily_post_views.views) DESC"
   end
+  scope :order_by_votes, ->{order cached_votes_score: :desc}
+
+  delegate :name, to: :user, prefix: true, allow_nil: true
 
   def today_post_views
-    today_post_views = self.daily_post_views.where("created_at >= ?",
-      Date.today).first || self.daily_post_views.create
+    daily_post_views.where("created_at >= ?", Date.today.in_time_zone)
+      .first || daily_post_views.create
   end
 end

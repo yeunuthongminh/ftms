@@ -3,12 +3,12 @@ $(document).on('turbolinks:load', function(){
     animation: 'slide'
   });
 
-  $('.scroll_to_section').click(function(e){
+  $(document).on('click', '.scroll_to_section', function(e){
     e.preventDefault();
     var target = $(this).data('target');
     if($(target).length > 0) {
       $('html, body').animate({
-        scrollTop: $(target).offset().top - $('#user-header').height()
+        scrollTop: $(target).offset().top - $('#user-header .navbar').height() - 20
       }, 500);
     } else {
       window.location = $(this).attr('href');

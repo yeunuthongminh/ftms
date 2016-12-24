@@ -240,3 +240,5 @@ faq:
   most_tagged_tags: 15
   truncated_characters: 160
   related_posts: 8
+  answers_per_page: 5
+  replies_per_page: 3

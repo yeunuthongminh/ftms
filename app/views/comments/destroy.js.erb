@@ -1,0 +1,7 @@
+$(".flash").html("<%= j render "layouts/flash" %>");
+<% if @comment.errors.empty? %>
+  $('<%= ".replies-#{@comment.id}" %>').slideUp('fast');
+  $('<%= ".answer-#{@comment.id}" %>').slideUp('slow');
+  $('.answers .title').html('<%= pluralize @post.comments.roots.count,\
+    t("faq.show.answer") %>');
+<% end %>

@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show, :index]
   before_action :load_post, except: [:index, :new, :create]
   before_action :load_supports, only: [:index, :show]
+  before_action :authorize_post, only: [:edit, :update, :destroy]
 
   def new
     @post = current_user.posts.build
@@ -18,10 +20,10 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post.views = @post.views + 1
+    @post.views += 1
     @post.save
     today_post_views = @post.today_post_views
-    today_post_views.views = today_post_views.views + 1
+    today_post_views.views += 1
     today_post_views.save
   end
 
@@ -56,6 +58,11 @@ class PostsController < ApplicationController
   end
 
   def load_supports
-    @supports ||= Supports::PostSupport.new params: params, post: @post
+    @supports = Supports::PostSupport.new params: params, post: @post,
+      user: current_user
+  end
+
+  def authorize_post
+    authorize_with_multiple page_params.merge(record: @post), PostPolicy
   end
 end

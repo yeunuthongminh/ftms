@@ -7,7 +7,7 @@
 <% if parts.include? "related_posts" %>
   <div class="related-posts">
     <div class="heading">
-      <h3 class="title"><%= t "faq.index.related_posts" %></h3>
+      <h3 class="title"><%= t "faq.show.related_posts" %></h3>
     </div>
     <div class="posts">
       <% @supports.related_posts.each do |post| %>
@@ -27,18 +27,20 @@
 <% end %>
 
 <% if parts.include? "most_viewed_posts" %>
-  <div class="most-viewed-posts tabs">
-    <div class="heading clearfix">
-      <div class="title pull-left"><%= t "faq.index.most_viewed" %></div>
-      <ul class="nav nav-tabs pull-right">
-        <% %w(day week month).each.with_index do |period, index| %>
-          <li class="<%= 'active' if index == 0 %>">
-            <a data-toggle="tab" href="#<%= period %>">
-              <%= t "faq.index.#{period}" %>
-            </a>
-          </li>
-        <% end %>
-      </ul>
+  <div class="most-viewed-posts">
+    <div class="tabs">
+      <div class="heading clearfix">
+        <div class="title pull-left"><%= t "faq.index.most_viewed" %></div>
+        <ul class="nav nav-tabs pull-right">
+          <% %w(day week month).each.with_index do |period, index| %>
+            <li class="<%= 'active' if index == 0 %>">
+              <a data-toggle="tab" href="#<%= period %>">
+                <%= t "faq.index.#{period}" %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
     <div class="tab-content">
       <% %w(day week month).each.with_index do |period, index| %>
@@ -70,6 +72,7 @@
     <div class="tags">
       <% @supports.most_tagged_tags.each do |tag| %>
         <%= link_to tag, "#", class: "tag" %>
+        <span class="tag-count">x<%= tag.taggings_count %></span>
       <% end %>
       <%= link_to t("faq.index.view_all"), "#", class: "tag" %>
     </div>

@@ -174,5 +174,8 @@ Rails.application.routes.draw do
   resources :exams, only: [:show, :index, :update]
   resources :calendars, only: :index
   resource :change_current_role_type, only: :update
-  resources :posts
+
+  resources :posts do
+    resources :comments
+  end
 end

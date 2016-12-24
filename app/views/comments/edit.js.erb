@@ -1,0 +1,3 @@
+$('#answer_form').html('<%= j render "comments/form", post: @post,\
+  comment: @comment, btn_new_text: t("faq.show.add_reply") %>');
+$('form', '#answer_form').find('.answer_content').focus();
