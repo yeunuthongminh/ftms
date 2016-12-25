@@ -1,0 +1,21 @@
+$(".flash").html("<%= j render "layouts/flash" %>");
+<% if @comment.errors.any? %>
+  $('#answer_form').find('#error_explanation').remove();
+  $('#answer_form').prepend('<%=j render "shared/error_messages",\
+    object: @comment %>');
+<% else %>
+  var answer = '<%= ".answer-#{@comment.id}" %>';
+  <% if @comment.root? %>
+    $(answer).replaceWith('<%= j render "comments/comment",\
+      comment: @comment, load_replies: false %>');
+  <% else %>
+    $(answer).replaceWith('<%= j render "comments/sub_comment",\
+      sub_comment: @comment %>');
+  <% end %>
+  $('#answer_form').html('<%= j render "comments/form", post: @post,\
+    comment: @supports.new_comment,\
+    btn_new_text: t("faq.show.add_answer") %>');
+  $('html, body').animate({
+    scrollTop: $(answer).offset().top - $('#user-header .navbar').height() - 20
+  }, 500);
+<% end %>

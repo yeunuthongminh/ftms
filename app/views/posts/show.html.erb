@@ -16,59 +16,93 @@
   <div class="row">
     <div class="col-md-8">
       <div class="clearfix main">
-        <div class="clearfix heading">
-          <h1 class="title"><%= @post.title.html_safe %></h1>
-        </div>
-        <div class="col-sm-2 col-xs-4 text-center padding-left-0">
-          <%= link_to @post.user, class: "user-info" do %>
-            <p class="avatar">
-              <%= avatar_user_tag @post.user, "profile-user img-circle",
-                Settings.image_size_50 %>
-            </p>
-            <p><%= @post.user.name %></p>
-          <% end %>
-          <div class="actions">
-            <% if current_user? @post.user %>
-              <%= link_to edit_post_path(@post), class: "btn btn-info",
-                title: t("buttons.edit") do %>
-                <fa class="fa fa-pencil"></fa>
-              <% end %>
-              <%= link_to post_path(@post), class: "btn btn-danger",
-                remote: true, method: :delete, title: t("buttons.delete"),
-                data: {confirm: t("messages.delete.confirm")} do %>
-                <fa class="fa fa-remove"></fa>
-              <% end %>
-            <% else %>
-              <%= link_to edit_post_path(@post), class: "btn upvote",
-                remote: true, title: t("buttons.upvote") do %>
-                <fa class="fa fa-thumbs-up"></fa>
-              <% end %>
-              <%= link_to edit_post_path(@post), class: "btn downvote",
-                remote: true, title: t("buttons.downvote") do %>
-                <fa class="fa fa-thumbs-down"></fa>
-              <% end %>
-            <% end %>
+        <div class="clearfix post-detail">
+          <div class="clearfix heading">
+            <h1 class="title"><%= @post.title.html_safe %></h1>
           </div>
-          <div class="votes">
-            <div class="count"><%= @supports.votes %></div>
-            <div>
-              <%= t("faq.show.vote").pluralize @supports.votes %>
+          <div class="col-sm-2 col-xs-4 text-center padding-left-0">
+            <%= link_to @post.user, class: "user-info" do %>
+              <p class="avatar">
+                <%= avatar_user_tag @post.user, "profile-user img-circle",
+                  Settings.image_size_50 %>
+              </p>
+              <p><%= @post.user_name %></p>
+            <% end %>
+            <div class="votes">
+              <% if user_signed_in? %>
+                <%= link_to "#", class: "btn upvote",
+                  remote: true, title: t("buttons.upvote") do %>
+                  <fa class="fa fa-thumbs-up"></fa>
+                <% end %>
+                <%= link_to "#", class: "btn downvote",
+                  remote: true, title: t("buttons.downvote") do %>
+                  <fa class="fa fa-thumbs-down"></fa>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="vote-count">
+              <span class="count"><%= @post.cached_votes_score %></span>
+              <%= t("faq.show.vote").pluralize @post.cached_votes_score %>
+            </div>
+          </div>
+          <div class="col-sm-10 col-xs-8 padding-left-0">
+            <div class="content">
+              <%= @post.content.html_safe %>
+            </div>
+            <div class="tags">
+              <% @post.tag_list.each do |tag| %>
+                <%= link_to tag, "#", class: "tag" %>
+              <% end %>
+            </div>
+            <div class="clearfix bottom">
+              <% if user_signed_in? %>
+                <div class="actions">
+                  <% if current_user? @post.user %>
+                    <%= link_to t("buttons.edit"), edit_post_path(@post) %>
+                  <% end %>
+                  <% if current_user?(@post.user) || current_user.is_admin? %>
+                    <%= link_to t("buttons.delete"), @post,
+                      remote: true, method: :delete,
+                      data: {confirm: t("messages.delete.confirm")} %>
+                  <% end %>
+                </div>
+              <% end %>
+              <div class="create-time">
+                <%= t "faq.index.time_ago",
+                  time: time_ago_in_words(@post.created_at) %>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-sm-10 col-xs-8 padding-left-0">
-          <div class="content">
-            <%= @post.content.html_safe %>
+      </div>
+      <div class="answer_section">
+        <div class="answers">
+          <div class="title">
+            <%= pluralize @post.comments.roots.count, t("faq.show.answer") %>
           </div>
-          <div class="tags">
-            <% @post.tag_list.each do |tag| %>
-              <%= link_to tag, "#", class: "tag" %>
-            <% end %>
+          <div class="all_answers">
+            <%= render @supports.load_answers, load_replies: true %>
           </div>
-          <div class="create-time">
-            <%= t "faq.index.time_ago",
-              time: time_ago_in_words(@post.created_at) %>
-          </div>
+          <% if @post.comments.roots.count > Settings.faq.answers_per_page %>
+            <div class="col-sm-12 load_more_answers">
+              <%= link_to t("faq.show.load_more_answers"),
+                post_comments_path(@post, page: 2), remote: true %>
+            </div>
+          <% end %>
+        </div>
+        <div id="add_answer">
+          <h3 class="title"><%= t "faq.show.add_answer" %></h3>
+          <% if user_signed_in? %>
+            <div id="answer_form">
+              <%= render "comments/form", post: @post,
+                comment: @supports.new_comment,
+                btn_new_text: t("faq.show.add_answer") %>
+            </div>
+          <% else %>
+            <div class="alert-box alert-warning">
+              <%= t "faq.show.sign_in_to_answer" %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

@@ -1,0 +1,30 @@
+<div class="clearfix answer answer-<%= sub_comment.id %> reply">
+  <div class="col-sm-10 padding-left-0 col-sm-offset-2">
+    <div class="content">
+      <%= sub_comment.content.html_safe %>
+    </div>
+    <div class="clearfix bottom">
+      <% if user_signed_in? %>
+        <div class="actions">
+          <% if current_user? sub_comment.user %>
+            <%= link_to t("buttons.edit"),
+              edit_post_comment_path(@post, sub_comment),
+              class: "scroll_to_section", data: {target: "#add_answer"},
+              remote: true %>
+          <% end %>
+          <% if current_user?(sub_comment.user) || current_user.is_admin? %>
+            <%= link_to t("buttons.delete"),
+              post_comment_path(@post, sub_comment),
+              remote: true, method: :delete,
+              data: {confirm: t("messages.delete.confirm")} %>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="create-time">
+        <%= t "faq.index.time_ago",
+          time: time_ago_in_words(sub_comment.created_at) %> -
+        <%= link_to sub_comment.user_name, sub_comment.user %>
+      </div>
+    </div>
+  </div>
+</div>

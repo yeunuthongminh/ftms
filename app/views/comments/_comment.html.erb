@@ -1,0 +1,73 @@
+<div class="clearfix answer answer-<%= comment.id %>">
+  <div class="col-sm-2  text-center padding-left-0">
+    <% if user_signed_in? %>
+      <div class="votes">
+        <%= link_to "#", class: "btn upvote",
+          remote: true, title: t("buttons.upvote") do %>
+          <fa class="fa fa-thumbs-up"></fa>
+        <% end %>
+        <%= link_to "#", class: "btn downvote",
+          remote: true, title: t("buttons.downvote") do %>
+          <fa class="fa fa-thumbs-down"></fa>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="vote-count">
+      <span class="count"><%= comment.cached_votes_score %></span>
+      <%= t("faq.show.vote").pluralize comment.cached_votes_score %>
+    </div>
+  </div>
+  <div class="col-sm-10 padding-left-0">
+    <div class="user-info">
+      <%= link_to comment.user, class: "avatar" do %>
+        <%= avatar_user_tag comment.user, "profile-user img-circle",
+          Settings.image_size_40 %>
+        <%= comment.user_name %>
+      <% end %>
+    </div>
+    <div class="content">
+      <%= comment.content.html_safe %>
+    </div>
+    <div class="clearfix bottom">
+      <% if user_signed_in? %>
+        <div class="actions">
+          <%= link_to t("faq.show.reply"),
+            new_post_comment_path(@post, parent_id: comment.id),
+            class: "scroll_to_section", remote: true,
+            data: {target: ".replies-#{comment.id} form"} %>
+          <% if current_user? comment.user %>
+            <%= link_to t("buttons.edit"),
+              edit_post_comment_path(@post, comment),
+              class: "scroll_to_section", data: {target: "#add_answer"},
+              remote: true %>
+          <% end %>
+          <% if current_user?(comment.user) || current_user.is_admin? %>
+            <%= link_to t("buttons.delete"), post_comment_path(@post, comment),
+              remote: true, method: :delete,
+              data: {confirm: t("messages.delete.confirm")} %>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="create-time">
+        <%= t "faq.index.time_ago",
+          time: time_ago_in_words(comment.created_at) %>
+      </div>
+    </div>
+  </div>
+</div>
+<% if load_replies %>
+  <div class="clearfix replies replies-<%= comment.id %>">
+    <%= render partial: "comments/sub_comment",
+      collection: @supports.load_replies(comment) %>
+    <% if comment.children.count > Settings.faq.replies_per_page %>
+      <div class="col-sm-12 load_more_replies text-center">
+        <%= link_to t("faq.show.load_more_replies"),
+          post_comments_path(@post, page: 2, comment_id: comment.id),
+          remote: true %>
+      </div>
+    <% end %>
+    <div class="col-sm-10 col-sm-offset-2 padding-left-0">
+      <form></form>
+    </div>
+  </div>
+<% end %>

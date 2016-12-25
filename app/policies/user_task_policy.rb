@@ -2,10 +2,10 @@ class UserTaskPolicy < ApplicationPolicy
   include PolicyObject
 
   def destroy?
-    @user = @record.trainee
+    @user == @record.trainee
   end
 
   def update?
-    @user = @record.trainee
+    @user == @record.trainee
   end
 end

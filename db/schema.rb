@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222110352) do
+ActiveRecord::Schema.define(version: 20161223102635) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -66,13 +66,36 @@ ActiveRecord::Schema.define(version: 20161222110352) do
     t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
 
+  create_table "comment_hierarchies", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "ancestor_id",   null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations",   null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "comment_anc_desc_idx", unique: true, using: :btree
+    t.index ["descendant_id"], name: "comment_desc_idx", using: :btree
+  end
+
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text     "content",    limit: 65535
+    t.text     "content",                 limit: 65535
     t.integer  "user_id"
     t.integer  "post_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.integer  "parent_id"
+    t.integer  "cached_votes_total",                    default: 0
+    t.integer  "cached_votes_score",                    default: 0
+    t.integer  "cached_votes_up",                       default: 0
+    t.integer  "cached_votes_down",                     default: 0
+    t.integer  "cached_weighted_score",                 default: 0
+    t.integer  "cached_weighted_total",                 default: 0
+    t.float    "cached_weighted_average", limit: 24,    default: 0.0
+    t.index ["cached_votes_down"], name: "index_comments_on_cached_votes_down", using: :btree
+    t.index ["cached_votes_score"], name: "index_comments_on_cached_votes_score", using: :btree
+    t.index ["cached_votes_total"], name: "index_comments_on_cached_votes_total", using: :btree
+    t.index ["cached_votes_up"], name: "index_comments_on_cached_votes_up", using: :btree
+    t.index ["cached_weighted_average"], name: "index_comments_on_cached_weighted_average", using: :btree
+    t.index ["cached_weighted_score"], name: "index_comments_on_cached_weighted_score", using: :btree
+    t.index ["cached_weighted_total"], name: "index_comments_on_cached_weighted_total", using: :btree
     t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
@@ -166,15 +189,23 @@ ActiveRecord::Schema.define(version: 20161222110352) do
     t.index ["user_id"], name: "index_evaluation_check_lists_on_user_id", using: :btree
   end
 
+  create_table "evaluation_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evaluation_groups_on_deleted_at", using: :btree
+  end
+
   create_table "evaluation_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "evaluation_standard_id"
-    t.integer  "evaluation_template_id"
+    t.integer  "evaluation_group_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_evaluation_items_on_deleted_at", using: :btree
+    t.index ["evaluation_group_id"], name: "index_evaluation_items_on_evaluation_group_id", using: :btree
     t.index ["evaluation_standard_id"], name: "index_evaluation_items_on_evaluation_standard_id", using: :btree
-    t.index ["evaluation_template_id"], name: "index_evaluation_items_on_evaluation_template_id", using: :btree
   end
 
   create_table "evaluation_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -186,14 +217,6 @@ ActiveRecord::Schema.define(version: 20161222110352) do
     t.datetime "updated_at",            null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_evaluation_standards_on_deleted_at", using: :btree
-  end
-
-  create_table "evaluation_templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_evaluation_templates_on_deleted_at", using: :btree
   end
 
   create_table "exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -304,12 +327,26 @@ ActiveRecord::Schema.define(version: 20161222110352) do
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
-    t.text     "content",    limit: 65535
-    t.integer  "views",                    default: 0
+    t.text     "content",                 limit: 65535
+    t.integer  "views",                                 default: 0
     t.integer  "user_id"
     t.datetime "deleted_at"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.integer  "cached_votes_total",                    default: 0
+    t.integer  "cached_votes_score",                    default: 0
+    t.integer  "cached_votes_up",                       default: 0
+    t.integer  "cached_votes_down",                     default: 0
+    t.integer  "cached_weighted_score",                 default: 0
+    t.integer  "cached_weighted_total",                 default: 0
+    t.float    "cached_weighted_average", limit: 24,    default: 0.0
+    t.index ["cached_votes_down"], name: "index_posts_on_cached_votes_down", using: :btree
+    t.index ["cached_votes_score"], name: "index_posts_on_cached_votes_score", using: :btree
+    t.index ["cached_votes_total"], name: "index_posts_on_cached_votes_total", using: :btree
+    t.index ["cached_votes_up"], name: "index_posts_on_cached_votes_up", using: :btree
+    t.index ["cached_weighted_average"], name: "index_posts_on_cached_weighted_average", using: :btree
+    t.index ["cached_weighted_score"], name: "index_posts_on_cached_weighted_score", using: :btree
+    t.index ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
@@ -734,8 +771,8 @@ ActiveRecord::Schema.define(version: 20161222110352) do
   add_foreign_key "evaluation_check_lists", "evaluation_standards"
   add_foreign_key "evaluation_check_lists", "trainee_evaluations"
   add_foreign_key "evaluation_check_lists", "users"
+  add_foreign_key "evaluation_items", "evaluation_groups"
   add_foreign_key "evaluation_items", "evaluation_standards"
-  add_foreign_key "evaluation_items", "evaluation_templates"
   add_foreign_key "exams", "categories"
   add_foreign_key "exams", "user_subjects"
   add_foreign_key "exams", "users"
