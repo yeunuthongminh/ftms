@@ -30,8 +30,8 @@ class ExamPresenter < ActionView::Base
   def sidebar_item exam, index
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{exam.id}\">
       <div class=\"tcell stt\">#</div>
-      <div class=\"tcell name user_name\" title=\"#{exam.trainee_name}\">
-      #{link_to exam.trainee_name, eval("#{@namespace}_user_path(exam.trainee)")}
+      <div class=\"tcell name user_name\" title=\"#{exam.user_name}\">
+      #{link_to exam.user_name, eval("#{@namespace}_user_path(exam.trainee)")}
       </div>
     </div>"
   end

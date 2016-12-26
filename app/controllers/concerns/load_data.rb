@@ -17,14 +17,6 @@ module LoadData
     end
   end
 
-  def load_course_subject
-    @course_subject = CourseSubject.find_by id: params[:id]
-    if @course_subject.nil?
-      flash[:alert] = flash_message "not_find"
-      redirect_to @course
-    end
-  end
-
   def back_or_root
     redirect_to :back
   rescue ActionController::RedirectBackError
