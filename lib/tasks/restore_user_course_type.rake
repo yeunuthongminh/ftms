@@ -11,7 +11,7 @@ namespace :db do
       content = JSON.load str
       content.each do |arr|
         user_course = UserCourse.find_by id: arr[0]
-        user_course.update_attributes type: arr[1] == 2 ? "TraineeCourse" : "TrainerCourse"
+        user_course.try :update_attributes, type: arr[1] == 2 ? "TraineeCourse" : "TrainerCourse"
       end
     else
       puts "File could not found!"

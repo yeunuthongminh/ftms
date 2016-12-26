@@ -1,6 +1,8 @@
 class Location < ApplicationRecord
   acts_as_paranoid
 
+  ATTRIBUTE_PARAMS = [:name, :user_id]
+
   belongs_to :manager, class_name: User.name, foreign_key: :user_id
 
   has_many :profiles
@@ -13,8 +15,6 @@ class Location < ApplicationRecord
   after_save :update_user_location
 
   delegate :name, to: :manager, prefix: true, allow_nil: true
-
-  ATTRIBUTE_PARAMS = [:name, :user_id]
 
   private
   def update_user_location

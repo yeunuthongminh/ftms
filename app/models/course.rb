@@ -17,22 +17,21 @@ class Course < ApplicationRecord
   belongs_to :program
 
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
-
-  validate :check_end_date, on: [:create, :update]
-  validates :name, presence: true
-  validates :language_id, presence: true
-
   has_many :course_subjects, dependent: :destroy
   has_many :user_courses, -> {with_deleted}, dependent: :destroy
-  has_many :trainer_courses, -> {with_deleted}, class_name: TrainerCourse.name, dependent: :destroy
+  has_many :trainer_courses, -> {with_deleted}, dependent: :destroy
+  has_many :trainee_courses, -> {with_deleted}, dependent: :destroy
   has_many :trainers, through: :trainer_courses, source: :user
-  has_many :trainee_courses, -> {with_deleted}, class_name: TraineeCourse.name, dependent: :destroy
   has_many :trainees, through: :trainee_courses, source: :user
   has_many :subjects, through: :course_subjects
   has_many :user_subjects, dependent: :destroy
   has_many :documents, as: :documentable
   has_many :notifications, as: :trackable, dependent: :destroy
   has_many :messages, as: :chat_room, dependent: :destroy
+
+  validate :check_end_date, on: [:create, :update]
+  validates :name, presence: true
+  validates :language_id, presence: true
 
   scope :recent, ->{order created_at: :desc}
   scope :active_course, ->{where status: "progress"}

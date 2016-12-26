@@ -2,7 +2,6 @@ class CourseSubject < ApplicationRecord
   acts_as_paranoid
 
   include PublicActivity::Model
-  include InitUserSubject
   include RankedModel
 
   mount_uploader :image, ImageUploader
@@ -14,17 +13,15 @@ class CourseSubject < ApplicationRecord
 
   belongs_to :subject
   belongs_to :course
-
   belongs_to :project
+
   has_many :user_subjects, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
   has_many :course_subject_requirements, dependent: :destroy
   has_many :project_requirements, through: :course_subject_requirement
 
-  after_create :create_tasks
-  after_create :create_user_subjects_when_add_new_subject
-  after_create :update_subject_course
+  after_create :init_objects
 
   accepts_nested_attributes_for :course_subject_requirements, allow_destroy: true
   accepts_nested_attributes_for :tasks, allow_destroy: true,
@@ -44,11 +41,10 @@ class CourseSubject < ApplicationRecord
   ranks :row_order, with_same: :course_id
 
   def finished?
-    status = true
-    self.user_subjects.each do |user_subject|
-      return status = false
+    user_subjects.each do |user_subject|
+      return false
     end
-    status
+    true
   end
 
   def update_project_assign project_params
@@ -63,22 +59,8 @@ class CourseSubject < ApplicationRecord
   end
 
   private
-  def update_subject_course
-    self.update_attributes subject_name: subject.name,
-      subject_description: subject.description,
-      subject_content: subject.content, image: subject.image
-  end
-
-  def create_user_subjects_when_add_new_subject
-    trainee_role = Role.find_by name: "trainee"
-    create_user_subjects course.user_courses.find_user_by_role(trainee_role.id),
-      [self], course_id
-  end
-
-  def create_tasks
-    subject.task_masters.each do |task_master|
-      Task.create course_subject_id: id, name: task_master.name,
-        description: task_master.description, task_master_id: task_master.id
-    end
+  def init_objects
+    init_objects_service = SubjectServices::InitCourseSubjectService.new self
+    init_objects_service.perform
   end
 end

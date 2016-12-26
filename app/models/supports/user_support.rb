@@ -11,7 +11,7 @@ class Supports::UserSupport
   end
 
   def user_courses
-    @user_courses ||= @user.user_courses.includes(user_subjects: [:course,
+    @user_courses ||= @user.trainee_courses.includes(user_subjects: [:course,
       :trainee_evaluations, :exams, {user_tasks: :task}, course_subject: :subject])
   end
 

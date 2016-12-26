@@ -54,7 +54,7 @@ Rails.application.routes.draw do
       resources :project_requirements, except: [:new, :edit, :show], defaults: {format: :json}
     end
     resources :questions, except: :show
-    resources :exams, only: :index
+    resources :exams, only: [:index, :show]
     resources :statistics, only: [:index, :create]
     resources :stages
     resources :programs, except: :destroy
