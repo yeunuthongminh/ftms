@@ -1,4 +1,4 @@
-class Supports::SubjectTrainee
+class Supports::SubjectTraineeSupport
   attr_reader :subject, :args
 
   def initialize args
@@ -8,8 +8,7 @@ class Supports::SubjectTrainee
 
   def course_subject
     @course_subject ||= CourseSubject.includes(
-      user_subjects: [:user_course, :course, user_tasks: [:task, :trainee,
-      :user_subject]])
+      user_subjects: [:trainee_course, :course])
       .find_by course_id: user_course.course_id, subject_id: @subject.id
   end
 
@@ -47,7 +46,7 @@ class Supports::SubjectTrainee
   end
 
   def user_tasks
-    @user_tasks ||= user_subject.user_tasks
+    @user_tasks ||= user_subject.user_tasks.includes :task, :user, :user_subject
   end
 
   def task_statuses
@@ -63,7 +62,7 @@ class Supports::SubjectTrainee
   end
 
   def user_course
-    @user_course ||= UserCourse.includes(:trainee).find_by id: @user_course_id
+    @user_course ||= UserCourse.includes(:user).find_by id: @user_course_id
   end
 
   UserTask.statuses.each do |key, value|
@@ -76,9 +75,9 @@ class Supports::SubjectTrainee
     unless user_subject.init?
       @user_tasks_chart_data = {}
 
-      course_subject.user_subjects.includes(:trainee, :user_course)
+      course_subject.user_subjects.includes(:user, :trainee_course)
         .each do |user_subject|
-        @user_tasks_chart_data[user_subject.trainee.name] = user_subject.user_tasks
+        @user_tasks_chart_data[user_subject.user_name] = user_subject.user_tasks
           .complete.size
       end
       @user_tasks_chart_data

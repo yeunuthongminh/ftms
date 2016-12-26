@@ -37,7 +37,7 @@ class UserTasksController < ApplicationController
 
   private
   def load_data
-    @subject_supports = Supports::SubjectTrainee.new subject: @user_task
+    @subject_supports = Supports::SubjectTraineeSupport.new subject: @user_task
       .user_subject.subject, user_course_id: @user_task.user_subject
       .user_course_id
   end
