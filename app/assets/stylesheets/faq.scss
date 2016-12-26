@@ -1,6 +1,8 @@
 #faq {
   margin: 20px 0;
-
+  .quote {
+    word-wrap: break-word;
+  }
   .search {
     margin-bottom: 20px;
     input.form-control {
