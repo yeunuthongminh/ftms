@@ -243,3 +243,7 @@ faq:
   answers_per_page: 5
   replies_per_page: 3
   tags_per_page: 10
+user_functions:
+  - admin
+  - trainer
+  - trainee

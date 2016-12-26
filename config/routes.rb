@@ -134,7 +134,7 @@ Rails.application.routes.draw do
   end
 
   namespace :change_role do
-    resources :users, only: [:edit]
+    resources :users, only: [:edit, :update]
   end
 
   namespace :export_file do

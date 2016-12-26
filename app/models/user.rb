@@ -98,6 +98,7 @@ class User < ApplicationRecord
   before_validation :set_password
 
   accepts_nested_attributes_for :profile
+  accepts_nested_attributes_for :user_functions, allow_destroy: true
 
   delegate :id, :name, to: :role, prefix: true, allow_nil: true
   delegate :location_id, to: :profile, prefix: true, allow_nil: true
@@ -143,8 +144,9 @@ class User < ApplicationRecord
     self.roles.order(:role_type).map(&:role_type).uniq
   end
 
-  def has_role? role_name
-    self.roles.map(&:name).include? role_name
+  def has_role? role
+    role = Role.find_by name: role
+    self.role_type_avaiable.include? role
   end
 
   def has_function? controller, action, role

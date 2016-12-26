@@ -1,0 +1,58 @@
+@import "variables";
+@import "mixin";
+
+#change_function {
+  @include customize-scrollbar;
+
+  .fixedTable-body {
+    height: auto;
+  }
+
+  .form-control {
+    padding: 0;
+  }
+
+  select {
+    text-indent: 0px;
+  }
+
+  .fixedTitle, .fixedTable-sidebar, #parent, #child{
+    width: 500px;
+  }
+
+  .scrollbar {
+    top: 30px;
+  }
+
+  .fixedTitle, .fixedTable-header {
+    max-height: 31px;
+    min-height: 31px;
+    height: 31px;
+  }
+
+  .tcell {
+    &.stt {
+      min-width: 35px;
+      max-width: 35px;
+    }
+
+    &.controller_name {
+      min-width: 465px;
+      max-width: 465px;
+      position: relative;
+      height: 31px;
+    }
+
+    &.checked-function {
+      max-width: 300px;
+      min-width: 300px;
+      height: 31px;
+    }
+
+    &.none {
+      display: table-cell;
+      border-right: none;
+      border-top: 2px solid #ccc;
+    }
+  }
+}

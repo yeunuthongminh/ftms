@@ -89,6 +89,7 @@
 //= require faq
 //= require task
 //= require likes
+//= require assign_user_function
 
 $(document).on('turbolinks:load ajaxComplete', function() {
   $('.alert').delay(3000).fadeOut();
