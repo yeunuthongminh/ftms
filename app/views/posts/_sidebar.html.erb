@@ -71,7 +71,7 @@
     </div>
     <div class="tags">
       <% @supports.most_tagged_tags.each do |tag| %>
-        <%= link_to tag, "#", class: "tag" %>
+        <%= link_to tag, tag, class: "tag" %>
         <span class="tag-count">x<%= tag.taggings_count %></span>
       <% end %>
       <%= link_to t("faq.index.view_all"), "#", class: "tag" %>
