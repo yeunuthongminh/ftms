@@ -12,7 +12,7 @@ class Program < ApplicationRecord
 
   delegate :name, to: :parent, prefix: true, allow_nil: true
 
-  enum program_type: ["open_education", "internal_education", "university"]
+  enum program_type: [:open_education, :internal_education, :university]
 
   accepts_nested_attributes_for :trainer_programs, allow_destroy: true
 end

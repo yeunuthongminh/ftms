@@ -30,7 +30,7 @@
               </div>
             <% end %>
             <div class="col-xs-2 info-panel">
-              <% course_subject.user_subjects.progress.includes(:trainee)
+              <% course_subject.user_subjects.progress.includes(:user)
                 .each.with_index 1 do |user_subject, index| %>
                 <% if index <= Settings.number_member_show %>
                   <div class="col-xs-6">

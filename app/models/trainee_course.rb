@@ -7,6 +7,8 @@ class TraineeCourse < UserCourse
 
   after_create :init_user_subjects
 
+  delegate :name, to: :trainee, prefix: true, allow_nil: true
+
   private
   def init_user_subjects
     create_user_subjects [self], course.course_subjects, course_id

@@ -19,7 +19,7 @@ namespace :db do
           else
             0
           end
-        task.update_attributes status: status
+        task.try :update_attributes, status: status
       end
     else
       puts "File could not found!"
