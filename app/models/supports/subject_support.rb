@@ -7,7 +7,7 @@ class Supports::SubjectSupport
   end
 
   def course_subject
-    @course_subject ||= course.course_subjects.find do |course_subject|
+    @course_subject ||= course.course_subjects.includes(:project).find do |course_subject|
       course_subject.subject_id == @subject.id
     end
   end
@@ -25,7 +25,7 @@ class Supports::SubjectSupport
   end
 
   def user_subjects
-    @user_subjects ||= course_subject.user_subjects
+    @user_subjects ||= course_subject.user_subjects.includes :user
   end
 
   def user_subjects_not_finishs
@@ -45,8 +45,7 @@ class Supports::SubjectSupport
   end
 
   def course
-    @course ||= Course.includes(course_subjects: :user_subjects)
-      .find_by id: @course_id
+    @course ||= Course.find_by id: @course_id
   end
 
   def statuses

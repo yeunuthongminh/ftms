@@ -5,8 +5,7 @@ class Admin::ExamsController < ApplicationController
 
   def index
     add_breadcrumb_index "exams"
-    @exams = Exam.finish
-      .includes :user, user_subject: [course_subject: :subject]
+    @exams = Exam.finish.includes :user, user_subject: [:course, course_subject: :subject]
     @filter_data_user = @filter_service.user_filter_data
     @exam_presenters = ExamPresenter.new(@exams, @namespace).render
   end

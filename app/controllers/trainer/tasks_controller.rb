@@ -58,11 +58,6 @@ class Trainer::TasksController < ApplicationController
     params.require(:task).permit Task::ATTRIBUTES_PARAMS
   end
 
-  def load_course_subject
-    @course_subject = CourseSubject.find_by id: params[:course_subject_id]
-    redirect_if_object_nil @course_subject
-  end
-
   def load_task
     @task = Task.find_by id: params[:id]
     redirect_if_object_nil @task
