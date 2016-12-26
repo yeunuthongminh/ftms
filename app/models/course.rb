@@ -25,9 +25,9 @@ class Course < ApplicationRecord
   has_many :course_subjects, dependent: :destroy
   has_many :user_courses, -> {with_deleted}, dependent: :destroy
   has_many :trainer_courses, -> {with_deleted}, class_name: TrainerCourse.name, dependent: :destroy
+  has_many :trainers, through: :trainer_courses, source: :user
   has_many :trainee_courses, -> {with_deleted}, class_name: TraineeCourse.name, dependent: :destroy
-  has_many :trainers, through: :trainer_courses, class_name: User.name
-  has_many :trainees, through: :trainee_courses, class_name: User.name
+  has_many :trainees, through: :trainee_courses, source: :user
   has_many :subjects, through: :course_subjects
   has_many :user_subjects, dependent: :destroy
   has_many :documents, as: :documentable

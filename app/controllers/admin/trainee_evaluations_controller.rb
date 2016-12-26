@@ -13,8 +13,8 @@ class Admin::TraineeEvaluationsController < ApplicationController
 
   def new
     add_breadcrumb_path "trainee_evaluations"
-    add_breadcrumb @supports.targetable.trainee_name,
-      [:admin, @supports.targetable.trainee]
+    add_breadcrumb @supports.targetable.user_name,
+      [:admin, @supports.targetable.user]
     add_breadcrumb_new "trainee_evaluations"
     render json: @supports.evaluation_template.evaluation_standards if
       params[:evaluation_template_id]
@@ -34,8 +34,8 @@ class Admin::TraineeEvaluationsController < ApplicationController
 
   def edit
     add_breadcrumb_path "trainee_evaluations"
-    add_breadcrumb @supports.targetable.trainee_name,
-      [:admin, @supports.targetable.trainee]
+    add_breadcrumb @supports.targetable.user_name,
+      [:admin, @supports.targetable.user]
     add_breadcrumb_edit "trainee_evaluations"
     render json: @supports.evaluation_template.evaluation_standards if
       params[:evaluation_template_id]
@@ -62,7 +62,7 @@ class Admin::TraineeEvaluationsController < ApplicationController
     targetable = if params[:user_subject_id]
       UserSubject.find_by id: params[:user_subject_id]
     else
-      UserCourse.find_by id: params[:user_course_id]
+      TraineeCourse.find_by id: params[:user_course_id]
     end
     if targetable
       @trainee_evaluation ||= TraineeEvaluation.new
@@ -85,7 +85,7 @@ class Admin::TraineeEvaluationsController < ApplicationController
   end
 
   def check_trainee_evaluation
-    trainee_evaluation = TraineeEvaluation.find_by trainee_id: @supports
+    trainee_evaluation = TraineeEvaluation.find_by user_id: @supports
       .targetable.user_id, targetable: @supports.targetable
     if trainee_evaluation
       flash[:alert] = flash_message "has_exist"

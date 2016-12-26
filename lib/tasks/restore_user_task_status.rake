@@ -12,9 +12,9 @@ namespace :db do
       content.each do |user_task|
         task = UserTask.find_by id: user_task[0]
         status = case user_task[1]
-          when "continue"
+          when 1
             2
-          when "finish"
+          when 2
             3
           else
             0

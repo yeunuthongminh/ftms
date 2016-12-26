@@ -3,7 +3,7 @@
     <%= link_to t("buttons.finish"), [@namespace.to_sym, user_course, status: :finish],
       remote: true, method: :patch, title: t("courses.finish_course"),
       data: {confirm: t("user_courses.finish_confirm",
-      name: user_course.trainee_name)}, class: "btn btn-danger btn-xs" %>
+      name: user_course.user_name)}, class: "btn btn-danger btn-xs" %>
   <% elsif user_course.finish? %>
     <div class="btn-xs <%= set_background_color_status user_course.status %>"
       title="<%= t 'buttons.finished' %>">

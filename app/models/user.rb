@@ -59,6 +59,7 @@ class User < ApplicationRecord
   has_many :user_courses
   has_many :comments, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :trainee_evaluations, dependent: :destroy
 
   has_many :active_note, class_name: Note.name, foreign_key: :author_id
   has_many :passive_note, class_name: Note.name, foreign_key: :user_id

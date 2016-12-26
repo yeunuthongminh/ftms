@@ -33,9 +33,9 @@ class TraineeEvaluationPresenter < ActionView::Base
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{trainee_evaluation.id}\">
       <div class=\"tcell stt\">#</div>
       <div class=\"tcell name trainee_name\"
-        title=\"#{trainee_evaluation.trainee_name}\">
-        #{link_to trainee_evaluation.trainee_name,
-          eval("#{@namespace}_user_path(trainee_evaluation.trainee)")}
+        title=\"#{trainee_evaluation.user_name}\">
+        #{link_to trainee_evaluation.user_name,
+          eval("#{@namespace}_user_path(trainee_evaluation.user)")}
       </div>
     </div>
     "
@@ -46,7 +46,7 @@ class TraineeEvaluationPresenter < ActionView::Base
       id=\"body-row-#{trainee_evaluation.id}\">
       <div class=\"tcell course_name\"
         title=\"#{trainee_evaluation.targetable.course_name if
-        trainee_evaluation.targetable_type == UserCourse.name}\">
+        trainee_evaluation.targetable_type == TraineeCourse.name}\">
         #{link_to_course trainee_evaluation}
       </div>
       <div class=\"tcell subject_name\"
@@ -72,7 +72,7 @@ class TraineeEvaluationPresenter < ActionView::Base
   def link_to_course trainee_evaluation
     link_to trainee_evaluation.targetable.course_name,
       [@namespace.to_sym, trainee_evaluation.targetable.course] if
-      trainee_evaluation.targetable_type == UserCourse.name
+      trainee_evaluation.targetable_type == TraineeCourse.name
   end
 
   def link_to_course_subject trainee_evaluation
