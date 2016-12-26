@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     unread_messages = @chat_room.messages.unread_by current_user
     unread_messages.mark_as_read! :all, for: current_user
 
-    @messages = @chat_room.messages.read_by(current_user).order(created_at: :desc)
+    @messages = @chat_room.messages.read_by(current_user).order_desc(:created_at)
       .per_page_kaminari(params[:page]).per Settings.chats.message_per_page
   end
 

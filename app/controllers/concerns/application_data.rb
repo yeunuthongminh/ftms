@@ -18,7 +18,7 @@ module ApplicationData
   def notifications
     @notifications = current_user.user_notifications
       .includes(notification: [:user, :trackable])
-      .order created_at: :desc if user_signed_in?
+      .order_desc(:created_at) if user_signed_in?
   end
 
   def load_root_path

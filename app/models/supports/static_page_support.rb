@@ -15,6 +15,6 @@ class Supports::StaticPageSupport
   end
 
   def most_viewed_posts
-    @most_viewed_posts ||= Post.most_viewed.take Settings.static_pages.num_of_faq
+    @most_viewed_posts ||= Post.order_desc(:views).take Settings.static_pages.num_of_faq
   end
 end

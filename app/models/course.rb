@@ -1,9 +1,10 @@
 class Course < ApplicationRecord
-  acts_as_paranoid
-
   include PublicActivity::Model
   include InitUserSubject
   include EstimateTime
+  include OrderScope
+
+  acts_as_paranoid
   mount_uploader :image, ImageUploader
 
   USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy, :deleted_at]]
@@ -33,8 +34,6 @@ class Course < ApplicationRecord
   validates :name, presence: true
   validates :language_id, presence: true
 
-  scope :recent, ->{order created_at: :desc}
-  scope :active_course, ->{where status: "progress"}
   scope :created_between, ->start_date, end_date{where("DATE(created_at) >=
     ? AND DATE(created_at) <= ?", start_date, end_date)}
   scope :finished_between, ->start_date, end_date{where("DATE(updated_at) >=

@@ -1,4 +1,6 @@
 class Exam < ApplicationRecord
+  include OrderScope
+
   acts_as_paranoid
 
   alias_attribute :trainee, :user
@@ -13,9 +15,7 @@ class Exam < ApplicationRecord
   has_many :results, dependent: :destroy
   has_many :questions, through: :results
 
-  scope :finished, ->{where status: :finish}
   scope :not_finished, ->{where.not status: :finish}
-  scope :order_exam_finish_desc, ->{order created_at: :desc}
 
   accepts_nested_attributes_for :results, allow_destroy: true
 

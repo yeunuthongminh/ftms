@@ -7,7 +7,7 @@ class Supports::UserSupport
 
   def activities
     @activities ||= PublicActivity::Activity.includes(:owner, :trackable)
-      .user_activities(@user.id).recent.limit(20).decorate
+      .user_activities(@user.id).order_desc(:created_at, 20).decorate
   end
 
   def user_courses

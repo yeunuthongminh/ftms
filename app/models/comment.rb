@@ -8,6 +8,4 @@ class Comment < ApplicationRecord
   belongs_to :post
 
   delegate :name, to: :user, prefix: true, allow_nil: true
-
-  scope :order_by_votes, ->{order cached_votes_score: :desc}
 end

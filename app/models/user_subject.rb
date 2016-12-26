@@ -134,9 +134,9 @@ class UserSubject < ApplicationRecord
 
   def check_current_progress
     user_subject = trainee.user_subjects.where(status: [:progress, :waiting])
-      .order("updated_at DESC").first
+      .order_desc(:updated_at).first
     user_subject ||= trainee.user_subjects.where(status: :finish)
-      .order("updated_at DESC").first
+      .order_desc(:updated_at).first
     user_subject.update_attributes(current_progress: true) if user_subject
     false
   end
@@ -144,7 +144,7 @@ class UserSubject < ApplicationRecord
   def locked?
     return true if exams.not_finished.size > 0 || lock_for_create_exam?
 
-    recent_exams = exams.finished.order("created_at DESC")
+    recent_exams = exams.finish.order_desc(:created_at)
       .limit(Settings.exams.max_recent_exams).pluck(:created_at).reverse
     return false if recent_exams.size < Settings.exams.max_recent_exams
 

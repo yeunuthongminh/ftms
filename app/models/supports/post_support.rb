@@ -36,7 +36,7 @@ class Supports::PostSupport
   end
 
   def load_answers
-    @load_answers ||= @post.comments.roots.order_by_votes
+    @load_answers ||= @post.comments.roots.order_desc(:cached_votes_score)
       .includes(:user).per_page_kaminari(@params[:page])
       .per Settings.faq.answers_per_page
   end
@@ -52,7 +52,7 @@ class Supports::PostSupport
   end
 
   def related_posts
-    @related_posts ||= @post.find_related_tags.order_by_votes
+    @related_posts ||= @post.find_related_tags.order_desc(:cached_votes_score)
       .includes(:taggings).take Settings.faq.related_posts
   end
 
@@ -83,6 +83,6 @@ class Supports::PostSupport
 
   private
   def posts
-    @posts ||= Post.includes(:user, :taggings).order_by_create
+    @posts ||= Post.includes(:user, :taggings).order_desc :created_at
   end
 end
