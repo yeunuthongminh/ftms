@@ -1,9 +1,15 @@
 class Supports::PostSupport
+
   def initialize args = {}
     @params = args[:params]
     @post = args[:post]
     @user = args[:user]
     @comment = args[:comment]
+    @filter_service = args[:filter_service]
+  end
+
+  def presenters
+    PostPresenter.new(posts).render
   end
 
   %w(newest unanswered).each do |post_type|
@@ -69,5 +75,14 @@ class Supports::PostSupport
 
   def new_comment
     @new_comment ||= @post.comments.build user: @user
+  end
+
+  def filter_data_user
+    @filter_data_user ||= @filter_service.user_filter_data
+  end
+
+  private
+  def posts
+    @posts ||= Post.includes(:user, :taggings).order_by_create
   end
 end

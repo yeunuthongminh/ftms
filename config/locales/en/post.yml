@@ -1,0 +1,15 @@
+en:
+  posts:
+    name_sidebar: "Q&A"
+    title_index: "All questions and answers"
+    user_post: "User of post"
+    title_post: "Title of post"
+    views_post: "Views"
+    content_post: "Content of post"
+    create_time_post: "Time create"
+    tag: "Tags"
+    action: "Action"
+    detele: "Delete"
+    reply: "reply: "
+    comment: "comment: "
+    sidebar_title: "Other post of user"

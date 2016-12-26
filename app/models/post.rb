@@ -30,6 +30,7 @@ class Post < ApplicationRecord
       .order "SUM(daily_post_views.views) DESC"
   end
   scope :order_by_votes, ->{order cached_votes_score: :desc}
+  scope :order_by_create, ->{order created_at: :desc}
 
   delegate :name, to: :user, prefix: true, allow_nil: true
 

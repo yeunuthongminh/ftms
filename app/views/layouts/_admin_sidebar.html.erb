@@ -182,6 +182,16 @@
           </ul>
         <% end %>
       </li>
+      
+      <% if policy admin_posts_path %>
+        <li>
+          <%= link_to admin_posts_path do %>
+            <i class="fa fa-question-circle" aria-hidden="true"></i>
+            <span><%= t "posts.name_sidebar" %></span>
+          <% end %>
+        </li>
+      <% end %>
+
       <% if policy admin_feed_backs_path %>
         <li>
           <%= link_to admin_feed_backs_path do %>
@@ -190,12 +200,14 @@
           <% end %>
         </li>
       <% end %>
+
       <li class="li-logout">
         <%= link_to destroy_user_session_path, method: :delete do %>
           <i class="fa fa-backward"></i>
           <span><%= t "staticpages.logout" %></span>
         <% end %>
       </li>
+
     </ul>
   </aside>
   <div class="control-sidebar-bg"></div>

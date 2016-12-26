@@ -143,6 +143,18 @@ class FilterDatasController < ApplicationController
       @key_field = :program
       @value_field = :program
       @resources = Program.pluck(:name).uniq.compact.sort!
+    when "post_title"
+      @key_field = :post_title
+      @value_field = :post_title
+      @resources = Post.pluck(:title).uniq.compact.sort!
+    when "post_views"
+      @key_field = :post_views
+      @value_field = :post_views
+      @resources = Post.pluck(:views).uniq.compact.sort!
+    when "post_content"
+      @key_field = :post_content
+      @value_field = :post_content
+      @resources = Post.pluck(:content).uniq.compact.sort!
     end
 
     respond_to do |format|
