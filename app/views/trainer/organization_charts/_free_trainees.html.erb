@@ -1,4 +1,4 @@
-<% if (free_trainees = Trainee.includes(:profile)
+<% if (free_trainees = Trainee.includes(profile: :trainee_type)
   .by_trainer(trainer.id).free_trainees).any? %>
   <div class="free-trainee">
     <div class="subject">

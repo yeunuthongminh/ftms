@@ -289,8 +289,8 @@ module ApplicationHelper
       !trainer_program_builder.object.deleted?
   end
 
-  def find_user_course trainee, course
-    UserCourse.find_by trainee: trainee, course: course
+  def find_user_course user, course
+    UserCourse.find_by user: user, course: course
   end
 
   def user_handler user_course
@@ -308,7 +308,7 @@ module ApplicationHelper
   end
 
   def link_evaluate targetable
-    trainee_evaluation = TraineeEvaluation.find_by trainee: targetable.trainee,
+    trainee_evaluation = TraineeEvaluation.find_by user: targetable.user,
       targetable: targetable
     if trainee_evaluation
       [:edit, @namespace.to_sym, targetable, trainee_evaluation]

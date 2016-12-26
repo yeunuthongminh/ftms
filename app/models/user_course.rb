@@ -18,7 +18,7 @@ class UserCourse < ApplicationRecord
     .where("user_roles.role_id = ?", role_id)}
 
   delegate :id, :name, to: :user, prefix: true, allow_nil: true
-  delegate :name, to: :course_language, prefix: true, allow_nil: true
+  delegate :name, to: :course_language, to: :course, prefix: true, allow_nil: true
 
   enum status: [:init, :progress, :finish]
 

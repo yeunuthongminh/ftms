@@ -2,7 +2,7 @@
   url: [:trainer, @supports.targetable, @supports.trainee_evaluation] do |f| %>
   <div class="row">
     <div class="col-md-6 col-md-offset-2">
-      <div class="title"><%= @supports.targetable.trainee_name %></div>
+      <div class="title"><%= @supports.targetable.user_name %></div>
     </div>
   </div>
   <%= render "shared/error_messages", object: f.object %>
@@ -21,7 +21,7 @@
           <%= @supports.targetable.course_name %>
         <% end %>
       </div>
-      <%= f.hidden_field :trainee_id, value: @supports.targetable.user_id %>
+      <%= f.hidden_field :user_id, value: @supports.targetable.user_id %>
       <%= f.hidden_field :targetable_id, value: @supports.targetable.id %>
       <%= f.hidden_field :targetable_type, value: @supports.targetable.class.name %>
     </div>
