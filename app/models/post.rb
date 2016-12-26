@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  include OrderScope
+
   acts_as_paranoid
   acts_as_taggable
   acts_as_votable
@@ -10,8 +12,6 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :daily_post_views, dependent: :destroy
 
-  scope :most_viewed, ->{order views: :desc}
-  scope :newest, ->{order created_at: :desc}
   scope :unanswered, -> do
     left_outer_joins(:comments).group(:id).having "COUNT(post_id) = 0"
   end
@@ -29,8 +29,6 @@ class Post < ApplicationRecord
       .where("daily_post_views.created_at >= ?", start_date)
       .order "SUM(daily_post_views.views) DESC"
   end
-  scope :order_by_votes, ->{order cached_votes_score: :desc}
-  scope :order_by_create, ->{order created_at: :desc}
 
   delegate :name, to: :user, prefix: true, allow_nil: true
 

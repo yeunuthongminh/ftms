@@ -1,4 +1,6 @@
 class Subject < ApplicationRecord
+  include OrderScope
+
   acts_as_paranoid
 
   mount_uploader :image, ImageUploader
@@ -23,7 +25,6 @@ class Subject < ApplicationRecord
 
   scope :subject_not_start_course, ->course{where "id NOT IN (SELECT subject_id
     FROM course_subjects WHERE course_id = ? AND status <> 0)", course.id}
-  scope :recent, ->{order created_at: :desc}
 
   accepts_nested_attributes_for :task_masters, allow_destroy: true,
     reject_if: proc {|attributes| attributes[:name].blank?}

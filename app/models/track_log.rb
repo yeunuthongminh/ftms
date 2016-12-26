@@ -1,5 +1,5 @@
 class TrackLog < ApplicationRecord
-  belongs_to :user
+  include OrderScope
 
-  scope :order_by_time, ->{order "created_at DESC"}
+  belongs_to :user
 end
