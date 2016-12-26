@@ -18,7 +18,7 @@
           <div class="box-header with-border">
             <h3>
               <%= link_to user_subject.subject.name,
-                [:admin, user_subject.course, user_subject.subject] %>
+                [@namespace.to_sym, user_subject.course, user_subject.subject] %>
             </h3>
             <table class="table table-hover">
               <tr>
