@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
   if ($('meta[name=current-user]').attr('id').length > 0) {
-    if (typeof localStorage.calendar_data === typeof undefined) {
+    if (localStorage.calendar_data == "undefined" || typeof localStorage.calendar_data === typeof undefined) {
       $.ajax({
         url: '/calendars.json',
         type: 'json',
