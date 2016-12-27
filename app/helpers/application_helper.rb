@@ -191,15 +191,15 @@ module ApplicationHelper
   end
 
   def the_rest_member user_subjects
-    user_subjects.progress.size - Settings.number_member_show
+    user_subjects.select{|user_subject| user_subject.progress?}.size - Settings.number_member_show
   end
 
   ["set_background_color_", ""].each do |prefix|
     define_method "#{prefix}status_subject" do |user_subjects|
-      if user_subjects.size == user_subjects.init.size
+      if user_subjects.size == user_subjects.select{|user_subject| user_subject.init?}.size
         prefix.blank? ? t("user_subjects.init") : "init-background-color"
       elsif user_subjects.size > 0 && user_subjects.size == user_subjects
-        .finish.size
+        .select{|user_subject| user_subject.finish?}.size
         prefix.blank? ? t("user_subjects.finished") :
           "finished-background-color"
       else
@@ -308,8 +308,9 @@ module ApplicationHelper
   end
 
   def link_evaluate targetable
-    trainee_evaluation = TraineeEvaluation.find_by user: targetable.user,
-      targetable: targetable
+    trainee_evaluation = targetable.trainee_evaluations.find do |trainee_evaluation|
+      trainee_evaluation.user == targetable.user
+    end
     if trainee_evaluation
       [:edit, @namespace.to_sym, targetable, trainee_evaluation]
     else

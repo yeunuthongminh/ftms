@@ -82,7 +82,8 @@ class Admin::CoursesController < ApplicationController
   end
 
   def find_course_in_show
-    @course = Course.includes(:language).find_by id: params[:id]
+    @course = Course.includes(:language, :trainers, :trainees,
+      trainee_courses: :trainee_evaluations).find_by id: params[:id]
     redirect_if_object_nil @course
   end
 

@@ -19,9 +19,9 @@ class Course < ApplicationRecord
 
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
   has_many :course_subjects, dependent: :destroy
-  has_many :user_courses, -> {with_deleted}, dependent: :destroy
-  has_many :trainer_courses, -> {with_deleted}, dependent: :destroy
-  has_many :trainee_courses, -> {with_deleted}, dependent: :destroy
+  has_many :user_courses, dependent: :destroy
+  has_many :trainer_courses, dependent: :destroy
+  has_many :trainee_courses, dependent: :destroy
   has_many :trainers, through: :trainer_courses, source: :user
   has_many :trainees, through: :trainee_courses, source: :user
   has_many :subjects, through: :course_subjects

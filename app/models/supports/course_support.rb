@@ -10,13 +10,13 @@ class Supports::CourseSupport
   end
 
   def course_subjects
-    @course_subjects ||= @course.course_subjects.includes(:subject).order_position
+    @course_subjects ||= @course.course_subjects.includes(:subject, :user_subjects).order_position
   end
 
   %w(trainees trainers).each do |objects|
     define_method objects do
       instance_variable_set "@#{objects}",
-        @course.send("#{objects}").users_in_course
+        @course.send("#{objects}")
     end
   end
 
@@ -63,7 +63,7 @@ class Supports::CourseSupport
     elsif @current_user
       @current_user.courses.includes :language, :location, :program
     else
-      Course.includes :language, :location, :program
+      Course.includes :language, :location, :program, trainer_courses: :user
     end
   end
 

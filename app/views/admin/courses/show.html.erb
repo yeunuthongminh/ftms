@@ -56,17 +56,18 @@
       </h2>
       <ul>
         <% @supports.trainees.each do |trainee| %>
+          <% trainee_course = @course.trainee_courses.find{|user_course| user_course.user_id == trainee.id} %>
           <li class="label-user label-user-<%= trainee.id %>
-            label-user-<%= find_user_course(trainee, @course).status %>">
+            label-user-<%= trainee_course.status %>">
             <%= link_to [:admin, trainee], title: trainee.name do %>
               <%= avatar_user_tag trainee,
                 "profile-user img-circle", Settings.image_size_50 %>
               <%= trainee.name %>
             <% end %>
             <div class="pull-right user-course">
-              <div id="user-course-<%= find_user_course(trainee, @course).id %>">
+              <div id="user-course-<%= trainee_course.id %>">
                 <%= render "shared/user_course",
-                  user_course: find_user_course(trainee, @course) %>
+                  user_course: trainee_course %>
               </div>
             </div>
           </li>
