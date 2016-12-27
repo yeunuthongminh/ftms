@@ -30,13 +30,13 @@
               </div>
             <% end %>
             <div class="col-xs-2 info-panel">
-              <% course_subject.user_subjects.progress.includes(:user)
+              <% course_subject.user_subjects.select{|user_subject| user_subject.progress?}
                 .each.with_index 1 do |user_subject, index| %>
                 <% if index <= Settings.number_member_show %>
                   <div class="col-xs-6">
-                    <%= link_to [:admin, user_subject.trainee],
-                      title: user_subject.trainee.name do %>
-                      <%= avatar_user_tag user_subject.trainee,
+                    <%= link_to [:admin, user_subject.user],
+                      title: user_subject.user_name do %>
+                      <%= avatar_user_tag user_subject.user,
                         "profile-user img-circle", Settings.image_size_30 %>
                     <% end %>
                   </div>

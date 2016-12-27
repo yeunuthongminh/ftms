@@ -102,8 +102,6 @@ class User < ApplicationRecord
   scope :free_group, ->{where.not id: GroupUser.select(:user_id)}
   scope :free_and_in_group, ->group_id{where.not id: GroupUser
     .where.not(group_id: group_id).select(:user_id)}
-  scope :users_in_course, ->{joins(:user_courses)
-    .where("user_courses.deleted_at": nil).distinct}
 
   before_validation :set_password
 

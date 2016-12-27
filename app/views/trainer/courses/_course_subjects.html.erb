@@ -2,7 +2,8 @@
   <tbody class="sortable-table">
     <% @supports.course_subjects.each do |course_subject| %>
       <tr data-item-id=<%= course_subject.id %>
-        data-url=<%= trainer_course_course_subject_path course_subject.course, course_subject %>
+        data-url=<%= trainer_course_course_subject_path course_subject.course,
+          course_subject %>
         class="item">
         <td>
           <div class="subject row">
@@ -30,7 +31,7 @@
               </div>
             <% end %>
             <div class="col-xs-2 info-panel">
-              <% course_subject.user_subjects.progress.includes(:user)
+              <% course_subject.user_subjects.select{|user_subject| user_subject.progress?}
                 .each.with_index 1 do |user_subject, index| %>
                 <% if index <= Settings.number_member_show %>
                   <div class="col-xs-6">
