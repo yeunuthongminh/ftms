@@ -1,4 +1,4 @@
-<% provide :title, @user_course_supports.course.name %>
+<% provide :title, @supports.course.name %>
 
 <div id="user-course-show" class="row">
   <div class="col-md-9">
@@ -11,33 +11,33 @@
           <% end %>
         </li>
         <li><%= link_to t("layouts.all_courses"), courses_path %></li>
-        <li class="active"><%= @user_course_supports.course.name %></li>
+        <li class="active"><%= @supports.course.name %></li>
       </ul>
     </div>
     <div class="image-course-header">
       <div>
-        <%= image_course_tag @user_course_supports.course, @user_course_supports
+        <%= image_course_tag @supports.course, @supports
           .course.language_name, Settings.image_size_100 %>
       </div>
       <div class="course-header">
         <span class="header-title">
-          <%= @user_course_supports.course.name %></span>
+          <%= @supports.course.name %></span>
 
         <span class="label-status
-          <%= set_background_color_status @user_course_supports.course.status %>">
-          <%= t "courses.labels.status.#{@user_course_supports.course.status}" %>
+          <%= set_background_color_status @supports.course.status %>">
+          <%= t "courses.labels.status.#{@supports.course.status}" %>
         </span>
         <div class="description">
-          <%= @user_course_supports.course.description %>
+          <%= @supports.course.description %>
         </div>
       </div>
     </div>
     <div class="subject-list">
-      <% @user_course_supports.user_subjects.each_with_index do |user_subject,
+      <% @supports.user_subjects.each_with_index do |user_subject,
         index| %>
         <div class="col-xs-1">
-          <%= link_to user_course_subject_path(@user_course_supports
-            .user_course, user_subject.subject),
+          <%= link_to user_course_subject_path(@supports
+            .trainee_course, user_subject.subject),
             title: t("user_subjects.statuses.#{user_subject.status}") do %>
             <% if index == 0 %>
               <div class="node <%= set_background_color_status user_subject
@@ -49,7 +49,7 @@
             <% end %>
           <% end %>
         </div>
-        <%= link_to user_course_subject_path(@user_course,
+        <%= link_to user_course_subject_path(@trainee_course,
           user_subject.subject) do %>
           <div class="subject col-xs-11 row">
             <div class="col-xs-2 subject-image">
@@ -62,8 +62,7 @@
                 </span>&nbsp;
                 <span>
                   <i>
-                    <%= "#{user_subject.during_time} "%>
-                    <%= t("user_subjects.labels.days") %>
+                    <%= i18n_pluralize user_subject.during_time, "user_subjects.labels.days" %>
                   </i>
                 </span>
               </div>
@@ -84,5 +83,5 @@
     <%= render "info_panel" %>
   </div>
 </div>
-<%= render "shared/member_modal", trainers: @user_course_supports.trainers,
-  trainees: @user_course_supports.trainees %>
+<%= render "shared/member_modal", trainers: @supports.trainers,
+  trainees: @supports.trainees %>

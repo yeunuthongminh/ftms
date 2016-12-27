@@ -6,7 +6,7 @@ en:
       finish: "Finish"
       waiting: "Waiting"
     labels:
-      days: "days"
+      days: "day"
     chart:
       title: "Trainee progress"
       task_total: "Total finished tasks"
@@ -23,4 +23,4 @@ en:
     finished: "Finished"
     request_finish:
       success: "Your request has been sent successfully!"
-    empty: "Don't have subject"  
+    empty: "Don't have subject"

@@ -27,7 +27,7 @@
         <% unless @subject_supports.user_subject.finish? || @subject_supports.course.finish? %>
           <div id="dialog-finish" title="<%= t "user_subjects.finish.confirm-title" %>"
             class="dialog">
-            <% if @subject_supports.user_subject.subject.subject_detail %>
+            <% if @subject.subject_detail %>
               <p><%= t "user_subjects.finish.confirm_exam" %></p>
               <%= link_to "", user_subject_path(@subject_supports.user_subject),
                 method: :put, class: "hidden", id: "finish-subject-exam" %>
@@ -40,7 +40,7 @@
           <% if current_user.is_trainee? && @subject_supports.user_subject.progress? %>
             <%= link_to t("buttons.finish"), "#",
               class: "btn btn-danger pull-right finish-subject" %>
-          <% elsif @subject_supports.user_subject.subject.subject_detail &&
+          <% elsif @subject.subject_detail &&
             @subject_supports.user_subject.waiting? %>
             <% if @subject_supports.exam_process &&
               @subject_supports.exam_process.testing? %>
@@ -53,7 +53,9 @@
           <% end %>
         <% end %>
 
-        <div class="description"><%= @subject_supports.user_subject.description %></div>
+        <div class="description">
+          <%= @subject_supports.user_subject.description %>
+        </div>
         <div class="subject-content box-divider">
           <div class="label-title"><%= t "subjects.content" %></div>
           <%= @subject_supports.user_subject.content.html_safe if @subject_supports.user_subject.content %>

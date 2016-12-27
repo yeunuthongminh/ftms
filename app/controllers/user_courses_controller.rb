@@ -2,15 +2,15 @@ class UserCoursesController < ApplicationController
   before_action :find_user_course, only: :show
 
   def show
-    authorize_with_multiple page_params.merge(record: @user_course), CoursePolicy
-    @user_course_supports = Supports::UserCourseSupport.new @user_course
+    authorize_with_multiple page_params.merge(record: current_user), CoursePolicy
+    @supports = Supports::TraineeCourseSupport.new @trainee_course
   end
 
   private
   def find_user_course
-    @user_course = UserCourse.includes(:course).find_by_id params[:id]
-    if @user_course.nil?
-      flash[:alert] = flash_message "not_load"
+    @trainee_course = TraineeCourse.includes(course: [:trainers, :trainees]).find_by id: params[:id]
+    if @trainee_course.nil?
+      flash[:alert] = flash_message "not_find"
       redirect_to courses_path
     end
   end
