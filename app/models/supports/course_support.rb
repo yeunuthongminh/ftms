@@ -20,31 +20,6 @@ class Supports::CourseSupport
     end
   end
 
-  def assigned_user_ids
-    @assigned_user_ids ||= @course.user_courses.map &:user_id
-  end
-
-  def trainees_assign
-    @trainees_assign ||= User.trainees.available_of_course @course.id
-  end
-
-  def trainers_assign
-    @trainers_assign ||= Role.includes(:users, :user_roles)
-      .find_by(name: Settings.roles.trainer).users
-  end
-
-  %w(trainee trainer).each do |object|
-    define_method "#{object}_courses_handler" do
-      instance_variable_set "@#{object}_courses_handler",
-        (
-          send("#{object}s_assign").map do |user|
-            UserCourse.unscoped.find_or_initialize_by user.class.name.underscore
-              .to_sym => user, course: @course
-          end
-        )
-    end
-  end
-
   def subjects
     @subjects ||= Subject.all
   end

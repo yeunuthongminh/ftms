@@ -10,9 +10,11 @@
         value: user_course_builder.object.user_id %>
       <%= user_course_builder.hidden_field :id,
         value: user_course_builder.object.id %>
+      <%= user_course_builder.hidden_field :type,
+        value: user_course_builder.object.class.name %>
       <%= user_course_builder.hidden_field :deleted_at, value: nil %>
     </td>
-    <td><%= user_course_builder.object.send(user_handler user_course_builder.object).name %></td>
-    <td><%= user_course_builder.object.send(user_handler user_course_builder.object).email %></td>
+    <td><%= user_course_builder.object.user_name %></td>
+    <td><%= user_course_builder.object.user_email %></td>
   </tr>
 <% end %>

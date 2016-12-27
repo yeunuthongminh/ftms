@@ -12,8 +12,6 @@ Rails.application.routes.draw do
     resources :course_masters
     resources :courses do
       resources :subjects, only: :show
-      resource :assign_trainers, only: [:edit, :update]
-      resource :assign_trainees, only: [:edit, :update]
       resources :course_subjects, except: [:new, :show]
     end
     resources :roles
@@ -76,8 +74,6 @@ Rails.application.routes.draw do
     resources :course_masters
     resources :courses do
       resources :subjects, only: :show
-      resource :assign_trainers, only: [:edit, :update]
-      resource :assign_trainees, only: [:edit, :update]
       resources :course_subjects, except: :new
     end
     resources :subjects do

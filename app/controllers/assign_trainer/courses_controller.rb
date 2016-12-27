@@ -3,7 +3,7 @@ class AssignTrainer::CoursesController < ApplicationController
   before_action :authorize
 
   def edit
-    @supports = Supports::CourseSupport.new course: @course
+    @supports = Supports::AssignUser.new course: @course
   end
 
   def update
@@ -22,10 +22,10 @@ class AssignTrainer::CoursesController < ApplicationController
   end
 
   def find_course
-    @course = Course.includes(user_courses: :trainee).find_by id: params[:id]
+    @course = Course.find_by id: params[:id]
     if @course.nil?
       flash[:alert] = flash_message "not_find"
-      redirect_to [@namespace.to_sym, @course]
+      redirect_to [@namespace.to_sym, :courses]
     end
   end
 end

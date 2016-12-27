@@ -5,8 +5,9 @@ class User < ApplicationRecord
 
   QUERY = "users.id NOT IN (SELECT user_id
     FROM user_courses, courses WHERE user_courses.course_id = courses.id
-    AND (courses.status = 0 OR courses.status = 1)
+    AND courses.status = 1
     AND user_courses.deleted_at IS NULL
+    AND user_courses.status = 1
     AND courses.id <> :course_id)"
 
 
@@ -73,21 +74,16 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password
 
-  scope :available_of_course, ->course_id{
-    joins(:profile).where QUERY, course_id: course_id
-  }
+  scope :available_of_course, ->course_id{where QUERY, course_id: course_id}
   scope :trainee_roles, ->{joins(user_roles: :role)
     .where("roles.role_type = ?", Role.role_types[:trainee])}
   scope :trainers, ->{joins(user_roles: :role)
     .where("roles.role_type = ?", Role.role_types[:trainer])}
   scope :admin_roles, ->{joins(user_roles: :role)
     .where("roles.role_type = ?", Role.role_types[:admin])}
-  scope :trainees, ->{trainee_roles.where.not(id: admin_roles.map(&:id))}
   scope :find_course, ->course{joins(:user_courses)
     .where("user_courses.course_id in (?)", course).distinct}
-  scope :select_all, ->{includes(:user_roles).distinct}
-  scope :not_trainees, ->{joins(user_roles: :role)
-    .where("roles.role_type != ?", Role.role_types[:trainee]).distinct}
+  scope :not_trainees, ->{where.not type: "Trainee"}
   scope :by_location, ->location_id{
     joins(:profile).where("profiles.location_id = ?", location_id)
   }

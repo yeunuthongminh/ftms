@@ -7,7 +7,7 @@ class Course < ApplicationRecord
   acts_as_paranoid
   mount_uploader :image, ImageUploader
 
-  USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy, :deleted_at]]
+  USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy, :deleted_at, :type]]
   COURSE_ATTRIBUTES_PARAMS = [:name, :image, :description,
     :language_id, :location_id, :program_id,
     :start_date, :end_date, documents_attributes:
