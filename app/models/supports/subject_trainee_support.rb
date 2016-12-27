@@ -8,7 +8,7 @@ class Supports::SubjectTraineeSupport
 
   def course_subject
     @course_subject ||= CourseSubject.includes(
-      user_subjects: [:trainee_course, :course])
+      user_subjects: [:trainee_course, course: [:trainers, :trainees]])
       .find_by course_id: user_course.course_id, subject_id: @subject.id
   end
 
@@ -75,10 +75,9 @@ class Supports::SubjectTraineeSupport
     unless user_subject.init?
       @user_tasks_chart_data = {}
 
-      course_subject.user_subjects.includes(:user, :trainee_course)
-        .each do |user_subject|
+      course_subject.user_subjects.includes(:user, :user_tasks).each do |user_subject|
         @user_tasks_chart_data[user_subject.user_name] = user_subject.user_tasks
-          .complete.size
+          .select{|user_task| user_task.complete?}.size
       end
       @user_tasks_chart_data
     end

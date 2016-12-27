@@ -5,6 +5,6 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def show?
-    @user == @record.trainee
+    @user == @record
   end
 end
