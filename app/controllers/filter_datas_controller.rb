@@ -13,7 +13,7 @@ class FilterDatasController < ApplicationController
 
     case @type
     when "trainee_name"
-      @resources = User.trainees.order(:name).pluck :name
+      @resources = Trainee.order(:name).pluck :name
     when "trainee_type"
       @key_field = :id
       @value_field = :trainee_type_name
@@ -21,7 +21,7 @@ class FilterDatasController < ApplicationController
     when "location"
       @key_field = :id
       @value_field = :location_name
-      @resources = Location.order(:name).pluck :name
+      @resources = Location.pluck(:name).sort!
     when "graduation"
       @key_field = :graduation
       @value_field = :graduation
@@ -45,7 +45,7 @@ class FilterDatasController < ApplicationController
     when "trainer"
       @key_field = :trainer
       @value_field = :trainer
-      @resources = User.trainers.pluck(:name).sort!
+      @resources = Trainer.pluck(:name).sort!
     when "current_progress"
       @key_field = :current_progress
       @value_field = :current_progress
@@ -86,7 +86,7 @@ class FilterDatasController < ApplicationController
     when "course_trainers"
       @key_field = :trainer
       @value_field = :trainer
-      @resources = User.trainers.pluck(:name).sort!
+      @resources = Trainer.pluck(:name).sort!
     when "course_start_date"
       @key_field = :start_date
       @value_field = :start_date

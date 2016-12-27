@@ -293,16 +293,6 @@ module ApplicationHelper
     UserCourse.find_by user: user, course: course
   end
 
-  def user_handler user_course
-    if user_course.trainee
-      "trainee"
-    elsif user_course.trainer
-      "trainer"
-    else
-      "admin"
-    end
-  end
-
   def allowed_file
     Settings.import.file_types.join ", "
   end
