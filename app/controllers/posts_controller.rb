@@ -4,6 +4,17 @@ class PostsController < ApplicationController
   before_action :load_supports, only: [:index, :show]
   before_action :authorize_post, only: [:edit, :update, :destroy]
 
+  def index
+    @posts = Post.search(params[:search])
+      .per_page_kaminari(params[:page]).per Settings.per_page if params[:search]
+    unless params[:search]
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+  end
+
   def new
     @post = current_user.posts.build
   end
