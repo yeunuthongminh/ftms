@@ -88,6 +88,7 @@
 //= require admin/assign_project
 //= require faq
 //= require task
+//= require likes
 
 $(document).on('turbolinks:load ajaxComplete', function() {
   $('.alert').delay(3000).fadeOut();

@@ -34,3 +34,8 @@ en:
       load_more_answers: "Load more answers..."
       load_more_replies: "Load more replies..."
       sign_in_to_answer: "Please sign in to add an answer"
+    like:
+      find_like_fail: "Find like fail"
+      find_likeable_fail: "Error don't find object like"
+      like_fail: "Like fail"
+      dislike_fail: "Dislike fail"

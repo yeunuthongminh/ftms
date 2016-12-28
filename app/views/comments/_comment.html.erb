@@ -2,20 +2,11 @@
   <div class="col-sm-2  text-center padding-left-0">
     <% if user_signed_in? %>
       <div class="votes">
-        <%= link_to "#", class: "btn upvote",
-          remote: true, title: t("buttons.upvote") do %>
-          <fa class="fa fa-thumbs-up"></fa>
-        <% end %>
-        <%= link_to "#", class: "btn downvote",
-          remote: true, title: t("buttons.downvote") do %>
-          <fa class="fa fa-thumbs-down"></fa>
-        <% end %>
+          <div class="like-div-<%= comment.id %>-Comment">
+            <%= render "likes/form_like", target: comment %>
+          </div>
       </div>
     <% end %>
-    <div class="vote-count">
-      <span class="count"><%= comment.cached_votes_score %></span>
-      <%= t("faq.show.vote").pluralize comment.cached_votes_score %>
-    </div>
   </div>
   <div class="col-sm-10 padding-left-0">
     <div class="user-info">

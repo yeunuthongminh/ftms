@@ -242,3 +242,4 @@ faq:
   related_posts: 8
   answers_per_page: 5
   replies_per_page: 3
+  tags_per_page: 10

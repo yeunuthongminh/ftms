@@ -30,19 +30,10 @@
             <% end %>
             <div class="votes">
               <% if user_signed_in? %>
-                <%= link_to "#", class: "btn upvote",
-                  remote: true, title: t("buttons.upvote") do %>
-                  <fa class="fa fa-thumbs-up"></fa>
-                <% end %>
-                <%= link_to "#", class: "btn downvote",
-                  remote: true, title: t("buttons.downvote") do %>
-                  <fa class="fa fa-thumbs-down"></fa>
-                <% end %>
+                <div class="like-div-<%= @post.id %>-Post">
+                  <%= render "likes/form_like", target: @post %>
+                </div>
               <% end %>
-            </div>
-            <div class="vote-count">
-              <span class="count"><%= @post.cached_votes_score %></span>
-              <%= t("faq.show.vote").pluralize @post.cached_votes_score %>
             </div>
           </div>
           <div class="col-sm-10 col-xs-8 padding-left-0">

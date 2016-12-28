@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+  <% if current_user.like? target %>
+    <%= form_for [target, create_like(target)],
+      html: {method: :delete, class: "form-like"}, remote: true do |f| %>
+      <%= render "likes/form_button_style", icon_like: "down", target: target %>
+    <% end %>
+  <% else %>
+    <%= form_for [target, create_like(target)], remote: true, html: {class: "form-like"} do |f| %>
+      <%= render "likes/form_button_style", icon_like: "up", target: target %>
+    <% end %>
+  <% end %>
+<% end %>
