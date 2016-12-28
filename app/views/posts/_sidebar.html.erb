@@ -16,7 +16,7 @@
             <h3 class="title"><%= link_to post.title, post %></h3>
             <div class="tags">
               <% post.tag_list.each do |tag| %>
-                <%= link_to tag, "#", class: "tag" %>
+                <%= link_to tag, tag_path(tag), class: "tag" %>
               <% end %>
             </div>
           </div>
@@ -52,7 +52,7 @@
                 <h3 class="title"><%= link_to post.title, post %></h3>
                 <div class="tags">
                   <% post.tag_list.each do |tag| %>
-                    <%= link_to tag, "#", class: "tag" %>
+                    <%= link_to tag, tag_path(tag), class: "tag" %>
                   <% end %>
                 </div>
               </div>
@@ -71,10 +71,10 @@
     </div>
     <div class="tags">
       <% @supports.most_tagged_tags.each do |tag| %>
-        <%= link_to tag, tag, class: "tag" %>
+        <%= link_to tag, tag_path(tag.name), class: "tag" %>
         <span class="tag-count">x<%= tag.taggings_count %></span>
       <% end %>
-      <%= link_to t("faq.index.view_all"), "#", class: "tag" %>
+      <%= link_to t("faq.index.view_all"), tags_path, class: "tag" %>
     </div>
   </div>
 <% end %>

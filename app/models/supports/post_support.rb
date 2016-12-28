@@ -36,7 +36,11 @@ class Supports::PostSupport
   end
 
   def load_answers
-    @load_answers ||= @post.comments.roots.order_desc(:cached_votes_score)
+    # code cua Quang sua? Em day? ve code cu de lam nen comment code cua Quang
+    # @load_answers ||= @post.comments.roots.order_desc(:cached_votes_score)
+    #   .includes(:user).per_page_kaminari(@params[:page])
+    #   .per Settings.faq.answers_per_page
+    @load_answers ||= @post.comments.roots
       .includes(:user).per_page_kaminari(@params[:page])
       .per Settings.faq.answers_per_page
   end

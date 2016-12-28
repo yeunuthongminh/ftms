@@ -11,6 +11,12 @@ class Post < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :daily_post_views, dependent: :destroy
+  has_many :likes, dependent: :destroy, as: :likeable
+
+  scope :most_viewed, ->{order views: :desc}
+  scope :newest, ->{order created_at: :desc}
+  scope :order_by_votes, ->{order cached_votes_score: :desc}
+  scope :order_by_create, ->{order created_at: :desc}
 
   scope :unanswered, -> do
     left_outer_joins(:comments).group(:id).having "COUNT(post_id) = 0"

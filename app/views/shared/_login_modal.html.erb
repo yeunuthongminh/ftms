@@ -1,0 +1,54 @@
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div id="div-forms">
+      <div id="login-form">
+        <div class="modal-body">
+          <div class="content-top"><%= t "signins.banner" %></div>
+          <div class="content-body">
+            <div class="line-or"></div>
+            <div class="form-modal">
+              <%= render "users/sessions/new" %>
+            </div>
+            <div class="content-footer">
+              <a id="login_lost_btn" class="see-more pull-right">
+                <%= t "user.forgot_password" %>
+              </a>
+              <a id="login_register_btn" class="see-more pull-left">
+                <%= t "signins.signup_now" %>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="lost-form">
+        <div class="modal-body">
+          <div class="content-top"><%= t "user.forgot_password" %></div>
+          <div class="content-body">
+            <div class="line-or"></div>
+            <div class="form-modal" style="width: 90%; margin-left: 5%">
+              <%= render "devise/passwords/new" %>
+            </div>
+            <div class="content-footer">
+              <a class="see-more pull-left" id="lost_login_btn">
+                <%= t "staticpages.member" %>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="register-form">
+        <div class="modal-body">
+          <div class="login-main login-agileits">
+            <h1><%= t "staticpages.signup" %></h1>
+            <h4>
+              <a class="sign-in popup-top-anim"
+              id="register_login_btn"><%= t "staticpages.member" %></a>
+            </h4>
+            <a id="register_lost_btn"><%= t "user.forgot_password" %></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
