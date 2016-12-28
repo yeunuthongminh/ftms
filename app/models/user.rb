@@ -10,18 +10,13 @@ class User < ApplicationRecord
     AND user_courses.status = 1
     AND courses.id <> :course_id)"
 
-
-  ATTRIBUTES_PROFILE_PARAMS = [
-    :id, :start_training_date, :leave_date, :finish_training_date,
+  ATTRIBUTES_PARAMS = [:name, :email, :password,
+    :password_confirmation, :avatar, :trainer_id, :chatwork_id,
+    :profile_id, :start_training_date, :leave_date, :finish_training_date,
     :ready_for_project, :contract_date, :naitei_company,
     :trainee_type_id, :university_id, :language_id, :user_progress_id,
     :status_id, :location_id, :graduation, :working_day, :staff_code,
-    :join_div_date, :stage_id, :away_date, :comeback_date
-  ]
-
-  ATTRIBUTES_PARAMS = [:name, :email, :password,
-    :password_confirmation, :avatar, :trainer_id, :chatwork_id, role_ids: [],
-    profile_attributes: ATTRIBUTES_PROFILE_PARAMS]
+    :join_div_date, :stage_id, :away_date, :comeback_date, role_ids: []]
 
   USER_ATTRIBUTES_PARAMS = [:name, :password, :password_confirmation, :avatar,
     profile_attributes: [:working_day, :graduation, :university_id]]

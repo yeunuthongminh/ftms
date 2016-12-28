@@ -1,172 +1,174 @@
 <div>
-  <%= f.fields_for :profile do |ff| %>
-    <div class="row">
-      <div class="col-md-6 profile-form">
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :staff_code %>
-          </div>
-          <div class="col-md-7">
-            <%= ff.text_field :staff_code, class: "form-control profile" %>
-          </div>
+  <div class="row">
+    <div class="col-md-6 profile-form">
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :staff_code %>
         </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :join_div_date %>
-          </div>
-          <div class="col-md-7">
-            <%= ff.text_field :join_div_date, value: @user.profile.join_div_date ?
-              l(@user.profile.join_div_date, format: :default) : "",
-              class: "form-control datepicker profile" %>
-          </div>
-        </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :start_training_date %>
-          </div>
-          <div class="col-md-7">
-            <%= ff.text_field :start_training_date, value: @user.profile.start_training_date ?
-              l(@user.profile.start_training_date, format: :default) : "",
-              class: "form-control datepicker profile" %>
-          </div>
-        </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :leave_date %>
-          </div>
-          <div class="col-md-7">
-            <%= ff.text_field :leave_date, value: @user.profile.leave_date ?
-              l(@user.profile.leave_date, format: :default) : "",
-              class: "form-control datepicker profile" %>
-          </div>
-        </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :finish_training_date %>
-          </div>
-          <div class="col-md-7">
-            <%= ff.text_field :finish_training_date, value: @user.profile.finish_training_date ?
-              l(@user.profile.finish_training_date, format: :default) : "",
-              class: "form-control datepicker profile" %>
-          </div>
-        </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :contract_date %>
-          </div>
-          <div class="col-md-7">
-            <%= ff.text_field :contract_date, value: @user.profile.contract_date ?
-              l(@user.profile.contract_date, format: :default) : "",
-              class: "form-control datepicker profile" %>
-          </div>
-        </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :graduation %>
-          </div>
-          <div class="col-md-7">
-            <%= ff.text_field :graduation,
-              value: @user.profile_graduation ? l(@user.profile_graduation, format: :year_month) :
-              "", class: "form-control graduation profile" %>
-          </div>
-        </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :stage %>
-          </div>
-          <div class="col-md-7">
-            <h4><b><%= @supports.stage.name %></b>&nbsp;&nbsp;&nbsp;
-              <% if @user.new_record? %>
-                <%= ff.hidden_field :stage_id, value: @supports.stage.id %>
-              <% else %>
-                <%= link_to t("stages.change"),
-                  edit_admin_user_stages_path(@user), class: "btn btn-danger" %>
-              <% end %>
-            </h4>
-          </div>
+        <div class="col-md-7">
+          <%= f.text_field :staff_code, class: "form-control profile" %>
         </div>
       </div>
-
-      <div class="col-md-6 profile-form">
-
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :location_id %>
-          </div>
-          <div class="col-md-7">
-            <%= select_profile_field "location", @supports.locations, ff %>
-          </div>
-          <%= link_to "#", data: {toggle: "modal",
-            target: "#location-modal"} do %>
-            <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
-          <% end %>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :join_div_date %>
         </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :trainee_type %>
-          </div>
-          <div class="col-md-7">
-            <%= select_profile_field "trainee_type", @supports.trainee_types, ff %>
-          </div>
-          <%= link_to "#", data: {toggle: "modal", target: "#usertype-modal"} do %>
-            <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
-          <% end %>
+        <div class="col-md-7">
+          <%= f.text_field :join_div_date,
+            value: @user_form.profile.join_div_date ?
+            l(@user_form.profile.join_div_date, format: :default) : "",
+            class: "form-control datepicker profile" %>
         </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :university %>
-          </div>
-          <div class="col-md-7">
-            <%= select_profile_field "university", @supports.universities, ff %>
-          </div>
-          <%= link_to "#", data: {toggle: "modal", target: "#university-modal"} do %>
-            <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
-          <% end %>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :start_training_date %>
         </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :language %>
-          </div>
-          <div class="col-md-7">
-            <%= select_profile_field "language", @supports.languages, ff %>
-          </div>
-          <%= link_to "#", data: {toggle: "modal", target: "#language-modal"} do %>
-            <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
-          <% end %>
+        <div class="col-md-7">
+          <%= f.text_field :start_training_date,
+            value: @user_form.profile.start_training_date ?
+            l(@user_form.profile.start_training_date, format: :default) : "",
+            class: "form-control datepicker profile" %>
         </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :status %>
-          </div>
-          <div class="col-md-7">
-            <%= select_profile_field "status", @supports.statuses, ff %>
-          </div>
-          <%= link_to "#", data: {toggle: "modal", target: "#status-modal"} do %>
-            <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
-          <% end %>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :leave_date %>
         </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :working_day %>
-          </div>
-          <div class="col-md-7">
-            <%= ff.number_field :working_day, step: Settings.working_day.step,
-              min: Settings.working_day.min, max: Settings.working_day.max,
-              class: "form-control profile"%>
-          </div>
+        <div class="col-md-7">
+          <%= f.text_field :leave_date, value: @user_form.profile.leave_date ?
+            l(@user_form.profile.leave_date, format: :default) : "",
+            class: "form-control datepicker profile" %>
         </div>
-        <div class="row form-group">
-          <div class="col-md-4">
-            <%= ff.label :ready_for_project %>
-          </div>
-          <div class="col-md-7">
-            <%= ff.text_field :ready_for_project,
-              value: @user.profile.ready_for_project ?
-              l(@user.profile.ready_for_project, format: :default) : "",
-              class: "form-control datepicker profile" %>
-          </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :finish_training_date %>
+        </div>
+        <div class="col-md-7">
+          <%= f.text_field :finish_training_date,
+            value: @user_form.profile.finish_training_date ?
+            l(@user_form.profile.finish_training_date, format: :default) : "",
+            class: "form-control datepicker profile" %>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :contract_date %>
+        </div>
+        <div class="col-md-7">
+          <%= f.text_field :contract_date,
+            value: @user_form.profile.contract_date ?
+            l(@user_form.profile.contract_date, format: :default) : "",
+            class: "form-control datepicker profile" %>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :graduation %>
+        </div>
+        <div class="col-md-7">
+          <%= f.text_field :graduation,
+            value: @user_form.profile.graduation ? l(@user_form.profile.graduation, format: :year_month) :
+            "", class: "form-control graduation profile" %>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :stage %>
+        </div>
+        <div class="col-md-7">
+          <h4><b><%= @supports.stage.name %></b>&nbsp;&nbsp;&nbsp;
+            <% if @supports.user.new_record? %>
+              <%= f.hidden_field :stage_id, value: @supports.stage.id %>
+            <% else %>
+              <%= link_to t("stages.change"),
+                edit_admin_user_stages_path(@user_form.user), class: "btn btn-danger" %>
+            <% end %>
+          </h4>
         </div>
       </div>
     </div>
-  <% end %>
+
+    <div class="col-md-6 profile-form">
+
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :location_id %>
+        </div>
+        <div class="col-md-7">
+          <%= select_profile_field "location", @supports.locations, f %>
+        </div>
+        <%= link_to "#", data: {toggle: "modal",
+          target: "#location-modal"} do %>
+          <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
+        <% end %>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :trainee_type %>
+        </div>
+        <div class="col-md-7">
+          <%= select_profile_field "trainee_type", @supports.trainee_types, f %>
+        </div>
+        <%= link_to "#", data: {toggle: "modal", target: "#usertype-modal"} do %>
+          <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
+        <% end %>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :university %>
+        </div>
+        <div class="col-md-7">
+          <%= select_profile_field "university", @supports.universities, f %>
+        </div>
+        <%= link_to "#", data: {toggle: "modal", target: "#university-modal"} do %>
+          <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
+        <% end %>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :language %>
+        </div>
+        <div class="col-md-7">
+          <%= select_profile_field "language", @supports.languages, f %>
+        </div>
+        <%= link_to "#", data: {toggle: "modal", target: "#language-modal"} do %>
+          <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
+        <% end %>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :status %>
+        </div>
+        <div class="col-md-7">
+          <%= select_profile_field "status", @supports.statuses, f %>
+        </div>
+        <%= link_to "#", data: {toggle: "modal", target: "#status-modal"} do %>
+          <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
+        <% end %>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :working_day %>
+        </div>
+        <div class="col-md-7">
+          <%= f.number_field :working_day, step: Settings.working_day.step,
+            min: Settings.working_day.min, max: Settings.working_day.max,
+            class: "form-control profile"%>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <%= f.label :ready_for_project %>
+        </div>
+        <div class="col-md-7">
+          <%= f.text_field :ready_for_project,
+            value: @user_form.profile.ready_for_project ?
+            l(@user_form.profile.ready_for_project, format: :default) : "",
+            class: "form-control datepicker profile" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
