@@ -2,17 +2,17 @@ class Admin::UsersController < ApplicationController
   before_action :authorize
   before_action :find_user, except: [:index, :new, :create]
   before_action :load_profile, only: [:new, :edit, :show]
-  before_action :build_profile, only: :new
   before_action :load_breadcrumb_edit, only: [:edit, :update]
   before_action :load_breadcrumb_new, only: [:new, :create]
 
   def new
+    @user_form = UserForm.new
   end
 
   def create
-    @user = User.new user_params
-    user_send_mail_service = MailerServices::UserSendMailService.new user: @user
-    if @user.save && user_send_mail_service.perform?
+    @user_form = UserForm.new user_params
+    user_send_mail_service = MailerServices::UserSendMailService.new user: @user_form.user
+    if @user_form.save && user_send_mail_service.perform?
       flash[:success] = flash_message "created"
       if params[:create_and_continue].present?
         redirect_to new_admin_user_path
@@ -26,11 +26,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    build_profile unless @user.profile
+    @user_form = UserForm.new user: @user, profile: @user.profile
   end
 
   def update
-    if @user.update_attributes user_params
+    @user_form = UserForm.new user: @user, profile: @user.profile
+    @user_form.assign_attributes user_params
+    if @user_form.save
       sign_in(@user, bypass: true) if current_user? @user
       flash[:success] = flash_message "updated"
       redirect_to admin_training_managements_path
@@ -51,7 +53,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @notes = Note.load_notes @user, current_user
-    add_breadcrumb_path "users"
+    add_breadcrumb_path "training_managements"
     add_breadcrumb @user.name
   end
 
@@ -61,8 +63,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def load_profile
-    @user ||= User.new
-    @supports = Supports::UserSupport.new @user
+    @supports = Supports::UserSupport.new @user || User.new
   end
 
   def load_breadcrumb_edit
@@ -76,9 +77,6 @@ class Admin::UsersController < ApplicationController
     add_breadcrumb_new "users"
   end
 
-  def build_profile
-    @user.build_profile
-  end
 
   def find_user
     @user = User.find_by id: params[:id]
