@@ -38,6 +38,12 @@ class Post < ApplicationRecord
 
   delegate :name, to: :user, prefix: true, allow_nil: true
 
+  class << self
+    def search search
+      search ? where(["title LIKE ? OR content LIKE ?", "%#{search}%", "%#{search}%"]) : []
+    end
+  end
+
   def today_post_views
     daily_post_views.where("created_at >= ?", Date.today.in_time_zone)
       .first || daily_post_views.create
