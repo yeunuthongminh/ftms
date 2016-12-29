@@ -180,4 +180,5 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
   resources :tags, only: [:show, :index]
+  resources :timelines, only: :index
 end

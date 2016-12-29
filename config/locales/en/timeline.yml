@@ -1,0 +1,6 @@
+en:
+  timeline:
+    headline: "The Main Timeline"
+    content: "<p>This is your Timeline</p>"
+    task_finish: "Task finish"
+    task_init: "Task init"
