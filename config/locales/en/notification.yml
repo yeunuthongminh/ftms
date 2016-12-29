@@ -5,3 +5,4 @@ en:
       change_status_down: " has been change status of %{data} back to "
       finish_course: " %{data} has been finished by "
       start_course: "  %{data} has been started by "
+      assign_project: "assign project \" %{data_project_name} \" to %{course_subject}"

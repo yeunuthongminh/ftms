@@ -1,5 +1,6 @@
 class TraineeCourse < UserCourse
   include StiRouting
+  include InitUserSubject
 
   alias_attribute :trainee, :user
 

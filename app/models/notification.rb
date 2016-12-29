@@ -8,5 +8,5 @@ class Notification < ApplicationRecord
 
   delegate :name, to: :user, prefix: true, allow_nil: true
 
-  enum key: [:change_status_up, :change_status_down, :finish_course, :start_course]
+  enum key: [:change_status_up, :change_status_down, :finish_course, :start_course, :assign_project]
 end

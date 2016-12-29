@@ -291,7 +291,7 @@ $(document).on("turbolinks:load", function() {
       url: "projects/" + prj_id + "/project_requirements",
       method: "POST",
       dataType: "json",
-      data: {project_requirement: {name: pqm_name}},
+      data: {project_requirement: {name: pqm_name, project_id: prj_id}},
       success: function(data) {
         flash_now('alert-success', I18n.t("projects.create_requirement.success"));
         rqm_li.replaceWith("<li type='1' class='list-group-item requirement-item' data-rqm="
