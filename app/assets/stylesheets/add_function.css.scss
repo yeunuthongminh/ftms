@@ -30,6 +30,10 @@
     height: 31px;
   }
 
+  .table {
+    min-height: 300px;
+  }
+
   .tcell {
     &.stt {
       min-width: 35px;
@@ -43,9 +47,16 @@
       height: 31px;
     }
 
+    &.routes {
+      min-width: 219px;
+      max-width: 465px;
+      position: relative;
+      height: 31px;
+    }
+
     &.checked-function {
-      max-width: 300px;
-      min-width: 300px;
+      max-width: 213px;
+      min-width: 213px;
       height: 31px;
     }
 

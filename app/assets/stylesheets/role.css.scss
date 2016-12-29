@@ -15,9 +15,14 @@
     max-width: 355px
   }
 
-  .filters {
-    top: 28% !important;
-    left: 29% !important;
+  .f-namespace {
+    top: 12% !important;
+    left: 8% !important;
+  }
+
+  .f-controller_name {
+    top: 12% !important;
+    left: 23% !important;
   }
 
   input[type="checkbox"] {
@@ -35,6 +40,15 @@
     &.stt {
       min-width: 35px;
       max-width: 35px;
+    }
+
+    &.namespace {
+      min-width: 100px;
+      max-width: 100px;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     &.controller_name {

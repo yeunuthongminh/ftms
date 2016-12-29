@@ -30,10 +30,17 @@ class AddUserFunctionPresenter < ActionView::Base
 
   private
   def sidebar_item function, index
+    obj = function.model_class.split("/")
+    if obj.length == 2
+      obj[0] = obj[0].capitalize
+      obj[1] = obj[1].capitalize
+    else
+      obj.prepend("Trainee")
+    end
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{function.model_class}\">
       <div class=\"tcell stt\">#</div>
       <div class=\"tcell name controller_name\" title=\"#{function.model_class}\">
-        #{function.model_class} #{function.action}
+        #{obj[0]} #{function.action} #{obj[1]}
       </div>
     </div>
     "

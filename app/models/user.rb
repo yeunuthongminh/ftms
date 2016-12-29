@@ -150,7 +150,8 @@ class User < ApplicationRecord
   end
 
   def has_function? controller, action, role
-    functions.has_function(controller, action).any?
+    type = (role+"Function").classify.constantize
+    user_functions.has_function(controller, action, type).any?
   end
 
   def like? target
