@@ -13,9 +13,9 @@ class TasksController < ApplicationController
       user_task_service = MailerServices::UserTaskService.new user_task: user_task,
         status: Settings.status.init
       @user_task_history = user_task_service.perform
-      flash[:success] = flash_message "created"
+      flash.now[:success] = flash_message "created"
     else
-      flash[:failed] = flash_message "not_created"
+      flash.now[:failed] = flash_message "not_created"
     end
     @user_task = @user_task_history.user_task
     load_data
@@ -27,9 +27,9 @@ class TasksController < ApplicationController
   def update
     @old_status = user_task.status
     if @task.update_attributes task_params
-      flash[:success] = flash_message "updated"
+      flash.now[:success] = flash_message "updated"
     else
-      flash[:failed] = flash_message "not_updated"
+      flash.now[:failed] = flash_message "not_updated"
     end
     @user_task = user_task
     load_data

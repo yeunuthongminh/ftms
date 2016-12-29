@@ -1,4 +1,5 @@
 class UserTask < ApplicationRecord
+  serialize :pull_request_url
   acts_as_paranoid
   include PublicActivity::Model
   include ChatworkApi
@@ -27,6 +28,8 @@ class UserTask < ApplicationRecord
   delegate :name, :id, to: :trainee, prefix: true, allow_nil: true
   delegate :description, to: :task, prefix: true, allow_nil: true
 
+  before_save :update_sent_pull_count
+
   def nil_master?
     task.task_master_id.nil?
   end
@@ -42,5 +45,10 @@ class UserTask < ApplicationRecord
   def all_user_task_history
     self.user_task_histories.select{|user_task_history|
       user_task_history.created_at.to_date == Date.today.to_date}
+  end
+
+  private
+  def update_sent_pull_count
+    self.sent_pull_count += 1 if pull_request_url_changed?
   end
 end

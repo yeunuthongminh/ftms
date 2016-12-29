@@ -1,6 +1,6 @@
 $('.flash').html('<%= j render "layouts/flash" %>');
 $('#user-task-<%= @user_task.id %>').modal("hide");
-$('#user-task-row-<%= @user_task.id %>')
-  .html('<%= j render "subjects/user_task_row", user_task: @user_task %>');
+$('.user-task-row#row-<%= @user_task.id %>')
+  .replaceWith('<%= j render "subjects/user_task", user_task: @user_task %>');
 $('.modal-backdrop').remove();
 $('#body-user').attr("class", "");

@@ -137,7 +137,6 @@
       left: 0;
       background: linear-gradient(to right, mix(violet, deepskyblue, 20%),
        mix(limegreen, yellow, 70%), yellow, orange, mix(red, deeppink, 20%));
-      clip-path: inset(0 100% 0 0);
       &:before{
         content: '';
         display: block;
