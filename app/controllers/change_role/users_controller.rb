@@ -4,35 +4,32 @@ class ChangeRole::UsersController < ApplicationController
 
   def edit
     @roles = Role.all
-    if role_changed?
-      @user.user_roles.delete_all
-      @user.user_functions.delete_all
-      @user.update_attributes role_ids: rebuild_params
-      user_functions = []
-      rebuild_params.each do |role_id|
-        role = Role.find role_id
-        role.role_functions.each do |role_function|
-          user_functions << UserFunction.new(user: @user,
-            function_id: role_function.function_id,
-            role_type: role.role_type)
-        end
+    @supports = Supports::UserFunctionSupport.new @role, @user
+  end
+
+  def update
+    @user.user_functions.delete_all
+    user_functions = []
+    rebuild_params.each do |user_function_id|
+      user_function = rebuild_params[user_function_id]
+      if user_function[:_destroy] == "false"
+        user_functions << UserFunction.new(user: @user,
+          function_id: user_function[:function_id],
+          type: user_function[:type])
       end
-      UserFunction.import user_functions
     end
+    UserFunction.import user_functions
     redirect_to eval("edit_#{@namespace}_user_path(@user)")
   end
 
   private
   def user_params
-    params.require(:user).permit role_ids: []
-  end
-
-  def role_changed?
-    @user.user_roles.collect{|u| u.role_id.to_s} != rebuild_params
+    params.require(:user).permit role_ids: [], user_functions_attributes: [:id, :function_id,
+      :user_id, :type, :_destroy]
   end
 
   def rebuild_params
-    user_params[:role_ids] - [""]
+    user_params[:user_functions_attributes]
   end
 
   def find_user
