@@ -12,7 +12,7 @@
       </p>
       <p class="documents"><%= t("subjects.documents") %>&nbsp;
         <% @subject.documents.each do |doc| %>
-          <%= link_to doc.name, doc.content.url, target: "_blank" %>&nbsp;
+          <%= link_to doc.title, doc.document_link.url, target: "_blank" %>&nbsp;
         <% end %>
       </p>
     </div>

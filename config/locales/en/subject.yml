@@ -60,3 +60,7 @@ en:
     chatwork_id: "Chatwork room id"
     content: "Content"
     change_project: "Change project"
+    error:
+      number_question: "Number question must fill"
+      time_of_exam: "Time of exam must fill"
+      min_score: "Min score must fill"

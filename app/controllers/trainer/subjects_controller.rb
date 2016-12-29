@@ -1,6 +1,5 @@
 class Trainer::SubjectsController < ApplicationController
   before_action :authorize
-  before_action :find_subject_in_edit, only: [:edit, :update]
   before_action :load_subject, except: [:index, :new, :create]
   before_action :load_data, only: :show
 
