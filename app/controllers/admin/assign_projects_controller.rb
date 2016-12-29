@@ -4,6 +4,9 @@ class Admin::AssignProjectsController < ApplicationController
   def update
     if params[:course_subject] && @course_subject.update_project_assign(course_subject_params)
       flash.now[:success] = flash_message "updated"
+      Notifications::AssignProjectNotificationBroadCastJob
+        .perform_now course_subject: @course_subject, key: :assign_project,
+        user: current_user, parameters: @project_name
     else
       flash.now[:danger] = flash_message "not_updated"
     end

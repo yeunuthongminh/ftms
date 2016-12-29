@@ -28,7 +28,7 @@ class Admin::ProjectRequirementsController < ApplicationController
 
   private
   def params_requirement
-    params.require(:project_requirement).permit :name
+    params.require(:project_requirement).permit :name, :project_id
   end
 
   def load_project

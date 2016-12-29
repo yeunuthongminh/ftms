@@ -20,6 +20,7 @@ class CourseSubject < ApplicationRecord
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
   has_many :course_subject_requirements, dependent: :destroy
   has_many :project_requirements, through: :course_subject_requirement
+  has_many :notifications, as: :trackable, dependent: :destroy
 
   after_create :init_objects
 
