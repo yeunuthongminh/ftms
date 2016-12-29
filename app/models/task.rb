@@ -2,7 +2,7 @@ class Task < ApplicationRecord
   acts_as_paranoid
 
   ATTRIBUTES_PARAMS = [:name, :description, :course_subject_id,
-    user_tasks_attributes: [:id, :user_id, :user_subject_id]]
+    user_tasks_attributes: [:id, :user_id, :user_subject_id, :pull_request_url]]
 
   belongs_to :course_subject
 

@@ -1,10 +1,65 @@
 $(document).on('turbolinks:load', function(){
-  $('a.task-action').click(function (e) {
+  $('.edit_task').each(function () {
+    var git_links = $('#task_user_tasks_attributes_0_pull_request_url', this).val().split(' '),
+        html = "";
+
+    for (var i=0; i < git_links.length; i++) {
+      if (git_links[i].length) {
+        html += pull_url_input_field(git_links[i]);
+      }
+    }
+    $('.pull-rq-field', this).prepend(html);
+  });
+
+  $('body').on('keypress', '.task-pullurl input.link-field', function (e) {
+    if (e.which == 13){
+      e.preventDefault();
+      if ($.trim($(this).val()).length) {
+        var new_field = pull_url_input_field();
+        $(this).closest('div.pull-rq-field').append(new_field);
+        $('input.link-field:last-child').focus();
+      }
+      return false;
+    }
+  });
+
+  $('.submit-user-task').click(function () {
+    var _form = $(this).closest('form'),
+        _links = $('input.link-field', _form),
+        _git_links = "",
+        _pull_url = $('input.pull_urls', _form);
+    $(_links).each(function () {
+      if ($.trim($(this).val()).length && check_valid_url(this.value)) {
+        _git_links += this.value + " ";
+      }
+    });
+    $(_pull_url).val(_git_links);
+
+    if ($(_pull_url).val().length) {
+      return true;
+    } else {
+      $(this).closest('.modal').modal('hide');
+      return false;
+    }
+  });
+
+  $('body').on('click', 'a.task-action', function (e) {
     e.preventDefault();
+
     var user_task_row = $(this).closest('.task.user-task-row'),
         action = $(this).data('action'),
         task_name = $('strong.task-name', user_task_row).text();
+    $('.pull-rq-field .btn-circle').on('click', function () {
+      var parent_pull-rq-field = $(this).closest('div.pull-rq-field');
+      if (parent_pull-rq-field.find('div.pull-requestes').length > 1) {
+        $(this).closest('div.pull-requestes').remove();
+      }
+    });
+
     if (action === "edit") {
+      str = user_task_row[0].id;
+      str = str.slice(4, str.length);
+      $('#user-task-'+ str).modal('show');
 
     } else if (action === "delete") {
 
@@ -48,3 +103,22 @@ $(document).on('turbolinks:load', function(){
     }
   });
 });
+
+function pull_url_input_field(value = "") {
+  return "<div class='pull-requestes'><div class='col-md-11 task-pullurl'>\
+    <input type='text' class='form-control link-field' placeholder='"
+    + I18n.t("user_tasks.title.git_link") + "' value='" + value + "'></div>\
+    <div class='col-md-1 btn-rm-pull' data-toggle='buttons'>\
+    <label class='btn btn-danger btn-circle'>\
+    <input type='checkbox' value='false' name='remove'>\
+    <i class='fa fa-times' aria-hidden='true'></i></label></div></div></div>";
+}
+
+function check_valid_url(str) {
+  var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+  if(!regex .test(str)) {
+    return "";
+  } else {
+    return str;
+  }
+}

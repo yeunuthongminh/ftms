@@ -1,14 +1,8 @@
 <div id="TaskModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3 class="label-modal"><%= t "subjects.task.new_task" %></h3>
-      </div>
-      <div class="modal-body">
-        <%= render "subjects/task_form", task: @subject_supports.task_new,
-          user_task: @subject_supports.user_task_handle %>
-      </div>
+      <%= render "subjects/task_form", task: @subject_supports.task_new,
+        user_task: @subject_supports.user_task_handle %>
     </div>
   </div>
 </div>

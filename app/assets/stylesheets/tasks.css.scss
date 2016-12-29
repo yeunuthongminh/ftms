@@ -79,15 +79,59 @@
     font-weight: 600;
   }
 
+  .fa.fa-times {
+    font-size: 17px;
+    position: relative;
+    top: -5px;
+    left: -1px;
+  }
+
   .author {
     position: absolute;
     top: 30px;
     left: 30px;
   }
 
+  .user-task-row {
+    .modal-body > div.form-group {
+      min-height: 30px;
+    }
+
+    label {
+      margin-top: 10px;
+    }
+
+
+    .pull-requestes {
+      position: relative;
+      min-height: 45px;
+      .task-pullurl {
+        position: absolute;
+        input {
+          margin-top: 10px;
+        }
+      }
+
+      .btn-rm-pull {
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    .col-md-1 {
+      padding-left: 0px;
+      padding-right: 5px;
+    }
+  }
+
   .author-name {
     display: block;
     margin: 0 0 15px 0;
+    min-height: 15px;
     font-size: 1.1em;
   }
 
@@ -95,7 +139,7 @@
     position: relative;
     padding: 15px 30px 40px 130px;
     min-height: 100px;
-    margin: 0 3px 3px 0;
+    margin: 0 6px 6px 0;
     border-radius: 2px;
     background: #fff !important;
 
@@ -111,7 +155,7 @@
 
     div.task-action {
       position: absolute;
-      top: 20px;
+      top: 10px;
       left: calc(100% - 50px);
       border: none !important;
       display: none;

@@ -1,22 +1,53 @@
 <%= form_for task, remote: true do |f| %>
-  <%= f.hidden_field :course_subject_id,
-    value: @subject_supports.course_subject.id %>
-  <div class="form-group">
-    <%= f.text_field :name, class: "form-control", required: true,
-      placeholder: t("tasks.form.input_task_name") %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="label-modal"><%= t "tasks.update" %></h4>
   </div>
-  <div class="form-group">
-    <%= f.text_area :description, class: "form-control modal-text-area",
-      placeholder: t("tasks.form.input_task_description") %>
+  <div class="modal-body modal-user-task row ">
+    <%= f.hidden_field :course_subject_id,
+      value: @subject_supports.course_subject.id %>
+    <div class="form-group">
+      <div class="col-md-2"><%= f.label :name %></div>
+      <div class="col-md-10">
+        <%= f.text_field :name, required: true, class: "form-control",
+          placeholder: t("tasks.form.input_task_name") %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-2"><%= f.label :description %></div>
+      <div class="col-md-10">
+        <%= f.text_area :description, class: "form-control modal-text-area",
+        placeholder: t("tasks.form.input_task_description") %>
+      </div>
+    </div>
+
+    <%= f.fields_for :user_tasks, user_task do |builder| %>
+      <%= builder.hidden_field :user_id, value: current_user.id %>
+      <%= builder.hidden_field :user_subject_id, value: @subject_supports.user_subject.id %>
+      <%= builder.hidden_field :pull_request_url, class: "pull_urls" %>
+      <div class="form-group">
+        <div class="col-md-2"><%= f.label t "user_tasks.label.git_link" %></div>
+        <div class="col-md-10 row pull-rq-field">
+          <div class="pull-requestes">
+            <div class='col-md-11 task-pullurl'>
+              <input type="text" class="form-control link-field"
+                placeholder="<%= t "user_tasks.title.git_link" %>">
+            </div>
+            <div class='col-md-1 btn-rm-pull' data-toggle='buttons'>
+              <label class='btn btn-danger btn-circle'>
+                <input type='checkbox' value='false' name='remove'>
+                <i class='fa fa-times' aria-hidden='true'></i>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <%= f.fields_for :user_tasks, user_task do |builder| %>
-    <%= builder.hidden_field :user_id, value: current_user.id %>
-    <%= builder.hidden_field :user_subject_id, value: @subject_supports.user_subject.id %>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.submit (f.object.new_record? ? t("buttons.create")
-      : t("buttons.save")), class: "btn-action" %>
+  <div class="modal-footer">
+    <div class="form-group">
+      <%= f.submit (f.object.new_record? ? t("buttons.create")
+        : t("buttons.save")), class: "btn-action pull-right submit-user-task" %>
+    </div>
   </div>
 <% end %>
