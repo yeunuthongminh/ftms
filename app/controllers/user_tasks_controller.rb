@@ -19,18 +19,18 @@ class UserTasksController < ApplicationController
       else
         flash.now[:error] = flash_message "not_updated"
       end
-      load_data
-      respond_to do |format|
-        format.js
-        format.json do
-          render json: {status: 200}
-        end
-      end
-    else
-      if @user_task.update_attributes status: params[:status]
-        flash.now[:success] = flash_message "updated"
-      else
-        flash.now[:error] = flash_message "not_updated"
+    elsif params[:pull_url]
+      users = [@user_task.user_subject.course.trainers, @user_task.user].flatten!
+      message = t "user_tasks.report_pull_request", task: @user_task.task_name,
+        url: params[:pull_url]
+      room_id = @user_task.user_subject.course_subject_chatwork_room_id
+      @user_task.send_message_chatwork users: users, message: message, room_id: room_id
+    end
+    load_data
+    respond_to do |format|
+      format.js
+      format.json do
+        render json: {status: 200}
       end
     end
   end

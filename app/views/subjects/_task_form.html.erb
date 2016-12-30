@@ -1,7 +1,9 @@
 <%= form_for task, remote: true do |f| %>
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="label-modal"><%= t "tasks.update" %></h4>
+    <h4 class="label-modal">
+      <%= f.object.new_record? ? t("tasks.create") : t("tasks.update") %>
+    </h4>
   </div>
   <div class="modal-body modal-user-task row ">
     <%= f.hidden_field :course_subject_id,
@@ -20,7 +22,7 @@
         placeholder: t("tasks.form.input_task_description") %>
       </div>
     </div>
-
+    <%= f.hidden_field :create_by_trainee, value: true %>
     <%= f.fields_for :user_tasks, user_task do |builder| %>
       <%= builder.hidden_field :user_id, value: current_user.id %>
       <%= builder.hidden_field :user_subject_id, value: @subject_supports.user_subject.id %>
@@ -28,15 +30,37 @@
       <div class="form-group">
         <div class="col-md-2"><%= f.label t "user_tasks.label.git_link" %></div>
         <div class="col-md-10 row pull-rq-field">
+          <% if user_task.pull_request_url %>
+            <% user_task.pull_request_url.split(" ").each do |url| %>
+            <div class="pull-requestes">
+              <div class="col-md-10 task-pullurl">
+                <input type="text" class="form-control link-field"
+                  placeholder="<%= t "user_tasks.title.git_link" %>" value="<%= url %>">
+              </div>
+              <div class="col-md-1 btn-submit-pull" data-toggle="buttons">
+                <label class="btn btn-success btn-circle">
+                  <input type="checkbox" value="false" name="submit">
+                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                </label>
+              </div>
+              <div class="col-md-1 btn-rm-pull" data-toggle="buttons">
+                <label class="btn btn-danger btn-circle">
+                  <input type="checkbox" value="false" name="remove">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </label>
+              </div>
+            </div>
+            <% end %>
+          <% end %>
           <div class="pull-requestes">
-            <div class='col-md-11 task-pullurl'>
+            <div class="col-md-11 task-pullurl">
               <input type="text" class="form-control link-field"
                 placeholder="<%= t "user_tasks.title.git_link" %>">
             </div>
-            <div class='col-md-1 btn-rm-pull' data-toggle='buttons'>
-              <label class='btn btn-danger btn-circle'>
-                <input type='checkbox' value='false' name='remove'>
-                <i class='fa fa-times' aria-hidden='true'></i>
+            <div class="col-md-1 btn-rm-pull" data-toggle="buttons">
+              <label class="btn btn-danger btn-circle">
+                <input type="checkbox" value="false" name="remove">
+                <i class="fa fa-times" aria-hidden="true"></i>
               </label>
             </div>
           </div>
@@ -46,8 +70,11 @@
   </div>
   <div class="modal-footer">
     <div class="form-group">
-      <%= f.submit (f.object.new_record? ? t("buttons.create")
-        : t("buttons.save")), class: "btn-action pull-right submit-user-task" %>
+      <% if f.object.new_record? %>
+        <%= f.submit t("buttons.create"), class: "btn-action create-user-task" %>
+      <% else %>
+        <%= f.submit t("buttons.save"), class: "btn-action update-user-task" %>
+      <% end %>
     </div>
   </div>
 <% end %>

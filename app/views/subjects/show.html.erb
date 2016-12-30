@@ -37,7 +37,7 @@
                 method: :put, class: "hidden", id: "finish-subject-project" %>
             <% end %>
           </div>
-          <% if current_user.is_trainee? && @subject_supports.user_subject.progress? %>
+          <% if current_user.trainee? && @subject_supports.user_subject.progress? %>
             <%= link_to t("buttons.finish"), "#",
               class: "btn btn-danger pull-right finish-subject" %>
           <% elsif @subject.subject_detail &&
@@ -71,13 +71,15 @@
         <div class="user-task">
           <div class="overview">
             <h1><%= t "subjects.task_overview" %></h1>
-            <% if current_user.is_trainee? && @subject_supports
+            <% if current_user.trainee? && @subject_supports
               .user_subject.progress? && !@subject_supports.course.finish? %>
               <%= link_to "#",
                 data: {toggle: "modal", target: "#TaskModal"},
                 class: "pull-right btn-new-task" do %>
-                <span class="glyphicon glyphicon-plus"></span>
-                <%= t "subjects.task.new_task" %>
+                <button type="button">
+                  <span class="glyphicon glyphicon-plus"></span>
+                  <%= t "subjects.task.new_task" %>
+                </button>
               <% end %>
             <% end %>
           </div>

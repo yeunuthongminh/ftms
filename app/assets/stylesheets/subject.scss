@@ -7,6 +7,12 @@
     }
   }
 
+  #TaskModal {
+    .modal-body > div.form-group {
+      min-height: 30px;
+    }
+  }
+
   .user-task {
     padding: 5px 5px 10px 5px;
     background-color: #f3f3e7;
@@ -15,6 +21,7 @@
       font-size: 150%;
       color: #575a5b;
       margin-bottom: 1.25em;
+      position: relative;
     }
 
     .assign-task {
@@ -36,7 +43,39 @@
   }
 
   .btn-new-task {
+    position: absolute;
+    top: 0;
+    right: 0;
     font-size: 14px;
+  }
+
+  .pull-requestes {
+    position: relative;
+    min-height: 45px;
+    .task-pullurl {
+      position: absolute;
+      input {
+        margin-top: 10px;
+      }
+    }
+
+    .col-md-1 {
+      padding-left: 0px;
+      padding-right: 5px;
+    }
+
+    .btn-rm-pull {
+      position: absolute;
+      right: 0;
+      top: 10px;
+    }
+  }
+
+  .fa.fa-times {
+    font-size: 17px;
+    position: relative;
+    top: -5px;
+    left: -1px;
   }
 
   .btn-action, .btn-finished, .btn-continued, .btn-finish {

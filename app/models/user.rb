@@ -150,9 +150,7 @@ class User < ApplicationRecord
   end
 
   def has_function? controller, action, role
-    if self.has_role? role
-      functions.has_function(controller, action).any?
-    end
+    functions.has_function(controller, action).any?
   end
 
   def like? target

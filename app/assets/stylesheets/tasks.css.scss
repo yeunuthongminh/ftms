@@ -79,7 +79,7 @@
     font-weight: 600;
   }
 
-  .fa.fa-times {
+  .fa.fa-times,.fa-paper-plane {
     font-size: 17px;
     position: relative;
     top: -5px;
@@ -97,11 +97,6 @@
       min-height: 30px;
     }
 
-    label {
-      margin-top: 10px;
-    }
-
-
     .pull-requestes {
       position: relative;
       min-height: 45px;
@@ -115,6 +110,12 @@
       .btn-rm-pull {
         position: absolute;
         right: 0;
+      }
+
+      .btn-submit-pull {
+        position: absolute;
+        right: 40px;
+        top: 10px;
       }
     }
 

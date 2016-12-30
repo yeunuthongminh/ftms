@@ -10,6 +10,7 @@ en:
     time_ago: "Created at %{time} ago"
     description: "Description"
     update: "Update"
+    create: "Create"
     pull_request: "Pull request"
     fields:
       name: "Name"
@@ -42,3 +43,4 @@ en:
       onhold_tasks: "Are you want to pause task %{task_name}?"
       delete_tasks: "Are you want to delete task %{task_name}?"
       inprogress_tasks: "Are you want to start task %{task_name}?"
+    report_pull_request: "Please review task %{task}: %{url}"

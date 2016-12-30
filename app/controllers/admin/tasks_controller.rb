@@ -82,7 +82,7 @@ class Admin::TasksController < ApplicationController
         user_subject.create_user_task_if_create_task @task
       end
     else
-      @task.create_by_trainee = current_user.is_trainee?
+      @task.create_by_trainee = current_user.trainee?
     end
     @task.course_subject = @course_subject
   end
