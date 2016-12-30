@@ -26,13 +26,16 @@ class Admin::SubjectsController < ApplicationController
     @subject.documents.build
     @subject.task_masters.build
     load_subject_detail
+    @subject_form = SubjectForm.new @subject
     add_breadcrumb_path "subjects"
     add_breadcrumb_new "subjects"
   end
 
   def create
     @subject = Subject.new subject_params
-    if @subject.save
+    @subject_form = SubjectForm.new @subject
+    if @subject_form.validate subject_params
+      @subject_form.save
       flash[:success] = flash_message "created"
       redirect_to admin_subject_task_masters_path @subject
     else
@@ -43,13 +46,16 @@ class Admin::SubjectsController < ApplicationController
   end
 
   def edit
+    @subject_form = SubjectForm.new @subject
     add_breadcrumb_path "subjects"
     add_breadcrumb @subject.name, admin_subject_task_masters_path(@subject)
     add_breadcrumb_edit "subjects"
   end
 
   def update
-    if @subject.update_attributes subject_params
+    @subject_form = SubjectForm.new @subject
+    if @subject_form.validate subject_params
+      @subject_form.save
       flash[:success] = flash_message "updated"
       redirect_to admin_subject_task_masters_path @subject
     else

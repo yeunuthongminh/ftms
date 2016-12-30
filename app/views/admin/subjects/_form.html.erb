@@ -1,7 +1,7 @@
 <div id="subjects-form">
-  <%= form_for [:admin, @subject] do |f| %>
+  <%= form_for [:admin, @subject_form] do |f| %>
     <div class="row">
-      <%= render "shared/error_messages", object: @subject %>
+      <%= render "shared/error_messages", object: @subject_form %>
       <div class="title"><%= @subject.name %></div>
       <div class="col-md-12">
         <div class="row">
@@ -61,7 +61,7 @@
         <%= f.fields_for :documents do |builder| %>
           <%= render "document_fields", f: builder %>
         <% end %>
-        <strong><%= link_to_add_fields t("subjects.document"), f, :documents %></strong>
+        <strong><%= link_to_add_form_fields t("subjects.document"), f, :documents %></strong>
       </div>
     </div>
     <br>
@@ -94,14 +94,14 @@
           <%= render "task_master_fields", f: builder %>
         <% end %>
         <span id="add-task-masters">
-          <%= link_to_add_fields t("subjects.dynamic_form.add"), f, :task_masters %>
+          <%= link_to_add_form_fields t("subjects.dynamic_form.add"), f, :task_masters %>
         </span>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-1 col-md-offset-10">
-        <%= f.submit (f.object.new_record? ? t("buttons.create") : t("buttons.save")),
+        <%= f.submit (f.object.model.new_record? ? t("buttons.create") : t("buttons.save")),
           class: "btn btn-primary text-right", id: "edit-subject-submit" %>
       </div>
     </div>
