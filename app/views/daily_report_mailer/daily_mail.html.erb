@@ -21,20 +21,23 @@
               <% course_subject.user_subjects.each do |user_subject| %>
                 <% if user_subject.progress? %>
                   <tr style="width: 100%; <%= 'color: #b22222' if user_subject.do_none_task? %>">
-                    <td style='border: 1px solid #cecece; width: 15%; text-align: center'>
+                    <td style='border: 1px solid #cecece; width: 10%; text-align: center'>
                       <%= user_subject.trainee.name %></td>
-                    <td style='border: 1px solid #cecece; width: 15%; text-align: center'>
+                    <td style='border: 1px solid #cecece; width: 10%; text-align: center'>
                       <%= course_subject.subject.name %></td>
                     <td style='border: 1px solid #cecece; width: 10%; text-align: center'>
                       <%= user_subject.percent_progress.to_i %>%</td>
-                    <td style='border: 1px solid #cecece; width: 20%; text-align: center'>
+                    <td style='border: 1px solid #cecece; width: 10%; text-align: center'>
                       <%= render "task_status", user_subject: user_subject, status: "init" %>
                     </td>
                     <td style='border: 1px solid #cecece; width: 20%; text-align: center'>
-                      <%= render "task_status", user_subject: user_subject, status: "continue" %>
+                      <%= render "task_status", user_subject: user_subject, status: "inprogress" %>
                     </td>
                     <td style='border: 1px solid #cecece; width: 20%; text-align: center'>
-                      <%= render "task_status", user_subject: user_subject, status: "finished" %>
+                      <%= render "task_status", user_subject: user_subject, status: "onhold" %>
+                    </td>
+                    <td style='border: 1px solid #cecece; width: 20%; text-align: center'>
+                      <%= render "task_status", user_subject: user_subject, status: "complete" %>
                     </td>
                   </tr>
                 <% end %>

@@ -5,19 +5,15 @@ class TasksController < ApplicationController
   before_action :authorize_task, only: [:update]
 
   def create
-    @task = current_user.tasks.new task_params
+    @task = Task.new task_params
     authorize_task
     load_user_subject_in_course
     if @task.save
-      user_task = @task.user_tasks.find_by user: current_user
-      user_task_service = MailerServices::UserTaskService.new user_task: user_task,
-        status: Settings.status.init
-      @user_task_history = user_task_service.perform
       flash.now[:success] = flash_message "created"
     else
       flash.now[:failed] = flash_message "not_created"
     end
-    @user_task = @user_task_history.user_task
+    @user_task = user_task
     load_data
     respond_to do |format|
       format.js
@@ -64,7 +60,7 @@ class TasksController < ApplicationController
   end
 
   def user_task
-    @task.user_tasks.first
+    @task.user_tasks.take
   end
 
   def authorize_task

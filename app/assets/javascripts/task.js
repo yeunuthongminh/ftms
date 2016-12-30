@@ -1,16 +1,4 @@
 $(document).on('turbolinks:load', function(){
-  $('.edit_task').each(function () {
-    var git_links = $('#task_user_tasks_attributes_0_pull_request_url', this).val().split(' '),
-        html = "";
-
-    for (var i=0; i < git_links.length; i++) {
-      if (git_links[i].length) {
-        html += pull_url_input_field(git_links[i]);
-      }
-    }
-    $('.pull-rq-field', this).prepend(html);
-  });
-
   $('body').on('keypress', '.task-pullurl input.link-field', function (e) {
     if (e.which == 13){
       e.preventDefault();
@@ -23,7 +11,7 @@ $(document).on('turbolinks:load', function(){
     }
   });
 
-  $('.submit-user-task').click(function () {
+  $('.update-user-task').click(function () {
     var _form = $(this).closest('form'),
         _links = $('input.link-field', _form),
         _git_links = "",
@@ -49,11 +37,25 @@ $(document).on('turbolinks:load', function(){
     var user_task_row = $(this).closest('.task.user-task-row'),
         action = $(this).data('action'),
         task_name = $('strong.task-name', user_task_row).text();
-    $('.pull-rq-field .btn-circle').on('click', function () {
-      var parent_pull-rq-field = $(this).closest('div.pull-rq-field');
-      if (parent_pull-rq-field.find('div.pull-requestes').length > 1) {
+    $('.pull-rq-field .btn-rm-pull .btn-circle').on('click', function () {
+      var parent_pull_rq = $(this).closest('div.pull-rq-field');
+      if (parent_pull_rq.find('div.pull-requestes').length > 1) {
         $(this).closest('div.pull-requestes').remove();
       }
+    });
+
+    $('.pull-rq-field .btn-submit-pull .btn-circle').on('click', function () {
+      var pull_rq = $(this).closest('div.pull-requestes').find('input.link-field').val(),
+          _that = this,
+          _url = $(this).closest('div.task.user-task-row').data('task');
+      $.ajax({
+        url: _url,
+        method: 'PATCH',
+        data: {pull_url: pull_rq},
+        complete: function (data) {
+          $(_that).closest('.modal').modal('hide');
+        }
+      });
     });
 
     if (action === "edit") {

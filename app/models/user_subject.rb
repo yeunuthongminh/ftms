@@ -39,7 +39,7 @@ class UserSubject < ApplicationRecord
   delegate :name, to: :user, prefix: true, allow_nil: true
   delegate :name, :id, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
-  delegate :link_github, :link_heroku, to: :course_subject, prefix: true,
+  delegate :link_github, :link_heroku, :chatwork_room_id, to: :course_subject, prefix: true,
     allow_nil: true
 
   enum status: [:init, :progress, :waiting, :finish]
@@ -163,7 +163,7 @@ class UserSubject < ApplicationRecord
   def do_none_task?
     none_task = true
     user_tasks.each do |user_task|
-      if user_task.all_user_task_history.any?
+      if user_task.user_task_finished_in_day?
         return none_task = false
       end
     end

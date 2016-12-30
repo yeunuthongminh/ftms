@@ -1,9 +1,7 @@
 <% user_subject.user_tasks.each do |user_task| %>
-  <% user_task.all_user_task_history.each do |user_task_history| %>
-    <% if user_task_history.send "#{status}?" %>
+    <% if user_task.send "#{status}?" %>
       <div class="text text-danger">
-        - <%= user_task_history.user_task.task.name %>
+        - <%= user_task.task_name %>
       </div>
     <% end %>
-  <% end %>
 <% end %>

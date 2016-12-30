@@ -19,7 +19,7 @@
           <td><%= l exam.created_at, format: :datetime %></td>
           <td>
             <%= link_to exam.user_subject.subject_name,
-              [exam.user_subject.user_course, exam.user_subject.subject] %>
+              [exam.user_subject.trainee_course, exam.user_subject.subject] %>
           </td>
           <td>
             <span class="label-status <%= set_background_color_status exam.status %>">
