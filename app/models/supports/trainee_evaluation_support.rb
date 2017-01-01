@@ -20,7 +20,7 @@ class Supports::TraineeEvaluationSupport
   end
 
   def trainee_evaluations
-    @trainee_evaluations ||= if @current_user.is_admin?
+    @trainee_evaluations ||= if @current_user.admin?
       TraineeEvaluation.includes :user
     else
       @current_user.trainee_evaluations.includes :user
