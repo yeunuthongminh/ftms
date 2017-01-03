@@ -87,7 +87,7 @@ class Admin::ProgramsController < ApplicationController
     if params[:parent_id]
       parent_program = Program.find_by id: params[:parent_id]
       if parent_program
-        @program = parent_program.children.new
+        @program = parent_program.children.new program_type: parent_program.program_type
       else
         flash[:alert] = flash_message "not_find"
         redirect_to admin_programs_path
