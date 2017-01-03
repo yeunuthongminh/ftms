@@ -81,7 +81,7 @@ $(document).on('turbolinks:load', function() {
       $('#list-evaluation li').length + "][score]'>" +
       "<a href='#'' class='check-list-remove'>\
       <i class='fa fa-remove'></i></a></div></li>";
-    $('#list-evaluation').prepend(html);
+    $('#list-evaluation').append(html);
     build_list_selectbox_evaluation($('#list-evaluation li .check-box.add-new-name'));
   });
 

@@ -1,4 +1,4 @@
-<%= form_for @trainee_evaluation,
+<%= form_for @trainee_evaluation_form,
   url: [:admin, @supports.targetable, @supports.trainee_evaluation] do |f| %>
   <div class="row">
     <div class="col-md-6 col-md-offset-2">
@@ -42,7 +42,7 @@
     <div class="row">
       <div class="col-md-1 col-md-offset-10">
         <p class="pull-right">
-          <%= f.submit (f.object.new_record? ? t("buttons.create") :
+          <%= f.submit (f.object.model.new_record? ? t("buttons.create") :
             t("buttons.save")), class: "btn btn-primary" %>
         </p>
       </div>
