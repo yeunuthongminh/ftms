@@ -56,6 +56,7 @@ gem "acts_as_votable", "~> 0.10.0"
 gem "reform"
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
+gem "timelineJS-rails", "~> 1.1.5"
 
 group :development, :test do
   gem "rack-mini-profiler"

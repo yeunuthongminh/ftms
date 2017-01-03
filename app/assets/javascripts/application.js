@@ -90,6 +90,8 @@
 //= require task
 //= require likes
 //= require assign_user_function
+//= require timelineJS/embed
+//= require timeline
 
 $(document).on('turbolinks:load ajaxComplete', function() {
   $('.alert').delay(3000).fadeOut();

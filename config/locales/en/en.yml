@@ -57,6 +57,7 @@ en:
       year: "%d/%m/%Y"
       datetime: "%Y-%m-%d %I:%M %p"
       times: "%H:%M:%S"
+      timeline_js: "%Y,%m,%d"
   date:
     <<: *datetime
   time:
