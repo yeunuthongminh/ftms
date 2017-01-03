@@ -21,9 +21,11 @@
 
     <div class="row">
       <div class="col-md-12">
-        <% if policy edit_change_role_user_path @user %>
-          <%= link_to t("user.edit_role"),
-            edit_change_role_user_path(@user) unless @user.new_record? %>
+        <%unless @user_form.user.new_record?%>
+          <% if policy edit_change_role_user_path @user_form.user %>
+            <%= link_to t("user.edit_role"),
+              edit_change_role_user_path(@user_form) %>
+          <% end %>
         <% end %>
         <% if @supports.user.new_record? %>
           <%= f.submit t("buttons.create_and_continue"),

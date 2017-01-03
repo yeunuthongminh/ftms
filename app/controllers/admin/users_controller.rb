@@ -26,11 +26,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    @user_form = UserForm.new user: @user, profile: @user.profile
+    @user_form = UserForm.new
+    @user_form.init user: @user, profile: @user.profile
   end
 
   def update
-    @user_form = UserForm.new user: @user, profile: @user.profile
+    @user_form = UserForm.new
+    @user_form.init user: @user, profile: @user.profile
     @user_form.assign_attributes user_params
     if @user_form.save
       sign_in(@user, bypass: true) if current_user? @user

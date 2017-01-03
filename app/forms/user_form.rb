@@ -2,11 +2,6 @@ class UserForm
   include ActiveModel::Model
   attr_accessor :user, :profile
 
-  def initialize args = {}
-    @user = args[:user]
-    @profile = args[:profile]
-  end
-
   class << self
     def user_attributes
       User.column_names
@@ -19,6 +14,11 @@ class UserForm
     def model_name
       User.model_name
     end
+  end
+
+  def init args
+    @user = args[:user]
+    @profile = args[:profile]
   end
 
   user_attributes.each do |attr|

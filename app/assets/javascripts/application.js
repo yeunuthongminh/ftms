@@ -36,10 +36,10 @@
 //= require admin/role_permission
 //= require admin/trainee_evaluation
 //= require admin/note
-//= require jquery-ui/dialog
-//= require jquery-ui/sortable
-//= require jquery-ui/effect-highlight
-//= require jquery-ui/slider
+//= require jquery-ui/widgets/dialog
+//= require jquery-ui/widgets/sortable
+//= require jquery-ui/effects/effect-highlight
+//= require jquery-ui/widgets/slider
 //= require admin/update_order_course_subject
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap

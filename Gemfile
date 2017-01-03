@@ -37,7 +37,7 @@ gem "breadcrumbs_on_rails"
 gem "unread"
 gem "exception_notification"
 gem "business_time"
-gem "paranoia", github: "rubysherpas/paranoia", branch: "rails5"
+gem "paranoia"
 gem "jquery-countdown-rails"
 gem "cloudinary"
 gem "pundit"
@@ -57,6 +57,8 @@ gem "reform"
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
 gem "timelineJS-rails", "~> 1.1.5"
+gem "reform-rails"
+
 
 group :development, :test do
   gem "rack-mini-profiler"
