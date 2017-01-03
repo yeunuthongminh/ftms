@@ -83,7 +83,7 @@
               <%= f.hidden_field :stage_id, value: @supports.stage.id %>
             <% else %>
               <%= link_to t("stages.change"),
-                edit_admin_user_stages_path(@user_form.user), class: "btn btn-danger" %>
+                edit_admin_user_stages_path(@supports.user), class: "btn btn-danger" %>
             <% end %>
           </h4>
         </div>
