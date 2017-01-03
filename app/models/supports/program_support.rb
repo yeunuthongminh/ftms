@@ -24,4 +24,9 @@ class Supports::ProgramSupport
   def programs
     @programs ||= Program.all.collect {|program| [program.name, program.id]}
   end
+
+  def program_types
+    @program_types ||= Program.program_types
+      .map {|key, value| [I18n.t("programs.program_types.#{key}"), key]}
+  end
 end

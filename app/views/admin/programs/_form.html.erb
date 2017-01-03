@@ -5,17 +5,29 @@
       <%= f.text_field :name, class: "form-control" %>
     </div>
   </div>
-  <div class="col-sm-6">
-    <% if @program.new_record? %>
-      <%= f.hidden_field :parent_id %>
-    <% else %>
+  <% if @program.new_record? %>
+    <%= f.hidden_field :parent_id %>
+  <% else %>
+    <div class="col-sm-6">
       <div class="form-group">
         <%= f.label :parent_program %>
         <%= f.select :parent_id, @program_supports.programs, {prompt: ""},
           {selected: f.object.parent_id, class: "form-control"} %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+  <% if @program.root? %>
+    <div class="col-sm-12">
+      <div class="form-group program-type">
+        <%= f.label :program_type %>
+        <%= f.select :program_type, @program_supports.program_types, {},
+          class: "form-control" %>
+      </div>
+    </div>
+  <% else %>
+    <%= f.hidden_field :program_type %>
+  <% end %>
+
   <%= render "shared/error_messages", object: f.object %>
   <%= render "shared/form_assign_trainer", f: f,
     assigned_trainer_ids: @program_supports.assigned_trainer_ids,

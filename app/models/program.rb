@@ -3,8 +3,8 @@ class Program < ApplicationRecord
 
   has_closure_tree
 
-  ATTRIBUTES_PARAMS = [:name, :parent_id, trainer_programs_attributes: [:id, :user_id,
-    :_destroy, :deleted_at]]
+  ATTRIBUTES_PARAMS = [:name, :parent_id, :program_type,
+    trainer_programs_attributes: [:id, :user_id, :_destroy, :deleted_at]]
 
   has_many :trainer_programs, -> {with_deleted}, dependent: :destroy
   has_many :users, through: :trainer_programs

@@ -3,3 +3,8 @@ en:
     name: "Name"
     parent_program: "Parent Program"
     new_sub_program: "New Sub Program"
+    program_type: "Program Type"
+    program_types:
+      open_education: "Open Education"
+      internal_education: "Internal Education"
+      university: "University"
