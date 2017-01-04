@@ -73,7 +73,6 @@
  *= require timelineJS/timeline
  *= require timeline
  */
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "mixin";
@@ -160,7 +159,7 @@
     &:hover {
       background-color: #ccc;
       width: 100%;
-      text-decoration:none;
+      text-decoration: none;
     }
     background-color: white;
     border: 0px;
@@ -168,8 +167,8 @@
     cursor: pointer;
     .sort-link {
       @extend .lef-offset;
-      text-decoration:none;
-      color:  #333333;
+      text-decoration: none;
+      color: #333333;
     }
   }
   .filter {
@@ -200,6 +199,7 @@
     }
   }
 }
+
 .filter-right-arow {
   &:before {
     left: auto;
@@ -290,6 +290,7 @@
     }
   }
 }
+
 .div-space {
   height: 100%;
   width: 25%
@@ -297,4 +298,8 @@
 
 .display-none {
   display: none;
+}
+
+.content {
+  min-height: 500px !important;
 }

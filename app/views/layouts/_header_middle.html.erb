@@ -1,0 +1,92 @@
+<ul class="nav navbar-nav">
+  <% if policy eval "#{@namespace}_courses_path" %>
+    <li>
+      <%= link_to eval "#{@namespace}_courses_path" do %>
+        <span><%= t "layouts.courses" %></span>
+      <% end %>
+    </li>
+  <% end %>
+
+  <li class="dropdown">
+    <% if policy_statistic Settings.statistics %>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <span><%= t "layouts.statistics" %></span>
+        <span class="caret"></span></a>
+      <ul class="dropdown-menu dropdown-menu-left dropdown-menu-header" aria-labelledby="  dLabel">
+        <% Settings.statistics.each do |type| %>
+          <li>
+            <% if @namespace == "admin" %>
+              <%= link_to admin_statistics_page_path(type) do %>
+                <span><%= t "statistics.titles.#{type}" %></span>
+              <% end %>
+            <% else %>
+              <%= link_to trainer_statistics_page_path(type) do %>
+                <span><%= t "statistics.titles.#{type}" %></span>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </li>
+
+  <li class="dropdown">
+    <% if policy_with_multi_path Settings.object_evaluation %>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <span><%= t "layouts.trainee_evaluations" %></span>
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-left dropdown-menu-header" aria-labelledby="dLabel">
+        <%= render "layouts/side_panel",
+          objects: Settings.object_evaluation %>
+      </ul>
+    <% end %>
+  </li>
+
+  <li class="dropdown">
+    <% if policy_none_model Settings.training_schedule %>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <span><%= t "layouts.training_schedule" %></span>
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-left dropdown-menu-header" aria-labelledby="dLabel">
+        <% if policy eval "#{@namespace}_organization_charts_path" %>
+          <li>
+            <%= link_to eval "#{@namespace}_organization_charts_path" do %>
+              <span><%= t "layouts.organization_chart" %></span>
+            <% end %>
+          </li>
+        <% end %>
+        <% if policy eval "#{@namespace}_training_managements_path" %>
+          <li>
+            <%= link_to eval"#{@namespace}_training_managements_path" do %>
+              <span><%= t "layouts.training_management" %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </li>
+
+  <% if @namespace == "admin" %>
+    <li class="dropdown">
+      <% if policy_with_multi_path Settings.object_exam %>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <span><%= t "layouts.exams" %></span>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-left dropdown-menu-header" aria-labelledby="dLabel">
+          <%= render "layouts/side_panel", objects: Settings.object_exam %>
+        </ul>
+      <% end %>
+    </li>
+    <% end %>
+
+  <% if policy admin_posts_path %>
+    <li>
+      <%= link_to admin_posts_path do %>
+        <span><%= t "posts.name_sidebar" %></span>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

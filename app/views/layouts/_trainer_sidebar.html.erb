@@ -1,88 +1,18 @@
 <div id="trainer-header">
   <header class="main-header">
-    <%= link_to trainer_root_path, class: "logo" do %>
-      <span class="logo-lg"><%= t :name_system %></span>
-    <% end %>
+
+    <%= render "layouts/header_left" %>
     <nav class="navbar navbar-static-top" role="navigation">
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li>
-            <%= link_to chats_path do %>
-              <i class="fa fa-weixin" aria-hidden="true"></i>
-              <%= t "chats.chat" %>
-              <span class="label label-danger dropdown-label number-message"></span>
-            <% end %>
-          </li>
-          <li class="dropdown messages-menu">
-            <%= link_to update_notifications_path, class: "dropdown-toggle",
-              data: {toggle: "dropdown"}, method: :patch, remote: true do %>
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-danger dropdown-label number-notification"><%= not_seen_notification %></span>
-            <% end %>
-            <ul class="dropdown-menu">
-              <li class="header">
-                <%= t "layouts.notifications.notification" %></li>
-              <li>
-                <div id="slimScrollDiv">
-                  <ul class="menu" id="slimscroll_admin">
-                    <% @notifications.limit(10).each do |user_notification| %>
-                      <%= render "shared/notification",
-                        notification: user_notification.notification %>
-                    <% end %>
-                  </ul>
-                </div>
-              </li>
-              <li class="footer">
-                <%= link_to t("layouts.notifications.view_all"), notifications_path %>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="#" data-toggle="control-sidebar" id="toggle-navbar">
-              <i class="fa fa-gears"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
+      <%= render "layouts/header_middle" %>
+      <%= render "layouts/header_right" %>
     </nav>
   </header>
+  <div class="control-sidebar-bg"></div>
 
   <aside class="control-sidebar control-sidebar-dark">
-    <div class="user-profile-navbar">
-      <div class="image-user-profile">
-        <%= link_to trainer_user_path(current_user) do %>
-          <%= avatar_user_tag current_user, "img-circle", Settings.image_size_100 %>
-        <% end %>
-      </div>
-      <div class="image-user-profile">
-        <div>
-          <%= link_to trainer_user_path(current_user) do %>
-            <p><%= current_user.name %><i class="fa fa-pencil"></i></p>
-          <% end %>
-        </div>
-        <div id="dropdown-admin" >
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <%= @namespace.capitalize %> <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <% current_user.role_type_avaiable.each do |role| %>
-                <li class="dropdown text-color"><%= link_to role,
-                  change_current_role_type_path(role), method: :patch %></li>
-              <% end %>
-            </ul>
-          </li>
-        </div>
-      </div>
-    </div>
+    <%= render "layouts/profile_sidebar_menu" %>
+
     <ul class="sidebar-menu">
-      <% if policy trainer_courses_path %>
-        <li>
-          <%= link_to trainer_courses_path do %>
-            <i class="fa fa-calendar"></i><span><%= t "layouts.courses" %></span>
-          <% end %>
-        </li>
-      <% end %>
       <% if policy trainer_subjects_path %>
         <li>
           <%= link_to trainer_subjects_path do %>
@@ -90,70 +20,20 @@
           <% end %>
         </li>
       <% end %>
-      <li class="dropdown">
-        <% if policy_with_multi_path Settings.object_evaluation %>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-            <span><%= t "layouts.trainee_evaluations" %></span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <%= render "layouts/side_panel",
-            objects: Settings.object_evaluation %>
-        <% end %>
-      </li>
+
       <li class="dropdown">
         <% if policy_with_multi_path Settings.object_system %>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-cogs" aria-hidden="true"></i>
             <span><%= t "layouts.system" %></span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <%= render "layouts/side_panel", objects: Settings.object_system %>
-        <% end %>
-      </li>
-      <li class="dropdown">
-        <% if policy_none_model Settings.training_schedule %>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-sitemap" aria-hidden="true"></i>
-            <span><%= t "layouts.training_schedule" %></span>
-            <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-angle-right pull-right"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
-            <% if policy trainer_organization_charts_path %>
-              <li>
-                <%= link_to trainer_organization_charts_path do %>
-                  <span><%= t "layouts.organization_chart" %></span>
-                <% end %>
-              </li>
-            <% end %>
-            <% if policy trainer_training_managements_path %>
-              <li>
-                <%= link_to trainer_training_managements_path do %>
-                  <span><%= t "layouts.training_management" %></span>
-                <% end %>
-              </li>
-            <% end %>
+            <%= render "layouts/side_panel", objects: Settings.object_system %>
           </ul>
         <% end %>
       </li>
-      <li class="dropdown">
-        <% if policy_statistic Settings.statistics %>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-area-chart" aria-hidden="true"></i>
-            <span><%= t "layouts.statistics" %></span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="  dLabel">
-            <% Settings.statistics.each do |type| %>
-              <li>
-                <%= link_to admin_statistics_page_path(type) do %>
-                  <span><%= t "statistics.titles.#{type}" %></span>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        <% end %>
-      </li>
+
       <% if policy trainer_feed_backs_path %>
         <li>
           <%= link_to trainer_feed_backs_path do %>
@@ -162,13 +42,6 @@
           <% end %>
         </li>
       <% end %>
-      <li class="li-logout">
-        <%= link_to destroy_user_session_path, method: :delete do %>
-          <i class="fa fa-backward"></i>
-          <span><%= t "staticpages.logout" %></span>
-        <% end %>
-      </li>
     </ul>
   </aside>
-  <div class="control-sidebar-bg"></div>
 </div>

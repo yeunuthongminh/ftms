@@ -1,54 +1,128 @@
 #admin-header, #trainer-header {
+  $color-main: #37444a;
+  $color-dropdown: #2e3940;
+  $color-link-a: white;
+
   .main-header {
-    background-color:  #1da1f2
-  }
-  a {
-    color: white;
-  }
-  a:hover {
-    color: black;
-    background-color:  #1da1f2;
-  }
-  .control-sidebar {
-    a:hover {
-      color: black;
-      background-color: #e1e3e9;
-      border-left: 3px solid black;
-    }
-    a:focus {
-      color: black;
-      background-color: #e1e3e9;
-    }
-  }
-  a:focus {
-    color: black;
-    background-color: #1da1f2;
-  }
-
-  .user-profile-navbar a:hover {
-    border-left: none;
-    background-color: transparent;
-  }
-
-
-  #dropdown-admin {
+    background-color: $color-main;
     a {
-      color: whitesmoke;
+      color: $color-link-a;
     }
-    a:hover {
-      color: blue;
+    .menu-side-bar-left {
+      float: left;
+      height: 50px;
+      text-align: center;
+      min-width: 80px;
+      display: block;
+      line-height: 50px;
+      &:hover {
+        background-color: #2e3940;
+      }
     }
-    ul {
-      background: transparent;
-      border: transparent
-    }
-    li {
-      list-style: none;
+    .logo {
+      padding: 0;
+      width: 150px;
     }
   }
-  .image-user-profile {
-    a:hover {
-      color: deepskyblue;
+
+  /* header */
+  .navbar-static-top {
+    ul li {
+      a {
+        color: $color-link-a;
+        &:hover {
+          color: white;
+          background-color: #2e3940;
+        }
+        &:active {
+          background-color: transparent !important;
+        }
+
+        &:focus {
+          background-color: transparent !important;
+        }
+      }
+      ul li {
+        a {
+          padding: 10px 20px 10px 20px;
+          color: $color-link-a;
+          &:hover {
+            color: white;
+            background-color: rgba(0, 0, 0, .15);
+          }
+        }
+      }
     }
+    /* dropdown header */
+    .dropdown-menu-header, .dropdown-menu-user-info {
+      display: none;
+      border: none;
+      background-color: $color-dropdown;
+      min-width: 190px;
+    }
+
+    .dropdown-menu-user-info {
+      min-width: 110px;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+  }
+
+  /* custom sidebar adminlte */
+  .control-sidebar, .control-sidebar-bg {
+    left: -230px;
+    -webkit-transition: left .3s ease-in-out !important;
+    -o-transition: left .3s ease-in-out !important;
+    transition: left .3s ease-in-out !important;
+    .control-sidebar-open, .control-sidebar.control-sidebar-open + .control-sidebar-bg {
+      left: 0 !important;
+    }
+  }
+
+  .control-sidebar.control-sidebar-open, .control-sidebar.control-sidebar-open + .control-sidebar-bg {
+    left: 0 !important;
+  }
+
+  .sidebar-menu > li > .dropdown-menu {
+    margin-right: -159px !important;
+    li a {
+      &:hover {
+        background-color: $color-dropdown;
+        color: white;
+      }
+    }
+  }
+  .change-role {
+    border: none !important;
+    background-color: transparent;
+    min-width: 100px;
+    a {
+      color: white !important;;
+      &:hover {
+        background-color: black;
+        color: white;
+      }
+    }
+  }
+  .control-sidebar-dark, .control-sidebar-dark + .control-sidebar-bg {
+    height: 100%;
+  }
+
+  .menu-side-bar-left {
+    float: left;
+    height: 50px;
+    text-align: center;
+    min-width: 80px;
+    display: block;
+    line-height: 50px;
+    &:hover {
+      background-color: #2e3940;
+    }
+  }
+  .logo {
+    padding: 0;
+    width: 150px;
   }
 }
