@@ -216,3 +216,4 @@ en:
       search: "Search ..."
       standards: "%{size} standards"
   record: "record was found"
+  count_records: "%{record} records"

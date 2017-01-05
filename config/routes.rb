@@ -117,12 +117,8 @@ Rails.application.routes.draw do
     resources :evaluation_standards
   end
 
-  namespace :assign_trainee do
-    resources :courses, only: [:edit, :update]
-  end
-
-  namespace :assign_trainer do
-    resources :courses, only: [:edit, :update]
+  namespace :assign_user do
+    resources :courses, only: [:edit, :update], defaults: {format: :js}
   end
 
   namespace :change_status do

@@ -3,12 +3,22 @@ class User < ApplicationRecord
   acts_as_reader
   mount_uploader :avatar, ImageUploader
 
-  QUERY = "users.id NOT IN (SELECT user_id
-    FROM user_courses, courses WHERE user_courses.course_id = courses.id
-    AND courses.status = 1
-    AND user_courses.deleted_at IS NULL
-    AND user_courses.status = 1
-    AND courses.id <> :course_id)"
+  QUERY = "SELECT users.id, users.name, user_course_id FROM users LEFT JOIN (
+      SELECT user_courses.id user_course_id, users.id user_id FROM users LEFT JOIN user_courses
+      ON users.id = user_courses.user_id
+      WHERE user_courses.course_id = :course_id
+    ) t ON users.id = t.user_id
+    WHERE id NOT IN (SELECT user_id
+      FROM user_courses, courses WHERE user_courses.course_id = courses.id
+      AND (
+        (courses.status = 1
+          AND user_courses.deleted_at IS NULL
+          AND user_courses.status = 1
+          AND user_courses.type = 'TraineeCourse'
+          AND courses.id <> :course_id)
+        OR (user_courses.deleted_at IS NULL AND course_id = :course_id)
+      )
+    )"
 
   ATTRIBUTES_PARAMS = [:name, :email, :password,
     :password_confirmation, :avatar, :trainer_id, :chatwork_id,
@@ -70,7 +80,7 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password
 
-  scope :available_of_course, ->course_id{where QUERY, course_id: course_id}
+  scope :available_of_course, ->course_id{find_by_sql [QUERY, course_id: course_id]}
   scope :trainee_roles, ->{joins(user_roles: :role)
     .where("roles.role_type = ?", Role.role_types[:trainee])}
   scope :trainers, ->{joins(user_roles: :role)

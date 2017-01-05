@@ -1,9 +1,46 @@
-#tbl-assign-user {
-  tr:hover {
-    cursor: pointer;
+#assign-member-modal {
+  .modal-dialog {
+    width: 75%;
   }
 
-  .assign-checkbox {
-    width: 4%;
+  .panel-body {
+    padding: 0;
+  }
+
+  .panel-info {
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+
+  .assign-member {
+    margin-bottom: 15px;
+    min-width: 50px;
+  }
+
+  .state-icon {
+    left: -5px;
+  }
+
+  #list-users {
+    max-height: 62vh;
+    overflow-y: auto;
+  }
+
+  #list-trainers {
+    height: 25vh;
+    overflow-y: auto;
+  }
+
+  #list-trainees {
+    height: 25vh;
+    overflow-y: auto;
+  }
+
+  .list-group {
+    margin-bottom: 0;
+  }
+
+  .count-member {
+    text-align: right;
   }
 }
