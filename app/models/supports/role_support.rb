@@ -6,8 +6,7 @@ class Supports::RoleSupport
   end
 
   def presenter form
-    @role_allocate_function_presenters_admin ||= AllocateFunctionPresenter.new(routes_admin: admin_routes,
-      routes_trainer: trainer_routes, routes_trainee: trainee_routes,
+    @role_allocate_function_presenters_admin ||= AllocateFunctionPresenter.new(
       namespace: @namespace, role: @role, form: form).render
   end
 

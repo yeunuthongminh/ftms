@@ -1,4 +1,5 @@
 class FilterDatasController < ApplicationController
+  include FilterHelper
   before_action :load_filter, only: [:index]
   before_action :load_dates
 
@@ -126,7 +127,9 @@ class FilterDatasController < ApplicationController
     when "level"
       @resources = i18n_enum(:question, :level)
     when "controller_name"
-      @resources = Function.pluck(:model_class).uniq.compact.sort!
+      @key_field = :routes
+      @value_field = :routes
+      @resources = load_function
     when "category_name"
       @key_field = :category_name
       @value_field = :category_name
@@ -155,6 +158,10 @@ class FilterDatasController < ApplicationController
       @key_field = :post_content
       @value_field = :post_content
       @resources = Post.pluck(:content).uniq.compact.sort!
+    when "namespace"
+      @key_field = :routes
+      @value_field = :routes
+      @resources = load_namespace
     end
 
     respond_to do |format|
@@ -202,12 +209,5 @@ class FilterDatasController < ApplicationController
     rescue
     end
     @dates << Date.today.beginning_of_month if @dates.blank?
-  end
-
-  def check_route route
-    Settings.controller_names.each do |object|
-      return true if route.include? object
-    end
-    false
   end
 end

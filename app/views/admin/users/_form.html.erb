@@ -12,16 +12,22 @@
           <%= f.label :email %>
           <%= f.text_field :email, class: "form-control" %>
         </div>
-
+        <div class="form-group">
+          <%= f.label :trainer_id %>
+          <%= f.select :trainer_id, options_for_select(@supports.trainers
+            .collect{|trainer| [trainer.name, trainer.id,
+            {"data-location-id": trainer.profile_location_id}]},
+            f.object.trainer_id), {include_blank: true},
+            class: "form-control" %>
+        </div>
       </div>
       <%= render "shared/edit_profile_form", f: f %>
     </div>
-
     <%= render "profile_form", f: f %>
 
     <div class="row">
       <div class="col-md-12">
-        <%unless @user_form.user.new_record?%>
+        <% unless @user_form.user.new_record? %>
           <% if policy edit_change_role_user_path @user_form.user %>
             <%= link_to t("user.edit_role"),
               edit_change_role_user_path(@user_form) %>
