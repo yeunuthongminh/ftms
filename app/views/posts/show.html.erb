@@ -1,18 +1,6 @@
 <% provide :title, @post.title.html_safe %>
 
 <div id="faq" class="post-show">
-  <div class="breadcrumb-bar">
-    <ul class="list breadcrumb">
-      <li>
-        <%= link_to root_url do %>
-          <i class="glyphicon glyphicon-th-list"></i>
-          <%= t "layouts.paths" %>
-        <% end %>
-      </li>
-      <li><%= link_to t("faq.index.title"), posts_path %></li>
-      <li class="active"><%= @post.title %></li>
-    </ul>
-  </div>
   <div class="row">
     <div class="col-md-8 post-content">
       <div class="clearfix main">
