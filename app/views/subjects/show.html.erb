@@ -3,20 +3,6 @@
 <div id="subject-show">
   <div class="row">
     <div class="col-md-9">
-      <div class="breadcrumb-bar">
-        <ul class="list breadcrumb">
-          <li>
-            <%= link_to root_url do %>
-              <i class="glyphicon glyphicon-th-list"></i>
-              <%= t "layouts.paths" %>
-            <% end %>
-          </li>
-          <li><%= link_to t("layouts.all_courses"), courses_path %></li>
-          <li><%= link_to @subject_supports.user_subject.course_name,
-            user_course_path(@subject_supports.user_subject.trainee_course) %></li>
-          <li class="active"><%= @subject_supports.user_subject.name %></li>
-        </ul>
-      </div>
       <div class="subject-overview">
         <span class="header-title">
           <%= @subject_supports.user_subject.name %>

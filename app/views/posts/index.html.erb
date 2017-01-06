@@ -1,17 +1,6 @@
 <% provide :title, t("faq.index.title") %>
 
 <div id="faq">
-  <div class="breadcrumb-bar">
-    <ul class="list breadcrumb">
-      <li>
-        <%= link_to root_url do %>
-          <i class="glyphicon glyphicon-th-list"></i>
-          <%= t "layouts.paths" %>
-        <% end %>
-      </li>
-      <li class="active"><%= t "faq.index.title" %></li>
-    </ul>
-  </div>
   <div class="row">
     <div class="col-md-8 post-content">
       <%= render "posts/content_posts" %>

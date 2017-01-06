@@ -41,8 +41,6 @@ class Admin::QuestionsController < ApplicationController
 
   def edit
     @question_form = QuestionForm.new @question
-    add_breadcrumb_path "questions"
-    add_breadcrumb_edit "questions"
   end
 
   def update

@@ -2,18 +2,6 @@
 
 <div id="user-course-show" class="row">
   <div class="col-md-9">
-    <div class="breadcrumb-bar">
-      <ul class="breadcrumb">
-        <li>
-          <%= link_to root_url do %>
-            <i class="glyphicon glyphicon-th-list"></i>
-            <%= t "layouts.paths" %>
-          <% end %>
-        </li>
-        <li><%= link_to t("layouts.all_courses"), courses_path %></li>
-        <li class="active"><%= @supports.course.name %></li>
-      </ul>
-    </div>
     <div class="image-course-header">
       <div>
         <%= image_course_tag @supports.course, @supports

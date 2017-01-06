@@ -6,7 +6,6 @@ class UsersController < ApplicationController
 
   def show
     @supports = Supports::UserSupport.new @user
-    add_breadcrumb @user.name
   end
 
   def edit
