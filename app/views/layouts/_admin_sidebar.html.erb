@@ -4,9 +4,6 @@
       <span class="logo-lg"><%= t :name_system %></span>
     <% end %>
     <nav class="navbar navbar-static-top" role="navigation">
-      <ol class="breadcrumb pull-left">
-        <%= render_breadcrumbs tag: :li, separator: "" %>
-      </ol>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li>
@@ -182,7 +179,7 @@
           </ul>
         <% end %>
       </li>
-      
+
       <% if policy admin_posts_path %>
         <li>
           <%= link_to admin_posts_path do %>

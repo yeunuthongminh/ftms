@@ -4,7 +4,6 @@ class Admin::UniversitiesController < ApplicationController
 
   def index
     @universities = University.all
-    add_breadcrumb_index "universities"
     respond_to do |format|
       format.html
       format.json {
@@ -15,8 +14,6 @@ class Admin::UniversitiesController < ApplicationController
 
   def new
     @university = University.new
-    add_breadcrumb_path "universities"
-    add_breadcrumb_new "universities"
   end
 
   def create
@@ -34,9 +31,6 @@ class Admin::UniversitiesController < ApplicationController
   end
 
   def edit
-    add_breadcrumb_path "universities"
-    add_breadcrumb @university.name
-    add_breadcrumb_edit "universities"
   end
 
   def update

@@ -3,7 +3,6 @@ class Admin::ProjectsController < ApplicationController
   before_action :load_project, except: [:index, :create]
 
   def index
-    add_breadcrumb_index "projects"
     @projects = Project.all
   end
 

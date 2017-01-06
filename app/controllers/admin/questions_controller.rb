@@ -18,8 +18,6 @@ class Admin::QuestionsController < ApplicationController
     @question = Question.new
     Settings.default_number_of_answers.times {@question.answers.build}
     @question_form = QuestionForm.new @question
-    add_breadcrumb_path "questions"
-    add_breadcrumb_new "questions"
   end
 
   def create
