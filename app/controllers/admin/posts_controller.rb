@@ -5,12 +5,9 @@ class Admin::PostsController < ApplicationController
   before_action :load_supports, only: :index
 
   def index
-    add_breadcrumb_index "posts"
   end
 
   def show
-    add_breadcrumb_path "posts"
-    add_breadcrumb @post.title, :admin_post_path
   end
 
   def destroy

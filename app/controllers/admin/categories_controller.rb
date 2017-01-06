@@ -8,7 +8,7 @@ class Admin::CategoriesController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html {add_breadcrumb_index "categories"}
+      format.html
       format.json do
         render json: CategoriesDatatable.new(view_context, @namespace, current_user)
       end
@@ -16,9 +16,6 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def show
-    add_breadcrumb_path "categories"
-    add_breadcrumb @category.name, :admin_course_path
-
     @question_presenters = QuestionPresenter.new({questions: @category.questions,
       namespace: @namespace, category: @category}).render
   end

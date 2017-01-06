@@ -8,7 +8,7 @@ class Admin::ProgramsController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html {add_breadcrumb_index "programs"}
+      format.html
       format.json {
         render json: ProgramsDatatable.new(view_context, @namespace)
       }
@@ -16,8 +16,6 @@ class Admin::ProgramsController < ApplicationController
   end
 
   def new
-    add_breadcrumb_path "programs"
-    add_breadcrumb_new "programs"
   end
 
   def create
@@ -27,8 +25,6 @@ class Admin::ProgramsController < ApplicationController
       redirect_to admin_programs_path
     else
       load_data
-      add_breadcrumb_path "programs"
-      add_breadcrumb_new "programs"
       render :new
     end
   end
@@ -36,13 +32,9 @@ class Admin::ProgramsController < ApplicationController
   def show
     @supports = Supports::CourseSupport.new namespace: @namespace,
       filter_service: load_filter, program: @program
-    add_breadcrumb_path "programs"
-    add_breadcrumb @program.name, :admin_program_path
   end
 
   def edit
-    add_breadcrumb_path "programs"
-    add_breadcrumb_edit "programs"
   end
 
   def update
@@ -51,8 +43,6 @@ class Admin::ProgramsController < ApplicationController
       redirect_to admin_programs_path
     else
       load_data
-      add_breadcrumb_path "programs"
-      add_breadcrumb_edit "programs"
       render :edit
     end
   end
