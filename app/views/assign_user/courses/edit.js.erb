@@ -1,0 +1,32 @@
+var html = "";
+<% @assign_user_form.users.each do |user| %>
+    html += "<li class='list-group-item' data-user='<%= user.id %>'\
+      id='<%= user.user_course_id %>'><%= user.name %></li>";
+<% end %>
+$('#list-users').html(html);
+
+html = "";
+<% @course.trainer_courses.each do |trainer_course| %>
+  html += "<li class='list-group-item' data-user='<%= trainer_course.user.id %>'\
+    id='<%= trainer_course.id %>' data-type='TrainerCourse'><%= trainer_course.user.name %></li>";
+<% end %>
+$('#list-trainers').html(html);
+
+html = "";
+<% @course.trainee_courses.each do |trainee_course| %>
+  html += "<li class='list-group-item' data-user='<%= trainee_course.user.id %>'\
+  id='<%= trainee_course.id %>' data-type='TraineeCourse'><%= trainee_course.user.name %></li>";
+<% end %>
+$('#list-trainees').html(html);
+
+var items = $('.list-group.checked-list-box .list-group-item');
+build_list_user_selectbox(items);
+
+$('#btn-assign-trainer').css('margin-top', $('#list-trainers').height()/2 + 15);
+$('#btn-remove-user').css('margin-top', $('#list-trainers').height() / 2 - 15
+  - $('#btn-assign-user').height());
+$('#btn-assign-trainee').css('margin-top', $('#list-trainees').height() / 2 - 15);
+
+$('#list-users, #list-trainers, #list-trainees').each(function () {
+  count_record(this, 'li.list-group-item');
+});

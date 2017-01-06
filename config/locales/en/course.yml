@@ -33,6 +33,11 @@ en:
         init: "New"
         progress: "Progress"
         finish: "Finish"
+      assign_member: "Assign members to course"
+      list_users: "Users"
+      list_trainers: "Trainers"
+      list_trainees: "Trainees"
+      reject: "Reject"
     users:
       name: "Name"
       email: "Email"

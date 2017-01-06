@@ -5,6 +5,10 @@ class Supports::AssignUser
     @course = args[:course]
   end
 
+  def users
+    @users ||= User.all
+  end
+
   def trainees_assign
     @trainees ||= Trainee.available_of_course @course.id
   end

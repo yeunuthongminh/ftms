@@ -181,7 +181,7 @@ class UserSubject < ApplicationRecord
   def create_user_tasks
     course_subject.tasks.each do |task|
       UserTask.find_or_create_by(user_subject_id: id,
-        user_id: user_course.user_id, task_id: task.id)
+        user_id: trainee_course.user_id, task_id: task.id)
     end
   end
 
