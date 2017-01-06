@@ -1,0 +1,21 @@
+<% if programs.any? %>
+  <% programs.includes(:children).each do |program| %>
+    <div class="option program-tree">
+      <div class="checkbox-opt" data-name="<%= program.name.try(value_field) %>">
+        <%= program_hash_tree tree %>
+        <% precision = Settings.fields_decimal[name] || 0 %>
+        <%= check_box_tag "#{name}",
+          number_with_precision(filter_selector_name(program.name, value_field),
+          precision: precision), @filter.nil? ? false : @filter
+          .include?(filter_selector_name(program.name, value_field).downcase),
+          id: "filter_#{program.id}_#{name}" %>
+        <%= label_tag program.name,
+          number_with_precision(filter_selector_name(program.name, value_field),
+          precision: precision), for: "filter_#{program.id}_#{name}" %>
+      </div>
+    </div>
+    <%= render "shared/filter_form_program", programs: program.children,
+      value_field: value_field, key_field: key_field, name: name, tree: (tree + 1) if
+      program.children.any?  %>
+  <% end %>
+<% end %>

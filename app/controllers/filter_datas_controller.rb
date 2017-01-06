@@ -145,7 +145,7 @@ class FilterDatasController < ApplicationController
     when "program"
       @key_field = :program
       @value_field = :program
-      @resources = Program.pluck(:name).uniq.compact.sort!
+      @resources = Program.roots.includes :children
     when "post_title"
       @key_field = :post_title
       @value_field = :post_title
