@@ -1,0 +1,28 @@
+<%= form_for @user, url: change_role_user_path(@user),
+ html: {method: :patch} do |f|%>
+  <div id="main" class="clearfix">
+    <div id="content">
+      <div id="change_function">
+        <div class="table">
+          <%= render "shared/datatables/add_user_function_header" %>
+          <%= @supports.presenter(f).html_safe %>
+        </div>
+
+        <div class="pull-right" id="number-records">
+          <%= i18n_pluralize UserFunction.all.size, Settings.record %>
+        </div>
+
+        <div class="list-filters">
+          <div class="filter-form">
+          </div>
+        </div>
+
+        <div class="space"></div>
+
+        <div id="button">
+          <%= f.submit t("roles.update"), class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

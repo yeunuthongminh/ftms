@@ -1,22 +1,10 @@
-<%= form_for @user, url: change_role_user_path(@user),
- html: {method: :patch} do |f|%>
-  <div id="main" class="clearfix">
-    <div id="content">
-      <div id="change_function">
-        <div class="table">
-          <%= render "shared/datatables/add_user_function_header" %>
-          <%= @supports.presenter(f).html_safe %>
-        </div>
-
-        <div class="list-filters">
-          <div class="filter-form">
-          </div>
-        </div>
-
-        <div id="button">
-          <%= f.submit t("roles.update"), class: "btn btn-danger" %>
-        </div>
+<div class="row">
+  <div id="roles-edit">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><%= t "roles.function" %></div>
+        <div class="panel-body"><%= render "form" %></div>
       </div>
     </div>
   </div>
-<% end %>
+</div>
