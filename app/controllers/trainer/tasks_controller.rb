@@ -6,15 +6,9 @@ class Trainer::TasksController < ApplicationController
 
   def new
     @task = Task.new
-    load_breadcrumbs
-    add_breadcrumb t("breadcrumbs.subjects.new_task")
   end
 
   def edit
-    load_breadcrumbs
-    add_breadcrumb @task.name,
-      trainer_course_subject_task_path(@course_subject, @task.user_tasks.first)
-    add_breadcrumb t("breadcrumbs.subjects.edit")
   end
 
   def create
@@ -61,14 +55,6 @@ class Trainer::TasksController < ApplicationController
   def load_task
     @task = Task.find_by id: params[:id]
     redirect_if_object_nil @task
-  end
-
-  def load_breadcrumbs
-    add_breadcrumb_path "courses"
-    add_breadcrumb @course_subject.course_name,
-      trainer_course_path(@course_subject.course)
-    add_breadcrumb @course_subject.subject_name,
-      trainer_course_subject_path(@course_subject.course, @course_subject.subject)
   end
 
   def add_task_info

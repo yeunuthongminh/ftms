@@ -4,7 +4,7 @@ class Trainer::RolesController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html {add_breadcrumb_index "roles"}
+      format.html
       format.json {
         render json: RolesDatatable.new(view_context, @namespace, current_user)
       }
@@ -13,8 +13,6 @@ class Trainer::RolesController < ApplicationController
 
   def new
     @role = Role.new
-    add_breadcrumb_path "roles"
-    add_breadcrumb_new "roles"
   end
 
   def create
@@ -29,9 +27,6 @@ class Trainer::RolesController < ApplicationController
   end
 
   def edit
-    add_breadcrumb_path "roles"
-    add_breadcrumb @role.name
-    add_breadcrumb_edit "roles"
   end
 
   def update

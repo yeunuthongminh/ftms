@@ -7,15 +7,12 @@ class Trainer::CoursesController < ApplicationController
   before_action :authorize
 
   def index
-    add_breadcrumb_index "courses"
     @supports = Supports::CourseSupport.new namespace: @namespace,
       filter_service: load_filter
   end
 
   def new
     @course.documents.build
-    add_breadcrumb_path "courses"
-    add_breadcrumb_new "courses"
   end
 
   def create
@@ -30,14 +27,9 @@ class Trainer::CoursesController < ApplicationController
   end
 
   def show
-    add_breadcrumb_path "courses"
-    add_breadcrumb @course.name, :trainer_course_path
   end
 
   def edit
-    add_breadcrumb_path "courses"
-    add_breadcrumb @course.name, :trainer_course_path
-    add_breadcrumb_edit "courses"
   end
 
   def update

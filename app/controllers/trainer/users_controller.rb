@@ -3,8 +3,6 @@ class Trainer::UsersController < ApplicationController
   before_action :find_user, except: [:index, :new, :create]
   before_action :load_profile, only: [:new, :edit, :show]
   before_action :build_profile, only: :new
-  before_action :load_breadcrumb_edit, only: [:edit, :update]
-  before_action :load_breadcrumb_new, only: [:new, :create]
 
   def new
   end
@@ -51,8 +49,6 @@ class Trainer::UsersController < ApplicationController
 
   def show
     @notes = Note.load_notes @user, current_user
-    add_breadcrumb_path "users"
-    add_breadcrumb @user.name
   end
 
   private
@@ -63,17 +59,6 @@ class Trainer::UsersController < ApplicationController
   def load_profile
     @user ||= User.new
     @supports = Supports::UserSupport.new @user
-  end
-
-  def load_breadcrumb_edit
-    add_breadcrumb_path "training_managements"
-    add_breadcrumb @user.name, [:trainer, @user]
-    add_breadcrumb_edit "users"
-  end
-
-  def load_breadcrumb_new
-    add_breadcrumb_path "training_managements"
-    add_breadcrumb_new "users"
   end
 
   def build_profile

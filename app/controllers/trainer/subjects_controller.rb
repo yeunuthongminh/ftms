@@ -6,7 +6,7 @@ class Trainer::SubjectsController < ApplicationController
   def index
     @subject = Subject.new
     respond_to do |format|
-      format.html {add_breadcrumb_index "subjects"}
+      format.html
       format.json {
         render json: SubjectsDatatable.new(view_context, @namespace)
       }
@@ -14,18 +14,12 @@ class Trainer::SubjectsController < ApplicationController
   end
 
   def show
-    add_breadcrumb_path "courses"
-    add_breadcrumb @supports.course.name, trainer_course_path(@supports.course)
-    add_breadcrumb @supports.course_subject.subject_name
   end
 
   def new
     @subject = Subject.new
     @subject.documents.build
     @subject.task_masters.build
-
-    add_breadcrumb_path "subjects"
-    add_breadcrumb_new "subjects"
   end
 
   def create
@@ -40,9 +34,6 @@ class Trainer::SubjectsController < ApplicationController
   end
 
   def edit
-    add_breadcrumb_path "subjects"
-    add_breadcrumb @subject.name, trainer_subject_task_masters_path(@subject)
-    add_breadcrumb_edit "subjects"
   end
 
   def update
