@@ -59,17 +59,16 @@ class Admin::RolesController < ApplicationController
 
   def add_user_function
     user_functions = []
-    @role.role_type.classify.constantize.all.each do |user|
-      user.user_functions.delete_all
-      @role.functions.each do |function|
-        type = function.model_class.split("/")
-        if type.length < 2
-          user_functions << UserFunction.new(function: function,
-            user: user, type: "TraineeFunction")
-        else
-          type = type[0]
-          user_functions << UserFunction.new(function: function,
-            user: user, type: type.humanize << "Function")
+    unless @role.users
+      @role.users.each do |user|
+        user.user_functions.delete_all
+        all_user_functions = params[:role][:role_functions_attributes].values
+        all_user_functions.each do |user_function|
+          if user_function[:_destroy] == "false"
+            type = user_function[:type]
+            user_functions << UserFunction.new(function_id: user_function[:function_id].to_i,
+              user: user, type: type.humanize << "Function")
+          end
         end
       end
     end

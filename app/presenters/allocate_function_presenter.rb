@@ -76,7 +76,8 @@ class AllocateFunctionPresenter < ActionView::Base
               title=\"#{function.action}\">
               #{builder.check_box :_destroy,
                 {checked: find_function?(@form.object, function)}, false, true}
-          </div>"
+            </div>"
+        html+=" #{builder.hidden_field :type, value: fn}"
         end
       end
     end
@@ -92,7 +93,9 @@ class AllocateFunctionPresenter < ActionView::Base
               title=\"#{function.action}\">
               #{builder.check_box :_destroy,
                 {checked: find_function?(@form.object, function)}, false, true}
+              #{builder.hidden_field :type, value: fn}
             </div>"
+          html+=" #{builder.hidden_field :type, value: fn}"
         end
       else
         html += "<div class=\"tcell checked-function text-center\"

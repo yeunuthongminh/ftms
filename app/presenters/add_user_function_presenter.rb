@@ -71,7 +71,7 @@ class AddUserFunctionPresenter < ActionView::Base
             #{builder.hidden_field :function_id, value: "#{function.id if function}"}
             <div class=\"tcell checked-function text-center\" title=\"#{function.action}\">
               #{builder.check_box :_destroy,
-                {checked: find_function?(@form.object, function)}, false, true}
+                {checked: find_function?(@form.object, function, (fn.humanize)+"Function")}, false, true}
           </div>"
         end
       end
@@ -86,7 +86,7 @@ class AddUserFunctionPresenter < ActionView::Base
           #{builder.hidden_field :function_id, value: "#{function.id if function}"}
           <div class=\"tcell checked-function text-center\" title=\"#{function.action}\">
             #{builder.check_box :_destroy,
-              {checked: find_function?(@form.object, function)}, false, true}
+              {checked: find_function?(@form.object, function, (fn.humanize)+"Function")}, false, true}
           </div>"
         end
       else
@@ -97,7 +97,7 @@ class AddUserFunctionPresenter < ActionView::Base
     html += "</div>"
   end
 
-  def find_function? user, function
-    user.functions.has_function(function.model_class, function.action).any? if function
+  def find_function? user, function, type
+    user.user_functions.has_function(function.model_class, function.action, type).any? if function
   end
 end
