@@ -215,3 +215,4 @@ en:
       select: "Evaluation standards selected"
       search: "Search ..."
       standards: "%{size} standards"
+  record: "record was found"

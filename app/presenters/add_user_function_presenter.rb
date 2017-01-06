@@ -34,16 +34,27 @@ class AddUserFunctionPresenter < ActionView::Base
     if obj.length == 2
       obj[0] = obj[0].capitalize
       obj[1] = obj[1].capitalize
-    else
-      obj.prepend("Trainee")
-    end
-    "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{function.model_class}\">
-      <div class=\"tcell stt\">#</div>
-      <div class=\"tcell name controller_name\" title=\"#{function.model_class}\">
-        #{obj[0]} #{function.action} #{obj[1]}
+      "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{function.model_class}\">
+        <div class=\"tcell stt\">#</div>
+        <div class=\"tcell namespace\">
+          #{obj[0]}
+        </div>
+        <div class=\"tcell name controller_name\" title=\"#{function.model_class}\">
+          #{obj[0]} #{function.action} #{obj[1]}
+        </div>
       </div>
-    </div>
-    "
+      "
+    else
+      "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{function.model_class}\">
+        <div class=\"tcell stt\">#</div>
+        <div class=\"tcell namespace\">
+        </div>
+        <div class=\"tcell name controller_name\" title=\"#{function.model_class}\">
+          Trainee #{function.action} #{obj[0]}
+        </div>
+      </div>
+      "
+    end
   end
 
   def body_item function, index
