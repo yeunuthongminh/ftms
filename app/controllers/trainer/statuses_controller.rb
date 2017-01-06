@@ -5,13 +5,10 @@ class Trainer::StatusesController < ApplicationController
   def index
     @statuses = Status.all
     @status = Status.new
-    add_breadcrumb_index "statuses"
   end
 
   def new
     @status = Status.new
-    add_breadcrumb_path "statuses"
-    add_breadcrumb_new "statuses"
   end
 
   def create
@@ -26,9 +23,6 @@ class Trainer::StatusesController < ApplicationController
   end
 
   def edit
-    add_breadcrumb_path "statuses"
-    add_breadcrumb @status.name
-    add_breadcrumb_edit "statuses"
   end
 
   def update
