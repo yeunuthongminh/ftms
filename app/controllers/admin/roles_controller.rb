@@ -62,22 +62,14 @@ class Admin::RolesController < ApplicationController
     @role.role_type.classify.constantize.all.each do |user|
       user.user_functions.delete_all
       @role.functions.each do |function|
-        type = function.model_class.split("/")
-        if type.length < 2
-          user_functions << UserFunction.new(function: function,
-            user: user, type: "TraineeFunction")
-        else
-          type = type[0]
-          user_functions << UserFunction.new(function: function,
-            user: user, type: type.humanize << "Function")
-        end
+        user_functions << UserFunction.new(function: function, user: user)
       end
     end
     UserFunction.import user_functions
   end
 
   def load_role_edit
-    @role = Role.find_by id: params[:id]
+    @role = Role.includes(:functions).find_by id: params[:id]
     unless @role
       flash[:alert] = flash_message "not_find"
       back_or_root

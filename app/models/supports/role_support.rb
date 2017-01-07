@@ -6,8 +6,13 @@ class Supports::RoleSupport
   end
 
   def presenter form
-    @role_allocate_function_presenters_admin ||= AllocateFunctionPresenter.new(
+    @role_allocate_function_presenters_admin ||= AllocateFunctionPresenter.new(routes_admin: admin_routes,
+      routes_trainer: trainer_routes, routes_trainee: trainee_routes,
       namespace: @namespace, role: @role, form: form).render
+  end
+
+  def role_type
+    @role_type = Role.role_types.keys
   end
 
   private
@@ -16,7 +21,8 @@ class Supports::RoleSupport
   end
 
   def trainee_functions
-    @trainee_functions ||= functions.reject{|route| route.model_class.include?("admin") || route.model_class.include?("trainer")}
+    @trainee_functions ||= functions.reject{|route| route.model_class.include?("admin") ||
+      route.model_class.include?("trainer")}
   end
 
   def admin_functions
