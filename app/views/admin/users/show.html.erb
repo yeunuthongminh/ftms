@@ -10,7 +10,7 @@
         <div class="nav-tabs-custom">
           <ul class="nav nav-tabs">
             <% Settings.users.tabs.each_with_index do |tab, index| %>
-              <li class="<%= 'active' if index == 3 %>">
+              <li class="<%= 'active' if index == 0 %>">
                 <a href="#<%= tab %>" data-toggle="tab">
                   <%= t "user.tabs.#{tab}" %>
                 </a>

@@ -11,7 +11,7 @@ class Supports::UserSupport
   end
 
   def user_courses
-    @user_courses ||= @user.trainee_courses.includes(user_subjects: [:course,
+    @user_courses ||= @user.trainee_courses.includes(user_subjects: [:course, :trainee_course,
       :trainee_evaluations, :exams, {user_tasks: :task}, course_subject: :subject])
   end
 
@@ -57,21 +57,6 @@ class Supports::UserSupport
     end
   end
 
-  def fa_icon index
-    case index
-    when 1
-      "fa-star-o"
-    when 2
-      "fa-sun-o"
-    when 3
-      "fa-check-circle-o"
-    when 4
-      "fa-moon-o"
-    else
-      "fa-smile-o"
-    end
-  end
-
   def fa_background index
     case index
     when 1
@@ -100,5 +85,16 @@ class Supports::UserSupport
     else
       "danger"
     end
+  end
+
+  def link_user_subject user_subject, namespace
+    namespace == Settings.namespace_roles.trainee ?
+      [user_subject.trainee_course, user_subject.subject] :
+      [namespace.to_sym, user_subject.course, user_subject.subject]
+  end
+
+  def link_exam namespace
+    namespace == Settings.namespace_roles.trainee ? exam :
+      [namespace.to_sym, exam]
   end
 end
