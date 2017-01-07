@@ -38,6 +38,7 @@ class Course < ApplicationRecord
     ? AND DATE(created_at) <= ?", start_date, end_date)}
   scope :finished_between, ->start_date, end_date{where("DATE(updated_at) >=
     ? AND DATE(updated_at) <= ? AND status = #{statuses[:finish]}", start_date, end_date)}
+  scope :in_programs, ->program_ids{where "program_id in (?)", program_ids}
 
   accepts_nested_attributes_for :user_courses, allow_destroy: true
   accepts_nested_attributes_for :documents,

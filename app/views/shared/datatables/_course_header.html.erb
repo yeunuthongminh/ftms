@@ -30,7 +30,7 @@
             <i class="fa ic ic-filter course_trainers"></i>
           <% end %>
         </div>
-        <% unless @program %>
+        <% unless @program && @program.leaf? %>
           <div class="tcell program title">
             <%= t "courses.table.program" %>
             <%= link_to filter_datas_path(type: :program, filter_type: :courses),

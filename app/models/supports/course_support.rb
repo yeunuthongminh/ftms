@@ -34,7 +34,9 @@ class Supports::CourseSupport
 
   def courses
     @courses = if @program
-      @program.courses.includes :language, :location
+      program_ids = @program.self_and_descendants.collect &:id
+      Course.in_programs(program_ids).includes :language, :location,
+        :program, trainer_courses: :user
     elsif @current_user
       @current_user.courses.includes :language, :location, :program
     else
