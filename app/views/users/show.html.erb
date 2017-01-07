@@ -1,5 +1,5 @@
 <% provide :title, @user.name %>
-<div class="row user-profile">
+<div class="row user-profile" id="users">
   <section class="content">
     <div class="row">
       <div class="col-md-3">
@@ -22,6 +22,7 @@
             <%= render "activities_tab" %>
             <%= render "finished_courses_tab" %>
             <%= render "inprogress_courses_tab" %>
+            <%= render "timeline" %>
           </div>
         </div>
       </div>

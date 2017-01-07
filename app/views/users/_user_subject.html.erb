@@ -21,7 +21,7 @@
     <div class="user-task">
       <table class="table">
         <%= render partial: "user_task",
-          collection: user_subject.user_tasks.includes(:task), as: :user_task %>
+          collection: user_subject.user_tasks, as: :user_task %>
       </table>
     </div>
   </div>

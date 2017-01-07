@@ -1,11 +1,10 @@
 class UsersController < ApplicationController
   before_action :authorize_user
   before_action :load_university, only: :edit
+  before_action :find_user, only: [:edit, :show]
   before_action :load_data, only: :show
-  before_action :load_user
 
   def show
-    @supports = Supports::UserSupport.new @user
   end
 
   def edit
@@ -32,9 +31,9 @@ class UsersController < ApplicationController
     @supports ||= Supports::UserSupport.new @user
   end
 
-  def load_user
-    @user = User.includes(:profile).find_by id: params[:id]
-    if @user.nil?
+  def find_user
+    @user = User.find_by id: params[:id]
+    unless @user
       flash[:alert] = flash_message "not_find"
       redirect_to root_path
     end

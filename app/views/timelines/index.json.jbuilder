@@ -4,8 +4,13 @@ json.timeline do
   json.text t("timeline.content")
   if @user_subjects.any?
     json.date @user_subjects do |user_subject|
-      json.startDate l(user_subject.start_date, format: :timeline_js)
-      json.endDate l(user_subject.end_date, format: :timeline_js)
+      if user_subject.start_date
+        json.startDate l(user_subject.start_date, format: :timeline_js)
+      end
+      if user_subject.user_end_date || user_subject.end_date
+        json.endDate l(user_subject.user_end_date || user_subject.end_date,
+          format: :timeline_js)
+      end
       json.headline user_subject.subject.name
       json.text user_subject.description
       json.tag user_subject.status
