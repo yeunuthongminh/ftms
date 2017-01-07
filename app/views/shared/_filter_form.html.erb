@@ -34,20 +34,26 @@
       <%= label_tag "#{name}_blank", t("filters.show.blank"),
         for: "filter_#{name}_blank" %>
     </div>
-    <% objects.each_with_index do |element, index| %>
-      <div class="option">
-        <div class="checkbox-opt" data-name="<%= element.try(value_field) %>">
-          <% precision = Settings.fields_decimal[name] || 0 %>
-          <%= check_box_tag "#{name}", number_with_precision(filter_selector_name(element, value_field),
-            precision: precision),
-            @filter.nil? ? false : @filter.include?(filter_selector_name(element, value_field).downcase),
-            id: "filter_#{index}_#{name}",
-            "data-project-id": "#{element.try(key_field)}" %>
-          <%= label_tag element, number_with_precision(filter_selector_name(element, value_field),
-            precision: precision),
-            for: "filter_#{index}_#{name}" %>
+    <% if objects.class.name == "ActiveRecord::Relation" %>
+      <%= render "shared/filter_form_program", programs: objects,
+        value_field: value_field, key_field: key_field, name: name,
+        tree: Settings.position.index %>
+    <% else %>
+      <% objects.each_with_index do |element, index| %>
+        <div class="option">
+          <div class="checkbox-opt" data-name="<%= element.try(value_field) %>">
+            <% precision = Settings.fields_decimal[name] || 0 %>
+            <%= check_box_tag "#{name}", number_with_precision(filter_selector_name(element, value_field),
+              precision: precision),
+              @filter.nil? ? false : @filter.include?(filter_selector_name(element, value_field).downcase),
+              id: "filter_#{index}_#{name}",
+              "data-project-id": "#{element.try(key_field)}" %>
+            <%= label_tag element, number_with_precision(filter_selector_name(element, value_field),
+              precision: precision),
+              for: "filter_#{index}_#{name}" %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
   <div class="divider"></div>

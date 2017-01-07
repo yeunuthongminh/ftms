@@ -73,7 +73,7 @@ class CoursePresenter < ActionView::Base
   end
 
   def parent_programs program
-    list_parent = []
+    list_parent = Array.new
     if program && program.ancestors.any?
       program.ancestors.each do |parent|
         list_parent << parent.name.underscore
