@@ -2,10 +2,14 @@
   <div id="main" class="clearfix">
     <div id="content">
       <div id="courses">
-        <%= link_to t("programs.new_sub_program"),
-          admin_new_program_path(@program), class: "btn btn-success pull-right" %>
-        <%= image_tag "loading.gif", id: "loading" %>
+        <div class="title">
+          <span>
+            <%= link_to t("programs.new_sub_program"),
+              admin_new_program_path(@program), class: "btn btn-success pull-right" %>
+          </span>
+        </div>
         <h3 class="title">
+          <%= image_tag "loading.gif", id: "loading" %>
           <button id="btn-filter-on-off" title="<%= filter_title %>"
             class="btn-filter-onoff-project btn btn-default">
             &nbsp;
