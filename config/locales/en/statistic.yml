@@ -11,6 +11,7 @@ en:
       total_trainees: "Total trainees in by month"
       in_out_by_month: "In/out by month"
       stages: "Trainee in edu"
+      trainee_progress: "Trainee progress"
     trainee_types:
       title_detail: "Total trainees by trainee types detail"
       title: "Total trainees by type"

@@ -1,11 +1,9 @@
-<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
-  <% objects.each do |object| %>
-    <% if policy "#{@namespace.to_sym}/#{object.constantize.table_name.to_sym}" %>
-      <li>
-        <%= link_to [@namespace.to_sym, object.constantize.table_name.to_sym] do %>
-          <%= t "layouts.#{object.constantize.table_name}" %>
-        <% end %>
-      </li>
-    <% end %>
+<% objects.each do |object| %>
+  <% if policy "#{@namespace.to_sym}/#{object.constantize.table_name.to_sym}" %>
+    <li>
+      <%= link_to [@namespace.to_sym, object.constantize.table_name.to_sym] do %>
+        <%= t "layouts.#{object.constantize.table_name}" %>
+      <% end %>
+    </li>
   <% end %>
-</ul>
+<% end %>
