@@ -128,6 +128,15 @@
       background: #eee;
     }
   }
+  #user-course-project-modal {
+    .modal-dialog {
+      .panel-info > .panel-heading {
+        color: white;
+        background-color: cadetblue;
+        border-color: #bce8f1;
+      }
+    }
+  }
 }
 
 .header-title {

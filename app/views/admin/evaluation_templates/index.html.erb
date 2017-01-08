@@ -1,14 +1,12 @@
 <div id="main" class="clearfix">
-  <h1 class="text-center"><%= t "evaluation_templates.all" %></h1>
   <div id="content">
+    <div class="button-new-evaluation-templates">
+      <%= link_to t("buttons.new"),
+        new_admin_evaluation_template_path, class: "btn btn-success pull-right" %>
+    </div>
     <div id="<%= controller_name %>">
       <%= image_tag "loading.gif", id: "loading" %>
       <h3 class="title">
-        <span>
-          <%= link_to t("buttons.new"),
-            new_admin_evaluation_template_path, class: "btn btn-success pull-right" %>
-        </span>
-
         <button id="btn-filter-on-off" title="<%= filter_title %>"
           class="btn-filter-onoff-project btn btn-default">
           &nbsp;

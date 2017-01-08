@@ -16,25 +16,25 @@
         <% if user_signed_in? %>
           <ul class="nav navbar-nav">
             <li>
-              <%= link_to courses_path do %>
+              <%= link_to courses_path, title: t("courses.course") do %>
                 <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                 <%= t "courses.course" %>
               <% end %>
             </li>
             <li>
-              <%= link_to exams_path do %>
+              <%= link_to exams_path, title: t("user-header.exams") do %>
                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                 <%= t "user-header.exams" %>
               <% end %>
             </li>
             <li>
-              <%= link_to chats_path do %>
+              <%= link_to chats_path, title: t("chats.chat") do %>
                 <i class="fa fa-weixin" aria-hidden="true"></i>
                 <%= t "chats.chat" %>
               <% end %>
             </li>
             <li>
-              <%= link_to posts_path do %>
+              <%= link_to posts_path, title: t("user-header.faq") do %>
                 <i class="fa fa-question-circle" aria-hidden="true"></i>
                 <%= t "user-header.faq" %>
               <% end %>

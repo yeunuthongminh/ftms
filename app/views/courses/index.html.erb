@@ -7,7 +7,7 @@
       <% @user_courses.each do |user_course| %>
         <div class="col-md-6">
           <div class="card">
-            <a href="<%= user_course_path user_course %>">
+            <a href="<%= user_course_path user_course %>" title="<%= user_course.course_name %>">
               <div class="bucket">
                 <div class="bucket-media">
                   <div class="badge">
