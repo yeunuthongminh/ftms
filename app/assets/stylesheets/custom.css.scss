@@ -5,7 +5,6 @@ html {
   min-height: 100%;
 }
 
-
 #body-admin, #body-user, .content-wrapper {
   background-color: #F6F8F8 !important;
   padding: 0;
@@ -27,6 +26,7 @@ html {
 .body-wrapper-content {
   padding-top: 0px;
 }
+
 .body_wrapper {
   min-height: 70%;
 
@@ -90,12 +90,12 @@ html {
 
 select {
   width: 150px;
-  text-align:center;
+  text-align: center;
   height: 30px;
 }
 
 select .lt {
-  text-align:center;
+  text-align: center;
 }
 
 select {
@@ -127,13 +127,15 @@ select {
   font-weight: bold;
 }
 
-.highlight { background-color: yellow }
+.highlight {
+  background-color: yellow
+}
 
 .info-panel {
   .user-list {
     padding-left: 3px;
 
-     li {
+    li {
       margin: 6px;
       list-style: none;
       float: left;
@@ -180,7 +182,7 @@ select {
   margin-bottom: 10%;
   padding: 10%;
   background: #fff;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   border-radius: 7px;
 
   #complete {
@@ -263,6 +265,7 @@ select {
     text-decoration: none;
   }
 }
+
 .dashboard-chart {
   margin-top: 50px;
 }
@@ -434,9 +437,9 @@ textarea {
   }
 
   .modal-header {
-    padding:9px 15px;
-    border-bottom:1px solid #eee;
-   }
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee;
+  }
 
   .dangerous {
     background-color: red;
@@ -458,7 +461,8 @@ textarea {
 }
 
 .date_input {
-  float: right; width: 170px;
+  float: right;
+  width: 170px;
 }
 
 .f-filter-month {
