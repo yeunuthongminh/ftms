@@ -186,10 +186,9 @@
       text-overflow: ellipsis;
     }
 
-    &.course_start_date, &.course_end_date, &.program_course_end_date,
-      &.program_course_start_date {
-      min-width: 210px;
-      max-width: 210px;
+    &.course_start_date, &.course_end_date {
+      min-width: 130px;
+      max-width: 130px;
       position: relative;
     }
 
@@ -200,9 +199,12 @@
     }
 
     &.program {
-      min-width: 200px;
-      max-width: 200px;
+      min-width: 150px;
+      max-width: 150px;
       position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
@@ -211,5 +213,9 @@
   }
   .evaluation-show {
     cursor: pointer;
+  }
+  .label-status {
+    width: 70px;
+    margin: 0 auto;
   }
 }

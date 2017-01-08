@@ -174,8 +174,13 @@ var filter_function = function(){
         } else {
           row[row_child].removeClass('hide');
         }
+        if (row[row_child].hasClass('row-odd')) {
+          row[row_child].removeClass('row-odd');
+        }
       }
     });
+    load_row_after_filter($('.fixedTable-body .trow:not(.hide)'));
+    load_row_after_filter($('.fixedTable-sidebar .trow:not(.hide)'));
   };
 
 
@@ -521,3 +526,11 @@ $(document).keyup(function(e) {
     $(".datepicker-orient-top").hide();
   }
 });
+
+var load_row_after_filter = function(data) {
+  data.each(function(index, element) {
+    if (index % 2 == 1) {
+      $(this).addClass('row-odd');
+    }
+  });
+};

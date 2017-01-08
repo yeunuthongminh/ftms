@@ -71,6 +71,6 @@ en:
     program: "Program"
     finish_course: "Finish course"
     statuses:
-      init: "New"
+      init: "Init"
       progress: "Progress"
       finish: "Finish"

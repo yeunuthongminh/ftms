@@ -1,5 +1,6 @@
 class CoursePresenter < ActionView::Base
   include Rails.application.routes.url_helpers
+  include ApplicationHelper
 
   def initialize args
     @courses = args[:courses]
@@ -56,14 +57,16 @@ class CoursePresenter < ActionView::Base
         #{course.location_name}
       </div>
       <div class=\"tcell course_status text-center\">
-        #{course.status}
+        <div class=\"label-status #{set_background_color_status course.status}\">
+          #{I18n.t("courses.statuses.#{course.status}")}</div>
       </div>
       <div class=\"tcell course_start_date text-right\">
         #{l course.start_date, format: :default if course.start_date}
       </div>
       <div class=\"tcell course_end_date text-right\">
         #{l course.end_date, format: :default if course.end_date}
-      </div></div>"
+      </div>
+      <div class=\"tcell blank\"></div></div>"
   end
 
   def course_trainers course
