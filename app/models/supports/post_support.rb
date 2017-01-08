@@ -1,11 +1,11 @@
 class Supports::PostSupport
-
   def initialize args = {}
     @params = args[:params]
     @post = args[:post]
     @user = args[:user]
     @comment = args[:comment]
     @filter_service = args[:filter_service]
+    @search_params = args[:search_params]
   end
 
   def presenters
@@ -20,8 +20,9 @@ class Supports::PostSupport
           Post.order_desc :created_at
         else
           Post.send post_type
-        end.includes(:taggings, :user).per_page_kaminari(page)
-        .per Settings.faq.posts_per_page
+        end.ransack(@search_params).result(distinct: true)
+        .includes(:taggings, :user)
+        .per_page_kaminari(page).per Settings.faq.posts_per_page
         instance_variable_set "@#{post_type}_posts", posts
       end
       instance_variable_get "@#{post_type}_posts"

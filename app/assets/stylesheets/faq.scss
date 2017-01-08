@@ -1,8 +1,10 @@
 #faq {
   margin: 20px 0;
+
   .quote {
     word-wrap: break-word;
   }
+
   .search {
     margin-bottom: 20px;
     input.form-control {
@@ -25,17 +27,15 @@
     }
   }
 
-  .tab-pane {
-    .post {
-      border: none;
-      border-bottom: 1px solid #ddd;
-      margin: 0;
-      padding: 10px;
-      background: #fff;
+  .post {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    padding: 10px;
+    background: #fff;
 
-      &:hover {
-        background: #FCFFB7;
-      }
+    &:hover {
+      background: #FCFFB7;
     }
   }
 

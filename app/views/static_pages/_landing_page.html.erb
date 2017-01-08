@@ -294,28 +294,35 @@
   </section>
 
   <section id="faq_homepage" class="scroll">
-      <div class="container text-center">
-        <div class="title">
-          <%= t "staticpages.faq_homepage.title" %>
-        </div>
-        <div class="faq-description">
-          <i><%= t "staticpages.faq_homepage.description" %></i>
-        </div>
-        <div class="row">
-          <% @supports.most_viewed_posts.each.with_index 1 do |post, index| %>
-            <%= link_to post do %>
-              <div class="col-md-12 question">
-                <h4 class="title text-left">
-                  <%= "#{index}. #{post.title}" %>
-                </h4>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
+    <div class="container text-center">
+      <div class="title">
+        <%= t "staticpages.faq_homepage.title" %>
       </div>
+      <div class="faq-description">
+        <i><%= t "staticpages.faq_homepage.description" %></i>
+      </div>
+      <div class="row">
+        <% @supports.most_viewed_posts.each.with_index 1 do |post, index| %>
+          <%= link_to post do %>
+            <div class="col-md-12 question">
+              <h4 class="title text-left">
+                <%= "#{index}. #{post.title}" %>
+              </h4>
+            </div>
+          <% end %>
+        <% end %>
+        <%= link_to posts_path do %>
+          <div class="col-md-12 question">
+            <h4 class="title text-left">
+              <%= t "staticpages.faq_homepage.view_all" %>
+            </h4>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </section>
 
-  <section id="counters">
+  <section id="counters" class="scroll">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12 col-sm-12 text-center">
@@ -374,6 +381,4 @@
       </div>
     </div>
   </section>
-
-
 </div>

@@ -9,6 +9,10 @@ html {
 #body-admin, #body-user, .content-wrapper {
   background-color: #F6F8F8 !important;
   padding: 0;
+
+  .content {
+    min-height: calc(100vh - 50px);
+  }
 }
 
 #body-user {

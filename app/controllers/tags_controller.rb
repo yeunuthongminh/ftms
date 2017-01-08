@@ -1,5 +1,7 @@
 class TagsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :show
+  skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :load_tag, only: :show
+  before_action :load_supports, only: :show
 
   def index
     @tags = Tag.per_page_kaminari(params[:page]).per Settings.tags_per_page
@@ -11,5 +13,15 @@ class TagsController < ApplicationController
     else
       Array.new
     end
+  end
+
+  private
+  def load_supports
+    @supports = Supports::TagSupport.new params: params
+  end
+
+  def load_tag
+    tag = Tag.find_by name: params[:id]
+    redirect_if_object_nil tag
   end
 end

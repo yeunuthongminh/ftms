@@ -73,6 +73,7 @@
  *= require timelineJS/timeline
  *= require timeline
  */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "mixin";
@@ -298,8 +299,4 @@
 
 .display-none {
   display: none;
-}
-
-.content {
-  min-height: 500px !important;
 }
