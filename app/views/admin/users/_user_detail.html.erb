@@ -1,0 +1,105 @@
+<div class="box box-info">
+  <div class="box-body">
+    <div class="box-header">
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :location_id %>
+      </div>
+      <div class="col-md-7">
+        <%= select_profile_field "location", @supports.locations, f %>
+      </div>
+      <%= link_to "#", data: {toggle: "modal",
+        target: "#location-modal"} do %>
+        <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
+      <% end %>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :trainee_type %>
+      </div>
+      <div class="col-md-7">
+        <%= select_profile_field "trainee_type", @supports.trainee_types, f %>
+      </div>
+      <%= link_to "#", data: {toggle: "modal", target: "#usertype-modal"} do %>
+        <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
+      <% end %>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :university %>
+      </div>
+      <div class="col-md-7">
+        <%= select_profile_field "university", @supports.universities, f %>
+      </div>
+      <%= link_to "#", data: {toggle: "modal", target: "#university-modal"} do %>
+        <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
+      <% end %>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :language %>
+      </div>
+      <div class="col-md-7">
+        <%= select_profile_field "language", @supports.languages, f %>
+      </div>
+      <%= link_to "#", data: {toggle: "modal", target: "#language-modal"} do %>
+        <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
+      <% end %>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :status %>
+      </div>
+      <div class="col-md-7">
+        <%= select_profile_field "status", @supports.statuses, f %>
+      </div>
+      <%= link_to "#", data: {toggle: "modal", target: "#status-modal"} do %>
+        <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
+      <% end %>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :working_day %>
+      </div>
+      <div class="col-md-7">
+        <%= f.number_field :working_day, step: Settings.working_day.step,
+          min: Settings.working_day.min, max: Settings.working_day.max,
+          class: "form-control profile"%>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :ready_for_project %>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :ready_for_project,
+          value: @user_form.profile.ready_for_project ?
+          l(@user_form.profile.ready_for_project, format: :default) : "",
+          class: "form-control datepicker profile" %>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :away_date %>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :away_date,
+          value: @user_form.profile.away_date ?
+          l(@user_form.profile.away_date, format: :default) : "",
+          class: "form-control datepicker profile" %>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :comeback_date %>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :comeback_date,
+          value: @user_form.profile.comeback_date ?
+          l(@user_form.profile.comeback_date, format: :default) : "",
+          class: "form-control datepicker profile" %>
+      </div>
+    </div>
+  </div>
+</div>

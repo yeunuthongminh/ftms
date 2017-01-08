@@ -5,7 +5,7 @@ class Supports::Statistics::ApplicationStatistic
     @check_params_location = args[:location_ids]
     @trainee_type_ids = args[:trainee_type_ids] || load_trainee_types.map(&:id)
     @stage_ids = args[:stage_ids] || load_stages.map(&:id)
-    @start_date = args[:start_date] || Date.today.beginning_of_year
+    @start_date = args[:start_date] || Date.today - 6.month
     @end_date = args[:end_date] || Date.today
   end
 

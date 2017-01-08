@@ -3,3 +3,4 @@ en:
     label_edit: "Edit user's profile"
     columns:
       staff_code: "Staff code: "
+    box_title: "Profile"
