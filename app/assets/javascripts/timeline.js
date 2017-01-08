@@ -6,11 +6,11 @@ $(document).on('turbolinks:load', function() {
       method: 'get',
       complete: function(data) {
         createStoryJS({
-          type:       'timeline',
-          width:      '100%',
-          height:     '600',
-          source:     '/timelines.json',
-          embed_id:   'timeline-embed'
+          type: 'timeline',
+          width: '100%',
+          height: '600',
+          source: '/timelines.json',
+          embed_id: 'timeline-embed'
         });
       }
     });

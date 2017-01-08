@@ -6,5 +6,49 @@
     .media-container .plain-text .container {
     text-align: left;
     padding-left: 30%;
+    color: white;
+  }
+  .media {
+    height: 300px;
+    overflow-y: auto;
+  }
+  .vco-slider .slider-item {
+    bottom: 20px;
+  }
+  .vco-slider .slider-item .content .content-container .text .container .slide-tag {
+    background-color: transparent;
+  }
+  .vco-slider .slider-item .content .content-container.layout-text-media.pad-left .text-media {
+    margin-top: 15px;
+  }
+  .description {
+    border-radius: 7px;
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+    text-shadow: none;
+    font-size: 15px;
+    line-height: 17px;
+    padding: 10px;
+    font-style: italic;
+  }
+
+  .vco-storyjs a {
+    color: #0088cc;
+  }
+
+  .vco-slider .slider-item .content {
+    background-color: darkslategrey;
+  }
+
+  .text-white {
+    color: white;
+  }
+
+  .text-bisque {
+    color: bisque;
+  }
+  .label-status {
+    padding: 0px 3px 1px 0;
   }
 }
