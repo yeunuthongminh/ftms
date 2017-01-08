@@ -241,11 +241,6 @@ div.table {
   height: auto;
   border-right: 2px solid #CCC;
   float: left;
-  .trow {
-    &:nth-child(odd) {
-    background-color: $color-body;
-    }
-  }
   .tcell {
     padding: 4px 5px;
     height: 30px;
@@ -259,11 +254,6 @@ div.table {
   width: auto;
   border-left: 0;
   margin-right: 12px;
-  .trow {
-    &:nth-child(odd) {
-    background-color: $color-body;
-    }
-  }
   .tcell {
     padding: 4px 5px;
     height: 30px;
@@ -302,4 +292,8 @@ div.table {
   top: 7px;
   left: -80px;
   width: 120px;
+}
+
+.row-odd {
+  background-color: $color-body;
 }

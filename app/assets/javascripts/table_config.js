@@ -12,6 +12,7 @@ var scb, tblBody, tblSidebar;
 $(document).on("ready turbolinks:load", function(){
   load_tables();
   setNameCellWidth();
+  load_column_blank();
 });
 
 $.fn.hasHorizontalScrollBar = function(fixedWidth) {
@@ -31,6 +32,7 @@ $.fn.hasVerticalScrollBar = function(fixedHeight) {
 $(window).on('resize', function(){
   load_tables();
   setNameCellWidth();
+  load_column_blank();
 });
 
 function setTableMaxHeight(tblElement) {
@@ -274,3 +276,19 @@ $(document).on("turbolinks:load", function(){
     tblSidebar.scrollTop(pos);
   }
 });
+
+var load_column_blank = function() {
+  if ($('.fixedTable-header .trow .blank').length > 0) {
+    var width_all_cell = 0;
+    $('.fixedTable-header .trow .tcell:not(.blank)').each(function() {
+      width_all_cell += $(this).width() + 1;
+    });
+    width_column_blank = $('.fixedTable-header').width() - width_all_cell;
+    if (width_column_blank > 0) {
+      $('.blank').css('width', width_column_blank);
+      $('.blank').removeClass('hidden');
+    } else {
+      $('.blank').addClass('hidden');
+    }
+  }
+}
