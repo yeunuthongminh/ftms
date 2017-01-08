@@ -56,7 +56,6 @@ gem "acts_as_votable", "~> 0.10.0"
 gem "reform"
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
-gem "timelineJS-rails", "~> 1.1.5"
 gem "reform-rails"
 
 

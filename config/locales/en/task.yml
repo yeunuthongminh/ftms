@@ -19,6 +19,8 @@ en:
       input_task_name: "Enter task name..."
       input_task_description: "Enter task description..."
       input_task_pull_request: "Enter pull request..."
+    task_init: "Task Init"
+    task_finish: "Task Finish"
   user_tasks:
     statuses:
       in_progress: "In Progress"
