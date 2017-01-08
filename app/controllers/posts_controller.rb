@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   end
 
   def load_post
-    @post = Post.find_by id: params[:id]
+    @post = Post.includes(:taggings).find_by id: params[:id]
     redirect_if_object_nil @post
   end
 

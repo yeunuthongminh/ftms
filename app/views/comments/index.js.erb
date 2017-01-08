@@ -10,7 +10,7 @@
     $load_more.remove();
   <% end %>
 <% else %>
-  $('.all_answers').append('<%= j render @answers %>');
+  $('.all_answers').append('<%= j render @answers, load_replies: false %>');
   <% if @data[:next_page] > 0 %>
     $('.load_more_answers').html('<%= j link_to t("faq.show.load_more_answers"),\
       post_comments_path(@post, page: @data[:next_page]), remote: true %>');

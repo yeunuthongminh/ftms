@@ -170,10 +170,10 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments
-    resources :likes, only: [:create, :destroy]
+    resources :votes, only: [:create, :destroy]
   end
   resources :comments do
-    resources :likes, only: [:create, :destroy]
+    resources :votes, only: [:create, :destroy]
   end
   resources :tags, only: [:show, :index]
   resources :timelines, only: :index

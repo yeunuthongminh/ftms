@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  include OrderScope
+
   acts_as_paranoid
   acts_as_votable
 
@@ -7,6 +9,5 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :post
 
-  has_many :likes, dependent: :destroy, as: :likeable
   delegate :name, to: :user, prefix: true, allow_nil: true
 end

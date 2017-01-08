@@ -40,16 +40,18 @@ class PostPresenter < ActionView::Base
 
   def body_item post, index
     html = "<div class=\"trow #{"list_#{index}"}\" id=\"body-row-#{post.id}\">
-      <div class=\"tcell post_content \"title=\"#{post.content}\">
+      <div class=\"tcell post_content \"title=\"#{strip_tags post.content}\">
         #{strip_tags post.content}
       </div>
       <div class=\"tcell post_date \"title=\"#{post.created_at}\">
         #{l post.created_at, format: :default if post.created_at}
       </div>
       <div class=\"tcell tag \"title=\"#{post.created_at}\">"
-        post.tag_list.each do |tag|
-          html << "#{link_to tag, "#", class: "tag"}"
-        end
+    tags = ""
+    post.tag_list.each do |tag|
+      tags << "#{link_to tag, "#", class: "tag"}, "
+    end
+    html << tags.chomp(", ")
     html << "</div></div>"
   end
 end

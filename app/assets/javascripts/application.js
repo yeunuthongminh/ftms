@@ -88,7 +88,7 @@
 //= require admin/assign_project
 //= require faq
 //= require task
-//= require likes
+//= require votes
 //= require assign_user_function
 //= require timelineJS/embed
 //= require timeline

@@ -160,7 +160,7 @@
       .post-detail {
         .heading {
           border-bottom: 1px solid #ddd;
-          margin: 0 0 20px 0;
+          margin: 0 0 15px 0;
           padding: 10px;
           h1.title {
             margin: 0;
@@ -173,8 +173,13 @@
           min-height: 100px;
           background: #fff;
           word-wrap: break-word;
+          font-size: 15px;
         }
       }
+    }
+
+    .user-info {
+      margin-bottom: 10px;
     }
 
     .votes {
@@ -219,6 +224,7 @@
         font-weight: bold;
       }
     }
+
     .bottom {
       .actions {
         float: left;
@@ -231,9 +237,15 @@
         float: right;
       }
     }
+
     .answer_section {
       margin-top: 20px;
       background: #fff;
+
+      .load_more_replies, .load_more_answers {
+        background: #EEE;
+      }
+
       .answers {
         .title {
           margin: 0;
@@ -252,13 +264,29 @@
               min-height: auto;
               background: transparent;
               word-wrap: break-word;
+              font-size: 15px;
+
+              .create-time {
+                color: #A7A7A7;
+              }
             }
           }
           .replies {
-            background: #F0E1E130;
             form[data-remote=true] {
               padding: 15px 0;
               margin-bottom: 10px;
+            }
+
+            .answer {
+              padding: 0;
+              border: none;
+
+              .content {
+                padding: 10px 0 10px 25px;
+                font-size: 13px;
+                color: #333;
+                border-top: 1px solid #ddd;
+              }
             }
           }
         }
@@ -280,11 +308,39 @@
         }
       }
     }
+
+    .left-col {
+      width: 10%;
+    }
+
+    .right-col {
+      width: 90%;
+    }
+
+    .offset-left-col {
+      margin-left: 10%;
+    }
   }
 
-  .btn-link{
-    font-size: 30px;
-    text-decoration: none;
+  .form-vote {
+    .button-vote {
+      font-size: 30px;
+      text-decoration: none;
+      padding: 5px;
+      background: transparent;
+
+      &.cannot-vote {
+        pointer-events: none;
+      }
+
+      .vote-up, .vote-down {
+        color: #888;
+      }
+
+      &.up .vote-up, &.down .vote-down {
+        color: #699CE6;
+      }
+    }
   }
 
   .padding-left-0 {
