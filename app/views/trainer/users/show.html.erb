@@ -4,6 +4,9 @@
     <div class="row">
       <div class="col-md-3">
         <%= render "trainer/users/profile" %>
+        <p><%= link_to t("user.profile.download_pdf"),
+          export_file_user_pdfs_path(@user, format: "pdf") %>
+        </p>
         <%= render "trainer/users/notes" %>
       </div>
 
