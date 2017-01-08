@@ -142,6 +142,8 @@ en:
     content: "Content"
     user: "User"
     index: "Index"
+    subtitle: "Please tell us what do you think, any kind of feedback is highly appreciated"
+    place_holder: "Your feedback..."
   charts:
     user_sign_up:
       title: "Number of User sign up"

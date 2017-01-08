@@ -10,13 +10,15 @@
               <span aria-hidden="true">&times;</span>
             </button>
             <h4 class="modal-title" id="myModalLabel">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
               <%= t "feed_backs.title" %>
             </h4>
+            <h5><%= t "feed_backs.subtitle" %></h5>
           </div>
           <div class="error"></div>
           <div class="modal-body">
-            <%= f.label :content %>
-            <%= f.text_area :content, class: "form-control" %>
+            <%= f.text_area :content, class: "form-control content-feedback",
+              placeholder: t("feed_backs.place_holder") %>
           </div>
           <div class="modal-footer">
             <%= f.submit t("buttons.send"), class: "btn btn-primary" %>

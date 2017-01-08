@@ -70,6 +70,7 @@
                     </ul>
                   </div>
                 </li>
+
                 <li class="footer">
                   <%= link_to t("layouts.notifications.view_all"), notifications_path %>
                 </li>
@@ -78,7 +79,7 @@
             <li>
               <%= link_to "#", class: "btn-feed-back",
                 data: {toggle: "modal", target: "#feed-back-modal"},
-                title: t("user-header.feedbacks") do %>
+                title: t("feed_backs.title") do %>
                 <i class="fa fa-envelope"></i>
               <% end %>
             </li>
@@ -92,7 +93,7 @@
               <% end %>
             <% end %>
             <li class="dropdown" id="dropdown-profile">
-              <a class="dropdown-toggle avatar" data-toggle="dropdown">
+              <a class="dropdown-toggle avatar" data-toggle="dropdown" href="#" >
                 <%= avatar_user_tag current_user, "user-image",
                   Settings.image_size_40 %>
                 <span class="hidden-xs">
@@ -131,6 +132,13 @@
             <li>
               <%= link_to t("staticpages.about"), root_path(anchor: "counters"),
                 class: "scroll_to_section", data: {target: "#counters"} %>
+            </li>
+            <li>
+              <%= link_to "#", class: "btn-feed-back",
+                data: {toggle: "modal", target: "#feed-back-modal"},
+                title: t("feed_backs.title") do %>
+                <%= t "feed_backs.title" %>
+              <% end %>
             </li>
             <li>
               <button class="btn btn-danger btn-login" data-toggle="modal" data-target="#login-modal">
