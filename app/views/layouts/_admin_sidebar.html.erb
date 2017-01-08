@@ -10,7 +10,6 @@
   <div class="control-sidebar-bg"></div>
 
   <aside class="control-sidebar control-sidebar-dark">
-    <%= render "layouts/profile_sidebar_menu" %>
     <ul class="sidebar-menu">
       <% if policy admin_subjects_path %>
         <li>
@@ -73,16 +72,6 @@
           </ul>
         <% end %>
       </li>
-
-      <% if policy admin_posts_path %>
-        <li>
-          <%= link_to admin_posts_path do %>
-            <i class="fa fa-question-circle" aria-hidden="true"></i>
-            <span><%= t "posts.name_sidebar" %></span>
-          <% end %>
-        </li>
-      <% end %>
-
       <% if policy admin_feed_backs_path %>
         <li>
           <%= link_to admin_feed_backs_path do %>

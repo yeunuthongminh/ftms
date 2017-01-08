@@ -18,7 +18,7 @@
             <li>
               <%= link_to courses_path do %>
                 <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                <%= t "user-header.courses" %>
+                <%= t "courses.course" %>
               <% end %>
             </li>
             <li>
@@ -61,14 +61,15 @@
                 <li class="header">
                   <%= t "layouts.notifications.notification" %></li>
                 <li>
-                <div id="slimScrollDiv">
-                  <ul class="menu">
-                    <% @notifications.limit(10).each do |user_notification| %>
-                      <%= render "shared/notification",
-                        notification: user_notification.notification %>
-                    <% end %>
-                  </ul>
-                </div>
+                  <div id="slimScrollDiv">
+                    <ul class="menu">
+                      <% @notifications.limit(10).each do |user_notification| %>
+                        <%= render "shared/notification",
+                          notification: user_notification.notification %>
+                      <% end %>
+                    </ul>
+                  </div>
+                </li>
                 <li class="footer">
                   <%= link_to t("layouts.notifications.view_all"), notifications_path %>
                 </li>
@@ -78,9 +79,18 @@
               <%= link_to "#", class: "btn-feed-back",
                 data: {toggle: "modal", target: "#feed-back-modal"},
                 title: t("user-header.feedbacks") do %>
-              <i class="fa fa-envelope"></i>
+                <i class="fa fa-envelope"></i>
               <% end %>
             </li>
+            <% current_user.role_type_avaiable.each do |role| %>
+              <% unless role == @namespace %>
+                <li>
+                  <%= link_to change_current_role_type_path(role), method: :patch do %>
+                    <%= role.capitalize %>
+                  <% end %>
+                </li>
+              <% end %>
+            <% end %>
             <li class="dropdown" id="dropdown-profile">
               <a class="dropdown-toggle avatar" data-toggle="dropdown">
                 <%= avatar_user_tag current_user, "user-image",
@@ -90,6 +100,7 @@
                 </span><span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
+
                 <li class="m_2">
                   <%= link_to user_path(current_user) do %>
                     <i class="fa fa-user"></i>
