@@ -1,35 +1,47 @@
-<div id="tags">
-  <% @posts.each do |post| %>
-    <div class="row post">
-      <div class="col-sm-2 col-xs-4 stats">
-        <div class="wrapper">
-          <div class="count"><%= post.comments.size %></div>
-          <div>
-            <%= t("faq.index.answer").pluralize post.comments.size %>
+<% provide :title, t("tags.show.tag_questions", tag: params[:id]).html_safe %>
+
+<div id="faq">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="tabs">
+        <div class="heading clearfix">
+          <div class="pull-left">
+            <%= link_to t("faq.new.title"), new_post_path,
+              class: "btn btn-primary" %>
           </div>
-          <div class="count"><%= post.views %></div>
-          <div>
-            <%= t("faq.index.view").pluralize post.views %>
-          </div>
+          <ul class="nav nav-tabs main-tabs pull-right"
+          data-selected-tab="<%= params[:tab] %>">
+            <% %w(newest unanswered).each_with_index do |post_type, index| %>
+              <li class="<%= 'active' if index == 0 %>">
+                <a data-toggle="tab" href="#<%= post_type %>">
+                  <%= t "faq.index.#{post_type}" %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
-      <div class="col-sm-10 col-xs-8 summary">
-        <h3 class="title"><%= link_to post.title, post %></h3>
-        <div class="quote">
-          <%= truncate post.content,
-            length: Settings.faq.truncated_characters %>
-        </div>
-        <div class="tags">
-          <% post.tag_list.each do |tag| %>
-            <%= link_to tag, tag, class: "tag" %>
-          <% end %>
-        </div>
-        <div class="create-time">
-          <%= t "faq.index.time_ago",
-            time: time_ago_in_words(post.created_at) %> -
-          <%= link_to post.user_name, post.user %>
-        </div>
+      <div class="tab-content">
+        <% %w(newest unanswered).each_with_index do |post_type, index| %>
+          <div id="<%= post_type %>"
+          class="tab-pane fade <%= 'in active' if index == 0 %>">
+            <%= render @supports.send "#{post_type}_posts" %>
+            <% if @supports.send("#{post_type}_posts").any? %>
+              <div class="row">
+                <div class="col-md-12">
+                  <%= paginate @supports.send("#{post_type}_posts"),
+                      params: {tab: post_type} %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
+
     </div>
-  <% end %>
+    <div class="col-md-4 sidebar">
+      <%= render "posts/sidebar",
+        parts: ["search", "most_viewed_posts", "popular_tags"] %>
+    </div>
+  </div>
 </div>

@@ -6,6 +6,8 @@
   .flexslider {
     border: none;
     margin: 0 -15px;
+    background: transparent;
+    box-shadow: none;
 
     .slides li {
       position: relative;
@@ -257,6 +259,9 @@
         text-align: left;
         text-transform: none;
         font-weight: normal;
+        &.view-all {
+          text-align: right;
+        }
       }
 
       &:hover {
@@ -273,8 +278,7 @@
     height: calc(100vh - 230px);
   }
 
-  .flexslider {
-    background: transparent;
-    box-shadow: none;
+  #counters {
+    min-height: calc(100vh - 50px);
   }
 }

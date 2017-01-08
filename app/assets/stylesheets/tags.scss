@@ -1,57 +1,6 @@
 #tags {
   margin: 20px 0;
 
-  .quote {
-    word-wrap: break-word;
-  }
-  .stats {
-    text-align: center;
-    padding-left: 0;
-
-    .wrapper {
-      border: 1px solid #ddd;
-      margin: 0 auto 5px;
-      background: #fff;
-      padding: 10px;
-      .count {
-        font-size: 20px;
-        font-weight: bold;
-      }
-    }
-  }
-
-  .summary {
-    padding: 0;
-
-    h3.title {
-      text-align: left;
-      margin: 0 0 10px 0;
-      padding: 0;
-      font-size: 18px;
-      font-weight: normal;
-      min-height: auto;
-
-      a {
-        color: #07C;
-      }
-    }
-  }
-
-  .tags {
-    margin: 10px 0;
-
-    .tag {
-      border: 1px solid #DDD;
-      background: #EEE;
-      padding: 3px 5px;
-      font-size: 14px;
-      line-height: 2.25;
-    }
-    .tag-count {
-      color: #888;
-      margin-right: 5px;
-    }
-  }
   .one-tag{
     max-height: 130px;
     min-height: 130px;
@@ -63,6 +12,7 @@
     width: 23%;
     float: left;
   }
+
   .number-posts{
     margin-top: 35px;
   }

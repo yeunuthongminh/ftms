@@ -36,3 +36,6 @@ en:
       sign_in_to_answer: "Please sign in to add an answer"
     votes:
       cannot_vote: "Cannot vote"
+  tags:
+    show:
+      tag_questions: "'%{tag}' questions"
