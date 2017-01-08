@@ -14,7 +14,7 @@
   <div class="col-sm-10 col-xs-8  summary">
     <h3 class="title"><%= link_to post.title, post %></h3>
     <div class="quote">
-      <%= truncate post.content,
+      <%= truncate sanitize(post.content),
         length: Settings.faq.truncated_characters %>
     </div>
     <div class="tags">

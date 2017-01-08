@@ -16,8 +16,12 @@ class Supports::PostSupport
     define_method "#{post_type}_posts" do
       page = @params[:tab] == post_type ? @params[:page] : nil
       unless instance_variable_get("@#{post_type}_posts")
-        posts = Post.send(post_type).includes(:taggings, :user)
-          .per_page_kaminari(page).per Settings.faq.posts_per_page
+        posts = if post_type == "newest"
+          Post.order_desc :created_at
+        else
+          Post.send post_type
+        end.includes(:taggings, :user).per_page_kaminari(page)
+        .per Settings.faq.posts_per_page
         instance_variable_set "@#{post_type}_posts", posts
       end
       instance_variable_get "@#{post_type}_posts"
@@ -36,11 +40,7 @@ class Supports::PostSupport
   end
 
   def load_answers
-    # code cua Quang sua? Em day? ve code cu de lam nen comment code cua Quang
-    # @load_answers ||= @post.comments.roots.order_desc(:cached_votes_score)
-    #   .includes(:user).per_page_kaminari(@params[:page])
-    #   .per Settings.faq.answers_per_page
-    @load_answers ||= @post.comments.roots
+    @load_answers ||= @post.comments.roots.order_desc(:cached_votes_score)
       .includes(:user).per_page_kaminari(@params[:page])
       .per Settings.faq.answers_per_page
   end

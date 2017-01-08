@@ -8,23 +8,21 @@
           <div class="clearfix heading">
             <h1 class="title"><%= @post.title.html_safe %></h1>
           </div>
-          <div class="col-sm-2 col-xs-4 text-center padding-left-0">
-            <%= link_to @post.user, class: "user-info" do %>
-              <p class="avatar">
-                <%= avatar_user_tag @post.user, "profile-user img-circle",
-                  Settings.image_size_50 %>
-              </p>
-              <p><%= @post.user_name %></p>
-            <% end %>
+          <div class="col-sm-2 text-center padding-left-0 left-col">
             <div class="votes">
-              <% if user_signed_in? %>
-                <div class="like-div-<%= @post.id %>-Post">
-                  <%= render "likes/form_like", target: @post %>
-                </div>
-              <% end %>
+              <div class="vote-div-<%= @post.id %>-Post">
+                <%= render "votes/form_vote", target: @post %>
+              </div>
             </div>
           </div>
-          <div class="col-sm-10 col-xs-8 padding-left-0">
+          <div class="col-sm-10 padding-left-0 right-col">
+            <div class="user-info">
+              <%= link_to @post.user, class: "avatar" do %>
+                <%= avatar_user_tag @post.user, "profile-user",
+                  Settings.image_size_40 %>
+                <%= @post.user_name %>
+              <% end %>
+            </div>
             <div class="content">
               <%= @post.content.html_safe %>
             </div>

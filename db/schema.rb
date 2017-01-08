@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227100714) do
+ActiveRecord::Schema.define(version: 20170108010102) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -274,17 +274,6 @@ ActiveRecord::Schema.define(version: 20161227100714) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_languages_on_deleted_at", using: :btree
-  end
-
-  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
-    t.string   "likeable_type"
-    t.integer  "likeable_id"
-    t.datetime "deleted_at"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id", using: :btree
-    t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
   end
 
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -655,8 +644,8 @@ ActiveRecord::Schema.define(version: 20161227100714) do
     t.datetime "updated_at",             null: false
     t.datetime "deleted_at"
     t.string   "type"
-    t.index ["course_id", "user_id", "type"], name: "index_user_courses_on_course_id_and_user_id_and_type", unique: true, using: :btree
     t.index ["deleted_at"], name: "index_user_courses_on_deleted_at", using: :btree
+    t.index ["user_id", "course_id"], name: "index_user_courses_on_user_id_and_course_id", unique: true, using: :btree
   end
 
   create_table "user_functions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -788,7 +777,6 @@ ActiveRecord::Schema.define(version: 20161227100714) do
   add_foreign_key "exams", "users"
   add_foreign_key "feed_backs", "users"
   add_foreign_key "filters", "users"
-  add_foreign_key "likes", "users"
   add_foreign_key "locations", "users"
   add_foreign_key "messages", "users"
   add_foreign_key "notes", "trainee_evaluations"

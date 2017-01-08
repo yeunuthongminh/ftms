@@ -1,0 +1,2 @@
+$('.vote-div-<%= @voteable.id %>-<%= @voteable.class.name %>').
+  html('<%= j render "votes/form_vote", target: @voteable %>');
