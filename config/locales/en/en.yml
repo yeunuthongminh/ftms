@@ -216,7 +216,8 @@ en:
       all: "All Evaluation Standards"
       select: "Evaluation standards selected"
       search: "Search ..."
-  record: "record was found"
+      standards: "%{size} standards"
+  record: "record"
   count_records: "%{record} records"
   user_type_sti:
     admin: "Admin"

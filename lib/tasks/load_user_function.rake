@@ -3,6 +3,9 @@ namespace :db do
   task load_user_function: :environment do
 
     puts "create function"
+    UserFunction.delete_all
+    RoleFunction.delete_all
+    Function.delete_all
     Rails.application.routes.routes.anchored_routes.map(&:defaults)
       .reject {|route| route[:internal] || Settings.controller_names.include?(route[:controller])}
       .each do |route|
