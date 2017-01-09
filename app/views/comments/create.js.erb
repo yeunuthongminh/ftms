@@ -1,38 +1,37 @@
 <% if @supports.parent_comment %>
-  var is_sub_comment = true;
   var $list_answers = $('<%= ".replies-#{@supports.parent_comment.id}" %>');
   var $form = $('form', $list_answers);
+  var content = '<%= j render "comments/sub_comment", sub_comment: @comment %>';
 <% else %>
-  var is_sub_comment = false;
   var $form = $('form', '#answer_form');
   var $list_answers = $('.all_answers');
+  var content = '<%= j render "comments/comment",\
+    comment: @comment, load_replies: false %>';
 <% end %>
 
 <% if @comment.errors.any? %>
   $form.find('#error_explanation').remove();
   $form.prepend('<%=j render "shared/error_messages", object: @comment %>');
 <% else %>
-  if(is_sub_comment){
+  <% if @supports.parent_comment %>
     var $load_more = $('.load_more_replies', $list_answers);
     if($load_more.length > 0) {
-      $load_more.before('<%= j render "comments/sub_comment",\
-        sub_comment: @comment %>');
+      $load_more.before(content);
     } else {
-      $form.closest('div').before('<%= j render "comments/sub_comment",\
-        sub_comment: @comment %>');
+      $form.closest('div').before(content);
     }
     $form.replaceWith('<form></form>');
-  } else {
-    $list_answers.append('<%= j render "comments/comment",\
-      comment: @comment, load_replies: false %>\
-      <div class="clearfix replies replies-<%= @comment.id %>">\
-        <div class="col-sm-10 right-col offset-left-col padding-left-0">\
-          <form></form>\
-        </div>\
-      </div>');
+  <% else %>
+    $list_answers.append(content);
     $('.answers .title').html('<%= pluralize @post.comments.roots.count,\
       t("faq.show.answer") %>');
     $('#answer_form .answer_content').val('');
-  }
+  <% end %>
+
+  var answer = '<%= ".answer-#{@comment.id}" %>';
+  $(answer).removeClass('box-effect').addClass('box-effect');
+  $('html, body').animate({
+    scrollTop: $(answer).offset().top - $('#user-header .navbar').height() - 20
+  }, 500);
 <% end %>
 $(".flash").html("<%= j render "layouts/flash" %>");

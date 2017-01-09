@@ -13,8 +13,8 @@
           <% if current_user? sub_comment.user %>
             <%= link_to t("buttons.edit"),
               edit_post_comment_path(@post, sub_comment),
-              class: "scroll_to_section", data: {target: "#add_answer"},
-              remote: true %>
+              class: "scroll_to_section", remote: true,
+              data: {target: ".replies-#{sub_comment.parent.id} form"} %>
           <% end %>
           <% if current_user?(sub_comment.user) || current_user.is_admin? %>
             <%= link_to t("buttons.delete"),
