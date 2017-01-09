@@ -361,16 +361,28 @@ $(document).on("turbolinks:load", function() {
         var box = element.parents(".box").first();
         var box_content = box.find("> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer");
         if (!box.hasClass("collapsed-box")) {
-          element.children(":first")
-            .removeClass(_this.icons.collapse)
-            .addClass(_this.icons.open);
+          if ($('#users').length > 0) {
+            element.children(":first")
+              .removeClass('glyphicon-chevron-up')
+              .addClass('glyphicon-chevron-down');
+          } else {
+            element.children(":first")
+              .removeClass(_this.icons.collapse)
+              .addClass(_this.icons.open);
+          }
           box_content.slideUp(_this.animationSpeed, function () {
             box.addClass("collapsed-box");
           });
         } else {
-          element.children(":first")
-            .removeClass(_this.icons.open)
-            .addClass(_this.icons.collapse);
+          if ($('#users').length > 0) {
+            element.children(":first")
+              .removeClass('glyphicon-chevron-down')
+              .addClass('glyphicon-chevron-up');
+          } else {
+            element.children(":first")
+              .removeClass(_this.icons.open)
+              .addClass(_this.icons.collapse);
+          }
           box_content.slideDown(_this.animationSpeed, function () {
             box.removeClass("collapsed-box");
           });
@@ -443,7 +455,6 @@ $(document).on("turbolinks:load", function() {
   (function ($) {
 
     'use strict';
-
     $.fn.activateBox = function () {
       $.AdminLTE.boxWidget.activate(this);
     };
