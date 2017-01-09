@@ -216,7 +216,6 @@ en:
       all: "All Evaluation Standards"
       select: "Evaluation standards selected"
       search: "Search ..."
-      standards: "%{size} standards"
   record: "record was found"
   count_records: "%{record} records"
   user_type_sti:

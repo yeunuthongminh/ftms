@@ -45,4 +45,5 @@ en:
       onhold_tasks: "Are you want to pause task %{task_name}?"
       delete_tasks: "Are you want to delete task %{task_name}?"
       inprogress_tasks: "Are you want to start task %{task_name}?"
+      change_status_task: "Change status task"
     report_pull_request: "Please review task %{task}: %{url}"

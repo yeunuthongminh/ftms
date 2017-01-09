@@ -61,7 +61,7 @@
               .user_subject.progress? && !@subject_supports.course.finish? %>
               <%= link_to "#",
                 data: {toggle: "modal", target: "#TaskModal"},
-                class: "pull-right btn-new-task" do %>
+                class: "pull-right btn-new-task", title: t("subjects.title.create") do %>
                 <button type="button">
                   <span class="glyphicon glyphicon-plus"></span>
                   <%= t "subjects.task.new_task" %>

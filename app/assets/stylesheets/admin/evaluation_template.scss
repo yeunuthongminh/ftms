@@ -100,4 +100,29 @@
   .pull-right{
     margin-left: 10px;
   }
+  .noneselected-list-standards {
+    .panel-heading {
+      color: white;
+      background-color: cadetblue;
+      border-color: #bce8f1;
+    }
+  }
+  .selected-list-standards {
+    .panel-heading {
+      color: white;
+      background-color: darkseagreen;
+      border-color: #d6e9c6;
+    }
+  }
+  .new-evaluation-standard {
+    color: white;
+  }
+
+  .selected-evaluation-standards, .noneselected-evaluation-standards {
+    min-height: 120px;
+    max-height: 120px;
+  }
+}
+.button-new-evaluation-templates {
+  min-height: 25px;
 }

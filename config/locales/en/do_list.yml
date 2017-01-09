@@ -4,6 +4,7 @@ en:
     task_history: "Task History"
     task_finish_on_day: "Finished on day"
     task_name: "Task:  %{task}"
+    to_do_title: "To do list"
   show_task:
     name: "Name:"
     subject: "Subject:"
