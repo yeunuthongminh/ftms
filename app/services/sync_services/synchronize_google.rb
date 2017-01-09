@@ -1,5 +1,6 @@
 class SyncServices::SynchronizeGoogle
   include SynchronizeTrainingSchedule
+  include SynchronizeFaq
 
   def initialize args
     @auth = args[:auth]

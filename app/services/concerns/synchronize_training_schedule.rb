@@ -1,5 +1,5 @@
 module SynchronizeTrainingSchedule
-  def synchronize title
+  def synchronize_training_schedule title
     worksheet = @file.worksheet_by_title title
     worksheet.list.each do |line|
       trainee = User.find_by_name line[Settings.sync.training_schedules.name].strip
