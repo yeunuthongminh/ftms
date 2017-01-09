@@ -48,6 +48,6 @@ class StatisticTotalTraineePresenter < ActionView::Base
         #{value}
       </div>"
     end
-    html += "</div>"
+    html += "<div class=\"tcell title blank\"></div></div>"
   end
 end

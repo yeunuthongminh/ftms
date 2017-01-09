@@ -33,7 +33,7 @@ class Supports::CourseSupport
   end
 
   def courses
-    @courses = if @program
+    @courses ||= if @program
       program_ids = @program.self_and_descendants.collect &:id
       Course.in_programs(program_ids).includes :language, :location,
         :program, trainer_courses: :user

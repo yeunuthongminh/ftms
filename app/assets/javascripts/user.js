@@ -83,6 +83,12 @@ $(document).on("turbolinks:load", function() {
     $('#form_languages_filter').submit();
     $('#form_stages_filter').submit();
   });
+
+  if ($('#users .timelines').length > 0) {
+    $('.box-tools .glyphicon').click(function() {
+      $(this).toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+    });
+  }
 });
 
 var datepicker_options = {

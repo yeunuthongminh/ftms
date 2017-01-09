@@ -77,12 +77,11 @@ class CoursePresenter < ActionView::Base
   end
 
   def parent_programs program
-    list_parent = Array.new
-    if program && program.ancestors.any?
-      program.ancestors.each do |parent|
-        list_parent << parent.name.underscore
-      end
+    list_parents = if program && program.ancestors.any?
+      program.ancestors.pluck(:name).map {|program| program.downcase}
+    else
+      Array.new
     end
-    list_parent << program.name.underscore if program
+    list_parents << program.name.underscore if program
   end
 end

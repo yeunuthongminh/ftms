@@ -53,6 +53,7 @@ class ExamPresenter < ActionView::Base
       </div>
       <div class=\"tcell score text-center\">
         #{exam.score}
-      </div></div>"
+      </div>
+      <div class=\"tcell blank\"></div></div>"
   end
 end
