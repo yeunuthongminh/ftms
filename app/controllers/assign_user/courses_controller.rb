@@ -9,7 +9,11 @@ class AssignUser::CoursesController < ApplicationController
   def update
     @assign_user_form = AssignUserCourseForm.new @course,
       user_courses_params[:user_courses_attributes].values
-    @assign_user_form.save
+    if @assign_user_form.save
+      flash.now[:success] = flash_message "updated"
+    else
+      flash.now[:danger] = flash_message "not_updated"
+    end
   end
 
   private

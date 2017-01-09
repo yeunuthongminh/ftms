@@ -17,9 +17,8 @@ $(document).on("turbolinks:load", function() {
         success: function(data) {
           var html = "";
           var j = 0;
-
-          if (data.length > 0) {
-            data.forEach(function(requirement){
+          if (data.requirement.length > 0) {
+            data.requirement.forEach(function(requirement){
               j++;
               html += "<li type='1' class='list-group-item requirement-item' data-rqm="
                 + requirement.id + " data-parent-prj="+ project_id + ">" + j

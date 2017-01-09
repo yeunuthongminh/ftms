@@ -4,7 +4,7 @@ $(document).on("turbolinks:load", function() {
     list_items = $('#list-users li.list-group-item.active');
     destination = $('.list-group#list-trainers');
     move_selected_users(list_items, destination, "TrainerCourse");
-    count_record($('#list-trainers'), 'li.list-group-item');
+    count_record($('#list-users, #list-trainers'), 'li.list-group-item');
   });
 
   $('#btn-assign-trainee').click(function (e) {
@@ -12,7 +12,7 @@ $(document).on("turbolinks:load", function() {
     list_items = $('#list-users li.list-group-item.active');
     destination = $('.list-group#list-trainees');
     move_selected_users(list_items, destination, "TraineeCourse");
-    count_record($('#list-trainees'), 'li.list-group-item');
+    count_record($('#list-users, #list-trainees'), 'li.list-group-item');
   });
 
   $('#btn-remove-user').click(function (e) {
@@ -20,7 +20,7 @@ $(document).on("turbolinks:load", function() {
     list_items = $('#list-trainers li.list-group-item.active, #list-trainees li.list-group-item.active');
     destination = $('.list-group#list-users');
     move_selected_users(list_items, destination);
-    count_record($('#list-users'), 'li.list-group-item');
+    count_record($('#list-users, #list-trainees, #list-trainers'), 'li.list-group-item');
   });
 
   $('#assign-user-submit').click(function () {
@@ -120,7 +120,9 @@ function build_list_user_selectbox (lists) {
   });
 }
 
-function count_record(parent, element_type) {
-  var count = $(element_type, parent).length;
-  $(parent).closest('.panel').find('.count-member').text(I18n.t("count_records", {record: count}));
+function count_record(parents, element_type) {
+  $(parents).each(function () {
+    var count = $(element_type, this).length;
+    $(this).closest('.panel').find('.count-member').text(I18n.t("count_records", {record: count}));
+  });
 }
