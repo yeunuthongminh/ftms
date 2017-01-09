@@ -5,7 +5,7 @@ class SyncServices::SynchronizeGoogle
     @auth = args[:auth]
     @auth.code = args[:code]
     @auth.fetch_access_token!
-    @file = GoogleDrive.login_with_oauth(@auth).spreadsheet_by_url args[:link]
+    @file = GoogleDrive.login_with_oauth(@auth.access_token).spreadsheet_by_url args[:link]
   end
 
   def list_sheets
