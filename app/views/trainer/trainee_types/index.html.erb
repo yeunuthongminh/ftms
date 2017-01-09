@@ -1,6 +1,6 @@
 <div id="types" class="profile-active">
   <p class="pull-right">
-    <% if policy(controller: "trainee_types", action: "new") %>
+    <% if policy new_trainer_trainee_type_path %>
       <%= link_to t("buttons.new"),
         new_trainer_trainee_type_path, class: "btn btn-success" %>
     <% end %>
@@ -16,13 +16,14 @@
       <% @trainee_types.each do |trainee_type| %>
         <tr>
           <td class="name"><%= trainee_type.name %></td>
-          <% if policy(controller: "trainee_types", action: "edit") %>
+          <% if policy edit_trainer_trainee_type_path(trainee_type) %>
             <td class="action">
               <%= link_to t("buttons.edit"), edit_trainer_trainee_type_path(trainee_type),
                 class: "text-primary" %> &nbsp;
             </td>
           <% end %>
-          <% if policy(controller: "trainee_types", action: "destroy") %>
+          <% if policy_with_method(url:
+            edit_trainer_trainee_type_path(trainee_type), action: "destroy") %>
             <td>
               <%= link_to t("buttons.delete"), trainer_trainee_type_path(trainee_type),
                 method: :delete, data: {confirm: t("messages.delete.confirm")},
