@@ -3,7 +3,7 @@
     <div class="box box-success">
       <div class="box-header with-border">
         <h3 class="box-title">
-          <%= t "statistics.universities.title" %>
+          <%= t "statistics.stages.title" %>
         </h3>
 
         <div class="box-tools pull-right">
@@ -19,17 +19,15 @@
       <div class="box-body">
         <div class="col-md-3 filter_form_chart">
           <div class="row">
-            <%= render "filter_form", type: "university" %>
+            <%= render "filter_form",type: "stage" %>
           </div>
         </div>
         <div class="col-md-9">
-          <div id="universities-statistic"
-            data-universities="<%= @statistics.universities %>">
+          <div id="stages-statistic" data-stages="<%= @statistics.stages %>">
           </div>
         </div>
       </div>
     </div>
-
-    <%= render "table_statistic_below_chart", type: "university" %>
+    <%= render "table_statistic_trainee_in_edu", type: "stage" %>
   </div>
 </div>
