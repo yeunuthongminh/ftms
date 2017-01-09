@@ -1,6 +1,15 @@
 $(document).on('turbolinks:load', function(){
-  $('.flexslider').flexslider({
-    animation: 'slide'
+  $('#home-index .flexslider').flexslider({
+    animation: 'slide',
+    pauseOnHover: true,
+    animationLoop: false
+  });
+
+  $('#learning-programs .flexslider').flexslider({
+    animation: 'slide',
+    slideshow: false,
+    keyboardNav: false,
+    animationLoop: false
   });
 
   $(document).on('click', '.scroll_to_section', function(e){

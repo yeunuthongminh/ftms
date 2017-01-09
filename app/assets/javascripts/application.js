@@ -92,6 +92,7 @@
 //= require assign_user_function
 //= require timelineJS/embed
 //= require timeline
+//= require subject_kickoff
 
 $(document).on('turbolinks:load ajaxComplete', function() {
   $('.alert').delay(3000).fadeOut();

@@ -19,6 +19,7 @@ class Subject < ApplicationRecord
   has_many :notifications, as: :trackable, dependent: :destroy
   has_many :subject_categories, dependent: :destroy
   has_many :categories, through: :subject_categories
+  has_many :subject_kick_offs, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :during_time, presence: true, numericality: {greater_than: 0}

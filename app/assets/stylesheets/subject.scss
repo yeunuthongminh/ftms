@@ -128,12 +128,58 @@
       background: #eee;
     }
   }
+
   #user-course-project-modal {
     .modal-dialog {
       .panel-info > .panel-heading {
         color: white;
         background-color: cadetblue;
         border-color: #bce8f1;
+      }
+    }
+  }
+
+  .btn-show-kickoff {
+    margin-left: 10px;
+  }
+
+  #kickoff_modal {
+    .modal-dialog {
+      max-width: 100%;
+
+      .flexslider {
+        margin: 0;
+        box-shadow: none;
+
+        .flex-direction-nav a {
+          width: 50px;
+          height: 50px;
+        }
+
+        .name {
+          width: 100%;
+        }
+
+        .content {
+          min-height: 300px;
+          width: 100%;
+        }
+
+        .flex-control-nav {
+          position: static;
+          margin-top: 10px;
+        }
+      }
+
+      .modal-body {
+        padding-bottom: 50px;
+
+        button#skip-kickoff {
+          font-size: 100%;
+          margin: 4px 4px 0;
+          position: absolute;
+          right: 15px;
+        }
       }
     }
   }
@@ -177,4 +223,12 @@
 .stt-user-subject {
   height: 25px;
   width: 90%;
+}
+
+.ui-dialog .ui-dialog-title {
+  float: none !important;
+}
+
+.flex-disabled {
+  pointer-events: none;
 }

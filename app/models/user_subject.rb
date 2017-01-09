@@ -177,6 +177,10 @@ class UserSubject < ApplicationRecord
     estimate_end_date estimate_time
   end
 
+  def set_view_kick_off
+    update is_viewed: true
+  end
+
   private
   def create_user_tasks
     course_subject.tasks.each do |task|

@@ -86,4 +86,13 @@ class Supports::SubjectTraineeSupport
   def exam_process
     user_subject.exams.last
   end
+
+  def show_kick_off?
+    if user_subject.progress? && !user_subject.is_viewed?
+      user_subject.set_view_kick_off
+      true
+    else
+      false
+    end
+  end
 end
