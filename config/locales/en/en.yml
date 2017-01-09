@@ -169,7 +169,7 @@ en:
     university: "Enter university name..."
     traineetype: "Enter type name..."
     location: "Enter location name..."
-    programminglanguage: "Enter programming language name..."
+    language: "Enter programming language name..."
     status: "Enter status name..."
   mail:
     by_day:
@@ -219,3 +219,7 @@ en:
       standards: "%{size} standards"
   record: "record was found"
   count_records: "%{record} records"
+  user_type_sti:
+    admin: "Admin"
+    trainee: "Trainee"
+    trainer: "Trainer"
