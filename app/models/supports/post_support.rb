@@ -47,7 +47,7 @@ class Supports::PostSupport
   end
 
   def load_replies answer
-    answer.children.includes(:user).per_page_kaminari(@params[:page])
+    answer.children.includes(:user, :parent).per_page_kaminari(@params[:page])
       .per Settings.faq.replies_per_page
   end
 

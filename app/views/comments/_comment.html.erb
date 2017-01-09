@@ -44,19 +44,19 @@
     </div>
   </div>
 </div>
-<% if load_replies %>
-  <div class="clearfix replies replies-<%= comment.id %>">
-    <%= render partial: "comments/sub_comment",
-      collection: @supports.load_replies(comment) %>
-    <% if comment.children.count > Settings.faq.replies_per_page %>
-      <div class="col-sm-12 load_more_replies text-center">
-        <%= link_to t("faq.show.load_more_replies"),
-          post_comments_path(@post, page: 2, comment_id: comment.id),
-          remote: true %>
-      </div>
-    <% end %>
-    <div class="col-sm-10 padding-left-0 right-col offset-left-col ">
-      <form></form>
-    </div>
+<div class="clearfix replies replies-<%= comment.id %>">
+  <% if load_replies %>
+      <%= render partial: "comments/sub_comment",
+        collection: @supports.load_replies(comment) %>
+      <% if comment.children.count > Settings.faq.replies_per_page %>
+        <div class="col-sm-12 load_more_replies text-center">
+          <%= link_to t("faq.show.load_more_replies"),
+            post_comments_path(@post, page: 2, comment_id: comment.id),
+            remote: true %>
+        </div>
+      <% end %>
+  <% end %>
+  <div class="col-sm-10 padding-left-0 right-col offset-left-col reply-form">
+    <form></form>
   </div>
-<% end %>
+</div>

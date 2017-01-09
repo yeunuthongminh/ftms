@@ -60,7 +60,7 @@
 
     h3.title {
       text-align: left;
-      margin: 0 0 10px 0;
+      margin: 0 0 5px 0;
       padding: 0;
       font-size: 18px;
       font-weight: normal;
@@ -73,7 +73,7 @@
   }
 
   .tags {
-    margin: 10px 0;
+    margin: 5px 0;
 
     .tag {
       border: 1px solid #DDD;
@@ -345,5 +345,20 @@
 
   .padding-left-0 {
     padding-left: 0;
+  }
+
+  .box-effect {
+    animation-name: box_effect;
+    animation-delay: 0.5s;
+    animation-duration: 1s;
+  }
+
+  @keyframes box_effect {
+    50% {
+      background: #D3E6FF;
+    }
+    100% {
+      background: #FFF;
+    }
   }
 }
