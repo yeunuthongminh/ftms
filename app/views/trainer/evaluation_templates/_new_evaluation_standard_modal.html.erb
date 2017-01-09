@@ -1,0 +1,36 @@
+<div id="new-evaluation-standard-modal" class="modal fade" tabindex="-1"
+  role="dialog" data-backdrop="static">
+  <div class="modal-dialog">
+    <%= form_for [:trainer, EvaluationStandard.new], remote: true do |f| %>
+      <%= hidden_field_tag "selected" %>
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">
+            <%= t "evaluation_standards.actions.create" %>
+          </h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div id="errors-create-evaluations"></div>
+
+            <%= render "trainer/evaluation_standards/form", f: f %>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div class="pull-right">
+            <%= f.submit t("buttons.save"),
+              data: {disable_with: t("buttons.saving")},
+              class: "btn btn-primary" %>
+            <%= link_to t("buttons.cancel"), "javascript:void(0)",
+              data: {dismiss: "modal"} %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
