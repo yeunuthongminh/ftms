@@ -1,6 +1,7 @@
 <% provide :title, @subject_supports.user_subject.subject_name %>
 
-<div id="subject-show">
+<div id="subject-show"
+  data-show-kickoff="<%= @subject_supports.show_kick_off? %>">
   <div class="row">
     <div class="col-md-9">
       <div class="subject-overview">
@@ -11,7 +12,7 @@
           <%= t "courses.labels.status.#{@subject_supports.user_subject.status}" %>
         </span>
         <% unless @subject_supports.user_subject.finish? || @subject_supports.course.finish? %>
-          <div id="dialog-finish" title="<%= t "user_subjects.finish.confirm-title" %>"
+          <div id="dialog-finish" title="<%= t 'user_subjects.finish.confirm-title' %>"
             class="dialog">
             <% if @subject.subject_detail %>
               <p><%= t "user_subjects.finish.confirm_exam" %></p>
@@ -84,4 +85,5 @@
   <%= render "shared/member_modal", trainers: @subject_supports.trainers,
     trainees: @subject_supports.trainees %>
   <%= render "project_assignments_modal", project: @subject_supports.project %>
+  <%= render "kickoff_modal" %>
 </div>

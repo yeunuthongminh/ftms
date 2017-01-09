@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108010102) do
+ActiveRecord::Schema.define(version: 20170109024546) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -527,6 +527,17 @@ ActiveRecord::Schema.define(version: 20170108010102) do
     t.index ["subject_id"], name: "index_subject_details_on_subject_id", unique: true, using: :btree
   end
 
+  create_table "subject_kick_offs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.text     "content",    limit: 65535
+    t.integer  "subject_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["deleted_at"], name: "index_subject_kick_offs_on_deleted_at", using: :btree
+    t.index ["subject_id"], name: "index_subject_kick_offs_on_subject_id", using: :btree
+  end
+
   create_table "subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "image"
@@ -695,6 +706,7 @@ ActiveRecord::Schema.define(version: 20170108010102) do
     t.boolean  "current_progress",     default: false
     t.datetime "deleted_at"
     t.boolean  "lock_for_create_exam", default: false
+    t.boolean  "is_viewed",            default: false
     t.index ["course_id"], name: "index_user_subjects_on_course_id", using: :btree
     t.index ["course_subject_id"], name: "index_user_subjects_on_course_subject_id", using: :btree
     t.index ["deleted_at"], name: "index_user_subjects_on_deleted_at", using: :btree
@@ -798,6 +810,7 @@ ActiveRecord::Schema.define(version: 20170108010102) do
   add_foreign_key "statistics", "trainee_types"
   add_foreign_key "subject_categories", "categories"
   add_foreign_key "subject_categories", "subjects"
+  add_foreign_key "subject_kick_offs", "subjects"
   add_foreign_key "task_masters", "subjects"
   add_foreign_key "tasks", "course_subjects", on_delete: :cascade
   add_foreign_key "trainer_programs", "programs"

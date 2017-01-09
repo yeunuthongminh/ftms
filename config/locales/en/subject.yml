@@ -66,3 +66,7 @@ en:
       min_score: "Min score must fill"
     title:
       create: "Create a new task"
+    show:
+      view_kickoff: "View subject targets"
+      kickoff_for_subject: "Targets of %{subject}"
+      skip_kickoff: "Skip"

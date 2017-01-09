@@ -132,7 +132,12 @@ module ApplicationHelper
 
   def chat_type room
     chat_room = room.class.name
-    chat_room == User.name ? Conversation.name : chat_room
+    case chat_room
+    when Trainer.name, Trainee.name, Admin.name
+      Conversation.name
+    else
+      chat_room
+    end
   end
 
   def allow_render_message message, active_room

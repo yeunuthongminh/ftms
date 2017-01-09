@@ -36,3 +36,4 @@ en:
     onholds: "Pause %{object}"
     inprogresss: "Start %{object}"
     deletes: "Delete %{object}"
+    targets: "Targets"
