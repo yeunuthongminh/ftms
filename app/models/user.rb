@@ -9,7 +9,7 @@ class User < ApplicationRecord
     SELECT user_courses.id user_course_id, users.id user_id FROM users LEFT JOIN user_courses
     ON users.id = user_courses.user_id
     WHERE user_courses.course_id = :course_id
-    ) t ON users.id = t.user_id LEFT JOIN (
+    ) t ON users.id = t.user_id INNER JOIN (
     SELECT user_id FROM profiles WHERE profiles.stage_id IN (
       SELECT stages.id FROM stages WHERE stages.name='In education'
     ) AND profiles.status_id NOT IN (

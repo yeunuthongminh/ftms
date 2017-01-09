@@ -34,7 +34,6 @@ class Admin::RolesController < ApplicationController
 
   def update
     if @role.update_attributes role_params
-      add_user_function
       flash[:success] = flash_message "updated"
       redirect_to admin_roles_path
     else

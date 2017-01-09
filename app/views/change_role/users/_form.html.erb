@@ -3,6 +3,18 @@
   <div id="main" class="clearfix">
     <div id="content">
       <div id="change_function">
+        <div class="form-group">
+          <%= f.label :role_ids %>
+          <%= f.collection_check_boxes :role_ids, @roles, :id,
+            :name do |role| %>
+            <span class="label label-default">
+              <%= role.label do %>
+                <%= role.check_box id: "check_role_#{role.object.role_type}" %> &nbsp;
+                <%= role.text %> &nbsp;
+              <% end %>
+            </span>
+          <% end %>
+        </div>
         <div class="table">
           <%= render "shared/datatables/add_user_function_header" %>
           <%= @supports.presenter(f).html_safe %>
