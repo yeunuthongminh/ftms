@@ -1,25 +1,39 @@
-<div id="evaluation-templates" class="evaluation-active">
-  <div class="row">
-    <div class="col-md-12 title">
-      <span>
-        <%= link_to t("buttons.new"),
-          new_trainer_evaluation_template_path, class: "btn btn-success pull-right" %>
-      </span>
+<div id="main" class="clearfix">
+  <h1 class="text-center"><%= t "evaluation_templates.all" %></h1>
+  <div id="content">
+    <div id="<%= controller_name %>">
+      <%= image_tag "loading.gif", id: "loading" %>
+      <h3 class="title">
+        <span>
+          <%= link_to t("buttons.new"),
+            new_trainer_evaluation_template_path, class: "btn btn-success pull-right" %>
+        </span>
+
+        <button id="btn-filter-on-off" title="<%= filter_title %>"
+          class="btn-filter-onoff-project btn btn-default">
+          &nbsp;
+        </button>
+        <span id="filter-loading" class="filter-loading-offset-top"></span>
+      </h3>
+
+      <div class="table">
+        <%= render "shared/datatables/evaluation_template_header" %>
+        <%= @evaluation_templates_presenter.html_safe %>
+      </div>
+
+      <div class="pull-right" id="number-records">
+        <%= i18n_pluralize @evaluation_templates.size, Settings.record %>
+      </div>
+
+      <div id="filter" data-filter-data="<%= @filter_data_user %>"
+        data-type="<%= :evaluation_templates %>" data-id="<%= current_user.id %>"
+        data-is-turn-on="<%= @filter_service.is_on? %>">
+      </div>
+
+      <div class="list-filters">
+        <div class="filter-form">
+        </div>
+      </div>
     </div>
   </div>
-  <table id="evaluation-template-tbl" class="table table-bordered display"
-    data-source="<%= trainer_evaluation_templates_url format: "json" %>" >
-    <thead>
-      <tr class="active">
-        <th></th>
-        <th class="name"><%= t "table.thead.name" %></th>
-        <th class="min-point"><%= t "table.thead.min_point" %></th>
-        <th class="max-point"><%= t "table.thead.max_point" %></th>
-        <th class="action"></th>
-        <th class="action"></th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
 </div>
