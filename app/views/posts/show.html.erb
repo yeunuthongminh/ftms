@@ -1,6 +1,6 @@
 <% provide :title, @post.title.html_safe %>
 
-<div id="faq" class="post-show">
+<div id="qna" class="post-show">
   <div class="row">
     <div class="col-md-8 post-content">
       <div class="clearfix main">
@@ -45,7 +45,7 @@
                 </div>
               <% end %>
               <div class="create-time">
-                <%= t "faq.index.time_ago",
+                <%= t "qna.index.time_ago",
                   time: time_ago_in_words(@post.created_at) %>
               </div>
             </div>
@@ -55,29 +55,29 @@
       <div class="answer_section">
         <div class="answers">
           <div class="title">
-            <%= pluralize @post.comments.roots.count, t("faq.show.answer") %>
+            <%= pluralize @post.comments.roots.count, t("qna.show.answer") %>
           </div>
           <div class="all_answers">
             <%= render @supports.load_answers, load_replies: true %>
           </div>
-          <% if @post.comments.roots.count > Settings.faq.answers_per_page %>
+          <% if @post.comments.roots.count > Settings.qna.answers_per_page %>
             <div class="col-sm-12 load_more_answers">
-              <%= link_to t("faq.show.load_more_answers"),
+              <%= link_to t("qna.show.load_more_answers"),
                 post_comments_path(@post, page: 2), remote: true %>
             </div>
           <% end %>
         </div>
         <div id="add_answer">
-          <h3 class="title"><%= t "faq.show.add_answer" %></h3>
+          <h3 class="title"><%= t "qna.show.add_answer" %></h3>
           <% if user_signed_in? %>
             <div id="answer_form">
               <%= render "comments/form", post: @post,
                 comment: @supports.new_comment,
-                btn_new_text: t("faq.show.add_answer") %>
+                btn_new_text: t("qna.show.add_answer") %>
             </div>
           <% else %>
             <div class="alert-box alert-warning">
-              <%= t "faq.show.sign_in_to_answer" %>
+              <%= t "qna.show.sign_in_to_answer" %>
             </div>
           <% end %>
         </div>

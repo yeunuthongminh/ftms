@@ -3,7 +3,7 @@ $(".flash").html("<%= j render "layouts/flash" %>");
 <% if @comment.root? %>
   var $div_form = $('#answer_form');
   var new_form = '<%= j render "comments/form", post: @post,\
-    comment: @supports.new_comment, btn_new_text: t("faq.show.add_answer") %>';
+    comment: @supports.new_comment, btn_new_text: t("qna.show.add_answer") %>';
 <% else %>
   var $div_form = $('<%= ".replies-#{@comment.parent.id}" %> .reply-form');
   var new_form = '<form></form>';

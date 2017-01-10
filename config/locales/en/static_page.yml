@@ -8,13 +8,20 @@ en:
     member: "Already a member?"
     home: "Home"
     about: "About"
-    learning_programs: "Learning programs"
-    faq: "FAQ"
-    sliders:
-      title: "Caption for photo"
-      excerpt: "Aenean eu leo quam. Pellentesque ornare sem lacinia quam
-        venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod.
-        Praesent commodo cursus magna, vel scelerisque nisl consectetur et."
+    learning_programs:
+      title: "Learning programs"
+      intern_name: "Intern"
+      open_edu_name: "Open Education"
+      new_dev_name: "New Dev"
+      new_dev_description: "You are graduated and want to \"MAKE IT AWESOME\" with us."
+      open_edu_description: "You are student and want to experience our ideal working environment."
+      intern_description: "You are student and searching for an internship opportunity."
+    counters:
+      title: "Developing Developers"
+      content: "Master new skills in programming, design and product building."
+      learning: "Learning"
+      completed: "Completed"
+      manage: "Manage"
     open_edu:
       title: "Open Education"
       git:
@@ -52,7 +59,7 @@ en:
         duration: "10 days"
         body: "Use what you've learned to build a project."
     new_dev:
-      title: "New dev"
+      title: "New Dev"
       git:
         title: "Git"
         duration: "2 days"
@@ -73,13 +80,23 @@ en:
         title: "Project 2"
         duration: "10 days"
         body: "Use what you've learned to build a project."
+    programming_languages:
+      title: "Programming languages"
+      trainee: "trainee"
+      course: "course"
+      ruby_description: "Master your Ruby skills and increase your Rails street cred by
+        learning to build dynamic, sustainable applications for the web."
+      php_description: "Dig into one of the most prevalent programming languages and
+        learn how PHP can help you develop various applications for the web."
+      android_description: "Learn how to design and develop great Android apps through
+        courses built by Android experts at Framgia."
+      java_description: "Spend some time with this powerful language and learn
+        to build applications with enhanced user interfaces."
+      ios_description: "Try building iOS applications for iPhone and iPad mobile devices.
+        Learn the basics of iOS development and bring your app ideas to life."
     counters:
       title: "Developing Developers"
       content: "Master new skills in programming, design and product building."
       learning: "Learning"
       completed: "Completed"
       manage: "Manage"
-    faq_homepage:
-      title: "FAQ"
-      description: "Frequently Asked Questions"
-      view_all: "View all..."

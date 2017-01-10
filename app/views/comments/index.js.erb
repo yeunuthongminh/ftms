@@ -3,7 +3,7 @@
   $load_more.before('<%= j render partial: "comments/sub_comment",\
     collection: @answers %>');
   <% if @data[:next_page] > 0 %>
-    $load_more.html('<%= j link_to t("faq.show.load_more_replies"),\
+    $load_more.html('<%= j link_to t("qna.show.load_more_replies"),\
       post_comments_path(@post, comment_id: @data[:comment_id], page: @data[:next_page]),\
       remote: true %>');
   <% else %>
@@ -12,7 +12,7 @@
 <% else %>
   $('.all_answers').append('<%= j render @answers, load_replies: false %>');
   <% if @data[:next_page] > 0 %>
-    $('.load_more_answers').html('<%= j link_to t("faq.show.load_more_answers"),\
+    $('.load_more_answers').html('<%= j link_to t("qna.show.load_more_answers"),\
       post_comments_path(@post, page: @data[:next_page]), remote: true %>');
   <% else %>
     $('.load_more_answers').remove();

@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function(){
   $('#home-index .flexslider').flexslider({
     animation: 'slide',
     pauseOnHover: true,
-    animationLoop: false
+    controlNav: false
   });
 
   $('#learning-programs .flexslider').flexslider({
@@ -71,12 +71,18 @@ $(document).on('turbolinks:load', function(){
   });
 
   $('.timeline-heading img').mouseenter(function(){
-    $(this).parent().parent().parent().find(".timeline-body")
-      .toggle('slide');
+    $timeline_heading = $(this).closest('.timeline-heading');
+    $timeline_heading.css('z-index', 100);
+    var $timeline_body = $(this).parent().parent().next();
+    $timeline_body.css('z-index', 99);
+    $timeline_body.toggle('slide');
   });
 
   $('.timeline-heading img').mouseout(function(){
-    $(this).parent().parent().parent().find(".timeline-body")
-      .toggle('slide');
+    $timeline_heading = $(this).closest('.timeline-heading');
+    $timeline_heading.css('z-index', 10);
+    var $timeline_body = $(this).parent().parent().next();
+    $timeline_body.css('z-index', 9);
+    $timeline_body.toggle('slide');
   });
 });

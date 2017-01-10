@@ -4,11 +4,11 @@
   var $div_form = '<%= ".replies-#{@comment.parent.id}" %> .reply-form';
   $('form', '<%= ".replies-#{@comment.parent.id}" %>')
     .replaceWith('<%= j render "comments/form", post: @post,\
-      comment: @comment, btn_new_text: t("faq.show.add_reply") %>');
+      comment: @comment, btn_new_text: t("qna.show.add_reply") %>');
   $('form', '<%= ".replies-#{@comment.parent.id}" %>')
     .find('.answer_content').focus();
 <% end %>
 
 $div_form.html('<%= j render "comments/form", post: @post,\
-  comment: @comment, btn_new_text: t("faq.show.add_reply") %>');
+  comment: @comment, btn_new_text: t("qna.show.add_reply") %>');
 $('form', $div_form).find('.answer_content').focus();

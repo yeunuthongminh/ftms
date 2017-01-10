@@ -20,7 +20,7 @@
     <div class="clearfix bottom">
       <% if user_signed_in? %>
         <div class="actions">
-          <%= link_to t("faq.show.reply"),
+          <%= link_to t("qna.show.reply"),
             new_post_comment_path(@post, parent_id: comment.id),
             class: "scroll_to_section", remote: true,
             data: {target: ".replies-#{comment.id} form"} %>
@@ -38,7 +38,7 @@
         </div>
       <% end %>
       <div class="create-time">
-        <%= t "faq.index.time_ago",
+        <%= t "qna.index.time_ago",
           time: time_ago_in_words(comment.created_at) %>
       </div>
     </div>
@@ -48,9 +48,9 @@
   <% if load_replies %>
       <%= render partial: "comments/sub_comment",
         collection: @supports.load_replies(comment) %>
-      <% if comment.children.count > Settings.faq.replies_per_page %>
+      <% if comment.children.count > Settings.qna.replies_per_page %>
         <div class="col-sm-12 load_more_replies text-center">
-          <%= link_to t("faq.show.load_more_replies"),
+          <%= link_to t("qna.show.load_more_replies"),
             post_comments_path(@post, page: 2, comment_id: comment.id),
             remote: true %>
         </div>

@@ -12,7 +12,7 @@ class Supports::TagSupport
         else
           Post.send post_type
         end.tagged_with(@params[:id]).includes(:taggings, :user)
-        .per_page_kaminari(page).per Settings.faq.posts_per_page
+        .per_page_kaminari(page).per Settings.qna.posts_per_page
         instance_variable_set "@#{post_type}_posts", posts
       end
       instance_variable_get "@#{post_type}_posts"
@@ -23,7 +23,7 @@ class Supports::TagSupport
     define_method "most_viewed_posts_#{period}" do
       unless instance_variable_get("@most_viewed_posts_#{period}")
         posts = Post.most_viewed_by(period).tagged_with(@params[:id])
-          .includes(:taggings).take Settings.faq.most_viewed_posts
+          .includes(:taggings).take Settings.qna.most_viewed_posts
         instance_variable_set("@most_viewed_posts_#{period}", posts)
       end
       instance_variable_get "@most_viewed_posts_#{period}"
@@ -32,6 +32,6 @@ class Supports::TagSupport
 
   def most_tagged_tags
     @most_tagged_tags ||= Post.tag_counts_on(:tags).order("COUNT DESC")
-      .limit Settings.faq.most_tagged_tags
+      .limit Settings.qna.most_tagged_tags
   end
 end

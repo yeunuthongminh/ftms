@@ -237,11 +237,9 @@ sync:
 
 sync_functions:
   - Training schedule
-  - FAQ
+  - QnA
 minimum_percent_to_join: 5
-static_pages:
-  num_of_faq: 10
-faq:
+qna:
   posts_per_page: 10
   most_viewed_posts: 10
   most_tagged_tags: 15

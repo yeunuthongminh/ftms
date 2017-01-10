@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:show, :index]
   before_action :load_post, except: [:index, :new, :create]
   before_action :load_supports, only: [:index, :show]
   before_action :authorize_post, only: [:edit, :update, :destroy]

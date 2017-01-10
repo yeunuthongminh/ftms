@@ -1,5 +1,5 @@
 class Supports::StaticPageSupport
-  def initialize args = {}
+  def initialize
   end
 
   def trainees_size
@@ -14,7 +14,7 @@ class Supports::StaticPageSupport
     @courses_size ||= Course.count
   end
 
-  def most_viewed_posts
-    @most_viewed_posts ||= Post.order_desc(:views).take Settings.static_pages.num_of_faq
+  def languages
+    @languages ||= Language.all
   end
 end

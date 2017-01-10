@@ -4,7 +4,7 @@
       <%= sub_comment.content.html_safe %> -
       <%= link_to sub_comment.user_name, sub_comment.user %>
       <span class="create-time">
-        <%= t "faq.index.time_ago",
+        <%= t "qna.index.time_ago",
           time: time_ago_in_words(sub_comment.created_at) %>
       </span>
 
