@@ -173,6 +173,9 @@ function toggleFilterMenu(element, resize) {
     _top = fa.offset().top - $('#tbl-locations').offset().top + 10;
   } else if (fa.hasClass('language') && $('#tbl-stages').offset()) {
     _top = fa.offset().top - $('#tbl-stages').offset().top + 10;
+  } else if (fa.is('.trainee_type, .language, .filter-month') &&
+    $('#total_trainees').offset()) {
+    _top = fa.offset().top - $('#total_trainees').offset().top + 10;
   }
   $filterDom.css({"top": _top, "left": _left});
 

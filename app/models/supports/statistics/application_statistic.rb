@@ -36,7 +36,7 @@ class Supports::Statistics::ApplicationStatistic
   end
 
   def months
-    date_range = @start_date..@end_date
+    date_range = @start_date.to_date..@end_date.to_date
     date_months = date_range.map {|d| Date.new(d.year, d.month, 1) }.uniq
     date_months.map {|d| d.strftime I18n.t('datetime.formats.year_month')}
   end
