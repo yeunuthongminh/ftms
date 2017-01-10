@@ -74,3 +74,4 @@ en:
       init: "Init"
       progress: "Progress"
       finish: "Finish"
+    search_user: "Search for user..."

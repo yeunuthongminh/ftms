@@ -1,5 +1,4 @@
 $(document).on('turbolinks:load', function() {
-  setMaxHeight();
   var arr_add_evaluation = [];
   var arr_remove_evaluation = [];
   reload_index($('.index-select'));

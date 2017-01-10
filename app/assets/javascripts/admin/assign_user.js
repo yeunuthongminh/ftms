@@ -27,6 +27,22 @@ $(document).on("turbolinks:load", function() {
     $('#assign-user-form').trigger('submit');
     $(this).closest('.modal').modal('hide');
   });
+
+  $('.search_form').keyup(function(){
+    var keyword = $(this).val().toLowerCase();
+    var $list_user = $(this).next().find('li.list-group-item');
+    $list_user.each(function(index, user) {
+      var user_name = $(user).find('.user_name');
+      if(user_name){
+        if(user_name.text().toLowerCase().indexOf(keyword) > -1){
+          $(user).show();
+        } else {
+          $(user).hide();
+        }
+      }
+    });
+    count_record($(this).next(), 'li:visible.list-group-item');
+  });
 });
 
 function move_selected_users(list_items, destination, attr_type="") {
@@ -123,6 +139,7 @@ function build_list_user_selectbox (lists) {
 function count_record(parents, element_type) {
   $(parents).each(function () {
     var count = $(element_type, this).length;
-    $(this).closest('.panel').find('.count-member').text(I18n.t("count_records", {record: count}));
+    $(this).closest('.panel').find('.count-member')
+      .text(I18n.t("count_records", {record: count}));
   });
 }
