@@ -28,10 +28,12 @@ class Admin::SynchronizesController < ApplicationController
 
   def synchronize_data_from_google code
     sync_google = SyncServices::SynchronizeGoogle.new code: code, auth: @auth, link: link
+    method_sync = "synchronize " + function.downcase
+    method_sync = method_sync.gsub(" ", "_")
     if title.blank?
       @titles = sync_google.list_sheets
     else
-      if sync_google.send "synchronize", title
+      if sync_google.send method_sync, title
         flash[:success] =  t "notice.sync_success", function: function
       else
         flash[:alert] = t "notice.sync_fails", function: function

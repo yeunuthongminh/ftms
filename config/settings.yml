@@ -229,8 +229,15 @@ sync:
     resign_date: "Resign Date"
     project_timing: "Project Timing"
     ready_for_project: "Ready for real PJ"
+  question_answers:
+    name: "Name"
+    question: "Question"
+    category: "Category"
+    answer: "Answer"
+
 sync_functions:
   - Training schedule
+  - FAQ
 minimum_percent_to_join: 5
 static_pages:
   num_of_faq: 10
