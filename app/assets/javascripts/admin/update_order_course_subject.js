@@ -3,8 +3,10 @@ $(document).on("turbolinks:load", function() {
     var cells, desired_width, table_width;
     if ($('#sortable').length > 0) {
       table_width = $('#sortable').width();
-      cells = $('.table').find('tr')[0].cells.length;
-      desired_width = table_width / cells + 'px';
+      if($('.table tr').length > 0) {
+        cells = $('.table tr')[0].cells.length;
+        desired_width = table_width / cells + 'px';
+      }
       $('.table td').css('width', desired_width);
       return $('#sortable').sortable({
         axis: 'y',
