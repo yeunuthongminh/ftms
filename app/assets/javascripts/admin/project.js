@@ -90,6 +90,7 @@ $(document).on("turbolinks:load", function() {
           li_tag_name.replaceWith(clone_project);
           active_li(li_tag_name);
         }
+        update_index_project()();
       }
     });
     e.preventDefault();
@@ -157,6 +158,7 @@ $(document).on("turbolinks:load", function() {
         } else {
           li_tag_name.replaceWith(clone_requirement);
         }
+        update_index_requirement()
       }
     });
     e.preventDefault();
@@ -274,6 +276,7 @@ $(document).on("turbolinks:load", function() {
             + I18n.t("buttons.edit") + "'><i class='fa fa-remove'></i></a></div></li>");
           $(v).replaceWith(html);
         });
+        update_index_project();
       },
       error: function(data) {
         flash_now('alert-error', I18n.t("projects.create_project.fail"));
@@ -301,6 +304,7 @@ $(document).on("turbolinks:load", function() {
           <a href='#' class='rqm-delete' title='"
           + I18n.t("buttons.edit") + "'><i class='fa fa-remove'></i></a>\
           </div></li>");
+        update_index_requirement()
       },
       error: function(data) {
         flash_now('alert-error', I18n.t("projects.create_requirement.fail"));
@@ -333,4 +337,14 @@ function flash_now(type, message) {
     <a class='close' data-dismiss='alert' href='#' aria-hidden='true'>&times;</a>"
     + message + "</div>";
   $('.flash').html(flash);
+}
+
+function update_index_project() {
+  size = $('.list-project .list-group-item.project-item').length;
+  $('#sumProject b').text(size);
+}
+
+function update_index_requirement() {
+  size = $('#list-rqms .list-group-item.requirement-item[type]').length;
+  $('#sumRequirement b').text(size);
 }
