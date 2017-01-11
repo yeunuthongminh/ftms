@@ -29,9 +29,13 @@ $(document).on('turbolinks:load', function(){
   $('#form-import-file').submit(function(){
     var file_inputs = $('input[type=file]');
     for (var i = 0; i < file_inputs.length; i++){
-      var model = $('#' + file_inputs[i].id).data('model');
-      $('#check-box-tag-file-select-' + model).prop('checked', true);
-      $('#loading-image-' + model).removeClass('hidden');
+      if (file_inputs[i].value === "")
+        file_inputs[i].disabled = true;
+      else{
+        var model = $('#' + file_inputs[i].id).data('model');
+        $('#check-box-tag-file-select-' + model).prop('checked', true);
+        $('#loading-image-' + model).removeClass('hidden');
+      }
     }
     return true;
   });
