@@ -78,9 +78,8 @@ class AllocateFunctionPresenter < ActionView::Base
   end
 
   def find_function action, model_class
-    function = @role.functions.find {|function| function.model_class == model_class && function.action == action if function}
+    function = @role.functions.find {|function| function.model_class == model_class &&
+      function.action == action if function}
     function.present? ? function.id : nil
   end
 end
-
-
