@@ -3,7 +3,7 @@
     <div class="col-md-5">
       <div class="timeline-header">
         <%= link_to user_subject.subject.name,
-          [:trainer, @inprogress_course.course, user_subject.subject] %>
+          [:trainer, @supports.inprogress_course.course, user_subject.subject] %>
       </div>
     </div>
     <div class="col-md-6">
@@ -21,7 +21,7 @@
     <div class="user-task">
       <table class="table">
         <%= render partial: "trainer/users/user_task",
-          collection: user_subject.user_tasks.includes(:task), as: :user_task %>
+          collection: user_subject.user_tasks, as: :user_task %>
       </table>
     </div>
   </div>

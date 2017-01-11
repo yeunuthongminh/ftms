@@ -1,16 +1,16 @@
 class Trainer::UsersController < ApplicationController
-  before_action :authorize, except: :edit
+  before_action :authorize
   before_action :find_user, except: [:index, :new, :create]
   before_action :load_profile, only: [:new, :edit, :show]
-  before_action :build_profile, only: :new
 
   def new
+    @user_form = UserForm.new
   end
 
   def create
-    @user = User.new user_params
-    user_send_mail_service = MailerServices::UserSendMailService.new user: @user
-    if @user.save && user_send_mail_service.perform?
+    @user_form = UserForm.new user_params
+    user_send_mail_service = MailerServices::UserSendMailService.new user: @user_form.user
+    if @user_form.save && user_send_mail_service.perform?
       flash[:success] = flash_message "created"
       if params[:create_and_continue].present?
         redirect_to new_trainer_user_path
@@ -24,11 +24,15 @@ class Trainer::UsersController < ApplicationController
   end
 
   def edit
-    build_profile unless @user.profile
+    @user_form = UserForm.new
+    @user_form.init user: @user, profile: @user.profile
   end
 
   def update
-    if @user.update_attributes user_params
+    @user_form = UserForm.new
+    @user_form.init user: @user, profile: @user.profile
+    @user_form.assign_attributes user_params
+    if @user_form.save
       sign_in(@user, bypass: true) if current_user? @user
       flash[:success] = flash_message "updated"
       redirect_to trainer_training_managements_path
@@ -57,12 +61,7 @@ class Trainer::UsersController < ApplicationController
   end
 
   def load_profile
-    @user ||= User.new
-    @supports = Supports::UserSupport.new @user
-  end
-
-  def build_profile
-    @user.build_profile
+    @supports = Supports::UserSupport.new @user || User.new
   end
 
   def find_user

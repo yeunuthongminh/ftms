@@ -1,52 +1,97 @@
-<div id="users">
-  <%= form_for [:trainer, @user] do |f| %>
-    <div class="row">
-      <%= render "shared/error_messages", object: @user %>
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= f.label :name %>
-          <%= f.text_field :name, class: "form-control" %>
+<div id="new-profile">
+  <%= form_for [:trainer, @user_form] do |f| %>
+    <%= render "shared/error_messages", object: @user_form %>
+    <div class="box box-primary">
+      <div class="box-header with-border fix-border">
+        <h3 class="box-title"><strong>
+          <%= t "profiles.box_title" %></strong></h3>
+        <div class="box-tools pull-right">
+          <% unless @user_form.user.new_record? %>
+            <% if policy edit_change_role_user_path @user_form.user %>
+              <%= link_to t("user.edit_role"),
+                edit_change_role_user_path(@user_form) %>
+            <% end %>
+          <% end %>
+          <button type="button" class="btn btn-box-tool" data-widget="collapse">
+            <i class="fa fa-minus"></i></button>
         </div>
-        <div class="form-group">
-          <%= f.label :email %>
-          <%= f.text_field :email, class: "form-control" %><br>
-        </div>
-        <% if policy edit_change_role_users_path(@user) %>
-          <%= link_to t("user.edit_role"),
-            edit_change_role_user_path(@user) unless @user.new_record? %>
-        <% end %>
-        <% if policy edit_trainer_user_path(@user) %>
-          <div class="form-group">
-            <%= f.label :trainer_id %>
-            <%= f.select :trainer_id, options_for_select(@supports.trainers
-              .collect{|trainer| [trainer.name, trainer.id,
-              {"data-location-id": trainer.profile_location_id}]},
-              f.object.trainer_id), {include_blank: true},
-              class: "form-control" %>
-          </div>
-        <% end %>
       </div>
-      <%= render "shared/edit_profile_form", f: f %>
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :name %>
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :email %>
+              <%= f.text_field :email, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :trainer_id %>
+              <%= f.select :trainer_id, options_for_select(@supports.trainers
+                .collect{|trainer| [trainer.name, trainer.id,
+                {"data-location-id": trainer.profile_location_id}]},
+                f.object.trainer_id), {include_blank: true},
+                class: "form-control" %>
+            </div>
+          </div>
+          <%= render "shared/edit_profile_form", f: f %>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :type %>
+              <%= f.select :type, options_for_select(Settings.user_functions
+                .map{|e| t("user_type_sti.#{e}")}, f.object.type),
+                {include_blank: true},
+                class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :password, t("user.fields.password") %>
+              <%= f.password_field :password, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :password_confirmation,
+                t("user.place_holder.password_confirmation") %>
+              <%= f.password_field :password_confirmation,
+                class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <%= render "profile_form", f: f %>
 
     <div class="row">
       <div class="col-md-12">
-        <% if f.object.new_record? %>
+        <% if @supports.user.new_record? %>
           <%= f.submit t("buttons.create_and_continue"),
             name: "create_and_continue",
             class: "btn btn-primary pull-right btn-create-and-continue btn-submit" %>
-          <%= f.submit t("buttons.create"), class: "btn btn-primary pull-right btn-submit" %>
+          <%= f.submit t("buttons.create"),
+            class: "btn btn-primary pull-right btn-submit" %>
         <% else %>
-          <%= f.submit t("buttons.update"), class: "btn btn-primary pull-right btn-submit" %>
+          <%= f.submit t("buttons.update"),
+            class: "btn btn-primary pull-right btn-submit" %>
         <% end %>
       </div>
     </div>
   <% end %>
 </div>
-<% [@supports.location, @supports.trainee_type, @supports.university].each do |object| %>
-  <div class="modal fade modal-form" id="<%= object.class.name.downcase %>-modal" role="dialog">
+<% [@supports.location, @supports.trainee_type, @supports.university, @supports.
+  status, @supports.language].each do |object| %>
+  <div class="modal fade modal-form" id="<%= object.class.name.downcase %>-modal"
+    role="dialog">
     <%= render "shared/quick_form", object: object, managers: @supports.managers %>
   </div>
 <% end %>

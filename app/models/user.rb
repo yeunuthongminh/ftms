@@ -6,10 +6,16 @@ class User < ApplicationRecord
   mount_uploader :avatar, ImageUploader
 
   QUERY = "SELECT users.id, users.name, user_course_id FROM users LEFT JOIN (
-      SELECT user_courses.id user_course_id, users.id user_id FROM users LEFT JOIN user_courses
-      ON users.id = user_courses.user_id
-      WHERE user_courses.course_id = :course_id
-    ) t ON users.id = t.user_id
+    SELECT user_courses.id user_course_id, users.id user_id FROM users LEFT JOIN user_courses
+    ON users.id = user_courses.user_id
+    WHERE user_courses.course_id = :course_id
+    ) t ON users.id = t.user_id LEFT JOIN (
+    SELECT user_id FROM profiles WHERE profiles.stage_id IN (
+      SELECT stages.id FROM stages WHERE stages.name='In education'
+    ) AND profiles.status_id NOT IN (
+      SELECT statuses.id FROM statuses WHERE statuses.name='Resigned'
+      )
+    ) z ON users.id = z.user_id
     WHERE id NOT IN (SELECT user_id
       FROM user_courses, courses WHERE user_courses.course_id = courses.id
       AND (
@@ -161,7 +167,7 @@ class User < ApplicationRecord
   end
 
   def has_function? controller, action, role
-    type = (role+"Function").classify.constantize
+    type = (role+"Function").classify
     user_functions.has_function(controller, action, type).any?
   end
 

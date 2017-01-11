@@ -1,0 +1,103 @@
+<div class="box box-danger">
+  <div class="box-body">
+    <div class="box-header">
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :staff_code %>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :staff_code, class: "form-control profile" %>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :join_div_date %>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :join_div_date,
+          value: @user_form.profile.join_div_date ?
+          l(@user_form.profile.join_div_date, format: :default) : "",
+          class: "form-control datepicker profile" %>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :start_training_date %>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :start_training_date,
+          value: @user_form.profile.start_training_date ?
+          l(@user_form.profile.start_training_date, format: :default) : "",
+          class: "form-control datepicker profile" %>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :leave_date %>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :leave_date, value: @user_form.profile.leave_date ?
+          l(@user_form.profile.leave_date, format: :default) : "",
+          class: "form-control datepicker profile" %>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :finish_training_date %>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :finish_training_date,
+          value: @user_form.profile.finish_training_date ?
+          l(@user_form.profile.finish_training_date, format: :default) : "",
+          class: "form-control datepicker profile" %>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :contract_date %>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :contract_date,
+          value: @user_form.profile.contract_date ?
+          l(@user_form.profile.contract_date, format: :default) : "",
+          class: "form-control datepicker profile" %>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :graduation %>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :graduation,
+          value: @user_form.profile.graduation ?
+          l(@user_form.profile.graduation, format: :year_month) :
+          "", class: "form-control graduation profile" %>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :naitei_company %>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :naitei_company, class: "form-control profile" %>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <%= f.label :stage %>
+      </div>
+      <div class="col-md-7">
+        <h4><b><%= @supports.stage.name %></b>&nbsp;&nbsp;&nbsp;
+          <% if @supports.user.new_record? %>
+            <%= f.hidden_field :stage_id, value: @supports.stage.id %>
+          <% else %>
+            <%= link_to t("stages.change"),
+              edit_trainer_user_stages_path(@supports.user),
+              class: "btn btn-danger" %>
+          <% end %>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>
