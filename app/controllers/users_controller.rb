@@ -1,25 +1,54 @@
 class UsersController < ApplicationController
-  before_action :authorize_user
-  before_action :load_university, only: :edit
-  before_action :find_user, only: [:edit, :show]
-  before_action :load_data, only: :show
+  def new
+    @user_form = UserForm.new
+  end
 
-  def show
+  def create
+    @user_form = UserForm.new user_params
+    user_send_mail_service = MailerServices::UserSendMailService.new user: @user_form.user
+    if @user_form.save && user_send_mail_service.perform?
+      flash[:success] = flash_message "created"
+      if params[:create_and_continue].present?
+        redirect_to new_trainer_user_path
+      else
+        redirect_to trainer_training_managements_path
+      end
+    else
+      load_profile
+      render :new
+    end
   end
 
   def edit
-    @user.build_profile unless @user.profile
+    @user_form = UserForm.new
+    @user_form.init user: @user, profile: @user.profile
   end
 
   def update
-    if @user.update_attributes user_params
-      sign_in @user, bypass: true
-      redirect_to @user, notice: flash_message("updated")
+    @user_form = UserForm.new
+    @user_form.init user: @user, profile: @user.profile
+    @user_form.assign_attributes user_params
+    if @user_form.save
+      sign_in(@user, bypass: true) if current_user? @user
+      flash[:success] = flash_message "updated"
+      redirect_to trainer_training_managements_path
     else
-      load_university
-      flash[:alert] = flash_message "not_updated"
+      load_profile
       render :edit
     end
+  end
+
+  def destroy
+    if @user.destroy
+      flash[:success] = flash_message "deleted"
+    else
+      flash[:alert] = flash_message "not_deleted"
+    end
+    redirect_to trainer_training_managements_path
+  end
+
+  def show
+    @notes = Note.load_notes @user, current_user
   end
 
   private
@@ -27,23 +56,15 @@ class UsersController < ApplicationController
     params.require(:user).permit User::ATTRIBUTES_PARAMS
   end
 
-  def load_data
-    @supports ||= Supports::UserSupport.new @user
+  def load_profile
+    @supports = Supports::UserSupport.new @user || User.new
   end
 
   def find_user
     @user = User.find_by id: params[:id]
     unless @user
       flash[:alert] = flash_message "not_find"
-      redirect_to root_path
+      redirect_to trainer_training_managements_path
     end
-  end
-
-  def load_university
-    @universities = University.all
-  end
-
-  def authorize_user
-    authorize_with_multiple page_params.merge(record: current_user), UserPolicy
   end
 end

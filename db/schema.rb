@@ -724,7 +724,7 @@ ActiveRecord::Schema.define(version: 20170109024546) do
     t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
     t.string   "pull_request_url"
-    t.integer  "sent_pull_count"
+    t.integer  "sent_pull_count",  default: 0
     t.index ["deleted_at"], name: "index_user_tasks_on_deleted_at", using: :btree
     t.index ["task_id"], name: "index_user_tasks_on_task_id", using: :btree
     t.index ["user_id"], name: "index_user_tasks_on_user_id", using: :btree
