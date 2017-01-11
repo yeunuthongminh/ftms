@@ -51,4 +51,64 @@
   .label-status {
     padding: 0px 3px 1px 0;
   }
+  .vco-timeline .vco-navigation {
+    height: 120px;
+    .timenav-background {
+      height: 60px;
+    }
+    .timenav .time .time-interval-minor .minor {
+      top: -80px;
+    }
+    .timenav .time .time-interval {
+      top: -75px;
+    }
+    .timenav-background .timenav-line {
+      height: 68px;
+    }
+    .timenav .content .marker .line {
+      height: 68px
+    }
+    .timenav-background .timenav-interval-background {
+      top: 69px;
+    }
+    .timenav .content .marker .line .event-line {
+      top: 68px !important;
+    }
+    .timenav .content .marker .dot {
+      top: 68px;
+    }
+    .vco-toolbar {
+      top: 0;
+    }
+    .timenav .content .marker .flag .flag-content {
+      height: 41px;
+      width: 140px;
+      border-radius: 4px;
+      background-image: none;
+      border: 1px solid white;
+      padding: 0px 7px 2px 4px;
+    }
+    .timenav .content .marker .flag-small .flag-content {
+      height: 17px;
+    }
+    .timenav .content .marker .flag-small:hover,
+      .timenav .content .marker .flag:hover {
+      background-image: none;
+    }
+    .timenav .content .marker .flag-small .flag-content .thumbnail {
+      width: 10px;
+    }
+    .timenav .time .time-interval-major {
+      top: -75px;
+    }
+  }
+  .user_task {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+    .status {
+      position: absolute;
+      right: 0;
+    }
+  }
 }
