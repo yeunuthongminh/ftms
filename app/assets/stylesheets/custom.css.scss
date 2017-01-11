@@ -5,7 +5,7 @@ html {
   min-height: 100%;
 }
 
-#body-admin, #body-user, .content-wrapper {
+#body-admin, .content-wrapper {
   background-color: #F6F8F8 !important;
   padding: 0;
 
@@ -15,6 +15,8 @@ html {
 }
 
 #body-user {
+  background-color: #F6F8F8 !important;
+  padding: 0;
   padding-top: 70px;
   height: 100%;
 }

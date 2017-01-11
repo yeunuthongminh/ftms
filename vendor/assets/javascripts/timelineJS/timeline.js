@@ -5440,6 +5440,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Slider == 'undefined') {
 			}
 
 			sizeSlides();
+			handle_data_timeline();
 		}
 
 		function sizeSlide(slide_id) {
@@ -9193,9 +9194,9 @@ if(typeof VMM != 'undefined' && typeof VMM.Timeline == 'undefined') {
 			VMM.Lib.addClass($timeline, "vco-storyjs");
 
 			$container	= VMM.appendAndGetElement($timeline, "<div>", "vco-container vco-main");
+			$navigation	= VMM.appendAndGetElement($container, "<div>", "vco-navigation");
 			$feature	= VMM.appendAndGetElement($container, "<div>", "vco-feature");
 			$slider		= VMM.appendAndGetElement($feature, "<div>", "vco-slider");
-			$navigation	= VMM.appendAndGetElement($container, "<div>", "vco-navigation");
 			$feedback	= VMM.appendAndGetElement($timeline, "<div>", "vco-feedback", "");
 
 
@@ -9487,7 +9488,6 @@ if(typeof VMM != 'undefined' && typeof VMM.Timeline == 'undefined') {
 
 
 			}
-
 
 		};
 
@@ -10027,7 +10027,6 @@ if(typeof VMM.Timeline != 'undefined' && typeof VMM.Timeline.TimeNav == 'undefin
 				VMM.Lib.visible(markers[0].marker, false);
 				VMM.Lib.addClass(markers[0].marker, "start");
 			}
-
 			VMM.Lib.addClass(markers[current_marker].marker, "active");
 
 			// ANIMATE MARKER
@@ -12155,5 +12154,4 @@ if (typeof VMM.Timeline !== 'undefined' && typeof VMM.Timeline.DataObj == 'undef
 		date_obj: {"startDate":"2012,2,2,11,30", "headline":"", "text":"", "asset": {"media":"http://youtu.be/vjVfu8-Wp6s", "credit":"", "caption":"" }, "tags":"Optional"}
 
 	};
-
 }
