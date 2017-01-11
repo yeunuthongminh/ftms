@@ -1,0 +1,25 @@
+<div class="box box-primary box-widget collapsed-box">
+  <div class="box-header with-border box-info">
+    <div class="info-title"><h3><%= t "user.course_result"%></h3></div>
+    <div class="box-tools">
+      <button type="button" class="btn btn-box-tool"
+        data-widget="collapse">
+        <i class="glyphicon glyphicon-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+  <div class="box-body">
+    <% @supports.user_courses.each do |user_course| %>
+      <strong class="icon-profile">
+        <i class="fa fa-file-text-o margin-r-5"></i>
+        <%= user_course.course.name %>
+      </strong>
+      <% user_course.user_subjects.each do |user_subject| %>
+        <p class="text-muted subject_result">
+          <%= user_subject.subject_name %>: <%= user_subject.trainee_evaluations.first
+            .total_point if user_subject.trainee_evaluations.any? %>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

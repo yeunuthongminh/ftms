@@ -58,8 +58,6 @@ default_password: 12345678
 users:
   tabs:
     - timelines
-    - inprogress_courses
-    - finished_courses
     - activities
 per_page: 10
 chats:

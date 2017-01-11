@@ -48,6 +48,7 @@ class UserSubject < ApplicationRecord
     def update_all_status status, current_user, course_subject
 
       if status == "start"
+        start_user_course if init?
         user_subjects = load_users(statuses[:init]).each do |user_subject|
           user_subject.update_attributes status: statuses[:progress],
             start_date: Time.now, current_progress: user_subject.in_progress,
@@ -81,6 +82,7 @@ class UserSubject < ApplicationRecord
   def update_status current_user, status
     row = status_before_type_cast
     column = UserSubject.statuses[status]
+    start_user_course if init?
     update_info status: status, row: row, column: column, current_user: current_user
   end
 
@@ -229,5 +231,9 @@ class UserSubject < ApplicationRecord
           parameters: new_status
       end
     end
+  end
+
+  def start_user_course
+    trainee_course.progress! if self.trainee_course.init?
   end
 end

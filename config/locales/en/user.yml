@@ -79,6 +79,8 @@ en:
     trainer_sign: "Trainer sign"
     pull_request: "Pull Request"
     no_start_date: "---------------"
+    user_info: "Info"
+    course_result: "Course Result"
   signins:
     banner: "Please Login"
     remember: "Remember me"
