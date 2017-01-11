@@ -1,6 +1,7 @@
 en:
   imports:
     question: "Questions"
+    project: "Project"
     import: "Import"
     imports: "Imports"
     synchronizes: "Synchronizes"

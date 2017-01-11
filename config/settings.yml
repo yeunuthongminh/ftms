@@ -194,6 +194,8 @@ import:
   data_types:
     - model: question
       verify_attribute: Question
+    - model: project
+      verify_attribute: Project
   image_loading_size: "30x30"
 data_types_import:
   question: "question"
