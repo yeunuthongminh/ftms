@@ -2,6 +2,8 @@ class UserCoursesController < ApplicationController
   before_action :find_user_course, only: :show
 
   def show
+    add_breadcrumb_path "courses"
+    add_breadcrumb @trainee_course.course.name
     authorize_with_multiple page_params.merge(record: current_user), CoursePolicy
     @supports = Supports::TraineeCourseSupport.new @trainee_course
   end

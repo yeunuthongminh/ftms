@@ -15,7 +15,7 @@ class Admin::EvaluationStandardsController < ApplicationController
 
   def new
     @evaluation_standard = EvaluationStandard.new
-    add_breadcrumb_index "evaluation_standards"
+    add_breadcrumb_path "evaluation_standards"
     add_breadcrumb_new "evaluation_standards"
   end
 
@@ -39,7 +39,7 @@ class Admin::EvaluationStandardsController < ApplicationController
   end
 
   def edit
-    add_breadcrumb_index "evaluation_standards"
+    add_breadcrumb_path "evaluation_standards"
     add_breadcrumb_edit "evaluation_standards"
   end
 

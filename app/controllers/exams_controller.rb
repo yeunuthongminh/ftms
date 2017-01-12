@@ -3,11 +3,14 @@ class ExamsController < ApplicationController
   before_action :load_exams, only: :index
 
   def index
+    add_breadcrumb_path "exams"
   end
 
   def show
     authorize_with_multiple page_params.merge(record: @exam), ExamPolicy
     check_status
+    add_breadcrumb_path "exams"
+    add_breadcrumb @exam.id
   end
 
   def update
