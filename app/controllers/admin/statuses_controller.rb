@@ -3,11 +3,14 @@ class Admin::StatusesController < ApplicationController
   before_action :load_status, only: [:edit, :update, :destroy]
 
   def index
+    add_breadcrumb_index "statuses"
     @statuses = Status.all
   end
 
   def new
     @status = Status.new
+    add_breadcrumb_path "statuses"
+    add_breadcrumb_new "statuses"
   end
 
   def create
@@ -25,6 +28,9 @@ class Admin::StatusesController < ApplicationController
   end
 
   def edit
+    add_breadcrumb_path "statuses"
+    add_breadcrumb @status.name
+    add_breadcrumb_edit "statuses"
   end
 
   def update

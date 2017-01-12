@@ -12,6 +12,11 @@ html {
   .content {
     min-height: calc(100vh - 50px);
   }
+  .bread_crumb_header {
+    min-height: 25px;
+    max-height: 50px;
+    width: 100%;
+  }
 }
 
 #body-user {

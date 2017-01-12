@@ -5,7 +5,7 @@ class Admin::EvaluationStandardsController < ApplicationController
   def index
     @evaluation_standard = EvaluationStandard.new
     respond_to do |format|
-      format.html
+      format.html {add_breadcrumb_index "evaluation_standards"}
       format.js
       format.json {
         render json: EvaluationStandardsDatatable.new(view_context, @namespace)
@@ -15,6 +15,8 @@ class Admin::EvaluationStandardsController < ApplicationController
 
   def new
     @evaluation_standard = EvaluationStandard.new
+    add_breadcrumb_index "evaluation_standards"
+    add_breadcrumb_new "evaluation_standards"
   end
 
   def create
@@ -37,6 +39,8 @@ class Admin::EvaluationStandardsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb_index "evaluation_standards"
+    add_breadcrumb_edit "evaluation_standards"
   end
 
   def update

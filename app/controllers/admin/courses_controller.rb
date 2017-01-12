@@ -8,6 +8,7 @@ class Admin::CoursesController < ApplicationController
   before_action :authorize
 
   def index
+    add_breadcrumb_index "courses"
     @supports ||= Supports::CourseSupport.new namespace: @namespace,
       filter_service: load_filter
   end
@@ -16,6 +17,8 @@ class Admin::CoursesController < ApplicationController
     @course = Course.new
     @course.documents.build
     @course_form = CourseForm.new @course
+    add_breadcrumb_path "courses"
+    add_breadcrumb_new "courses"
   end
 
   def create
@@ -34,10 +37,15 @@ class Admin::CoursesController < ApplicationController
   end
 
   def show
+    add_breadcrumb_path "courses"
+    add_breadcrumb @course.name, :admin_course_path
   end
 
   def edit
     @course_form = CourseForm.new @course
+    add_breadcrumb_path "courses"
+    add_breadcrumb @course.name, :admin_course_path
+    add_breadcrumb_edit "courses"
   end
 
   def update

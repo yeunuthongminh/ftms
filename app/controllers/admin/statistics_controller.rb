@@ -1,11 +1,13 @@
 class Admin::StatisticsController < ApplicationController
   include FilterData
+  include BreadcrumbHelper
 
   before_action :authorize, except: :show
   before_action :load_statistic_view
   before_action :load_filter, only: :show
 
   def show
+    add_breadcrumb_index "statistics"
     template = "admin/statistics/#{params[:type]}"
     if template_exists? template
       render template

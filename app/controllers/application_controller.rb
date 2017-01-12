@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   include ApplicationHelper
   include PublicActivity::StoreController
+  include BreadcrumbHelper
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :exception

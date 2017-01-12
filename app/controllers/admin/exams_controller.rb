@@ -7,5 +7,6 @@ class Admin::ExamsController < ApplicationController
     @exams = Exam.finish.includes :user, user_subject: [:course, course_subject: :subject]
     @filter_data_user = @filter_service.user_filter_data
     @exam_presenters = ExamPresenter.new(@exams, @namespace).render
+    add_breadcrumb_index "exams"
   end
 end

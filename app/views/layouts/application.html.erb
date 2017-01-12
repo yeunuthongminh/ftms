@@ -32,6 +32,17 @@
     <body id="body-admin" class="skin-blue sidebar-mini wysihtml5-supported" >
       <div class="wrapper">
         <%= render "layouts/#{@namespace}_sidebar" %>
+        <div class="bread_crumb_header">
+          <ol class="breadcrumb pull-left">
+            <li>
+              <%= link_to eval("#{@namespace}_root_path") do %>
+                <i class="glyphicon glyphicon-th-list"></i>
+                <%= t "layouts.paths" %>
+              <% end %>
+            </li>
+            <%= render_breadcrumbs tag: :li, separator: "" %>
+          </ol>
+        </div>
           <section class="content">
             <div class="flash">
               <%= render "layouts/flash" %>
