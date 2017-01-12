@@ -2,17 +2,6 @@ namespace :db do
   desc "remake database data"
   task load_user_function: :environment do
 
-    puts "create function"
-    UserFunction.delete_all
-    RoleFunction.delete_all
-    Function.delete_all
-    Rails.application.routes.routes.anchored_routes.map(&:defaults)
-      .reject {|route| route[:internal] || Settings.controller_names.include?(route[:controller])}
-      .each do |route|
-      Function.find_or_create_by model_class: route[:controller],
-        action: route[:action] unless route[:action] == "edit" || route[:action] == "new"
-    end
-
     puts "create function for admin"
     admins = []
     Admin.all.each do |admin|

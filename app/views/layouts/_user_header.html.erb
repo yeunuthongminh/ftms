@@ -83,13 +83,15 @@
                 <i class="fa fa-envelope"></i>
               <% end %>
             </li>
-            <% current_user.role_type_avaiable.each do |role| %>
-              <% unless role == @namespace %>
-                <li>
-                  <%= link_to change_current_role_type_path(role), method: :patch do %>
-                    <%= role.capitalize %>
-                  <% end %>
-                </li>
+            <% if current_user.role_type_avaiable.any? %>
+              <% current_user.role_type_avaiable.each do |role| %>
+                <% unless role == @namespace %>
+                  <li>
+                    <%= link_to change_current_role_type_path(role), method: :patch do %>
+                      <%= role.capitalize %>
+                    <% end %>
+                  </li>
+                <% end %>
               <% end %>
             <% end %>
             <li class="dropdown" id="dropdown-profile">

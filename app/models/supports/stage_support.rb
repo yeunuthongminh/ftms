@@ -1,26 +1,26 @@
 class Supports::StageSupport
-  attr_reader :profile, :user
+  attr_reader :profile, :user_form
 
   def initialize args
     @profile = args[:profile]
     @stage = args[:stage]
-    @user = @profile.user
+    @user_form = args[:user_form]
   end
 
   def location_name
-    @location ||= @profile.location_name
+    @location ||= @user_form.location_name
   end
 
   def status
-    @status ||= @profile.status_name
+    @status ||= @user_form.status_name
   end
 
   def university
-    @university ||= @profile.university_name
+    @university ||= @user_form.university_name
   end
 
   def staff_code
-    @staff_code ||= @profile.staff_code
+    @staff_code ||= @user_form.staff_code
   end
 
   def stages

@@ -92,9 +92,11 @@
           <% if @supports.user.new_record? %>
             <%= f.hidden_field :stage_id, value: @supports.stage.id %>
           <% else %>
-            <%= link_to t("stages.change"),
-              edit_admin_user_stages_path(@supports.user),
-              class: "btn btn-danger" %>
+            <% if policy edit_move_stage_user_path(@supports.user) %>
+              <%= link_to t("stages.change"),
+                edit_move_stage_user_path(@supports.user),
+                class: "btn btn-danger" %>
+            <% end %>
           <% end %>
         </h4>
       </div>

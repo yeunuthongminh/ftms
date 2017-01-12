@@ -24,9 +24,7 @@ Rails.application.routes.draw do
       resources :tasks, except: :show
       resources :course_subject_requirement, only: :update
     end
-    resources :users, except: :index do
-      resource :stages, only: [:edit, :update]
-    end
+    resources :users, except: :index
 
     resources :trainee_evaluations, only: :index
     resources :evaluation_standards
@@ -138,6 +136,10 @@ Rails.application.routes.draw do
     resources :users, only: :show do
       resource :pdfs, only: :show
     end
+  end
+
+  namespace :move_stage do
+    resources :users, only: [:edit, :update]
   end
 
   root "static_pages#home"

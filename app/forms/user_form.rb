@@ -34,6 +34,7 @@ class UserForm
   def assign_attributes params
     user_attributes = params.slice *self.class.user_attributes
     user.assign_attributes user_attributes
+    @user = @user.becomes @user.type.constantize
     profile_attributes = params.slice *self.class.profile_attributes
     profile.assign_attributes profile_attributes
     setup_associations

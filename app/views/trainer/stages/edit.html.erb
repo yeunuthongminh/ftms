@@ -1,0 +1,20 @@
+<% provide :title, t("stages.edit") %>
+<div id="stage-edit">
+  <div class="row">
+    <% if @supports %>
+      <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><%= t "profiles.label_edit" %></div>
+          <div class="panel-body"><%= render "user_stage_form" %></div>
+        </div>
+      </div>
+    <% else %>
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><%= t "stages.edit" %></div>
+          <div class="panel-body"><%= render "form" %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
