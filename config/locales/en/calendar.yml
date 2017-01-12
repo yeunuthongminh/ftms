@@ -3,3 +3,7 @@ en:
     tiny:
       label: "Mini calendar"
     must_be_finished: "Must be finished: "
+    demo: "%{owner} will demo %{target} today"
+    expected_demo: "%{owner} expected demo %{target}"
+    will_demo: "%{owner} will demo %{target} in %{time}"
+    going_finish: "%{owner} is going to finish course %{target}"

@@ -4,7 +4,7 @@ en:
     do_exam: "Do exam %{name}"
     save: "Save"
     finish: "Finish"
-    finish_warning: "You wan't to finish?"
+    finish_warning: "Do you want to finish?"
     saved: "Exam has been saved"
     finished: "Exam has been finished"
     update_fail: "Exam update fail"

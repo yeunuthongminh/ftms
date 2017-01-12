@@ -2,6 +2,9 @@
   .fc-header {
     vertical-align: top;
     border: none !important;
+    min-height: 33px;
+    background: mediumseagreen;
+    color: white;
   }
   max-width: 900px;
   margin: 5px auto;
@@ -19,6 +22,32 @@
   .fc-day-header .ui-widget-header {
     border: none;
   }
+  .fc-more-popover {
+    width: auto !important;
+  }
+  .fc-popover > .ui-widget-header + .ui-widget-content {
+    .fc-event-container {
+      a {
+        margin-bottom: 10px;
+        margin-left: 5px;
+        min-height: 25px;
+        max-height: 40px;
+        text-align: left;
+        padding-top: 10px;
+        font-size: 11pt;
+        font-weight: bold;
+      }
+      .fc-day-grid-event .fc-content {
+        white-space: none !important;
+      }
+    }
+  }
+  .fc-more {
+    font-size: 15pt;
+    text-decoration: none;
+    padding-left: 20px;
+  }
+
   margin-bottom: 100px;
 }
 
@@ -57,7 +86,7 @@
   .fc-day-number {
     font-size: 13px !important;
   }
-  .fc-day-number:hover, .fc-day-top:hover{
+  .fc-day-number:hover, .fc-day-top:hover {
     background: lightblue;
   }
   .fc-day-top {
@@ -71,3 +100,29 @@
   }
 }
 
+#full_calendar_modal {
+  .modal-content {
+    .modal-header {
+      background-color: #5F9EA0;
+      color: white;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: center;
+      h4 {
+        font-size: 18pt;
+        font-weight: bold;
+      }
+    }
+    .modal-body {
+      ol li {
+        padding-bottom: 10px;
+        margin: 10px 0 10px 0;
+        font-size: 16pt;
+        font-weight: bold;
+      }
+    }
+    .modal-footer {
+      border-top: 1px solid #e5e5e5;
+    }
+  }
+}

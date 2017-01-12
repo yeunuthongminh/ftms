@@ -115,6 +115,7 @@ Rails.application.routes.draw do
 
     resources :trainee_evaluations, only: :index
     resources :evaluation_standards
+    resources :calendars, only: :index
   end
 
   namespace :assign_user do
@@ -165,8 +166,8 @@ Rails.application.routes.draw do
   resources :feed_backs, only: :create
   resources :filter_datas, only: [:index, :create]
   resources :exams, only: [:show, :index, :update]
-  resources :calendars, only: :index
   resource :change_current_role_type, only: :update
+  resources :calendars, only: :index
 
   resources :posts do
     resources :comments
