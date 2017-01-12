@@ -2,6 +2,8 @@ class Trainer::UsersController < ApplicationController
   before_action :authorize
   before_action :find_user, except: [:index, :new, :create]
   before_action :load_profile, only: [:new, :edit, :show]
+  before_action :load_breadcrumb_edit, only: [:edit, :update]
+  before_action :load_breadcrumb_new, only: [:new, :create]
 
   def new
     @user_form = UserForm.new
@@ -53,6 +55,8 @@ class Trainer::UsersController < ApplicationController
 
   def show
     @notes = Note.load_notes @user, current_user
+    add_breadcrumb_path "training_managements"
+    add_breadcrumb @user.name
   end
 
   private
@@ -62,6 +66,17 @@ class Trainer::UsersController < ApplicationController
 
   def load_profile
     @supports = Supports::UserSupport.new @user || User.new
+  end
+
+  def load_breadcrumb_edit
+    add_breadcrumb_path "training_managements"
+    add_breadcrumb @user.name, [:trainer, @user]
+    add_breadcrumb_edit "users"
+  end
+
+  def load_breadcrumb_new
+    add_breadcrumb_path "training_managements"
+    add_breadcrumb_new "users"
   end
 
   def find_user

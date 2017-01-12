@@ -6,6 +6,7 @@ class Trainer::StatisticsController < ApplicationController
   before_action :load_filter, only: :show
 
   def show
+    add_breadcrumb_index "statistics"
     template = "trainer/statistics/#{params[:type]}"
     if template_exists? template
       render template

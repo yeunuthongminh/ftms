@@ -7,6 +7,11 @@ class Trainer::CourseSubjectsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb_path "courses"
+    add_breadcrumb @course_subject.course_name, trainer_course_path(@course)
+    add_breadcrumb @course_subject.subject_name, trainer_course_subject_path(@course,
+      @course_subject.subject)
+    add_breadcrumb_edit "subjects"
   end
 
   def update

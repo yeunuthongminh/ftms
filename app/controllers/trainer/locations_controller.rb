@@ -3,10 +3,12 @@ class Trainer::LocationsController < ApplicationController
   before_action :find_location, except: [:index, :create, :new]
 
   before_action :load_managers, except: [:destroy, :show, :index]
+  before_action :set_breadcrumb_new, only: [:new, :create]
+  before_action :set_breadcrumb_edit, only: [:edit, :update]
 
   def index
     respond_to do |format|
-      format.html
+      format.html {add_breadcrumb_index "locations"}
       format.json {
         render json: LocationsDatatable.new(view_context, @namespace, current_user)
       }
@@ -15,6 +17,8 @@ class Trainer::LocationsController < ApplicationController
 
   def show
     @location_support = Supports::LocationSupport.new location: @location
+    add_breadcrumb_path "locations"
+    add_breadcrumb @location.name
   end
 
   def new
@@ -64,6 +68,17 @@ class Trainer::LocationsController < ApplicationController
 
   def load_managers
     @managers = User.not_trainees
+  end
+
+  def set_breadcrumb_new
+    add_breadcrumb_path "locations"
+    add_breadcrumb_new "locations"
+  end
+
+  def set_breadcrumb_edit
+    add_breadcrumb_path "locations"
+    add_breadcrumb @location.name
+    add_breadcrumb_edit "locations"
   end
 
   def find_location

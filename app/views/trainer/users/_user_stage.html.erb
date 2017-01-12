@@ -83,21 +83,5 @@
         <%= f.text_field :naitei_company, class: "form-control profile" %>
       </div>
     </div>
-    <div class="row form-group">
-      <div class="col-md-4">
-        <%= f.label :stage %>
-      </div>
-      <div class="col-md-7">
-        <h4><b><%= @supports.stage.name %></b>&nbsp;&nbsp;&nbsp;
-          <% if @supports.user.new_record? %>
-            <%= f.hidden_field :stage_id, value: @supports.stage.id %>
-          <% else %>
-            <%= link_to t("stages.change"),
-              edit_trainer_user_stages_path(@supports.user),
-              class: "btn btn-danger" %>
-          <% end %>
-        </h4>
-      </div>
-    </div>
   </div>
 </div>

@@ -5,6 +5,7 @@ class Trainer::TrainingManagementsController < ApplicationController
   before_action :authorize
 
   def index
+    add_breadcrumb_index "training_managements"
     users = Trainee.includes(:trainer, user_subjects: [:course_subject],
       profile: [:status, :trainee_type, :location, :university, :language, :stage]).order :name
     @training_management_presenters = TrainingManagementPresenter.new(users, @namespace).render
