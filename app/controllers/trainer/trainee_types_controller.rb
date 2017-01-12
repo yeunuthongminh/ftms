@@ -5,10 +5,13 @@ class Trainer::TraineeTypesController < ApplicationController
   def index
     @trainee_types = TraineeType.all
     @trainee_type = TraineeType.new
+    add_breadcrumb_index "trainee_types"
   end
 
   def new
     @trainee_type = TraineeType.new
+    add_breadcrumb_path "trainee_types"
+    add_breadcrumb_new "trainee_types"
   end
 
   def create
@@ -26,6 +29,9 @@ class Trainer::TraineeTypesController < ApplicationController
   end
 
   def edit
+    add_breadcrumb_path "trainee_types"
+    add_breadcrumb @trainee_type.name
+    add_breadcrumb_edit "trainee_types"
   end
 
   def update
