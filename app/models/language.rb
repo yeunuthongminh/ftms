@@ -11,6 +11,6 @@ class Language < ApplicationRecord
   validates :name, presence: true
 
   scope :order_by_trainee, -> do
-    left_outer_joins(:profiles).group(:language_id).order "COUNT(profiles.id) DESC"
+    left_outer_joins(:profiles).group(:id).order "COUNT(profiles.id) DESC"
   end
 end
