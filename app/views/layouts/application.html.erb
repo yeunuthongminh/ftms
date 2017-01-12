@@ -55,6 +55,19 @@
     <body id="body-user">
       <%= render "layouts/user_header" %>
       <div class="body_wrapper <%= class_body controller_name %>">
+        <% if user_signed_in? %>
+          <div class="breadcrumb-bar">
+            <ul class="list breadcrumb">
+              <li>
+                <%= link_to root_url do %>
+                  <i class="glyphicon glyphicon-th-list"></i>
+                  <%= t "layouts.paths" %>
+                <% end %>
+              </li>
+              <%= render_breadcrumbs tag: :li, separator: "" %>
+            </ul>
+          </div>
+        <% end %>
         <div class="flash">
           <%= render "layouts/flash" %>
         </div>

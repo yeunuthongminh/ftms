@@ -5,10 +5,13 @@ class UsersController < ApplicationController
   before_action :load_data, only: :show
 
   def show
+    add_breadcrumb @user.name
   end
 
   def edit
     @user.build_profile unless @user.profile
+    add_breadcrumb @user.name, :user_path
+    add_breadcrumb_edit "users"
   end
 
   def update
@@ -18,6 +21,8 @@ class UsersController < ApplicationController
     else
       load_university
       flash[:alert] = flash_message "not_updated"
+      add_breadcrumb @user.name, :user_path
+      add_breadcrumb_edit "users"
       render :edit
     end
   end
@@ -41,5 +46,9 @@ class UsersController < ApplicationController
 
   def authorize_user
     authorize_with_multiple page_params.merge(record: current_user), UserPolicy
+  end
+
+  def load_university
+    @universities = University.all
   end
 end

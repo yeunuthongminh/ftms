@@ -3,8 +3,14 @@ class PostsController < ApplicationController
   before_action :load_supports, only: [:index, :show]
   before_action :authorize_post, only: [:edit, :update, :destroy]
 
+  def index
+    add_breadcrumb_path "posts"
+  end
+
   def new
     @post = current_user.posts.build
+    add_breadcrumb_path "posts"
+    add_breadcrumb_new "posts"
   end
 
   def create
@@ -13,12 +19,15 @@ class PostsController < ApplicationController
       flash[:success] = flash_message "created"
       redirect_to @post
     else
+      add_breadcrumb_path "posts"
+      add_breadcrumb_new "posts"
       flash.now[:failed] = flash_message "not_created"
       render :new
     end
   end
 
   def show
+    add_breadcrumb_path "posts"
     @post.views += 1
     @post.save
     today_post_views = @post.today_post_views
@@ -26,11 +35,18 @@ class PostsController < ApplicationController
     today_post_views.save
   end
 
+  def edit
+    add_breadcrumb_path "posts"
+    add_breadcrumb_edit "posts"
+  end
+
   def update
     if @post.update_attributes post_params
       flash[:success] = flash_message "updated"
       redirect_to @post
     else
+      add_breadcrumb_path "posts"
+      add_breadcrumb_edit "posts"
       flash.now[:failed] = flash_message "not_updated"
       render :edit
     end

@@ -6,12 +6,16 @@ class Trainer::EvaluationTemplatesController < ApplicationController
   before_action :find_evaluation_template, only: [:edit, :update]
 
   def index
+    add_breadcrumb_index "evaluation_templates"
     @evaluation_templates = EvaluationTemplate.all
     @evaluation_templates_presenter = EvaluationTemplatePresenter.new(
       evaluation_templates: @evaluation_templates, namespace: @namespace).render
   end
 
   def new
+    add_breadcrumb_path "evaluation_templates"
+    add_breadcrumb_new "evaluation_templates"
+
     @evaluation_template = EvaluationTemplate.new
     @evaluation_standards = EvaluationStandard.all
   end
@@ -28,6 +32,8 @@ class Trainer::EvaluationTemplatesController < ApplicationController
   end
 
   def edit
+    add_breadcrumb_path "evaluation_templates"
+    add_breadcrumb_edit "evaluation_templates"
     @evaluation_standards = EvaluationStandard.all - @evaluation_template.evaluation_standards
   end
 

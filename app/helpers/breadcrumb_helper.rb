@@ -1,7 +1,12 @@
 module BreadcrumbHelper
   def add_breadcrumb_path resource
-    add_breadcrumb t("breadcrumbs.#{resource}.all"),
-      "#{@namespace}_#{resource}_path".to_sym
+    if @namespace == Settings.namespace_roles.trainee
+      add_breadcrumb t("breadcrumbs.#{resource}.all"),
+        "#{resource}_path".to_sym
+    else
+      add_breadcrumb t("breadcrumbs.#{resource}.all"),
+        "#{@namespace}_#{resource}_path".to_sym
+    end
   end
 
   def add_breadcrumb_index resource
