@@ -254,3 +254,5 @@ user_functions:
   - admin
   - trainer
   - trainee
+static_pages:
+  num_of_languages: 6

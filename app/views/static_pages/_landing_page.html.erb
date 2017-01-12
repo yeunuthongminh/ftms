@@ -335,7 +335,12 @@
           <div class="col-md-6">
             <div class="language clearfix">
               <div class="col-sm-3 language-image">
-                <%= image_tag "languages/#{language.name.downcase}.png" %>
+                <% if Rails.application.assets
+                  .find_asset "languages/#{language.name.downcase}.png" %>
+                  <%= image_tag "languages/#{language.name.downcase}.png" %>
+                <% else %>
+                  <%= image_tag "languages/default.png" %>
+                <% end %>
               </div>
               <div class="col-sm-9 detail">
                 <div class="row head">
