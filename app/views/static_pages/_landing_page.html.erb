@@ -2,320 +2,362 @@
   <div class="container-fluid scroll" id="home-index">
     <div class="flexslider">
       <ul class="slides">
-        <% 4.times do %>
+        <% 4.times do |i| %>
           <li>
-            <%= image_tag "home.jpg" %>
-            <div class="flex-caption">
-              <h3 class="title"><%= t "staticpages.sliders.title" %></h3>
-              <div class="excerpt">
-                <p><%= t "staticpages.sliders.excerpt" %></p>
-              </div>
-            </div>
+            <%= image_tag "home-slides/#{i}.jpg" %>
           </li>
         <% end %>
       </ul>
     </div>
   </div>
 
-  <section id="learning-programs" class="clearfix scroll">
-    <div class="col-md-12">
-      <div class="flexslider">
-        <ul class="slides">
-          <li class="program-progress">
-            <div id="program-open-edu" class="clearfix">
-              <div class="section-title">
-                <%= t "staticpages.open_edu.title" %>
-              </div>
-              <div class="container relative">
-                <div class="col-sm-12 program-timeline" data-total-col="22">
-                  <div class="col-sm-3 timeline-block up" data-col="2">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/git.png", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.open_edu.git.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.open_edu.git.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.open_edu.git.body" %></p>
-                      </div>
-                    </div>
+  <div id="learning-programs" class="scroll">
+    <section id="all-programs">
+      <div class="container-fluid">
+        <div class="row">
+          <h2 class="title">
+            <%= t "staticpages.learning_programs.title" %>
+          </h2>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <% %w(new_dev intern open_edu).each do |program| %>
+            <div class="col-md-4">
+              <%= link_to root_path(anchor: "program-#{program}"),
+                class: "scroll_to_section", data: {target: "#program-#{program}"} do %>
+                <div class="program clearfix">
+                  <div class="col-md-12">
+                    <h3 class="name">
+                      <%= t "staticpages.learning_programs.#{program}_name" %>
+                    </h3>
+                    <h4 class="description">
+                      <%= t "staticpages.learning_programs.#{program}_description" %>
+                    </h4>
                   </div>
-                  <div class="col-sm-3 timeline-block down" data-col="10">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/tutorial.png", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.open_edu.tutorial.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.open_edu.tutorial.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.open_edu.tutorial.body" %></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 timeline-block up" data-col="10">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/project.png", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.open_edu.project1.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.open_edu.project1.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.open_edu.project1.body" %></p>
-                      </div>
-                    </div>
+                  <div class="col-sm-12 program-image">
+                    <%= image_tag "programs/#{program}.png" %>
                   </div>
                 </div>
-              </div>
-            </div>
-          </li>
-          <li class="program-progress">
-            <div id="program-intern" class="clearfix">
-              <div class="section-title">
-                <%= t "staticpages.intern.title" %>
-              </div>
-              <div class="container relative">
-                <div class="col-sm-12 program-timeline" data-total-col="34">
-                  <div class="col-sm-3 timeline-block up" data-col="2">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/git.png", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.intern.git.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.intern.git.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.intern.git.body" %></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 timeline-block down" data-col="10">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/tutorial.png", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.intern.tutorial.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.intern.tutorial.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.intern.tutorial.body" %></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 timeline-block up" data-col="10">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/project.png", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.intern.project1.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.intern.project1.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.intern.project1.body" %></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 timeline-block down" data-col="2">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/mysql.jpg", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.intern.mysql.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.intern.mysql.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.intern.mysql.body" %></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 timeline-block up" data-col="10">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/project.png", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.intern.project2.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.intern.project2.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.intern.project2.body" %></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="program-progress">
-            <div id="program-new-dev" class="clearfix">
-              <div class="section-title">
-                <%= t "staticpages.new_dev.title" %>
-              </div>
-              <div class="container relative">
-                <div class="col-sm-12 program-timeline" data-total-col="34">
-                  <div class="col-sm-3 timeline-block up" data-col="2">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/git.png", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.new_dev.git.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.new_dev.git.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.new_dev.git.body" %></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 timeline-block down" data-col="10">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/tutorial.png", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.new_dev.tutorial.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.new_dev.tutorial.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.new_dev.tutorial.body" %></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 timeline-block up" data-col="10">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/project.png", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.new_dev.project1.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.new_dev.project1.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.new_dev.project1.body" %></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 timeline-block down" data-col="2">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/mysql.jpg", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.new_dev.mysql.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.new_dev.mysql.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.new_dev.mysql.body" %></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 timeline-block up" data-col="10">
-                    <div class="timeline-content">
-                      <div class="timeline-heading">
-                        <div class="img">
-                          <%= image_tag "programs/project.png", class: "img-circle" %>
-                        </div>
-                      </div>
-                      <div class="timeline-body">
-                        <h2 class="title">
-                          <%= t "staticpages.new_dev.project2.title" %>
-                        </h2>
-                        <h4 class="subject-duration">
-                          <%= t "staticpages.new_dev.project2.duration" %>
-                        </h4>
-                        <p><%= t "staticpages.new_dev.project2.body" %></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq_homepage" class="scroll">
-    <div class="container text-center">
-      <div class="title">
-        <%= t "staticpages.faq_homepage.title" %>
-      </div>
-      <div class="faq-description">
-        <i><%= t "staticpages.faq_homepage.description" %></i>
-      </div>
-      <div class="row">
-        <% @supports.most_viewed_posts.each.with_index 1 do |post, index| %>
-          <%= link_to post do %>
-            <div class="col-md-12 question">
-              <h4 class="title text-left">
-                <%= "#{index}. #{post.title}" %>
-              </h4>
+              <% end %>
             </div>
           <% end %>
-        <% end %>
-        <%= link_to posts_path do %>
-          <div class="col-md-12 question">
-            <h4 class="title text-left">
-              <%= t "staticpages.faq_homepage.view_all" %>
-            </h4>
+        </div>
+      </div>
+    </section>
+
+    <section class="program-progress">
+      <div id="program-intern" class="clearfix">
+        <div class="section-title">
+          <%= t "staticpages.intern.title" %>
+        </div>
+        <div class="container relative">
+          <div class="col-sm-12 program-timeline" data-total-col="34">
+            <div class="col-sm-3 timeline-block up" data-col="2">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/git.png", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.intern.git.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.intern.git.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.intern.git.body" %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 timeline-block down" data-col="10">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/tutorial.png", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.intern.tutorial.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.intern.tutorial.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.intern.tutorial.body" %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 timeline-block up" data-col="10">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/project.png", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.intern.project1.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.intern.project1.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.intern.project1.body" %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 timeline-block down" data-col="2">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/mysql.jpg", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.intern.mysql.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.intern.mysql.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.intern.mysql.body" %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 timeline-block up" data-col="10">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/project.png", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.intern.project2.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.intern.project2.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.intern.project2.body" %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="program-progress">
+      <div id="program-open_edu" class="clearfix">
+        <div class="section-title">
+          <%= t "staticpages.open_edu.title" %>
+        </div>
+        <div class="container relative">
+          <div class="col-sm-12 program-timeline" data-total-col="22">
+            <div class="col-sm-3 timeline-block up" data-col="2">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/git.png", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.open_edu.git.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.open_edu.git.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.open_edu.git.body" %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 timeline-block down" data-col="10">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/tutorial.png", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.open_edu.tutorial.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.open_edu.tutorial.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.open_edu.tutorial.body" %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 timeline-block up" data-col="10">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/project.png", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.open_edu.project1.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.open_edu.project1.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.open_edu.project1.body" %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="program-progress">
+      <div id="program-new_dev" class="clearfix">
+        <div class="section-title">
+          <%= t "staticpages.new_dev.title" %>
+        </div>
+        <div class="container relative">
+          <div class="col-sm-12 program-timeline" data-total-col="34">
+            <div class="col-sm-3 timeline-block up" data-col="2">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/git.png", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.new_dev.git.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.new_dev.git.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.new_dev.git.body" %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 timeline-block down" data-col="10">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/tutorial.png", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.new_dev.tutorial.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.new_dev.tutorial.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.new_dev.tutorial.body" %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 timeline-block up" data-col="10">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/project.png", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.new_dev.project1.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.new_dev.project1.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.new_dev.project1.body" %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 timeline-block down" data-col="2">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/mysql.jpg", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.new_dev.mysql.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.new_dev.mysql.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.new_dev.mysql.body" %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 timeline-block up" data-col="10">
+              <div class="timeline-content">
+                <div class="timeline-heading">
+                  <div class="img">
+                    <%= image_tag "programs/project.png", class: "img-circle" %>
+                  </div>
+                </div>
+                <div class="timeline-body">
+                  <h2 class="title">
+                    <%= t "staticpages.new_dev.project2.title" %>
+                  </h2>
+                  <h4 class="subject-duration">
+                    <%= t "staticpages.new_dev.project2.duration" %>
+                  </h4>
+                  <p><%= t "staticpages.new_dev.project2.body" %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="programming-languages" class="scroll">
+    <div class="container-fluid">
+      <div class="row">
+        <h2 class="title">
+          <%= t "staticpages.programming_languages.title" %>
+        </h2>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <% @supports.languages.each_with_index do |language, index| %>
+          <% if index > 0 && index % 2 == 0 %>
+            </div>
+            <div class="row">
+          <% end %>
+          <div class="col-md-6">
+            <div class="language clearfix">
+              <div class="col-sm-3 language-image">
+                <%= image_tag "languages/#{language.name.downcase}.png" %>
+              </div>
+              <div class="col-sm-9 detail">
+                <div class="row head">
+                  <div class="col-xs-8 name">
+                    <h3><%= language.name %></h3>
+                  </div>
+                  <div class="col-xs-4 statistic">
+                    <p><%= pluralize language.profiles.count,
+                        t("staticpages.programming_languages.trainee") %></p>
+                    <p><%= pluralize language.courses.count,
+                        t("staticpages.programming_languages.course") %></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 description">
+                    <p>
+                      <%= t "staticpages.programming_languages.#{language.name.downcase}_description" %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         <% end %>
       </div>

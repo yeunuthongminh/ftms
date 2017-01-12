@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
   before_action :load_post
   before_action :load_comment, only: [:edit, :update, :destroy]
   before_action :load_supports, except: [:destroy, :show]
@@ -12,11 +11,11 @@ class CommentsController < ApplicationController
       redirect_if_object_nil answer
       @answers = @supports.load_replies answer
       remaining = answer.children.count - params[:page]
-        .to_i * Settings.faq.replies_per_page
+        .to_i * Settings.qna.replies_per_page
     else
       @answers = @supports.load_answers
       remaining = @post.comments.roots.count - params[:page]
-        .to_i * Settings.faq.answers_per_page
+        .to_i * Settings.qna.answers_per_page
     end
     next_page = remaining > 0 ? params[:page].to_i + 1 : 0
     @data = {next_page: next_page, comment_id: params[:comment_id]}

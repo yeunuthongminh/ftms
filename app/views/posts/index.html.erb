@@ -1,12 +1,12 @@
-<% provide :title, t("faq.index.title") %>
+<% provide :title, t("qna.index.title").html_safe %>
 
-<div id="faq">
+<div id="qna">
   <div class="row">
     <div class="col-md-8">
       <div class="tabs">
         <div class="heading clearfix">
           <div class="pull-left">
-            <%= link_to t("faq.new.title"), new_post_path,
+            <%= link_to t("qna.new.title"), new_post_path,
               class: "btn btn-primary" %>
           </div>
           <ul class="nav nav-tabs main-tabs pull-right"
@@ -14,7 +14,7 @@
             <% %w(newest unanswered).each_with_index do |post_type, index| %>
               <li class="<%= 'active' if index == 0 %>">
                 <a data-toggle="tab" href="#<%= post_type %>">
-                  <%= t "faq.index.#{post_type}" %>
+                  <%= t "qna.index.#{post_type}" %>
                 </a>
               </li>
             <% end %>

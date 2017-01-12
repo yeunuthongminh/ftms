@@ -34,9 +34,9 @@
               <% end %>
             </li>
             <li>
-              <%= link_to posts_path, title: t("user-header.faq") do %>
+              <%= link_to posts_path, title: t("user-header.qna") do %>
                 <i class="fa fa-question-circle" aria-hidden="true"></i>
-                <%= t "user-header.faq" %>
+                <%= t "user-header.qna" %>
               <% end %>
             </li>
           </ul>
@@ -119,15 +119,20 @@
           <% else %>
             <li>
               <%= link_to t("staticpages.home"), root_path(anchor: "home-index"),
-                class: "scroll_to_section active", data: {target: "#home-index"} %>
+                class: "scroll_to_section active",
+                data: {target: "#home-index"} %>
             </li>
             <li>
-              <%= link_to t("staticpages.learning_programs"), root_path(anchor: "learning-programs"),
-                class: "scroll_to_section", data: {target: "#learning-programs"} %>
+              <%= link_to t("staticpages.learning_programs.title"),
+                root_path(anchor: "learning-programs"),
+                class: "scroll_to_section",
+                data: {target: "#learning-programs"} %>
             </li>
             <li>
-              <%= link_to t("staticpages.faq"), root_path(anchor: "faq_homepage"),
-                class: "scroll_to_section", data: {target: "#faq_homepage"} %>
+              <%= link_to t("staticpages.programming_languages.title"),
+                root_path(anchor: "programming-languages"),
+                class: "scroll_to_section",
+                data: {target: "#programming-languages"} %>
             </li>
             <li>
               <%= link_to t("staticpages.about"), root_path(anchor: "counters"),

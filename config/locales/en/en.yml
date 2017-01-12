@@ -6,7 +6,7 @@ en:
     todolist: "TODO list"
     notifications: "Notifications"
     feedbacks: "Feedback"
-    faq: "FAQ"
+    qna: "Q&A"
   document:
     name: "Documents"
     description: "Document description"

@@ -1,5 +1,4 @@
 class TagsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :load_tag, only: :show
   before_action :load_supports, only: :show
 

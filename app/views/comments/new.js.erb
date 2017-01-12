@@ -1,6 +1,6 @@
 $('form', '<%= ".replies-#{@supports.parent_comment.id}" %>')
   .replaceWith('<%= j render "comments/form", post: @post,\
     comment: @supports.new_sub_comment,\
-    btn_new_text: t("faq.show.add_reply") %>');
+    btn_new_text: t("qna.show.add_reply") %>');
 $('form', '<%= ".replies-#{@supports.parent_comment.id}" %>')
   .find('.answer_content').focus();

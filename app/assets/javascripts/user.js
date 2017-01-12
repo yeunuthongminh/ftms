@@ -36,20 +36,11 @@ $(document).on("turbolinks:load", function() {
     var $msgAnimateTime = 150;
     var $msgShowTime = 3000;
 
-    $('#login_register_btn').click(function () {
-      modalAnimate($formLogin, $formRegister)
-    });
-    $('#register_login_btn').click(function () {
-      modalAnimate($formRegister, $formLogin);
-    });
     $('#login_lost_btn').click(function () {
       modalAnimate($formLogin, $formLost);
     });
     $('#lost_login_btn').click(function () {
       modalAnimate($formLost, $formLogin);
-    });
-    $('#register_lost_btn').click(function () {
-      modalAnimate($formRegister, $formLost);
     });
 
     function modalAnimate($oldForm, $newForm) {

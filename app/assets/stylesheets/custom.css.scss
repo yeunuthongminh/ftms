@@ -36,63 +36,6 @@ html {
 
 .body_wrapper {
   min-height: 70%;
-
-  #counters {
-    padding: 80px 0;
-    background-color: #404040;
-    color: white;
-
-    .title {
-      font-size: 40px;
-      margin-top: 0;
-      margin-bottom: 15px;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .content {
-      margin-bottom: 20px;
-      font-size: 16px;
-      font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      text-transform: none;
-      font-style: italic;
-      font-weight: 400;
-      min-height: 0;
-      color: #888;
-    }
-
-    .counters-v2 {
-      background-color: #505050;
-      text-align: center;
-      padding: 60px 50px;
-    }
-
-    .counters-v2 .counters-v2-title {
-      font-size: 28px;
-      margin-bottom: 3px;
-      text-transform: uppercase;
-    }
-
-    .counters-v2-subtitle {
-      color: #efefef;
-      font-style: italic;
-      font-size: 20px;
-    }
-
-    .counters-v2-icon, section#counters .counters-v2-subtitle {
-      color: #efefef;
-      font-size: 44px;
-      margin-bottom: 15px;
-    }
-
-    .counters-v2 .counters-v2-no {
-      display: block;
-      font-size: 40px;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-  }
 }
 
 select {

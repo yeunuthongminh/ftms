@@ -7,7 +7,7 @@
 <% if parts.include? "related_posts" %>
   <div class="related-posts">
     <div class="heading">
-      <h3 class="title"><%= t "faq.show.related_posts" %></h3>
+      <h3 class="title"><%= t "qna.show.related_posts" %></h3>
     </div>
     <div class="posts">
       <% @supports.related_posts.each do |post| %>
@@ -30,12 +30,12 @@
   <div class="most-viewed-posts">
     <div class="tabs">
       <div class="heading clearfix">
-        <div class="title pull-left"><%= t "faq.index.most_viewed" %></div>
+        <div class="title pull-left"><%= t "qna.index.most_viewed" %></div>
         <ul class="nav nav-tabs pull-right">
           <% %w(day week month).each.with_index do |period, index| %>
             <li class="<%= 'active' if index == 0 %>">
               <a data-toggle="tab" href="#<%= period %>">
-                <%= t "faq.index.#{period}" %>
+                <%= t "qna.index.#{period}" %>
               </a>
             </li>
           <% end %>
@@ -67,14 +67,14 @@
 <% if parts.include? "popular_tags" %>
   <div class="popular-tags">
     <div class="heading">
-      <h3 class="title"><%= t "faq.index.popular_tags" %></h3>
+      <h3 class="title"><%= t "qna.index.popular_tags" %></h3>
     </div>
     <div class="tags">
       <% @supports.most_tagged_tags.each do |tag| %>
         <%= link_to tag, tag_path(tag.name), class: "tag" %>
         <span class="tag-count">x<%= tag.taggings_count %></span>
       <% end %>
-      <%= link_to t("faq.index.view_all"), tags_path, class: "tag" %>
+      <%= link_to t("qna.index.view_all"), tags_path, class: "tag" %>
     </div>
   </div>
 <% end %>

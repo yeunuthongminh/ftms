@@ -86,7 +86,7 @@
 //= require admin/category
 //= require counting_number
 //= require admin/assign_project
-//= require faq
+//= require qna
 //= require task
 //= require votes
 //= require assign_user_function

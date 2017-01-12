@@ -37,14 +37,14 @@
             <% end %>
           </div>
           <div class="create-time">
-            <%= t "faq.index.time_ago",
+            <%= t "qna.index.time_ago",
               time: time_ago_in_words(@post.created_at) %>
           </div>
         </div>
       </div>
 
       <div class="title_answer">
-        <h4><%= pluralize @post.comments.roots.count, t("faq.show.answer") %></h4>
+        <h4><%= pluralize @post.comments.roots.count, t("qna.show.answer") %></h4>
       </div>
       <div>
         <% @post.comments.roots.each do |root_comment| %>

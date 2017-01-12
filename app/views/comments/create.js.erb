@@ -24,7 +24,7 @@
   <% else %>
     $list_answers.append(content);
     $('.answers .title').html('<%= pluralize @post.comments.roots.count,\
-      t("faq.show.answer") %>');
+      t("qna.show.answer") %>');
     $('#answer_form .answer_content').val('');
   <% end %>
 
