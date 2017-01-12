@@ -88,8 +88,8 @@ class Supports::SubjectTraineeSupport
   end
 
   def show_kick_off?
-    @has_kick_offs ||= user_subject.subject.kick_offs.any?
-    if user_subject.progress? && !user_subject.is_viewed? && @has_kick_offs
+    @has_kickoff ||= user_subject.subject.subject_kick_offs.any?
+    if user_subject.progress? && !user_subject.is_viewed? && @has_kickoff
       user_subject.set_view_kick_off
       true
     else

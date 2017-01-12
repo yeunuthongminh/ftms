@@ -15,6 +15,7 @@ class Supports::StaticPageSupport
   end
 
   def languages
-    @languages ||= Language.all
+    @languages ||= Language.order_by_trainee
+      .take Settings.static_pages.num_of_languages
   end
 end
