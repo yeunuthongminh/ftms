@@ -93,7 +93,7 @@ class Supports::UserSupport
       [namespace.to_sym, user_subject.course, user_subject.subject]
   end
 
-  def link_exam namespace
+  def link_exam exam, namespace
     namespace == Settings.namespace_roles.trainee ? exam :
       [namespace.to_sym, exam]
   end

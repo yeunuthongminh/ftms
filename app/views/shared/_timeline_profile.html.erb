@@ -39,7 +39,7 @@
                       <% user_subject.exams.each.with_index 1 do |exam, index| %>
                         <div>
                           <%= link_to t("users.exam", index: index),
-                            @supports.link_exam(@namespace) %>
+                            @supports.link_exam(exam, @namespace) %>
                           (<%= exam.score %>)
                         </div>
                       <% end %>

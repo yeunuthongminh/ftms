@@ -6,7 +6,7 @@
 
   <div class="task_detail_input">
     <%= t "show_task.subject" %>
-    <%= link_to [@user_task.user_subject.user_course,
+    <%= link_to [@user_task.user_subject.trainee_course,
       @user_task.user_subject.subject] do %>
       <h5><%= @user_task.user_subject.subject.name %></h5>
     <% end %>

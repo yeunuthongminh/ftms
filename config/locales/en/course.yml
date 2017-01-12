@@ -65,6 +65,8 @@ en:
     trainees: "Trainees"
     trainers: "Trainers"
     title: "Course detail"
+    titles:
+      maxlength: "Max %{length} characters"
     tab:
       trainees: "Trainees"
       trainers: "Trainers"

@@ -7,6 +7,6 @@ class Supports::Statistics::TraineeProgressSupport < Supports::Statistics::Appli
   private
   def trainee_by_course
     @load_all_trainee_by_course ||= Trainee.includes(profile: [:trainee_type,
-      :location, :status], user_courses: [:course, user_subjects: :course_subject])
+      :location, :status], trainee_courses: [:course, user_subjects: :course_subject])
   end
 end

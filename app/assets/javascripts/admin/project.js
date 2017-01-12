@@ -37,7 +37,7 @@ $(document).on("turbolinks:load", function() {
 
           $('.list-requirement ul').append("<li class='list-group-item requirement-item'>\
             <input type='text' class='edit-name-field'\
-            name='requirement-name'><a href='#' class='new-rqm-save' title='"
+            name='requirement-name' maxlength='255'><a href='#' class='new-rqm-save' title='"
             + I18n.t("buttons.create") + "'><i class='fa fa-check'></i></a>\
             <a href='#' class='new-rqm-cancel' title='"
             + I18n.t("buttons.cancel") + "'><i class='fa fa-remove'></i></a></li>");
@@ -66,7 +66,7 @@ $(document).on("turbolinks:load", function() {
     clone_project = li_tag_name.clone();
     var name = li_tag_name.find('span').text();
     name_field_html = "<input type='text' class='edit-name-field' name='project-name'\
-      value='"+ name +"'><a href='#' class='edit-prj-save' title='"
+      value='"+ name +"' maxlength='255'><a href='#' class='edit-prj-save' title='"
       + I18n.t("buttons.save") + "'><i class='fa fa-check'></i></a>\
       <a href='#' class='edit-prj-cancel' title='"
       + I18n.t("buttons.cancel") + "'><i class='fa fa-remove'></i></a>";

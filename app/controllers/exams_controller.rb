@@ -20,7 +20,7 @@ class ExamsController < ApplicationController
       if params["finish"].nil?
         flash[:notice] = t "exams.saved"
         @exam.update_attributes status: :testing, spent_time: spent_time
-        redirect_to [user_subject.user_course, user_subject.subject]
+        redirect_to [user_subject.trainee_course, user_subject.subject]
       else
         flash[:success] = t "exams.finished"
         @exam.update_attributes status: :finish, spent_time: spent_time
@@ -32,7 +32,7 @@ class ExamsController < ApplicationController
       end
     else
       flash[:danger] = t "exams.update_fail"
-      redirect_to [@exam.user_subject.user_course, @exam.user_subject.subject]
+      redirect_to [@exam.user_subject.trainee_course, @exam.user_subject.subject]
     end
   end
 
