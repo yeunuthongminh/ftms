@@ -39,10 +39,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def load_university
-    @universities = University.all
-  end
-
   def authorize_user
     authorize_with_multiple page_params.merge(record: current_user), UserPolicy
   end
