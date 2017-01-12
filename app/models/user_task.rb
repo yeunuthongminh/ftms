@@ -51,6 +51,6 @@ class UserTask < ApplicationRecord
 
   private
   def update_sent_pull_count
-    self.sent_pull_count += 1 if pull_request_url_changed?
+    self.sent_pull_count += 1 if pull_request_url_changed? && !new_record?
   end
 end

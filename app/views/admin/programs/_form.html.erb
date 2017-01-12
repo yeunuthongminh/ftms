@@ -2,7 +2,7 @@
   <div class="col-sm-6">
     <div class="form-group">
       <%= f.label :program_name %>
-      <%= f.text_field :name, class: "form-control" %>
+      <%= f.text_field :name, class: "form-control", maxlength: 255 %>
     </div>
   </div>
   <% if @program.new_record? %>
@@ -11,7 +11,7 @@
     <div class="col-sm-6">
       <div class="form-group">
         <%= f.label :parent_program %>
-        <%= f.select :parent_id, @program_supports.programs, {prompt: ""},
+        <%= f.select :parent_id, @program_supports.programs, {include_blank: true},
           {selected: f.object.parent_id, class: "form-control"} %>
       </div>
     </div>

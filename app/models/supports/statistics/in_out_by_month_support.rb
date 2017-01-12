@@ -14,7 +14,7 @@ class Supports::Statistics::InOutByMonthSupport < Supports::Statistics::Applicat
         trainee_in[month] = 0 unless trainee_in[month]
         trainee_out[month] = 0 unless trainee_out[month]
         trainee_join_div[month] = 0 unless trainee_join_div[month]
-        trainee_away[month] = 0 unless trainee_join_div[month]
+        trainee_away[month] = 0 unless trainee_away[month]
         if in_month? month, profile.start_training_date
           trainee_in[month] += 1
         elsif in_month? month, profile.leave_date
