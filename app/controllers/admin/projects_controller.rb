@@ -4,6 +4,7 @@ class Admin::ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
+    add_breadcrumb_index "projects"
   end
 
   def create

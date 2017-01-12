@@ -6,11 +6,16 @@ class Admin::TraineeEvaluationsController < ApplicationController
   before_action :check_trainee_evaluation, only: :new
 
   def index
+    add_breadcrumb_index "trainee_evaluations"
     @trainee_evaluation_supports = Supports::TraineeEvaluationSupport.new namespace:
       @namespace, filter_service: load_filter, current_user: current_user
   end
 
   def new
+    add_breadcrumb_path "trainee_evaluations"
+    add_breadcrumb @supports.targetable.user_name,
+      [:admin, @supports.targetable.user]
+    add_breadcrumb_new "trainee_evaluations"
     render json: @supports.evaluation_template.evaluation_standards if
       params[:evaluation_template_id]
   end
@@ -30,6 +35,10 @@ class Admin::TraineeEvaluationsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb_path "trainee_evaluations"
+    add_breadcrumb @supports.targetable.user_name,
+      [:admin, @supports.targetable.user]
+    add_breadcrumb_edit "trainee_evaluations"
     render json: @supports.evaluation_template.evaluation_standards if
       params[:evaluation_template_id]
   end
