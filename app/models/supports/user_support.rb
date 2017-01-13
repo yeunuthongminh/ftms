@@ -87,6 +87,19 @@ class Supports::UserSupport
     end
   end
 
+  def status_background index
+    case index
+    when "start"
+      "bg-blue"
+    when "ontime"
+      "bg-green"
+    when "late"
+      "bg-red"
+    else
+      "bg-orange"
+    end
+  end
+
   def link_user_subject user_subject, namespace
     namespace == Settings.namespace_roles.trainee ?
       [user_subject.trainee_course, user_subject.subject] :

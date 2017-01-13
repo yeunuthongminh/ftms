@@ -1,0 +1,42 @@
+<div class="box box-primary box-widget collapsed-box">
+  <div class="box-header with-border box-info">
+    <div class="info-title"><h3><%= t "user.user_info" %></h3></div>
+    <div class="box-tools">
+      <button type="button" class="btn btn-box-tool"
+        data-widget="collapse">
+        <i class="glyphicon glyphicon-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+  <div class="box-body">
+    <strong class="icon-profile">
+      <i class="fa fa-book margin-r-5"></i>
+      <%= t "user.profile.university" %>
+    </strong>
+    <p class="text-muted">
+      <%= user.profile.university.name if user
+        .profile.university.present? %>
+    </p>
+    <hr>
+    <strong class="icon-profile">
+      <i class="fa fa-envelope margin-r-5"></i>
+      <%= t "user.profile.email" %>
+    </strong>
+    <p class="text-muted">
+      <%= user.email %>
+    </p>
+    <hr>
+    <strong class="icon-profile">
+      <i class="fa fa-map-marker margin-r-5"></i>
+      <%=  t "user.profile.location" %>
+    </strong>
+    <p class="text-muted"><%= user.profile.location.name if user
+      .profile.location.present? %></p>
+    <hr>
+    <strong class="icon-profile">
+      <i class="fa fa-file-text-o margin-r-5"></i>
+      <%= t "user.profile.note" %>
+    </strong>
+    <p><%= t "user.profile.description" %></p>
+  </div>
+</div>

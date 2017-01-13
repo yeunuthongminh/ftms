@@ -8,10 +8,9 @@
             format: :default) : t("user.no_start_date") %>
         </span>
       </li>
-      <li class="nobreak">
-        <div class="timeline-badge <%= @supports.background_icon index %>
-          timeline-header">
-          <i class="fa <%= @supports.fa_icon index %>"></i>
+      <li>
+        <div class="timeline-badge timeline-header">
+          <%= set_image user_subject, Settings.image_size_50 %>
         </div>
         <div class="timeline-panel <%= @supports.background_icon index %>
           box box-widget collapsed-box">

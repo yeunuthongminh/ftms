@@ -3,7 +3,7 @@
   <ul class="timeline timeline-inverse">
     <% user_course.user_subjects.each.with_index do |user_subject, index| %>
       <li class="time-label">
-        <span class="<%= @supports.fa_background index %>">
+        <span class="<%= @supports.status_background 'start' %>">
           <%= user_subject.start_date ? (l user_subject.start_date,
             format: :default) : t("user.no_start_date") %>
         </span>
@@ -15,10 +15,24 @@
         <div class="timeline-panel <%= @supports.background_icon index %>
           box box-widget collapsed-box">
           <div class="box-header with-border">
-            <h3>
-              <%= link_to user_subject.subject.name,
-                @supports.link_user_subject(user_subject, @namespace) %>
-            </h3>
+            <div class="row">
+              <div class="col-md-4">
+                <h3>
+                  <%= link_to user_subject.subject.name,
+                    @supports.link_user_subject(user_subject, @namespace) %>
+                </h3>
+              </div>
+              <div class="col-md-8">
+                <div class="position-progress">
+                  <%= render "shared/progress_bar",
+                    percent: user_subject.percent_progress,
+                    status: user_subject.status,
+                    user_subject: user_subject,
+                    index: index,
+                    size: user_course.user_subjects.size %>
+                </div>
+              </div>
+            </div>
             <table class="table table-hover">
               <tr>
                 <th class="col-md-3"><%= t "user.evaluation_point" %></th>

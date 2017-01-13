@@ -146,6 +146,51 @@
         mix-blend-mode: overlay;
       }
     }
+
+    .prog-bar-bg-ontime{
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(to right, mix(violet, deepskyblue, 40%),
+       mix(limegreen, yellow, 80%), yellow);
+      &:before{
+        content: '';
+        display: block;
+        height: 100%;
+        box-sizing: border-box;
+        opacity: 0.75;
+        mix-blend-mode: overlay;
+      }
+    }
+  }
+  .fix-size-bar {
+    height: 30%;
+  }
+
+  .arrow-up {
+    position:absolute;
+    width: 1px;
+    background-color: white;
+    margin-top: -7px;
+    float: left;
+    color: black;
+  }
+
+  .arrow-down {
+    position:absolute;
+    width: 1px;
+    background-color: white;
+    margin-top: 11px;
+    float: left;
+    color: black;
+  }
+
+  .date-under {
+    margin-top: 7px;
+  }
+  .date-on {
+    margin-bottom: 7px;
   }
 }
 

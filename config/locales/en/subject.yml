@@ -70,3 +70,5 @@ en:
       view_kickoff: "View subject targets"
       kickoff_for_subject: "Targets of %{subject}"
       skip_kickoff: "Skip"
+    show_more: "Show more.."
+    close: "Close"
