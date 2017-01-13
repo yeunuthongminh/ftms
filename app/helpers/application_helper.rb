@@ -290,7 +290,7 @@ module ApplicationHelper
 
   def check_on_time user_subject
     if user_subject.user_end_date.present?
-      status = if  user_subject.user_end_date == user_subject.end_date
+      if user_subject.user_end_date <= user_subject.end_date
         "-ontime"
       end
     end

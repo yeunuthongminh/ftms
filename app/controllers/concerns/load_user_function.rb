@@ -2,7 +2,7 @@ module LoadUserFunction
   def add_user_function
     user = @user_form.user
     type = user.type
-    base = "Role_Base_" + type
+    base = "Role base " + type
     if type == "Admin"
       user.functions = Function.all
     else
