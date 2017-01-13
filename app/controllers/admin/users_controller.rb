@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  include LoadUserFunction
   before_action :authorize
   before_action :find_user, except: [:index, :new, :create]
   before_action :load_profile, only: [:new, :edit, :show]
@@ -13,6 +14,7 @@ class Admin::UsersController < ApplicationController
     @user_form = UserForm.new user_params
     user_send_mail_service = MailerServices::UserSendMailService.new user: @user_form.user
     if @user_form.save && user_send_mail_service.perform?
+      add_user_function
       flash[:success] = flash_message "created"
       if params[:create_and_continue].present?
         redirect_to new_admin_user_path

@@ -28,7 +28,7 @@ class User < ApplicationRecord
       )
     )"
 
-  ATTRIBUTES_PARAMS = [:name, :email, :password,
+  ATTRIBUTES_PARAMS = [:name, :email, :password, :type,
     :password_confirmation, :avatar, :trainer_id, :chatwork_id,
     :profile_id, :start_training_date, :leave_date, :finish_training_date,
     :ready_for_project, :contract_date, :naitei_company,
@@ -166,8 +166,7 @@ class User < ApplicationRecord
     self.role_type_avaiable.include? role
   end
 
-  def has_function? controller, action, role
-    type = (role+"Function").classify
+  def has_function? controller, action, type
     user_functions.has_function(controller, action, type).any?
   end
 

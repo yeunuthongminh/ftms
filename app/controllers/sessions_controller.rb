@@ -51,8 +51,12 @@ class SessionsController < Devise::SessionsController
   end
 
   def update_current_role
-    current_user.update_attributes current_role_type: current_user.
-      role_type_avaiable.first
+    if current_user.role_type_avaiable.any?
+      current_user.update_attributes current_role_type: current_user.
+        role_type_avaiable.first
+    else
+      current_user.update_attributes current_role_type: current_user.type.humanize.downcase
+    end
   end
 
   def remove_current_role

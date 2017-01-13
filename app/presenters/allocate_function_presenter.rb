@@ -32,10 +32,8 @@ class AllocateFunctionPresenter < ActionView::Base
 
   def routes
     routes = []
-    @functions.map(&:model_class).uniq.each do |controller|
-      routes << Hash[:controller, controller, :actions,
-        Function.select{|function| function.model_class == controller}.pluck(:action).uniq]
-    end
+    Function.pluck(:model_class, :action).group_by(&:first).values.map{|e|
+      e.flatten.uniq}.each{|x| routes << Hash[:controller, x.shift, :actions, x]}
     routes
   end
 

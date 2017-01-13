@@ -1,4 +1,6 @@
-<%= form_for [:admin, @user_form] do |f| %>
+<%= form_for @user_form, url: move_stage_user_path(@user_form),
+ html: {method: :patch} do |f| %>
+  <%= render "shared/error_messages", object: @user_form %>
   <div class="row">
     <div class="panel panel-default">
       <div class="panel-body text-center">
@@ -11,7 +13,7 @@
   <div class="col-md-5">
     <div class="text-center stage-selection">
       <select class="form-control" disabled="disabled">
-        <option selected="true"><%= @stage.name %></option>
+        <option selected="true"><%= @user_form.user.profile.stage.name %></option>
       </select>
     </div>
     <div class="well">
