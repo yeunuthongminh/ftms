@@ -158,13 +158,16 @@ function caculate_precent() {
       if(percent <= start_width){
         percent = start_width;
       }
-      $('#point-expect' + i).css('margin-left', percent - start_width + 'px');
       $('#arrow-expect' + i).css('margin-left', percent + 'px');
-      if(percent > 285) {
-        $('#point-expect' + i).css('margin-left', '68%');
+      if(percent > size_progress_bar - start_width ) {
+        $('#point-expect' + i).removeClass('pull-left');
+        $('#point-expect' + i).addClass('pull-right');
+      }else {
+        $('#point-expect' + i).css('margin-left', percent - start_width + 'px');
       }
     }else{
-      $('#point-expect' + i).css('margin-left', '68%');
+      $('#point-expect' + i).removeClass('pull-left');
+      $('#point-expect' + i).addClass('pull-right');
       $('#arrow-expect' + i).css('margin-left', size_progress_bar - start_width/4 + 'px');
     }
   }
