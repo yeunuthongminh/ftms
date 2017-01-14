@@ -30,7 +30,7 @@ class User < ApplicationRecord
 
   ATTRIBUTES_PARAMS = [:name, :email, :password, :type,
     :password_confirmation, :avatar, :trainer_id, :chatwork_id,
-    :profile_id, :start_training_date, :leave_date, :finish_training_date,
+    :start_training_date, :leave_date, :finish_training_date,
     :ready_for_project, :contract_date, :naitei_company,
     :trainee_type_id, :university_id, :language_id, :user_progress_id,
     :status_id, :location_id, :graduation, :working_day, :staff_code,

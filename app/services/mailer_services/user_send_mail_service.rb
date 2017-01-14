@@ -5,9 +5,9 @@ class MailerServices::UserSendMailService
     @user = args[:user]
   end
 
-  def perform?
+  def perform
     if Rails.env.production?
-      true if WelcomeNewTraineeJob.perform_now(@user, Settings.default_password)
+      WelcomeNewTraineeJob.perform @user, Settings.default_password
     end
   end
 end

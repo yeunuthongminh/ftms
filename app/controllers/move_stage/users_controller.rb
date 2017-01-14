@@ -3,15 +3,13 @@ class MoveStage::UsersController < ApplicationController
   before_action :find_user, except: [:index, :new, :create]
 
   def edit
-    @user_form = UserForm.new
-    @user_form.init user: @user, profile: @user.profile
+    @user_form = UserForm.new user: @user, profile: @user.profile
     @supports = Supports::StageSupport.new(profile: @user.profile,
       stage: @user.profile.stage, user_form: @user_form) if params[:id]
   end
 
   def update
-    @user_form = UserForm.new
-    @user_form.init user: @user, profile: @user.profile
+    @user_form = UserForm.new user: @user, profile: @user.profile
     @user_form.assign_attributes user_params
     if @user_form.save
       sign_in(@user, bypass: true) if current_user? @user

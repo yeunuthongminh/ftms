@@ -74,7 +74,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <% if @supports.user.new_record? %>
+        <% if @user_form.user.new_record? %>
           <%= f.submit t("buttons.create_and_continue"),
             name: "create_and_continue",
             class: "btn btn-primary pull-right btn-create-and-continue btn-submit" %>
