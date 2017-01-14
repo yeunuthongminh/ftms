@@ -5,6 +5,15 @@ class ChangeRole::UsersController < ApplicationController
   def edit
     @roles = Role.all
     @supports = Supports::UserFunctionSupport.new @role, @user
+    respond_to do |format|
+      format.html
+      format.json do
+        role = Role.find params[:role_id]
+        @functions = UserFunctionServices::GetUserFunctionsService.new(role).perform
+        role_type = role.role_type.classify + "Function"
+        render json: {functions: @functions, role_type: role_type}
+      end
+    end
   end
 
   def update

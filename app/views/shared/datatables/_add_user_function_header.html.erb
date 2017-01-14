@@ -31,11 +31,11 @@
   <div id="table-header" class="scroll-table">
     <div class="tbody">
       <div class="trow header">
-        <% Settings.user_functions.each do |user_function| %>
+        <% Settings.user_functions.each_with_index do |user_function, index| %>
           <div class="tcell <%= user_function %>-user_function
             title checked-function title">
             <%= user_function %>
-            <input type="checkbox" id="checked_all_in_col">
+            <input type="checkbox" class="check_functions" data-index="<%= index %>">
           </div>
         <% end %>
       </div>
