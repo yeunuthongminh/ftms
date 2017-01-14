@@ -36,6 +36,7 @@ class Admin::UsersController < ApplicationController
     @user_form = UserForm.new
     @user_form.init user: @user, profile: @user.profile
     @user_form.assign_attributes user_params
+    change_type
     if @user_form.save
       sign_in(@user, bypass: true) if current_user? @user
       flash[:success] = flash_message "updated"
