@@ -16,9 +16,10 @@ class UserForm
     end
   end
 
-  def init args
+  def initialize args = {}
     @user = args[:user]
     @profile = args[:profile]
+    assign_attributes args if args
   end
 
   user_attributes.each do |attr|

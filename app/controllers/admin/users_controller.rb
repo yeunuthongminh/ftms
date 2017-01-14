@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   include LoadUserFunction
   before_action :authorize
-  before_action :find_user, except: [:index, :new, :create]
+  before_action :find_user, except: [:new, :create]
   before_action :load_profile, only: [:new, :edit, :show]
   before_action :load_breadcrumb_edit, only: [:edit, :update]
   before_action :load_breadcrumb_new, only: [:new, :create]
@@ -12,9 +12,12 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user_form = UserForm.new user_params
-    user_send_mail_service = MailerServices::UserSendMailService.new user: @user_form.user
-    if @user_form.save && user_send_mail_service.perform?
+    if @user_form.save
       add_user_function
+
+      user_send_mail_service = MailerServices::UserSendMailService.new user: @user_form.user
+      user_send_mail_service.perform
+
       flash[:success] = flash_message "created"
       if params[:create_and_continue].present?
         redirect_to new_admin_user_path
@@ -28,13 +31,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    @user_form = UserForm.new
-    @user_form.init user: @user, profile: @user.profile
+    @user_form = UserForm.new user: @user, profile: @user.profile
   end
 
   def update
-    @user_form = UserForm.new
-    @user_form.init user: @user, profile: @user.profile
+    @user_form = UserForm.new user: @user, profile: @user.profile
     @user_form.assign_attributes user_params
     change_type
     if @user_form.save
