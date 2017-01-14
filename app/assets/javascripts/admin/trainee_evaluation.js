@@ -29,7 +29,7 @@ $(document).on('turbolinks:load', function() {
             if (data.length > 0) {
               data.forEach(function(evaluation_standard) {
                 var $exist = 0;
-                $('#list-evaluation li').each(function() {
+                $('#list-evaluation li.exist').each(function() {
                   if($(this).data('id') == evaluation_standard.id) {$exist++}
                 });
                 if ($exist == 0) {

@@ -16,6 +16,10 @@ class Supports::SubjectTraineeSupport
     @project ||= course_subject.project
   end
 
+  def course_subject_requirements
+    @course_subject_requirements ||= course_subject.course_subject_requirements
+  end
+
   def course
     @course ||= course_subject.course
   end

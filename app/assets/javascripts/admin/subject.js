@@ -71,9 +71,10 @@ $(document).on('turbolinks:load', function () {
 
     $('li input[type="checkbox"].selectCategory').change(function() {
       $('input.nQuestioninCategory[data-id="' + $(this).val() + '"]').attr('disabled', !this.checked);
+      $(this).closest('li.list-group-item').find('input.nQuestioninCategory').trigger('change');
     });
 
-    $('.nQuestioninCategory').bind('input', function() {
+    $('.nQuestioninCategory').on('change keyup paste', function() {
       var total_question = 0;
       $('input.nQuestioninCategory:enabled').each(function(){
         if ($(this).val()) {
