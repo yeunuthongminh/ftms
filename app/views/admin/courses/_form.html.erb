@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-9">
           <%= f.text_field :name, class: "form-control", required: true,
-            pattern: ".{1,21}", title: t("courses.titles.maxlength", length: 255),
+            pattern: ".{1,255}", title: t("courses.titles.maxlength", length: 255),
             placeholder: I18n.t("courses.form.input_course_name") %>
         </div>
       </div>

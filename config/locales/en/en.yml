@@ -16,6 +16,9 @@ en:
     wrong_end_date: "Must be greater than start date"
     not_authorize: "You are not authorized to access this page."
     something_went_wrong: "Sorry, something went wrong"
+  errors:
+    messages:
+      mini_magick_processing_error: "mini magick processing error"
   messages:
     delete:
       confirm: "Are you sure?"
