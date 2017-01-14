@@ -167,6 +167,7 @@ class User < ApplicationRecord
   end
 
   def has_function? controller, action, type
+    type = type + "Function"
     user_functions.has_function(controller, action, type).any?
   end
 
