@@ -123,6 +123,7 @@ module ApplicationHelper
   end
 
   def percent_size number
+    return 100 if number == 0
     number_to_percentage 10000/percent_out(number), precision: 1, strip_insignificant_zeros: true
   end
 

@@ -112,18 +112,16 @@ class UserSubject < ApplicationRecord
   end
 
   def percent_progress
-    if start_date
-      return 0 if start_date > Time.zone.today
-      current_date = user_end_date
-      current_date ||= Time.zone.today
+    return 0 if !start_date || start_date > Time.zone.today
+    current_date = user_end_date
+    current_date ||= Time.zone.today
 
-      real_duration_time = end_date - start_date
-      return 100 if real_duration_time <= 0
+    real_duration_time = end_date - start_date
+    return 100 if real_duration_time <= 0
 
-      user_current_time = (current_date - start_date).to_f
-      percent = user_current_time * 100 / real_duration_time.to_f
-      percent < 0 ? 0 : percent
-    end
+    user_current_time = (current_date - start_date).to_f
+    percent = user_current_time * 100 / real_duration_time.to_f
+    percent < 0 ? 0 : percent
   end
 
   def create_user_task_if_create_task task
