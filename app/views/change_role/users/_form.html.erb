@@ -9,7 +9,7 @@
             :name do |role| %>
             <span class="label label-default">
               <%= role.label do %>
-                <%= role.check_box id: "check_role_#{role.object.role_type}" %> &nbsp;
+                <%= role.check_box class: "check_role_functions" %> &nbsp;
                 <%= role.text %> &nbsp;
               <% end %>
             </span>
