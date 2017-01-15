@@ -1,0 +1,8 @@
+en:
+  languages:
+    form:
+      input_language_description: "Enter language description..."
+    table:
+      name: "Name"
+      image: "Image"
+      description: "Description"
