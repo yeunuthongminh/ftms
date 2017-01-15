@@ -84,16 +84,6 @@ en:
       title: "Programming languages"
       trainee: "trainee"
       course: "course"
-      ruby_description: "Master your Ruby skills and increase your Rails street cred by
-        learning to build dynamic, sustainable applications for the web."
-      php_description: "Dig into one of the most prevalent programming languages and
-        learn how PHP can help you develop various applications for the web."
-      android_description: "Learn how to design and develop great Android apps through
-        courses built by Android experts at Framgia."
-      java_description: "Spend some time with this powerful language and learn
-        to build applications with enhanced user interfaces."
-      ios_description: "Try building iOS applications for iPhone and iPad mobile devices.
-        Learn the basics of iOS development and bring your app ideas to life."
     counters:
       title: "Developing Developers"
       content: "Master new skills in programming, design and product building."

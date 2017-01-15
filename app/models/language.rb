@@ -1,7 +1,9 @@
 class Language < ApplicationRecord
   acts_as_paranoid
 
-  ATTRIBUTES_PARAMS = [:name]
+  mount_uploader :image, ImageUploader
+
+  ATTRIBUTES_PARAMS = [:name, :image, :description]
 
   has_many :profiles
   has_many :categories
