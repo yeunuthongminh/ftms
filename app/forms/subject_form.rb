@@ -26,8 +26,8 @@ class SubjectForm < Reform::Form
     property :_destroy, writeable: false
   end
 
-  property :subject_detail,
-    skip_if: lambda {|fragment, *| fragment["_destroy"]=="1"} do
+  property :subject_detail, populate_if_empty: :populate_subject_detail!,
+    skip_if: :skip_subject_detail? do
     property :id, writeable: false
     property :number_of_question
     property :time_of_exam
@@ -58,11 +58,32 @@ class SubjectForm < Reform::Form
     super
   end
 
+  private
   def validate_if_model_persited model_type, attrs
     to_be_removed = ->(i) {i[:_destroy] == "1"}
     ids_to_rm = attrs["#{model_type.pluralize}".to_sym].select(&to_be_removed)
       .map {|i| i[:id]}
     Object.const_get("#{model_type.classify}").destroy ids_to_rm
     send("#{model_type.pluralize}").reject! {|i| ids_to_rm.include? i.id}
+  end
+
+  def skip_subject_detail?(fragment:, **)
+    if fragment[:_destroy] == "1"
+      true
+    else
+      false
+    end
+  end
+
+  def populate_subject_detail!(fragment:, **)
+    if fragment[:_destroy] == "1"
+      SubjectDetail.new
+    else
+      SubjectDetail.new number_of_question: fragment[:number_of_question],
+        time_of_exam: fragment[:time_of_exam],
+        min_score_to_pass: fragment[:min_score_to_pass],
+        percent_of_questions: fragment[:percent_of_questions],
+        category_questions: fragment[:category_questions]
+    end
   end
 end

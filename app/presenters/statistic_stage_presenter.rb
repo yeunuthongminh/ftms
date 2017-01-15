@@ -30,7 +30,7 @@ class StatisticStagePresenter < ActionView::Base
   def sidebar_item sidebar_items, index
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{index}\">
       <div class=\"tcell stt\">#</div>
-      <div class=\"tcell stage stage-#{sidebar_items[:name]}\"
+      <div class=\"tcell language language-#{sidebar_items[:name]}\"
         title=\"#{sidebar_items[:name]}\">
         #{sidebar_items[:name]}
       </div>
