@@ -10,7 +10,7 @@ module LoadUserFunction
       UserRole.create! user: user, role: role
       user.functions = role.functions
     end
-    user.user_functions.update_all type: type
+    user.user_functions.update_all type: type + "Function"
   end
 
   def change_type
