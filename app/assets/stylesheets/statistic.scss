@@ -35,6 +35,11 @@
       &.trainee-by-month{
         @include ellipsis(100px);
       }
+
+      &.blank {
+        width: 100vw;
+        position: relative;
+      }
     }
 
     .month {

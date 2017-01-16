@@ -14,6 +14,7 @@ $(document).on('turbolinks:load', function () {
   } else if (localStorage.calendar_data) {
     localStorage.removeItem('calendar_data');
   }
+
   $('#calendar').fullCalendar({
     theme: true,
     header: {
@@ -30,7 +31,6 @@ $(document).on('turbolinks:load', function () {
     },
     events: {
       url: '/trainer/calendars.json',
-      async: false,
       error: function () {
         $('#script-warning').show();
       }
