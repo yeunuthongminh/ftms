@@ -1,0 +1,88 @@
+<div class="modal fade" id="assign-member-modal" tabindex="-1" role="dialog"
+  aria-labelledby="assign-member-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="assign-member-label">
+          <%= t "courses.labels.assign_member" %>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="panel panel-info">
+              <div class="panel-heading text-center">
+                <%= t "courses.labels.list_users" %>
+              </div>
+              <div class="panel-body">
+                <input class="form-control search_form" name="keyword"
+                  placeholder="<%= t 'courses.search_user' %>"
+                  autocomplete="off">
+                <div class="list-group checked-list-box" id="list-users">
+                </div>
+                <div class="panel-footer count-member"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 action-assign">
+            <button class="btn btn-success center-block assign-member" id="btn-assign-trainer">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+              <%= t "courses.labels.trainer" %>
+            </button>
+            <button class="btn btn-danger center-block assign-member" id="btn-remove-user">
+              <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+              <%= t "courses.labels.reject" %>
+            </button>
+            <button class="btn btn-success center-block assign-member" id="btn-assign-trainee">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+              <%= t "courses.labels.trainee" %>
+            </button>
+          </div>
+
+          <div class="col-md-5">
+            <%= form_for [:assign_user, @course], remote: true, html: {id: "assign-user-form"} do |f| %>
+              <div class="panel panel-info">
+                <div class="panel-heading text-center">
+                  <%= t "courses.labels.list_trainers" %>
+                </div>
+                <div class="panel-body">
+                  <input class="form-control search_form" name="keyword"
+                    placeholder="<%= t 'courses.search_user' %>"
+                    autocomplete="off">
+                  <div class="list-group checked-list-box" id="list-trainers">
+                  </div>
+                </div>
+                <div class="panel-footer count-member"></div>
+              </div>
+              <div class="panel panel-info">
+                <div class="panel-heading text-center">
+                  <%= t "courses.labels.list_trainees" %>
+                </div>
+                <div class="panel-body">
+                  <input class="form-control search_form" name="keyword"
+                    placeholder="<%= t 'courses.search_user' %>"
+                    autocomplete="off">
+                  <div class="list-group checked-list-box" id="list-trainees">
+                  </div>
+                </div>
+                <div class="panel-footer count-member"></div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          <%= t "buttons.cancel" %>
+        </button>
+        <button type="button" class="btn btn-primary" id="assign-user-submit">
+          <%= t "buttons.save" %>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
