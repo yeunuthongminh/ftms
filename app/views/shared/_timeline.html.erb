@@ -1,9 +1,11 @@
 <div class="active tab-pane" id="timelines">
   <ul class="timelines timeline-inverse">
     <% if @supports.user_courses.any? %>
-      <% @supports.user_courses.each do |user_course| %>
-        <%= render "shared/timeline_profile", user_course: user_course %>
+      <% @supports.user_courses.each.with_index do |user_course, index| %>
+        <%= render "shared/timeline_profile", user_course: user_course,
+          course_index: index %>
       <% end %>
+      <%= hidden_field_tag "course_size", @supports.user_courses.size %>
     <% else %>
       <p class="text text-danger">
         <%= t "user.titles.none_finished_course",

@@ -144,31 +144,34 @@ $(document).on('ajaxComplete', function(){
 });
 
 function caculate_precent() {
-  var size_arr = $('#size').val();
-  for (var i = 0 ;i < size_arr; i++){
-    var size_progress_bar = $('.prog-bar').width();
-    var start_width = $('#point-start' + i).width();
-    $('#point-real' + i).css('margin-left', size_progress_bar - start_width/4 + 'px');
-    $('#arrow-real' + i).css('margin-left', size_progress_bar - start_width/4 + 'px');
+  var course_size = $('#course_size').val();
+  var subject_size = $('#subject_size').val();
+  for (var j =0 ;j < course_size; j++){
+    for (var i = 0 ;i < subject_size; i++){
+      var size_progress_bar = $('.prog-bar').width();
+      var start_width = $('#point-start-'+ j + '-' + i).width();
+      $('#point-real-'+ j + '-' + i).css('margin-left', size_progress_bar - start_width/4 + 'px');
+      $('#arrow-real-'+ j + '-' + i).css('margin-left', size_progress_bar - start_width/4 + 'px');
 
-    var distance = $('#spent_time' + i).val() - $('#expect_time' + i).val();
-    if(distance > 0){
-      var temp = $('#expect_time' + i).val() / $('#spent_time'+i).val();
-      percent = temp * size_progress_bar;
-      if(percent <= start_width){
-        percent = start_width;
+      var distance = $('#spent_time' + j + i).val() - $('#expect_time' + j + i).val();
+      if(distance > 0){
+        var temp = $('#expect_time' + j + i).val() / $('#spent_time' + j + i).val();
+        percent = temp * size_progress_bar;
+        if(percent <= start_width){
+          percent = start_width;
+        }
+        $('#arrow-expect-'+ j + '-' + i).css('margin-left', percent + 'px');
+        if(percent > size_progress_bar - start_width ) {
+          $('#point-expect-'+ j + '-' + i).removeClass('pull-left');
+          $('#point-expect-'+ j + '-' + i).addClass('pull-right');
+        }else {
+          $('#point-expect-'+ j + '-' + i).css('margin-left', percent - start_width + 'px');
+        }
+      }else{
+        $('#point-expect-'+ j + '-' + i).removeClass('pull-left');
+        $('#point-expect-'+ j + '-' + i).addClass('pull-right');
+        $('#arrow-expect-'+ j + '-' + i).css('margin-left', size_progress_bar - start_width/4 + 'px');
       }
-      $('#arrow-expect' + i).css('margin-left', percent + 'px');
-      if(percent > size_progress_bar - start_width ) {
-        $('#point-expect' + i).removeClass('pull-left');
-        $('#point-expect' + i).addClass('pull-right');
-      }else {
-        $('#point-expect' + i).css('margin-left', percent - start_width + 'px');
-      }
-    }else{
-      $('#point-expect' + i).removeClass('pull-left');
-      $('#point-expect' + i).addClass('pull-right');
-      $('#arrow-expect' + i).css('margin-left', size_progress_bar - start_width/4 + 'px');
     }
   }
 }
