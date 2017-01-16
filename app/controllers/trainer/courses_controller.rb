@@ -13,18 +13,24 @@ class Trainer::CoursesController < ApplicationController
   end
 
   def new
+    @course = Course.new
     @course.documents.build
+    @course_form = CourseForm.new @course
     add_breadcrumb_path "courses"
     add_breadcrumb_new "courses"
   end
 
   def create
-    if @course.save
+    @course = Course.new course_params
+
+    course_form = CourseForm.new @course
+    if course_form.validate course_params
+      course_form.save
       flash[:success] = flash_message "created"
-      redirect_to trainer_courses_path
+      redirect_to trainer_course_path @course
     else
-      flash[:failed] = flash_message "not_created"
       load_data
+      flash_message[:failed] = flash_message "not_created"
       render :new
     end
   end
@@ -35,18 +41,23 @@ class Trainer::CoursesController < ApplicationController
   end
 
   def edit
+    @course_form = CourseForm.new @course
     add_breadcrumb_path "courses"
     add_breadcrumb @course.name, :trainer_course_path
     add_breadcrumb_edit "courses"
   end
 
   def update
-    if @course.update_attributes course_params
+    course_form = CourseForm.new @course
+
+    if course_form.validate course_params
+      course_form.save
+      ExpectedTrainingDateService.new(course: @course).perform
       flash[:success] = flash_message "updated"
-      redirect_to trainer_course_path(@course)
+      redirect_to trainer_course_path @course
     else
-      flash[:failed] = flash_message "not_updated"
       load_data
+      flash[:failed] = flash_message "not_updated"
       render :edit
     end
   end

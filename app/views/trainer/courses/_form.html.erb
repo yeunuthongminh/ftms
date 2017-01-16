@@ -1,7 +1,6 @@
-<%= form_for [:trainer, @course] do |f| %>
+<%= form_for [:trainer, @course_form] do |f| %>
   <div class="row">
-    <%= render "shared/error_messages", object: @course %>
-    <div class="title"><%= @course.name %></div>
+    <%= render "shared/error_messages", object: @course_form %>
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-2 text-right">
@@ -9,6 +8,7 @@
         </div>
         <div class="col-md-9">
           <%= f.text_field :name, class: "form-control", required: true,
+            pattern: ".{1,255}", title: t("courses.titles.maxlength", length: 255),
             placeholder: I18n.t("courses.form.input_course_name") %>
         </div>
       </div>
@@ -108,13 +108,13 @@
       <%= f.fields_for :documents do |builder| %>
         <%= render "document_fields", f: builder %>
       <% end %>
-      <p><%= link_to_add_fields t("courses.document"), f, :documents %></p>
+      <p><%= link_to_add_form_fields t("courses.document"), f, :documents %></p>
     </div>
   </div>
   <br>
   <div class="row">
     <div class="col-md-1 col-md-offset-10">
-      <%= f.submit (f.object.new_record? ? t("buttons.create")
+      <%= f.submit (f.object.model.new_record? ? t("buttons.create")
         : t("buttons.save")), class: "btn btn-primary text-right" %>
     </div>
   </div>

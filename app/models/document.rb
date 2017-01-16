@@ -9,7 +9,8 @@ class Document < ApplicationRecord
     if new_record?
       super
     else
-      self[:title] = self[:title].blank? ? document_link.file.filename : self[:title]
+      self[:title] = self[:title].blank? ?
+        document_link.instance_variable_get("@filename") : self[:title]
     end
   end
 end
