@@ -1,12 +1,12 @@
-<div class="row text-center">
-  <% ["new_users", "new_courses", "finished_courses"].each do |method| %>
-    <% if @dashboard_support.send("#{method}_in_day").any? %>
-    <div id="<%= "#{method}-chart" %>"
-      data-chart="<%= @dashboard_support.send("#{method}_in_day") %>"
+<!-- <div class="row text-center">
+  <%# ["new_users", "new_courses", "finished_courses"].each do |method| %>
+    <%# if @dashboard_support.send("#{method}_in_day").any? %>
+    <div id="<%#= "#{method}-chart" %>"
+      data-chart="<%#= @dashboard_support.send("#{method}_in_day") %>"
       class="col-md-6 dashboard-chart"></div>
-    <% end %>
-  <% end %>
-</div>
+    <%# end %>
+  <%# end %>
+</div> -->
 <div id="calendar">
 </div>
 <div id="full_calendar_modal"></div>
