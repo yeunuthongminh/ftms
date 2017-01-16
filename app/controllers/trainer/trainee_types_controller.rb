@@ -55,11 +55,11 @@ class Trainer::TraineeTypesController < ApplicationController
 
   private
   def trainee_type_params
-    params.require(:trainee_type).permit UserType::ATTRIBUTES_PARAMS
+    params.require(:trainee_type).permit TraineeType::ATTRIBUTES_PARAMS
   end
 
   def load_trainee_type
-    @trainee_type = UserType.find_by id: params[:id]
+    @trainee_type = TraineeType.find_by id: params[:id]
     unless @trainee_type
       redirect_to trainer_user_trainee_types_path
       flash[:alert] = flash_message "not_find"

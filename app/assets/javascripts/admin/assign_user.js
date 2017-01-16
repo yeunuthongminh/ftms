@@ -70,7 +70,8 @@ $(document).on("turbolinks:load", function() {
   $('#tbl-assign-user tr').css('cursor', 'pointer');
 });
 
-function move_selected_users(list_items, destination, attr_type="") {
+function move_selected_users(list_items, destination, attr_type) {
+  var attr_type = attr_type || "";
   var selected_users = list_items.detach();
   selected_users.each(function(){
     $('.input-user-type', this).each(function() {

@@ -28,14 +28,13 @@ class Trainer::UsersController < ApplicationController
   end
 
   def edit
-    @user_form = UserForm.new
-    @user_form.init user: @user, profile: @user.profile
+    @user_form = UserForm.new user: @user, profile: @user.profile
   end
 
   def update
-    @user_form = UserForm.new
-    @user_form.init user: @user, profile: @user.profile
+    @user_form = UserForm.new user: @user, profile: @user.profile
     @user_form.assign_attributes user_params
+    change_type
     if @user_form.save
       sign_in(@user, bypass: true) if current_user? @user
       flash[:success] = flash_message "updated"
