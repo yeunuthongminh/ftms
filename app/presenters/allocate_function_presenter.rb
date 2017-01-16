@@ -3,7 +3,7 @@ class AllocateFunctionPresenter < ActionView::Base
 
   def initialize args
     @functions = Function.all
-    @routes = routes
+    @routes = args[:routes]
     @namespace = args[:namespace]
     @role = args[:role]
     @form = args[:form]
@@ -28,13 +28,6 @@ class AllocateFunctionPresenter < ActionView::Base
       <div class=\"tbody listsort filter_table_right_part\">"
     html += body_admin.join("")
     html += "</div></div>"
-  end
-
-  def routes
-    routes = []
-    Function.pluck(:model_class, :action).group_by(&:first).values.map{|e|
-      e.flatten.uniq}.each{|x| routes << Hash[:controller, x.shift, :actions, x]}
-    routes
   end
 
   private

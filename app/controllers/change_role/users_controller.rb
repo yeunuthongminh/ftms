@@ -18,6 +18,7 @@ class ChangeRole::UsersController < ApplicationController
 
   def update
     @user.user_functions.delete_all
+    role = Role.find_by name: "Role base "+ @user.type.downcase
     user_functions = []
     rebuild_params.each do |user_function_id|
       user_function = rebuild_params[user_function_id]
@@ -28,6 +29,7 @@ class ChangeRole::UsersController < ApplicationController
       end
     end
     UserFunction.import user_functions
+    @user.functions << role.functions
     redirect_to eval("edit_#{@namespace}_user_path(@user)")
   end
 
