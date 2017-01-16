@@ -12,7 +12,7 @@ namespace :db do
 
     puts "create role base"
 
-    role_trainer = Role.create name: "Role base trainer", role_type: "Trainer"
+    role_trainer = Role.create name: "Role base trainer", role_type: "trainer"
     role_trainer.functions.create!([
       {model_class: "trainer/dashboard", action: "index"},
       {model_class: "trainer/course_masters", action: "index"},
@@ -117,7 +117,7 @@ namespace :db do
       {model_class: "trainer/evaluation_standards", action: "destroy"}
     ])
 
-    role_trainee = Role.create name: "Role base trainee", role_type: "Trainee"
+    role_trainee = Role.create name: "Role base trainee", role_type: "trainee"
     role_trainee.functions.create!([
       {model_class: "Course", action: "read"},
       {model_class: "CourseSubject", action: "read"},

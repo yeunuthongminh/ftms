@@ -158,7 +158,18 @@ class User < ApplicationRecord
   end
 
   def role_type_avaiable
-    self.roles.order(:role_type).map(&:role_type).uniq
+    resourses = functions.pluck(:model_class)
+    @resourses = []
+    resourses.each do |obj|
+      obj = obj.split("/")
+      if obj.length == 2 && Settings.user_functions.include?(obj[0])
+        @resourses << obj[0].capitalize.downcase
+      else
+        @resourses << "trainee"
+      end
+    end
+    @resourses << "admin" if self.email == "admin@tms.com"
+    return @resourses.uniq.sort!
   end
 
   def has_role? role
