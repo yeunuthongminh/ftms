@@ -18,7 +18,6 @@ class Trainer::TasksController < ApplicationController
   end
 
   def create
-    @task = Task.build task_params
     if @task.save
       flash[:success] = flash_message "created"
       redirect_to edit_trainer_course_course_subject_path(@course_subject.course,
@@ -72,7 +71,8 @@ class Trainer::TasksController < ApplicationController
   end
 
   def add_task_info
-    if current_user.is_trainer? || current_user.is_admin?
+    @task = Task.new task_params
+    if current_user.trainer? || current_user.admin?
       @course_subject.user_subjects.each do |user_subject|
         user_subject.create_user_task_if_create_task @task
       end

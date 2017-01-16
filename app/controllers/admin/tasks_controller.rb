@@ -77,7 +77,7 @@ class Admin::TasksController < ApplicationController
 
   def add_task_info
     @task = Task.new task_params
-    if current_user.is_trainer? || current_user.is_admin?
+    if current_user.trainer? || current_user.admin?
       @course_subject.user_subjects.each do |user_subject|
         user_subject.create_user_task_if_create_task @task
       end
