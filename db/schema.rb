@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170115064534) do
+ActiveRecord::Schema.define(version: 20170116030806) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -475,7 +475,6 @@ ActiveRecord::Schema.define(version: 20170115064534) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "role_type"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_roles_on_deleted_at", using: :btree
   end
@@ -657,8 +656,8 @@ ActiveRecord::Schema.define(version: 20170115064534) do
     t.datetime "updated_at",             null: false
     t.datetime "deleted_at"
     t.string   "type"
-    t.index ["course_id", "user_id", "type"], name: "index_user_courses_on_course_id_and_user_id_and_type", unique: true, using: :btree
     t.index ["deleted_at"], name: "index_user_courses_on_deleted_at", using: :btree
+    t.index ["user_id", "course_id"], name: "index_user_courses_on_user_id_and_course_id", unique: true, using: :btree
   end
 
   create_table "user_functions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
