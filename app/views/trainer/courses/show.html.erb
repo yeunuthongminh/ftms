@@ -28,7 +28,7 @@
         (<%= @supports.trainers.size %>)&nbsp;
         <% unless @course.finish? %>
           <% if policy edit_assign_user_course_path @course %>
-            <%= link_to edit_trainer_course_assign_trainers_path(@course) do %>
+            <%= link_to edit_assign_user_course_path(@course) do %>
               <i class="ionicons ion-android-person-add"></i>
             <% end %>
           <% end %>
@@ -48,7 +48,7 @@
         (<%= @supports.trainees.size %>)
         <% unless @course.finish? %>
           <% if policy edit_assign_user_course_path @course %>
-            <%= link_to edit_trainer_course_assign_trainees_path(@course) do %>&nbsp;
+            <%= link_to edit_assign_user_course_path(@course) do %>&nbsp;
               <i class="ionicons ion-android-person-add"></i>
             <% end %>
           <% end %>
