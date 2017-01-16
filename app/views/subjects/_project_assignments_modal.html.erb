@@ -7,17 +7,18 @@
           <h3 class="label-modal"><%= project.name %></h3>
           <small>
             <%= t "projects.requirements.total" %>
-            <%= pluralize project.project_requirements.size,
+            <%= pluralize @subject_supports.course_subject_requirements.size,
               t("projects.requirements.requirement") %>
           </small>
         <% end %>
       </div>
       <div class="panel-body">
         <div class="list-group">
-          <% if project && project.project_requirements.any? %>
-            <% project.project_requirements.each_with_index do |requirement, index| %>
+          <% if project && @subject_supports.course_subject_requirements.any? %>
+            <% @subject_supports.course_subject_requirements.each.with_index 1 do
+              |requirement, index| %>
               <div class="list-group-item">
-                <%= "#{index + 1}. #{requirement.name}" %>
+                <%= "#{index}. #{requirement.project_requirement.name}" %>
               </div>
             <% end %>
           <% end %>
