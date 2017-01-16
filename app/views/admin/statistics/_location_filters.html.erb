@@ -3,6 +3,7 @@
   <div class="display-none">
     <%= check_box_tag "check_visit" %>
   </div>
+  <%= hidden_field_tag "location_ids[]", "" %>
   <% @statistics.load_locations.each do |location| %>
     <%= check_box_tag "location_ids[]", location.id, checked: true %>
     <%= location.name %>
