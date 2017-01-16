@@ -3,7 +3,7 @@ class AllocateFunctionPresenter < ActionView::Base
 
   def initialize args
     @functions = Function.all
-    @routes = args[:routes]
+    @routes = routes
     @namespace = args[:namespace]
     @role = args[:role]
     @form = args[:form]
@@ -30,6 +30,13 @@ class AllocateFunctionPresenter < ActionView::Base
     html += "</div></div>"
   end
 
+  def routes
+    routes = []
+    Function.pluck(:model_class, :action).group_by(&:first).values.map{|e|
+      e.flatten.uniq}.each{|x| routes << Hash[:controller, x.shift, :actions, x]}
+    routes
+  end
+
   private
   def sidebar_item route, index
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{route[:controller]}\"
@@ -49,7 +56,7 @@ class AllocateFunctionPresenter < ActionView::Base
     Settings.functions.each do |function|
       if route[:actions].include? function
         a = find_function(function, route[:controller])
-        html += " <div class=\"tcell function text-center\" title=\"#{function}\">"
+        html += " <div class=\"tcell #{function}-function text-center\" title=\"#{function}\">"
         if @role.functions.ids.include? a
           html += "<input type =\"checkbox\" name=\"role[function_ids][]\"
             id=\"role_function_ids_#{a}\" value=\"#{a}\" checked >"
@@ -63,7 +70,7 @@ class AllocateFunctionPresenter < ActionView::Base
           title=\"#{function}\"></div>"
       end
     end
-    html += "<div class=\"tcell function text-center\">
+    html += "<div class=\"tcell text-center\">
       <input type=\"checkbox\" data-parent=\"#{index}\" class=\"sltAll\"></input></div>
     </div>"
   end
