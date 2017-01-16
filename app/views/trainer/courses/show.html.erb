@@ -6,7 +6,7 @@
         <div class="col-md-2">
           <%= image_course_tag @course, @course.language_name %>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
           <span class="header-title"><%= @course.name %></span> &nbsp;
           <span class="label-status <%= set_background_color_status @course.status %>">
             <%= t "courses.labels.status.#{@course.status}" %>
@@ -24,55 +24,11 @@
 
     <div class="col-md-3 user-info right-side-course">
       <%= render "menu_action" %>
-      <h2 class="label"><%= t "courses.labels.trainer" %>
-        (<%= @supports.trainers.size %>)&nbsp;
-        <% unless @course.finish? %>
-          <% if policy edit_assign_user_course_path @course %>
-            <%= link_to edit_assign_user_course_path(@course) do %>
-              <i class="ionicons ion-android-person-add"></i>
-            <% end %>
-          <% end %>
-        <% end %>
-      </h2>
-      <ul>
-        <% @supports.trainers.each do |trainer| %>
-          <%= link_to [:trainer, trainer], title: trainer.name do %>
-            <li class="label-user"><%= avatar_user_tag trainer,
-              "profile-trainer img-circle", Settings.image_size_50 %>
-              <%= trainer.name %>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
-      <h2 class="label"><%= t "courses.labels.trainee" %>
-        (<%= @supports.trainees.size %>)
-        <% unless @course.finish? %>
-          <% if policy edit_assign_user_course_path @course %>
-            <%= link_to edit_assign_user_course_path(@course) do %>&nbsp;
-              <i class="ionicons ion-android-person-add"></i>
-            <% end %>
-          <% end %>
-        <% end %>
-      </h2>
-      <ul>
-        <% @supports.trainees.each do |trainee| %>
-          <% trainee_course = @course.trainee_courses.find{|user_course| user_course.user_id == trainee.id} %>
-          <li class="label-user label-user-<%= trainee.id %>
-            label-user-<%= trainee_course.status %>">
-            <%= link_to [:trainer, trainee], title: trainee.name do %>
-              <%= avatar_user_tag trainee,
-                "profile-user img-circle", Settings.image_size_50 %>
-              <%= trainee.name %>
-            <% end %>
-            <div class="pull-right user-course">
-              <div id="user-course-<%= trainee_course.id %>">
-                <%= render "shared/user_course",
-                  user_course: trainee_course %>
-              </div>
-            </div>
-          </li>
-        <% end %>
-      </ul>
+      <br>
+      <div id="list-member-course">
+        <%= render "trainer/courses/member_lists" %>
+      </div>
     </div>
   </div>
+  <%= render "assign_member_form" %>
 </div>
