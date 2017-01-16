@@ -12,9 +12,12 @@ class Trainer::UsersController < ApplicationController
 
   def create
     @user_form = UserForm.new user_params
-    user_send_mail_service = MailerServices::UserSendMailService.new user: @user_form.user
-    if @user_form.save && user_send_mail_service.perform?
+    if @user_form.save
       add_user_function
+
+      user_send_mail_service = MailerServices::UserSendMailService.new user: @user_form.user
+      user_send_mail_service.perform
+
       flash[:success] = flash_message "created"
       if params[:create_and_continue].present?
         redirect_to new_trainer_user_path
