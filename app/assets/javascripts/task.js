@@ -106,7 +106,8 @@ $(document).on('turbolinks:load', function(){
   });
 });
 
-function pull_url_input_field(value = "") {
+function pull_url_input_field(value) {
+  var value = value || "";
   return "<div class='pull-requestes'><div class='col-md-11 task-pullurl'>\
     <input type='text' class='form-control link-field' placeholder='"
     + I18n.t("user_tasks.title.git_link") + "' value='" + value + "'></div>\
