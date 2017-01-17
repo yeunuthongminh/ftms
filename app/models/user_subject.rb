@@ -47,9 +47,7 @@ class UserSubject < ApplicationRecord
 
   class << self
     def update_all_status status, current_user, course_subject
-
-      if status == "start"
-        start_user_course if init?
+      if status == "progress"
         user_subjects = load_users(statuses[:init]).each do |user_subject|
           user_subject.update_attributes status: statuses[:progress],
             start_date: Time.now, current_progress: user_subject.in_progress,
@@ -62,7 +60,7 @@ class UserSubject < ApplicationRecord
           user_end_date: Time.now, current_progress: user_subject.in_progress
         end
         user_subjects += load_users(statuses[:init]).each do |user_subject|
-          user_subject.update_attributes status: statuses[:finished],
+          user_subject.update_attributes status: statuses[:finish],
             current_progress: user_subject.in_progress
         end
         key = "user_subject.finish_all_subject"
