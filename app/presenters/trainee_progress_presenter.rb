@@ -75,7 +75,8 @@ class TraineeProgressPresenter < ActionView::Base
         #{trainee.profile.status_name}
       </div>
       <div class=\"tcell course_name\" title=\"#{last_course ? last_course.course_name : ""}\">
-        #{last_course ? (link_to last_course.course_name, admin_course_path(last_course)) : ""}
+        #{last_course ? (link_to last_course.course_name, admin_course_path(last_course)) :
+          "<span></span>"}
       </div>
       <div class=\"tcell course\">
         #{courses_html}

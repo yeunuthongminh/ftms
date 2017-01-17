@@ -13,6 +13,14 @@
       width: 310px;
     }
 
+    @-moz-document url-prefix() {
+      .fixedTable-body .tcell {
+        padding: 0px 5px;
+        height: 27px;
+        line-height: 20px;
+      }
+    }
+
     .tcell {
       &.stt {
         min-width: 35px;
@@ -164,7 +172,7 @@
       left: 494px !important;
     }
 
-    .fixedTable-body .tcell{
+    .fixedTable-body .tcell {
       padding: 0;
     }
 

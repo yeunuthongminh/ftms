@@ -4,8 +4,8 @@
       <div class="tcell stt">#</div>
       <div class="tcell evaluation_template_name title">
         <%= t "evaluation_templates.label.name" %>
-        <%= link_to filter_datas_path(type: :name,
-          filter_type: :evaluation_templates),
+        <%= link_to filter_datas_path(type: :evaluation_template_name,
+          filter_type: :trainee_evaluations),
           remote: true, class: "open-select", data: {name: "f-evaluation_template_name"} do %>
           <i class="fa ic ic-filter evaluation_template_name"></i>
         <% end %>
@@ -22,8 +22,9 @@
   <div id="table-header" class="scroll-table">
     <div class="tbody">
       <div class="trow header">
-        <div class="tcell action-edit"></div>
-        <div class="tcell action-delete"></div>
+        <div class="tcell action-edit title"></div>
+        <div class="tcell action-delete title"></div>
+        <div class="tcell blank title"></div>
       </div>
     </div>
   </div>

@@ -138,6 +138,12 @@
     height: 31px;
   }
 
+  @-moz-document url-prefix() {
+    .fixedTable-body .tcell {
+      height: 20px;
+    }
+  }
+
   .tcell {
     &.stt {
       min-width: 35px;
