@@ -50,6 +50,7 @@ class EvaluationTemplatePresenter < ActionView::Base
         #{link_to t("buttons.delete"),
         eval("edit_#{@namespace}_evaluation_template_path(evaluation_template)")}
       </div>
+      <div class=\"tcell blank\"></div>
     </div>"
   end
 end

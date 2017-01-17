@@ -7,7 +7,7 @@ class MailerServices::UserSendMailService
 
   def perform
     if Rails.env.production?
-      WelcomeNewTraineeJob.perform @user, Settings.default_password
+      WelcomeNewTraineeJob.perform_now @user, Settings.default_password
     end
   end
 end

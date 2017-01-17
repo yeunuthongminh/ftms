@@ -162,6 +162,10 @@ class FilterDatasController < ApplicationController
       @key_field = :routes
       @value_field = :routes
       @resources = load_namespace
+    when "evaluation_template_name"
+      @key_field = :evaluation_template_name
+      @value_field = :evaluation_template_name
+      @resources = EvaluationTemplate.pluck(:name).uniq.compact.sort!
     end
 
     respond_to do |format|
