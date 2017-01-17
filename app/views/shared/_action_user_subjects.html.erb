@@ -10,7 +10,7 @@
     <li>
       <% if @supports.course.progress? %>
         <% if @supports.user_subjects.init.any? %>
-          <%= link_to [@namespace.to_sym, @supports.course_subject],
+          <%= link_to eval("#{@namespace}_status_subject_path #{@supports.course_subject.id}, :progress"),
             method: :patch, remote: true do %>
             <i class="fa fa-check" aria-hidden="true"></i>
             <%= t "admin.actions.show_subject.start_all" %>

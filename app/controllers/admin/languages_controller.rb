@@ -29,9 +29,9 @@ class Admin::LanguagesController < ApplicationController
 
   def update
     if @language.update_attributes language_params
-      flash[:success] = "updated"
+      flash[:success] = flash_message "updated"
     else
-      flash[:failed] = "not_updated"
+      flash[:failed] = flash_message "not_updated"
       render :edit
     end
     redirect_to admin_languages_path
