@@ -66,10 +66,10 @@ class AddUserFunctionPresenter < ActionView::Base
       @form.fields_for :user_functions, @user_functions.build do |builder|
         Settings.user_functions.each do |fn|
           html += "
+            <div class=\"tcell checked-function text-center\" title=\"#{function.action}\">
             #{builder.hidden_field :id, value:index}
             #{builder.hidden_field :type, value: "#{fn.humanize}Function"}
             #{builder.hidden_field :function_id, value: "#{function.id if function}"}
-            <div class=\"tcell checked-function text-center\" title=\"#{function.action}\">
               #{builder.check_box :_destroy,
                 {checked: find_function?(@form.object, function)}, false, true}
           </div>"
@@ -81,10 +81,10 @@ class AddUserFunctionPresenter < ActionView::Base
       if namespace[0] == fn
         @form.fields_for :user_functions, @user_functions.build do |builder|
           html += "
-          #{builder.hidden_field :id, value:"#{index}"}
-          #{builder.hidden_field :type, value: "#{fn.humanize}Function"}
-          #{builder.hidden_field :function_id, value: "#{function.id if function}"}
           <div class=\"tcell checked-function text-center\" title=\"#{function.action}\">
+            #{builder.hidden_field :id, value:"#{index}"}
+            #{builder.hidden_field :type, value: "#{fn.humanize}Function"}
+            #{builder.hidden_field :function_id, value: "#{function.id if function}"}
             #{builder.check_box :_destroy,
               {checked: find_function?(@form.object, function)}, false, true}
           </div>"
@@ -94,7 +94,7 @@ class AddUserFunctionPresenter < ActionView::Base
           title=\"#{function.action}\"></div>"
       end
     end
-    html += "</div>"
+    html += "<div class=\"tcell blank\"></div></div>"
   end
 
   def find_function? user, function

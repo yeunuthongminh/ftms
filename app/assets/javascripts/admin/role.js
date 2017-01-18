@@ -39,4 +39,6 @@ $(document).on("turbolinks:load", function() {
       }
     });
   });
+
+  $('.checked-function input[type="hidden"]').remove();
 });
