@@ -1,0 +1,12 @@
+en:
+  authentication:
+    sessions:
+      sign_in_success: "Signed in successfully."
+      sign_in_fail: "Signed in fail."
+      sign_out: "Sign out successfully."
+      invalid_token: "Invalid token."
+      register: "Registration has been completed."
+    error:
+      invalid: " is invalid!"
+      missing_param: "Missing params."
+      invalid_login: "Wrong email or password or authentication token"
