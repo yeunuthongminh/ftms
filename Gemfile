@@ -19,6 +19,7 @@ gem "sprockets-es6"
 gem "babel-transpiler", github: "babel/ruby-babel-transpiler"
 gem "devise"
 gem "simple_token_authentication"
+gem "paranoia"
 
 group :development, :test do
   gem "pry"

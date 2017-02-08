@@ -32,6 +32,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
 
       #authentication
       t.string :authentication_token, limit: 30
+      t.string :avatar
+      t.integer :trainer_id
+      t.string :type, default: "Trainee"
+      t.datetime :deleted_at
 
       t.timestamps null: false
     end
