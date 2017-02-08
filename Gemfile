@@ -17,9 +17,11 @@ gem "jbuilder", "~> 2.5"
 gem "react-rails"
 gem "sprockets-es6"
 gem "babel-transpiler", github: "babel/ruby-babel-transpiler"
+gem "devise"
+gem "simple_token_authentication"
 
 group :development, :test do
-  gem "byebug", platform: :mri
+  gem "pry"
 end
 
 group :development do
