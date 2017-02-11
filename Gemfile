@@ -14,12 +14,11 @@ gem "coffee-rails", "~> 4.2"
 gem "jquery-rails"
 gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.5"
-gem "react-rails"
-gem "sprockets-es6"
-gem "babel-transpiler", github: "babel/ruby-babel-transpiler"
 gem "devise"
 gem "simple_token_authentication"
 gem "paranoia"
+gem "react_on_rails", "~> 6"
+gem "foreman"
 
 group :development, :test do
   gem "pry"
@@ -33,3 +32,5 @@ group :development do
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "mini_racer", platforms: :ruby
