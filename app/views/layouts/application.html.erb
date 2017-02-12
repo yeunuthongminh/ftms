@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TestApp</title>
+    <title><%= full_title yield :title %></title>
+    <%= favicon_link_tag "logo.png" %>
+    <%= javascript_include_tag Ckeditor.cdn_url %>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "application", media: "all",
+      "data-turbolinks-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
+    <script type="text/javascript">
+      I18n.defaultLocale = "<%= I18n.default_locale %>";
+      I18n.locale = "<%= I18n.locale %>";
+    </script>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+      <%= react_component "Header" %>
+      <%= react_component "Sidebar" %>
+      <div class="content-wrapper">
+        <%= yield %>
+      </div>
+      <%= react_component "Footer" %>
+    </div>
   </body>
 </html>

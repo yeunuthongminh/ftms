@@ -1,0 +1,17 @@
+en:
+  footer:
+    version: "Version"
+    coppy_right: "Copyright &copy; 2014-2016"
+    all_right: " All rights reserved."
+  header:
+    long_logo: "In Side Out"
+    short_logo: "ISO"
+    toggle: "Toggle navigation"
+    test_name: "Alexander Pierce"
+    test_role: "Web Developer"
+    profile: "Profile"
+    sign_out: "Sign out"
+    test_online: " Online"
+  sidebar:
+    main_nav: "MAIN NAVIGATION"
+    dashboard: "Dashboard"
