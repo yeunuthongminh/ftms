@@ -53,3 +53,6 @@ node_modules
 
 # Generated js bundles
 /app/assets/webpack/*
+
+# I18n js
+/public/javascripts/translations.js
