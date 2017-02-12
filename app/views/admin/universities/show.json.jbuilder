@@ -1,0 +1,1 @@
+json.university @university, :name
