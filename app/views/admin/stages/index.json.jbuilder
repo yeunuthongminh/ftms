@@ -1,0 +1,1 @@
+json.stages @stages, :name
