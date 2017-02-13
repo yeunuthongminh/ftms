@@ -12,6 +12,7 @@ en:
     profile: "Profile"
     sign_out: "Sign out"
     test_online: " Online"
+    user_image_alt: "User Image"
   sidebar:
     main_nav: "MAIN NAVIGATION"
     dashboard: "Dashboard"
