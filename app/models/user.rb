@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   ATTRIBUTES_PARAMS = [:email, :password]
 
-  has_one :profiles, dependent: :destroy
+  has_one :profile, dependent: :destroy
 
   has_many :moving_histories, dependent: :destroy
   has_many :organizations, dependent: :destroy
