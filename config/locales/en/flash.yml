@@ -11,3 +11,5 @@ en:
       not_found: "%{model_name} couldn't be found"
       record_not_found: "Sorry, no record was found!"
       has_existed: "%{model_name} has existed"
+    errors:
+      not_authorize: "You are not authorize"

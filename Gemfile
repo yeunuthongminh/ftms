@@ -47,6 +47,7 @@ gem "config"
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
 gem "font-awesome-rails"
+gem "pundit"
 
 group :development, :test do
   gem "spring"

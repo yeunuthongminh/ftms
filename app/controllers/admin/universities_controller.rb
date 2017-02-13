@@ -1,6 +1,7 @@
 class Admin::UniversitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :find_university, except: [:index, :new, :create]
+  before_action :authorize
 
   def index
     @universities = University.all

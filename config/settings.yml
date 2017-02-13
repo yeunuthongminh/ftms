@@ -1,0 +1,14 @@
+all_functions:
+  - index
+  - show
+  - new
+  - create
+  - edit
+  - update
+  - destroy
+functions:
+  - index
+  - show
+  - create
+  - update
+  - destroy
